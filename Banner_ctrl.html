@@ -823,24 +823,6 @@ li.subhead {
 </div><!--frbanner2-->
 
 <script>
-var bannerClosedCookieValue = '{{{banner-closed-cookie-custom-value}}}' || '1',
-    showBanner = true;
-
-if ( bannerClosedCookieIsSet() ) {
-	showBanner = false;
-}
-
-if ( typeof mw !== 'undefined' && typeof mw.centralNotice !== 'undefined' ) {
-	mw.centralNotice.bannerData.alterImpressionData = function ( impressionData ) {
-		if ( showBanner ) {
-			return true;
-		}
-
-		mw.centralNotice.bannerData.hideResult = true;
-		mw.centralNotice.bannerData.hideReason = 'close';
-		return false;
-	};
-}
 
 function debounce( func, wait, immediate ) {
     var timeout;
@@ -863,9 +845,6 @@ var lazyResize = debounce( function() {
 $( window ).resize( lazyResize );
 
 function addBannerSpace() {
-    if ( !showBanner ) {
-        return;
-    }
 
     var bannerHeight = $( '#frbanner2' ).height();
     $( '#frbanner2' ).css( 'top', 0 - bannerHeight ).show();
@@ -886,13 +865,6 @@ function removeBannerSpace() {
     $( '#mw-mf-viewport .overlay.media-viewer' ).css( 'margin-top', 0 );
 }
 
-function setBannerClosedCookie( cookieName ) {
-	var currentDate = new Date(),
-		expiryDate;
-
-	expiryDate = new Date( currentDate.getFullYear() + 1, 0, 1 );
-	$.cookie( cookieName, bannerClosedCookieValue, { expires: 7, path: '/' } );
-}
 
 function initializeDynamicPlaceholderValues() {
 
@@ -941,7 +913,9 @@ $(document).ready(function() {
         $( '#frbanner2' ).hide();
         removeBannerSpace();
         mw.centralNotice.hideBanner();
-        setBannerClosedCookie( 'centralnotice_wmde16_hide_cookie' );
+        if ( Math.random() < 0.01 ) {
+        	$( '#pwkExpandTrack' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{{BannerName}}}&rec=1' );
+	}
 
         return false;
     });
@@ -963,26 +937,19 @@ $(document).ready(function() {
         }, 3000 );
     });
 
+    // Show page 2 in preview
     var forced = location.search.match(/\bforce=1/);
+    if (forced) {
+        // Fullscreen banner
+        window.scrollTo(0,0);
+        $("#frbanner").show();
 
-    if (!mw.centralNotice.bannerData.hideResult) {
-        // Show the correct sub-banner
-        if (forced) {
-            // Fullscreen banner
-            window.scrollTo(0,0);
-            $("#frbanner").show();
-
-            animateProgressBar();
-            window.setTimeout( function () {
-                animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
-            }, 3000 );
-        } else {
-            // Reminder banner
-            // Add extra space at bottom so banner doesn't cover up footer
-            $('#footer').css( 'margin-bottom', $('#frbanner2').height() );
-            setTimeout( addBannerSpace, 5000 );
-        }
+        animateProgressBar();
+        window.setTimeout( function () {
+            animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+        }, 3000 );
     }
+
 
     $( '#{{{banner}}}_btn-ppl' ).click( function() {
         if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
@@ -1185,12 +1152,6 @@ function getCookieExpiryDate() {
     return new Date( currentDate.getFullYear() + 1, 0, 1 );
 }
 
-function bannerClosedCookieIsSet() {
-	if ( bannerClosedCookieValue !== '1' ) {
-		return $.cookie( 'centralnotice_wmde16_hide_cookie' ) === bannerClosedCookieValue;
-	}
-	return $.cookie( 'centralnotice_wmde16_hide_cookie' ) !== null;
-}
 
 function validateForm() {
     var form = document.donationForm;
