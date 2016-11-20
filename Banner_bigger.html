@@ -1,0 +1,697 @@
+<style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/DesktopBanner.css}}</style>
+<style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/icon.css}}</style>
+<style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.css}}</style>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/BannerValues.js}}</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/DesktopBanner.js
+| donations-date-base       = ' + window.GlobalBannerSettings['donations-date-base'] + '
+| donations-collected-base  = ' + window.GlobalBannerSettings['donations-collected-base'] + '
+| donators-base             = ' + window.GlobalBannerSettings['donators-base'] + '
+| appr-donations-per-minute = ' + window.GlobalBannerSettings['appr-donations-per-minute'] + '
+| appr-donators-per-minute  = ' + window.GlobalBannerSettings['appr-donators-per-minute'] + '
+}}
+</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CountCampaignDays.js
+| campaign-start-date = 2015-11-11
+}}
+</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CustomDayName.js}}</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.js}}</script>
+<style type="text/css">
+  #WMDE_Banner-text {
+    text-align: left;
+    font-size: 20.4px;
+  }
+
+  #WMDE_Banner-text-salute {
+    color: #000;
+    font-size: 20.4px;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin: 4px 10px 4px 35px;
+    text-align: justify;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  #WMDE_Banner_info {
+    font-size: 120%;
+  }
+
+  #WMDE_BannerForm-wrapper {
+    font-size: 120%;
+  }
+
+#WMDE_Banner-form fieldset {
+    width: 95%;
+    border: 0;
+    margin: 0 auto;
+    padding: 0 0.5em 0.5em 0.5em;
+}
+
+#WMDE_Banner-frequency ul,
+#WMDE_Banner-amounts ul,
+#WMDE_Banner-payment ul {
+    width: 100%;
+    height: 100%;
+    display: table;
+    margin: 0 0 0.3em;
+    padding: 0;
+    list-style: none;
+}
+
+#WMDE_Banner-form legend {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0.3em 0;
+    text-align: center;
+    font-size: .9em;
+    color: rgba(0,0,0,0.42);
+}
+
+/* --- Common Button Styles --- */
+
+.WMDE_Banner-btn {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%) repeat scroll 0 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 11px 0;
+    width: 100%;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 1px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.WMDE_Banner-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.5), inset 0 14px 16px rgba(255,255,255,.75), inset 0 0 7px #fff;
+    color: #367fb4;
+}
+
+.WMDE_Banner-btn.checked {
+    background: linear-gradient(to top, #eee 0%, #ccc 100%) !important;
+    border-color: #ccc;
+}
+
+.WMDE_Banner-btn:active {
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+}
+
+#WMDE_Banner-payment .btn-payment-type {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #eee 0%, #ccc 100%) repeat scroll 0 0 !important;
+    border-color: #CCC !important;
+}
+
+/* --- Frequency Buttons --- */
+
+#WMDE_Banner-frequency li {
+    display: table-cell;
+    width: 50%;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+}
+body.rtl #WMDE_Banner-frequency li { padding: 0 0 0 2%; }
+
+#WMDE_Banner-frequency label {
+    width: 100%;
+    display: block;
+    font-size: .9em;
+}
+
+/*@media (min-width : 1100px) { #WMDE_Banner-frequency label { font-size: .95em; } }*/
+@media (min-width : 1200px) {
+    /*#WMDE_Banner-frequency label {
+        font-size: 1em;
+    }*/
+    /*#WMDE_Banner-payment .WMDE_Banner-btn {
+        min-height: 2em !important;
+    }
+    .WMDE_Banner-btn {
+        padding: 4px 0;
+    }*/
+}
+
+#WMDE_Banner-frequency input[type="radio"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* --- Amount Buttons --- */
+
+#WMDE_Banner-amounts legend {
+    display: block;
+
+}
+
+#WMDE_Banner-amounts li {
+    display: table-cell;
+    width: 23%;
+    height: 100%;
+    clear: none;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+}
+body.rtl #WMDE_Banner-amounts li {
+    padding: 0 0 0 2%;
+}
+
+/* Chrome specific - need to be floated for height 100% to work */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #WMDE_Banner-amounts li { float: left; }
+    body.rtl #WMDE_Banner-amounts li { float: right; }
+}
+
+#WMDE_Banner-amounts li input[type="radio"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#WMDE_Banner-amounts label {
+    font-size: 1.1em;
+    text-transform: none;
+}
+
+/*@media (min-width : 800px)  { #WMDE_Banner-amounts .predefined_amount { font-size: 1em; } }
+@media (min-width : 1100px) { #WMDE_Banner-amounts .predefined_amount { font-size: 1.1em; } }*/
+
+/* --- Other Amount --- */
+
+#amount_custom .WMDE_Banner-btn {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    padding: 0.2em 0 0.4em 0;
+}
+
+#amount_custom label {
+    display: block;
+    height: auto;
+    margin-bottom: 0.2em;
+    font-size: .7em;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#amount_custom input {
+    width: 80%;
+    font-size: .9em;
+    padding: .3em;
+    text-align: center;
+}
+
+#amount_custom .checked input {
+    background: #fff;
+    color: #163348;
+}
+
+#amount-other-input {
+    margin-top: .6em;
+}
+
+/* --- Payment method Buttons --- */
+
+#WMDE_Banner-payment ul li {
+    display: table-cell;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+    width: 50%;
+    margin-bottom: 4px;
+}
+body.rtl #WMDE_Banner-payment ul li {
+    padding: 0 0 0 2%;
+}
+
+/*#WMDE_Banner-payment .WMDE_Banner-btn {
+    min-height: 4em;
+}*/
+
+#WMDE_Banner-window button {
+    width: 100%;
+    height: 100%;
+    font-size: .9em;
+    float: none;
+    font-family: inherit;
+}
+
+@media all and (min-width: 1px) and (max-width: 900px), all and (min-width: 1050px) and (max-width: 1200px) {
+  #WMDE_Banner-payment .btn-payment-type {
+    min-height: 4em;
+  }
+}
+
+@media all and (min-width: 1px) and (max-width: 1050px) {
+  #WMDE_Banner-payment ul {
+    margin: 0;
+    width: 100%;
+  }
+
+  #WMDE_Banner-payment ul li {
+    display: block;
+    width: 100%;
+  }
+}
+
+div.interval_tab {
+    padding: 4px 0 2px 0 !important;
+    height: 2em;
+    text-align: center;
+    width: 50%;
+    border: none;
+    border-bottom: 1px solid #c2cedb;
+    background: linear-gradient(to bottom, rgba(238,240,252,1) 60%,rgba(194,206,219,0.5) 100%);
+    float: left;
+    cursor: pointer;
+}
+
+div.interval_tab, div.interval_tab label {
+    cursor: pointer;
+}
+
+div.interval_tab label:hover {
+    text-decoration: underline;
+}
+
+div.interval_tab_first {
+    margin-left: -1px;
+    border-right: 1px solid #c2cedb;
+}
+
+#WMDE_Banner div.active {
+    text-decoration: underline;
+    border-bottom: none;
+    background: transparent;
+}
+
+#WMDE_Banner .highlight {
+    background-color: yellow;
+}
+
+/* --- more info for recurring donations --- */
+
+#interval_tab_multiple {
+     position: relative;
+}
+
+#interval-multiple-moreinfo-link {
+     position:absolute;
+     right: 5px;
+     top: 5px;
+}
+
+#donationperiodInfo {
+     width:520px;
+     margin-top:-5px;
+}
+
+#donationperiodInfo .checks {
+     list-style: url('//upload.wikimedia.org/wikipedia/commons/2/21/Green_valid_check_icon.png');
+     line-height:135%;
+}
+
+</style>
+
+<div id="WMDE_Banner" >
+  <div style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);">
+    <form id="WMDE_Banner-form" method="post" name="donationForm"
+          action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
+      <table id="WMDE_Banner-facts">
+        <tbody>
+        <tr>
+          <td>
+            <table style="height: 100%" id="WMDE_Banner-message-wrapper">
+              <tbody>
+              <tr>
+                <td style="height: 1%" valign="top">
+                  <p id="WMDE_Banner-text-salute">{{{banner-text-salutation}}}</p>
+                  <p id="WMDE_Banner-text">{{{banner-text}}}</p>
+                </td>
+                <td>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 1%; vertical-align: bottom;">
+                  <div id="WMDE_Banner_info">
+                    <div id="WMDE_Banner_text">
+                      <span class="binfo-ucase">Spendenkonto</span>
+                      <span>Wikimedia Foerdergesellschaft</span>
+                      <span>BIC</span>
+                      <span class="binfo-bold">BFSWDE33BER</span>
+                      <span>IBAN</span>
+                      <span class="binfo-bold" style="margin-right: 0;">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+
+          <td id="WMDE_BannerForm-wrapper">
+            <div id="interval_tab_onetime" class="interval_tab interval_tab_first active">
+              <label for="interval_onetime">
+                <input type="radio" style="display: none" id="interval_onetime" name="interval_tab" value="0">
+                einmalig
+              </label>
+            </div>
+            <div id="interval_tab_multiple" class="interval_tab">
+              <label for="interval_multiple">
+                <input type="radio" style="display: none" id="interval_multiple" name="interval_tab" value="1">
+                regelmäßig
+              </label>
+              <span class="icon-question" id="interval-multiple-moreinfo-link" data-href="#donationperiodInfo"></span>
+            </div>
+            <fieldset id="WMDE_Banner-frequency" class="cf">
+              <div style="padding-top: 1em;" class="interval-options interval-hidden">
+                <ul>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval1">
+                      <input type="radio" id="interval1" name="interval" value="1">
+                      monatlich
+                    </label>
+                  </li>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval3">
+                      <input type="radio" id="interval3" name="interval" value="3">
+                      vierteljährlich
+                    </label>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval6">
+                      <input type="radio" id="interval6" name="interval" value="6">
+                      halbjährlich
+                    </label>
+                  </li>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval12">
+                      <input type="radio" id="interval12" name="interval" value="12">
+                      jährlich
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+
+            <fieldset id="WMDE_Banner-amounts" class="cf">
+              <ul>
+                <li id="amount_total_1">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_1" value="5">
+                  <label id="amount_label_1" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_1">5 €</label>
+                </li>
+
+                <li id="amount_total_2">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_2" value="15">
+                  <label id="amount_label_2" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_2">15 €</label>
+                </li>
+
+                <li id="amount_total_3">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_3" value="25">
+                  <label id="amount_label_3" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_3">25 €</label>
+                </li>
+
+                <li id="amount_total_4">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_4" value="50">
+                  <label id="amount_label_4" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_4">50 €</label>
+                </li>
+              </ul>
+              <ul>
+                <li id="amount_total_5">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_5" value="75">
+                  <label id="amount_label_5" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_5">75 €</label>
+                </li>
+
+                <li id="amount_total_6">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_6" value="100">
+                  <label id="amount_label_6" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_6">100 €</label>
+                </li>
+
+                <li id="amount_total_7">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_7" value="250">
+                  <label id="amount_label_7" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_7">250 €</label>
+                </li>
+
+                <li id="amount_custom">
+                  <div class="WMDE_Banner-btn" style="padding: 0 0 0.5em 0; height: initial;">
+                    <input type="radio" name="betrag" id="input_amount_other" value="">
+                    <!--<label for="amount-other-input"></label>-->
+                    <input type="text" name="amountGiven" id="amount-other-input" size="3" autocomplete="off" value="" placeholder="anderer">
+                  </div>
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset id="WMDE_Banner-payment" class="cf">
+              <ul>
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('BEZ');">
+                    Lastschrift
+                  </button>
+                </li>
+
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('UEB');">
+                    Überweisung
+                  </button>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('MCP');">
+                    Kreditkarte
+                  </button>
+                </li>
+
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('PPL');">
+                    PayPal
+                  </button>
+                </li>
+
+              </ul>
+            </fieldset>
+          </td>
+
+          <td id="WMDE_Banner-close-wrapper">
+            <span id="WMDE_Banner-close">&nbsp;</span>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <input type="hidden" id="periode" name="periode" value="0"/>
+      <input type="hidden" id="intervalType" name="intervalType" value="0"/>
+      <input type="hidden" id="impCount" name="impCount" value=""/>
+      <input type="hidden" id="bImpCount" name="bImpCount" value=""/>
+      <input type="hidden" id="zahlweise" name="zahlweise" value=""/>
+    </form>
+  </div>
+  <img id="WMDE_Banner-close-ct" src="//upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0">
+</div>
+<div class="wlightbox-contents">
+   <div id="donationperiodInfo">
+      <div class="container"><ul class="checks">
+        <li>Jederzeit und ab sofort kündbar. Eine formlose E-Mail genügt.</li>
+        <li>Betrag und Zahlungsintervall problemlos änderbar.</li>
+        <li>Vergrößerte Planungssicherheit und Nachhaltigkeit.</li>
+        <li>Automatischer Versand der Zuwendungsbestätigung. </li>
+        <li>Auf Wunsch Versand unseres Tätigkeitsberichts.</li>
+        </ul>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+  $( document ).ready( function () {
+    $( '#interval_tab_onetime' ).click( function () {
+      if ( $( '#interval_tab_onetime' ).hasClass( 'active' ) ) {
+        return;
+      }
+
+      $( '#interval_tab_onetime' ).addClass( 'active' );
+      $( '#interval_tab_multiple' ).removeClass( 'active' );
+      $( '.interval-options').addClass( 'interval-hidden' );
+      $( '' );
+
+      addSpaceInstantly();
+    } );
+
+    $( '#interval_tab_multiple' ).click( function ( e ) {
+      if ( $( e.target ).prop( 'id' ) == 'interval-multiple-moreinfo-link' ) {
+        return;
+      }
+      if ( $( '#interval_tab_multiple' ).hasClass( 'active' ) ) {
+        return;
+      }
+
+      $( '#interval_tab_multiple' ).addClass( 'active' );
+      $( '#interval_tab_onetime' ).removeClass( 'active' );
+
+      $( '.interval-options').removeClass( 'interval-hidden' );
+      addSpaceInstantly();
+    } );
+  } );
+
+  $( '#WMDE_Banner-frequency' ).find( 'label' ).click( function () {
+    $( '#WMDE_Banner-frequency' ).find( 'label' ).removeClass( 'checked' );
+    $( this ).addClass( 'checked' );
+  } );
+
+  $( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
+    $( '#WMDE_Banner-amounts' ).find( 'label' ).removeClass( 'checked' );
+    $( '#amount-other-input' ).parent().removeClass( 'checked' );
+    $( this ).addClass( 'checked' );
+  } );
+
+  $( '#amount-other-input' ).click( function () {
+    $( '#WMDE_Banner-amounts' ).find( 'label' ).removeClass( 'checked' );
+    $( this ).parent().addClass( 'checked' );
+  } );
+
+  function addSpace() {
+    if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+      return;
+    }
+    var bannerHeight = $( 'div#WMDE_Banner' ).height(),
+        skin = getSkin();
+
+    switch ( skin ) {
+      case 'vector':
+        $( '#mw-panel' ).animate( {'top':bannerHeight + 160},1000 );
+        $( '#mw-head' ).animate( {'top':bannerHeight},1000 );
+        $( '#mw-page-base' ).animate( {'padding-top':bannerHeight},1000);
+      case 'minerva':
+        $( '#mw-mf-viewport' ).animate( {'top':bannerHeight},1000 );
+        break;
+    }
+  }
+
+  function addSpaceInstantly() {
+    if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+      return;
+    }
+    var bannerHeight = $( 'div#WMDE_Banner' ).height(),
+        skin = getSkin();
+
+    switch ( skin ) {
+      case 'vector':
+        $( '#mw-panel' ).css( { top: bannerHeight + 160 } );
+        $( '#mw-head' ).css( { top: bannerHeight } );
+        $( '#mw-page-base' ).css( { paddingTop: bannerHeight } );
+      case 'minerva':
+        $( '#mw-mf-viewport' ).css( { top: bannerHeight } );
+        break;
+    }
+  }
+
+  function displayBanner() {
+    if ( !showBanner ) {
+      return;
+    }
+
+    var bannerElement = $( '#WMDE_Banner' ),
+        bannerHeight = bannerElement.height();
+    $( 'body' ).prepend( $( '#centralNotice' ) );
+    bannerElement.css( 'top', -bannerHeight );
+    bannerElement.css( 'display', 'block' );
+    addSpace();
+    bannerElement.animate( { top: 0 }, 1000 );
+
+    $( window ).resize( function () {
+      addSpaceInstantly();
+    } );
+  }
+
+  function addMiniBanner() {
+    /* add the "nag" bar. Has to be done after we show the main banner (to get its height) */
+    var bigBannerHeight = $('#WMDE_Banner').height();
+
+    $(window).scroll(function() {
+      if ($(window).scrollTop() <= bigBannerHeight) {
+        $('#WMDE_Banner-nag').finish();
+        $('#WMDE_Banner-nag').css('display', 'none');
+      } else {
+        $('#WMDE_Banner-nag').delay(1500).slideDown();
+      }
+    });
+
+    $('#WMDE_Banner-nag-close').click(function(event) {
+      $('#WMDE_Banner-nag').remove();
+      event.stopPropagation();
+    });
+
+    $('#WMDE_Banner-nag').click(function() {
+      window.scrollTo(0,0);
+    });
+  }
+
+  $( document ).ready( function() {
+    var lightboxOpened = false;
+    $( '#WMDE_Banner-payment button' ).click( function( e ) {
+      return validateForm();
+    } );
+
+    $( '#interval-multiple-moreinfo-link' ).wlightbox( { container: $( '#mw-page-base' ), right: '20px' } );
+    $( '#interval-multiple-moreinfo-link' ).click( function ( e ) {
+        if ( lightboxOpened ) {
+           // We need to wait for 320 seconds because this click will also trigger the opening of the lightbox again.
+           window.setTimeout( function() {
+               $( '#interval-multiple-moreinfo-link' ).get(0).close();
+               lightboxOpened = false;
+           }, 320 );
+           return;
+        }
+        lightboxOpened = true;
+        // scroll to top
+        $( 'html, body' ).animate( { scrollTop: 0 }, 'slow' );
+        // track link clicking
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/period-lightbox-opened/{{{BannerName}}}&rec=1' );
+        // close lightbox if any form element is clicked
+        $( '#WMDE_BannerForm-wrapper' ).on( 'click', function ( e ) {
+          if ( $( e.target ).prop( 'id' ) == 'interval-multiple-moreinfo-link' ) {
+             return;
+          }
+          lightboxOpened = false;
+          $( this ).off();
+          $( '#interval-multiple-moreinfo-link' ).get(0).close();
+        } );
+    } );
+
+    var impCount = increaseImpCount();
+    $( '#impCount' ).val( impCount );
+    var bannerImpCount = increaseBannerImpCount( "{{{banner}}}" );
+    $( '#bImpCount' ).val( bannerImpCount );
+
+    if ( mw.config.get( 'wgAction' ) === "view" ) {
+      setTimeout( displayBanner, 7500 );
+    }
+    if ( mw.config.get( 'wgUserName' ) !== null ) {
+      $( '#wikilogin' ).val( 'yes' );
+    }
+
+    $( 'span#numDaysLeft' ).text( getDaysRemaining() );
+    $( 'span#weekday' ).text( getCurrentDayName( getCurrentGermanDay ) );
+    if ( getCurrentDayName( getCurrentGermanDay ) !== getCurrentGermanDay() ) {
+      $( '#weekdayPrepPhrase' ).text( 'am heutigen' );
+    }
+    $( 'span#campaignDay' ).text( getCampaignDayString() );
+    $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
+
+  } );
+</script>
