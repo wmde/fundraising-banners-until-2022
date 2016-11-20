@@ -771,6 +771,7 @@ $(document).ready(function() {
     $(".frbanner-recurring label").click(function() {
         $(".frbanner-recurring label").removeClass("checked");
         $(this).addClass("checked");
+        fundraisingBanner.addSpace();
         Banner.progressBar.setProgressBarSize();
     });
 
@@ -817,6 +818,7 @@ $(document).ready(function() {
 
         $( '#campaignDaySentence' ).text( getCampaignDaySentence() );
         $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
+        $( '.bannerImpressions').text( window.GlobalBannerSettings[ 'milion-impressions-per-day' ] );
 
         if ( getDaysSinceCampaignStart() < 1 ) {
             $( '#donationRemaining' ).text( 'Unser Spendenziel: ' + ( GlobalBannerSettings.goalSum / 1000000 ).toFixed( 1 ).replace( '.', ',' ) + ' Mio. €' );

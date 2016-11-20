@@ -1,0 +1,840 @@
+<!-- Large desktop banner. Must be used with "Large banner limit and switch" mixin -->
+
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/BannerValues.js}}</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/DesktopBanner.js
+| donations-date-base       = ' + window.GlobalBannerSettings['donations-date-base'] + '
+| donations-collected-base  = ' + window.GlobalBannerSettings['donations-collected-base'] + '
+| donators-base             = ' + window.GlobalBannerSettings['donators-base'] + '
+| appr-donations-per-minute = ' + window.GlobalBannerSettings['appr-donations-per-minute'] + '
+| appr-donators-per-minute  = ' + window.GlobalBannerSettings['appr-donators-per-minute'] + '
+}}
+</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/CountCampaignDays.js
+| campaign-start-date = 2016-11-09
+}}
+</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CustomDayName.js}}</script>
+
+<style>
+/* For IE9 */
+@media screen {
+    #centralNotice {
+       display: block !important;
+    }
+}
+
+/* Hide when editing */
+.action-edit #centralNotice,
+.ve-activated #centralNotice {
+    display: none !important;
+}
+
+/* Clearfix */
+
+#frbanner .cf:before,
+#frbanner .cf:after {
+    content: "";
+    display: table;
+}
+
+#frbanner .cf:after { clear: both; }
+.ie7 #frbanner .cf { zoom: 1; }
+
+
+/* Border-Box */
+
+#frbanner *,
+#frbanner *:before,
+#frbanner *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Transitions */
+
+.frbanner-form label,
+.frbanner-form button,
+.frbanner-form #amount_other {
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition:    all .25s ease-in-out;
+    transition:         all .25s ease-in-out;
+}
+
+/* --- Main banner wrapper --- */
+
+div#WMDE_Banner {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    background: transparent;
+}
+
+#frbanner {
+    border-bottom: 1px solid #c8ccd1;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    color: #222;
+    font: 1em/1.2 Arial, Helvetica, Verdana, sans-serif;
+    font-weight: 500;
+}
+
+/* --- Window Styles --- */
+
+#frbanner-window {
+    position: relative;
+    width: 100%;
+    padding: 0.5em 0 0.5em 0.5em;
+}
+
+body.rtl #frbanner-window {
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
+/* --- Close Options --- */
+
+#WMDE_Banner-close {
+    display: inline-block;
+    position: absolute;
+    right: .5em;
+    top: .5em;
+    z-index: 999;
+    font-size: .8em;
+    text-transform: uppercase;
+}
+
+body.rtl #WMDE_Banner-close {
+    right: auto;
+    left: .5em;
+}
+
+/* --- Close button --- */
+
+#WMDE_Banner-close-label {
+    display: inline-block;
+    cursor: pointer;
+    opacity: .5;
+    z-index: 999;
+}
+
+#WMDE_Banner-close-label:hover { opacity: 1; }
+
+#WMDE_Banner-close-icon {
+    background: url('//upload.wikimedia.org/wikipedia/donate/3/32/Close-thin.png') no-repeat center center;
+    width: 9px;
+    height: 9px;
+    float: right;
+    display: block;
+    margin: .2em .4em;
+}
+
+#WMDE_Banner-close-ct {
+    display: none;
+}
+
+body.rtl #WMDE_Banner-close-icon {
+    float: left;
+}
+
+/* -------------- Message -------------- */
+
+.frbanner-message {
+    display: table-cell;
+    width: auto;
+    vertical-align: top;
+    font-family: "Linux Libertine", Georgia, Times, serif;
+    font-size: 1.05em;
+    color: #fff;
+    position: relative;
+    padding: .75em 2em;
+    line-height: 1.4;
+    border-radius: 0.5em;
+    background: #020524;
+    background: -moz-linear-gradient(left, rgba(2,5,36,1) 0%, rgba(4,9,49,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(2,5,36,1) 0%, rgba(4,9,49,1) 100%);
+    background: linear-gradient(to right, rgba(2,5,36,1) 0%, rgba(4,9,49,1) 100%);
+}
+
+.frbanner-notice {
+    bottom: 8px;
+    font: 1em/1.2 Arial, Helvetica, Verdana, sans-serif;;
+    font-size: 0.9em;
+    /* height: 1.4em; */
+    padding: 0 1.4em;
+
+    background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
+    background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
+    background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
+    background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
+}
+
+.frbanner-message div.frbanner-notice span {
+    padding-right: 0.5em;
+}
+
+@media (min-width : 960px) {
+    .frbanner-message {
+        font-size: 1.35em;
+    }
+    .frbanner-notice {
+        font-size: 0.7em;
+    }
+}
+
+@media (min-width : 1100px) {
+    .frbanner-notice {
+        font-size: 0.7em;
+    }
+}
+
+@media (min-width : 1300px) {
+    .frbanner-message {
+        font-size: 1.5em;
+    }
+    .frbanner-notice {
+        background-position: 0 0;
+        background-size: 18px 18px;
+    }
+}
+
+@media (min-width : 1500px) {
+    .frbanner-message {
+        font-size: 1.6em;
+    }
+    .frbanner-notice {
+        background-position: 0 1px;
+        background-size: 18px 18px;
+    }
+}
+
+@media (min-width : 1800px) {
+    .frbanner-message { height: 16.5em; }
+}
+
+.frbanner-message p:last-child { margin-bottom: 0; }
+
+.frbanner-message span.banner-text-highlight {
+    background-color: #FFDD5B;
+    padding: 1px 5px;
+    color: black;
+}
+
+/* -------------- Form -------------- */
+
+.frbanner-form {
+    display: table-cell;
+    position: relative;
+    width: 30%;
+    height: 100%;
+    vertical-align: top;
+    padding: 1.7em .5em .5em 1em;
+    background: #fff;
+}
+
+.frbanner-form:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: " ";
+    margin: 0;
+    border: 10px solid transparent;
+    border-left-color: #040931;
+    pointer-events: none;
+}
+
+@media (min-width : 960px)  {
+    .frbanner-form {
+        width: 25%;
+        padding-top: 2em;
+    }
+}
+
+.frbanner-form fieldset {
+    width: 100%;
+    border: 0;
+    margin: 0 auto;
+    padding: 0 0 1em 0;
+}
+
+.frbanner-form ul {
+    display: table;
+    width: 100%;
+    height: 100%;
+    margin: 0 0 .5em 0;
+    padding: 0;
+    list-style: none;
+}
+
+.frbanner-form legend {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 .5em 0;
+    text-align: center;
+    font-size: .9em;
+}
+
+/* --- Common Button Styles --- */
+
+.frbanner-btn {
+    display: block;
+    background-color: #f8f9fa;
+    color: #222;
+    border: 1px solid #9aa0a7;
+    border-radius: 2px;
+    padding: 1em .5em;
+    outline: 0;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+}
+.frbanner-btn:hover {
+    background-color: #fff;
+    color: #444;
+    border-color: #a2a9b1;
+}
+.frbanner-btn:active {
+    background-color: #d9d9d9;
+    color: #000;
+    border-color: #7d8389;
+}
+.frbanner-btn:focus {
+    border-color: #3366cc;
+    box-shadow: inset 0 0 0 1px #3366cc;
+}
+.frbanner-btn.checked {
+    background-color: #2a4b8d;
+    color: #fff;
+    border-color: #7d8389;
+}
+
+/* --- Frequency Buttons --- */
+
+.frbanner-frequency li, .frbanner-recurring li {
+    display: table-cell;
+    width: 50%;
+    padding: 0 .5em 0 0;
+    vertical-align: top;
+}
+body.rtl .frbanner-frequency li { padding: 0 0 0 .5em; }
+
+/*.frbanner-frequency label.frbanner-btn {
+    padding: .5em;
+}*/
+
+.frbanner-frequency label, .frbanner-recurring label {
+    display: block;
+    width: 100%;
+    font-size: .9em;
+}
+
+/* Hide radio buttons */
+.frbanner-frequency li input[type="radio"],
+.frbanner-amounts li input[type="radio"],
+.frbanner-recurring li input[type="radio"] {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    clip: rect(0 0 0 0);
+    border: 0;
+    margin: -1px;
+    padding: 0;
+}
+
+/* --- Amount Buttons --- */
+
+.frbanner-amounts legend {
+    display: block;
+}
+
+.frbanner-amounts li {
+    display: table-cell;
+    width: 25%;
+    height: 100%;
+    clear: none;
+    padding: 0 .5em 0 0;
+    vertical-align: top;
+}
+body.rtl .frbanner-amounts li {
+    padding: 0 0 0 .5em;
+}
+
+/* Chrome specific - need to be floated for height 100% to work */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .frbanner-amounts li { float: left; }
+    body.rtl .frbanner-amounts li { float: right; }
+}
+
+.frbanner-amounts label {
+    height: 100%;
+    font-size: .8em;
+    text-transform: none;
+}
+
+.frbanner-amounts .predefined_amount {
+        padding: 1.4em 0.05em;
+    }
+}
+
+@media (min-width : 800px)  { .frbanner-amounts .predefined_amount { font-size: .9em; padding: 1em 0.25em; } }
+@media (min-width : 1100px)  { .frbanner-amounts .predefined_amount { font-size: 1.1em; padding: 1em 0.5em; } }
+
+/* --- Other Amount --- */
+
+.frbanner-amounts #amount_other .frbanner-btn {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0.2em 0 0.4em 0;
+}
+
+.frbanner-amounts #amount_other label {
+    display: block;
+    height: auto;
+    margin-bottom: 0.2em;
+    font-size: .7em;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.frbanner-amounts #amount_other input {
+    width: 80%;
+    border: 1px solid #ccc;
+    color: #555;
+    font-size: .9em;
+    padding: .3em;
+    border-radius: 2px;
+    direction: ltr;
+    text-align: center;
+    font-family: inherit;
+}
+
+.frbanner-amounts #amount-other-input:focus {
+    outline: 0;
+    border-color: #3366cc;
+    box-shadow: inset 0 0 0 1px #3366cc;
+}
+
+/* --- Payment method Buttons --- */
+
+.frbanner-form .frbanner-submit {
+    padding-bottom: 0;
+}
+
+.frbanner-submit ul {
+    display: block;
+}
+.frbanner-submit ul li {
+    width: 100%;
+    display: block;
+    margin-bottom: .5em;
+    padding: 0 .5em 0 0;
+}
+
+body.rtl .frbanner-submit ul li {
+    padding: 0 0 0 .5em;
+}
+
+.frbanner-submit .frbanner-btn,
+.frbanner-email-reminder-link.frbanner-btn {
+    color: #3366cc;
+}
+
+.frbanner-submit .frbanner-btn:hover,
+.frbanner-email-reminder-link.frbanner-btn:hover {
+    background-color: #fff;
+    border-color: #859dcc;
+}
+
+.frbanner-submit .frbanner-btn:active,
+.frbanner-email-reminder-link.frbanner-btn:active {
+    background-color: #eff3fa;
+    color: #2a4b8d;
+    border-color: #2a4b8d;
+    box-shadow: none
+}
+
+.frbanner-submit .frbanner-btn img {
+    display: block;
+    margin: 0 auto;
+    max-height: 1em;
+    max-width: 100%;
+}
+
+#frbanner-window button {
+    width: 100%;
+    height: 100%;
+    font-size: .85em;
+    float: none;
+    font-family: inherit;
+}
+
+/* If wide enough, put in a row. table-layout: fixed; makes them equal widths */
+@media (min-width : 1100px) {
+
+    .frbanner-submit ul {
+        display: table;
+        table-layout: fixed;
+    }
+
+    .frbanner-submit ul li {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .frbanner-submit .frbanner-btn {
+        min-height: 4.2em;
+    }
+
+    .frbanner-submit .frbanner-btn img {
+        max-height: 2em;
+    }
+}
+
+@media (min-width:  960px) { #frbanner-window button { font-size: .9em; } }
+@media (min-width: 1200px) { #frbanner-window button { font-size: .95em; } }
+
+/* --- Progress bar --- */
+
+#WMDE_Banner #donationRemaining,
+#WMDE_Banner #donationText,
+#WMDE_Banner #daysLeft {
+     font-family: Arial, Helvetica, Verdana, sans-serif;
+     font-synthesis: none;
+}
+
+
+</style>
+
+<div id="WMDE_Banner" style="display: none;"><!-- hidden by default until have checked the cookies -->
+
+    <div id="frbanner">
+
+        <div id="frbanner-window">
+
+            <div id="WMDE_Banner-close">
+
+                <span id="WMDE_Banner-close-label">
+                    Schließen
+                    <span id="WMDE_Banner-close-icon"></span>
+                </span>
+
+            </div>
+
+            <div class="frbanner-message">
+                <p>
+                    {{{frbanner-salutation}}}
+                </p>
+                <p>
+                    {{{frbanner-text}}}
+                </p>
+
+{{MediaWiki:WMDE_FR2016/Resources/ProgressBar
+ | size=32
+ | tip-type=round
+ | minFillWidth=100
+ | border-color=#FFDD5B
+ | fill-color=#FFDD5B
+ | background-color=#000000
+ | text-color-inner=#000000
+ | text-color-outer=#FFFFFF
+ | margin=40px 0
+ | text-inner-left=
+}}
+
+                <div class="frbanner-notice">
+                    <span>Spendenkonto</span>
+                    <span class="highlight">Wikimedia Foerdergesellschaft</span>
+                    <span>BIC</span>
+                    <span class="highlight">BFSWDE33BER</span>
+                    <span>IBAN&nbsp;<span class="highlight">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span></span>
+                </div>
+
+            </div><!--frbanner-message-->
+
+            <div class="frbanner-form">
+
+                <form id="frbanner-form" method="POST" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
+
+                    <input type="hidden" id="periode" name="periode" value="">
+                    <input type="hidden" id="intervalType" name="intervalType" value="0">
+                    <input type="hidden" id="zahlweise" name="zahlweise" value="">
+                    <input type="hidden" id="impCount" name="impCount" value="">
+                    <input type="hidden" id="bImpCount" name="bImpCount" value="">
+
+                    <fieldset class="frbanner-frequency cf">
+                        <ul>
+                            <li>
+                                <input type="radio" id="interval_multiple" />
+                                <label class="frbanner-btn donation-frequency">
+                                    <input type="radio" id="interval_onetime">
+                                    einmalig
+                                </label>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <label class="frbanner-btn donation-interval">
+                                    <input type="radio" name="interval" value="1">
+                                    monatlich
+                                </label>
+                            </li>
+                            <li>
+                                <label class="frbanner-btn donation-interval">
+                                    <input type="radio" name="interval" value="3">
+                                    vierteljährlich
+                                </label>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <label class="frbanner-btn donation-interval">
+                                    <input type="radio" name="interval" value="6">
+                                    halbjährlich
+                                </label>
+                            </li>
+                            <li>
+                                <label class="frbanner-btn donation-interval">
+                                    <input type="radio" name="interval" value="12">
+                                    jährlich
+                                </label>
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="frbanner-amounts cf">
+                        <legend>Betrag auswählen</legend>
+                        <ul>
+                            <li id="amount_total_1">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_1" value="5">
+                                <label id="amount_label_1" class="frbanner-btn predefined_amount" for="field-amount_total_1">5&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_total_2">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_2" value="15">
+                                <label id="amount_label_2" class="frbanner-btn predefined_amount" for="field-amount_total_2">15&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_total_3">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_3" value="25">
+                                <label id="amount_label_3" class="frbanner-btn predefined_amount" for="field-amount_total_3">25&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_total_4">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_4" value="50">
+                                <label id="amount_label_4" class="frbanner-btn predefined_amount" for="field-amount_total_4">50&nbsp;€</label>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li id="amount_total_5">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_5" value="75">
+                                <label id="amount_label_5" class="frbanner-btn predefined_amount" for="field-amount_total_5">75&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_total_6">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_6" value="100">
+                                <label id="amount_label_6" class="frbanner-btn predefined_amount" for="field-amount_total_6">100&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_total_7">
+                                <input name="betrag_auswahl" type="radio" id="field-amount_total_7" value="250">
+                                <label id="amount_label_7" class="frbanner-btn predefined_amount" for="field-amount_total_7">250&nbsp;€</label>
+                            </li>
+
+                            <li id="amount_other">
+                                <div class="frbanner-btn">
+                                    <input name="betrag_auswahl" type="radio" id="input_amount_other" value="Other"/>
+                                    <label for="input_amount_other">anderer</label>
+                                    <input name="amountGiven" type="text" id="amount-other-input" size="3" autocomplete="off" value="" />
+                                </div>
+                            </li>
+
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="frbanner-submit cf">
+                        <legend>Zahlweise</legend>
+
+                        <ul>
+                            <li class="payment-method">
+                                <button class="frbanner-btn" onclick="$( '#zahlweise' ).val( 'BEZ' );">
+                                    Lastschrift
+                                </button>
+                            </li>
+
+                            <li class="payment-method">
+                                <button class="frbanner-btn" onclick="$( '#zahlweise' ).val( 'UEB' );">
+                                    Überweisung
+                                </button>
+                            </li>
+
+                        </ul>
+                    </fieldset>
+
+                    <fieldset class="frbanner-submit cf">
+                        <legend>Zahlweise</legend>
+
+                        <ul>
+                            <li class="payment-method">
+                                <button class="frbanner-btn" onclick="$( '#zahlweise' ).val( 'MCP' );">
+                                    Kreditkarte
+                                </button>
+                            </li>
+
+                            <li class="payment-method">
+                                <button class="frbanner-btn" onclick="$( '#zahlweise' ).val( 'PPL' );">
+                                    PayPal
+                                </button>
+                            </li>
+
+                        </ul>
+                    </fieldset>
+
+                </form>
+                <!--frbanner-form-->
+
+        </div><!--frbanner-window-->
+
+    </div>
+    <img id="WMDE_Banner-close-ct" src="" border="0" width="0" height="0" />
+</div>
+
+<script>
+
+var fundraisingBanner = {};
+
+fundraisingBanner.addSpace = function() {
+    if ( $('#WMDE_Banner').is(':visible') ) {
+        /* Add space for the banner, and extra px if given below. called on load and window resize */
+        var extra = 16;
+        var bannerHeight = $('#frbanner-window').height();
+        $('#mw-panel').css('top', bannerHeight + 160 + extra );
+        $('#mw-head').css('top', bannerHeight + extra );
+        $('#mw-page-base').css('padding-top', bannerHeight+extra);
+    }
+};
+
+fundraisingBanner.addSpaceWithRollo = function () {
+    if ( $('#WMDE_Banner').is(':visible') ) {
+        /* Add space for the banner, and extra px if given below. called on load and window resize */
+        var extra = 16;
+        var bannerHeight = $('#frbanner-window').height();
+        $( '#mw-panel' ).animate( { 'top': bannerHeight + 160 + extra },1000 );
+        $( '#mw-head' ).animate( { 'top': bannerHeight + extra },1000 );
+        $( '#mw-page-base' ).animate( { 'padding-top': bannerHeight},1000);
+    }
+  }
+
+
+fundraisingBanner.show = function() {
+    if ( !showBanner ) {
+      return;
+    }
+
+    var bannerElement = $( '#WMDE_Banner' ),
+        bannerHeight = bannerElement.height();
+    $( 'body' ).prepend( $( '#centralNotice' ) );
+
+
+    bannerElement.css( 'display', 'block' );
+    fundraisingBanner.addSpace();
+    setTimeout(fundraisingBanner.addSpace, 50); // readjust space after loading
+    setTimeout(fundraisingBanner.addSpace, 100);
+    setTimeout(fundraisingBanner.addSpace, 500);
+    setTimeout(fundraisingBanner.addSpace, 3000);
+
+    $(window).resize(function() {
+        fundraisingBanner.addSpace();
+    });
+};
+
+
+$(document).ready(function() {
+
+    $( '#interval_onetime' ).off( 'click' ) // remove handler from common-banner.js
+      .on( 'click', function () {
+         $( '#interval_multiple' ).prop( 'checked', false );
+         $(".donation-interval").removeClass("checked");
+    } );
+
+    $(".donation-frequency").click(function() {
+      $(".donation-frequency").removeClass("checked");
+      $(this).addClass("checked");
+      $( '#interval_multiple' ).prop( 'checked', false );
+    });
+
+    $(".donation-interval").click(function() {
+      $(".donation-interval").removeClass("checked");
+      $(this).addClass("checked");
+      $( '.donation-frequency' ).removeClass( "checked" );
+      $( '#interval_onetime' ).prop( 'checked', false );
+      $( '#interval_multiple' ).prop( 'checked', 'checked' );
+    });
+
+    $(".frbanner-recurring label").click(function() {
+        $(".frbanner-recurring label").removeClass("checked");
+        $(this).addClass("checked");
+        Banner.progressBar.setProgressBarSize();
+    });
+
+    $(".frbanner-frequency label").click(function() {
+        $(".frbanner-frequency label").removeClass("checked");
+        $(this).addClass("checked");
+    });
+
+    $(".frbanner-amounts .frbanner-btn").click(function() {
+        $(".frbanner-amounts .frbanner-btn").removeClass("checked");
+        $(this).addClass("checked");
+        $('#amount-other-input').val(''); // Clear "other" box
+    });
+
+    $("#amount_other").click(function() {
+        document.getElementById("input_amount_other").checked = true;
+        $("#amount-other-input").focus();
+    });
+
+    /* Hide banner outside of main namespace (and Main Page, for sites where that isn't in main namespace) */
+    if ( mw.config.get('wgNamespaceNumber') > 0 && !mw.config.get('wgIsMainPage') ) {
+        mw.centralNotice.bannerData.hideResult = true;
+        mw.centralNotice.bannerData.hideReason = 'namespace';
+    }
+
+    if (!mw.centralNotice.bannerData.hideResult) {
+
+        fundraisingBanner.show();
+        Banner.progressBar.animateProgressBar();
+
+        $( '#daysLeft span' ).text( getDaysRemaining() );
+
+        $( 'li.payment-method button.frbanner-btn' ).click( function( e ) {
+            return validateForm();
+        } );
+
+        $( "#impCount" ).val( increaseImpCount() );
+        $( "#bImpCount" ).val( increaseBannerImpCount( "{{{BannerName}}}" ) );
+
+        $( 'span#weekday' ).text( getCurrentDayName( getCurrentGermanDay ) );
+        if ( getCurrentDayName( getCurrentGermanDay ) !== getCurrentGermanDay() ) {
+            $( '#weekdayPrepPhrase' ).text( 'am heutigen' );
+        }
+
+        $( '#campaignDaySentence' ).text( getCampaignDaySentence() );
+        $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
+        $( '.bannerImpressions').text( window.GlobalBannerSettings[ 'milion-impressions-per-day' ] );
+
+        if ( getDaysSinceCampaignStart() < 1 ) {
+            $( '#donationRemaining' ).text( 'Unser Spendenziel: ' + ( GlobalBannerSettings.goalSum / 1000000 ).toFixed( 1 ).replace( '.', ',' ) + ' Mio. €' );
+            $( '#donationText' ).html( '' );
+        }
+    }
+
+});
+</script>

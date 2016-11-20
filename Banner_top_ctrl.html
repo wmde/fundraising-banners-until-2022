@@ -1,5 +1,6 @@
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/DesktopBanner.css}}</style>
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/icon.css}}</style>
+<style type="text/css">{{MediaWiki:WMDE FR2015/Resources/MiniNagBanner.css}}</style>
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.css}}</style>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/BannerValues.js}}</script>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/DesktopBanner.js
@@ -17,6 +18,16 @@
 <script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CustomDayName.js}}</script>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.js}}</script>
 <style type="text/css">
+
+#WMDE_Banner-nag-wrapper {
+    background: transparent;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+}
+
   #WMDE_Banner-facts {
     background-color: #040931;
   }
@@ -329,9 +340,44 @@ div.interval_tab_first {
      margin: 0 10px 10px 35px;
 }
 
+/* --- Nag Banner overrides -- */
+
+#WMDE_Banner-nag {
+    background-color: #f36b21;
+}
+
+#WMDE_Banner-nag img {
+    margin-right: .4em;
+    height: 20px;
+    width: 20px;
+}
+
+#WMDE_Banner-nag button {
+    display: inline-block;
+    margin: 0 0 0 1em;
+    border-radius: .25em;
+    background: #ffed41;
+    box-shadow: 0 0 5px rgba(6,7,7,.3);
+    color: #990000;
+    font-size: .8em;
+    padding: .25em .5em;
+    font-weight: bold;
+    cursor: pointer;
+    vertical-align: middle;
+    border: none;
+    text-transform: uppercase;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+
+
+#WMDE_Banner-nag-close {
+    background-image: url('//upload.wikimedia.org/wikipedia/donate/8/84/Close-dark-trilogy.png');
+}
 </style>
 
-<div id="WMDE_Banner" >
+<div id="WMDE_Banner" style="position: absolute;" >
   <div style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);">
     <form id="WMDE_Banner-form" method="post" name="donationForm"
           action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
@@ -538,6 +584,18 @@ div.interval_tab_first {
    </div>
 </div>
 
+
+<div id="WMDE_Banner-nag-wrapper">
+  <div id="WMDE_Banner-nag">
+     <div id="WMDE_Banner-nag-content">
+        <img src="//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png">
+        <span id="WMDE_Banner-nag-link">{{{mini-banner-text}}}</span>
+        <button id="WMDE_Banner-nag-donate">{{{mini-banner-donate-link}}}</button>
+        <span id="WMDE_Banner-nag-close"></span>
+     </div>
+  </div>
+</div>
+
 <script type="text/javascript">
   $( document ).ready( function () {
     $( '#interval_tab_onetime' ).click( function () {
@@ -629,13 +687,10 @@ div.interval_tab_first {
     var bannerElement = $( '#WMDE_Banner' ),
         bannerHeight = bannerElement.height();
     $( 'body' ).prepend( $( '#centralNotice' ) );
-    bannerElement.css( 'top', -bannerHeight );
+
     bannerElement.css( 'display', 'block' );
-    addSpace();
-    bannerElement.animate( { top: 0 }, 1000 );
-    setTimeout( function () {
-            Banner.progressBar.animateProgressBar();
-        }, 1000 );
+    addSpaceInstantly();
+    Banner.progressBar.animateProgressBar();
 
     $( window ).resize( function () {
       addSpaceInstantly();
@@ -703,7 +758,8 @@ div.interval_tab_first {
     $( '#bImpCount' ).val( bannerImpCount );
 
     if ( mw.config.get( 'wgAction' ) === "view" ) {
-      setTimeout( displayBanner, 7500 );
+      displayBanner();
+      addMiniBanner();
     }
     if ( mw.config.get( 'wgUserName' ) !== null ) {
       $( '#wikilogin' ).val( 'yes' );
@@ -716,6 +772,7 @@ div.interval_tab_first {
     }
     $( 'span#campaignDay' ).text( getCampaignDayString() );
     $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
+    $( '.bannerImpressions').text( window.GlobalBannerSettings[ 'milion-impressions-per-day' ] );
 
     $( '#campaignDaySentence' ).text( getCampaignDaySentence() );
 
