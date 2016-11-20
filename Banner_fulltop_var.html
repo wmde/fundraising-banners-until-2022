@@ -14,7 +14,10 @@
 }}
 </script>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CustomDayName.js}}</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.js}}</script>
 
+<style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/icon.css}}</style>
+<style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.css}}</style>
 <style>
 /* For IE9 */
 @media screen {
@@ -163,7 +166,7 @@ body.rtl #WMDE_Banner-close-icon {
     font: 1em/1.2 Arial, Helvetica, Verdana, sans-serif;;
     font-size: 0.9em;
     /* height: 1.4em; */
-    padding: 0 1.4em;
+    padding: 0 0 0 1.4em;
 
     background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
     background: url('//upload.wikimedia.org/wikipedia/donate/thumb/9/96/I.svg/40px-I.svg.png') no-repeat 0 1px / 15px 15px;
@@ -510,6 +513,37 @@ body.rtl .frbanner-submit ul li {
      font-synthesis: none;
 }
 
+#application-of-funds-link {
+    cursor: pointer;
+    margin-left: 1.5em;
+}
+
+#application-of-funds-link:hover {
+    text-decoration: underline;
+}
+
+#info-application-of-funds {
+    width: 720px;
+    margin-top: -5px;
+}
+
+#info-application-of-funds hr {
+    margin: 1.4em 0;
+}
+
+#info-application-of-funds-footer {
+    font-size: 0.8em;
+}
+
+#info-application-of-funds-footer div {
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+}
+
+#info-application-of-funds-footer a {
+    color: #3366cc;
+}
 
 </style>
 
@@ -550,11 +584,18 @@ body.rtl .frbanner-submit ul li {
 }}
 
                 <div class="frbanner-notice">
-                    <span>Spendenkonto</span>
-                    <span class="highlight">Wikimedia Foerdergesellschaft</span>
-                    <span>BIC</span>
-                    <span class="highlight">BFSWDE33BER</span>
-                    <span>IBAN&nbsp;<span class="highlight">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span></span>
+                    <div>
+                        <div style="float: right;">
+                            <span id="application-of-funds-link" data-href="#info-application-of-funds">Wohin&nbsp;geht&nbsp;meine&nbsp;Spende?</span>
+                        </div>
+                        <div id="frbanner-notice-left">
+                            <span>Spendenkonto</span>
+                            <span class="highlight">Wikimedia Foerdergesellschaft</span>
+                            <span>BIC</span>
+                            <span class="highlight">BFSWDE33BER</span>
+                            <span>IBAN&nbsp;<span class="highlight">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span></span>
+                        </div>
+                    </div>
                 </div>
 
             </div><!--frbanner-message-->
@@ -707,6 +748,36 @@ body.rtl .frbanner-submit ul li {
     <img id="WMDE_Banner-close-ct" src="" border="0" width="0" height="0" />
 </div>
 
+<div class="wlightbox-contents">
+    <div id="info-application-of-funds">
+        <div class="wlightbox-title clearfix">
+            <span class="icon-bar-chart wlightbox-icon"></span>Wohin geht meine Spende?
+
+            <a href="http://wikimedia.de/wiki/Transparenz" target="_blank"><span class="logo-itz-white f-right no-margin"></span></a>
+        </div>
+
+        <p>
+            <img src="//upload.wikimedia.org/wikipedia/commons/8/8a/WMDE-application-of-funds-diagram-2017.png" />
+        </p>
+
+        <div>
+            <img src="//upload.wikimedia.org/wikipedia/commons/0/00/WMDE-application-of-funds-2017.svg" />
+        </div>
+
+        <hr/>
+
+        <div id="info-application-of-funds-footer">
+            <div>
+                <a id="link-wmf-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Foundation_Annual_Plan/2016-2017/Final" target="_blank">Erfahren Sie mehr zum Jahresplan<br>der Wikimedia Foundation</a>
+            </div>
+            <div>
+                <a id="link-wmde-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Deutschland/Jahresplanung_2017/Ziele,_Indikatoren_und_Wirtschaftsplan" target="_blank">Erfahren Sie mehr zum Jahresplan<br>von Wikimedia Deutschland</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script>
 
 var fundraisingBanner = {};
@@ -782,6 +853,7 @@ $(document).ready(function() {
     $(".frbanner-recurring label").click(function() {
         $(".frbanner-recurring label").removeClass("checked");
         $(this).addClass("checked");
+        fundraisingBanner.addSpace();
         Banner.progressBar.setProgressBarSize();
     });
 
@@ -835,6 +907,19 @@ $(document).ready(function() {
             $( '#donationText' ).html( '' );
         }
     }
+
+    $( '#application-of-funds-link' ).wlightbox( { container: $( '#mw-page-base' ), right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px' } );
+    $( '#application-of-funds-link' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/application-of-funds-lightbox-opened/{{{BannerName}}}&rec=1' );
+    } );
+
+    $( '#link-wmf-annual-plan' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/wmf-annual-plan/{{{BannerName}}}&rec=1' );
+    } );
+
+    $( '#link-wmde-annual-plan' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/wmde-annual-plan/{{{BannerName}}}&rec=1' );
+    } );
 
 });
 </script>

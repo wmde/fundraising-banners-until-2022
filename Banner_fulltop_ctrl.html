@@ -564,38 +564,30 @@ body.rtl .frbanner-submit ul li {
                 <form id="frbanner-form" method="POST" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
 
                     <input type="hidden" id="periode" name="periode" value="">
-                    <input type="hidden" id="intervalType" name="intervalType" value="">
+                    <input type="hidden" id="intervalType" name="intervalType" value="0">
                     <input type="hidden" id="zahlweise" name="zahlweise" value="">
                     <input type="hidden" id="impCount" name="impCount" value="">
                     <input type="hidden" id="bImpCount" name="bImpCount" value="">
 
-                    <fieldset class="frbanner-recurring cf">
+                    <fieldset class="frbanner-frequency cf">
                         <ul>
                             <li>
-                                <label class="frbanner-btn frequency_onetime" onclick="$( '.frbanner-frequency' ).hide(); $( '.frbanner-frequency input:radio[name=periode]' ).prop( 'checked', false );">
-                                    <input type="radio" name="intervalType" value="0" id="interval_onetime">
+                                <input type="radio" id="interval_multiple" />
+                                <label class="frbanner-btn donation-frequency">
+                                    <input type="radio" id="interval_onetime">
                                     einmalig
                                 </label>
                             </li>
-                            <li>
-                                <label class="frbanner-btn frequency_monthly" onclick="$( '.frbanner-frequency' ).show();">
-                                    <input type="radio" name="intervalType" value="1" id="interval_multiple">
-                                    regelmäßig
-                                </label>
-                            </li>
                         </ul>
-                    </fieldset>
-
-                    <fieldset class="frbanner-frequency cf" style="display: none;">
                         <ul>
                             <li>
-                                <label class="frbanner-btn">
+                                <label class="frbanner-btn donation-interval">
                                     <input type="radio" name="interval" value="1">
                                     monatlich
                                 </label>
                             </li>
                             <li>
-                                <label class="frbanner-btn">
+                                <label class="frbanner-btn donation-interval">
                                     <input type="radio" name="interval" value="3">
                                     vierteljährlich
                                 </label>
@@ -604,13 +596,13 @@ body.rtl .frbanner-submit ul li {
 
                         <ul>
                             <li>
-                                <label class="frbanner-btn">
+                                <label class="frbanner-btn donation-interval">
                                     <input type="radio" name="interval" value="6">
                                     halbjährlich
                                 </label>
                             </li>
                             <li>
-                                <label class="frbanner-btn">
+                                <label class="frbanner-btn donation-interval">
                                     <input type="radio" name="interval" value="12">
                                     jährlich
                                 </label>
@@ -767,11 +759,29 @@ fundraisingBanner.show = function() {
 
 $(document).ready(function() {
 
+    $( '#interval_onetime' ).off( 'click' ) // remove handler from common-banner.js
+      .on( 'click', function () {
+         $( '#interval_multiple' ).prop( 'checked', false );
+         $(".donation-interval").removeClass("checked");
+    } );
+
+    $(".donation-frequency").click(function() {
+      $(".donation-frequency").removeClass("checked");
+      $(this).addClass("checked");
+      $( '#interval_multiple' ).prop( 'checked', false );
+    });
+
+    $(".donation-interval").click(function() {
+      $(".donation-interval").removeClass("checked");
+      $(this).addClass("checked");
+      $( '.donation-frequency' ).removeClass( "checked" );
+      $( '#interval_onetime' ).prop( 'checked', false );
+      $( '#interval_multiple' ).prop( 'checked', 'checked' );
+    });
 
     $(".frbanner-recurring label").click(function() {
         $(".frbanner-recurring label").removeClass("checked");
         $(this).addClass("checked");
-        fundraisingBanner.addSpace();
         Banner.progressBar.setProgressBarSize();
     });
 
