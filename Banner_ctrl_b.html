@@ -1,8 +1,8 @@
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/DesktopBanner.css}}</style>
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/icon.css}}</style>
 <style type="text/css">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.css}}</style>
-<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/BannerValues.js}}</script>
-<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/DesktopBanner.js
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/BannerValues.js}}</script>
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/DesktopBanner.js
 | donations-date-base       = ' + window.GlobalBannerSettings['donations-date-base'] + '
 | donations-collected-base  = ' + window.GlobalBannerSettings['donations-collected-base'] + '
 | donators-base             = ' + window.GlobalBannerSettings['donators-base'] + '
@@ -10,19 +10,28 @@
 | appr-donators-per-minute  = ' + window.GlobalBannerSettings['appr-donators-per-minute'] + '
 }}
 </script>
-<script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CountCampaignDays.js
-| campaign-start-date = 2015-11-11
+<script type="text/javascript">{{MediaWiki:WMDE_FR2016/Resources/CountCampaignDays.js
+| campaign-start-date = 2016-11-09
 }}
 </script>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/CustomDayName.js}}</script>
 <script type="text/javascript">{{MediaWiki:WMDE_FR2015/Resources/wlightbox.js}}</script>
 <style type="text/css">
+  #WMDE_Banner-facts {
+    background-color: #040931;
+  }
+
+  #WMDE_Banner_info {
+    color: #ffffff;
+  }
+
   #WMDE_Banner-text {
     text-align:left;
+    color: #ffffff;
   }
 
   #WMDE_Banner-text-salute {
-    color: #000;
+    color: #ffffff;
     font-size: 17px;
     font-weight: bold;
     line-height: 1.2em;
@@ -288,7 +297,8 @@ div.interval_tab_first {
 }
 
 #WMDE_Banner .highlight {
-    background-color: yellow;
+    background-color: #ffdd5b;
+    color: #000000;
 }
 
 /* --- more info for recurring donations --- */
@@ -313,6 +323,12 @@ div.interval_tab_first {
      line-height:135%;
 }
 
+/* --- Donation meter --- */
+
+#WMDE_Banner #donationMeterWrapper {
+     margin: 0 10px 10px 35px;
+}
+
 </style>
 
 <div id="WMDE_Banner" >
@@ -330,7 +346,22 @@ div.interval_tab_first {
                   <p id="WMDE_Banner-text-salute">{{{banner-text-salutation}}}</p>
                   <p id="WMDE_Banner-text">{{{banner-text}}}</p>
                 </td>
-                <td>
+              </tr>
+              <tr>
+                <td style="vertical-align:middle;" valign="center">
+{{MediaWiki:WMDE_FR2016/Resources/ProgressBar
+ | size=32
+ | tip-type=round
+ | minFillWidth=100
+ | border-color=#FFDD5B
+ | fill-color=#FFDD5B
+ | background-color=#000000
+ | text-color-inner=#000000
+ | text-color-outer=#FFFFFF
+ | margin=40px 0
+ | text-inner-left=
+}}
+
                 </td>
               </tr>
               <tr>
@@ -602,6 +633,9 @@ div.interval_tab_first {
     bannerElement.css( 'display', 'block' );
     addSpace();
     bannerElement.animate( { top: 0 }, 1000 );
+    setTimeout( function () {
+            Banner.progressBar.animateProgressBar();
+        }, 1000 );
 
     $( window ).resize( function () {
       addSpaceInstantly();
@@ -682,6 +716,13 @@ div.interval_tab_first {
     }
     $( 'span#campaignDay' ).text( getCampaignDayString() );
     $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
+
+    $( '#campaignDaySentence' ).text( getCampaignDaySentence() );
+
+    if ( getDaysSinceCampaignStart() < 1 ) {
+        $( '#donationRemaining' ).text( 'Unser Spendenziel: ' + ( GlobalBannerSettings.goalSum / 1000000 ).toFixed( 1 ).replace( '.', ',' ) + ' Mio. €' );
+        $( '#donationText' ).html( '' );
+    }
 
   } );
 </script>
