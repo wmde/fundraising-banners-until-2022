@@ -41,6 +41,20 @@
     padding-bottom: 0;
   }
 
+/* --- Footer --- */
+.footer-info {
+   white-space:nowrap;
+}
+
+
+@media (max-width : 730px) {
+    .footer-info .bankdata-label {
+       display: inline-block;
+       min-width: 32px;
+    }
+}
+
+/* --- Form --- */
 #WMDE_Banner-form fieldset {
     width: 95%;
     border: 0;
@@ -369,11 +383,15 @@ div.interval_tab_first {
                   <div id="WMDE_Banner_info">
                     <div id="WMDE_Banner_text">
                       <span class="binfo-ucase">Spendenkonto</span>
-                      <span>Wikimedia Foerdergesellschaft</span>
-                      <span>BIC</span>
-                      <span class="binfo-bold">BFSWDE33BER</span>
-                      <span>IBAN</span>
-                      <span class="binfo-bold" style="margin-right: 0;">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                      <span class="footer-info">Wikimedia Foerdergesellschaft</span>
+                      <span class="footer-info">
+                          <span class="bankdata-label">BIC</span>
+                          <span class="binfo-bold">BFSWDE33BER</span>
+                      </span>
+                      <span class="footer-info">
+                          <span class="bankdata-label">IBAN</span>
+                          <span class="binfo-bold" style="margin-right: 0;">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                      </span>
                     </div>
                   </div>
                 </td>
