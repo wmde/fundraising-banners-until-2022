@@ -288,7 +288,7 @@ body.rtl #WMDE_Banner-close-icon {
     color: #222;
     border: 1px solid #9aa0a7;
     border-radius: 2px;
-    padding: 1em .5em;
+    padding: .9em .5em;
     outline: 0;
     text-align: center;
     line-height: 1;
@@ -297,6 +297,13 @@ body.rtl #WMDE_Banner-close-icon {
     font-weight: 500;
     transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 }
+
+.frbanner-btn input[type=text] {
+    background-color: #ffffff;
+    line-height: 1.6em;
+    margin-top: 0.3em;
+}
+
 .frbanner-btn:hover {
     background-color: #fff;
     color: #444;
@@ -386,8 +393,8 @@ body.rtl .frbanner-amounts li {
     }
 }
 
-@media (min-width : 800px)  { .frbanner-amounts .predefined_amount { font-size: .9em; padding: 1em 0.25em; } }
-@media (min-width : 1100px)  { .frbanner-amounts .predefined_amount { font-size: 1.1em; padding: 1em 0.5em; } }
+@media (min-width : 800px)  { .frbanner-amounts .predefined_amount { font-size: .9em; padding: .9em 0.25em; } }
+@media (min-width : 1100px)  { .frbanner-amounts .predefined_amount { font-size: 1.1em; padding: .9em 0.5em; } }
 
 /* --- Other Amount --- */
 
@@ -479,46 +486,24 @@ body.rtl .frbanner-submit ul li {
     font-family: inherit;
 }
 
-/* If wide enough, put in a row. table-layout: fixed; makes them equal widths */
-@media (min-width : 1100px) {
-
-    .frbanner-submit ul {
-        display: table;
-        table-layout: fixed;
-    }
-
-    .frbanner-submit ul li {
-        display: table-cell;
-        vertical-align: top;
-    }
-
-    .frbanner-submit .frbanner-btn {
-        min-height: 4.2em;
-    }
-
-    .frbanner-submit .frbanner-btn img {
-        max-height: 2em;
-    }
+ul.form-footer {
+    display: block;
+    font-size: 0.7em;
+    width: 100%;
 }
 
-@media (min-width:  960px) { #frbanner-window button { font-size: .9em; } }
-@media (min-width: 1200px) { #frbanner-window button { font-size: .95em; } }
-
-/* --- Progress bar --- */
-
-#WMDE_Banner #donationRemaining,
-#WMDE_Banner #donationText,
-#WMDE_Banner #daysLeft {
-     font-family: Arial, Helvetica, Verdana, sans-serif;
-     font-synthesis: none;
+ul.form-footer li {
+    display: block;
+    text-align: center;
+    padding: 0 0.5em 0 0;
 }
 
-#application-of-funds-link {
+.form-footer-link {
     cursor: pointer;
-    margin-left: 1.5em;
+    line-height: 2em;
 }
 
-#application-of-funds-link:hover {
+.form-footer-link:hover {
     text-decoration: underline;
 }
 
@@ -543,6 +528,59 @@ body.rtl .frbanner-submit ul li {
 
 #info-application-of-funds-footer a {
     color: #3366cc;
+}
+
+.frbanner-form form {
+    margin-bottom: 0;
+}
+
+/* If wide enough, put in a row. table-layout: fixed; makes them equal widths */
+@media (min-width : 1100px) {
+
+    .frbanner-form form {
+        margin-bottom: 1.2em;
+    }
+
+    .frbanner-submit ul, ul.form-footer {
+        display: table;
+        table-layout: fixed;
+    }
+
+    ul.form-footer {
+        position: absolute;
+        bottom: -1em;
+        left: 0;
+    }
+
+    .frbanner-submit ul li, ul.form-footer li {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .frbanner-submit .frbanner-btn {
+        min-height: 3.8em;
+    }
+
+    .frbanner-submit .frbanner-btn img {
+        max-height: 2em;
+    }
+}
+
+@media (min-width : 1300px) {
+    ul.form-footer {
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width:  960px) { #frbanner-window button { font-size: .9em; } }
+
+/* --- Progress bar --- */
+
+#WMDE_Banner #donationRemaining,
+#WMDE_Banner #donationText,
+#WMDE_Banner #daysLeft {
+     font-family: Arial, Helvetica, Verdana, sans-serif;
+     font-synthesis: none;
 }
 
 </style>
@@ -584,18 +622,11 @@ body.rtl .frbanner-submit ul li {
 }}
 
                 <div class="frbanner-notice">
-                    <div>
-                        <div style="float: right;">
-                            <span id="application-of-funds-link" data-href="#info-application-of-funds">Wohin&nbsp;geht&nbsp;meine&nbsp;Spende?</span>
-                        </div>
-                        <div id="frbanner-notice-left">
-                            <span>Spendenkonto</span>
-                            <span class="highlight">Wikimedia Foerdergesellschaft</span>
-                            <span>BIC</span>
-                            <span class="highlight">BFSWDE33BER</span>
-                            <span>IBAN&nbsp;<span class="highlight">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span></span>
-                        </div>
-                    </div>
+                    <span>Spendenkonto</span>
+                    <span class="highlight">Wikimedia Foerdergesellschaft</span>
+                    <span>BIC</span>
+                    <span class="highlight">BFSWDE33BER</span>
+                    <span>IBAN&nbsp;<span class="highlight">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span></span>
                 </div>
 
             </div><!--frbanner-message-->
@@ -693,8 +724,7 @@ body.rtl .frbanner-submit ul li {
                             <li id="amount_other">
                                 <div class="frbanner-btn">
                                     <input name="betrag_auswahl" type="radio" id="input_amount_other" value="Other"/>
-                                    <label for="input_amount_other">anderer</label>
-                                    <input name="amountGiven" type="text" id="amount-other-input" size="3" autocomplete="off" value="" />
+                                    <input name="amountGiven" type="text" id="amount-other-input" size="3" autocomplete="off" value="" placeholder="anderer" />
                                 </div>
                             </li>
 
@@ -739,6 +769,15 @@ body.rtl .frbanner-submit ul li {
                         </ul>
                     </fieldset>
 
+                    <ul class="form-footer">
+                        <li>
+                            <span id="secure-connection-link" class="form-footer-link" data-href="#info-secure-connection"><span class="icon-lock" style="height: 13px;"></span>&nbsp;SSL-Verschlüsselung</span>
+                        </li>
+                        <li>
+                            <span id="application-of-funds-link" class="form-footer-link" data-href="#info-application-of-funds">Wohin geht meine Spende?</span>
+                        </li>
+                    </ul>
+
                 </form>
                 <!--frbanner-form-->
 
@@ -776,6 +815,9 @@ body.rtl .frbanner-submit ul li {
         </div>
 
     </div>
+
+    <div id="info-secure-connection">Ihre Daten werden über eine sichere SSL-Verbindung übertragen und liegen später auf deutschen Servern.</div>
+
 </div>
 
 <script>
@@ -909,8 +951,13 @@ $(document).ready(function() {
     }
 
     $( '#application-of-funds-link' ).wlightbox( { container: $( '#mw-page-base' ), right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px' } );
+    $( '#secure-connection-link' ).wlightbox( { container: $( '#mw-page-base' ), right: '20px', top: $( 'ul.form-footer' ).offset().top - 80 } );
     $( '#application-of-funds-link' ).click( function ( e ) {
         $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/application-of-funds-lightbox-opened/{{{BannerName}}}&rec=1' );
+    } );
+
+    $( '#secure-connection-link' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/secure-connection-lightbox-opened/{{{BannerName}}}&rec=1' );
     } );
 
     $( '#link-wmf-annual-plan' ).click( function ( e ) {

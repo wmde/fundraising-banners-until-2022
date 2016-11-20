@@ -371,10 +371,42 @@ div.interval_tab_first {
     transition: all .25s ease-in-out;
 }
 
-
 #WMDE_Banner-nag-close {
     background-image: url('//upload.wikimedia.org/wikipedia/donate/8/84/Close-dark-trilogy.png');
 }
+
+#application-of-funds-link {
+    cursor: pointer;
+    margin-left: 1.5em;
+}
+
+#application-of-funds-link:hover {
+    text-decoration: underline;
+}
+
+#info-application-of-funds {
+    width: 720px;
+    margin-top: -5px;
+}
+
+#info-application-of-funds hr {
+    margin: 1.4em 0;
+}
+
+#info-application-of-funds-footer {
+    font-size: 0.8em;
+}
+
+#info-application-of-funds-footer div {
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+}
+
+#info-application-of-funds-footer a {
+    color: #3366cc;
+}
+
 </style>
 
 <div id="WMDE_Banner" style="position: absolute;" >
@@ -413,7 +445,10 @@ div.interval_tab_first {
               <tr>
                 <td style="height: 1%; vertical-align: bottom;">
                   <div id="WMDE_Banner_info">
-                    <div id="WMDE_Banner_text">
+                    <div style="float: right;">
+                            <span id="application-of-funds-link" data-href="#info-application-of-funds">Wohin&nbsp;geht&nbsp;meine&nbsp;Spende?</span>
+                    </div>
+                    <div>
                       <span class="binfo-ucase">Spendenkonto</span>
                       <span>Wikimedia Foerdergesellschaft</span>
                       <span>BIC</span>
@@ -595,6 +630,36 @@ div.interval_tab_first {
   </div>
 </div>
 
+<div class="wlightbox-contents">
+    <div id="info-application-of-funds">
+        <div class="wlightbox-title clearfix">
+            <span class="icon-bar-chart wlightbox-icon"></span>Wohin geht meine Spende?
+
+            <a href="http://wikimedia.de/wiki/Transparenz" target="_blank"><span class="logo-itz-white f-right no-margin"></span></a>
+        </div>
+
+        <p>
+            <img src="//upload.wikimedia.org/wikipedia/commons/8/8a/WMDE-application-of-funds-diagram-2017.png" />
+        </p>
+
+        <div>
+            <img src="//upload.wikimedia.org/wikipedia/commons/0/00/WMDE-application-of-funds-2017.svg" />
+        </div>
+
+        <hr/>
+
+        <div id="info-application-of-funds-footer">
+            <div>
+                <a id="link-wmf-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Foundation_Annual_Plan/2016-2017/Final" target="_blank">Erfahren Sie mehr zum Jahresplan<br>der Wikimedia Foundation</a>
+            </div>
+            <div>
+                <a id="link-wmde-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Deutschland/Jahresplanung_2017/Ziele,_Indikatoren_und_Wirtschaftsplan" target="_blank">Erfahren Sie mehr zum Jahresplan<br>von Wikimedia Deutschland</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script type="text/javascript">
   $( document ).ready( function () {
     $( '#interval_tab_onetime' ).click( function () {
@@ -608,6 +673,7 @@ div.interval_tab_first {
       $( '' );
 
       addSpaceInstantly();
+      calculateLightboxPosition();
     } );
 
     $( '#interval_tab_multiple' ).click( function ( e ) {
@@ -623,7 +689,9 @@ div.interval_tab_first {
 
       $( '.interval-options').removeClass( 'interval-hidden' );
       addSpaceInstantly();
+      calculateLightboxPosition();
     } );
+
   } );
 
   $( '#WMDE_Banner-frequency' ).find( 'label' ).click( function () {
@@ -693,29 +761,37 @@ div.interval_tab_first {
 
     $( window ).resize( function () {
       addSpaceInstantly();
+      calculateLightboxPosition();
     } );
+  }
+
+  function calculateLightboxPosition() {
+      $( '#wlightbox' ).css( { right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px', top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px' } );
   }
 
   function addMiniBanner() {
     /* add the "nag" bar. Has to be done after we show the main banner (to get its height) */
     var bigBannerHeight = $('#WMDE_Banner').height();
 
-    $(window).scroll(function() {
-      if ($(window).scrollTop() <= bigBannerHeight) {
-        $('#WMDE_Banner-nag').finish();
-        $('#WMDE_Banner-nag').css('display', 'none');
+    $( window ).scroll( function () {
+      if ( $( window ).scrollTop() <= bigBannerHeight ) {
+        $( '#WMDE_Banner-nag' ).finish();
+        $( '#WMDE_Banner-nag' ).css( 'display', 'none' );
       } else {
-        $('#WMDE_Banner-nag').delay(1500).slideDown();
+        // only show mini banner if no lightbox is visible
+        if ( !$( '#wlightbox' ).is(':visible') ) {
+          $( '#WMDE_Banner-nag' ).delay( 1500 ).slideDown();
+        }
       }
     });
 
-    $('#WMDE_Banner-nag-close').click(function(event) {
-      $('#WMDE_Banner-nag').remove();
+    $( '#WMDE_Banner-nag-close' ).click( function ( event ) {
+      $( '#WMDE_Banner-nag' ).remove();
       event.stopPropagation();
     });
 
-    $('#WMDE_Banner-nag').click(function() {
-      window.scrollTo(0,0);
+    $( '#WMDE_Banner-nag' ).click( function () {
+      window.scrollTo( 0, 0 );
     });
   }
 
@@ -772,13 +848,25 @@ div.interval_tab_first {
     $( 'span#campaignDay' ).text( getCampaignDayString() );
     $( 'span#donorsValue' ).html( addPointsToNum( Math.floor( getApprDonatorsRaw() ) ) );
     $( '.bannerImpressions').text( window.GlobalBannerSettings[ 'milion-impressions-per-day' ] );
-
     $( '#campaignDaySentence' ).text( getCampaignDaySentence() );
 
     if ( getDaysSinceCampaignStart() < 1 ) {
         $( '#donationRemaining' ).text( 'Unser Spendenziel: ' + ( GlobalBannerSettings.goalSum / 1000000 ).toFixed( 1 ).replace( '.', ',' ) + ' Mio. €' );
         $( '#donationText' ).html( '' );
     }
+
+    $( '#application-of-funds-link' ).wlightbox( { container: $( '#mw-page-base' ), right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px', top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px' } );
+    $( '#application-of-funds-link' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/application-of-funds-lightbox-opened/{{{BannerName}}}&rec=1' );
+    } );
+
+    $( '#link-wmf-annual-plan' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/wmf-annual-plan/{{{BannerName}}}&rec=1' );
+    } );
+
+    $( '#link-wmde-annual-plan' ).click( function ( e ) {
+        $( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/wmde-annual-plan/{{{BannerName}}}&rec=1' );
+    } );
 
   } );
 </script>
