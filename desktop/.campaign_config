@@ -1,3 +1,3 @@
-API_URL = "https://wiki.wikimedia.de/w/api.php"
-PAGE_PREFIX = "Web:Banner/"
-CAMPAIGN_NAME = "FR2016_TopBanner_"
+API_URL = "https://meta.wikimedia.org/w/api.php"
+PAGE_PREFIX = "MediaWiki:Centralnotice-template-"
+CAMPAIGN_NAME = "B16WMDE_"
