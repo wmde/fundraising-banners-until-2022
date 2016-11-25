@@ -345,9 +345,51 @@ div.interval_tab_first {
     padding: 2px 4px;
     text-align: center;
 }
+
+/* --- Nag Banner overrides -- */
+
+#WMDE_Banner-nag {
+    background-color: #f36b21;
+}
+
+#WMDE_Banner-nag img {
+    margin-right: .4em;
+    height: 20px;
+    width: 20px;
+}
+
+#WMDE_Banner-nag button {
+    display: inline-block;
+    margin: 0 0 0 1em;
+    border-radius: .25em;
+    background: #ffed41;
+    box-shadow: 0 0 5px rgba(6,7,7,.3);
+    color: #990000;
+    font-size: .8em;
+    padding: .25em .5em;
+    font-weight: bold;
+    cursor: pointer;
+    vertical-align: middle;
+    border: none;
+    text-transform: uppercase;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+
+#WMDE_Banner-nag-close {
+    background-image: url('//upload.wikimedia.org/wikipedia/donate/8/84/Close-dark-trilogy.png');
+}
+
+#WMDE_Banner-close {
+    background-image: url('//upload.wikimedia.org/wikipedia/commons/c/cb/Close_x_-_black.png');
+    background-color: transparent;
+    background-size: 12px auto;
+}
+
 </style>
 
-<div id="WMDE_Banner" style="position: fixed; display: none;">
+<div id="WMDE_Banner" style="position: absolute;">
   <div style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);">
     <form id="WMDE_Banner-form" method="post" name="donationForm"
           action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
@@ -651,16 +693,9 @@ div.interval_tab_first {
     var bannerElement = $( '#WMDE_Banner' ),
         bannerHeight = bannerElement.height();
     $( 'body' ).prepend( $( '#centralNotice' ) );
-    bannerElement.css( 'top', -bannerHeight );
     bannerElement.css( 'display', 'block' );
-    addSpace();
-    bannerElement.animate( { top: 0 }, 1000 );
-    setTimeout( function () {
-        Banner.progressBar.animateProgressBar();
-    } );
-    setTimeout( function () {
-        $( '#donationRemaining2' ).show();
-    }, 4500 );
+    addSpaceInstantly();
+    Banner.progressBar.animateProgressBar();
 
     $( window ).resize( function () {
         addSpaceInstantly();
@@ -717,7 +752,8 @@ div.interval_tab_first {
     $( "#bImpCount" ).val( bannerImpCount );
 
     if ( mw.config.get( 'wgAction' ) === "view" ) {
-      setTimeout( displayBanner, 7500 );
+      displayBanner();
+      addMiniBanner();
     }
     if ( mw.config.get( 'wgUserName' ) !== null ) {
       $( '#wikilogin' ).val( 'yes' );
