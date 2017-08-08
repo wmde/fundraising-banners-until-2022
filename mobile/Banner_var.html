@@ -8,6 +8,7 @@
 
 <style>
 /* Clearfix */
+
 #frbanner .cf:before,
 #frbanner .cf:after {
     content: "";
@@ -122,11 +123,6 @@
     color: #3c3c3c;
 }
 
-#frbanner2 {
-    font-size: 0.8em;
-    line-height: 1em;
-}
-
 @media (min-width : 768px) {
     #frbanner2 {
         font-size: 1em;
@@ -150,17 +146,19 @@
     font-style: normal;
     font-weight: 600;
 }
+
 /* --- Dynamic highlighting --- */
 
 #frbanner .highlight,
-#mini-highlight .highlight {
+#frbanner2 #mini-highlight .highlight{
     background-color: yellow;
     color: black;
     font-weight:normal;
 }
 
-#to-highlight span:first-child { padding-left:5px; }
-#to-highlight span:last-child { padding-right:5px; }
+#to-highlight span:first-child { padding-left:5px; margin-left:-5px; }
+#to-highlight span:last-child { padding-right:5px; margin-right:-5px; }
+
 
 #frbanner-window .frbanner-message .highlight { line-height: 1.2; }
 
@@ -174,9 +172,9 @@
 
 #frbanner2 #mini-highlight {
     background-color: yellow;
-    color:#040931;
     padding: 0px 5px;
 }
+
 
 /* --- Form --- */
 
@@ -549,7 +547,7 @@ li.subhead {
 }*/
 
 #frbanner2 .frbanner2-tab {
-    background: #040931;
+    background: #ffcc00;
     width: 280px;
     margin: 0 auto;
     padding: 0 .8em 0.3em .8em;
@@ -560,29 +558,27 @@ li.subhead {
     -webkit-border-radius: 0 0 4px 4px;
     border-radius:         0 0 4px 4px;
     font-size: .9em;
-    color: #fff;
+    color: #1c1c1c;
     font-weight: bold;
     cursor: pointer;
 }
 
 #frbanner2 .frbanner2-tab img {
     float: left;
-    margin: .4em .15em 0 0em;
+    margin: .4em .15em 0 .4em;
     transform: rotate(180deg);
 }
 
 #frbanner2 p {
-    background: #040931;
+    background: #ffcc00;
     padding: .7em;
     margin: 0;
-    font-size: .8em;
-    line-height: 1.4em;
-    color: #fff;
+    color: #1c1c1c;
     text-align: center;
 }
 
 #frbanner2-close {
-    background: url('//upload.wikimedia.org/wikipedia/commons/c/c7/Close-trilogy-white.png') no-repeat center center;
+    background: url('//upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png') no-repeat center center;
     width: 1em;
     height: 1em;
     background-size: contain;
@@ -708,7 +704,7 @@ li.subhead {
 
             </div><!--frbanner-message-->
 
-            <form id="frbanner-form" method="post" name="donationForm" style="height: 100%" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}&form=10h16_Form2_Ticker_Intrvar">
+            <form id="frbanner-form" method="post" name="donationForm" style="height: 100%" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
                 <input type="hidden" name="periode" value="0">
                 <input type="hidden" id="{{{banner}}}_address_type" name="addressType" value="person">
                 <input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -814,8 +810,8 @@ li.subhead {
         <span id="frbanner2-close"></span>
         {{{banner-mini-text}}}
     </p>
-    <div class="frbanner2-tab">
-        <img src="//upload.wikimedia.org/wikipedia/commons/a/a4/Arrow-up-white.png" class="tab-img">Spenden Sie jetzt für Wikipedia
+    <div class="frbanner2-tab" style="color: #0645ad;">
+        <img src="//upload.wikimedia.org/wikipedia/donate/d/da/Arrow-up-1.png" class="tab-img"> Spenden Sie jetzt für Wikipedia
     </div>
 </div><!--frbanner2-->
 
@@ -930,7 +926,7 @@ $(document).ready(function() {
 
         animateProgressBar();
         window.setTimeout( function () {
-                animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+            animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
         }, 3000 );
     });
 
@@ -947,8 +943,10 @@ $(document).ready(function() {
         }, 3000 );
     }
 
+
     $( '#{{{banner}}}_btn-ppl' ).click( function() {
         if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
+            $( '#{{{banner}}}_iframe' ).val('');
             $( '#{{{banner}}}_zahlweise' ).val('PPL');
             $( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
             $( '#{{{banner}}}_form' ).submit();
@@ -978,7 +976,6 @@ $(document).ready(function() {
         if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
             $( '#{{{banner}}}_zahlweise' ).val( 'BEZ' );
             $( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-            $( '#frbanner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}&form=10h16_Form2_Ticker_Intrvar' );
             $( '{{{banner}}}_address_type' ).val( 'person' );
             $( '#{{{banner}}}_form' ).submit();
         } else {
@@ -1147,6 +1144,7 @@ function getCookieExpiryDate() {
     var currentDate = new Date();
     return new Date( currentDate.getFullYear() + 1, 0, 1 );
 }
+
 
 function validateForm() {
     var form = document.donationForm;
