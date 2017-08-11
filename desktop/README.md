@@ -16,9 +16,9 @@ To build a minified version of the banner:
 
     docker-compose up js-serve
 
-The web server is at http://localhost:8080/
+To view the banner inside the proxied German Wikimedia go to [http://localhost:8080/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype](http://localhost:8080/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype).
 
-By default, the banner `banner_ctrl` will be loaded. To load a different banner, e.g. `banner_var`, add the parameter `?banner=banner_var` to the URL.
+By default, the banner `banner_ctrl` will be loaded. To load a different banner, e.g. `banner_var`, add the parameter `&devbanner=banner_var` to the URL.
 
 ## Using the compiled JavaScript on CentralNotice
 
@@ -31,6 +31,12 @@ Until there is an upload tool, you need to copy and paste the compiled banner co
     </script></nowiki>
     </div>
 
+## How the preview feature works
+* `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that 
+  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org
+* `B17WMDE_webpack_prototype` is a special banner on CentralNotice that reads the `devbanner` parameter from the URL and inserts it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).   
+
+
 ## Planned Features
 - [x] Bundle HTML and JavaScript as one includable bundle
 - [x] Bundle CSS
@@ -41,12 +47,11 @@ Until there is an upload tool, you need to copy and paste the compiled banner co
 - [x] Add production config for webpack
 - [x] Test how webpack handles JavaScript that calls jQuery without requiring it.
 - [x] Add Dockerfile with installed npm >= 5.x, check in npm lock file (5.3 it is)
-- [ ] Preview with real Wikipedia DE markup and HTML on preview page.
+- [X] Preview with real Wikipedia DE markup and HTML on preview page.
 - [ ] Create upload plugin that wraps the generated JS (see above) and sends it to CentralNotice
 - [ ] development version with source maps
 
 ## Random ideas
-* Move index.html out of `dist` into `public` folder and use different values for `devServer.contentBase` and `devServer.publicPath` ?
 * Configure Campaign number, campaign prefix and campaign start date to generate file names and tracking info inside banners.
 
 ## Notes on possible Banner code improvements
