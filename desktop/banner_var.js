@@ -114,19 +114,9 @@ $( '#amount-other-input' ).change( function () {
   $( this ).trigger( 'amount:custom' );
 } );
 
-$( '#interval_onetime' ).on( 'click', function () {
+$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
     BannerFunctions.hideFrequencyError();
-    $( '#interval_onetime' ).prop( 'checked', true );
-    $( '#interval_multiple' ).prop( 'checked', false );
 }  );
-
-$( '#interval_multiple' ).on( 'click', function () {
-    $( '#interval_multiple' ).prop( 'checked', true );
-    $( '#interval_onetime' ).prop( 'checked', false );
-} );
-$( '.donation-interval' ).on( 'click', function () {
-    BannerFunctions.hideFrequencyError();
-} );
 
 BannerFunctions.initializeBannerEvents();
 
