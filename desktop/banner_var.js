@@ -204,7 +204,7 @@ function displayBanner() {
 
 function calculateLightboxPosition() {
     $( '#wlightbox' ).css( {
-        right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px',
+        right: ( $('body').width() - 750 ) / 2 + 'px',
         top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
     } );
 }
@@ -232,10 +232,10 @@ $( '#application-of-funds-link' ).click( function () {
 trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
+trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
-$( '#WMDE_Banner .close' ).click( function () {
+$( '#WMDE_Banner .close__link' ).click( function () {
     $( '#WMDE_Banner' ).hide();
     if ( BannerFunctions.onMediaWiki() ) {
         mw.centralNotice.hideBanner();
