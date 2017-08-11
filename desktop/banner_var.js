@@ -1,4 +1,5 @@
 require( './styles_var.css' );
+require( './icons.css' );
 require( './wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
@@ -146,11 +147,11 @@ function addSpace() {
           trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
           sizeIssueTrackRatio
       );
-      $( '#mw-panel' ).animate( {'top':bannerHeight + 160},1000 );
-      $( '#mw-head' ).animate( {'top':bannerHeight},1000 );
-      $( '#mw-page-base' ).animate( {'padding-top':bannerHeight},1000);
+      $( '#mw-panel' ).animate( { 'top': bannerHeight }, 1000 );
+      $( '#mw-head' ).animate( { 'top': bannerHeight }, 1000 );
+      $( '#mw-page-base' ).animate( { 'padding-top': bannerHeight }, 1000);
     case 'minerva':
-      $( '#mw-mf-viewport' ).animate( {'top':bannerHeight},1000 );
+      $( '#mw-mf-viewport' ).animate( { 'top': bannerHeight}, 1000 );
       break;
   }
 }
@@ -164,7 +165,7 @@ function addSpaceInstantly() {
 
   switch ( skin ) {
     case 'vector':
-      $( '#mw-panel' ).css( { top: bannerHeight + 160 } );
+      $( '#mw-panel' ).css( { top: bannerHeight } );
       $( '#mw-head' ).css( { top: bannerHeight } );
       $( '#mw-page-base' ).css( { paddingTop: bannerHeight } );
     case 'minerva':
@@ -174,7 +175,22 @@ function addSpaceInstantly() {
 }
 
 function removeBannerSpace() {
-    // TODO test with real Wikpedia assets, check if we need to remove banner space.
+	var skin = BannerFunctions.getSkin();
+	switch ( skin ) {
+		case 'vector':
+			$( '#mw-panel' ).css( 'top', 0 );
+			$( '#mw-head' ).css( 'top', 0 );
+			$( '#mw-page-base' ).css( 'padding-top', 0 );
+			break;
+		case 'minerva':
+			$( '#mw-mf-viewport' ).css( 'top', 0 );
+			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
+			break;
+		case 'monobook':
+			$( '#globalWrapper' ).css( 'position', 'relative' );
+			$( '#globalWrapper' ).css( 'top', 0 );
+			break;
+	}
 }
 
 function displayBanner() {
@@ -226,10 +242,10 @@ $( '#application-of-funds-link' ).click( function () {
 trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner-close' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
+trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
-$( '#WMDE_Banner-close a' ).click( function () {
+$( '#WMDE_Banner .close' ).click( function () {
     $( '#WMDE_Banner' ).hide();
     if ( BannerFunctions.onMediaWiki() ) {
         mw.centralNotice.hideBanner();
@@ -252,5 +268,5 @@ $( function () {
   if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
     return;
   }
-  setTimeout( displayBanner, $( '#WMDE-BannerPreview' ).data( 'delay' ) || 7500 );
+  setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 } );

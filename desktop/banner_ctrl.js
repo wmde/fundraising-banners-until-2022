@@ -187,6 +187,7 @@ function addSpaceInstantly() {
 
 function removeBannerSpace() {
     // TODO test with real Wikpedia assets, check if we need to remove banner space.
+
 }
 
 function displayBanner() {

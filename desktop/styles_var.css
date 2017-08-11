@@ -5,9 +5,19 @@ img {
     border: 0 none;
 }
 
+#WMDE_Banner {
+    display: none;
+}
+
 /**
  * CUSTOM
  */
+
+#WMDE_Banner {
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
 
 /* Just the layout of components with flexbox */
 .banner {
@@ -52,16 +62,17 @@ img {
 /* Styling, from old banner code, but cleaned up */
 
 .WMDE-Banner {
-  font-family: Arial, Helvetica, Verdana, sans-serif;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-  padding-bottom:0.25em
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    background-color: white;
 }
 
 .infobox {
-  border: 5px solid #990000;
-  border-radius: 9px;
-  background-color: #f8f9fa;
-  padding: 0 0.5em 0 2em;
+    border: 5px solid #990000;
+    border-radius: 9px;
+    background-color: #f8f9fa;
+    padding: 0 0.5em 0 2em;
+    margin: 0.25em;
 }
 
 .text {
@@ -83,8 +94,16 @@ img {
 }
 
 .footer {
-  border-top: 1px solid #990000;
-  padding-top:0.025em
+    padding-top: 0.025em;
+    font-size: .81em;
+    line-height: 1.7em;
+    margin-left: -18px;
+    padding-left: 20px;
+
+    background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: left top;
 }
 
 .ucase {
@@ -100,7 +119,8 @@ img {
 }
 
 .bankname, .iban, .bic, .application-of-funds {
-  white-space: nowrap;
+    border-top: 1px solid #990000;
+    white-space: nowrap;
 }
 
 .application-of-funds {
@@ -108,6 +128,9 @@ img {
   text-align: right;
 }
 
+.application-of-funds-link {
+    color: #000;
+}
 
 /* Form styling */
 
@@ -140,18 +163,18 @@ img {
     width: 100%;
     height: 100%;
     margin:0;
-    font-size: .9em;
+    font-size: .7em;
     border: 1px solid #9aa0a7;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
 .select-group__option {
-  flex: 1 1 auto;
-  padding: 0.1em 0.1em;
-  margin: 0;
-  box-sizing: border-box;
-  display: block;
+    flex: 1 1 auto;
+    padding: 0.1em 0.1em;
+    margin: 0;
+    box-sizing: border-box;
+    display: block;
 }
 
 .select-group__option--fullwidth {
@@ -176,7 +199,7 @@ img {
     cursor: pointer;
     text-align: center;
     font-weight: bold;
-    font-size: .9em;
+    font-size: .81em;
     box-sizing: border-box;
 }
 
@@ -221,7 +244,7 @@ img {
     border-radius: 2px;
     padding: .05em 0;
     line-height: 2em;
-    font-size: .9em;
+    font-size: .81em;
     cursor: pointer;
     text-align: center;
     font-weight: bold;

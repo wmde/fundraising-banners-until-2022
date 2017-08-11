@@ -2,8 +2,7 @@
 <div class="banner WMDE-Banner">
     <div class="infobox">
       <div class="text">
-        <p class="WMDE-Banner-text-salute"><i>Liebe Leserinnen und Leser:</i></p>
-        <p class="WMDE-Banner-text">Verzeihen Sie die Störung. {{ campaignDaySentence }} Wikipedia wird geschrieben von Freiwilligen und finanziert durch Spenden von durchschnittlich 20 €. Jetzt sind Sie in Deutschland gefragt. <span class="highlight">Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, ist unsere Spendenkampagne in einer Stunde vorüber.</span> Schon der Preis einer Tasse Kaffee würde genügen. Millionen von Menschen nutzen Wikipedia, aber nur ein Bruchteil spendet. Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {{ weekdayPrepPhrase }} {{ customDayName }} bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück. <i>Vielen Dank!</i>
+        {{>banner_text_var}}
         </p>
       </div>
       <div class="footer">
@@ -21,7 +20,7 @@
         </div>
 
         <div class="application-of-funds">
-          <span id="application-of-funds-link" data-href="#info-application-of-funds">Wohin geht meine Spende?</span>
+	        <a id="application-of-funds-link" class="application-of-funds-link" href="https://spenden.wikimedia.de/page/Transparenz" data-href="#info-application-of-funds">Wohin geht meine Spende?</a>
         </div>
       </div>
     </div>
@@ -129,3 +128,5 @@
 	</div>
 </div>
 </div>
+
+{{> application_of_funds }}
