@@ -5,8 +5,10 @@ services:
     image: digitallyseamless/nodejs-bower-grunt
     volumes:
       - ./:/code
-#      - ~/.npm:/npm-cache
+      - ~/.npm:/npm-cache
     working_dir: /code
+    environment:
+      - npm_config_cache=/npm-cache
   js-serve:
     extends: js-build
     ports:
