@@ -1,3 +1,14 @@
+/**
+ * GLOBAL RESET
+ */
+img {
+    border: 0 none;
+}
+
+/**
+ * CUSTOM
+ */
+
 /* Just the layout of components with flexbox */
 .banner {
   display: flex;
@@ -28,8 +39,9 @@
 }
 
 .close {
-  font-size: 1.5em;
-  padding:.125em;
+    width: 18px;
+    flex: 0 0 18px;
+    font-size: .1em;
 }
 
 .bankname, .iban, .bic {

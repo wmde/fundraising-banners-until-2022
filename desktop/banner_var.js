@@ -229,7 +229,7 @@ trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annu
 trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner-close' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
-$( '#WMDE_Banner-close' ).click( function () {
+$( '#WMDE_Banner-close a' ).click( function () {
     $( '#WMDE_Banner' ).hide();
     if ( BannerFunctions.onMediaWiki() ) {
         mw.centralNotice.hideBanner();
