@@ -1,0 +1,201 @@
+<div id="WMDE_Banner" data-validation-event-handling="1">
+  <div style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);">
+    <form id="WMDE_Banner-form" method="post" name="donationForm"
+          action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}">
+      <table id="WMDE_Banner-facts">
+        <tbody>
+        <tr>
+          <td class="banner-left">
+            <div class="banner-left-wrapper">
+              <table>
+              <tr>
+                <td style="height: 1%" valign="top">
+                  {{> bannerText_ctrl }}
+                </td>
+              </tr>
+              <tr>
+                  <td class="WMDE_Banner_info-cell">
+                    <div id="WMDE_Banner_info">
+                    <div style="float: right;">
+                            <span id="application-of-funds-link" data-href="#info-application-of-funds">Wohin&nbsp;geht&nbsp;meine&nbsp;Spende?</span>
+                    </div>
+
+                      <div id="WMDE_Banner_text">
+                        <span class="binfo-ucase">Spendenkonto</span>
+                        <span>Wikimedia Foerdergesellschaft</span>
+                        <span>BIC</span>
+                        <span class="binfo-bold">BFSWDE33BER</span>
+                        <span>IBAN</span>
+                        <span class="binfo-bold" style="margin-right: 0;">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                      </div>
+                    </div>
+                  </td>
+              </tr>
+            </table>
+            </div>
+          </td>
+
+          <td id="WMDE_BannerForm-wrapper">
+            <fieldset id="WMDE_Banner-frequency" class="cf">
+              <div style="padding-top: 0.5em;" class="interval-options">
+                <span id="WMDE_Banner-frequency-error-text" style="display: none">{{no-interval-message}}</span>
+                <ul>
+                  <li>
+                    <input type="radio" id="interval_multiple" />
+                    <label class="WMDE_Banner-btn donation-frequency" for="interval_onetime">
+                      <input type="radio" id="interval_onetime">
+                      einmalig
+                    </label>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval1">
+                      <input type="radio" id="interval1" name="interval" value="1">
+                      monatlich
+                    </label>
+                  </li>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval3">
+                      <input type="radio" id="interval3" name="interval" value="3">
+                      vierteljährlich
+                    </label>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval6">
+                      <input type="radio" id="interval6" name="interval" value="6">
+                      halbjährlich
+                    </label>
+                  </li>
+                  <li>
+                    <label class="WMDE_Banner-btn donation-interval" for="interval12">
+                      <input type="radio" id="interval12" name="interval" value="12">
+                      jährlich
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+
+            <fieldset id="WMDE_Banner-amounts" class="cf">
+              <span id="WMDE_Banner-amounts-error-text" style="display: none">{{amount-empty-message}}</span>
+              <ul>
+                <li id="amount_total_1">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_1" value="5">
+                  <label id="amount_label_1" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_1">5 €</label>
+                </li>
+
+                <li id="amount_total_2">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_2" value="15">
+                  <label id="amount_label_2" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_2">15 €</label>
+                </li>
+
+                <li id="amount_total_3">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_3" value="25">
+                  <label id="amount_label_3" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_3">25 €</label>
+                </li>
+
+                <li id="amount_total_4">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_4" value="50">
+                  <label id="amount_label_4" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_4">50 €</label>
+                </li>
+              </ul>
+              <ul>
+                <li id="amount_total_5">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_5" value="75">
+                  <label id="amount_label_5" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_5">75 €</label>
+                </li>
+
+                <li id="amount_total_6">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_6" value="100">
+                  <label id="amount_label_6" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_6">100 €</label>
+                </li>
+
+                <li id="amount_total_7">
+                  <input type="radio" name="betrag_auswahl" id="field-amount_total_7" value="250">
+                  <label id="amount_label_7" class="WMDE_Banner-btn predefined_amount" for="field-amount_total_7">250 €</label>
+                </li>
+
+                <li id="amount_custom">
+                  <input type="text" name="amountGiven" id="amount-other-input" size="3" autocomplete="off" value="" placeholder="anderer">
+                </li>
+              </ul>
+            </fieldset>
+
+            <fieldset id="WMDE_Banner-payment" class="cf">
+              <ul>
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('BEZ');">
+                    Lastschrift
+                  </button>
+                </li>
+
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('UEB');">
+                    Überweisung
+                  </button>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('MCP');">
+                    Kreditkarte
+                  </button>
+                </li>
+
+                <li>
+                  <button class="WMDE_Banner-btn btn-payment-type" onclick="$('#zahlweise').val('PPL');">
+                    PayPal
+                  </button>
+                </li>
+
+              </ul>
+            </fieldset>
+            <span id="WMDE_Banner-close" style="position: absolute; right: 5px;">&nbsp;</span>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <input type="hidden" id="periode" name="periode" value="0"/>
+      <input type="hidden" id="intervalType" name="intervalType" value="0"/>
+      <input type="hidden" id="impCount" name="impCount" value=""/>
+      <input type="hidden" id="bImpCount" name="bImpCount" value=""/>
+      <input type="hidden" id="zahlweise" name="zahlweise" value=""/>
+    </form>
+  </div>
+  <img id="WMDE_Banner-close-ct" src="//upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="1" width="1">
+</div>
+
+<div class="wlightbox-contents">
+    <div id="info-application-of-funds">
+        <div class="wlightbox-title clearfix">
+            <span class="icon-bar-chart wlightbox-icon"></span>Wohin geht meine Spende?
+
+            <a href="http://wikimedia.de/wiki/Transparenz" target="_blank"><span class="logo-itz-white f-right no-margin"></span></a>
+        </div>
+
+        <p>
+            <img src="//upload.wikimedia.org/wikipedia/commons/8/8a/WMDE-application-of-funds-diagram-2017.png" />
+        </p>
+
+        <div>
+            <img src="//upload.wikimedia.org/wikipedia/commons/0/00/WMDE-application-of-funds-2017.svg" />
+        </div>
+
+        <hr/>
+
+        <div id="info-application-of-funds-footer">
+            <div>
+                <a id="link-wmf-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Foundation_Annual_Plan/2016-2017/Final" target="_blank">Erfahren Sie mehr zum Jahresplan<br>der Wikimedia Foundation</a>
+            </div>
+            <div>
+                <a id="link-wmde-annual-plan" href="https://meta.wikimedia.org/wiki/Wikimedia_Deutschland/Jahresplanung_2017/Ziele,_Indikatoren_und_Wirtschaftsplan" target="_blank">Erfahren Sie mehr zum Jahresplan<br>von Wikimedia Deutschland</a>
+            </div>
+        </div>
+
+    </div>
+</div>

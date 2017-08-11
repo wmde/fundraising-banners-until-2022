@@ -1,0 +1,27 @@
+#wlightbox-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #7c8499; z-index: 500; display: none; }
+#wlightbox { position: absolute; z-index: 510; padding: 30px 30px 25px; background: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+}
+#wlightbox-content { color: #000; }
+#wlightbox-content p { margin-bottom: 15px; }
+#wlightbox-close { text-decoration: none; position: absolute; right: 10px; top: 10px; font-size: 1.2em; }
+.wlightbox-title { border-bottom: 1px solid #edeef1; color: #7c8499; font-size: 1.2em; font-weight: bold; padding-bottom: 10px; margin-bottom: 30px; }
+.wlightbox-icon { font-size: 2em; color: #c8c8c8; display: inline-block; margin-right: 20px; vertical-align: middle; }
+
+.wlightbox-contents { display: none; }
+
+#wlightbox:before { border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; }
+#wlightbox.arrow-box-right:before { left: 100%; top: 50%; border-left-color: #FFF; border-width: 20px; margin-top: -20px; }
+#wlightbox.arrow-box-left:before { right: 100%; top: 50%; border-right-color: #FFF; border-width: 20px; margin-top: -20px; }
+#wlightbox.arrow-box-top:before { bottom: 100%; left: 50%; border-bottom-color: #FFF; border-width: 20px; margin-left: -20px; }
+#wlightbox.arrow-box-bottom:before { top: 100%; left: 50%; border-top-color: #FFF; border-width: 20px; margin-left: -20px; }
+#wlightbox.arrow-box-right { margin-right: 20px; }
+#wlightbox.arrow-box-left { margin-left: 20px; }
+#wlightbox.arrow-box-top { margin-top: 20px; }
+#wlightbox.arrow-box-bottom { margin-bottom: 20px; }

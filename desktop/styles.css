@@ -1,0 +1,13 @@
+.bruce {
+    background: darkgreen;
+    color:yellow;
+}
+
+.bruce.not-angry {
+    background: none;
+    color: brown;
+}
+
+.name {
+    font-family: fantasy;
+}

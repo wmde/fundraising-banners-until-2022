@@ -1,0 +1,357 @@
+#WMDE_Banner-facts {
+  background-color: #ffffff;
+  background-image: none;
+}
+
+#WMDE_Banner table {
+  height: 100%;
+}
+
+.banner-left {
+  height: 100%;
+  padding: 0.25em;
+}
+
+.banner-left-wrapper {
+  border: 5px solid #990000;
+  border-radius: 9px;
+  background-color: #f8f9fa;
+  height: 96%;
+}
+
+#WMDE_Banner .WMDE_Banner_info-cell {
+  height: 1%;
+  vertical-align: bottom;
+  background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: left 14px bottom 4px;
+}
+
+#WMDE_Banner_info {
+  border-top: 1px solid #990000;
+}
+
+#WMDE_Banner-text-salute {
+  color: #black;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin: 4px 10px 4px 35px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#WMDE_Banner-text {
+  text-align:left;
+}
+
+#WMDE_BannerForm-wrapper {
+  background-color: #ffffff;
+  border: none;
+  padding: 0 20px 0 10px;
+  height: 250px;
+}
+
+#WMDE_Banner-form fieldset {
+  width: 95%;
+  border: 0;
+  margin: 0 auto;
+  padding: 0 0.5em 0.5em 0.5em;
+}
+
+#WMDE_Banner-frequency ul,
+#WMDE_Banner-amounts ul,
+#WMDE_Banner-payment ul {
+  width: 100%;
+  height: 100%;
+  display: table;
+  margin: 0 0 0.3em;
+  padding: 0;
+  list-style: none;
+}
+
+#WMDE_Banner-form legend {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 0.3em 0;
+  text-align: center;
+  font-size: .9em;
+  color: rgba(0,0,0,0.42);
+}
+
+/* --- Common Button Styles --- */
+
+.WMDE_Banner-btn {
+  background: #f8f9fa;
+  border: 1px solid #9aa0a7;
+  border-radius: 2px;
+  padding: 1px 0;
+  line-height: 2em;
+  width: 100%;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 1px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.WMDE_Banner-btn:hover {
+  background-color: #ffffff;
+  color: #444444;
+  border-color: #a2a9b1;
+}
+
+.WMDE_Banner-btn.checked {
+  background: #2a4b8d;
+  border-color: #7d8389;
+  color: #ffffff;
+}
+
+#WMDE_Banner-payment .btn-payment-type {
+  background: #f8f9fa;
+  font-size: 0.9em;
+  color: #3366cc;
+}
+
+#WMDE_Banner-payment .btn-payment-type:hover {
+  background: #ffffff;
+  color: #3366cc !important;
+}
+
+/* --- Frequency Buttons --- */
+
+#WMDE_Banner-frequency li {
+  display: table-cell;
+  width: 33%;
+  padding: 0 2% 0 0;
+  vertical-align: top;
+}
+body.rtl #WMDE_Banner-frequency li { padding: 0 0 0 2%; }
+
+#WMDE_Banner-frequency label {
+  width: 100%;
+  display: block;
+  font-size: .9em;
+}
+
+/*@media (min-width : 1100px) { #WMDE_Banner-frequency label { font-size: .95em; } }*/
+@media (min-width : 1200px) {
+  /*#WMDE_Banner-frequency label {
+      font-size: 1em;
+  }*/
+  /*#WMDE_Banner-payment .WMDE_Banner-btn {
+      min-height: 2em !important;
+  }
+  .WMDE_Banner-btn {
+      padding: 4px 0;
+  }*/
+}
+
+#WMDE_Banner-frequency input[type="radio"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* --- Amount Buttons --- */
+
+#WMDE_Banner-amounts legend {
+  display: block;
+
+}
+
+#WMDE_Banner-amounts li {
+  display: table-cell;
+  width: 23%;
+  height: 100%;
+  clear: none;
+  padding: 0 2% 0 0;
+  vertical-align: top;
+  font-weight: bold;
+}
+body.rtl #WMDE_Banner-amounts li {
+  padding: 0 0 0 2%;
+}
+
+/* Chrome specific - need to be floated for height 100% to work */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  #WMDE_Banner-amounts li { float: left; }
+  body.rtl #WMDE_Banner-amounts li { float: right; }
+}
+
+#WMDE_Banner-amounts li input[type="radio"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#WMDE_Banner-amounts label {
+  font-size: .9em;
+  text-transform: none;
+}
+
+/*@media (min-width : 800px)  { #WMDE_Banner-amounts .predefined_amount { font-size: 1em; } }
+@media (min-width : 1100px) { #WMDE_Banner-amounts .predefined_amount { font-size: 1.1em; } }*/
+
+/* --- Other Amount --- */
+
+#amount_custom .WMDE_Banner-btn {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding: 0.2em 0 0.4em 0;
+}
+
+#amount_custom label {
+  display: block;
+  height: auto;
+  margin-bottom: 0.2em;
+  font-size: .7em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#amount_custom input {
+  width: 85%;
+  font-size: .9em;
+  padding: .4em;
+  text-align: center;
+  border: 1px solid #9aa0a7;
+  margin: 0 1px;
+}
+
+#amount_custom .checked input {
+  background: #2a4b8d;
+  color: #ffffff;
+}
+
+#amount_custom input:hover {
+  box-shadow: 0 0 0 1px #3366cc inset;
+  background-color: #ffffff;
+  color: #444444;
+  border-color: #a2a9b1;
+}
+
+/* --- Payment method Buttons --- */
+
+#WMDE_Banner-payment {
+  padding-bottom: 0.25em;
+}
+
+#WMDE_Banner-payment ul li {
+  display: table-cell;
+  padding: 0 2% 0 0;
+  vertical-align: top;
+  width: 50%;
+  margin-bottom: 4px;
+}
+body.rtl #WMDE_Banner-payment ul li {
+  padding: 0 0 0 2%;
+}
+
+#WMDE_Banner-window button {
+  width: 100%;
+  height: 100%;
+  font-size: .9em;
+  float: none;
+  font-family: inherit;
+}
+
+@media all and (min-width: 1px) and (max-width: 900px), all and (min-width: 1050px) and (max-width: 1200px) {
+#WMDE_Banner-payment .btn-payment-type {
+  min-height: 4em;
+}
+}
+
+@media all and (min-width: 1px) and (max-width: 1050px) {
+#WMDE_Banner-payment ul {
+  margin: 0;
+  width: 100%;
+}
+
+#WMDE_Banner-payment ul li {
+  display: block;
+  width: 100%;
+}
+}
+
+#WMDE_Banner .highlight {
+  border-bottom: solid 3px #990000;
+  padding: 0 .1em;
+  background:transparent;
+  color:black;
+}
+
+/* --- Donation meter --- */
+
+#WMDE_Banner-close {
+  background-image: url('//upload.wikimedia.org/wikipedia/commons/c/cb/Close_x_-_black.png');
+  background-color: transparent;
+  background-size: 18px auto;
+}
+
+#application-of-funds-link {
+  cursor: pointer;
+  margin-left: 1.5em;
+}
+
+#application-of-funds-link:hover {
+  text-decoration: underline;
+}
+
+#info-application-of-funds {
+  width: 720px;
+  margin-top: -5px;
+}
+
+#info-application-of-funds hr {
+  margin: 1.4em 0;
+}
+
+#info-application-of-funds-footer {
+  font-size: 0.8em;
+}
+
+#info-application-of-funds-footer div {
+  width: 49%;
+  display: inline-block;
+  text-align: center;
+}
+
+#info-application-of-funds-footer a {
+  color: #3366cc;
+}
+
+/* --- Error Msg --- */
+
+#WMDE_Banner-amounts.fieldset-error, #WMDE_Banner-frequency.fieldset-error {
+  float: left;
+  background: #990000;
+  border:none;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin-left: -2px;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+#WMDE_Banner-amounts-error-text, #WMDE_Banner-frequency-error-text {
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.2em;
+}

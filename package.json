@@ -1,0 +1,36 @@
+{
+  "name": "banners-webpack",
+  "version": "1.0.0",
+  "description": "Building WMDE banners with webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack --config webpack.production.js",
+    "start": "webpack-dev-server --disable-host-check --host 0.0.0.0"
+  },
+  "keywords": [],
+  "author": "gabriel.birke@wikimedia.de",
+  "license": "MIT",
+  "repository": "https://github.com/gbirke/webpack-experiments",
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.4",
+    "handlebars": "^4.0.10",
+    "handlebars-loader": "^1.5.0",
+    "html-loader": "^0.4.5",
+    "postcss-loader": "^2.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1",
+    "webpack-merge": "^4.1.0"
+  },
+  "browserslist": [
+    "ie 10",
+    "last 2 versions",
+    "> 1%"
+  ]
+}
