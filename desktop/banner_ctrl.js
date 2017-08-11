@@ -1,14 +1,12 @@
-require( './DesktopBanner.css' );
+require( './styles_var.css' );
 require( './icons.css' );
 require( './wlightbox.css' );
-// this was formally in-banner CSS. TODO: Merge with Desktopbanner, only keep override CSS
-require( './DesktopBannerOverride.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueTrackRatio = 1;
-const CampaignName = 'C17_02_170724';
-const BannerName = 'B17_02_170724_ctrl-test';
+const CampaignName = 'C17_04_170814';
+const BannerName = 'B17_04_170814_ctrl';
 const LANGUAGE = 'de';
 
 // END Banner-Specific configuration
@@ -23,8 +21,6 @@ const SizeIssues = require( './track_size_issues' );
 const getCampaignDaySentence = require( './count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( './custom_day_name' );
 const TrackingEvents = require( './TrackingEvents' );
-
-// TODO progress bar partial, css and JS
 
 const bannerTemplate = require('./banner_ctrl.hbs');
 
@@ -79,41 +75,34 @@ function setupAmountEventHandling() {
       var banner = $( '#WMDE_Banner' );
       // using delegated events with empty selector to be markup-independent and still have corrent value for event.target
       banner.on( 'amount:selected', null, function( evt ) {
-          $( '#WMDE_Banner-amounts' ).find( 'label' ).removeClass( 'checked' );
-          $( '#amount-other-input' ).parent().removeClass( 'checked' );
-          $( evt.target ).addClass( 'checked' );
+          $( '#amount-other-input' ).val( '' );
           $( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
       } );
 
       banner.on( 'amount:custom', null, function( evt ) {
-          $( '#WMDE_Banner-amounts' ).find( 'label' ).removeClass( 'checked' );
-          $( evt.target ).parent().addClass( 'checked' );
+          $( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
           $( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
       } );
 }
 
-$( '#interval_onetime' ).off( 'click' ).on( 'click', function () {
-     $( '#interval_multiple' ).prop( 'checked', false );
-     $( '.donation-interval' ).removeClass( 'checked' );
-     $( '#WMDE_Banner' ). trigger( 'validation:period:ok' );
-} );
-
-$( '#WMDE_Banner-frequency' ).find( 'label' ).click( function () {
-  $( '#WMDE_Banner-frequency' ).find( 'label' ).removeClass( 'checked' );
-  $( this ).addClass( 'checked' );
-  $( '#WMDE_Banner' ). trigger( 'validation:period:ok' );
-} );
-
-$( '.donation-interval' ).click( function () {
-  $( '.donation-interval' ).removeClass( 'checked' );
-  $( this ).addClass( 'checked' );
-  $( '.donation-frequency' ).removeClass( 'checked' );
-  $( '#interval_onetime' ).prop( 'checked', false );
-  $( '#interval_multiple' ).prop( 'checked', 'checked' );
-});
+function validateAndSetPeriod() {
+    var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
+    if ( typeof selectedInterval === 'undefined' ) {
+        BannerFunctions.showFrequencyError( 'Bitte wählen Sie zuerst ein Zahlungsintervall.' );
+        return false;
+    }
+    $( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
+    $( '#periode' ).val( selectedInterval );
+	BannerFunctions.hideFrequencyError();
+	return true;
+}
 
 $( '#WMDE_Banner-payment button' ).click( function( e ) {
-  return BannerFunctions.validateForm();
+    $( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
+  if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
+      e.preventDefault();
+      return false;
+  }
 } );
 
 /* Convert browser events to custom events */
@@ -125,19 +114,9 @@ $( '#amount-other-input' ).change( function () {
   $( this ).trigger( 'amount:custom' );
 } );
 
-$( '#interval_onetime' ).on( 'click', function () {
+$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
     BannerFunctions.hideFrequencyError();
-    $( '#interval_onetime' ).prop( 'checked', true );
-    $( '#interval_multiple' ).prop( 'checked', false );
 }  );
-
-$( '#interval_multiple' ).on( 'click', function () {
-    $( '#interval_multiple' ).prop( 'checked', true );
-    $( '#interval_onetime' ).prop( 'checked', false );
-} );
-$( '.donation-interval' ).on( 'click', function () {
-    BannerFunctions.hideFrequencyError();
-} );
 
 BannerFunctions.initializeBannerEvents();
 
@@ -158,11 +137,11 @@ function addSpace() {
           trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
           sizeIssueTrackRatio
       );
-      $( '#mw-panel' ).animate( {'top':bannerHeight + 160},1000 );
-      $( '#mw-head' ).animate( {'top':bannerHeight},1000 );
-      $( '#mw-page-base' ).animate( {'padding-top':bannerHeight},1000);
+      $( '#mw-panel' ).animate( { 'top': bannerHeight }, 1000 );
+      $( '#mw-head' ).animate( { 'top': bannerHeight }, 1000 );
+      $( '#mw-page-base' ).animate( { 'padding-top': bannerHeight }, 1000);
     case 'minerva':
-      $( '#mw-mf-viewport' ).animate( {'top':bannerHeight},1000 );
+      $( '#mw-mf-viewport' ).animate( { 'top': bannerHeight}, 1000 );
       break;
   }
 }
@@ -176,7 +155,7 @@ function addSpaceInstantly() {
 
   switch ( skin ) {
     case 'vector':
-      $( '#mw-panel' ).css( { top: bannerHeight + 160 } );
+      $( '#mw-panel' ).css( { top: bannerHeight } );
       $( '#mw-head' ).css( { top: bannerHeight } );
       $( '#mw-page-base' ).css( { paddingTop: bannerHeight } );
     case 'minerva':
@@ -186,8 +165,22 @@ function addSpaceInstantly() {
 }
 
 function removeBannerSpace() {
-    // TODO test with real Wikpedia assets, check if we need to remove banner space.
-
+	var skin = BannerFunctions.getSkin();
+	switch ( skin ) {
+		case 'vector':
+			$( '#mw-panel' ).css( 'top', 0 );
+			$( '#mw-head' ).css( 'top', 0 );
+			$( '#mw-page-base' ).css( 'padding-top', 0 );
+			break;
+		case 'minerva':
+			$( '#mw-mf-viewport' ).css( 'top', 0 );
+			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
+			break;
+		case 'monobook':
+			$( '#globalWrapper' ).css( 'position', 'relative' );
+			$( '#globalWrapper' ).css( 'top', 0 );
+			break;
+	}
 }
 
 function displayBanner() {
@@ -211,7 +204,7 @@ function displayBanner() {
 
 function calculateLightboxPosition() {
     $( '#wlightbox' ).css( {
-        right: ( $('body').width() - 750 ) / 2 + 'px', top: '20px',
+        right: ( $('body').width() - 750 ) / 2 + 'px',
         top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
     } );
 }
@@ -239,10 +232,10 @@ $( '#application-of-funds-link' ).click( function () {
 trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner-close' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
+trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
-$( '#WMDE_Banner .close' ).click( function () {
+$( '#WMDE_Banner .close__link' ).click( function () {
     $( '#WMDE_Banner' ).hide();
     if ( BannerFunctions.onMediaWiki() ) {
         mw.centralNotice.hideBanner();
@@ -265,5 +258,5 @@ $( function () {
   if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
     return;
   }
-  setTimeout( displayBanner, $( '#WMDE-BannerPreview' ).data( 'delay' ) || 7500 );
+  setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 } );
