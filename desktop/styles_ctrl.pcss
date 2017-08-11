@@ -1,0 +1,255 @@
+#WMDE_Banner {
+
+    /**
+     * GLOBAL RESET
+     */
+    img {
+        border: 0 none;
+    }
+
+    & {
+        display: none;
+    }
+
+    /**
+     * CUSTOM
+     */
+
+    & {
+        width: 100%;
+        position: fixed;
+        z-index: 1000;
+    }
+
+
+    /* Just the layout of components with flexbox */
+    .banner {
+        display: flex;
+    }
+
+    .infobox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 0 1 100%;
+    }
+
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .form {
+        width: 15.5em;
+        flex-shrink: 0;
+        padding-left: 1.1em;
+    }
+
+    .close {
+        width: 18px;
+        flex: 0 0 18px;
+    }
+
+    /* Styling, from old banner code, but cleaned up */
+
+    .WMDE-Banner {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+        background-color: white;
+    }
+
+    .infobox {
+        border: 5px solid #990000;
+        border-radius: 9px;
+        background-color: #f8f9fa;
+        padding: 0 0.5em 0 2em;
+        margin: 0.25em;
+    }
+
+    .text {
+        color: #000;
+        font-size: 17px;
+        font-weight: bold;
+        line-height: 1.2em;
+        text-align: left;
+    }
+
+    .text p {
+        margin: .25em 0;
+    }
+
+    .text p .highlight {
+        border-bottom: solid 3px #990000;
+        padding: 0 .1em;
+        background: transparent;
+    }
+
+    .footer {
+        padding-top: 0.025em;
+        font-size: .81em;
+        line-height: 1.7em;
+        margin-left: -18px;
+        padding-left: 20px;
+
+        background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    .ucase {
+        text-transform: uppercase;
+    }
+
+    .footer span {
+        margin-right: .5em;
+    }
+
+    .bankdata-important {
+        font-weight: bold;
+    }
+
+    .bankname, .iban, .bic, .application-of-funds {
+        border-top: 1px solid #990000;
+        white-space: nowrap;
+    }
+
+    .application-of-funds {
+        flex-grow: 1;
+        text-align: right;
+    }
+
+    .application-of-funds-link {
+        color: #000;
+    }
+
+    /* Form styling */
+
+    .select-group {
+        border: 0;
+        margin: 0 auto;
+        padding: 0 0.5em 0.5em 0.5em;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex: 1 1 100%;
+    }
+
+    .select-group__errormessage {
+        color: white;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.2em;
+    }
+
+    .select-group__input {
+        display: none;
+    }
+
+    .select-group__custom-input {
+        padding: .4em;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-size: .7em;
+        border: 1px solid #9aa0a7;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .select-group__option {
+        flex: 1 1 auto;
+        padding: 0.1em 0.1em;
+        margin: 0;
+        box-sizing: border-box;
+        display: block;
+    }
+
+    .select-group__option--fullwidth {
+        width: 100%;
+    }
+
+    .select-group__option--halfwidth {
+        width: 50%;
+    }
+
+    .select-group__option--quarterwidth {
+        width: 25%;
+    }
+
+    .select-group__state {
+        display: block;
+        background: #f8f9fa;
+        border: 1px solid #9aa0a7;
+        border-radius: 2px;
+        padding: .05em 0;
+        line-height: 2em;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        font-size: .81em;
+        box-sizing: border-box;
+    }
+
+    .select-group__input:checked + .select-group__state {
+        background: #2a4b8d;
+        border-color: #7d8389;
+        color: #ffffff;
+    }
+
+    .button-group {
+        border: 0;
+        margin: 0 auto;
+        padding: 0 0.5em 0.5em 0.5em;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex: 1 1 100%;
+    }
+
+    .button-group__button {
+        flex: 1 1 auto;
+        padding: 0.1em 0.1em;
+        margin: 0;
+        box-sizing: border-box;
+        display: block;
+        /* Override browser defaults */
+        border: none;
+        background: transparent;
+        font-size: inherit;
+    }
+
+    .button-group__button--halfwidth {
+        width: 50%;
+    }
+
+    .button-group__label {
+        display: block;
+        color: #3366cc;
+        background: #f8f9fa;
+        border: 1px solid #9aa0a7;
+        border-radius: 2px;
+        padding: .05em 0;
+        line-height: 2em;
+        font-size: .81em;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    .fieldset-error {
+        background: #990000;
+    }
+
+    .close {
+        font-size: .1em;
+    }
+
+}

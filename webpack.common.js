@@ -22,10 +22,17 @@ module.exports = {
             test: /\.css$/,
             use: [
               { loader: 'style-loader' },
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              { loader: 'postcss-loader' }
+              { loader: 'css-loader', options: { importLoaders: 1 } }
             ]
         },
+		{
+			test: /\.pcss$/,
+			use: [
+				{ loader: 'style-loader' },
+				{ loader: 'css-loader', options: { importLoaders: 1 } },
+				{ loader: 'postcss-loader' }
+			]
+		},
         {
             test: /\.handlebars$|\.hbs$/,
             use: [
