@@ -15,7 +15,7 @@ var qs = (function(a) {
 
 var bannerName = qs.banner || 'banner_ctrl';
 
-$( 'body' ).append( '<script src="' + bannerName + '.js"></script>' );
+$( 'body' ).append( '<script src="/' + bannerName + '.js"></script>' );
 window.document.title = bannerName + ' | ' + window.document.title;
 
 // TODO: display navigational elements for easily switching between banners

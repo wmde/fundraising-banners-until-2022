@@ -8,6 +8,12 @@ module.exports = Merge( CommonConfig, {
   ],
   devServer: {
       hot: true,
-      contentBase: './dist'
+      contentBase: './dist',
+      proxy: [{
+          context: [ '/wiki', '/w', '/static' ],
+          target: 'https://de.wikipedia.org',
+          secure: false,
+          headers: { host:'de.wikipedia.org' }
+      }]
   }
 } );
