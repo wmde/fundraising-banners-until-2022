@@ -5,8 +5,8 @@ require( './wlightbox.css' );
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueTrackRatio = 1;
-const CampaignName = 'C17_02_170724';
-const BannerName = 'B17_02_170724_ctrl-test';
+const CampaignName = 'C17_04_170814';
+const BannerName = 'B17_04_170814_var';
 const LANGUAGE = 'de';
 
 // END Banner-Specific configuration
