@@ -31,17 +31,17 @@ Until there is an upload tool, you need to copy and paste the compiled banner co
     </script></nowiki>
     </div>
 
-## Banner Assets and structure
+## Banner assets and structure
 The files `banner_ctrl.js` and `banner_var.js` are the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*, the files which will be compiled by [Webpack](https://webpack.js.org) to the final JavaScript code that can be copied to CentralNotice.
-The entry points includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will the  handle according to file type. 
+Each entry points includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will then handle according to file type. Most assets are shared between the banners.  
 
 ### Creating A/B tests
 The changes to the code depend on which kind of test you are running.
 
 * If you test **different behavior**, change `banner_var.js` as needed. Override library functions with our own versions if need be.
-* If you test **style changes**, include a file named `styles_var.pcss` in your `banner_var.js`. That file should only contain the overriding changes.
-* If you test **text or markup changes**, duplicate the `banner_html.hbs` to `banner_html_var.hbs` and include a duplicate of `banner_text.hbs`.
-* If you test a **whole new banner design**, all ove the above changes might apply.
+* If you test **style changes**, include a file named `css/styles_var.pcss` in your `banner_var.js`. That file should only contain the overriding changes.
+* If you test **text or markup changes**, duplicate the necessary templates in the `templates` directory.
+* If you test a **whole new banner design**, all of the above changes might apply.
 
 **Attention:** Before creating a new A/B test, clean up the previous one by incorporating the changes into the code! Do not layer tests upon each other!
 
@@ -69,9 +69,9 @@ The changes to the code depend on which kind of test you are running.
 * Configure Campaign number, campaign prefix and campaign start date to generate file names and tracking info inside banners.
 
 ## Notes on possible Banner code improvements
-* Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `BannerDisplay`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Remove similar functions from `DesktopBanner.js`. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
-* Move form initialization and validation code to module `FormValidation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `DesktopBanner.js` into the new module.
-* Move date/time-based campaign data counting (donors, donations, campaign day, special day name, normal day name, prefix for day name) from `DesktopBanner.js`, `custom_day_name.js` and `count_campaign_days.js` into module.
-* Refactor `DesktopBanner.js` and `count_campaign_days` to longer require parameters after `require`. Use classes with constructor parameters instead.
+* Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Remove similar functions from `banner_functions.js`. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
+* Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
+* Move date/time-based campaign data counting (donors, donations, campaign day, special day name, normal day name, prefix for day name) from `banner_functions.js`, `custom_day_name.js` and `count_campaign_days.js` into module.
+* Refactor `banner_functions.js` and `count_campaign_days` to longer require parameters after `require`. Use classes with constructor parameters instead.
 * Structure banner initialization into functions, call them one after each other. Select Banner object only once and use its `find` method with all other jQuery selections.
 * Re-Implement/Refactor lightbox module without the need for global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.

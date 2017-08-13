@@ -1,6 +1,6 @@
-require( './styles.pcss' );
-require( './icons.css' );
-require( './wlightbox.css' );
+require( './css/styles.pcss' );
+require( './css/icons.css' );
+require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -16,16 +16,16 @@ const fundraisingBanner = {};
 const DevGlobalBannerSettings = require( './GlobalBannerSettings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
-const BannerFunctions = require( './DesktopBanner' )( GlobalBannerSettings, Translations );
-const SizeIssues = require( './track_size_issues' );
-const getCampaignDaySentence = require( './count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
-const getCustomDayName = require( './custom_day_name' );
-const TrackingEvents = require( './TrackingEvents' );
+const BannerFunctions = require( './js/banner_functions' )( GlobalBannerSettings, Translations );
+const SizeIssues = require( './js/track_size_issues' );
+const getCampaignDaySentence = require( './js/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
+const getCustomDayName = require( './js/custom_day_name' );
+const TrackingEvents = require( './js/tracking_events' );
 
-const bannerTemplate = require('./banner_html.hbs');
+const bannerTemplate = require('./templates/banner_html.hbs');
 
 const $ = require( 'jquery' );
-require( './wlightbox.js' );
+require( './js/wlightbox.js' );
 
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
