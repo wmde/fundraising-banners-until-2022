@@ -1,6 +1,9 @@
-require( './styles_var.pcss' );
+require( './styles.pcss' );
 require( './icons.css' );
 require( './wlightbox.css' );
+
+// For A/B testing different styles, load
+// require( './styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -22,7 +25,9 @@ const getCampaignDaySentence = require( './count_campaign_days' )( GlobalBannerS
 const getCustomDayName = require( './custom_day_name' );
 const TrackingEvents = require( './TrackingEvents' );
 
-const bannerTemplate = require('./banner_var.hbs');
+// For A/B testing different text or markup, load
+// const bannerTemplate = require('./banner_var.hbs');
+const bannerTemplate = require('./banner_html.hbs');
 
 const $ = require( 'jquery' );
 require( './wlightbox.js' );

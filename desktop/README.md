@@ -31,6 +31,20 @@ Until there is an upload tool, you need to copy and paste the compiled banner co
     </script></nowiki>
     </div>
 
+## Banner Assets and structure
+The files `banner_ctrl.js` and `banner_var.js` are the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*, the files which will be compiled by [Webpack](https://webpack.js.org) to the final JavaScript code that can be copied to CentralNotice.
+The entry points includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will the  handle according to file type. 
+
+### Creating A/B tests
+The changes to the code depend on which kind of test you are running.
+
+* If you test **different behavior**, change `banner_var.js` as needed. Override library functions with our own versions if need be.
+* If you test **style changes**, include a file named `styles_var.pcss` in your `banner_var.js`. That file should only contain the overriding changes.
+* If you test **text or markup changes**, duplicate the `banner_html.hbs` to `banner_html_var.hbs` and include a duplicate of `banner_text.hbs`.
+* If you test a **whole new banner design**, all ove the above changes might apply.
+
+**Attention:** Before creating a new A/B test, clean up the previous one by incorporating the changes into the code! Do not layer tests upon each other!
+
 ## How the preview feature works
 * `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that 
   path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org

@@ -1,4 +1,4 @@
-require( './styles_ctrl.pcss' );
+require( './styles.pcss' );
 require( './icons.css' );
 require( './wlightbox.css' );
 
@@ -22,7 +22,7 @@ const getCampaignDaySentence = require( './count_campaign_days' )( GlobalBannerS
 const getCustomDayName = require( './custom_day_name' );
 const TrackingEvents = require( './TrackingEvents' );
 
-const bannerTemplate = require('./banner_ctrl.hbs');
+const bannerTemplate = require('./banner_html.hbs');
 
 const $ = require( 'jquery' );
 require( './wlightbox.js' );
