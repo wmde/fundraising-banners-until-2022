@@ -1,4 +1,4 @@
-require( './styles_var.pcss' );
+require( './styles_ctrl.pcss' );
 require( './icons.css' );
 require( './wlightbox.css' );
 

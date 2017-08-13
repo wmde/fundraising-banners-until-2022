@@ -21,10 +21,12 @@
         z-index: 1000;
     }
 
-
-    /* Just the layout of components with flexbox */
     .banner {
         display: flex;
+
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+        background-color: white;
     }
 
     .infobox {
@@ -32,35 +34,7 @@
         flex-direction: column;
         justify-content: space-between;
         flex: 0 1 100%;
-    }
 
-    .footer {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-
-    .form {
-        width: 15.5em;
-        flex-shrink: 0;
-        padding-left: 1.1em;
-    }
-
-    .close {
-        width: 18px;
-        flex: 0 0 18px;
-    }
-
-    /* Styling, from old banner code, but cleaned up */
-
-    .WMDE-Banner {
-        font-family: Arial, Helvetica, Verdana, sans-serif;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-        background-color: white;
-    }
-
-    .infobox {
         border: 5px solid #990000;
         border-radius: 9px;
         background-color: #f8f9fa;
@@ -68,7 +42,7 @@
         margin: 0.25em;
     }
 
-    .text {
+    .infobox__text {
         color: #000;
         font-size: 17px;
         font-weight: bold;
@@ -76,17 +50,22 @@
         text-align: left;
     }
 
-    .text p {
+    .infobox__text p {
         margin: .25em 0;
     }
 
-    .text p .highlight {
+    .infobox__text .highlight {
         border-bottom: solid 3px #990000;
         padding: 0 .1em;
         background: transparent;
     }
 
-    .footer {
+    .infobox__footer {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+
         padding-top: 0.025em;
         font-size: .81em;
         line-height: 1.7em;
@@ -99,24 +78,24 @@
         background-position: left top;
     }
 
-    .ucase {
+    .footer__info {
         text-transform: uppercase;
     }
 
-    .footer span {
+    .footer__item span {
         margin-right: .5em;
     }
 
-    .bankdata-important {
+    .footer__importantinfo {
         font-weight: bold;
     }
 
-    .bankname, .iban, .bic, .application-of-funds {
+    .footer__item {
         border-top: 1px solid #990000;
         white-space: nowrap;
     }
 
-    .application-of-funds {
+    .footer__item--rightflex {
         flex-grow: 1;
         text-align: right;
     }
@@ -126,6 +105,12 @@
     }
 
     /* Form styling */
+
+    .form {
+        width: 15.5em;
+        flex-shrink: 0;
+        padding-left: 1.1em;
+    }
 
     .select-group {
         border: 0;
@@ -250,6 +235,9 @@
 
     .close {
         font-size: .1em;
+        width: 18px;
+        flex: 0 0 18px;
     }
+
 
 }
