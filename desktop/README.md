@@ -22,17 +22,10 @@ By default, the banner `banner_ctrl` will be loaded. To load a different banner,
 
 ## Using the compiled JavaScript on CentralNotice
 
-Until there is an upload tool, you need to copy and paste the compiled banner code form the `dist` directory into the CentralNotice text field. Wrap it as follows:
-
-    <div id="WMDE-Banner-Container">
-    <script>{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}</script>
-    <nowiki><script>
-    // banner code here
-    </script></nowiki>
-    </div>
+After the assets are compiled, the `dist` directory contains `.wikitext` files that can be inserted 1:1 in CentralNotice or uploaded via the [upload tool](https://github.com/wmde/banner-toolkit).
 
 ## Banner assets and structure
-The files `banner_ctrl.js` and `banner_var.js` are the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*, the files which will be compiled by [Webpack](https://webpack.js.org) to the final JavaScript code that can be copied to CentralNotice.
+The files `banner_ctrl.js` and `banner_var.js` are the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*, the files which will be compiled by [Webpack](https://webpack.js.org) to pure JavaScript code and JavaScript code wrapped in wikitext that can be copied to CentralNotice.
 Each entry points includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will then handle according to file type. Most assets are shared between the banners.  
 
 ### Creating A/B tests
@@ -62,8 +55,9 @@ The changes to the code depend on which kind of test you are running.
 - [x] Test how webpack handles JavaScript that calls jQuery without requiring it.
 - [x] Add Dockerfile with installed npm >= 5.x, check in npm lock file (5.3 it is)
 - [X] Preview with real Wikipedia DE markup and HTML on preview page.
-- [ ] Create upload plugin that wraps the generated JS (see above) and sends it to CentralNotice
-- [ ] development version with source maps
+- [ ] Make webpack configuration work with multiple banner destinations (DEWP, mobile, English, WP.DE, etc). Allow for as much code sharing as possible.
+- [ ] Create upload plugin for webpack that can figure out the correct naming of the banner from the banner data and sends the wikitext to the appropriate page on meta.wikimedia.org / GS-Wiki.
+- [ ] Add source maps to dev preview
 
 ## Random ideas
 * Configure Campaign number, campaign prefix and campaign start date to generate file names and tracking info inside banners.

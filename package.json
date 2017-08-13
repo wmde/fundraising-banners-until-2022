@@ -22,6 +22,7 @@
     "handlebars": "^4.0.10",
     "handlebars-loader": "^1.5.0",
     "html-loader": "^0.4.5",
+    "minimatch": "^3.0.4",
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.0",
     "style-loader": "^0.18.2",
