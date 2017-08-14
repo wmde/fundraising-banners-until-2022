@@ -50,9 +50,10 @@ module.exports = {
       jQuery: 'jquery'
     }),
       new MediaWikiTextWrapper( {
-          prefixText: "<!-- WMDE compiled banner, see https://github.com/wmde/fundraising-banners -->\n<nowiki>\n" +
+          prefixText: "<!-- WMDE compiled banner, see https://github.com/wmde/fundraising-banners -->" +
             "<div id=\"WMDE-Banner-Container\"></div>" +
-		    "<script>{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}</script><script>\n",
+            "<script>{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}</script>" +
+            "<nowiki>\n<script>\n",
           suffixTex: "\n</script></nowiki>\n",
           filePattern: 'banner_*.js'
       } )
