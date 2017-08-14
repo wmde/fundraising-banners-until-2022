@@ -38,7 +38,7 @@
         border: 5px solid #990000;
         border-radius: 9px;
         background-color: #f8f9fa;
-        padding: 0 0.5em 0 2em;
+        padding: 0 0.5em 0 0;
         margin: 0.25em;
     }
 
@@ -48,6 +48,7 @@
         font-weight: bold;
         line-height: 1.2em;
         text-align: left;
+        margin-left: 2em;
     }
 
     .infobox__text p {
@@ -61,21 +62,24 @@
     }
 
     .infobox__footer {
+        padding: 0.025em 0 0 2em;
+
+        background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: left 0.5em top;
+    }
+
+    .footer {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: flex-start;
 
-        padding-top: 0.025em;
         font-size: .81em;
         line-height: 1.7em;
-        margin-left: -18px;
-        padding-left: 20px;
 
-        background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
-        background-size: 18px 18px;
-        background-repeat: no-repeat;
-        background-position: left top;
+        border-top: 1px solid #990000;
     }
 
     .footer__info {
@@ -91,7 +95,6 @@
     }
 
     .footer__item {
-        border-top: 1px solid #990000;
         white-space: nowrap;
     }
 
@@ -147,7 +150,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        font-size: .7em;
+        font-size: .74em;
         border: 1px solid #9aa0a7;
         border-radius: 4px;
         box-sizing: border-box;
