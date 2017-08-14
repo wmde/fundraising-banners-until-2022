@@ -109,7 +109,7 @@
     .form {
         width: 15.5em;
         flex-shrink: 0;
-        padding-left: 1.1em;
+        padding: 0 .3em 0 0.5em;
         margin: 0.25em; /* Same as infobox */
     }
 
@@ -135,7 +135,7 @@
         text-align: center;
         width: 100%;
         margin-bottom: 0.2em;
-        font-size: 0.81em;
+        font-size: 0.74em;
     }
 
     .select-group__input {
@@ -183,7 +183,7 @@
         cursor: pointer;
         text-align: center;
         font-weight: bold;
-        font-size: .81em;
+        font-size: .74em;
         box-sizing: border-box;
     }
 
@@ -220,6 +220,18 @@
         width: 50%;
     }
 
+    @media(max-width: 1024px) {
+        .button-group__button--halfwidth .button-group__label {
+            padding: 0.3em 0.1em;
+        }
+    }
+
+    @media(max-width: 900px) {
+        .button-group__button--halfwidth {
+            width: 100%;
+        }
+    }
+
     .button-group__label {
         display: block;
         color: #3366cc;
@@ -228,7 +240,7 @@
         border-radius: 2px;
         padding: .05em 0;
         line-height: 2em;
-        font-size: .81em;
+        font-size: .74em;
         cursor: pointer;
         text-align: center;
         font-weight: bold;
@@ -236,10 +248,12 @@
     }
 
     .close {
+        position: absolute;
         font-size: .1em;
         width: 18px;
-        flex: 0 0 18px;
         margin: 0.25em 0.25em;
+        top: 0.25em;
+        right:0.25em;
     }
 
 
