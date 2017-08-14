@@ -110,6 +110,7 @@
         width: 15.5em;
         flex-shrink: 0;
         padding-left: 1.1em;
+        margin: 0.25em; /* Same as infobox */
     }
 
     .select-group {
@@ -123,13 +124,18 @@
         flex: 1 1 100%;
     }
 
+    .select-group--with-error {
+        background: #990000;
+    }
+
     .select-group__errormessage {
+        display: none; /* Message will be shown by JS code */
         color: white;
         font-weight: bold;
-        display: block;
         text-align: center;
         width: 100%;
         margin-bottom: 0.2em;
+        font-size: 0.81em;
     }
 
     .select-group__input {
@@ -149,7 +155,7 @@
 
     .select-group__option {
         flex: 1 1 auto;
-        padding: 0.1em 0.1em;
+        padding: 0 0.2em 0.2em 0;
         margin: 0;
         box-sizing: border-box;
         display: block;
@@ -229,14 +235,11 @@
         box-sizing: border-box;
     }
 
-    .fieldset-error {
-        background: #990000;
-    }
-
     .close {
         font-size: .1em;
         width: 18px;
         flex: 0 0 18px;
+        margin: 0.25em 0.25em;
     }
 
 

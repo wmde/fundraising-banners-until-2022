@@ -51,22 +51,22 @@ function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );
   banner.on( 'validation:amount:ok', function () {
       $( '#WMDE_Banner-amounts-error-text' ).hide();
-      $( '#WMDE_Banner-amounts' ).removeClass( 'fieldset-error' );
+      $( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
       addSpaceInstantly();
   } );
   banner.on( 'validation:amount:error', function ( evt, text ) {
       $( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-      $( '#WMDE_Banner-amounts' ).addClass( 'fieldset-error' );
+      $( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
       addSpaceInstantly();
   } );
   banner.on( 'validation:period:ok', function () {
       $( '#WMDE_Banner-frequency-error-text' ).hide();
-      $( '#WMDE_Banner-frequency' ).removeClass( 'fieldset-error' );
+      $( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
       addSpaceInstantly();
   } );
   banner.on( 'validation:period:error', function ( evt, text ) {
       $( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-      $( '#WMDE_Banner-frequency' ).addClass( 'fieldset-error' );
+      $( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
       addSpaceInstantly();
   } );
 }
