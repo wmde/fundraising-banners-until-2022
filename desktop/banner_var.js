@@ -71,7 +71,7 @@ function setPeriodDependentAmounts( period ) {
         if ( amounts.length == 0 || !option.has( '.select-group__input' ) ) {
             return;
         }
-        $( '.select-group__input', option ).val( amounts[ 0 ] );
+        $( '.select-group__input', option ).prop( 'checked', false ).val( amounts[ 0 ] );
 		$( '.select-group__state', option ).text( amounts[ 0 ] + ' €' );
 		amounts.shift();
 	})
