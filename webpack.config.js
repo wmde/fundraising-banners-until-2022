@@ -9,6 +9,9 @@ module.exports = Merge( CommonConfig, {
   devServer: {
       hot: true,
       contentBase: './dist',
+	  headers: {
+		  'Access-Control-Allow-Origin': '*'
+	  },
       proxy: [{
           context: [ '/wiki', '/w', '/static' ],
           target: 'https://de.wikipedia.org',
