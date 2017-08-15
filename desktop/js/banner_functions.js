@@ -250,7 +250,7 @@ function validateAmount( amount ) {
 	if ( amount === false ) {
 		showAmountError( amountEmptyMessage );
 		return false;
-	} else if ( amount < 1 || error ) {
+	} else if ( amount < 1 ) {
 		showAmountError( amountTooLowMessage );
 		return false;
 	} else if ( amount > 99999 ) {
@@ -258,6 +258,7 @@ function validateAmount( amount ) {
 		return false;
 	}
 	hideAmountError();
+	return true;
 }
 
 /**
