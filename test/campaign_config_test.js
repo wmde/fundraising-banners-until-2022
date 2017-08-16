@@ -92,5 +92,45 @@ describe('CampaignConfig', function() {
 				config.getEntryPoints();
 			}, /duplicate.*desktop\.(var|ctrl)/i )
 		} );
+
 	});
+
+	describe('#getConfigForPages()', function() {
+		it( 'should include campaign and banner configuration for each page', function () {
+			const config = new CampaignConfig( {
+				desktop: {
+					testvalue1: 'foo',
+					testvalue2: 'bar',
+					banners: {
+						ctrl: {
+							filename: './foo/bar.js',
+							pagename: 'B17WMDE_test_ctrl',
+							tracking: 'tracking----ctrl'
+						},
+						var: {
+							filename: './foo/var.js',
+							pagename: 'B17WMDE_test_var',
+							tracking: 'tracking----var'
+						}
+					}
+				}
+			} );
+			assert.deepEqual( config.getConfigForPages(), {
+				B17WMDE_test_ctrl: {
+					filename: './foo/bar.js',
+					pagename: 'B17WMDE_test_ctrl',
+					tracking: 'tracking----ctrl',
+					testvalue1: 'foo',
+					testvalue2: 'bar',
+				},
+				B17WMDE_test_var: {
+					filename: './foo/var.js',
+					pagename: 'B17WMDE_test_var',
+					tracking: 'tracking----var',
+					testvalue1: 'foo',
+					testvalue2: 'bar',
+				}
+			} );
+		} );
+	} );
 });

@@ -1,6 +1,6 @@
 # A Campaign with global settings
 [desktop]
-campaign_name = "05-ba-170825"
+campaign_tracking = "05-ba-170825"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
