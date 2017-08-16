@@ -16,17 +16,20 @@ To build a minified version of the banner:
 
     docker-compose up js-serve
 
-To view the banner inside the proxied German Wikimedia go to [http://localhost:8080/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype](http://localhost:8080/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype).
+The preview server is at http://localhost:8080/
 
-By default, the banner `banner_ctrl` will be loaded. To load a different banner, e.g. `banner_var`, add the parameter `&devbanner=banner_var` to the URL.
+It will display a selection of banners to preview. The preview will be shown inside the proxied German Wikimedia.
+
+To load a different banner than the one you selected, change the `devbanner` parameter in the URL to the new banner name.
 
 ## Using the compiled JavaScript on CentralNotice
 
 After the assets are compiled, the `dist` directory contains `.wikitext` files that can be inserted 1:1 in CentralNotice or uploaded via the [upload tool](https://github.com/wmde/banner-toolkit).
 
-## Banner assets and structure
-The files `banner_ctrl.js` and `banner_var.js` are the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*, the files which will be compiled by [Webpack](https://webpack.js.org) to pure JavaScript code and JavaScript code wrapped in wikitext that can be copied to CentralNotice.
-Each entry points includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will then handle according to file type. Most assets are shared between the banners.  
+## Campaigns, Banner assets and structure
+The file `campaign_info.toml` contains the metadata for all banners and campaigns. It'll be used to determine the unique file names of the output and the input files, the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*. Entry points are the local files (configured with the setting `filename`) which will be compiled by [Webpack](https://webpack.js.org) to pure JavaScript code and JavaScript code wrapped in wikitext that can be copied to CentralNotice. The CentralNote banner names (which can also be used for the `devbanner` parameter in the preview) come from the `pagename` setting.
+
+Each entry point includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will then handle according to file type. Most assets are shared between the banners.  
 
 ### Creating A/B tests
 The changes to the code depend on which kind of test you are running.
@@ -55,7 +58,7 @@ The changes to the code depend on which kind of test you are running.
 - [x] Test how webpack handles JavaScript that calls jQuery without requiring it.
 - [x] Add Dockerfile with installed npm >= 5.x, check in npm lock file (5.3 it is)
 - [X] Preview with real Wikipedia DE markup and HTML on preview page.
-- [ ] Make webpack configuration work with multiple banner destinations (DEWP, mobile, English, WP.DE, etc). Allow for as much code sharing as possible.
+- [X] Make webpack configuration work with multiple banner destinations (DEWP, mobile, English, WP.DE, etc). Allow for as much code sharing as possible.
 - [ ] Create upload plugin for webpack that can figure out the correct naming of the banner from the banner data and sends the wikitext to the appropriate page on meta.wikimedia.org / GS-Wiki.
 - [ ] Add source maps to dev preview
 
@@ -63,6 +66,7 @@ The changes to the code depend on which kind of test you are running.
 * Configure Campaign number, campaign prefix and campaign start date to generate file names and tracking info inside banners.
 
 ## Notes on possible Banner code improvements
+* Move JavaScript libraries from `desktop` directory into `shared` directory.
 * Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Remove similar functions from `banner_functions.js`. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
 * Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
 * Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module.

@@ -1,13 +1,14 @@
 const path = require( 'path' );
+const fs = require( 'fs' );
+const toml = require( 'toml' );
 const webpack = require( 'webpack' );
 const MediaWikiTextWrapper = require( './mediawiki_text_wrapper' );
+const CampaignConfig = require( './webpack/campaign_config' );
+
+const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 module.exports = {
-  entry: {
-    loader: './desktop/loader.js',
-    banner_ctrl: './desktop/banner_ctrl.js',
-    banner_var:  './desktop/banner_var.js',
-  },
+  entry: campaigns.getEntryPoints(),
   output: {
     filename: '[name].js',
     path: path.resolve( __dirname, 'dist' )
