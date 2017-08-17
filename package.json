@@ -26,9 +26,9 @@
     "mocha": "^3.5.0",
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.0",
-    "query-string": "^5.0.0",
     "style-loader": "^0.18.2",
     "toml": "^2.3.2",
+    "url": "^0.11.0",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1",
     "webpack-merge": "^4.1.0"
