@@ -1,3 +1,0 @@
-API_URL = "https://meta.wikimedia.org/w/api.php"
-PAGE_PREFIX = "MediaWiki:Centralnotice-template-"
-CAMPAIGN_NAME = "B16WMDE_mob_"

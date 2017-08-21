@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  js-build:
+    image: digitallyseamless/nodejs-bower-grunt
+    volumes:
+      - ./:/code
+      - ~/.npm:/npm-cache
+    working_dir: /code
+    environment:
+      - npm_config_cache=/npm-cache
+  js-serve:
+    extends: js-build
+    ports:
+      - "8080:8080"
+    command: "npm run start"

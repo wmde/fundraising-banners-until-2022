@@ -1,3 +1,0 @@
-API_URL = "https://wiki.wikimedia.de/w/api.php"
-PAGE_PREFIX = "Web:Banner/"
-CAMPAIGN_NAME = "FR2016_TopBanner_"
