@@ -1,6 +1,6 @@
 # Fundraising banners, webpack edition
 
-This is bundling all dependencies of WMDE fundraising banners with webpack.
+This project is bundling all assets and dependencies of WMDE fundraising banners with webpack.
 
 ## Installing dependencies
 To install all dependencies run:
@@ -29,9 +29,13 @@ After the assets are compiled, the `dist` directory contains `.wikitext` files t
 ## Campaigns, Banner assets and structure
 The file `campaign_info.toml` contains the metadata for all banners and campaigns. It'll be used to determine the unique file names of the output and the input files, the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*. Entry points are the local files (configured with the setting `filename`) which will be compiled by [Webpack](https://webpack.js.org) to pure JavaScript code and JavaScript code wrapped in wikitext that can be copied to CentralNotice. The CentralNotice banner names (which can also be used for the `devbanner` parameter in the preview) come from the `pagename` setting.
 
-Each entry point includes JavaScript libraries, CSS and HTML templates through `require` statements, which Webpack will then handle according to file type. Most assets are shared between the banners.
+Each entry point includes JavaScript libraries, CSS and HTML templates through `require` statements in the entry point files. Webpack is [configured](webpack.common.js) to handle file types according to their extension: HTML templates are preprocessed as JavaScript templating functions, CSS is preprocessed and will be inserted as an inline `<style>` tag, etc. Most assets are shared between the banners.
 
 The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are used to create the tracking information inside the banner code. The tracking information is passed to the form fields and event tracking pixels inside the banner.  
+
+## Creating new campaigns
+1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
+2. Create a new campaign and its banner configuration in `campaign_info.toml`. 
 
 ### Creating A/B tests
 The changes to the code depend on which kind of test you are running.
@@ -50,25 +54,13 @@ The changes to the code depend on which kind of test you are running.
 * `B17WMDE_webpack_prototype` is a special banner on CentralNotice that reads the `devbanner` parameter from the URL and inserts it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).   
 
 
-## Planned Features
-- [x] Bundle HTML and JavaScript as one includable bundle
-- [x] Bundle CSS
-- [x] Bundle multiple entry points/HTML files for multiple banners
-- [x] Use template engine to render HTML
-- [x] Use webpack web server for previews
-- [x] Use [HOT module replacement](https://webpack.js.org/guides/hot-module-replacement/) for automatic refresh in browser.
-- [x] Add production config for webpack
-- [x] Test how webpack handles JavaScript that calls jQuery without requiring it.
-- [x] Add Dockerfile with installed npm >= 5.x, check in npm lock file (5.3 it is)
-- [X] Preview with real Wikipedia DE markup and HTML on preview page.
-- [X] Make webpack configuration work with multiple banner destinations (DEWP, mobile, English, WP.DE, etc). Allow for as much code sharing as possible.
+## Planned Features of the dev environment
+- [ ] Configure webpack to add source maps (esp for JavaScript) to dev preview.
+- [ ] Use `MediaWikiTextWrapper` only in webpack production configuration and don't output the compiled `*.js` files.
 - [ ] Create upload plugin for webpack uses the campaign information from `campaign_info.toml` to upload the generated `.wikitext` file to the appropriate page on meta.wikimedia.org / GS-Wiki.
-- [ ] Add source maps to dev preview
-
-## Random ideas
-* Configure Campaign number, campaign prefix and campaign start date to generate file names and tracking info inside banners.
 
 ## Notes on possible Banner code improvements
+* Change banner JS code to improve reusability of markup, for A/B testing text changes: Load the `banner_text.hbs` template and render it as an usecaped variable into the markup in `banner_html.hbs`.
 * Move JavaScript libraries from `desktop` directory into `shared` directory.
 * Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Remove similar functions from `banner_functions.js`. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
 * Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
@@ -76,4 +68,4 @@ The changes to the code depend on which kind of test you are running.
 * Move date/time-based campaign data counting (donors, donations, campaign day, special day name, normal day name, prefix for day name) from `banner_functions.js`, `custom_day_name.js` and `count_campaign_days.js` into module.
 * Refactor `banner_functions.js` and `count_campaign_days` to longer require parameters after `require`. Use classes with constructor parameters instead.
 * Structure banner initialization into functions, call them one after each other. Select Banner object only once and use its `find` method with all other jQuery selections.
-* Re-Implement/Refactor lightbox module without the need for global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.
+* Re-Implement/Refactor lightbox module without the need for a global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.
