@@ -1,13 +1,14 @@
 const path = require( 'path' );
+const fs = require( 'fs' );
+const toml = require( 'toml' );
 const webpack = require( 'webpack' );
-const MediaWikiTextWrapper = require( './mediawiki_text_wrapper' );
+const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
+const CampaignConfig = require( './webpack/campaign_config' );
+
+const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 module.exports = {
-  entry: {
-    loader: './desktop/loader.js',
-    banner_ctrl: './desktop/banner_ctrl.js',
-    banner_var:  './desktop/banner_var.js',
-  },
+  entry: campaigns.getEntryPoints(),
   output: {
     filename: '[name].js',
     path: path.resolve( __dirname, 'dist' )
@@ -50,12 +51,12 @@ module.exports = {
       jQuery: 'jquery'
     }),
       new MediaWikiTextWrapper( {
-          prefixText: "<!-- WMDE compiled banner, see https://github.com/wmde/fundraising-banners -->" +
-            "<div id=\"WMDE-Banner-Container\"></div>" +
-            "<script>{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}</script>" +
-            "<nowiki>\n<script>\n",
-          suffixTex: "\n</script></nowiki>\n",
-          filePattern: 'banner_*.js'
+          template: fs.readFileSync( './webpack/banner_wikitext_wrapper.hbs', 'utf8' ),
+          context: {
+		        bannerValues: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
+          },
+          filePattern: 'B17WMDE_*.js',
+		  campaignConfig: campaigns.getConfigForPages()
       } )
   ]
 };

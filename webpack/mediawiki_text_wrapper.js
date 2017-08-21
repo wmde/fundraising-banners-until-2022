@@ -3,11 +3,13 @@
  */
 
 const Minimatch = require( 'minimatch' ).Minimatch;
+const Handlebars = require( 'handlebars' );
 
 function MediaWikiTextWrapper( options ) {
-	this.prefixText = options.prefixText || '<nowiki><script>';
-	this.suffixText = options.suffixText || '</script></nowiki>';
+	this.template = Handlebars.compile( options.template ) || '{{{ banner }}}';
 	this.filePattern = options.filePattern || '*.js';
+	this.context = options.context || {};
+	this.campaignConfig = options.campaignConfig || {};
 }
 
 MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
@@ -21,7 +23,10 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 				continue;
 			}
 
-			wrappedFiles[ filename + '.wikitext' ] = self.prefixText + compilation.assets[ filename ].source() + self.suffixText;
+			wrappedFiles[ filename + '.wikitext' ] = self.template( Object.assign( {
+				banner: compilation.assets[ filename ].source(),
+				campaignConfig: self.campaignConfig[ filename.replace( /\.js$/, '' ) ] || {},
+			}, self.context ) );
 		}
 
 		for ( let filename in wrappedFiles ) {

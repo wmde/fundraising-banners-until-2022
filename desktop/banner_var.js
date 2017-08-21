@@ -8,8 +8,6 @@ require( './css/wlightbox.css' );
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueTrackRatio = 1;
-const CampaignName = '04-ba-170815';
-const BannerName = 'org-04-170815-var';
 const LANGUAGE = 'de';
 
 // END Banner-Specific configuration
@@ -32,12 +30,14 @@ const bannerTemplate = require('./templates/banner_html.hbs');
 const $ = require( 'jquery' );
 require( './js/wlightbox.js' );
 
+const $bannerContainer = $( '#WMDE-Banner-Container' );
+const CampaignName = $bannerContainer.data( 'campaign-tracking' );
+const BannerName = $bannerContainer.data( 'tracking' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 
-const $banner = $( '#WMDE-Banner-Container' );
-$banner.html( bannerTemplate( {
+$bannerContainer.html( bannerTemplate( {
     // TODO approx. donors
     customDayName: customDayName,
     currentDayName: currentDayName,
