@@ -226,13 +226,13 @@ $( '#application-of-funds-link' ).wlightbox( {
 $( '#application-of-funds-link' ).click( function () {
     // Lightbox position is relative to banner position
     window.scrollTo(0,0);
-} )
+} );
 
 // track lightbox link clicking and banner closing
 trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
 trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'wmde-annual-plan', 'banner-closed', bannerCloseTrackRatio );
+trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
