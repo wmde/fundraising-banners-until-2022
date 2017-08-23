@@ -167,7 +167,11 @@ function addSpace() {
     return;
   }
   var bannerHeight = $( 'div#WMDE_Banner' ).height(),
-      skin = BannerFunctions.getSkin();
+      skin = BannerFunctions.getSkin(),
+	  cssForBannerOffset = {
+		  top: bannerHeight,
+		  transition: 'top 1s linear'
+	  };
 
   switch ( skin ) {
     case 'vector':
@@ -176,11 +180,14 @@ function addSpace() {
           trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
           sizeIssueTrackRatio
       );
-      $( '#mw-panel' ).animate( { 'top': bannerHeight }, 1000 );
-      $( '#mw-head' ).animate( { 'top': bannerHeight }, 1000 );
-      $( '#mw-page-base' ).animate( { 'padding-top': bannerHeight }, 1000);
+		$( '#mw-panel' ).css( cssForBannerOffset );
+		$( '#mw-head' ).css( cssForBannerOffset );
+		$( '#mw-page-base' ).css( {
+			paddingTop: bannerHeight,
+			transition: 'padding-top 1s linear'
+		} );
     case 'minerva':
-      $( '#mw-mf-viewport' ).animate( { 'top': bannerHeight}, 1000 );
+		$( '#mw-mf-viewport' ).css( cssForBannerOffset );
       break;
   }
 }
@@ -190,15 +197,22 @@ function addSpaceInstantly() {
     return;
   }
   var bannerHeight = $( 'div#WMDE_Banner' ).height(),
-      skin = BannerFunctions.getSkin();
+      skin = BannerFunctions.getSkin(),
+	  cssForBannerOffset = {
+		  top: bannerHeight,
+		  transition: 'none'
+	  };
 
   switch ( skin ) {
     case 'vector':
-      $( '#mw-panel' ).css( { top: bannerHeight } );
-      $( '#mw-head' ).css( { top: bannerHeight } );
-      $( '#mw-page-base' ).css( { paddingTop: bannerHeight } );
+		$( '#mw-panel' ).css( cssForBannerOffset );
+		$( '#mw-head' ).css( cssForBannerOffset );
+		$( '#mw-page-base' ).css( {
+			paddingTop: bannerHeight,
+			transition: 'none'
+		} );
     case 'minerva':
-      $( '#mw-mf-viewport' ).css( { top: bannerHeight } );
+		$( '#mw-mf-viewport' ).css( cssForBannerOffset );
       break;
   }
 }
@@ -207,12 +221,12 @@ function removeBannerSpace() {
 	var skin = BannerFunctions.getSkin();
 	switch ( skin ) {
 		case 'vector':
-			$( '#mw-panel' ).css( 'top', 0 );
-			$( '#mw-head' ).css( 'top', 0 );
-			$( '#mw-page-base' ).css( 'padding-top', 0 );
+			$( '#mw-panel' ).css( { top: 0, transition: 'none' } );
+			$( '#mw-head' ).css( { top: 0, transition: 'none' } );
+			$( '#mw-page-base' ).css( { paddingTop: 0, transition: 'none' } );
 			break;
 		case 'minerva':
-			$( '#mw-mf-viewport' ).css( 'top', 0 );
+			$( '#mw-mf-viewport' ).css( { top: 0, transition: 'none' } );
 			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
 			break;
 		case 'monobook':
@@ -231,10 +245,15 @@ function displayBanner() {
   setupPeriodEventHandling();
 
   $( 'body' ).prepend( $( '#centralNotice' ) );
-  bannerElement.css( 'top', -bannerHeight );
-  bannerElement.css( 'display', 'block' );
+  bannerElement.css( {
+	  top: -bannerHeight,
+	  display: 'block'
+  } );
   addSpace();
-  bannerElement.animate( { top: 0 }, 1000 );
+	bannerElement.css( {
+		top: 0,
+		transition: 'top 1s linear'
+	} );
 
   $( window ).resize( function () {
     addSpaceInstantly();
