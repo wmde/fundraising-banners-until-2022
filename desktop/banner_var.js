@@ -50,7 +50,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingLinkGenerator = new TrackingEvents( BannerName, $( '#WMDE_Banner-close-ct' ) );
+const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.click-tracking__pixel' ) );
 
 const periodAmounts = {
     0: [ 5, 15, 25, 50, 75, 100, 250 ],
