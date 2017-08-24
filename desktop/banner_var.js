@@ -25,7 +25,7 @@ const TrackingEvents = require( './js/tracking_events' );
 
 // For A/B testing different text or markup, load
 // const bannerTemplate = require('./banner_var.hbs');
-const bannerTemplate = require('./templates/banner_html.hbs');
+const bannerTemplate = require('./templates/banner_html_var.hbs');
 
 const $ = require( 'jquery' );
 require( './js/wlightbox.js' );
