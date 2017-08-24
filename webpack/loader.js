@@ -1,14 +1,16 @@
 /**
- * This entry point is for development only
+ * This entry point is for development only.
  */
 
 const url = require( 'url' );
 const $ = require( 'jquery' );
 const CampaignConfig = require( './campaign_config' );
 const bannerSelectionListTemplate = require( './banner_selection_list.hbs' );
+const overviewTemplate = require( './preview_choice.hbs' );
 
 const currentUrl = url.parse( window.location.href, true );
 const MW_PROTOTYPE_BANNER = 'B17WMDE_webpack_prototype';
+const LOCAL_DEVELOPMENT_BANNER = 'LOCAL_DEVELOPMENT';
 const container = $( '#WMDE-Banner-Container' );
 
 function getMediawikiBannerLinks() {
@@ -30,10 +32,43 @@ function getMediawikiBannerLinks() {
 	return bannerlist;
 }
 
+function getLocalBannerLinks() {
+	let bannerlist = [];
+	Object.keys( CAMPAIGNS ).forEach( function ( campaign ) {
+		Object.keys( CAMPAIGNS[ campaign ].banners ).forEach( function ( banner ) {
+			let u = url.parse( url.format( currentUrl ) );
+			u.pathname = '/local-development/index.html';
+			u.query = u.query || {};
+			u.query.devbanner = CAMPAIGNS[ campaign ].banners[ banner ].pagename;
+			u.query.banner = LOCAL_DEVELOPMENT_BANNER;
+			delete u.search;
+			bannerlist.push( {
+				url: url.format( u ),
+				name: CAMPAIGNS[ campaign ].banners[ banner ].pagename
+			} );
+		} );
+	} );
+	return bannerlist;
+}
+
 if ( !currentUrl.query.banner ) {
-	$( 'body' ).html( bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } ) );
+	$( 'body' ).html( overviewTemplate( {
+		wikipedia_banners: getMediawikiBannerLinks(),
+		local_banners: getLocalBannerLinks()
+	} ) );
 } else if ( currentUrl.query.banner === MW_PROTOTYPE_BANNER && !currentUrl.query.devbanner ) {
 	container.html( bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } ) );
+}
+
+if ( currentUrl.query.banner === LOCAL_DEVELOPMENT_BANNER ) {
+	if ( !currentUrl.query.devbanner ) {
+		container.html( bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } ) );
+	}
+	else {
+		const s = document.createElement( 'script' );
+		s.src = '/' + currentUrl.query.devbanner + '.js';
+		document.body.appendChild( s );
+	}
 }
 
 // inject tracking data for current banner.
@@ -43,11 +78,8 @@ if ( currentUrl.query.devbanner ) {
 	const pages = campaigns.getConfigForPages();
 	const currentBanner = currentUrl.query.devbanner;
 	if ( pages[ currentBanner ] ) {
-		console.log( 'current banner', currentBanner, pages[ currentBanner ].tracking, pages[ currentBanner ].campaign_tracking );
 		container.data( 'tracking', pages[ currentBanner ].tracking );
 		container.data( 'campaign-tracking', pages[ currentBanner ].campaign_tracking );
 	}
 }
-
-// TODO banner loading functions for non-proxied development (with `localbanner` param)
 
