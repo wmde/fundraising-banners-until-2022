@@ -224,13 +224,15 @@ function removeBannerSpace() {
 
 function displayBanner() {
   var bannerElement = $( '#WMDE_Banner' ),
-      bannerHeight = bannerElement.height();
+      bannerHeight;
 
   setupValidationEventHandling();
   setupAmountEventHandling();
   setupPeriodEventHandling();
 
   $( 'body' ).prepend( $( '#centralNotice' ) );
+
+  bannerHeight = bannerElement.height();
   bannerElement.css( 'top', -bannerHeight );
   bannerElement.css( 'display', 'block' );
   addSpace();
