@@ -52,32 +52,6 @@ $bannerContainer.html( bannerTemplate( {
 
 const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.click-tracking__pixel' ) );
 
-const periodAmounts = {
-    0: [ 5, 15, 25, 50, 75, 100, 250 ],
-	1: [ 1, 2, 3, 5, 10, 15, 25 ],
-	3: [ 5, 10, 15, 20, 25, 30, 50 ],
-    6: [ 5, 10, 15, 20, 25, 50, 100 ],
-    12: [ 5, 10, 15, 20, 25, 50, 100 ]
-};
-
-function setPeriodDependentAmounts( period ) {
-    // Just to be sure, should never happen
-    if ( typeof periodAmounts[ period ] === 'undefined' ) {
-        return;
-    }
-    let amounts = periodAmounts[ period ].slice( 0 );
-    $( '#WMDE_Banner-amounts .select-group__option' ).each( function () {
-        const option = $( this );
-        if ( amounts.length == 0 || !option.has( '.select-group__input' ) ) {
-            return;
-        }
-        $( '.select-group__input', option ).prop( 'checked', false ).val( amounts[ 0 ] );
-		$( '.select-group__state', option ).text( amounts[ 0 ] + ' €' );
-		amounts.shift();
-	})
-    
-}
-
 function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );
   banner.on( 'validation:amount:ok', function () {
@@ -116,14 +90,6 @@ function setupAmountEventHandling() {
       } );
 }
 
-function setupPeriodEventHandling() {
-	const banner = $( '#WMDE_Banner' );
-	banner.on( 'period:selected', null, function( evt ) {
-        setPeriodDependentAmounts( $( 'input', evt.target ).val() );
-        BannerFunctions.hideFrequencyError();
-	} );
-}
-
 function validateAndSetPeriod() {
     var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
     if ( typeof selectedInterval === 'undefined' ) {
@@ -154,8 +120,8 @@ $( '#amount-other-input' ).change( function () {
 } );
 
 $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
-  $( this ).trigger( 'period:selected' );
-} );
+    BannerFunctions.hideFrequencyError();
+}  );
 
 BannerFunctions.initializeBannerEvents();
 
@@ -228,7 +194,6 @@ function displayBanner() {
 
   setupValidationEventHandling();
   setupAmountEventHandling();
-  setupPeriodEventHandling();
 
   $( 'body' ).prepend( $( '#centralNotice' ) );
 
