@@ -13,6 +13,7 @@ const Translations = {}; // will only be needed for English banner, German defau
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
+const animateHighlight = require( '../shared/animate_highlight' );
 const TrackingEvents = require( '../shared/tracking_events' );
 
 const bannerTemplate = require('./templates/banner_html.hbs');
