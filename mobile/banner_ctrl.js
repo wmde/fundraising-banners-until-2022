@@ -95,7 +95,7 @@ $(document).ready(function() {
 
 	initializeDynamicPlaceholderValues();
 
-	setTimeout( addBannerSpace, 5000 );
+	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
 	var impCount = increaseImpCount();
 	$("#impCount").val(impCount);
