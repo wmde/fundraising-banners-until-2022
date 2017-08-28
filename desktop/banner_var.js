@@ -17,18 +17,18 @@ const fundraisingBanner = {};
 const DevGlobalBannerSettings = require( './GlobalBannerSettings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
-const BannerFunctions = require( './js/banner_functions' )( GlobalBannerSettings, Translations );
-const SizeIssues = require( './js/track_size_issues' );
-const getCampaignDaySentence = require( './js/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
-const getCustomDayName = require( './js/custom_day_name' );
-const TrackingEvents = require( './js/tracking_events' );
+const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const SizeIssues = require( '../shared/track_size_issues' );
+const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
+const getCustomDayName = require( '../shared/custom_day_name' );
+const TrackingEvents = require( '../shared/tracking_events' );
 
 // For A/B testing different text or markup, load
 // const bannerTemplate = require('./banner_var.hbs');
 const bannerTemplate = require('./templates/banner_html.hbs');
 
 const $ = require( 'jquery' );
-require( './js/wlightbox.js' );
+require( '../shared/wlightbox.js' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
