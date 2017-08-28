@@ -74,12 +74,6 @@ function addBannerSpace() {
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
 }
 
-function removeBannerSpace() {
-	$( '#mw-mf-viewport' ).css( { marginTop: '0px' } );
-	$( '#mw-mf-viewport .overlay.media-viewer' ).css( 'margin-top', 0 );
-}
-
-
 function initializeDynamicPlaceholderValues() {
 
 	$("span.donorsValue").html( addPointsToNum( getApprDonatorsRaw() ) );
@@ -123,8 +117,12 @@ $(document).ready(function() {
 
 	$("#frbanner2-close").click(function() {
 		$( '#frbanner2' ).hide();
-		removeBannerSpace();
-		mw.centralNotice.hideBanner();
+		BannerFunctions.removeBannerSpace();
+
+		if ( BannerFunctions.onMediaWiki() ) {
+			mw.centralNotice.hideBanner();
+		}
+
 		if ( Math.random() < 0.01 ) {
 			$( '#pwkExpandTrack' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{ BannerName }}&rec=1' );
 		}

@@ -483,6 +483,7 @@ return {
 	showFrequencyError: showFrequencyError,
 	showAmountError: showAmountError,
 	hideAmountError: hideAmountError,
-	hideFrequencyError: hideFrequencyError
+	hideFrequencyError: hideFrequencyError,
+	removeBannerSpace: removeBannerSpace
 }
 }
