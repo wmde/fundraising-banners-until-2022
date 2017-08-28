@@ -44,6 +44,61 @@ trackingLinkGenerator.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed',
 // BEGIN form initialization
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
+
+$( '.send' ).click( function( e ) {
+	return validateForm();
+} );
+
+// Reset "other box" if they click a different amount
+$( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
+	$( '#input_amount_other_box' ).val( '' );
+} );
+
+$( '#btn-ppl' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#iframe' ).val( '' );
+		$( '#zahlweise' ).val( 'PPL' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
+$( '#btn-cc' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'MCP' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
+$( '#btn-ueb' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'UEB' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
+$( '#btn-bez' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'BEZ' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#address_type' ).val( 'person' );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
 // END form initialization
 
 function debounce( func, wait, immediate ) {
@@ -102,17 +157,6 @@ $(document).ready(function() {
 
 	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
-	if(wgUserName !== null) $('#wikilogin').val('yes');
-
-	$( ".send" ).click( function( e ) {
-		return validateForm();
-	});
-
-	// Reset "other box" if they click a different amount
-	$('#amount1, #amount2, #amount3, #amount4, #amount5').click(function() {
-		$('#input_amount_other_box').val('');
-	});
-
 	$("#frbanner-close").click(function() {
 		// Close only the full-screen
 		$("#frbanner").hide();
@@ -153,47 +197,6 @@ $(document).ready(function() {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
 	}
-
-
-	$( '#btn-ppl' ).click( function() {
-		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#iframe' ).val('');
-			$( '#zahlweise' ).val('PPL');
-			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#form' ).submit();
-		} else {
-			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
-		}
-	});
-	$( '#btn-cc' ).click( function() {
-		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#zahlweise' ).val('MCP');
-			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#form' ).submit();
-		} else {
-			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
-		}
-	});
-	$( '#btn-ueb' ).click( function() {
-		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#zahlweise' ).val( 'UEB' );
-			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#form' ).submit();
-		} else {
-			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
-		}
-	});
-	$( '#btn-bez' ).click( function() {
-		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#zahlweise' ).val( 'BEZ' );
-			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( 'address_type' ).val( 'person' );
-			$( '#form' ).submit();
-		} else {
-			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
-		}
-	});
-
 });
 
 
