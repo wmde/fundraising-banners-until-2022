@@ -2,7 +2,7 @@
 
 	<div id="frbanner-mask"></div>
 
-	<div id="frbanner-window" style="z-index: 1001;">
+	<div id="frbanner-window">
 
 		<div id="frbanner-close"></div>
 
@@ -19,7 +19,7 @@
 				<div id="donationMeterWrapper">
 					<div id="donationMeter"></div>
 					<div id="donationFill">
-						<div id="daysLeft" style="display: block;">Noch <span id="numDaysLeft">1 Tag</span></div>
+						<div id="daysLeft">Noch <span id="numDaysLeft">1 Tag</span></div>
 						<div id="pbarTip"></div>
 
 						<div id="donationTooltipArrow"></div>
@@ -29,7 +29,7 @@
 
 			</div><!--frbanner-message-->
 
-			<form id="frbanner-form" method="post" name="donationForm" style="height: 100%" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+			<form id="frbanner-form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -83,7 +83,7 @@
 
 					<li class="subhead">Zahlweise wählen</li>
 
-					<li class="pm-all" style="margin-right: 0px">
+					<li class="pm-all">
 						<button id="btn-ppl" class="send">
 							PayPal
 						</button>
@@ -111,7 +111,7 @@
 						<a href="sms:81190" class="a-sms">5€ per SMS</a>
 					</li>
 
-					<li style="margin-right: 0px" class="pm-sms-hint">
+					<li class="pm-sms-hint">
 						SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
 					</li>
 

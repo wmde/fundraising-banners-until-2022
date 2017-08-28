@@ -51,6 +51,7 @@
   -webkit-box-shadow: 0 0 10px rgba(90,97,98,.25);
   box-shadow:         0 0 10px rgba(90,97,98,.25);
   position: absolute;
+  z-index: 1001;
 }
 
 @media (min-width : 330px)                               { #frbanner-window { width: 90%; left: 5% !important; }}
@@ -173,13 +174,14 @@
   background: #e2e2e2;
   padding: 10px 15px 10px;
   position: relative;
+  height: 100%;
 }
 
 @media (min-width : 330px)                               { #frbanner-form { padding: 15px 20px 10px; } }
-@media (min-width : 370px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 20px 15px 15px; width: 37%; float: right; height: 250px;  }}
-@media (min-width : 570px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px 20px 20px; width: 35%; float: right; height: 290px; }}
+@media (min-width : 370px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 20px 15px 15px; width: 37%; float: right; }}
+@media (min-width : 570px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px 20px 20px; width: 35%; float: right; }}
 @media (min-width : 650px) and (max-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px; } }
-@media (min-width : 650px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px; width: 34%; float: left; height: 435px; } }
+@media (min-width : 650px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px; width: 34%; float: left; } }
 
 
 #frbanner-form:before {
@@ -190,7 +192,6 @@
   position: absolute;
   left: 50%;
   top: 0;
-  border-color: rgba(255, 255, 255, 0);
   border: solid transparent;
   pointer-events: none;
   border-top-color: white;
@@ -199,11 +200,9 @@
 
 @media (min-width : 370px) and (min-aspect-ratio: 13/9) {
   #frbanner-form:before  {
-    border-left-color: white;
     left: 0;
     top: 50%;
     margin: 0;
-    border-color: rgba(255, 255, 255, 0);
     border: solid transparent;
     pointer-events: none;
     border-left-color: white;
@@ -255,7 +254,9 @@
 /* Stack in landscape */
 @media (min-aspect-ratio: 13/9) {
   .frbanner-submit .pm-all, {
-    margin-bottom: 6px; margin-right: 0; width: 100%;
+    margin-bottom: 6px;
+    margin-right: 0;
+    width: 100%;
   }
 }*/
 
@@ -285,6 +286,7 @@
 .pm-sms-hint {
   font-size: 9pt;
   line-height: 12pt;
+  margin-right: 0;
 }
 
 @media (min-aspect-ratio: 13/9)  { .frbanner-submit .pm-sms, .pm-sms-hint { margin-bottom: 4px; margin-right: 0; width: 100% !important; }}
@@ -469,7 +471,7 @@ li.subhead {
 }
 
 #daysLeft {
-  display: none;
+  display: block;
   font-size: 16pt;
   color: white;
   font-weight: bold;
