@@ -126,7 +126,7 @@ $(document).ready(function() {
 		removeBannerSpace();
 		mw.centralNotice.hideBanner();
 		if ( Math.random() < 0.01 ) {
-			$( '#pwkExpandTrack' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{{BannerName}}}&rec=1' );
+			$( '#pwkExpandTrack' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{ BannerName }}&rec=1' );
 		}
 
 		return false;
@@ -139,7 +139,7 @@ $(document).ready(function() {
 		$("#frbanner2").slideToggle();
 
 		if( Math.random() > 0 ) {
-			var url = 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-expanded/{{{BannerName}}}&rec=1';
+			var url = 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-expanded/{{ BannerName }}&rec=1';
 			$( '#pwkExpandTrack' ).attr( 'src', url );
 		}
 
@@ -163,40 +163,40 @@ $(document).ready(function() {
 	}
 
 
-	$( '#{{{banner}}}_btn-ppl' ).click( function() {
+	$( '#btn-ppl' ).click( function() {
 		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#{{{banner}}}_iframe' ).val('');
-			$( '#{{{banner}}}_zahlweise' ).val('PPL');
-			$( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#{{{banner}}}_form' ).submit();
+			$( '#iframe' ).val('');
+			$( '#zahlweise' ).val('PPL');
+			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+			$( '#form' ).submit();
 		} else {
 			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
 		}
 	});
-	$( '#{{{banner}}}_btn-cc' ).click( function() {
+	$( '#btn-cc' ).click( function() {
 		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#{{{banner}}}_zahlweise' ).val('MCP');
-			$( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#{{{banner}}}_form' ).submit();
+			$( '#zahlweise' ).val('MCP');
+			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+			$( '#form' ).submit();
 		} else {
 			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
 		}
 	});
-	$( '#{{{banner}}}_btn-ueb' ).click( function() {
+	$( '#btn-ueb' ).click( function() {
 		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#{{{banner}}}_zahlweise' ).val( 'UEB' );
-			$( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '#{{{banner}}}_form' ).submit();
+			$( '#zahlweise' ).val( 'UEB' );
+			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+			$( '#form' ).submit();
 		} else {
 			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
 		}
 	});
-	$( '#{{{banner}}}_btn-bez' ).click( function() {
+	$( '#btn-bez' ).click( function() {
 		if( $( 'input[name=betrag_auswahl]:checked' ).length > 0 ) {
-			$( '#{{{banner}}}_zahlweise' ).val( 'BEZ' );
-			$( '#{{{banner}}}_betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-			$( '{{{banner}}}_address_type' ).val( 'person' );
-			$( '#{{{banner}}}_form' ).submit();
+			$( '#zahlweise' ).val( 'BEZ' );
+			$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+			$( 'address_type' ).val( 'person' );
+			$( '#form' ).submit();
 		} else {
 			alert( "Bitte wählen Sie einen Spendenbetrag aus." );
 		}
@@ -213,7 +213,7 @@ function animateProgressBar() {
 	$( 'div#daysLeft' ).hide();
 
 	var barWidth = $( '#donationMeter' ).width();
-	var dTarget = parseInt( "{{{donation-target}}}" );
+	var dTarget = parseInt( GlobalBannerSettings['goalSum'] );
 	var dCollected = getApprDonationsRaw();
 	if( dCollected > ( dTarget ) ) {
 		dCollected = dTarget;
@@ -354,11 +354,11 @@ function increaseBannerImpCount() {
 	if($.cookie('centralnotice_single_banner_impression_count')) {
 		var impCountCookie = $.cookie('centralnotice_single_banner_impression_count');
 		var bannerImpCount = impCountCookie.split("|");
-		if(bannerImpCount[0] === '{{{banner}}}') {
+		if(bannerImpCount[0] === '{{ BannerName }}') {
 			impCount = parseInt(bannerImpCount[1]);
 		}
 	}
-	$.cookie('centralnotice_single_banner_impression_count', '{{{banner}}}|' + (impCount + 1), { expires: getCookieExpiryDate(), path: '/' });
+	$.cookie('centralnotice_single_banner_impression_count', '{{ BannerName }}|' + (impCount + 1), { expires: getCookieExpiryDate(), path: '/' });
 	return (impCount + 1);
 }
 

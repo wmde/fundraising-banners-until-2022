@@ -29,18 +29,18 @@
 
 			</div><!--frbanner-message-->
 
-			<form id="frbanner-form" method="post" name="donationForm" style="height: 100%" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}">
+			<form id="frbanner-form" method="post" name="donationForm" style="height: 100%" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" name="periode" value="0">
-				<input type="hidden" id="{{{banner}}}_address_type" name="addressType" value="person">
+				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
 				<input type="hidden" id="wikilogin" name="wikilogin" value="no" />
 
 				<input type="hidden" id="impCount" name="impCount" value="" />
 				<input type="hidden" id="bImpCount" name="bImpCount" value="" />
-				<input type="hidden" id="{{{banner}}}_tracking" name="tracking" value="{{{CampaignName}}}/{{{BannerName}}}">
+				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 
-				<input type="hidden" id="{{{banner}}}_zahlweise" name="zahlweise" value="" />
-				<input type="hidden" id="{{{banner}}}_betrag" name="betrag" value="" />
+				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
+				<input type="hidden" id="betrag" name="betrag" value="" />
 
 
 				<ol class="frbanner-amounts cf">
@@ -84,25 +84,25 @@
 					<li class="subhead">Zahlweise wählen</li>
 
 					<li class="pm-all" style="margin-right: 0px">
-						<button id="{{{banner}}}_btn-ppl" class="send">
+						<button id="btn-ppl" class="send">
 							PayPal
 						</button>
 					</li>
 
 					<li class="pm-all">
-						<button id="{{{banner}}}_btn-cc" class="send">
+						<button id="btn-cc" class="send">
 							Kreditkarte
 						</button>
 					</li>
 
 					<li class="pm-all">
-						<button id="{{{banner}}}_btn-ueb" class="send">
+						<button id="btn-ueb" class="send">
 							Überweisung
 						</button>
 					</li>
 
 					<li class="pm-all">
-						<button id="{{{banner}}}_btn-bez" class="send">
+						<button id="btn-bez" class="send">
 							Lastschrift
 						</button>
 					</li>
@@ -120,7 +120,7 @@
 			</form>
 
 			<div class="frbanner-message" id="frbanner-smallprint">
-				<div class="frbanner_disclaimer"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{{CampaignName}}}&piwik_kwd={{{BannerName}}}-link&skin=10h16">Datenschutz</a></div>
+				<div class="frbanner_disclaimer"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
 			</div>
 			<img id="pwkExpandTrack" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
 
