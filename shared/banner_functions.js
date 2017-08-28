@@ -206,7 +206,7 @@ function getBannerImpCount( bannerId ) {
 
 function increaseImpCount() {
 	var impCount = getImpCount();
-	$.cookie( allBannersImpCookie, impCount + 1, { expires: 7, path: '/' } );
+	$.cookie( allBannersImpCookie, impCount + 1, { expires: getCookieExpiryDate(), path: '/' } );
 	return impCount + 1;
 }
 
@@ -214,10 +214,14 @@ function increaseBannerImpCount( bannerId ) {
 	var impCount = getBannerImpCount( bannerId );
 
 	$.cookie( singleBannerImpCookie, bannerId + '|' + ( impCount + 1 ), {
-		expires: 7,
+		expires: getCookieExpiryDate(),
 		path: '/'
 	} );
 	return ( impCount + 1 );
+}
+
+function getCookieExpiryDate() {
+	return new Date( ( new Date() ).getFullYear() + 1, 0, 1 );
 }
 
 function validateForm() {

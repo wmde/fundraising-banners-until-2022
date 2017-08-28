@@ -41,6 +41,11 @@ const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.banner-tracki
 trackingLinkGenerator.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
 trackingLinkGenerator.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
 
+// BEGIN form initialization
+$( '#impCount' ).val( BannerFunctions.increaseImpCount() );
+$( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
+// END form initialization
+
 function debounce( func, wait, immediate ) {
 	var timeout;
 	return function() {
@@ -96,11 +101,6 @@ $(document).ready(function() {
 	initializeDynamicPlaceholderValues();
 
 	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
-
-	var impCount = increaseImpCount();
-	$("#impCount").val(impCount);
-	var bannerImpCount = increaseBannerImpCount();
-	$("#bImpCount").val(bannerImpCount);
 
 	if(wgUserName !== null) $('#wikilogin').val('yes');
 
@@ -332,33 +332,6 @@ function getDateString( date ) {
 	dateString += month;
 	return dateString;
 }
-
-
-function increaseImpCount() {
-	impCount = parseInt($.cookie('centralnotice_banner_impression_count')) | 0;
-	$.cookie('centralnotice_banner_impression_count', impCount + 1, { expires: getCookieExpiryDate(), path: '/' });
-	return impCount + 1;
-}
-
-function increaseBannerImpCount() {
-	var impCount = 0;
-
-	if($.cookie('centralnotice_single_banner_impression_count')) {
-		var impCountCookie = $.cookie('centralnotice_single_banner_impression_count');
-		var bannerImpCount = impCountCookie.split("|");
-		if(bannerImpCount[0] === '{{ BannerName }}') {
-			impCount = parseInt(bannerImpCount[1]);
-		}
-	}
-	$.cookie('centralnotice_single_banner_impression_count', '{{ BannerName }}|' + (impCount + 1), { expires: getCookieExpiryDate(), path: '/' });
-	return (impCount + 1);
-}
-
-function getCookieExpiryDate() {
-	var currentDate = new Date();
-	return new Date( currentDate.getFullYear() + 1, 0, 1 );
-}
-
 
 function validateForm() {
 	var form = document.donationForm;
