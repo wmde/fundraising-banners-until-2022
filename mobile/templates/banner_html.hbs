@@ -10,7 +10,7 @@
 
 			<div class="frbanner-message">
 
-				<p> {{{banner-text}}} </p>
+				<p>{{> banner_text }}</p>
 
 				<hr />
 				<div id="donationGoalLabel">Unser Spendenziel</div>
@@ -130,12 +130,4 @@
 
 </div><!--frbanner-->
 
-<div id="frbanner2"><!-- the small banner -->
-	<p>
-		<span id="frbanner2-close"></span>
-		{{{banner-mini-text}}}
-	</p>
-	<div class="frbanner2-tab" style="color: #0645ad;">
-		<img src="//upload.wikimedia.org/wikipedia/donate/d/da/Arrow-up-1.png" class="tab-img"> Jetzt spenden
-	</div>
-</div><!--frbanner2-->
+{{> mini_banner }}
