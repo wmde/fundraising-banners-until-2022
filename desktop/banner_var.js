@@ -14,7 +14,7 @@ const LANGUAGE = 'de';
 
 const fundraisingBanner = {};
 
-const DevGlobalBannerSettings = require( './GlobalBannerSettings' );
+const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
