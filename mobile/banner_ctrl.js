@@ -57,7 +57,6 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 $( '#btn-ppl' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if( $checkedAmountElement.length > 0 ) {
-		$( '#iframe' ).val( '' );
 		$( '#zahlweise' ).val( 'PPL' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
@@ -93,7 +92,6 @@ $( '#btn-bez' ).click( function () {
 	if( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'BEZ' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#address_type' ).val( 'person' );
 		$( '#form' ).submit();
 	} else {
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
