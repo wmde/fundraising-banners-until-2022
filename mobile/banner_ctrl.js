@@ -1,7 +1,7 @@
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 0.01;
+const bannerCloseTrackRatio = 1;
 const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
@@ -37,6 +37,9 @@ $bannerContainer.html( bannerTemplate( {
 	BannerName: BannerName
 } ) );
 
+const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.banner-tracking' ) );
+trackingLinkGenerator.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
+trackingLinkGenerator.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
 
 function debounce( func, wait, immediate ) {
 	var timeout;
@@ -123,10 +126,6 @@ $(document).ready(function() {
 			mw.centralNotice.hideBanner();
 		}
 
-		if ( Math.random() < 0.01 ) {
-			$( '#pwkExpandTrack' ).attr( 'src', 'https://tracking.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{ BannerName }}&rec=1' );
-		}
-
 		return false;
 	});
 
@@ -135,11 +134,6 @@ $(document).ready(function() {
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 		$("#frbanner").show();
 		$("#frbanner2").slideToggle();
-
-		if( Math.random() > 0 ) {
-			var url = 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-expanded/{{ BannerName }}&rec=1';
-			$( '#pwkExpandTrack' ).attr( 'src', url );
-		}
 
 		animateProgressBar();
 		window.setTimeout( function () {
