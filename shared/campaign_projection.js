@@ -1,4 +1,5 @@
-function CampaignProjection( campaignStartDate, campaignEndDate, baseDonationSum, donationAmountPerMinute, donorsBase, donorsPerMinute, randomFactor ) {
+function CampaignProjection( campaignStartDate, campaignEndDate, baseDonationSum, donationAmountPerMinute,
+							 donorsBase, donorsPerMinute, randomFactor ) {
 	this.campaignStartDate = campaignStartDate;
 	this.campaignEndDate = campaignEndDate;
 	this.baseDonationSum = baseDonationSum;
@@ -16,28 +17,17 @@ CampaignProjection.prototype.getSecondsSinceCampaignStart = function () {
 };
 
 CampaignProjection.prototype.getProjectedDonationSum = function ( randomDeviation ) {
+	return this.calculateProjection( this.baseDonationSum, this.donationAmountPerMinute, randomDeviation ? this.randomFactor : 0 );
+};
+
+CampaignProjection.prototype.getProjectedNumberOfDonors = function ( randomDeviation ) {
+	return this.calculateProjection( this.donorsBase, this.donorsPerMinute, randomDeviation ? this.randomFactor : 0 );
+};
+
+CampaignProjection.prototype.calculateProjection = function ( baseValue, increasePerMinute, randomFactor ) {
 	const minutesPassed = this.getSecondsSinceCampaignStart() / 60,
-		increasePerMinute = this.donationAmountPerMinute * ( 100 + ( randomDeviation ? this.randomFactor : 0 ) ) / 100;
-
-	return minutesPassed * increasePerMinute + this.baseDonationSum;
-};
-
-CampaignProjection.prototype.getApprDonatorsRaw = function ( rand ) {
-	const startDonators = this.donorsBase,
-		secsPast = this.getSecondsSinceCampaignStart();
-
-	return startDonators + this.getApprDonatorsFor( secsPast, rand );
-};
-
-CampaignProjection.prototype.getApprDonatorsFor = function ( secsPast, rand ) {
-	const apprDonatorsMinute = this.donorsPerMinute;
-	let randFactor = 0;
-
-	if ( rand === true ) {
-		randFactor = this.randomFactor;
-	}
-
-	return ( secsPast / 60 * ( apprDonatorsMinute * ( 100 + randFactor ) ) / 100 );
+		increase = increasePerMinute * ( 100 + randomFactor ) / 100;
+	return minutesPassed * increase + baseValue;
 };
 
 function getDigitGroupingCharacter() {

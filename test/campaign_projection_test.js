@@ -57,7 +57,7 @@ describe( 'CampaignProjection', function () {
 				DONORS_PER_MINUTE,
 				NO_PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getApprDonatorsRaw( false ), 6994 );
+			assert.equal( campaignProjection.getProjectedNumberOfDonors( false ), 6994 );
 		} );
 
 		it( 'should return deviating number of donor projection', function () {
@@ -70,7 +70,7 @@ describe( 'CampaignProjection', function () {
 				DONORS_PER_MINUTE,
 				PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getApprDonatorsRaw( true ), 7005.52 );
+			assert.equal( campaignProjection.getProjectedNumberOfDonors( true ), 7005.52 );
 		} );
 
 	} );
