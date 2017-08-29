@@ -1,6 +1,9 @@
-function CampaignProjection( campaignStartDate, campaignEndDate ) {
+function CampaignProjection( campaignStartDate, campaignEndDate, baseDonationSum, donationAmountPerMinute, randomFactor ) {
 	this.campaignStartDate = campaignStartDate;
 	this.campaignEndDate = campaignEndDate;
+	this.baseDonationSum = baseDonationSum;
+	this.donationAmountPerMinute = donationAmountPerMinute;
+	this.randomFactor = randomFactor || Math.floor( ( Math.random() ) + 0.5 - 0.2 );
 }
 
 CampaignProjection.prototype.getSecondsSinceCampaignStart = function () {
@@ -10,29 +13,18 @@ CampaignProjection.prototype.getSecondsSinceCampaignStart = function () {
 	return Math.max( 0, Math.min( maxSecs, secsPassed ) );
 };
 
-function getApprDonationsRaw( rand ) {
-	var startDonations = collectedBase,
-		secsPast = getSecsPassed();
+CampaignProjection.prototype.getProjectedDonationSum = function ( randomDeviation ) {
+	const minutesPassed = this.getSecondsSinceCampaignStart() / 60,
+		increasePerMinute = this.donationAmountPerMinute * ( 100 + ( randomDeviation ? this.randomFactor : 0 ) ) / 100;
 
-	return startDonations + getApprDonationsFor( secsPast, rand );
-}
+	return minutesPassed * increasePerMinute + this.baseDonationSum;
+};
 
 function getApprDonatorsRaw( rand ) {
 	var startDonators = donorsBase,
 		secsPast = getSecsPassed();
 
 	return startDonators + getApprDonatorsFor( secsPast, rand );
-}
-
-function getApprDonationsFor( secsPast, rand ) {
-	var apprDontionsMinute = donationsPerMinApproximation,
-		randFactor = 0;
-
-	if ( rand === true ) {
-		randFactor = Math.floor( ( Math.random() ) + 0.5 - 0.2 );
-	}
-
-	return ( secsPast / 60 * ( apprDontionsMinute * ( 100 + randFactor ) ) / 100 );
 }
 
 function getApprDonatorsFor( secsPast, rand ) {
