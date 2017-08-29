@@ -41,8 +41,4 @@ CampaignProjection.prototype.formatNumber = function ( number ) {
 	return parseInt( number ).toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + this.digitGroupingCharacter );
 };
 
-function floorF( num ) {
-	return Math.floor( num * 100 ) / 100;
-}
-
 module.exports = CampaignProjection;
