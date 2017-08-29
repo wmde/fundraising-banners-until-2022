@@ -4,36 +4,11 @@ function CampaignProjection( campaignStartDate, campaignEndDate ) {
 }
 
 CampaignProjection.prototype.getSecondsSinceCampaignStart = function () {
-	const startDate = this.campaignStartDate.split( '-' ),
-		startDateObj = new Date( startDate[ 0 ], startDate[ 1 ] - 1, startDate[ 2 ] ),
-		maxSecs = Math.floor( new Date( this.campaignEndDate - startDateObj ) / 1000 );
-	let secsPassed = Math.floor( ( new Date() - startDateObj ) / 1000 );
+	const maxSecs = Math.floor( ( this.campaignEndDate.getTime() - this.campaignStartDate.getTime() ) / 1000 ),
+		secsPassed = Math.floor( ( new Date().getTime() - this.campaignStartDate.getTime() ) / 1000 );
 
-	if ( secsPassed < 0 ) {
-		secsPassed = 0;
-	}
-	if ( secsPassed > maxSecs ) {
-		secsPassed = maxSecs;
-	}
-
-	return secsPassed;
+	return Math.max( 0, Math.min( maxSecs, secsPassed ) );
 };
-
-function getSecsPassed() {
-	var startDate = baseDate.split( '-' ),
-		startDateObj = new Date( startDate[ 0 ], startDate[ 1 ] - 1, startDate[ 2 ] ),
-		maxSecs = Math.floor( new Date( finalDateTime - startDateObj ) / 1000 ),
-		secsPassed = Math.floor( ( new Date() - startDateObj ) / 1000 );
-
-	if ( secsPassed < 0 ) {
-		secsPassed = 0;
-	}
-	if ( secsPassed > maxSecs ) {
-		secsPassed = maxSecs;
-	}
-
-	return secsPassed;
-}
 
 function getApprDonationsRaw( rand ) {
 	var startDonations = collectedBase,
