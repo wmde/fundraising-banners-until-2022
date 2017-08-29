@@ -38,11 +38,7 @@ CampaignProjection.prototype.calculateProjection = function ( baseValue, increas
 };
 
 CampaignProjection.prototype.formatNumber = function ( number ) {
-	// jscs:disable disallowImplicitTypeConversion
-	number = parseInt( number, 10 ) + '';
-	// jscs:enable disallowImplicitTypeConversion
-	number = number.replace( /\./g, ',' );
-	return number.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + this.digitGroupingCharacter );
+	return parseInt( number ).toString().replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + this.digitGroupingCharacter );
 };
 
 function floorF( num ) {
