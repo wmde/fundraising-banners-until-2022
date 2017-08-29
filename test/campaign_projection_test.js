@@ -10,6 +10,8 @@ describe( 'CampaignProjection', function () {
 		DONORS_BASE_NUMBER = 1234,
 		DONORS_PER_MINUTE = 1,
 		PROJECTION_DEVIATION = 0.2,
+		GERMAN_DIGIT_GROUPING_CHARACTER = '.',
+		ENGLISH_DIGIT_GROUPING_CHARACTER = ',',
 		NO_PROJECTION_DEVIATION = 0;
 
 	before( function () {
@@ -26,9 +28,10 @@ describe( 'CampaignProjection', function () {
 				DONATION_SUM_PER_MINUTE,
 				DONORS_BASE_NUMBER,
 				DONORS_PER_MINUTE,
+				GERMAN_DIGIT_GROUPING_CHARACTER,
 				NO_PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getProjectedDonationSum( false ), 181056 );
+			assert.equal( campaignProjection.getProjectedDonationSum( false ), '181.056' );
 		} );
 
 		it( 'should return deviating donation sum projection', function () {
@@ -39,9 +42,24 @@ describe( 'CampaignProjection', function () {
 				DONATION_SUM_PER_MINUTE,
 				DONORS_BASE_NUMBER,
 				DONORS_PER_MINUTE,
+				GERMAN_DIGIT_GROUPING_CHARACTER,
 				PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getProjectedDonationSum( true ), 181171.2 );
+			assert.equal( campaignProjection.getProjectedDonationSum( true ), '181.171' );
+		} );
+
+		it( 'should return deviating donation sum projection with digits grouped by comma', function () {
+			const campaignProjection = new CampaignProjection(
+				new Date( '2017-11-01 00:00:00' ),
+				new Date( '2018-01-01 00:00:00' ),
+				BASE_DONATION_SUM,
+				DONATION_SUM_PER_MINUTE,
+				DONORS_BASE_NUMBER,
+				DONORS_PER_MINUTE,
+				ENGLISH_DIGIT_GROUPING_CHARACTER,
+				PROJECTION_DEVIATION
+			);
+			assert.equal( campaignProjection.getProjectedDonationSum( true ), '181,171' );
 		} );
 
 	} );
@@ -55,9 +73,10 @@ describe( 'CampaignProjection', function () {
 				DONATION_SUM_PER_MINUTE,
 				DONORS_BASE_NUMBER,
 				DONORS_PER_MINUTE,
+				GERMAN_DIGIT_GROUPING_CHARACTER,
 				NO_PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getProjectedNumberOfDonors( false ), 6994 );
+			assert.equal( campaignProjection.getProjectedNumberOfDonors( false ), '6.994' );
 		} );
 
 		it( 'should return deviating number of donor projection', function () {
@@ -68,9 +87,24 @@ describe( 'CampaignProjection', function () {
 				DONATION_SUM_PER_MINUTE,
 				DONORS_BASE_NUMBER,
 				DONORS_PER_MINUTE,
+				GERMAN_DIGIT_GROUPING_CHARACTER,
 				PROJECTION_DEVIATION
 			);
-			assert.equal( campaignProjection.getProjectedNumberOfDonors( true ), 7005.52 );
+			assert.equal( campaignProjection.getProjectedNumberOfDonors( true ), '7.005' );
+		} );
+
+		it( 'should return deviating number of donor projection with digits grouped by comma', function () {
+			const campaignProjection = new CampaignProjection(
+				new Date( '2017-11-01 00:00:00' ),
+				new Date( '2018-01-01 00:00:00' ),
+				BASE_DONATION_SUM,
+				DONATION_SUM_PER_MINUTE,
+				DONORS_BASE_NUMBER,
+				DONORS_PER_MINUTE,
+				ENGLISH_DIGIT_GROUPING_CHARACTER,
+				PROJECTION_DEVIATION
+			);
+			assert.equal( campaignProjection.getProjectedNumberOfDonors( true ), '7,005' );
 		} );
 
 	} );
