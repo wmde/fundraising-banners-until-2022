@@ -50,6 +50,7 @@ $bannerContainer.html( bannerTemplate( {
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: getCampaignDaySentence( LANGUAGE ),
 	daysRemaining: BannerFunctions.getDaysRemaining( LANGUAGE ),
+	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	CampaignName: CampaignName,
 	BannerName: BannerName
 } ) );
@@ -137,7 +138,6 @@ var lazyResize = debounce( function() {
 $( window ).on( 'orientationchange', lazyResize );
 
 function addBannerSpace() {
-
 	var bannerHeight = $( '#frbanner2' ).height();
 	$( '#frbanner2' ).css( 'top', 0 - bannerHeight ).show();
 
@@ -152,23 +152,8 @@ function addBannerSpace() {
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
 }
 
-function initializeDynamicPlaceholderValues() {
-
-	$("span.donorsValue").html( addPointsToNum( getApprDonatorsRaw() ) );
-	$( 'span#weekday' ).text( getCustomDayName( getCurrentGermanDay ) );
-	if ( getCustomDayName( getCurrentGermanDay ) !== getCurrentGermanDay() ) {
-		$( '#weekdayPrepPhrase' ).text( 'am heutigen' );
-	}
-	$( 'span#campaignDaySentence' ).text( getCampaignDaySentence() );
-	$( 'span#numDaysLeft').text( getDaysRemaining() );
-	$( '.bannerImpressions').text( GlobalBannerSettings[ 'milion-impressions-per-day' ] );
-
-}
-
 $(document).ready(function() {
 	$('body').prepend($('#centralNotice'));
-
-	initializeDynamicPlaceholderValues();
 
 	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
@@ -213,8 +198,6 @@ $(document).ready(function() {
 		}, 3000 );
 	}
 });
-
-
 
 function animateProgressBar() {
 	var donationFillElement = $( "#donationFill" );

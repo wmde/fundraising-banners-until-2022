@@ -5,7 +5,7 @@ module.exports = {
     'donators-base': 0,
     'appr-donations-per-minute': 10,
     'appr-donators-per-minute': 1,
-    'milion-impressions-per-day': 8,
+    'impressions-per-day-in-million': 8,
     allBannersCookie: 'banner_impression_count',
     singleBannerCookie: 'single_banner_impression_count',
     'campaign-start-date': '2017-11-06',

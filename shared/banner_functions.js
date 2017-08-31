@@ -424,6 +424,7 @@ return {
 	showAmountError: showAmountError,
 	hideAmountError: hideAmountError,
 	hideFrequencyError: hideFrequencyError,
-	removeBannerSpace: removeBannerSpace
+	removeBannerSpace: removeBannerSpace,
+	getDigitGroupingCharacter: getDigitGroupingCharacter
 }
 }
