@@ -3,6 +3,7 @@ require( './css/styles.pcss' );
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 1;
 const LANGUAGE = 'de';
+const PROJECTION_DEVIATION = true;
 // END Banner-Specific configuration
 
 const fundraisingBanner = {};
@@ -11,6 +12,20 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const CampaignProjection = require( '../shared/campaign_projection' );
+const campaignProjection = new CampaignProjection( {
+	campaignStartDate: new Date( GlobalBannerSettings['campaign-start-date'] ),
+	campaignEndDate: new Date( GlobalBannerSettings['campaign-end-date'] ),
+	baseDonationSum: GlobalBannerSettings['donations-collected-base'],
+	donationAmountPerMinute: GlobalBannerSettings['appr-donations-per-minute'],
+	donorsBase: GlobalBannerSettings['donators-base'],
+	donorsPerMinute: GlobalBannerSettings['appr-donators-per-minute']
+} );
+
+const numeral = require( 'numeral' );
+numeral.register( 'locale', 'de-alternative', { delimiters: { thousands: '.', decimal: ',' } } );
+numeral.locale( 'de-alternative' );
+
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
@@ -23,12 +38,13 @@ const $ = require( 'jquery' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
+const numberOfDonors = numeral( campaignProjection.getProjectedNumberOfDonors( PROJECTION_DEVIATION ) ).format( '0,0' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 
 $bannerContainer.html( bannerTemplate( {
-	// TODO approx. donors
+	numberOfDonors: numberOfDonors,
 	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
@@ -208,7 +224,7 @@ function animateProgressBar() {
 
 	var barWidth = $( '#donationMeter' ).width();
 	var dTarget = parseInt( GlobalBannerSettings['goalSum'] );
-	var dCollected = getApprDonationsRaw();
+	var dCollected = campaignProjection.getProjectedDonationSum();
 	if( dCollected > ( dTarget ) ) {
 		dCollected = dTarget;
 	}
@@ -239,100 +255,6 @@ function animateProgressBar() {
 			$( "#valRem" ).html( vRem );
 		}
 	} );
-}
-
-function getDaysRemaining() {
-	var daysRemaining = Math.floor( new Date( new Date( 2016, 11, 31, 23, 59, 59 ) - new Date() ) / 1000 / 60 / 60 / 24 );
-	return ( daysRemaining > 1 ) ? daysRemaining + " Tage" : "1 Tag";
-}
-
-function getSecsPassed() {
-	var startDate =  GlobalBannerSettings['donations-date-base'];
-	var parts = startDate.split( '-' );
-	var startDateObj = new Date( parts[0], parts[1] - 1, parts[2] );
-	return Math.floor( ( new Date() - startDateObj ) / 1000 );
-}
-
-function getApprDonationsRaw( rand ) {
-	var startDonations = parseInt( GlobalBannerSettings['donations-collected-base'], 10 );
-
-	var secsPast = getSecsPassed();
-
-	return startDonations + getApprDonationsFor( secsPast, rand );
-}
-
-function getApprDonatorsRaw( rand ) {
-	var startDonators = parseInt( GlobalBannerSettings['donators-base'], 10 );
-
-	var secsPast = getSecsPassed();
-
-	return startDonators + getApprDonatorsFor( secsPast, rand );
-}
-
-function getApprDonationsFor( secsPast, rand ) {
-	var apprDontionsMinute = parseFloat( GlobalBannerSettings['appr-donations-per-minute'] )
-	var randFactor = 0;
-
-	if ( rand == true ) {
-		randFactor = Math.floor( (Math.random()) + 0.5 - 0.2 );
-	}
-
-	return (secsPast / 60 * (apprDontionsMinute * (100 + randFactor)) / 100);
-}
-
-function getApprDonatorsFor( secsPast, rand ) {
-	var apprDonatorsMinute = parseFloat( GlobalBannerSettings['appr-donators-per-minute'])
-	var randFactor = 0;
-
-	if ( rand == true ) {
-		randFactor = Math.floor( (Math.random()) + 0.5 - 0.2 );
-	}
-
-	return (secsPast / 60 * (apprDonatorsMinute * (100 + randFactor)) / 100);
-}
-
-
-function addPointsToNum( num ) {
-	num = parseInt( num ) + "";
-	num = num.replace( /\./g, ',' );
-	return num.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, "$1." );
-}
-
-function getCurrentGermanDay() {
-	switch ( new Date().getDay() ) {
-		case 0:
-			return "Sonntag";
-		case 1:
-			return "Montag";
-		case 2:
-			return "Dienstag";
-		case 3:
-			return "Mittwoch";
-		case 4:
-			return "Donnerstag";
-		case 5:
-			return "Freitag";
-		case 6:
-			return "Samstag";
-		default:
-			return "";
-	}
-}
-
-function getDateString( date ) {
-	var dateString = '',
-		day = date.getDate(),
-		month = date.getMonth() + 1;
-	if ( day < 10 ) {
-		dateString += '0';
-	}
-	dateString += day;
-	dateString += '.';
-	if ( month < 10 ) {
-		dateString += month;
-	}
-	dateString += month;
-	return dateString;
 }
 
 function validateForm() {
