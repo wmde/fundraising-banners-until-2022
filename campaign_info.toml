@@ -13,6 +13,11 @@ filename = "./desktop/banner_var.js"
 pagename = "B17WMDE_05_170825_var"
 tracking = "org-05-170825-var"
 
+[desktop.banners.prototype]
+filename = "./desktop/banner_prototype.js"
+pagename = "B17WMDE_06_170905_prototype"
+tracking = "org-06-170905-prototype"
+
 [mobile]
 campaign_tracking = "mob01-ba-170904"
 preview_skin = "minerva"
