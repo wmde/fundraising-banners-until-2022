@@ -51,14 +51,18 @@
         margin-left: 2em;
     }
 
-    .infobox__text p {
+    .text__headline, .text__paragraph {
         margin: .25em 0;
     }
 
-    .infobox__text .highlight {
+    .text__paragraph--highlight {
         border-bottom: solid 3px #990000;
         padding: 0 .1em;
         background: transparent;
+    }
+
+    .text__paragraph--hidden-placeholder {
+        visibility: hidden;
     }
 
     .infobox__footer {
@@ -258,5 +262,14 @@
         flex: 0 0 18px;
     }
 
+    .click-tracking {
+        display: none;
+    }
+
+    .click-tracking__pixel {
+        height: 0;
+        width: 0;
+        border: none;
+    }
 
 }

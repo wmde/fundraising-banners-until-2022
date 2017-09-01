@@ -5,12 +5,12 @@ campaign_tracking = "05-ba-170825"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_05_170824_ctrl"
+pagename = "B17WMDE_05_170825_ctrl"
 tracking = "org-05-170825-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_05_170824_var"
+pagename = "B17WMDE_05_170825_var"
 tracking = "org-05-170825-var"
 
 [mobile]

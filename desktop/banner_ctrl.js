@@ -45,7 +45,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingLinkGenerator = new TrackingEvents( BannerName, $( '#WMDE_Banner-close-ct' ) );
+const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.click-tracking__pixel' ) );
 
 function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );
