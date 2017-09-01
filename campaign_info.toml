@@ -20,3 +20,8 @@ campaign_tracking = "mob01-ba-170829"
 filename = "./mobile/banner_ctrl.js"
 pagename = "B17WMDE_mob01_170829_ctrl"
 tracking = "org-mob01-170829-ctrl"
+
+[mobile.banners.var]
+filename = "./mobile/banner_var.js"
+pagename = "B17WMDE_mob01_170829_var"
+tracking = "org-mob01-170829-var"
