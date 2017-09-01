@@ -1,0 +1,63 @@
+@media (min-width : 768px) { .mini-banner { font-size: 1em; line-height: 1.3em; } }
+
+.mini-banner {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+	text-align: center;
+	z-index: 1000;
+	display: none;
+}
+
+.mini-banner__text {
+	background: #ffcc00;
+	padding: .7em;
+	margin: 0;
+	color: #1c1c1c;
+	text-align: left;
+}
+
+.mini-banner__tab {
+	background: #ffcc00;
+	width: 130px;
+	margin: 0 auto;
+	padding: 0 .8em 0.3em .8em;
+	display: block;
+	position: relative;
+	top: 0;
+	-moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+	font-size: .9em;
+	color: #1c1c1c;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.mini-banner__tab img {
+	float: left;
+	margin: .4em .15em 0 .4em;
+	transform: rotate(180deg);
+}
+
+.mini-banner__close-button {
+	background: url('//upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png') no-repeat center center;
+	width: 1em;
+	height: 1em;
+	background-size: contain;
+	float: right;
+	display: block;
+	cursor: pointer;
+	text-indent: -99999px;
+	z-index: 999;
+	margin: 0.25em;
+}
+
+.text__highlight {
+	background-color: yellow;
+	color: black;
+	font-weight: bold;
+	padding: 0 5px;
+}
