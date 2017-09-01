@@ -12,3 +12,11 @@ tracking = "org-05-170825-ctrl"
 filename = "./desktop/banner_var.js"
 pagename = "B17WMDE_05_170824_var"
 tracking = "org-05-170825-var"
+
+[mobile]
+campaign_tracking = "mob01-ba-170829"
+
+[mobile.banners.ctrl]
+filename = "./mobile/banner_ctrl.js"
+pagename = "B17WMDE_mob01_170829_ctrl"
+tracking = "org-mob01-170829-ctrl"

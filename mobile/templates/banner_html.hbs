@@ -1,0 +1,133 @@
+<div id="frbanner" style="display: none;"><!-- the "full screen" banner -->
+
+	<div id="frbanner-mask"></div>
+
+	<div id="frbanner-window">
+
+		<div id="frbanner-close"></div>
+
+		<div id="modal-signup" class="cf">
+
+			<div class="frbanner-message">
+
+				<p>{{> banner_text }}</p>
+
+				<hr />
+				<div id="donationGoalLabel">Unser Spendenziel</div>
+				<div id="donationGoal">8.600.000 Euro</div>
+
+				<div id="donationMeterWrapper">
+					<div id="donationMeter"></div>
+					<div id="donationFill">
+						<div id="daysLeft">Noch <span id="numDaysLeft">{{ daysRemaining }}</span></div>
+						<div id="pbarTip"></div>
+
+						<div id="donationTooltipArrow"></div>
+						<div id="donationTooltip">Noch fehlen <span id="valRem"></span> Mio. €</div>
+					</div>
+				</div>
+
+			</div><!--frbanner-message-->
+
+			<form id="frbanner-form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+				<input type="hidden" name="periode" value="0">
+				<input type="hidden" id="address_type" name="addressType" value="person">
+				<input type="hidden" name="intervalType" id="intervalType" value="0" />
+				<input type="hidden" id="wikilogin" name="wikilogin" value="no" />
+
+				<input type="hidden" id="impCount" name="impCount" value="" />
+				<input type="hidden" id="bImpCount" name="bImpCount" value="" />
+				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
+
+				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
+				<input type="hidden" id="betrag" name="betrag" value="" />
+
+
+				<ol class="frbanner-amounts cf">
+
+					<li class="subhead">Betrag wählen</li>
+
+					<li id="amount_total_1">
+						<input name="betrag_auswahl" type="radio" id="amount1" value="5" />
+						<label id="amount_label_1" for="amount1">5 €</label>
+					</li>
+
+					<li id="amount_total_2">
+						<input name="betrag_auswahl" type="radio" id="amount2" value="15" />
+						<label id="amount_label_2" for="amount2">15 €</label>
+					</li>
+
+					<li id="amount_total_3">
+						<input name="betrag_auswahl" type="radio" id="amount3" value="25" />
+						<label id="amount_label_3" for="amount3">25 €</label>
+					</li>
+
+					<li id="amount_total_4">
+						<input name="betrag_auswahl" type="radio" id="amount4" value="50" />
+						<label id="amount_label_4" for="amount4">50 €</label>
+					</li>
+
+					<li id="amount_total_5">
+						<input name="betrag_auswahl" type="radio" id="amount5" value="75" />
+						<label id="amount_label_5" for="amount5">75 €</label>
+					</li>
+
+					<li id="amount_total_6">
+						<input name="betrag_auswahl" type="radio" id="amount6" value="100" />
+						<label id="amount_label_6" for="amount6">100 €</label>
+					</li>
+
+				</ol>
+
+				<ol class="frbanner-submit cf">
+
+					<li class="subhead">Zahlweise wählen</li>
+
+					<li class="pm-all">
+						<button id="btn-ppl" class="send">
+							PayPal
+						</button>
+					</li>
+
+					<li class="pm-all">
+						<button id="btn-cc" class="send">
+							Kreditkarte
+						</button>
+					</li>
+
+					<li class="pm-all">
+						<button id="btn-ueb" class="send">
+							Überweisung
+						</button>
+					</li>
+
+					<li class="pm-all">
+						<button id="btn-bez" class="send">
+							Lastschrift
+						</button>
+					</li>
+
+					<li class="pm-all pm-sms">
+						<a href="sms:81190" class="a-sms">5€ per SMS</a>
+					</li>
+
+					<li class="pm-sms-hint">
+						SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
+					</li>
+
+				</ol>
+
+			</form>
+
+			<div class="frbanner-message" id="frbanner-smallprint">
+				<div class="frbanner_disclaimer"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
+			</div>
+			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
+
+		</div><!--modal-signup-->
+
+	</div><!--frbanner-window-->
+
+</div><!--frbanner-->
+
+{{> mini_banner }}

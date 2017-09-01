@@ -13,6 +13,9 @@
   "author": "gabriel.birke@wikimedia.de",
   "license": "MIT",
   "repository": "https://github.com/gbirke/webpack-experiments",
+  "dependencies": {
+    "format-number": "^3.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
@@ -25,6 +28,7 @@
     "html-loader": "^0.4.5",
     "minimatch": "^3.0.4",
     "mocha": "^3.5.0",
+    "mockdate": "^2.0.2",
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.0",
     "style-loader": "^0.18.2",
