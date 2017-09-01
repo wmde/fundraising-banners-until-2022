@@ -1,14 +1,29 @@
-function getSecondsSinceCampaignStart( that ) {
-	const maxSecs = Math.floor( ( that.campaignEndDate.getTime() - that.campaignStartDate.getTime() ) / 1000 ),
-		secsPassed = Math.floor( ( new Date().getTime() - that.campaignStartDate.getTime() ) / 1000 );
+/**
+ * @param {Date} campaignStartDate
+ * @param {Date} campaignEndDate
+ * @returns {number}
+ */
+function getSecondsSinceCampaignStart( campaignStartDate, campaignEndDate ) {
+	const maxSecs = Math.floor( ( campaignEndDate.getTime() - campaignStartDate.getTime() ) / 1000 ),
+		secsPassed = Math.floor( ( new Date().getTime() - campaignStartDate.getTime() ) / 1000 );
 
 	return Math.max( 0, Math.min( maxSecs, secsPassed ) );
 }
 
-function calculateProjection( that, baseValue, increasePerMinute, randomFactor ) {
-	const minutesPassed = getSecondsSinceCampaignStart( that ) / 60,
-		increase = increasePerMinute * ( 100 + randomFactor ) / 100;
-	return minutesPassed * increase + baseValue;
+/**
+ * @param {Date} campaignStartDate
+ * @param {Date} campaignEndDate
+ * @param {number} base
+ * @param {number} increasePerMinute
+ * @returns {number}
+ */
+function calculateProjection( campaignStartDate, campaignEndDate, base, increasePerMinute ) {
+	const minutesPassed = getSecondsSinceCampaignStart( campaignStartDate, campaignEndDate ) / 60;
+	if ( minutesPassed === 0 ) {
+		return 0;
+	}
+
+	return base + minutesPassed * increasePerMinute;
 }
 
 function CampaignProjection( options ) {
@@ -18,15 +33,14 @@ function CampaignProjection( options ) {
 	this.donationAmountPerMinute = options.donationAmountPerMinute || 0;
 	this.donorsBase = options.donorsBase || 0;
 	this.donorsPerMinute = options.donorsPerMinute || 0;
-	this.deviation = options.deviation || Math.floor( ( Math.random() ) + 0.5 - 0.2 );
 }
 
-CampaignProjection.prototype.getProjectedDonationSum = function ( randomDeviation ) {
-	return calculateProjection( this, this.baseDonationSum, this.donationAmountPerMinute, randomDeviation ? this.deviation : 0 );
+CampaignProjection.prototype.getProjectedDonationSum = function () {
+	return calculateProjection( this.campaignStartDate, this.campaignEndDate, this.baseDonationSum, this.donationAmountPerMinute );
 };
 
-CampaignProjection.prototype.getProjectedNumberOfDonors = function ( randomDeviation ) {
-	return calculateProjection( this, this.donorsBase, this.donorsPerMinute, randomDeviation ? this.deviation : 0 );
+CampaignProjection.prototype.getProjectedNumberOfDonors = function () {
+	return calculateProjection( this.campaignStartDate, this.campaignEndDate, this.donorsBase, this.donorsPerMinute );
 };
 
 module.exports = CampaignProjection;

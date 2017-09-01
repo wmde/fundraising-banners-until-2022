@@ -3,7 +3,6 @@ require( './css/styles.pcss' );
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 1;
 const LANGUAGE = 'de';
-const PROJECTION_DEVIATION = true;
 // END Banner-Specific configuration
 
 const fundraisingBanner = {};
@@ -37,7 +36,7 @@ const $ = require( 'jquery' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDonors = donorFormatter( campaignProjection.getProjectedNumberOfDonors( PROJECTION_DEVIATION ) );
+const numberOfDonors = donorFormatter( campaignProjection.getProjectedNumberOfDonors() );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
