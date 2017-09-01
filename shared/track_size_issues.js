@@ -7,7 +7,7 @@ const $ = require( 'jquery' );
  */
 const getVisibleWikipedia = function ( bannerElement ) {
     return $( window ).height() - bannerElement.height();
-}
+};
 
 /**
  * Check if Banner takes too much screen space and track the incident
@@ -37,11 +37,11 @@ const trackSizeIssues = function( bannerElement, trackingLink, trackRatio ) {
         window.outerWidth + 'x' + window.outerHeight
     ].join( '--' );
 
-    var trackUrl = trackingLink + resolutions;
+    var trackUrl = trackingLink.replace( /\/$/, '' ) + '/' + resolutions;
     bannerElement.append( $( '<img id="WMDE_Banner-track-sizes" width="1" height="1">' ).attr( 'src', trackUrl ) );
-}
+};
 
 module.exports = {
   trackSizeIssues: trackSizeIssues,
   getVisibleWikipedia: getVisibleWikipedia
-}
+};
