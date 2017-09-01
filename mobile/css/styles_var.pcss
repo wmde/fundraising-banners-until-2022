@@ -1,3 +1,4 @@
+/* Overall container */
 #frbanner {
 
   & {
@@ -26,7 +27,6 @@
 
 }
 
-
 #frbanner-mask {
   position: fixed;
   z-index: 1000;
@@ -39,13 +39,13 @@
 }
 
 
-/* frbanner-window Styles
+/* Main Banner
 ------------------------------------ */
 
 #frbanner-window {
 
   & {
-    background: #ffffff url(//upload.wikimedia.org/wikipedia/donate/c/c0/Information-icon.png) no-repeat 10px 8px;
+    background: #ffffff;
     width: 90%;
     top: 20px !important;
     left: 5% !important;
@@ -54,15 +54,308 @@
     box-shadow:         0 0 10px rgba(90,97,98,.25);
     position: absolute;
     z-index: 1001;
+
   }
 
-  .frbanner-message {
-    text-align: left;
-    font: 24px/1.1em "Helvetica Neue","Helvetica","Nimbus Sans L","Arial","Liberation Sans",sans-serif;
-    font-style: normal;
+  /* --- Message --- */
+
+  .infobox {
+    font-size: 20px;
+    line-height: 1.3;
+    border: 5px solid #990000;
+    border-bottom: 0;
+  }
+
+  .infobox__text {
+    padding: 20px;
+    font-weight: bold;
+  }
+
+  @media (min-width: 768px) {
+    .infobox {
+      font-size: 24px;
+      line-height: 1.4;
+    }
+    .infobox__text {
+      padding: 48px 72px;
+    }
+  }
+
+  @media (min-height: 1000px) {
+    .infobox {
+      font-size: 24px;
+    }
+    .infobox__text {
+      padding: 48px 72px;
+    }
+  }
+
+  .infobox__text p {
+    margin-bottom: 10px;
+  }
+
+  .infobox__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Call to action */
+  .call-to-action {
+    text-align: center;
+    background: #990000;
+    color: #fff;
+    padding: 10px;
     font-weight: 400;
+    font-size: 24px;
+    display: block;
+    margin: auto;
+    width: 100%;
+    position: relative;
   }
 
+  .call-to-action__optional-text {
+    display: none;
+  }
+
+  @media (min-height: 1000px) {
+    .call-to-action {
+      padding: 27px;
+    }
+  }
+  @media (min-width : 1100px) {
+    .call-to-action {
+      font-size: 33px;
+    }
+  }
+
+  @media (min-width: 800px) {
+    .call-to-action__optional-text {
+      display: inline;
+    }
+  }
+
+  .call-to-action:after {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    height: 0;
+    width: 0;
+    margin-left: -10px;
+    content: " ";
+    border: solid transparent;
+    border-top-color: #990000;
+    border-width: 10px;
+    pointer-events: none;
+  }
+
+  /* --- Dynamic highlighting --- */
+
+  .highlight {
+    background-color: yellow;
+    color: black;
+  }
+
+  #to-highlight span:first-child { padding-left:5px; margin-left:-5px; }
+  #to-highlight span:last-child { padding-right:5px; margin-right:-5px; }
+
+
+  .infobox .highlight { line-height: 1.2; }
+
+  /*  --- Form  ---  */
+
+  .form {
+    padding: 10px 15px 10px;
+    position: relative;
+    height: 100%;
+  }
+
+  .form__section {
+    width: 100%;
+    overflow: auto;
+    zoom: 1;
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+  }
+
+  .form__section-head {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 8px 0;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  @media (min-width : 768px) {
+    .form__section-head {
+      font-size: 18px;
+    }
+  }
+
+  /* Select groups, 2 cols by default for small screens */
+
+  .select-group__option {
+    display: block;
+    width: 49%;
+    clear: none;
+    float: left;
+    margin-bottom: 6px;
+    margin-right: 2%;
+    padding: 0 4px;
+  }
+
+  .select-group__option:nth-child(2n) {
+    margin-right:0;
+  }
+
+  .select-group--tablet-3cols {
+    @media (min-width: 375px) {
+
+      .select-group__option {
+        width: 32%;
+      }
+
+      .select-group__option:nth-child(2n) {
+        margin-right:2%;
+      }
+
+      .select-group__option:nth-child(3n) {
+        margin-right: 0;
+      }
+
+    }
+  }
+
+  .select-group__label {
+    display: block;
+    background-color: #f8f9fa;
+    color: #222;
+    border: 1px solid #9aa0a7;
+    border-radius: 2px;
+    padding: 24px 2px;
+    outline: 0;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    font-size:24px;
+    transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+  }
+  .select-group__label:hover {
+    background-color: #fff;
+    color: #444;
+    border-color: #a2a9b1;
+  }
+  .select-group__label:active {
+    background-color: #d9d9d9;
+    color: #000;
+    border-color: #7d8389;
+  }
+
+  .select-group__input:checked + .select-group__label,
+  .select-group__label.checked {
+    background-color: #2a4b8d;
+    color: #fff;
+    border-color: #7d8389;
+  }
+
+  /* Hide radio buttons. Based on http://jqueryui.com/button/#radio */
+  .select-group__input {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    clip: rect(0 0 0 0);
+    border: 0;
+    margin: -1px;
+    padding: 0;
+  }
+
+  /* Button Groups, 1 col by default for small screens */
+
+  .button-group__container {
+    display: block;
+    width: 100%;
+    clear: none;
+    float: left;
+    margin-bottom: 6px;
+    padding: 0 4px;
+  }
+
+  .button-group--tablet-2cols {
+    @media (min-width: 375px) {
+
+      .button-group__container {
+        width: 49%;
+      }
+
+      .button-group__container:nth-child(2n+1) {
+        margin-right:2%;
+      }
+
+      .button-group__container:nth-child(5) {
+        width:100%;
+        margin-right: 0;
+      }
+
+    }
+  }
+
+  .button-group__button {
+    display: inline-block;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #222;
+    border: 1px solid #9aa0a7;
+    border-radius: 2px;
+    padding: 24px 2px;
+    outline: 0;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    font-size:24px;
+    transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+  }
+  .button-group__button:hover {
+    background-color: #fff;
+    color: #444;
+    border-color: #a2a9b1;
+  }
+  .button-group__button:active {
+    background-color: #d9d9d9;
+    color: #000;
+    border-color: #7d8389;
+  }
+
+  .button-group__hint {
+    font-size: 9pt;
+    line-height: 12pt;
+    margin-right: 0;
+    width:100%;
+    padding: 0 4px;
+  }
+
+
+  /* -- Smallprint -- */
+  .smallprint {
+    width: 100%;
+    font-size: 75%;
+    padding: 10px 20px 5px 20px;
+  }
+
+  .smallprint a {
+    font-size: 9pt;
+    line-height: 14pt;
+    color: #002bb8;
+    text-decoration: none;
+  }
+
+  .smallprint a:hover {
+    text-decoration: underline;
+  }
 }
 
 @media (min-width : 330px)                               { #frbanner-window { width: 90%; left: 5% !important; }}
@@ -94,475 +387,3 @@
   opacity: 1;
 }
 
-
-/* --- Message --- */
-
-@media (min-width : 330px)                               { #frbanner-window .frbanner-message { padding: 20px; font-size: .95em; line-height: 1.4em; } }
-@media (min-width : 370px) and (min-aspect-ratio: 13/9)  { #frbanner-window .frbanner-message { padding: 15px; width: 63%; float: left; font-size: .75em; line-height: 1.4em; } }
-@media (min-width : 570px) and (min-aspect-ratio: 13/9)  { #frbanner-window .frbanner-message { padding: 20px; width: 65%; float: left; font-size: .9em; line-height: 1.4em; } }
-@media (min-width : 650px) and (max-aspect-ratio: 13/9)  { #frbanner-window .frbanner-message { padding: 30px; font-size: 1.15em; line-height: 1.4em; } }
-@media (min-width : 650px) and (min-aspect-ratio: 13/9)  { #frbanner-window .frbanner-message { padding: 30px; width: 66%; float: left; font-size: 1.2em; line-height: 1.4em; } }
-
-
-#frbanner-window .frbanner-message p { margin-bottom: .5em; }
-
-#frbanner-window .frbanner-message p:last-child { margin-bottom: 0; }
-
-#frbanner-window .frbanner-message strong {
-  font-family: "Helvetica Neue Bold",Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-}
-
-/* --- Dynamic highlighting --- */
-
-#frbanner .highlight {
-  background-color: yellow;
-  color: black;
-  font-weight:normal;
-}
-
-#to-highlight span:first-child { padding-left:5px; margin-left:-5px; }
-#to-highlight span:last-child { padding-right:5px; margin-right:-5px; }
-
-
-#frbanner-window .frbanner-message .highlight { line-height: 1.2; }
-
-
-/* --- Static highlighting --- */
-
-#frbanner-window span#btext-highlight {
-  background-color: yellow;
-  padding: 0px 5px;
-}
-
-
-/* --- Form --- */
-
-#frbanner-form {
-  background: #e2e2e2;
-  padding: 10px 15px 10px;
-  position: relative;
-  height: 100%;
-}
-
-@media (min-width : 330px)                               { #frbanner-form { padding: 15px 20px 10px; } }
-@media (min-width : 370px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 20px 15px 15px; width: 37%; float: right; }}
-@media (min-width : 570px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px 20px 20px; width: 35%; float: right; }}
-@media (min-width : 650px) and (max-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px; } }
-@media (min-width : 650px) and (min-aspect-ratio: 13/9)  { #frbanner-form { padding: 30px; width: 34%; float: left; } }
-
-
-#frbanner-form:before {
-  height: 0;
-  width: 0;
-  margin-left: -10px;
-  content: " ";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  border: solid transparent;
-  pointer-events: none;
-  border-top-color: white;
-  border-width: 10px;
-}
-
-@media (min-width : 370px) and (min-aspect-ratio: 13/9) {
-  #frbanner-form:before  {
-    left: 0;
-    top: 50%;
-    margin: 0;
-    border: solid transparent;
-    pointer-events: none;
-    border-left-color: white;
-    border-width: 10px;
-  }}
-
-.frbanner-amounts,
-.frbanner-submit {
-  width: 100%;
-  overflow: auto;
-  zoom: 1;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.frbanner-amounts { margin-bottom: 10px; }
-
-@media (min-width : 370px)  { .frbanner-amounts { margin-bottom: 12px; }}
-@media (min-width : 570px)  { .frbanner-amounts { margin-bottom: 15px; }}
-@media (min-width : 650px)  { .frbanner-amounts { margin-bottom: 30px;} }
-
-.frbanner-amounts li {
-  display: block;
-  width: 32%;
-  float: left;
-  clear: none;
-  margin: 0 2% 6px 0;
-}
-
-@media (min-width : 370px) and (min-aspect-ratio: 13/9) { .frbanner-amounts li  { width: 48%; /*margin-right: 4%;*/} }
-@media (min-width : 650px)  {  .frbanner-amounts li, .frbanner-submit li { margin-bottom: 6px; } }
-
-
-.frbanner-amounts li:last-child,
-.frbanner-submit li:last-child { margin-right: 0; }
-
-@media (max-aspect-ratio: 13/9)   { .frbanner-amounts li#amount_total_3, .frbanner-amounts li#amount_total_6  { margin-right: 0; }}
-@media (min-aspect-ratio: 13/9)  { .frbanner-amounts li#amount_total_2, .frbanner-amounts li#amount_total_4  { margin-right: 0; }}
-
-.frbanner-amounts li#amount_total_5,
-.frbanner-amounts li#amount_total_6 {
-  margin-bottom: 0;
-}
-
-@media (max-aspect-ratio: 13/9)   { .frbanner-amounts li#amount_total_4  { margin-bottom: 0; }}
-
-/*.frbanner-submit li { width: 100%; margin-right: 0%;}
-
-/* Stack in landscape */
-@media (min-aspect-ratio: 13/9) {
-  .frbanner-submit .pm-all, {
-    margin-bottom: 6px;
-    margin-right: 0;
-    width: 100%;
-  }
-}*/
-
-.frbanner-submit ol {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-.frbanner-submit li {
-  display: table-cell;
-  padding-right: 2%;
-  float: left;
-  vertical-align: top;
-  margin-right: 0px;
-  margin-bottom: 6px;
-  width: 50%
-}
-
-@media (min-aspect-ratio: 13/9)   {
-  .frbanner-submit li { width: 100%; }
-}
-
-.pm-sms, .pm-sms-hint {
-  width: 100% !important;
-}
-
-.pm-sms-hint {
-  font-size: 9pt;
-  line-height: 12pt;
-  margin-right: 0;
-}
-
-@media (min-aspect-ratio: 13/9)  { .frbanner-submit .pm-sms, .pm-sms-hint { margin-bottom: 4px; margin-right: 0; width: 100% !important; }}
-@media (min-width : 650px)       { .frbanner-submit .pm-sms { margin-bottom: 6px; } }
-
-
-li.subhead {
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  font-size: 9px;
-  text-transform: uppercase;
-  color: #7c7c7c;
-}
-
-@media (min-width : 330px) { li.subhead { font-size: 10px; }}
-@media (min-width : 370px) { li.subhead { font-size: 9px; }}
-@media (min-width : 570px) { li.subhead { font-size: 10px; }}
-@media (min-width : 650px) { li.subhead { font-size: 13px; margin-bottom: 5px; } }
-
-.frbanner-amounts li input[type="radio"] {
-  /* Based on http://jqueryui.com/button/#radio */
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-.frbanner-amounts li label {
-  display: block;
-  width: 100%;
-  height: 32px;
-  padding: 5px;
-  font: 1.1em/22px "Helvetica Neue Roman", Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  text-align: center;
-  background: #367fb4;
-  border:none;
-  -moz-border-radius:    4px;
-  -webkit-border-radius: 4px;
-  border-radius:         4px;
-  color: #fff;
-  cursor: pointer;
-  outline: 0;
-  backface-visibility: hidden;
-}
-
-@media (min-width : 330px) { .frbanner-amounts li label { height: 32px; font-size: 1.2em; line-height: 24px; }}
-@media (min-width : 370px) { .frbanner-amounts li label { height: 22px; font-size: 0.9em; line-height: 14px; }}
-@media (min-width : 570px) { .frbanner-amounts li label { height: 22px; font-size: 0.9em; line-height: 14px; }}
-@media (min-width : 650px) { .frbanner-amounts li label { height: 40px; font-size: 1.3em; line-height: 32px; }}
-
-.frbanner-amounts li label:active ,
-.frbanner-amounts li input[type="radio"]:checked + label,
-.frbanner-amounts li input[type="radio"].checked + label {
-  background: #0f4b76;
-}
-
-@media (max-width : 680px) {
-  .frbanner-amounts#amount_total_6 label { font-size: 1.2em; }
-}
-
-/* -- Other amount box -- */
-#input_amount_other_box {
-  padding: 0;
-  margin: 0;
-  background: #fff;
-  border: none;
-  width: 80%;
-  font-size: 0.8em;
-}
-.frbanner-amounts li input[type="radio"]:checked + label #input_amount_other_box {
-  background: #fff;
-}
-
-#frbanner-window li.frbanner-submit {
-  display: block;
-  margin:0;
-}
-
-#frbanner-window .a-sms,
-#frbanner-window button {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 80%;
-  border: none;
-  width: 100%;
-  height: 32px;
-  padding: 5px;
-  line-height: 1;
-  font-size: .8em;
-  text-transform: uppercase;
-  color: white;
-  cursor: pointer;
-  -moz-border-radius:    4px;
-  -webkit-border-radius: 4px;
-  border-radius:         4px;
-}
-
-#frbanner-window .a-sms{
-  display: block;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 32px;
-  padding: 0px;
-}
-#frbanner-window .a-sms:hover{
-  text-decoration: none;
-}
-
-@media (min-width : 330px) { #frbanner-window .a-sms, #frbanner-window button { height: 40px; line-height: 1.2; }}
-@media (min-width : 370px) { #frbanner-window .a-sms, #frbanner-window button { height: 24px; line-height: 1.2; }}
-@media (min-width : 570px) { #frbanner-window .a-sms, #frbanner-window button { height: 32px; line-height: 24px; }}
-@media (min-width : 800px) { #frbanner-window .a-sms, #frbanner-window button { height: 48px; /*font-size: 1.1em;*/; font-size: .9em; line-height: 1.2; background-size: 60%; }}
-
-@media (min-width : 330px) { #frbanner-window .a-sms { line-height: 40px;}}
-@media (min-width : 370px) { #frbanner-window .a-sms { line-height: 24px;}}
-@media (min-width : 570px) { #frbanner-window .a-sms { line-height: 32px;}}
-@media (min-width : 800px) { #frbanner-window .a-sms { line-height: 48px;}}
-
-/*-- New button styles -- */
-#frbanner-window .a-sms,
-#frbanner-window button {
-  background-color: #e7e7e7;
-  -moz-box-shadow: 0 0 2px rgba(0,0,0,.2), inset 0 14px 16px rgba(255,255,255,.75), inset 0 0 7px #fff;
-  -webkit-box-shadow: 0 0 2px rgba(0,0,0,.2), inset 0 14px 16px rgba(255,255,255,.75), inset 0 0 7px #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,.2), inset 0 14px 16px rgba(255,255,255,.75), inset 0 0 7px #fff;
-  color: #367fb4;
-}
-
-#frbanner-window button:active {
-  background-color: #f9f9f9;
-  -moz-box-shadow:    0 0 2px rgba(0,0,0,.2), inset 1px 1px 3px rgba(0,0,0,.3), inset 0 0 7px #fff;
-  -webkit-box-shadow: 0 0 2px rgba(0,0,0,.2), inset 1px 1px 3px rgba(0,0,0,.3), inset 0 0 7px #fff;
-  box-shadow:         0 0 2px rgba(0,0,0,.2), inset 1px 1px 3px rgba(0,0,0,.3), inset 0 0 7px #fff;
-}
-
-#frbanner-window .pm-all button, {
-  text-indent: -99999px;
-}
-
-#frbanner-window .pm-ideal button { text-transform: none; }
-
-
-
-/* progress bar */
-#donationMeterWrapper {
-  position: relative;
-  margin-bottom: 15px;
-}
-
-#donationMeter {
-  margin: 0 auto;
-  height: 40px;
-  background: #ff4d22;
-  border-radius: 8px;
-}
-
-#donationFill {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 40px;
-  background: #257eb0;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-
-#pbarTip {
-  position: absolute;
-  right: 0;
-  height:40px;
-  width: 2px;
-  background-color: white;
-}
-
-#daysLeft {
-  display: block;
-  font-size: 16pt;
-  color: white;
-  font-weight: bold;
-  line-height: 40px;
-  position: absolute;
-  padding-left: 5px;
-}
-
-#donationTooltipArrow {
-  display: none;
-  border-bottom: 10px solid #ff4d22;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  height: 0;
-  left: 180px;
-  position: relative;
-  top: 41px;
-  width: 0;
-  z-index: 1100;
-}
-
-#donationTooltip {
-  display: none;
-  background-color: #ff4d22;
-  border-radius: 10px;
-  box-shadow: 1px 1px 1px #888888;
-  color: #ffffff;
-  font-size: 17px;
-  font-weight: bold;
-  left: 70px;
-  padding: 5px 10px;
-  position: relative;
-  text-align: center;
-  top: 41px;
-  width: 240px;
-  z-index: 1100;
-}
-/* -- Smallprint -- */
-#frbanner-window #frbanner-smallprint {
-  width: 100%;
-  font-size: 75%;
-  padding: 5px 20px;
-  background: #e2e2e2;
-}
-
-.frbanner_disclaimer a,
-.frbanner_disclaimer a:hover {
-  font-size: 9pt;
-  line-height: 14pt;
-  color: #000000;
-  text-decoration: none;
-}
-
-#frbanner-window .frbanner-message {
-  padding-top: 25px;
-}
-
-#donationGoalLabel {
-  text-align: center;
-  text-transform: uppercase;
-  color: rgb(170, 170, 170);
-  font-size: 11pt;
-  line-height: 11pt;
-}
-
-#donationGoal {
-  text-align: center;
-  font-weight: bold;
-  font-size: 16pt;
-  line-height: 18pt;
-  padding-bottom: 10px;
-}
-
-#frbanner hr {
-  background: none repeat scroll 0 0 #ddd;
-  border: medium none;
-  color: #ddd;
-  height: 1pt;
-}
-
-@media (min-width : 330px)                               {
-  #donationGoal { font-size: 1.0em; line-height: 1.1em;}
-  #donationGoalLabel { font-size: .7em; line-height: .8em;}
-  #daysLeft { font-size: .9em; line-height: 30px; }
-  #donationMeter { height: 30px; }
-  #donationFill { height: 30px; }
-  #donationTooltip { font-size: .7em; line-height: 1.1em; top: 29px; width: 165px }
-  #donationTooltipArrow { top: 31px; }
-}
-@media (min-width : 370px) and (min-aspect-ratio: 13/9)  {
-  #donationGoal { font-size: 1.0em; line-height: 1.1em;}
-  #donationGoalLabel { font-size: .7em; line-height: .8em;}
-  #daysLeft { font-size: .9em; line-height: 30px; }
-  #donationMeter { height: 30px; }
-  #donationFill {height: 30px; }
-  #donationTooltip { font-size: .7em; line-height: 1.1em; top: 29px; width: 165px }
-  #donationTooltipArrow { top: 31px; }
-}
-@media (min-width : 570px) and (min-aspect-ratio: 13/9)  {
-  #donationGoal { font-size: 1.0em;  line-height: 1.1em;}
-  #donationGoalLabel { font-size: .7em;  line-height: .8em;}
-  #daysLeft { font-size: .9em; line-height: 30px; }
-  #donationMeter { height: 30px; }
-  #donationFill { height: 30px; }
-  #donationTooltip { font-size: .7em; line-height: 1.1em; top: 29px; width: 165px }
-  #donationTooltipArrow { top: 31px; }
-}
-@media (min-width : 650px) and (max-aspect-ratio: 13/9)  {
-  #donationGoal { font-size: 1.1em;line-height: 1.1em; }
-  #donationGoalLabel { font-size: .8em;line-height: .9em; }
-  #daysLeft { font-size: 1.0em; line-height: 35px; }
-  #donationMeter { height: 35px; }
-  #donationFill { height: 35px; }
-  #donationTooltip { font-size: .9em; line-height: 1.2em; top: 34px; width: 230px }
-  #donationTooltipArrow { top: 36px; }
-}
-@media (min-width : 650px) and (min-aspect-ratio: 13/9)  {
-  #donationGoal { font-size: 1.2em; line-height: 1.2em; }
-  #donationGoalLabel { font-size: .9em; line-height: .9em; }
-  #daysLeft { font-size: 1.0em; line-height: 40px; }
-  #donationMeter { height: 40px; }
-  #donationFill { height: 40px; }
-  #donationTooltip { font-size: .9em; line-height: 1.2em; top: 39px; width: 230px }
-  #donationTooltipArrow { top: 41px; }
-}
