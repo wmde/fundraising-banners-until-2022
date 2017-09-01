@@ -22,9 +22,8 @@ const campaignProjection = new CampaignProjection( {
 	donorsPerMinute: GlobalBannerSettings['appr-donators-per-minute']
 } );
 
-const numeral = require( 'numeral' );
-numeral.register( 'locale', 'de-alternative', { delimiters: { thousands: '.', decimal: ',' } } );
-numeral.locale( 'de-alternative' );
+const formatNumber = require( 'format-number' );
+const donorFormatter = formatNumber( {round: 0, integerSeparator: '.' } );
 
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
@@ -38,7 +37,7 @@ const $ = require( 'jquery' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDonors = numeral( campaignProjection.getProjectedNumberOfDonors( PROJECTION_DEVIATION ) ).format( '0,0' );
+const numberOfDonors = donorFormatter( campaignProjection.getProjectedNumberOfDonors( PROJECTION_DEVIATION ) );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
