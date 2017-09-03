@@ -5,6 +5,9 @@
 var $ = require( 'jquery' );
 
 module.exports = function ( GlobalBannerSettings, Translations ) {
+
+const NOT_A_MEDIAWIKI_SKIN = 'not-a-mediawiki-skin';
+
 var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
 	baseDate = GlobalBannerSettings[ 'donations-date-base' ] || '2017-11-01',
 	collectedBase = parseInt( GlobalBannerSettings.collectedBase || 0, 10 ),
@@ -401,7 +404,7 @@ function getSkin() {
 	if ( onMediaWiki() ) {
 		return window.mw.config.get( 'skin' );
 	}
-	return 'vector';
+	return NOT_A_MEDIAWIKI_SKIN;
 }
 
 function onMediaWiki() {
@@ -425,6 +428,8 @@ return {
 	hideAmountError: hideAmountError,
 	hideFrequencyError: hideFrequencyError,
 	removeBannerSpace: removeBannerSpace,
-	getDigitGroupingCharacter: getDigitGroupingCharacter
+	getDigitGroupingCharacter: getDigitGroupingCharacter,
+	NOT_A_MEDIAWIKI_SKIN: NOT_A_MEDIAWIKI_SKIN
 }
-}
+
+};
