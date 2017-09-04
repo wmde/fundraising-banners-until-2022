@@ -12,21 +12,6 @@
 
 				<p>{{> banner_text }}</p>
 
-				<hr />
-				<div id="donationGoalLabel">Unser Spendenziel</div>
-				<div id="donationGoal">8.600.000 Euro</div>
-
-				<div id="donationMeterWrapper">
-					<div id="donationMeter"></div>
-					<div id="donationFill">
-						<div id="daysLeft">Noch <span id="numDaysLeft">{{ daysRemaining }}</span></div>
-						<div id="pbarTip"></div>
-
-						<div id="donationTooltipArrow"></div>
-						<div id="donationTooltip">Noch fehlen <span id="valRem"></span> Mio. €</div>
-					</div>
-				</div>
-
 			</div><!--frbanner-message-->
 
 			<form id="frbanner-form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">

@@ -14,9 +14,15 @@ pagename = "B17WMDE_05_170825_var"
 tracking = "org-05-170825-var"
 
 [mobile]
-campaign_tracking = "mob01-ba-170829"
+campaign_tracking = "mob01-ba-170904"
+preview_skin = "minerva"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B17WMDE_mob01_170829_ctrl"
-tracking = "org-mob01-170829-ctrl"
+pagename = "B17WMDE_mob_01_170904_ctrl"
+tracking = "org-mob01-170904-ctrl"
+
+[mobile.banners.var]
+filename = "./mobile/banner_var.js"
+pagename = "B17WMDE_mob_01_170904_var"
+tracking = "org-mob01-170904-var"

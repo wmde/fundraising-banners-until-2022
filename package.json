@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
-    "start": "webpack-dev-server --disable-host-check --host 0.0.0.0"
+    "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
+    "clean": "rm dist/*.js dist/*.wikitext"
   },
   "keywords": [],
   "author": "gabriel.birke@wikimedia.de",

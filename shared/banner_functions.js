@@ -328,7 +328,7 @@ function removeBannerSpace() {
 			$( '#mw-page-base' ).css( 'padding-top', 0 );
 			break;
 		case 'minerva':
-			$( '#mw-mf-viewport' ).css( 'top', 0 );
+			$( '#mw-mf-viewport' ).css( { top: 0, marginTop: 0 } );
 			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
 			break;
 		case 'monobook':

@@ -20,6 +20,9 @@ function getMediawikiBannerLinks() {
 			u.query = u.query || {};
 			u.query.devbanner = CAMPAIGNS[ campaign ].banners[ banner ].pagename;
 			u.query.banner = MW_PROTOTYPE_BANNER;
+			if ( CAMPAIGNS[ campaign ].preview_skin ) {
+				u.query.useskin = CAMPAIGNS[ campaign ].preview_skin;
+			}
 			delete u.search;
 			bannerlist.push( {
 				url: url.format( u ),

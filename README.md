@@ -31,7 +31,11 @@ The file `campaign_info.toml` contains the metadata for all banners and campaign
 
 Each entry point includes JavaScript libraries, CSS and HTML templates through `require` statements in the entry point files. Webpack is [configured](webpack.common.js) to handle file types according to their extension: HTML templates are preprocessed as JavaScript templating functions, CSS is preprocessed and will be inserted as an inline `<style>` tag, etc. Most assets are shared between the banners.
 
-The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are used to create the tracking information inside the banner code. The tracking information is passed to the form fields and event tracking pixels inside the banner.  
+The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are used to create the tracking information inside the banner code. The tracking information is passed to the form fields and event tracking pixels inside the banner.
+
+For mobile banners on de.m.wikipedia.org you can use the mobile skin when previewing by adding the following line to your mobile campaign:
+
+	preview_skin = "minerva"
 
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
@@ -64,7 +68,7 @@ The changes to the code depend on which kind of test you are running.
 * Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Remove similar functions from `banner_functions.js`. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
 * Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
 * Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module.
-* Move date/time-based campaign data counting (donors, donations, campaign day, special day name, normal day name, prefix for day name) from `banner_functions.js`, `custom_day_name.js` and `count_campaign_days.js` into module.
+* Move date/time-based campaign data counting (campaign day, special day name, normal day name, prefix for day name) from `custom_day_name.js` and `count_campaign_days.js` into `campaign_projection.js` module or split date math and modules depending on the date math into their own modules. There is some duplicated code between `count_campaign_days.js` and `campaign_projection.js`. 
 * Refactor `banner_functions.js` and `count_campaign_days` to longer require parameters after `require`. Use classes with constructor parameters instead.
 * Structure banner initialization into functions, call them one after each other. Select Banner object only once and use its `find` method with all other jQuery selections.
 * Re-Implement/Refactor lightbox module without the need for a global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.
