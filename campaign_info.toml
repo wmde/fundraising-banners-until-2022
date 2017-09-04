@@ -15,6 +15,7 @@ tracking = "org-05-170825-var"
 
 [mobile]
 campaign_tracking = "mob01-ba-170904"
+preview_skin = "minerva"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
