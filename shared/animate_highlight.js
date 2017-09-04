@@ -16,7 +16,7 @@ function addCharacterSpans( $elem, startCharacter, endCharacter ) {
 }
 
 function getNumberOfCharacters( $elem ) {
-	return $elem.text().length;
+	return $elem.text().trim().length;
 }
 
 function highlightNthCharacter( $elem, n, className ) {
