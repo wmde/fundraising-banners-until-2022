@@ -35,27 +35,25 @@
 		justify-content: space-between;
 		flex: 0 1 100%;
 
-		border: 5px solid #990000;
-		border-radius: 9px;
+		border: 8px solid #990000;
+		border-radius: 12px;
 		background-color: #f8f9fa;
-		padding: 0 0.5em 0 0;
-		margin: 0.25em;
+		padding: 0.75em 0.5em 0.75em 0;
+		margin: 1em 0 1em 0.5em;
 	}
 
 	.infobox__text {
 		color: #000;
-		font-size: 17px;
-		font-weight: bold;
-		line-height: 1.2em;
+		font-size: 1.05em;
+		line-height: 1.4em;
 		text-align: left;
 		margin-left: 2em;
 	}
 
-	.text__headline {}
+	@media (min-width:  960px) { .infobox__text { font-size: 1.35em; } }
+	@media (min-width: 1600px) { .infobox__text { font-size: 1.5em; } }
 
-	.text__headline--italic {
-		font-style: italic;
-	}
+	.text__headline {}
 
 	.text__paragraph {
 		margin: .25em 0;
@@ -69,11 +67,7 @@
 
 	.infobox__footer {
 		padding: 0.025em 0 0 2em;
-
-		background-image: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg');
-		background-size: 18px 18px;
-		background-repeat: no-repeat;
-		background-position: left 0.5em top;
+		background: url('//upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg') no-repeat left 0.5em top 0.25em/18px 18px;
 	}
 
 	.footer {
@@ -82,7 +76,7 @@
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: .81em;
+		font-size: 0.9em;
 		line-height: 1.7em;
 
 		border-top: 1px solid #990000;
@@ -116,7 +110,7 @@
 	/* Form styling */
 
 	.form {
-		width: 15.5em;
+		width: 25%;
 		flex-shrink: 0;
 		padding: 0 0 0 0.5em;
 		margin: 0.25em 0 0.25em 0.25em; /* Same as infobox, but not to the right */
@@ -164,7 +158,7 @@
 
 	.select-group__option {
 		flex: 1 1 auto;
-		padding: 0 0.2em 0.2em 0;
+		padding: 0 0.4em 0.4em 0;
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
@@ -182,17 +176,20 @@
 		width: 25%;
 	}
 
+	.select-group__option--biggertext {
+		font-size: 1em;
+	}
+
 	.select-group__state {
 		display: block;
 		background: #f8f9fa;
 		border: 1px solid #9aa0a7;
 		border-radius: 2px;
-		padding: .05em 0;
+		padding: 0.2em 0;
 		line-height: 2em;
 		cursor: pointer;
 		text-align: center;
-		font-weight: bold;
-		font-size: .74em;
+		font-size: .9em;
 		box-sizing: border-box;
 	}
 
@@ -215,7 +212,7 @@
 
 	.button-group__button {
 		flex: 1 1 auto;
-		padding: 0.1em 0.1em;
+		padding: 0 0.4em 0.4em 0;
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
@@ -230,13 +227,13 @@
 		width: 50%;
 	}
 
-	@media(max-width: 1024px) {
+	@media(max-width: 1100px) {
 		.button-group__button--halfwidth .button-group__label {
 			padding: 0.3em 0.1em;
 		}
 	}
 
-	@media(max-width: 900px) {
+	@media(max-width: 1100px) {
 		.button-group__button--halfwidth {
 			width: 100%;
 		}
@@ -248,11 +245,10 @@
 		background: #f8f9fa;
 		border: 1px solid #9aa0a7;
 		border-radius: 2px;
-		padding: .05em 0;
+		padding: 0.2em 0;
 		line-height: 2em;
-		font-size: .74em;
+		font-size: 0.9em;
 		text-align: center;
-		font-weight: bold;
 		box-sizing: border-box;
 	}
 
