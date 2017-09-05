@@ -17,7 +17,7 @@
 
 	& {
 		width: 100%;
-		position: absolute;
+		position: fixed;
 		z-index: 1000;
 	}
 
@@ -38,26 +38,29 @@
 		border: 8px solid #990000;
 		border-radius: 12px;
 		background-color: #f8f9fa;
-		padding: 0.75em 0.5em 0.75em 0;
-		margin: 1em 0 1em 0.5em;
+		padding: 0.25em 0.5em 0.25em 0;
+		margin: 0.25em 0 0.25em 0.25em;
 	}
 
 	.infobox__text {
 		color: #000;
-		font-size: 1.05em;
+		font-size: 0.95em;
 		line-height: 1.4em;
 		text-align: left;
-		margin-left: 2em;
+		margin: 0 0 0.5em 1.4em;
 		font-family: "Linux Libertine", Georgia, Times, serif;
 	}
 
-	@media (min-width:  960px) { .infobox__text { font-size: 1.35em; } }
-	@media (min-width: 1600px) { .infobox__text { font-size: 1.5em; } }
+	@media (min-width:  850px) { .infobox__text { font-size: 1em; } }
+	@media (min-width:  960px) { .infobox__text { font-size: 1.1em; } }
+	@media (min-width: 1600px) { .infobox__text { font-size: 1.3em; } }
 
-	.text__headline {}
+	.text__headline {
+		margin: 0.2em 0;
+	}
 
 	.text__paragraph {
-		margin: .25em 0;
+		margin: 0;
 	}
 
 	.infobox__text .highlight {
@@ -78,11 +81,14 @@
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 0.9em;
+		font-size: 0.75em;
 		line-height: 1.7em;
 
 		border-top: 1px solid #990000;
 	}
+
+	@media (min-width:  850px) { .footer { font-size: 0.8em; } }
+	@media (min-width:  960px) { .footer { font-size: 0.9em; } }
 
 	.footer__info {
 		text-transform: uppercase;
@@ -123,9 +129,10 @@
 
 	.form {
 		width: 25%;
+		min-width: 12em;
 		flex-shrink: 0;
 		padding: 0 0 0 0.5em;
-		margin: 1.25em 0 0.25em 0.25em; /* Same as infobox, but not to the right */
+		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
 	}
 
 	.select-group {
@@ -163,6 +170,7 @@
 		height: 100%;
 		margin: 0;
 		font-size: .74em;
+		text-align: center;
 		border: 1px solid #9aa0a7;
 		border-radius: 4px;
 		box-sizing: border-box;
@@ -170,7 +178,7 @@
 
 	.select-group__option {
 		flex: 1 1 auto;
-		padding: 0 0.4em 0.4em 0;
+		padding: 0 0.3em 0.3em 0;
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
@@ -197,11 +205,11 @@
 		background: #f8f9fa;
 		border: 1px solid #9aa0a7;
 		border-radius: 2px;
-		padding: 0.2em 0;
+		padding: 0.1em 0;
 		line-height: 2em;
 		cursor: pointer;
 		text-align: center;
-		font-size: .9em;
+		font-size: 0.8em;
 		box-sizing: border-box;
 	}
 
@@ -214,7 +222,7 @@
 	.button-group {
 		border: 0;
 		margin: 0 auto;
-		padding: 0 0.5em 0.5em 0.5em;
+		padding: 0 0.5em;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
@@ -224,7 +232,7 @@
 
 	.button-group__button {
 		flex: 1 1 auto;
-		padding: 0 0.4em 0.4em 0;
+		padding: 0 0.3em 0.3em 0;
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
@@ -257,9 +265,9 @@
 		background: #f8f9fa;
 		border: 1px solid #9aa0a7;
 		border-radius: 2px;
-		padding: 0.2em 0;
+		padding: 0.1em 0;
 		line-height: 2em;
-		font-size: 0.9em;
+		font-size: 0.8em;
 		text-align: center;
 		box-sizing: border-box;
 	}
