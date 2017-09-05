@@ -1,4 +1,4 @@
-require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -25,7 +25,7 @@ const TrackingEvents = require( '../shared/tracking_events' );
 
 // For A/B testing different text or markup, load
 // const bannerTemplate = require('./banner_var.hbs');
-const bannerTemplate = require('./templates/banner_html.hbs');
+const bannerTemplate = require('./templates/banner_html_var.hbs');
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
