@@ -25,8 +25,7 @@ module.exports = Merge( CommonConfig, {
 			{
 				context: [ '/wiki', '/w', '/static' ],
 				target: 'https://de.wikipedia.org',
-				secure: false,
-				headers: { host: 'de.wikipedia.org' }
+				changeOrigin: true
 			}
 		]
 	}
