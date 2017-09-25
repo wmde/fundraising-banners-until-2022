@@ -9,6 +9,7 @@
 
     & {
         display: none;
+        font-size: 16px;
     }
 
     /**
@@ -51,7 +52,9 @@
         margin-left: 2em;
     }
 
-    .text__headline {}
+    .text__headline {
+        margin: 0.4em 0 0.5em 0;
+    }
 
     .text__headline--italic {
         font-style: italic;
@@ -115,6 +118,12 @@
 
     .application-of-funds-link {
         color: #000;
+        text-decoration: none;
+    }
+
+    .application-of-funds-link:hover,
+    .application-of-funds-link:focus {
+        text-decoration: underline;
     }
 
     /* Form styling */
