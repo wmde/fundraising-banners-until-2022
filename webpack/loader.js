@@ -33,10 +33,14 @@ function getMediawikiBannerLinks() {
 	return bannerlist;
 }
 
-if ( !currentUrl.query.banner ) {
-	$( 'body' ).html( bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } ) );
+function getMediawikiBannerLinksHtml( ) {
+	return bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } );
+}
+
+if ( !currentUrl.query.banner && !currentUrl.query.bannertest ) {	// different wikipedia.org & wikipedia.de banner params
+	$( 'body' ).html( getMediawikiBannerLinksHtml() );
 } else if ( currentUrl.query.banner === MW_PROTOTYPE_BANNER && !currentUrl.query.devbanner ) {
-	container.html( bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } ) );
+	container.html( getMediawikiBannerLinksHtml() );
 }
 
 // inject tracking data for current banner.
