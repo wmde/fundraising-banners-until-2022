@@ -23,6 +23,12 @@ module.exports = Merge( CommonConfig, {
 		},
 		proxy: [
 			{
+				context: [ '/wikipedia.de', '/FundraisingBanners', '/img', '/js', '/style.css', '/suggest.js' ],
+				pathRewrite: { '^/wikipedia.de' : '' },
+				target: 'https://wikipedia.de',
+				changeOrigin: true
+			},
+			{
 				context: [ '/wiki', '/w', '/static' ],
 				target: 'https://de.wikipedia.org',
 				changeOrigin: true
