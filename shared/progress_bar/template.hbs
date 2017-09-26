@@ -1,0 +1,15 @@
+<div id="donationMeterWrapper">
+	<div id="donationMeter"></div>
+	<div id="donationFill" style="width:1px;">
+		<div id="donationText" style="display:none">{{{ text-inner-right }}}</div>
+		<div id="daysLeft">{{{ text-inner-left }}}</div>
+		<div id="donationMeterTip"></div>
+	</div>
+	<div id="donationRemaining">{{#if needed-sum-inner }} {{{ text-right }}} {{/if }}</div>
+	<div id="donationRemainingOuter">
+		<div class="pointer-tip"></div>
+		<hr class="pointer-line">
+		{{#if needed-sum-outer }} {{{ text-right }}} {{/if }}
+	</div>
+	<div id="donationMessage"></div>
+</div>

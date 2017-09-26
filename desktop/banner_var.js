@@ -22,6 +22,8 @@ const Translations = {}; // will only be needed for English banner, German defau
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
+const CampaignProjection = require('../shared/campaign_projection');
+const ProgressBar = require('../shared/progress_bar/progress_bar');
 
 // For A/B testing different text or markup, load
 // const bannerTemplate = require('./banner_var.hbs');
@@ -38,6 +40,17 @@ const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
+const campaignProjection = new CampaignProjection( {
+	campaignStartDate: new Date( GlobalBannerSettings['campaign-start-date'] ),
+	campaignEndDate: new Date( GlobalBannerSettings['campaign-end-date'] ),
+	baseDonationSum: GlobalBannerSettings['donations-collected-base'],
+	donationAmountPerMinute: GlobalBannerSettings['appr-donations-per-minute'],
+	donorsBase: GlobalBannerSettings['donators-base'],
+	donorsPerMinute: GlobalBannerSettings['appr-donators-per-minute']
+} );
+
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection );
+
 $bannerContainer.html( bannerTemplate( {
 	// TODO approx. donors
 	customDayName: customDayName,
@@ -46,7 +59,8 @@ $bannerContainer.html( bannerTemplate( {
 	campaignDaySentence: getCampaignDaySentence( LANGUAGE ),
 	daysRemaining: BannerFunctions.getDaysRemaining( LANGUAGE ),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -163,10 +177,12 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	progressBar.animateProgressBar();
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
 		calculateLightboxPosition();
+		progressBar.setProgressBarSize();
 	} );
 }
 
