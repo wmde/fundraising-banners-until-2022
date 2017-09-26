@@ -1,16 +1,16 @@
-#donationMeterWrapper {
+.progress_bar__wrapper {
     position: relative;
     margin: 4px 35px;
     border: 2px solid #990000;
     border-radius: 8px;
 }
 
-#donationMeter {
+.progress_bar__donation_meter {
     margin: 0 auto;
     height: 32px;
 }
 
-#donationFill {
+.progress_bar__donation_fill {
     position: absolute;
     top: -1px;
     left: 0;
@@ -20,17 +20,7 @@
 	border-radius: 5px 16px 16px 5px;
 }
 
-#pbarTip {
-    position: absolute;
-    right: 0;
-    height: 32px;
-}
-
-#pbarTip img {
-    vertical-align: baseline;
-}
-
-#donationText {
+.progress_bar__donation_text {
     position: absolute;
     right: 16px;
     height: 100%;
@@ -43,7 +33,7 @@
     overflow: hidden;
 }
 
-#donationRemaining {
+.progress_bar__donation_remaining--inner {
     position: absolute;
     top: -1px;
     right: 10px;
@@ -54,7 +44,7 @@
     line-height: 36px;
 }
 
-#donationRemainingOuter {
+.progress_bar__donation_remaining--outer {
     position: absolute;
     top: -1px;
     line-height: 36px;
@@ -65,7 +55,7 @@
     display: none;
 }
 
-#donationRemainingOuter .pointer-tip {
+.progress_bar__pointer_tip {
     width: 5px;
     height: 5px;
     background: #000000;
@@ -74,14 +64,14 @@
     margin-top: 16px;
 }
 
-#donationRemainingOuter .pointer-line {
+.progress_bar__pointer_line {
     float: left;
     width: 25px;
     background: #000000;
     margin: 18px 2px 0 0;
 }
 
-#daysLeft {
+.progress_bar__days_left {
     display: none;
     font-size: 15px;
     color: #ffffff;
@@ -89,16 +79,4 @@
     line-height: 36px;
     position: absolute;
     left: 5px;
-}
-
-#donationMeterTip {
-	display: none;
-    background: #ffffff;
-    border-bottom: 16px solid transparent;
-    border-left: 16px solid #990000;
-    border-top: 16px solid transparent;
-    height: 0;
-    position: absolute;
-    right: 0;
-    width: 0;
 }

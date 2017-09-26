@@ -11,18 +11,22 @@ function ProgressBar( GlobalBannerSettings, campaignProjection ) {
 	this.neededSumOuter = (this.positionNeededSum !== 'inner');
 }
 
+ProgressBar.prototype.getBarWidth = function () {
+	return $( '.progress_bar__donation_meter' ).width();
+};
+
 ProgressBar.prototype.animateProgressBar = function () {
 	var self = this,
-		donationFillElement = $( '#donationFill' ),
-		daysLeftElement = $( '#daysLeft' ),
+		donationFillElement = $( '.progress_bar__donation_fill' ),
+		daysLeftElement = $( '.progress_bar__days_left' ),
 		donationValueElement = $( '#donationValue' ),
 		remainingValueElement = $( '#valRem' ),
 		preFillValue = 0,
 		barWidth, dTarget, dCollected, dRemaining, fWidth, widthToFill,
-		donationSumNeededElementWidth = $( '#donationRemainingOuter' ).width();
+		donationSumNeededElementWidth = $( '.progress_bar__donation_remaining--outer' ).width();
 
-	$( '#donationMeterWrapper' ).css( { marginRight: donationSumNeededElementWidth + 10 } );
-	$( '#donationRemainingOuter' ).css( { right: 0 - donationSumNeededElementWidth + 10 } );
+	$( '.progress_bar__wrapper' ).css( { marginRight: donationSumNeededElementWidth + 10 } );
+	$( '.progress_bar__donation_remaining--outer' ).css( { right: 0 - donationSumNeededElementWidth + 10 } );
 
 	donationFillElement.clearQueue();
 	donationFillElement.stop();
@@ -30,7 +34,7 @@ ProgressBar.prototype.animateProgressBar = function () {
 
 	daysLeftElement.hide();
 
-	barWidth = $( '#donationMeter' ).width();
+	barWidth = this.getBarWidth();
 
 	dTarget = this.GlobalBannerSettings.goalSum;
 
@@ -55,11 +59,11 @@ ProgressBar.prototype.animateProgressBar = function () {
 		complete: function () {
 			remainingValueElement.html( self._formatMillion( dRemaining ) );
 			donationValueElement.html( self._formatMillion( dCollected ) );
-			$( '#donationText' ).show();
+			$( '.progress_bar__donation_text' ).show();
 			if ( self.neededSumOuter ) {
-				$( '#donationRemainingOuter' ).show();
+				$( '.progress_bar__donation_remaining--outer' ).show();
 			} else {
-				$( '#donationRemaining' ).show();
+				$( '.progress_bar__donation_remaining--inner' ).show();
 			}
 			daysLeftElement.show();
 		}
@@ -68,9 +72,9 @@ ProgressBar.prototype.animateProgressBar = function () {
 
 // called on window resize
 ProgressBar.prototype.setProgressBarSize = function () {
-	var donationFillElement = $( '#donationFill' ),
+	var donationFillElement = $( '.progress_bar__donation_fill' ),
 		barWidth, dCollected;
-	barWidth = $( '#donationMeter' ).width();
+	barWidth = this.getBarWidth();
 	dCollected = this.campaignProjection.getProjectedDonationSum();
 	donationFillElement.width( this.getFillWidth( barWidth, this.GlobalBannerSettings.goalSum, dCollected ) + 'px' );
 };
@@ -81,7 +85,7 @@ ProgressBar.prototype.getFillWidth = function ( donationBarWidth, donationTarget
 		fWidth = donationsCollected / donationTarget * donationBarWidth;
 
 	if ( this.neededSumInner ) {
-		maxFillWidth = maxFillWidth - $( '#donationRemaining' ).width();
+		maxFillWidth = maxFillWidth - $( '.progress_bar__donation_remaining--inner' ).width();
 	}
 
 	widthToFill = Math.min( maxFillWidth, fWidth );
