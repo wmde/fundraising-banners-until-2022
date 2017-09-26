@@ -15,7 +15,7 @@ ProgressBar.prototype.getBarWidth = function () {
 	return $( '.progress_bar__donation_meter' ).width();
 };
 
-ProgressBar.prototype.animateProgressBar = function () {
+ProgressBar.prototype.animate = function () {
 	var self = this,
 		donationFillElement = $( '.progress_bar__donation_fill' ),
 		daysLeftElement = $( '.progress_bar__days_left' ),
@@ -71,7 +71,7 @@ ProgressBar.prototype.animateProgressBar = function () {
 };
 
 // called on window resize
-ProgressBar.prototype.setProgressBarSize = function () {
+ProgressBar.prototype.resize = function () {
 	var donationFillElement = $( '.progress_bar__donation_fill' ),
 		barWidth, dCollected;
 	barWidth = this.getBarWidth();

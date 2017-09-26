@@ -177,12 +177,12 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	progressBar.animateProgressBar();
+	progressBar.animate();
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
 		calculateLightboxPosition();
-		progressBar.setProgressBarSize();
+		progressBar.resize();
 	} );
 }
 
