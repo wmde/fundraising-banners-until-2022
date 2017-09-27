@@ -16,7 +16,7 @@ To build a minified version of the banner:
 
     docker-compose up js-serve
 
-The preview server is at [http://localhost:8080/](http://localhost:8080/)
+The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
 It will display a selection of banners to preview. The preview will be shown inside the proxied German Wikimedia.
 
