@@ -15,6 +15,7 @@ module.exports = Merge( CommonConfig, {
       } )
   ],
   devServer: {
+      port: 8084,
       hot: true,
       contentBase: './dist',
 	  headers: {
