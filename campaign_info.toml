@@ -1,17 +1,17 @@
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "07-ba-170914"
+campaign_tracking = "08-ba-170928"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_07_170913_ctrl"
-tracking = "org-07-170914-ctrl"
+pagename = "B17WMDE_08_170928_ctrl"
+tracking = "org-08-170928-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_07_170913_var"
-tracking = "org-07-170914-var"
+pagename = "B17WMDE_08_170928_var"
+tracking = "org-08-170928-var"
 
 [mobile]
 campaign_tracking = "mob01-ba-170904"
