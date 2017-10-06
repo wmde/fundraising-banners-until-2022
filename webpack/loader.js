@@ -8,7 +8,6 @@ const CampaignConfig = require( './campaign_config' );
 const bannerSelectionListTemplate = require( './banner_selection_list.hbs' );
 
 const currentUrl = url.parse( window.location.href, true );
-const MW_PROTOTYPE_BANNER = 'B17WMDE_webpack_prototype';
 const container = $( '#WMDE-Banner-Container' );
 
 const Handlebars = require('handlebars/runtime');
@@ -22,8 +21,6 @@ function getMediawikiBannerLinksHtml( ) {
 
 if ( !currentUrl.query.banner && !currentUrl.query.bannertest ) {	// different wikipedia.org & wikipedia.de banner params
 	$( 'body' ).html( getMediawikiBannerLinksHtml() );
-} else if ( currentUrl.query.banner === MW_PROTOTYPE_BANNER && !currentUrl.query.devbanner ) {
-	container.html( getMediawikiBannerLinksHtml() );
 }
 
 // inject tracking data for current banner.
