@@ -14,13 +14,15 @@ Handlebars.registerHelper('bannerlink', function( campaign, bannername ) {
 	return campaign.preview_link.replace( '{{banner}}', bannername );
 });
 
-if ( !currentUrl.query.banner && !currentUrl.query.bannertest ) {	// different wikipedia.org & wikipedia.de banner params
-	$( 'body' ).html( bannerSelectionListTemplate( { campaigns: CAMPAIGNS } ) );
-}
+if ( !currentUrl.query.devbanner ) {
 
-// inject tracking data for current banner.
-// In a compiled banner, the tracking data is baked into the data attribute of the container div.
-if ( currentUrl.query.devbanner ) {
+	$( 'body' ).html( bannerSelectionListTemplate( { campaigns: CAMPAIGNS } ) );
+
+} else {
+
+	// inject tracking data for current banner.
+	// In a compiled banner, the tracking data is baked into the data attribute of the container div.
+
 	const campaigns = new CampaignConfig( CAMPAIGNS );
 	const pages = campaigns.getConfigForPages();
 	const currentBanner = currentUrl.query.devbanner;
