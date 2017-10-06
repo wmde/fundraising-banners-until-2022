@@ -1,6 +1,12 @@
-<p>Select a Banner:</p>
+<h1>Select a Banner</h1>
+
 <ul>
-    {{#each banners }}
-        <li><a href="{{url}}">{{name}}</a> </li>
-    {{/each}}
+	{{#each campaigns }}
+		<h2>{{ @key }}</h2>
+		<ul>
+			{{#each banners }}
+				<li><a href="{{ bannerlink ../this pagename }}" target="_blank">{{ pagename }}</a></li>
+			{{/each}}
+		</ul>
+	{{/each}}
 </ul>

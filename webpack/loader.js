@@ -11,30 +11,13 @@ const currentUrl = url.parse( window.location.href, true );
 const MW_PROTOTYPE_BANNER = 'B17WMDE_webpack_prototype';
 const container = $( '#WMDE-Banner-Container' );
 
-function getMediawikiBannerLinks() {
-	let bannerlist = [];
-	Object.keys( CAMPAIGNS ).forEach( function ( campaign ) {
-		Object.keys( CAMPAIGNS[ campaign ].banners ).forEach( function ( banner ) {
-			let u = url.parse( url.format( currentUrl ) );
-			u.pathname = '/wiki/Wikipedia:Hauptseite';
-			u.query = u.query || {};
-			u.query.devbanner = CAMPAIGNS[ campaign ].banners[ banner ].pagename;
-			u.query.banner = MW_PROTOTYPE_BANNER;
-			if ( CAMPAIGNS[ campaign ].preview_skin ) {
-				u.query.useskin = CAMPAIGNS[ campaign ].preview_skin;
-			}
-			delete u.search;
-			bannerlist.push( {
-				url: url.format( u ),
-				name: CAMPAIGNS[ campaign ].banners[ banner ].pagename
-			} );
-		} );
-	} );
-	return bannerlist;
-}
+const Handlebars = require('handlebars/runtime');
+Handlebars.registerHelper('bannerlink', function( campaign, bannername ) {
+	return campaign.preview_link.replace( '{{banner}}', bannername );
+});
 
 function getMediawikiBannerLinksHtml( ) {
-	return bannerSelectionListTemplate( { banners: getMediawikiBannerLinks() } );
+	return bannerSelectionListTemplate( { campaigns: CAMPAIGNS } );
 }
 
 if ( !currentUrl.query.banner && !currentUrl.query.bannertest ) {	// different wikipedia.org & wikipedia.de banner params
