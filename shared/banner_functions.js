@@ -31,7 +31,8 @@ var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
 			day: 'Tag',
 			days: 'Tage'
 		}
-	};
+	},
+	skinObject;
 
 
 BannerEventHandlers.handleAmountSelected = function () {
@@ -260,82 +261,8 @@ function getAmount() {
 	return amount;
 }
 
-function addBannerSpace() {
-	var expandableBannerHeight = $( 'div#WMDE_Banner' ).height() + 44,
-		bannerDivElement = $( '#WMDE_Banner' ),
-		skin = getSkin();
-
-	if ( !showBanner ) {
-		return;
-	}
-	switch ( skin ) {
-			case 'vector':
-				bannerDivElement.css( 'top', 0 );
-				bannerDivElement.css( 'display', 'block' );
-				$( '#mw-panel' ).css( 'top', expandableBannerHeight + 160 );
-				$( '#mw-head' ).css( 'top', expandableBannerHeight );
-				$( '#mw-page-base' ).css( 'paddingTop', expandableBannerHeight );
-				break;
-			case 'minerva':
-				$( '#mw-mf-viewport' ).css( 'top', expandableBannerHeight );
-				$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', expandableBannerHeight );
-			break;
-			case 'monobook':
-				$( '#globalWrapper' ).css( 'position', 'relative' );
-				$( '#globalWrapper' ).css( 'top', expandableBannerHeight );
-				bannerDivElement.css( 'top', '-20px' );
-				bannerDivElement.css( 'background', 'none' );
-				break;
-		}
-	}
-
-function addBannerSpaceWithRollo() {
-	var expandableBannerHeight = $( 'div#WMDE_Banner' ).height() + 44,
-		bannerDivElement = $( '#WMDE_Banner' ),
-		skin = getSkin();
-
-	if ( !showBanner ) {
-		return;
-	}
-	switch ( skin ) {
-		case 'vector':
-			bannerDivElement.css( 'top', 0 - expandableBannerHeight );
-			$( '#mw-panel' ).animate( { top: expandableBannerHeight + 160 }, 1000 );
-			$( '#mw-head' ).animate( { top: expandableBannerHeight }, 1000 );
-			$( '#mw-page-base' ).animate( { paddingTop: expandableBannerHeight }, 1000 );
-			break;
-		case 'minerva':
-			$( '#mw-mf-viewport' ).css( 'top', expandableBannerHeight );
-			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', expandableBannerHeight );
-			break;
-		case 'monobook':
-			$( '#globalWrapper' ).css( 'position', 'relative' );
-			$( '#globalWrapper' ).css( 'top', expandableBannerHeight );
-			bannerDivElement.css( 'top', '-20px' );
-			bannerDivElement.css( 'background', 'none' );
-			break;
-	}
-	bannerDivElement.css( 'display', 'block' );
-	bannerDivElement.animate( { top: 0 }, 1000 );
-}
-
 function removeBannerSpace() {
-	var skin = getSkin();
-	switch ( skin ) {
-		case 'vector':
-			$( '#mw-panel' ).css( 'top', 160 );
-			$( '#mw-head' ).css( 'top', 0 );
-			$( '#mw-page-base' ).css( 'padding-top', 0 );
-			break;
-		case 'minerva':
-			$( '#mw-mf-viewport' ).css( { top: 0, marginTop: 0 } );
-			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
-			break;
-		case 'monobook':
-			$( '#globalWrapper' ).css( 'position', 'relative' );
-			$( '#globalWrapper' ).css( 'top', 0 );
-			break;
-	}
+	getSkinObject().removeSpace();
 }
 
 function addSpaceForIntervalOptions() {
@@ -407,6 +334,22 @@ function getSkin() {
 	return NOT_A_MEDIAWIKI_SKIN;
 }
 
+function getSkinObject() {
+	let skin = getSkin(),
+		skinClass;
+
+	if ( !skinObject ) {
+		if ( ['minerva', 'monobook', 'vector'].indexOf( skin ) === -1 ) {
+			skin = 'wpde';	// we assume we are on wp.de if no known mediawiki skin is detected
+		}
+
+		skinClass = require( './skin/' + skin );
+		skinObject = new skinClass;
+	}
+
+	return skinObject;
+}
+
 function onMediaWiki() {
 	return typeof window.mw === 'object' && typeof window.mw.centralNotice !== 'undefined';
 }
@@ -414,6 +357,7 @@ function onMediaWiki() {
 return {
 	onMediaWiki: onMediaWiki,
 	getSkin: getSkin,
+	getSkinObject: getSkinObject,
 	validateForm: validateForm,
 	validateAndSetPeriod: validateAndSetPeriod,
 	validateAmount: validateAmount,
