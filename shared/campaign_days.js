@@ -21,10 +21,12 @@ export default class CampaignDays {
 		return this.endDate.getTime() - this.now.getTime() < 0;
 	}
 
-	getSecondsSinceCampaignStart() {
-		console.log("now", this.now)
-		console.log("start", this.startDate)
+	getSecondsSinceCampaignStart( ) {
 		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
+	}
+
+	getSecondsBetweenStartAndEndOfCampaign() {
+		return Math.floor( ( this.endDate.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
 }
