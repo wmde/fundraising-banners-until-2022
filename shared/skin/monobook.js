@@ -1,19 +1,24 @@
 "use strict";
 
 const Skin = require("./Skin");
+const $ = require( 'jquery' );
 
 module.exports = class Monobook extends Skin {
+	constructor() {
+		super();
+
+		this.globalWrapper = $( '#globalWrapper' );
+	};
+
 	addSpace( bannerHeight ) {
-		// @todo Total lack of this is apparently a 0-day bug, cp.
-		// https://meta.wikimedia.org/?banner=B17WMDE_03_170804_var&uselang=en&force=1&useskin=monobook
+		this.globalWrapper.animate( { 'top': bannerHeight }, 1000 );
 	};
 
 	addSpaceInstantly( bannerHeight ) {
-		// @todo Total lack of this is apparently a bug
+		this.globalWrapper.css( 'top', bannerHeight );
 	};
 
 	removeSpace() {
-		$( '#globalWrapper' ).css( 'position', 'relative' );
-		$( '#globalWrapper' ).css( 'top', 0 );
+		this.globalWrapper.css( 'top', 0 );
 	};
 };
