@@ -1,6 +1,7 @@
 # A Campaign with global settings
 [desktop]
 campaign_tracking = "09-ba-171006"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
@@ -13,9 +14,10 @@ filename = "./desktop/banner_var.js"
 pagename = "B17WMDE_09_171006_var"
 tracking = "org-09-171006-var"
 
+
 [mobile]
 campaign_tracking = "mob01-ba-170904"
-preview_skin = "minerva"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
@@ -26,3 +28,18 @@ tracking = "org-mob01-170904-ctrl"
 filename = "./mobile/banner_var.js"
 pagename = "B17WMDE_mob_01_170904_var"
 tracking = "org-mob01-170904-var"
+
+
+[wikipediade]
+campaign_tracking = "09-ba-171006"
+preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype&devbanner={{banner}}"
+
+[wikipediade.banners.ctrl]
+filename = "./wikipedia.de/banner_ctrl.js"
+pagename = "FR2016_09_171007_ctrl"
+tracking = "org-09-171006-ctrl"
+
+[wikipediade.banners.var]
+filename = "./wikipedia.de/banner_var.js"
+pagename = "FR2016_09_171007_var"
+tracking = "org-09-171006-var"
