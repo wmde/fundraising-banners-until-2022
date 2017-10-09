@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const Skin = require("./Skin");
+const Skin = require( './Skin' );
 const $ = require( 'jquery' );
 
 module.exports = class Wpde extends Skin {
