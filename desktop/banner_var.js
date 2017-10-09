@@ -133,7 +133,7 @@ function addSpace() {
     return;
   }
 
-	if ( BannerFunctions.getSkin() === 'vector' ) {
+	if ( BannerFunctions.getSkin().getName() === 'vector' ) {
 		SizeIssues.trackSizeIssues(
 			$( 'div#WMDE_Banner' ),
 			trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
@@ -141,7 +141,7 @@ function addSpace() {
 		);
 	}
 
-	BannerFunctions.getSkinObject().addSpace( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpace( $( 'div#WMDE_Banner' ).height() );
 }
 
 function addSpaceInstantly() {
@@ -149,11 +149,11 @@ function addSpaceInstantly() {
     return;
   }
 
-	BannerFunctions.getSkinObject().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
-	BannerFunctions.getSkinObject().removeSpace();
+	BannerFunctions.getSkin().removeSpace();
 }
 
 function displayBanner() {

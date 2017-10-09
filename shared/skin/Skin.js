@@ -9,4 +9,8 @@ module.exports = class Skin {
 
 	removeSpace() {
 	};
+
+	getName() {
+		return this.constructor.name.toLowerCase();
+	};
 };

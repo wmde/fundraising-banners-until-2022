@@ -6,8 +6,6 @@ var $ = require( 'jquery' );
 
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
-const NOT_A_MEDIAWIKI_SKIN = 'not-a-mediawiki-skin';
-
 var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
 	baseDate = GlobalBannerSettings[ 'donations-date-base' ] || '2017-11-01',
 	collectedBase = parseInt( GlobalBannerSettings.collectedBase || 0, 10 ),
@@ -31,9 +29,9 @@ var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
 			day: 'Tag',
 			days: 'Tage'
 		}
-	},
-	skinObject;
+	};
 
+let skin;
 
 BannerEventHandlers.handleAmountSelected = function () {
 	$( '#amount_other' ).prop( 'checked', false );
@@ -262,7 +260,7 @@ function getAmount() {
 }
 
 function removeBannerSpace() {
-	getSkinObject().removeSpace();
+	getSkin().removeSpace();
 }
 
 /**
@@ -281,27 +279,28 @@ function getRemainingDonorsNeeded( averageDonation ) {
 	return Math.max( 0, numDonors );
 }
 
+/**
+ * @return {Skin}
+ */
 function getSkin() {
-	if ( onMediaWiki() ) {
-		return window.mw.config.get( 'skin' );
-	}
-	return NOT_A_MEDIAWIKI_SKIN;
-}
-
-function getSkinObject() {
-	let skin = getSkin(),
+	var skinName,
 		skinClass;
 
-	if ( !skinObject ) {
-		if ( ['minerva', 'monobook', 'vector'].indexOf( skin ) === -1 ) {
-			skin = 'wpde';	// we assume we are on wp.de if no known mediawiki skin is detected
+	if ( !skin ) {
+		if ( onMediaWiki() ) {
+			skinName = window.mw.config.get( 'skin' );
+			if ( [ 'minerva', 'monobook', 'vector' ].indexOf( skinName ) === -1 ) {
+				skinName = 'vector';	// when in doubt, fall back to vector
+			}
+		} else {
+			skinName = 'wpde';
 		}
 
-		skinClass = require( './skin/' + skin );
-		skinObject = new skinClass;
+		skinClass = require( './skin/' + skinName );
+		skin = new skinClass;
 	}
 
-	return skinObject;
+	return skin;
 }
 
 function onMediaWiki() {
@@ -311,7 +310,6 @@ function onMediaWiki() {
 return {
 	onMediaWiki: onMediaWiki,
 	getSkin: getSkin,
-	getSkinObject: getSkinObject,
 	validateForm: validateForm,
 	validateAndSetPeriod: validateAndSetPeriod,
 	validateAmount: validateAmount,
@@ -326,8 +324,7 @@ return {
 	hideAmountError: hideAmountError,
 	hideFrequencyError: hideFrequencyError,
 	removeBannerSpace: removeBannerSpace,
-	getDigitGroupingCharacter: getDigitGroupingCharacter,
-	NOT_A_MEDIAWIKI_SKIN: NOT_A_MEDIAWIKI_SKIN
+	getDigitGroupingCharacter: getDigitGroupingCharacter
 }
 
 };
