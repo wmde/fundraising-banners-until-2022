@@ -14,14 +14,18 @@ export default class CampaignDays {
 	}
 
 	campaignHasStarted() {
-		return this.startDate.getTime() - this.now.getTime() < 0;
+		return this.getSecondsSinceCampaignStart() > 0;
 	}
 
 	campaignHasEnded() {
 		return this.endDate.getTime() - this.now.getTime() < 0;
 	}
 
-
+	getSecondsSinceCampaignStart() {
+		console.log("now", this.now)
+		console.log("start", this.startDate)
+		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
+	}
 
 }
 

@@ -46,4 +46,11 @@ describe('CampaignDays', function() {
 		} );
 	} );
 
+	describe( '#getSecondsSinceCampaignStart', function () {
+		it( 'returns a negative number before the campaign', function () {
+			const campaignDays = new CampaignDays( new Date( '2016-11-01' ), new Date( '2016-12-31' ), new Date( '2016-10-31' ) );
+			assert.equal( -86400, campaignDays.getSecondsSinceCampaignStart() );
+		} );
+	} )
+
 } );
