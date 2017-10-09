@@ -265,52 +265,6 @@ function removeBannerSpace() {
 	getSkinObject().removeSpace();
 }
 
-function addSpaceForIntervalOptions() {
-	var $intervalOptionsContainer = $( 'div.interval-options' ),
-		expandableBannerHeight = $intervalOptionsContainer.height();
-	if ( $intervalOptionsContainer && $intervalOptionsContainer.is( ':visible' ) ) {
-		return;
-	}
-
-	switch ( getSkin() ) {
-		case 'vector':
-			$( '#mw-panel' ).css( { top: parseInt( $( '#mw-panel' ).css( 'top' ), 10 ) + expandableBannerHeight + 'px' } );
-			$( '#mw-head' ).css( { top: parseInt( $( '#mw-head' ).css( 'top' ), 10 ) + expandableBannerHeight + 'px' } );
-			$( '#mw-page-base' ).css( { paddingTop: parseInt( $( '#mw-page-base' ).css( 'padding-top' ), 10 ) + expandableBannerHeight + 'px' } );
-			break;
-		case 'minerva':
-			$( '#mw-mf-viewport' ).css( { top: parseInt( $( '#mw-mf-viewport' ).css( 'top' ), 10 ) + expandableBannerHeight + 'px' } );
-			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( { top: parseInt( $( '#mw-mf-page-center' ).css( 'top' ), 10 ) + expandableBannerHeight + 'px' } );
-			break;
-		case 'monobook':
-			$( '#globalWrapper' ).css( { top: parseInt( $( '#globalWrapper' ).css( 'top' ), 10 ) + expandableBannerHeight + 'px' } );
-			break;
-	}
-}
-
-function removeSpaceForIntervalOptions() {
-	var $intervalOptionsContainer = $( 'div.interval-options' ),
-		expandableBannerHeight = $intervalOptionsContainer.height() + 5;
-	if ( $intervalOptionsContainer && !$intervalOptionsContainer.is( ':visible' ) ) {
-		return;
-	}
-
-	switch ( getSkin() ) {
-		case 'vector':
-			$( '#mw-panel' ).css( { top: ( parseInt( $( '#mw-panel' ).css( 'top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			$( '#mw-head' ).css( { top: ( parseInt( $( '#mw-head' ).css( 'top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			$( '#mw-page-base' ).css( { paddingTop: ( parseInt( $( '#mw-page-base' ).css( 'padding-top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			break;
-		case 'minerva':
-			$( '#mw-mf-viewport' ).css( { top: ( parseInt( $( '#mw-mf-viewport' ).css( 'top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( { top: ( parseInt( $( '#mw-mf-page-center' ).css( 'top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			break;
-		case 'monobook':
-			$( '#globalWrapper' ).css( { top: ( parseInt( $( '#globalWrapper' ).css( 'top' ), 10 ) - expandableBannerHeight ) + 'px' } );
-			break;
-	}
-}
-
 /**
  * Calculate the number of donors needed, given an average donation amount.
  *
