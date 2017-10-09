@@ -1,17 +1,24 @@
 "use strict";
 
 const Skin = require("./Skin");
+const $ = require( 'jquery' );
 
 module.exports = class Wpde extends Skin {
+	constructor() {
+		super();
+
+		this.container = $( 'body center' );
+	};
+
 	addSpace( bannerHeight ) {
-		$( 'body center' ).animate( { 'margin-top': bannerHeight }, 1000 );
+		this.container.animate( { 'margin-top': bannerHeight }, 1000 );
 	};
 
 	addSpaceInstantly( bannerHeight ) {
-		$( 'body center' ).css( 'margin-top', bannerHeight );
+		this.container.css( 'margin-top', bannerHeight );
 	};
 
 	removeSpace() {
-		$( 'body center' ).css( 'margin-top', 0 );
+		this.container.css( 'margin-top', 0 );
 	};
 };
