@@ -18,11 +18,15 @@ export default class CampaignDays {
 	}
 
 	campaignHasEnded() {
-		return this.endDate.getTime() - this.now.getTime() < 0;
+		return this.getSecondsUntilCampaignEnds() < 0;
 	}
 
-	getSecondsSinceCampaignStart( ) {
+	getSecondsSinceCampaignStart() {
 		return Math.floor( ( this.now.getTime() - this.startDate.getTime() ) / 1000 );
+	}
+
+	getSecondsUntilCampaignEnds() {
+		return Math.floor( ( this.endDate.getTime() - this.now.getTime() ) / 1000 );
 	}
 
 	getSecondsBetweenStartAndEndOfCampaign() {

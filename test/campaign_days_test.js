@@ -75,5 +75,22 @@ describe('CampaignDays', function() {
 
 	} );
 
+	describe( '#getSecondsUntilCampaignEnds', function () {
+		it( 'returns a positive number before the campaign', function () {
+			const campaignDays = new CampaignDays( new Date( '2016-11-01' ), new Date( '2016-12-31' ), new Date( '2016-10-31' ) );
+			assert.equal( 5270400, campaignDays.getSecondsUntilCampaignEnds() );
+		} );
+
+		it( 'returns a positive number after the campaign started', function () {
+			const campaignDays = new CampaignDays( new Date( '2016-11-01' ), new Date( '2016-12-31 23:59:59' ), new Date( '2016-12-31 23:59:54' ) );
+			assert.equal( 5, campaignDays.getSecondsUntilCampaignEnds() );
+		} );
+
+		it( 'returns a negative number when the campaign has ended', function () {
+			const campaignDays = new CampaignDays( new Date( '2016-11-01 00:00:00' ), new Date( '2016-12-31 23:59:59' ), new Date( '2017-01-01 0:00:04' ) );
+			assert.equal( -5, campaignDays.getSecondsUntilCampaignEnds() );
+		} );
+
+	} );
 
 } );
