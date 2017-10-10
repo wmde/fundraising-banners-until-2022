@@ -133,13 +133,11 @@ function addSpace() {
     return;
   }
 
-	if ( BannerFunctions.getSkin().getName() === 'vector' ) {
-		SizeIssues.trackSizeIssues(
-			$( 'div#WMDE_Banner' ),
-			trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
-			sizeIssueTrackRatio
-		);
-	}
+	SizeIssues.trackSizeIssues(
+		$( 'div#WMDE_Banner' ),
+		trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
+		sizeIssueTrackRatio
+	);
 
 	BannerFunctions.getSkin().addSpace( $( 'div#WMDE_Banner' ).height() );
 }
