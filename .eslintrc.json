@@ -1,0 +1,19 @@
+{
+	"extends": "wikimedia",
+	"parserOptions": {
+		"ecmaVersion": 6
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"jquery": true,
+		"qunit": true
+	},
+	"globals": {
+	},
+	"rules": {
+		"dot-notation": [ "error", { "allowKeywords": true } ],
+		"one-var": [ "off" ],
+		"vars-on-top": [ "off" ]
+	}
+}
