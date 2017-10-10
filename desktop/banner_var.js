@@ -132,60 +132,28 @@ function addSpace() {
   if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
     return;
   }
-  var bannerHeight = $( 'div#WMDE_Banner' ).height(),
-      skin = BannerFunctions.getSkin();
 
-  switch ( skin ) {
-    case 'vector':
-      SizeIssues.trackSizeIssues(
-          $( 'div#WMDE_Banner' ),
-          trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
-          sizeIssueTrackRatio
-      );
-      $( '#mw-panel' ).animate( { 'top': bannerHeight }, 1000 );
-      $( '#mw-head' ).animate( { 'top': bannerHeight }, 1000 );
-      $( '#mw-page-base' ).animate( { 'padding-top': bannerHeight }, 1000);
-    case 'minerva':
-      $( '#mw-mf-viewport' ).animate( { 'top': bannerHeight}, 1000 );
-      break;
-  }
+	if ( BannerFunctions.getSkin().getName() === 'vector' ) {
+		SizeIssues.trackSizeIssues(
+			$( 'div#WMDE_Banner' ),
+			trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
+			sizeIssueTrackRatio
+		);
+	}
+
+	BannerFunctions.getSkin().addSpace( $( 'div#WMDE_Banner' ).height() );
 }
 
 function addSpaceInstantly() {
   if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
     return;
   }
-  var bannerHeight = $( 'div#WMDE_Banner' ).height(),
-      skin = BannerFunctions.getSkin();
 
-  switch ( skin ) {
-    case 'vector':
-      $( '#mw-panel' ).css( { top: bannerHeight } );
-      $( '#mw-head' ).css( { top: bannerHeight } );
-      $( '#mw-page-base' ).css( { paddingTop: bannerHeight } );
-    case 'minerva':
-      $( '#mw-mf-viewport' ).css( { top: bannerHeight } );
-      break;
-  }
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
-	var skin = BannerFunctions.getSkin();
-	switch ( skin ) {
-		case 'vector':
-			$( '#mw-panel' ).css( 'top', 0 );
-			$( '#mw-head' ).css( 'top', 0 );
-			$( '#mw-page-base' ).css( 'padding-top', 0 );
-			break;
-		case 'minerva':
-			$( '#mw-mf-viewport' ).css( 'top', 0 );
-			$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
-			break;
-		case 'monobook':
-			$( '#globalWrapper' ).css( 'position', 'relative' );
-			$( '#globalWrapper' ).css( 'top', 0 );
-			break;
-	}
+	BannerFunctions.getSkin().removeSpace();
 }
 
 function displayBanner() {
