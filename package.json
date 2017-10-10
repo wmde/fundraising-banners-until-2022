@@ -9,7 +9,7 @@
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
     "clean": "rm dist/*.js dist/*.wikitext",
-    "lint:js": "eslint . --cache --ignore-path .gitignore"
+    "lint:js": "eslint --cache --ignore-path .gitignore ."
   },
   "keywords": [],
   "author": "gabriel.birke@wikimedia.de",
