@@ -9,7 +9,8 @@
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
     "clean": "rm dist/*.js dist/*.wikitext",
-    "lint:js": "eslint --cache --ignore-path .gitignore ."
+    "lint:js": "eslint --cache --ignore-path .gitignore .",
+    "lint:css": "stylelint --syntax scss '**/*.pcss'"
   },
   "keywords": [],
   "author": "gabriel.birke@wikimedia.de",
@@ -39,6 +40,8 @@
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.0",
     "style-loader": "^0.18.2",
+    "stylelint": "^7.8.0",
+    "stylelint-config-wikimedia": "^0.4.1",
     "toml": "^2.3.2",
     "url": "^0.11.0",
     "webpack": "^3.3.0",
