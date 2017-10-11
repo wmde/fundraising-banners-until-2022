@@ -1,14 +1,12 @@
-language: node_js
+services:
+  - docker
 
-node_js:
-  - "8"
-
-install: travis_retry npm install
+install: docker-compose run js-build npm install
 
 script:
-  - npm run lint:js
-  - npm run lint:css
-  - npm run build
+  - docker-compose run js-build npm run lint:js
+  - docker-compose run js-build npm run lint:css
+  - docker-compose run js-build npm run build
 
 notifications:
   email:
