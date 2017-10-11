@@ -1,7 +1,7 @@
 #WMDE_Banner [class^="icon-"], #WMDE_Banner [class*=" icon-"], #wlightbox [class^="icon-"], #wlightbox [class*=" icon-"] {
 	display: inline-block;
 	background-repeat: no-repeat;
-	background-image: url('//upload.wikimedia.org/wikipedia/commons/6/6f/Icomoon_website_icon_sprite.svg');
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Icomoon_website_icon_sprite.svg' );
 }
 .icon-ok-inverted	{ width: 14px; height: 16px; background-position: 0 0; }
 .icon-parcel		{ width: 14px; height: 16px; background-position: -20px 0; }
