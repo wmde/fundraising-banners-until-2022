@@ -4,8 +4,7 @@ services:
 install: docker-compose run js-build npm install
 
 script:
-  - docker-compose run js-build npm run lint:js
-  - docker-compose run js-build npm run lint:css
+  - docker-compose run js-build npm run lint
   - docker-compose run js-build npm run build
 
 notifications:
