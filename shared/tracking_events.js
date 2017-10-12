@@ -15,7 +15,14 @@ function TrackingEvents( bannerName, trackingImage ) {
     this.baseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 }
 
-TrackingEvents.prototype.trackClickEvent = function ( trackedElement, actionName, trackRatio ) {
+/**
+ * Track a click event on a given element
+ *
+ * @param {jQuery} $trackedElement The element to bind the click event to
+ * @param {string} actionName Name of the action to be tracked
+ * @param {number} trackRatio The probability of the event being tracked (between 0 and 1)
+ */
+TrackingEvents.prototype.trackClickEvent = function ( $trackedElement, actionName, trackRatio ) {
     const self = this;
     if ( typeof trackRatio === 'undefined' ) {
         trackRatio = 1;
@@ -31,6 +38,12 @@ TrackingEvents.prototype.trackClickEvent = function ( trackedElement, actionName
 	} );
 };
 
+/**
+ * Track the event of a banner being too large for a user's viewport
+ *
+ * @param {jQuery} trackingData Additional data to be provided to the tracker
+ * @param {string} trackingRatio The probability of the event being tracked (between 0 and 1)
+ */
 TrackingEvents.prototype.trackSizeIssueEvent = function ( trackingData, trackingRatio ) {
 	const self = this;
 
