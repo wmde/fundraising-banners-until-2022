@@ -137,13 +137,6 @@ function addSpace() {
 		return;
 	}
 
-	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
-		trackingLinkGenerator.trackSizeIssueEvent(
-			sizeIssueIndicator.generateTrackingData( $bannerElement ),
-			sizeIssueTrackRatio
-		);
-	}
-
 	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
@@ -233,8 +226,18 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-  if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
-    return;
-  }
-  setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+	var $bannerElement = $( '#WMDE_Banner' );
+
+	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
+		return;
+	}
+
+	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+		trackingLinkGenerator.trackSizeIssueEvent(
+			sizeIssueIndicator.generateTrackingData( $bannerElement ),
+			sizeIssueTrackRatio
+		);
+	} else {
+		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+	}
 } );
