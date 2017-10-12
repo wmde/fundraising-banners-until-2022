@@ -1,3 +1,14 @@
+function getTrackingURL( baseUrl, actionName, bannerName, data ) {
+	return [
+		baseUrl,
+		actionName,
+		bannerName,
+		data || ''
+	].filter( function ( value ) {
+		return value.length > 0;
+	} ).join( '/' );
+}
+
 function TrackingEvents( bannerName, trackingImage ) {
     this.bannerName = bannerName;
     this.trackingImage = trackingImage;
@@ -9,11 +20,15 @@ TrackingEvents.prototype.trackClickEvent = function ( trackedElement, actionName
     if ( typeof trackRatio === 'undefined' ) {
         trackRatio = 1;
     }
-    trackedElement.click( function () {
-        if ( Math.random() < trackRatio ) {
-            self.trackingImage.attr( 'src', self.getTrackingURL( actionName ) );
-        }
-    } );
+
+	$trackedElement.click( function () {
+		if ( Math.random() < trackRatio ) {
+			self.trackingImage.attr(
+				'src',
+				getTrackingURL( this.baseUrl, actionName, this.bannerName, '' )
+			);
+		}
+	} );
 };
 
 TrackingEvents.prototype.trackSizeIssueEvent = function ( trackingData, trackingRatio ) {
@@ -24,25 +39,11 @@ TrackingEvents.prototype.trackSizeIssueEvent = function ( trackingData, tracking
 	}
 	
 	if ( Math.random() < trackingRatio ) {
-		self.trackingImage.attr( 'src', self.getTrackingURL( 'banner-size-issue', trackingData ) );
+		self.trackingImage.attr(
+			'src',
+			getTrackingURL( this.baseUrl, 'banner-size-issue', this.bannerName, trackingData )
+		);
 	}
-};
-
-/**
- * @param {string} actionName
- * @param {string} data Possible additional data to append
- * @return {string} Tracking URL
- */
-TrackingEvents.prototype.getTrackingURL = function ( actionName, data ) {
-    return [
-        this.baseUrl,
-        actionName,
-        this.bannerName,
-        data || ''
-    ].filter( function ( value ) {
-        return value.length > 0;
-    } ).join( '/' );
-
 };
 
 module.exports = TrackingEvents;
