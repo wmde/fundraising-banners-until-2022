@@ -82,15 +82,17 @@
 		.infobox__text {
 			padding: 48px 72px;
 		}
-	} @media ( min-height: 1000px ) {
-	.infobox {
-		font-size: 24px;
 	}
 
-	.infobox__text {
-		padding: 48px 72px;
+	@media ( min-height: 1000px ) {
+		.infobox {
+			font-size: 24px;
+		}
+
+		.infobox__text {
+			padding: 48px 72px;
+		}
 	}
-}
 
 	.infobox__text p {
 		margin-bottom: 10px;
@@ -122,15 +124,19 @@
 		.call-to-action {
 			padding: 27px;
 		}
-	} @media ( min-width: 1100px ) {
-	.call-to-action {
-		font-size: 33px;
 	}
-} @media ( min-width: 800px ) {
-	.call-to-action__optional-text {
-		display: inline;
+
+	@media ( min-width: 1100px ) {
+		.call-to-action {
+			font-size: 33px;
+		}
 	}
-}
+
+	@media ( min-width: 800px ) {
+		.call-to-action__optional-text {
+			display: inline;
+		}
+	}
 
 	.call-to-action:after {
 		position: absolute;
