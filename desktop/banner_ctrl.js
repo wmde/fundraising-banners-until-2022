@@ -228,6 +228,9 @@ $( function () {
 	}
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+		if ( BannerFunctions.onMediaWiki() ) {
+			mw.centralNotice.setBannerLoadedButHidden();
+		}
 		trackingLinkGenerator.trackSizeIssueEvent(
 			sizeIssueIndicator.generateTrackingData( $bannerElement ),
 			sizeIssueTrackRatio
