@@ -1,7 +1,7 @@
-#WMDE_Banner [class^="icon-"],
-#WMDE_Banner [class*=" icon-"],
-#wlightbox [class^="icon-"],
-#wlightbox [class*=" icon-"] {
+#WMDE_Banner [class^='icon-'],
+#WMDE_Banner [class*=' icon-'],
+#wlightbox [class^='icon-'],
+#wlightbox [class*=' icon-'] {
 	display: inline-block;
 	background-repeat: no-repeat;
 	background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Icomoon_website_icon_sprite.svg');
