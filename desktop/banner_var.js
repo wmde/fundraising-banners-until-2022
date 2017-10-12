@@ -132,17 +132,19 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-  if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
-    return;
-  }
+	var $bannerElement = $( 'div#WMDE_Banner' );
+    if ( !$bannerElement.is( ':visible' ) ) {
+		return;
+	}
 
-	sizeIssueIndicator.trackSizeIssues(
-		$( 'div#WMDE_Banner' ),
-		trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
-		sizeIssueTrackRatio
-	);
+	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+		trackingLinkGenerator.trackSizeIssueEvent(
+			sizeIssueIndicator.generateTrackingData( $bannerElement ),
+			sizeIssueTrackRatio
+		);
+	}
 
-	BannerFunctions.getSkin().addSpace( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
 function addSpaceInstantly() {
