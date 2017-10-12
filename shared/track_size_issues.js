@@ -1,13 +1,17 @@
 const $ = require( 'jquery' );
 
+function SizeIssueIndicator( thresholdInPixels ) {
+	this.thresholdInPixels = thresholdInPixels;
+}
+
 /**
  * Get number of pixels remaining in viewport after the banner height was subtracted.
  * @param {jQuery} bannerElement
  * @return {number}
  */
-const getVisibleWikipedia = function ( bannerElement ) {
+function getVisibleWikipedia( bannerElement ) {
 	return $( window ).height() - bannerElement.height();
-};
+}
 
 /**
  * Check if Banner takes too much screen space and track the incident
@@ -15,11 +19,11 @@ const getVisibleWikipedia = function ( bannerElement ) {
  * @param {string} trackingLink
  * @param {number} trackRatio
  */
-const trackSizeIssues = function( bannerElement, trackingLink, trackRatio ) {
+SizeIssueIndicator.prototype.trackSizeIssues = function( bannerElement, trackingLink, trackRatio ) {
 	var bannerHeight = bannerElement.height(),
 		viewportHeight = $( window ).height(),
 		viewportWidth = $( window ).width(),
-		threshold = 180, // Pixels
+		threshold = this.thresholdInPixels, // Pixels
 		resolutions = '';
 	
 	if ( getVisibleWikipedia( bannerElement ) > threshold ) {
@@ -43,7 +47,4 @@ const trackSizeIssues = function( bannerElement, trackingLink, trackRatio ) {
 	bannerElement.append( $( '<img id="WMDE_Banner-track-sizes" width="1" height="1">' ).attr( 'src', trackUrl ) );
 };
 
-module.exports = {
-	trackSizeIssues: trackSizeIssues,
-	getVisibleWikipedia: getVisibleWikipedia
-};
+module.exports = SizeIssueIndicator;

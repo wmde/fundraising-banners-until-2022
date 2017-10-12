@@ -7,6 +7,7 @@ require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
+const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
 const LANGUAGE = 'de';
 
@@ -18,7 +19,6 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const SizeIssues = require( '../shared/track_size_issues' );
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
 const TrackingEvents = require( '../shared/tracking_events' );
@@ -36,6 +36,9 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
+
+const SizeIssueIndicator = require( '../shared/track_size_issues' );
+const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 $bannerContainer.html( bannerTemplate( {
     // TODO approx. donors
@@ -133,7 +136,7 @@ function addSpace() {
     return;
   }
 
-	SizeIssues.trackSizeIssues(
+	sizeIssueIndicator.trackSizeIssues(
 		$( 'div#WMDE_Banner' ),
 		trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
 		sizeIssueTrackRatio
