@@ -237,7 +237,7 @@ $( function () {
 			mw.centralNotice.setBannerLoadedButHidden();
 		}
 		trackingLinkGenerator.trackSizeIssueEvent(
-			sizeIssueIndicator.generateTrackingData( $bannerElement ),
+			sizeIssueIndicator.generateTrackingData( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
 	} else {
