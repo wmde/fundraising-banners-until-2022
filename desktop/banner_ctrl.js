@@ -7,7 +7,7 @@ const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
 const LANGUAGE = 'de';
-
+const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
 const fundraisingBanner = {};
@@ -48,7 +48,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.click-tracking__pixel' ) );
+const trackingLinkGenerator = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
 function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );

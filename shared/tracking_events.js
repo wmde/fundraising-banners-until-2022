@@ -9,10 +9,10 @@ function getTrackingURL( baseUrl, actionName, bannerName, data ) {
 	} ).join( '/' );
 }
 
-function TrackingEvents( bannerName, trackingImage ) {
-    this.bannerName = bannerName;
-    this.trackingImage = trackingImage;
-    this.baseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
+function TrackingEvents( baseUrl, bannerName, trackingImage ) {
+	this.baseUrl = baseUrl;
+	this.bannerName = bannerName;
+	this.trackingImage = trackingImage;
 }
 
 /**
@@ -32,7 +32,7 @@ TrackingEvents.prototype.trackClickEvent = function ( $trackedElement, actionNam
 		if ( Math.random() < trackRatio ) {
 			self.trackingImage.attr(
 				'src',
-				getTrackingURL( this.baseUrl, actionName, this.bannerName, '' )
+				getTrackingURL( self.baseUrl, actionName, self.bannerName, '' )
 			);
 		}
 	} );
