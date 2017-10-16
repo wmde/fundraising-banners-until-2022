@@ -16,6 +16,7 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 const fundraisingBanner = {};
 
 import TrackingEvents from '../shared/tracking_events';
+import SizeIssueIndicator from '../shared/track_size_issues';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -37,8 +38,6 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
-
-const SizeIssueIndicator = require( '../shared/track_size_issues' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 $bannerContainer.html( bannerTemplate( {
