@@ -7,15 +7,24 @@ function SizeIssueIndicator( thresholdInPixels ) {
 /**
  * Get banner height and screen/window dimensions as a concatenated string
  * @param {number} bannerHeight
- * @return {string} tracking data
+ * @return {object} screen, window and banner dimensions
  */
-SizeIssueIndicator.prototype.generateTrackingData = function( bannerHeight ) {
-	return [
-		bannerHeight,
-		$( window ).width() + 'x' + $( window ).height(),
-		screen.width + 'x' + screen.height,
-		window.outerWidth + 'x' + window.outerHeight
-	].join( '--' )
+SizeIssueIndicator.prototype.getDimensions = function( bannerHeight ) {
+	return {
+		bannerHeight: bannerHeight,
+		screen: {
+			width: screen.width,
+			height: screen.height
+		},
+		window: {
+			width: $( window ).width(),
+			height: $( window ).height()
+		},
+		windowOuter: {
+			width: window.outerWidth,
+			height: window.outerHeight
+		}
+	};
 };
 
 /**
