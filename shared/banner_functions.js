@@ -212,8 +212,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	function getAmount() {
 		var amount = null,
-			otherAmount = $( '#amount-other-input' ).val(),
-			form = document.donationForm;
+			otherAmount = $( '#amount-other-input' ).val();
 
 		amount = $( 'input[name=betrag_auswahl]:checked' ).val();
 
