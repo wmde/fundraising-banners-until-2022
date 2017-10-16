@@ -200,6 +200,10 @@ $( document ).ready( function () {
 	}
 } );
 
+function addPointsToNum() {
+	// fixme Called in animateProgressBar() but not implemented!
+}
+
 function animateProgressBar() {
 	var donationFillElement = $( '#donationFill' );
 	donationFillElement.width( '0px' );
