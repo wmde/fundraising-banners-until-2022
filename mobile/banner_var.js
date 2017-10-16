@@ -1,3 +1,5 @@
+/* eslint no-alert: 1 */
+
 require( './css/styles_var.pcss' );
 require( './css/styles_mini_var.pcss' );
 

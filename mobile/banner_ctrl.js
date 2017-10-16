@@ -1,3 +1,5 @@
+/* eslint no-alert: 1 */
+
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
