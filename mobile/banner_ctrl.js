@@ -1,4 +1,5 @@
 require( './css/styles.pcss' );
+require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 1;
@@ -54,8 +55,8 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.banner-tracking' ) );
-trackingLinkGenerator.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
-trackingLinkGenerator.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
+trackingLinkGenerator.trackClickEvent( $( '.mini-banner' ), 'banner-expanded' );
+trackingLinkGenerator.trackClickEvent( $( '.mini-banner__close' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
@@ -136,10 +137,11 @@ var lazyResize = debounce( function() {
 $( window ).on( 'orientationchange', lazyResize );
 
 function addBannerSpace() {
-	var bannerHeight = $( '#frbanner2' ).height();
-	$( '#frbanner2' ).css( 'top', 0 - bannerHeight ).show();
 
-	$( '#frbanner2' ).animate( {
+	var bannerHeight = $( '.mini-banner' ).height();
+	$( '.mini-banner' ).css( 'top', 0 - bannerHeight ).show();
+
+	$( '.mini-banner' ).animate( {
 		top: 0
 	}, 1000 );
 
@@ -160,8 +162,8 @@ $(document).ready(function() {
 		$("#frbanner").hide();
 	});
 
-	$("#frbanner2-close").click(function() {
-		$( '#frbanner2' ).hide();
+	$( '.mini-banner__close-button' ).click(function() {
+		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
 
 		if ( BannerFunctions.onMediaWiki() ) {
@@ -171,11 +173,11 @@ $(document).ready(function() {
 		return false;
 	});
 
-	$("#frbanner2").click(function() {
+	$( '.mini-banner' ).click(function() {
 		window.scrollTo(0,0);
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 		$("#frbanner").show();
-		$("#frbanner2").slideToggle();
+		$( '.mini-banner' ).slideToggle();
 
 		animateProgressBar();
 		window.setTimeout( function () {
