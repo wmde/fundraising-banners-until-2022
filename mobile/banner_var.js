@@ -229,8 +229,6 @@ function animateProgressBar() {
 			$( 'div#donationTooltip' ).css( 'left', Math.min( ( fillWidth - tooltipWidth / 2 ), tooltipMaxLeft ) + 'px' ).show();
 			$( 'div#donationTooltipArrow' ).css( 'left', ( fillWidth - 11 ) + 'px' ).show();
 
-			var dFill = donationFillElement.width();
-			var pFill = dFill / barWidth;
 			var vRem = dRemaining / 1000000;
 
 			vRem = vRem.toFixed( 1 );
