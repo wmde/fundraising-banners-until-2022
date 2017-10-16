@@ -48,7 +48,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingLinkGenerator = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
+const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
 function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );
@@ -195,10 +195,10 @@ $( '#application-of-funds-link' ).click( function () {
 } );
 
 // track lightbox link clicking and banner closing
-trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
+trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
+trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
+trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
@@ -231,7 +231,7 @@ $( function () {
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
 		}
-		trackingLinkGenerator.trackSizeIssueEvent(
+		trackingEvents.trackSizeIssueEvent(
 			sizeIssueIndicator.generateTrackingData( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);

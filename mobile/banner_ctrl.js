@@ -1,7 +1,7 @@
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 1;
+const bannerCloseTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -54,9 +54,9 @@ $bannerContainer.html( bannerTemplate( {
 	BannerName: BannerName
 } ) );
 
-const trackingLinkGenerator = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
-trackingLinkGenerator.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
-trackingLinkGenerator.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
+const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
+trackingEvents.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
+trackingEvents.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
