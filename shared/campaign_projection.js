@@ -1,7 +1,7 @@
 /**
  * @param {Date} campaignStartDate
  * @param {Date} campaignEndDate
- * @returns {number}
+ * @return {number}
  */
 function getSecondsSinceCampaignStart( campaignStartDate, campaignEndDate ) {
 	const maxSecs = Math.floor( ( campaignEndDate.getTime() - campaignStartDate.getTime() ) / 1000 ),
@@ -15,7 +15,7 @@ function getSecondsSinceCampaignStart( campaignStartDate, campaignEndDate ) {
  * @param {Date} campaignEndDate
  * @param {number} base
  * @param {number} increasePerMinute
- * @returns {number}
+ * @return {number}
  */
 function calculateProjection( campaignStartDate, campaignEndDate, base, increasePerMinute ) {
 	const minutesPassed = getSecondsSinceCampaignStart( campaignStartDate, campaignEndDate ) / 60;

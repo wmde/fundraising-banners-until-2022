@@ -207,6 +207,8 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 	 * Check the "interval" radio buttons and change the "period" and "intervalType" fields accordingly.
 	 * If "periodically" is selected but no interval is selected, this function
 	 * will display an error message via alert.
+	 *
+	 * @return {boolean}
 	 */
 	function validateAndSetPeriod() {
 		var form = document.donationForm;
