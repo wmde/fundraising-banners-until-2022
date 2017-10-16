@@ -253,6 +253,8 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 				skinName = 'wpde';
 			}
 
+			/* eslint new-cap: [ "error", { "newIsCapExceptions": [ "skinClass" ] } ] */
+
 			skinClass = require( './skin/' + skinName );
 			skin = new skinClass();
 		}
