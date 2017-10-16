@@ -76,10 +76,10 @@
 				// position & size
 				$.each( 'top bottom left right width height maxWidth maxHeight'.split( ' ' ), function ( index, item ) {
 					switch ( typeof s.options[ item ] ) {
-						case "undefined":
+						case 'undefined':
 						    return;
-						case "function":
-							$wlightbox.css( item, s.options[ item ]( item ) );;
+						case 'function':
+							$wlightbox.css( item, s.options[ item ]( item ) );
 						default:
 							$wlightbox.css( item, s.options[ item ] );
 					}
@@ -194,4 +194,4 @@
 		$.fn.wlightbox.css = document.createStyleSheet( '' );
 	}
 
-} )( jQuery );
+}( jQuery ) );

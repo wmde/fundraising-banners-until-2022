@@ -1,19 +1,19 @@
-/*jshint unused: false */
+/* jshint unused: false */
 
 var customDayNames = {
 	'06.12': {
 		de: 'Nikolaustag',
 		en: 'St Nicholas Day'
 	},
-	'24.12': {
+	24.12: {
 		de: 'Weihnachtsfeiertag',
 		en: 'Christmas Day'
 	},
-	'25.12': {
+	25.12: {
 		de: '1. Weihnachtsfeiertag',
 		en: 'Christmas Day'
 	},
-	'26.12': {
+	26.12: {
 		de: '2. Weihnachtsfeiertag',
 		en: 'Christmas Day'
 	}

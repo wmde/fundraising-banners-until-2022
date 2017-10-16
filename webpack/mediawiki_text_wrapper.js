@@ -25,23 +25,23 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 
 			wrappedFiles[ filename + '.wikitext' ] = self.template( Object.assign( {
 				banner: compilation.assets[ filename ].source(),
-				campaignConfig: self.campaignConfig[ filename.replace( /\.js$/, '' ) ] || {},
+				campaignConfig: self.campaignConfig[ filename.replace( /\.js$/, '' ) ] || {}
 			}, self.context ) );
 		}
 
 		for ( let filename in wrappedFiles ) {
 			compilation.assets[ filename ] = {
-				source: function() {
+				source: function () {
 					return wrappedFiles[ filename ];
 				},
-				size: function() {
+				size: function () {
 					return wrappedFiles[ filename ].length;
 				}
 			};
 		}
 
 		callback();
-	});
+	} );
 };
 
 module.exports = MediaWikiTextWrapper;

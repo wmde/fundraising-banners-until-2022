@@ -9,10 +9,10 @@ const bannerSelectionListTemplate = require( './banner_selection_list.hbs' );
 
 const currentUrl = url.parse( window.location.href, true );
 
-const Handlebars = require('handlebars/runtime');
-Handlebars.registerHelper('bannerlink', function( campaign, bannername ) {
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'bannerlink', function ( campaign, bannername ) {
 	return campaign.preview_link.replace( '{{banner}}', bannername );
-});
+} );
 
 if ( !currentUrl.query.devbanner ) {
 

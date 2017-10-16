@@ -1,5 +1,5 @@
-/*jshint latedef: nofunc */
-/*jshint unused: false */
+/* jshint latedef: nofunc */
+/* jshint unused: false */
 /* globals mw, alert */
 
 var $ = require( 'jquery' );
@@ -40,7 +40,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		hideAmountError();
 	};
 
-	BannerEventHandlers.handleCustomAmount = function() {
+	BannerEventHandlers.handleCustomAmount = function () {
 		$( 'input:radio[name=betrag_auswahl]' ).prop( 'checked', false );
 		$( '#amount_other' ).prop( 'checked', true );
 		hideAmountError();
@@ -218,7 +218,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 				$( '#intervalType' ).val( '1' );
 				$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
 			}
-		} else if ( $( '#interval_onetime' ).is( ':checked' ) )  {
+		} else if ( $( '#interval_onetime' ).is( ':checked' ) ) {
 			$( '#periode' ).val( '0' );
 			$( '#intervalType' ).val( '0' );
 		} else {
@@ -226,8 +226,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			if ( $( '.interval_tab' ).length > 0 ) {
 				$( '#periode' ).val( '0' );
 				$( '#intervalType' ).val( '0' );
-					}
-			else {
+			} else {
 				showFrequencyError( noIntervalSelectedMessage );
 				return false;
 			}
@@ -297,7 +296,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			}
 
 			skinClass = require( './skin/' + skinName );
-			skin = new skinClass;
+			skin = new skinClass();
 		}
 
 		return skin;
@@ -325,6 +324,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		hideFrequencyError: hideFrequencyError,
 		removeBannerSpace: removeBannerSpace,
 		getDigitGroupingCharacter: getDigitGroupingCharacter
-	}
+	};
 
 };
