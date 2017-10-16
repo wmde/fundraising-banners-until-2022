@@ -1,5 +1,5 @@
-require( './css/styles_var.pcss' );
-require( './css/styles_mini_var.pcss' );
+require( './css/styles.pcss' );
+require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 1;
@@ -108,6 +108,17 @@ $( '#btn-bez' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'BEZ' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
+$( '#btn-sofort' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'SUB' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
 	} else {
