@@ -31,7 +31,7 @@ const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
 import TrackingEvents from '../shared/tracking_events';
 
-const bannerTemplate = require('./templates/banner_html.hbs');
+const bannerTemplate = require('./templates/banner_html_var.hbs');
 
 const $ = require( 'jquery' );
 
@@ -109,6 +109,17 @@ $( '#btn-bez' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'BEZ' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
+$( '#btn-sofort' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'SUB' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
 	} else {
