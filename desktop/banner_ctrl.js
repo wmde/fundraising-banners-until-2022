@@ -218,10 +218,13 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-  var $bannerElement = $( '#WMDE_Banner' );if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
-    return;
-  }
-  if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+	var $bannerElement = $( '#WMDE_Banner' );
+
+	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
+		return;
+	}
+
+	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
 		}
@@ -229,5 +232,7 @@ $( function () {
 			sizeIssueIndicator.generateTrackingData( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
-	} else {setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );}
+	} else {
+		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+	}
 } );
