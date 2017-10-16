@@ -28,7 +28,6 @@ if ( !currentUrl.query.devbanner ) {
 	const currentBanner = currentUrl.query.devbanner;
 	const container = $( '#WMDE-Banner-Container' );
 	if ( pages[ currentBanner ] ) {
-		console.log( 'current banner', currentBanner, pages[ currentBanner ].tracking, pages[ currentBanner ].campaign_tracking );
 		container.data( 'tracking', pages[ currentBanner ].tracking );
 		container.data( 'campaign-tracking', pages[ currentBanner ].campaign_tracking );
 	}
