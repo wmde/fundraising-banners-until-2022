@@ -7,7 +7,8 @@
 		"browser": true,
 		"node": true,
 		"jquery": true,
-		"qunit": true
+		"qunit": true,
+		"mocha": true
 	},
 	"globals": {
 	},
