@@ -268,7 +268,7 @@ function validateForm() {
 		}
 	}
 	// Check amount is a real number
-	error = ( amount == null || isNaN( amount ) || amount.value <= 0 );
+	error = ( amount === null || isNaN( amount ) || amount.value <= 0 );
 	// Check amount is at least the minimum
 	if ( amount < 1 || error ) {
 
