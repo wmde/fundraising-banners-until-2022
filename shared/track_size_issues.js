@@ -1,47 +1,41 @@
-const $ = require( 'jquery' );
+import $ from 'jquery';
 
-/**
- * Get number of pixels remaining in viewport after the banner height was subtracted.
- * @param jQuery bannerElement
- * @return Number
- */
-const getVisibleWikipedia = function ( bannerElement ) {
-    return $( window ).height() - bannerElement.height();
-};
+export default class SizeIssueIndicator {
 
-/**
- * Check if Banner takes too much screen space and track the incident
- * @param jQuery bannerElement
- */
-const trackSizeIssues = function( bannerElement, trackingLink, trackRatio ) {
-    var bannerHeight = bannerElement.height(),
-        viewportHeight = $( window ).height(),
-        viewportWidth = $( window ).width(),
-        threshold = 180, // Pixels
-        resolutions = '';
+	constructor( thresholdInPixels ) {
+		this.thresholdInPixels = thresholdInPixels;
+	}
 
-    if ( getVisibleWikipedia( bannerElement ) > threshold ) {
-        return;
-    }
-    if ( Math.random() > trackRatio ) {
-        return;
-    }
-    // Avoid multiple tracking when trackSpaceIssues is called multiple times
-    if ( $( '#WMDE_Banner-track-sizes', bannerElement ).length > 0 ) {
-        return;
-    }
-    resolutions = [
-        bannerHeight,
-        viewportWidth + 'x' + viewportHeight,
-        screen.width + 'x' + screen.height,
-        window.outerWidth + 'x' + window.outerHeight
-    ].join( '--' );
+	/**
+	 * Get banner height and screen/window dimensions as a concatenated string
+	 * @param {number} bannerHeight
+	 * @return {object} screen, window and banner dimensions
+	 */
+	getDimensions( bannerHeight ) {
+		return {
+			bannerHeight: bannerHeight,
+			screen: {
+				width: screen.width,
+				height: screen.height
+			},
+			window: {
+				width: $( window ).width(),
+				height: $( window ).height()
+			},
+			windowOuter: {
+				width: window.outerWidth,
+				height: window.outerHeight
+			}
+		};
+	};
 
-    var trackUrl = trackingLink.replace( /\/$/, '' ) + '/' + resolutions;
-    bannerElement.append( $( '<img id="WMDE_Banner-track-sizes" width="1" height="1">' ).attr( 'src', trackUrl ) );
-};
+	/**
+	 * Check if Banner takes too much screen space and track the incident
+	 * @param {jQuery} $bannerElement
+	 * @return {boolean} whether or not the remaining viewport height is below the threshold
+	 */
+	hasSizeIssues( $bannerElement ) {
+		return ( $( window ).height() - $bannerElement.height() ) < this.thresholdInPixels;
+	};
 
-module.exports = {
-  trackSizeIssues: trackSizeIssues,
-  getVisibleWikipedia: getVisibleWikipedia
-};
+}

@@ -2,8 +2,9 @@ require( './css/styles_var.pcss' );
 require( './css/styles_mini_var.pcss' );
 
 // BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 1;
+const bannerCloseTrackRatio = 0.01;
 const LANGUAGE = 'de';
+const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
 const fundraisingBanner = {};
@@ -54,9 +55,9 @@ $bannerContainer.html( bannerTemplate( {
 	BannerName: BannerName
 } ) );
 
-const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.banner-tracking' ) );
-trackingLinkGenerator.trackClickEvent( $( '.mini-banner' ), 'banner-expanded' );
-trackingLinkGenerator.trackClickEvent( $( '.mini-banner__close' ), 'banner-closed', bannerCloseTrackRatio );
+const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
+trackingEvents.trackClickEvent( $( '.mini-banner' ), 'banner-expanded' );
+trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );

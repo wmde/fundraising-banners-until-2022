@@ -7,21 +7,23 @@ require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
+const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
 const LANGUAGE = 'de';
-
+const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
 const fundraisingBanner = {};
+
+import TrackingEvents from '../shared/tracking_events';
+import SizeIssueIndicator from '../shared/track_size_issues';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const SizeIssues = require( '../shared/track_size_issues' );
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
-const TrackingEvents = require( '../shared/tracking_events' );
 
 // For A/B testing different text or markup, load
 // const bannerTemplate = require('./banner_var.hbs');
@@ -36,6 +38,7 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
+const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 $bannerContainer.html( bannerTemplate( {
     // TODO approx. donors
@@ -50,7 +53,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingLinkGenerator = new TrackingEvents( BannerName, $( '.click-tracking__pixel' ) );
+const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
 function setupValidationEventHandling() {
   var banner = $( '#WMDE_Banner' );
@@ -129,19 +132,12 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-  if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
-    return;
-  }
-
-	if ( BannerFunctions.getSkin().getName() === 'vector' ) {
-		SizeIssues.trackSizeIssues(
-			$( 'div#WMDE_Banner' ),
-			trackingLinkGenerator.getTrackingURL( 'banner-size-issue' ),
-			sizeIssueTrackRatio
-		);
+	var $bannerElement = $( 'div#WMDE_Banner' );
+    if ( !$bannerElement.is( ':visible' ) ) {
+		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
 function addSpaceInstantly() {
@@ -204,10 +200,10 @@ $( '#application-of-funds-link' ).click( function () {
 } );
 
 // track lightbox link clicking and banner closing
-trackingLinkGenerator.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingLinkGenerator.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingLinkGenerator.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
+trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
+trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
+trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
@@ -230,8 +226,21 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-  if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
-    return;
-  }
-  setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+	var $bannerElement = $( '#WMDE_Banner' );
+
+	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== "view" ) {
+		return;
+	}
+
+	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+		if ( BannerFunctions.onMediaWiki() ) {
+			mw.centralNotice.setBannerLoadedButHidden();
+		}
+		trackingEvents.trackSizeIssueEvent(
+			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
+			sizeIssueTrackRatio
+		);
+	} else {
+		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+	}
 } );
