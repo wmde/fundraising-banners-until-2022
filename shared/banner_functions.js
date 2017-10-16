@@ -7,18 +7,12 @@ var $ = require( 'jquery' );
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
-		baseDate = GlobalBannerSettings[ 'donations-date-base' ] || '2017-11-01',
-		collectedBase = parseInt( GlobalBannerSettings.collectedBase || 0, 10 ),
-		donorsBase = parseInt( GlobalBannerSettings.donorsBase, 10 ),
-		donationsPerMinApproximation = parseFloat( GlobalBannerSettings[ 'appr-donations-per-minute' ] || 0.1 ),
-		donorsPerMinApproximation = parseFloat( GlobalBannerSettings[ 'appr-donators-per-minute' ] ),
 		noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 		amountEmptyMessage = Translations[ 'amount-empty-message' ] || 'Bitte wählen Sie zuerst einen Betrag.',
 		amountTooLowMessage = Translations[ 'amount-too-low-message' ] || 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
-		showBanner = true,
 		BannerEventHandlers = BannerEventHandlers || {},
 		messages = {
 			en: {
