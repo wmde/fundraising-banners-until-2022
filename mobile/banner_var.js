@@ -1,7 +1,7 @@
 /* eslint no-alert: 1 */
 
-require( './css/styles_var.pcss' );
-require( './css/styles_mini_var.pcss' );
+require( './css/styles.pcss' );
+require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -31,7 +31,7 @@ const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
 import TrackingEvents from '../shared/tracking_events';
 
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 
