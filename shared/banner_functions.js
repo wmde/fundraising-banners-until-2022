@@ -217,9 +217,9 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		amount = $( 'input[name=betrag_auswahl]:checked' ).val();
 
 		if ( otherAmount !== '' ) {
-			otherAmount = otherAmount.replace( /[,.](\d)$/, '\:$10' );
-			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, '\:$1$2' );
-			otherAmount = otherAmount.replace( /[\$,.]/g, '' );
+			otherAmount = otherAmount.replace( /[,.](\d)$/, ':$10' );
+			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, ':$1$2' );
+			otherAmount = otherAmount.replace( /[$,.]/g, '' );
 			otherAmount = otherAmount.replace( /:/, '.' );
 			$( '#amount-other-input' ).val( otherAmount );
 			amount = otherAmount;
