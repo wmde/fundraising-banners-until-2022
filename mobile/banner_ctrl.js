@@ -62,7 +62,7 @@ trackingEvents.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', banner
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.send' ).click( function ( e ) {
+$( '.send' ).click( function () {
 	return validateForm();
 } );
 

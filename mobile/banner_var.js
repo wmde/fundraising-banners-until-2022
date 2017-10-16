@@ -63,7 +63,7 @@ trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-close
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.send' ).click( function ( e ) {
+$( '.send' ).click( function () {
 	return validateForm();
 } );
 

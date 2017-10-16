@@ -80,12 +80,12 @@ function setupValidationEventHandling() {
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function ( evt ) {
+	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 
-	banner.on( 'amount:custom', null, function ( evt ) {
+	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
