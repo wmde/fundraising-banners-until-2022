@@ -53,10 +53,10 @@ module.exports = {
 		new MediaWikiTextWrapper( {
 			template: fs.readFileSync( './webpack/banner_wikitext_wrapper.hbs', 'utf8' ),
 			context: {
-		        bannerValues: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}'
+				bannerValues: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}'
 			},
 			filePattern: 'B17WMDE_*.js',
-		  campaignConfig: campaigns.getConfigForPages()
+			campaignConfig: campaigns.getConfigForPages()
 		} )
 	]
 };

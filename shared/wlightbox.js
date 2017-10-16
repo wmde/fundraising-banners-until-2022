@@ -77,7 +77,7 @@
 				$.each( 'top bottom left right width height maxWidth maxHeight'.split( ' ' ), function ( index, item ) {
 					switch ( typeof s.options[ item ] ) {
 						case 'undefined':
-						    return;
+							return;
 						case 'function':
 							$wlightbox.css( item, s.options[ item ]( item ) );
 						default:

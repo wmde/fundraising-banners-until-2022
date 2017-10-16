@@ -15,7 +15,7 @@ module.exports = function ( startDate, endDate ) {
 	}
 
 	function getDaysUntilCampaignEnds() {
-     	var endDay = dateObjectFromString( endDate ),
+		var endDay = dateObjectFromString( endDate ),
 			dayDelta = endDay - new Date();
 		if ( dayDelta > 0 ) {
 			return Math.floor( dayDelta / 1000 / 60 / 60 / 24 );
