@@ -27,7 +27,7 @@ export default class SizeIssueIndicator {
 				height: window.outerHeight
 			}
 		};
-	};
+	}
 
 	/**
 	 * Check if Banner takes too much screen space and track the incident
@@ -36,6 +36,6 @@ export default class SizeIssueIndicator {
 	 */
 	hasSizeIssues( $bannerElement ) {
 		return ( $( window ).height() - $bannerElement.height() ) < this.thresholdInPixels;
-	};
+	}
 
 }
