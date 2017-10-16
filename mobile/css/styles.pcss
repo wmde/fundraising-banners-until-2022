@@ -266,10 +266,14 @@
 /* --- Dynamic highlighting --- */
 
 #frbanner .highlight,
-#frbanner2 #mini-highlight .highlight {
+#frbanner2 .highlight {
 	background-color: #ff0;
 	color: #000;
 	font-weight: normal;
+}
+
+#frbanner .highlight {
+	line-height: 1.2;
 }
 
 #to-highlight span:first-child {
@@ -280,10 +284,6 @@
 #to-highlight span:last-child {
 	padding-right: 5px;
 	margin-right: -5px;
-}
-
-#frbanner-window .frbanner-message .highlight {
-	line-height: 1.2;
 }
 
 /* --- Static highlighting --- */
