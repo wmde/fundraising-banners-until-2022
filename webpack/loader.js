@@ -2,6 +2,8 @@
  * This entry point is for development only
  */
 
+/* global CAMPAIGNS */
+
 const url = require( 'url' );
 const $ = require( 'jquery' );
 const CampaignConfig = require( './campaign_config' );
