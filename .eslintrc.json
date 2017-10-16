@@ -18,6 +18,7 @@
 		"dot-notation": [ "error", { "allowKeywords": true } ],
 		"one-var": [ "off" ],
 		"vars-on-top": [ "off" ],
-		"camelcase": [ "error", { "properties": "never" } ]
+		"camelcase": [ "error", { "properties": "never" } ],
+		"no-use-before-define": [ "error", { "functions": false } ]
 	}
 }
