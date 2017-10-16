@@ -1,5 +1,3 @@
-"use strict";
-
 function generateTrackingData( dimensions ) {
 	if ( typeof dimensions !== 'object' ) {
 		return dimensions;
