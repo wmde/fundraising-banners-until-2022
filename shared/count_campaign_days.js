@@ -25,7 +25,7 @@ module.exports = function ( startDate, endDate ) {
 	}
 
 	function getCampaignDaySentence() {
-		if ( getDaysUntilCampaignEnds() == 0 ) {
+		if ( getDaysUntilCampaignEnds() === 0 ) {
 			return 'Heute ist der letzte Tag unserer Spendenkampagne.';
 		} else if ( getDaysUntilCampaignEnds() < 7 ) {
 			return 'Dies ist die letzte Woche unserer Spendenkampagne.';
@@ -39,7 +39,7 @@ module.exports = function ( startDate, endDate ) {
 	}
 
 	function getEnglishCampaignDaySentence() {
-		if ( getDaysUntilCampaignEnds() == 0 ) {
+		if ( getDaysUntilCampaignEnds() === 0 ) {
 			return 'Today is the final day of our donation campaign.';
 		} else if ( getDaysUntilCampaignEnds() < 7 ) {
 			return 'This is the last week of our donation campaign.';
