@@ -1,5 +1,6 @@
+import TrackingEvents from '../shared/tracking_events';
+
 const assert = require( 'assert' );
-const TrackingEvents = require( '../shared/tracking_events' );
 
 const { JSDOM } = require( 'jsdom' );
 const { window } = new JSDOM( '<!doctype html><html><body></body></html>' );
