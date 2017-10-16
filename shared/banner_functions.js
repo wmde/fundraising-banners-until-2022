@@ -237,22 +237,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 	}
 
 	/**
-	 * Calculate the number of donors needed, given an average donation amount.
-	 *
-	 * This function cannot return less than 0 donors when the target has been reached.
-	 *
-	 * @param  {number} averageDonation Average donation amount in EUR
-	 * @return {number} Number of donors needed (rounded up)
-	 */
-	function getRemainingDonorsNeeded( averageDonation ) {
-		var dRemaining, dCollected, numDonors;
-		dCollected = getApprDonationsRaw();
-		dRemaining = GlobalBannerSettings.goalSum - dCollected;
-		numDonors = Math.ceil( dRemaining / averageDonation );
-		return Math.max( 0, numDonors );
-	}
-
-	/**
 	 * @return {Skin}
 	 */
 	function getSkin() {
