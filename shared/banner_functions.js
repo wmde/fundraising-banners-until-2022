@@ -13,7 +13,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
-		BannerEventHandlers = BannerEventHandlers || {},
+		BannerEventHandlers = {},
 		messages = {
 			en: {
 				day: 'day',
