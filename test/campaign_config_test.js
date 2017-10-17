@@ -21,11 +21,11 @@ describe( 'CampaignConfig', function () {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
-						ctrl_fulltop: {
+						'ctrl_fulltop': {
 							filename: './foo/fulltop.js',
 							pagename: 'B17WMDE_test_ctrl_fulltop'
 						},
@@ -47,7 +47,7 @@ describe( 'CampaignConfig', function () {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
@@ -77,7 +77,7 @@ describe( 'CampaignConfig', function () {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
@@ -102,7 +102,7 @@ describe( 'CampaignConfig', function () {
 					testvalue1: 'foo',
 					testvalue2: 'bar',
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl',
 							tracking: 'tracking----ctrl'
