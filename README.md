@@ -42,10 +42,6 @@ Each entry point includes JavaScript libraries, CSS and HTML templates through `
 
 The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are used to create the tracking information inside the banner code. The tracking information is passed to the form fields and event tracking pixels inside the banner.
 
-For mobile banners on de.m.wikipedia.org you can use the mobile skin when previewing by adding the following line to your mobile campaign:
-
-	preview_skin = "minerva"
-
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
 2. Create a new campaign and its banner configuration in `campaign_info.toml`. 
