@@ -5,18 +5,22 @@
 This project is bundling all assets and dependencies of WMDE fundraising banners with webpack.
 
 ## Installing dependencies
-To install all dependencies run:
+
+To install all dependencies run
 
     docker-compose run js-build npm install
 
 ## Starting the preview
 
+The banners can be previewed using a built-in server.
+
     docker-compose up js-serve
 
 The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
-It will display a selection of banners to preview.
-Follow the links to preview them in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
+It will display a selection of banners to preview in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
+
+Changes to the code base while the preview is running should be reflected via hot reload.
 
 ## Linting the sources
 
@@ -26,7 +30,8 @@ To verify the code is up to our coding standards. These tests will also be run, 
     docker-compose run js-build npm run lint:css
 
 ## Building the assets
-To build a minified version of the banner:
+
+To build a minified version of the banner in order to use it on CentralNotice run
 
     docker-compose run js-build npm run build
 
