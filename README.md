@@ -5,24 +5,36 @@
 This project is bundling all assets and dependencies of WMDE fundraising banners with webpack.
 
 ## Installing dependencies
-To install all dependencies run:
+
+To install all dependencies run
 
     docker-compose run js-build npm install
 
-## Building the assets
-To build a minified version of the banner:
-
-    docker-compose run js-build npm run build
-
 ## Starting the preview
+
+The banners can be previewed using a built-in server.
 
     docker-compose up js-serve
 
 The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
-It will display a selection of banners to preview. The preview will be shown inside the proxied German Wikimedia.
+It will display a selection of banners to preview in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
 
-To load a different banner than the one you selected, change the `devbanner` parameter in the URL to the new banner name.
+Changes to the code base while the preview is running should be reflected via hot reload.
+
+## Check the sources
+
+To verify the code is correct and up to our coding standards. These tests will also be run, and have to pass, in CI.
+
+    docker-compose run js-build npm run test
+    docker-compose run js-build npm run lint:js
+    docker-compose run js-build npm run lint:css
+
+## Building the assets
+
+To build a minified version of the banner in order to use it on CentralNotice run
+
+    docker-compose run js-build npm run build
 
 ## Using the compiled JavaScript on CentralNotice
 
@@ -34,10 +46,6 @@ The file `campaign_info.toml` contains the metadata for all banners and campaign
 Each entry point includes JavaScript libraries, CSS and HTML templates through `require` statements in the entry point files. Webpack is [configured](webpack.common.js) to handle file types according to their extension: HTML templates are preprocessed as JavaScript templating functions, CSS is preprocessed and will be inserted as an inline `<style>` tag, etc. Most assets are shared between the banners.
 
 The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are used to create the tracking information inside the banner code. The tracking information is passed to the form fields and event tracking pixels inside the banner.
-
-For mobile banners on de.m.wikipedia.org you can use the mobile skin when previewing by adding the following line to your mobile campaign:
-
-	preview_skin = "minerva"
 
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
@@ -56,9 +64,10 @@ The changes to the code depend on which kind of test you are running.
 ## How the preview feature works
 * Initially, the file `webpack/loader.js` will use the banner configuration to present links to a preview page for each banner.  
 * `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that 
-  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org. That means the CentralNotice banner loader will be used for loading the development banner `B17WMDE_webpack_prototype`.
-* `B17WMDE_webpack_prototype` is a special banner on CentralNotice that reads the `devbanner` parameter from the URL and inserts it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).   
-
+  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org.
+* there exist two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
+  * [B17WMDE_webpack_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B17WMDE_webpack_prototype) on CentralNotice
+  * [B17WMDE_webpack_prototype](https://wiki.wikimedia.de/w/index.php?title=Web:Banner/B17WMDE_webpack_prototype) on GS-WIKI
 
 ## Planned Features of the dev environment
 - [ ] Configure webpack to add source maps (esp for JavaScript) to dev preview.
