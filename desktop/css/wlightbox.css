@@ -13,7 +13,7 @@
 	position: absolute;
 	z-index: 510;
 	padding: 30px 30px 25px;
-	background: #FFF;
+	background: #ffffff;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -24,7 +24,7 @@
 }
 
 #wlightbox-content {
-	color: #000;
+	color: #000000;
 }
 
 #wlightbox-content p {
@@ -72,7 +72,7 @@
 #wlightbox.arrow-box-right:before {
 	left: 100%;
 	top: 50%;
-	border-left-color: #FFF;
+	border-left-color: #ffffff;
 	border-width: 20px;
 	margin-top: -20px;
 }
@@ -80,7 +80,7 @@
 #wlightbox.arrow-box-left:before {
 	right: 100%;
 	top: 50%;
-	border-right-color: #FFF;
+	border-right-color: #ffffff;
 	border-width: 20px;
 	margin-top: -20px;
 }
@@ -88,7 +88,7 @@
 #wlightbox.arrow-box-top:before {
 	bottom: 100%;
 	left: 50%;
-	border-bottom-color: #FFF;
+	border-bottom-color: #ffffff;
 	border-width: 20px;
 	margin-left: -20px;
 }
@@ -96,7 +96,7 @@
 #wlightbox.arrow-box-bottom:before {
 	top: 100%;
 	left: 50%;
-	border-top-color: #FFF;
+	border-top-color: #ffffff;
 	border-width: 20px;
 	margin-left: -20px;
 }
