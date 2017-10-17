@@ -27,9 +27,8 @@ To verify the code is up to our coding standards. These tests will also be run, 
 
 The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
-It will display a selection of banners to preview. The preview will be shown inside the proxied German Wikimedia.
-
-To load a different banner than the one you selected, change the `devbanner` parameter in the URL to the new banner name.
+It will display a selection of banners to preview.
+Follow the links to preview them in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
 
 ## Using the compiled JavaScript on CentralNotice
 
