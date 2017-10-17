@@ -63,9 +63,10 @@ The changes to the code depend on which kind of test you are running.
 ## How the preview feature works
 * Initially, the file `webpack/loader.js` will use the banner configuration to present links to a preview page for each banner.  
 * `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that 
-  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org. That means the CentralNotice banner loader will be used for loading the development banner `B17WMDE_webpack_prototype`.
-* `B17WMDE_webpack_prototype` is a special banner on CentralNotice that reads the `devbanner` parameter from the URL and inserts it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).   
-
+  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org.
+* there exist two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
+  * [B17WMDE_webpack_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B17WMDE_webpack_prototype) on CentralNotice
+  * [B17WMDE_webpack_prototype](https://wiki.wikimedia.de/w/index.php?title=Web:Banner/B17WMDE_webpack_prototype) on GS-WIKI
 
 ## Planned Features of the dev environment
 - [ ] Configure webpack to add source maps (esp for JavaScript) to dev preview.
