@@ -1,0 +1,292 @@
+#WMDE_Banner {
+
+	/**
+	 * GLOBAL RESET
+	 */
+	img {
+		border: 0 none;
+	}
+
+	/**
+	 * CUSTOM
+	 */
+
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+	display: none;
+	font-size: 16px;
+
+	.banner {
+		display: flex;
+
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #ffffff;
+	}
+
+	.infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 0 1 100%;
+
+		border: 5px solid #990000;
+		border-radius: 9px;
+		background-color: #f8f9fa;
+		padding: 0 0.5em 0 0;
+		margin: 0.25em;
+	}
+
+	.infobox__text {
+		color: #000000;
+		font-size: 17px;
+		font-weight: bold;
+		line-height: 1.2em;
+		text-align: left;
+		margin-left: 2em;
+	}
+
+	.text__headline {
+		margin: 0.4em 0 0.5em 0;
+	}
+
+	.text__headline--italic {
+		font-style: italic;
+	}
+
+	.text__paragraph {
+		margin: 0.25em 0;
+	}
+
+	.text__highlight {
+		border-bottom: solid 3px #990000;
+		padding: 0 0.1em;
+		background: transparent;
+	}
+
+	/* This is for keeping the same banner size when testing different banner texts.
+		 The placeholder text element should contain the text that was removed.
+	 */
+	.text__hidden-placeholder {
+		visibility: hidden;
+	}
+
+	.infobox__footer {
+		padding: 0.025em 0 0 2em;
+
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' );
+		background-size: 18px 18px;
+		background-repeat: no-repeat;
+		background-position: left 0.5em top;
+	}
+
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		font-size: 0.81em;
+		line-height: 1.7em;
+
+		border-top: 1px solid #990000;
+	}
+
+	.footer__info {
+		text-transform: uppercase;
+	}
+
+	.footer__item span {
+		margin-right: 0.5em;
+	}
+
+	.footer__importantinfo {
+		font-weight: bold;
+	}
+
+	.footer__item {
+		white-space: nowrap;
+	}
+
+	.footer__item--rightflex {
+		flex-grow: 1;
+		text-align: right;
+	}
+
+	.application-of-funds-link {
+		color: #000000;
+		text-decoration: none;
+	}
+
+	.application-of-funds-link:hover,
+	.application-of-funds-link:focus {
+		text-decoration: underline;
+	}
+
+	/* Form styling */
+
+	.form {
+		width: 15.5em;
+		flex-shrink: 0;
+		padding: 0 0 0 0.5em;
+		margin: 0.25em 0 0.25em 0.25em; /* Same as infobox, but not to the right */
+	}
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 0.5em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+	}
+
+	.select-group--with-error {
+		background: #990000;
+	}
+
+	.select-group__errormessage {
+		display: none; /* Message will be shown by JS code */
+		color: #ffffff;
+		font-weight: bold;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.74em;
+	}
+
+	.select-group__input {
+		display: none;
+	}
+
+	.select-group__custom-input {
+		padding: 0.4em;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		font-size: 0.74em;
+		border: 1px solid #9aa0a7;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.select-group__option {
+		flex: 1 1 auto;
+		padding: 0 0.2em 0.2em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+	}
+
+	.select-group__option--fullwidth {
+		width: 100%;
+	}
+
+	.select-group__option--halfwidth {
+		width: 50%;
+	}
+
+	.select-group__option--thirdwidth {
+		width: 33%;
+	}
+
+	.select-group__option--quarterwidth {
+		width: 25%;
+	}
+
+	.select-group__state {
+		display: block;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.05em 0;
+		line-height: 3em;
+		cursor: pointer;
+		text-align: center;
+		font-weight: bold;
+		font-size: 0.74em;
+		box-sizing: border-box;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
+	}
+
+	.button-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 0.5em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+	}
+
+	.button-group__button {
+		flex: 1 1 auto;
+		padding: 0 0.2em 0.2em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+		cursor: pointer;
+		/* Override browser defaults */
+		border: 0 none;
+		background: transparent;
+		font-size: inherit;
+	}
+
+	.button-group__button--halfwidth {
+		width: 50%;
+	}
+
+	@media ( max-width: 1024px ) {
+		.button-group__button--halfwidth .button-group__label {
+			padding: 0.3em 0.1em;
+		}
+	}
+
+	@media ( max-width: 900px ) {
+		.button-group__button--halfwidth {
+			width: 100%;
+		}
+	}
+
+	.button-group__label {
+		display: block;
+		color: #3366cc;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.05em 0;
+		line-height: 3em;
+		font-size: 0.74em;
+		text-align: center;
+		font-weight: bold;
+		box-sizing: border-box;
+	}
+
+	.close {
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: auto;
+		right: auto;
+		flex: 0 0 18px;
+	}
+
+	.click-tracking {
+		display: none;
+	}
+
+	.click-tracking__pixel {
+		height: 0;
+		width: 0;
+		border: 0 none;
+	}
+
+}
