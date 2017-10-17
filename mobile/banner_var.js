@@ -118,7 +118,7 @@ $( '#btn-bez' ).click( function () {
 
 $( '#btn-sofort' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if( $checkedAmountElement.length > 0 ) {
+	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'SUB' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();

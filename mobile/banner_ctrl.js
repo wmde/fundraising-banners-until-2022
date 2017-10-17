@@ -167,7 +167,7 @@ $( document ).ready( function () {
 		$( '#frbanner' ).hide();
 	} );
 
-	$( '.mini-banner__close-button' ).click(function() {
+	$( '.mini-banner__close-button' ).click( function () {
 		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
 
@@ -178,8 +178,8 @@ $( document ).ready( function () {
 		return false;
 	} );
 
-	$( '.mini-banner' ).click(function() {
-		window.scrollTo(0,0);
+	$( '.mini-banner' ).click( function () {
+		window.scrollTo( 0, 0 );
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 		$( '#frbanner' ).show();
 		$( '.mini-banner' ).slideToggle();
