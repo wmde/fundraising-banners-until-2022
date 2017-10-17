@@ -189,19 +189,6 @@ $( document ).ready( function () {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
 	} );
-
-	// Show page 2 in preview
-	var forced = location.search.match( /\bforce=1/ );
-	if ( forced ) {
-		// Fullscreen banner
-		window.scrollTo( 0, 0 );
-		$( '#frbanner' ).show();
-
-		animateProgressBar();
-		window.setTimeout( function () {
-			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
-		}, 3000 );
-	}
 } );
 
 function addPointsToNum() {
