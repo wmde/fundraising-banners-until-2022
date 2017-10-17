@@ -1,8 +1,8 @@
-const assert = require('assert');
+const assert = require( 'assert' );
 const CampaignConfig = require( '../webpack/campaign_config' );
 
-describe('CampaignConfig', function() {
-	describe('#getEntryPoints()', function() {
+describe( 'CampaignConfig', function () {
+	describe( '#getEntryPoints()', function () {
 		it( 'should return pagename - filename pairs for one banner in one campaign', function () {
 			const config = new CampaignConfig( {
 				desktop: {
@@ -21,15 +21,15 @@ describe('CampaignConfig', function() {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
-						ctrl_fulltop: {
+						'ctrl_fulltop': {
 							filename: './foo/fulltop.js',
 							pagename: 'B17WMDE_test_ctrl_fulltop'
 						},
-						var: {
+						'var': {
 							filename: './foo/var.js',
 							pagename: 'B17WMDE_test_var'
 						}
@@ -39,7 +39,7 @@ describe('CampaignConfig', function() {
 			assert.deepEqual( config.getEntryPoints(), {
 				B17WMDE_test_ctrl: './foo/bar.js',
 				B17WMDE_test_ctrl_fulltop: './foo/fulltop.js',
-				B17WMDE_test_var: './foo/var.js',
+				B17WMDE_test_var: './foo/var.js'
 			} );
 		} );
 
@@ -47,11 +47,11 @@ describe('CampaignConfig', function() {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
-						var: {
+						'var': {
 							filename: './foo/var.js',
 							pagename: 'B17WMDE_test_var'
 						}
@@ -62,7 +62,7 @@ describe('CampaignConfig', function() {
 						ctrl: {
 							filename: './mobile/foo.js',
 							pagename: 'B17WMDE_test_mob_ctrl'
-						},
+						}
 					}
 				}
 			} );
@@ -77,11 +77,11 @@ describe('CampaignConfig', function() {
 			const config = new CampaignConfig( {
 				desktop: {
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl'
 						},
-						var: {
+						'var': {
 							filename: './foo/var.js',
 							pagename: 'B17WMDE_test_ctrl'
 						}
@@ -90,24 +90,24 @@ describe('CampaignConfig', function() {
 			} );
 			assert.throws( function () {
 				config.getEntryPoints();
-			}, /duplicate.*desktop\.(var|ctrl)/i )
+			}, /duplicate.*desktop\.(var|ctrl)/i );
 		} );
 
-	});
+	} );
 
-	describe('#getConfigForPages()', function() {
+	describe( '#getConfigForPages()', function () {
 		it( 'should include campaign and banner configuration for each page', function () {
 			const config = new CampaignConfig( {
 				desktop: {
 					testvalue1: 'foo',
 					testvalue2: 'bar',
 					banners: {
-						ctrl: {
+						'ctrl': {
 							filename: './foo/bar.js',
 							pagename: 'B17WMDE_test_ctrl',
 							tracking: 'tracking----ctrl'
 						},
-						var: {
+						'var': {
 							filename: './foo/var.js',
 							pagename: 'B17WMDE_test_var',
 							tracking: 'tracking----var'
@@ -121,16 +121,16 @@ describe('CampaignConfig', function() {
 					pagename: 'B17WMDE_test_ctrl',
 					tracking: 'tracking----ctrl',
 					testvalue1: 'foo',
-					testvalue2: 'bar',
+					testvalue2: 'bar'
 				},
 				B17WMDE_test_var: {
 					filename: './foo/var.js',
 					pagename: 'B17WMDE_test_var',
 					tracking: 'tracking----var',
 					testvalue1: 'foo',
-					testvalue2: 'bar',
+					testvalue2: 'bar'
 				}
 			} );
 		} );
 	} );
-});
+} );

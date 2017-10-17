@@ -54,32 +54,32 @@
 			};
 
 			s.create = function () {
-				var arrowData;
-				if ( $( '#wlightbox' ).length == 0 ) {
+				if ( $( '#wlightbox' ).length === 0 ) {
 					$( s.options.container ).append( $wlightbox );
 				}
 
 				$wlightbox.empty();
 
-				if ( $( '#wlightbox-content' ).length == 0 ) {
+				if ( $( '#wlightbox-content' ).length === 0 ) {
 					$wlightbox.append( $wlightboxContent );
 				}
-				if ( $( '#wlightbox-overlay' ).length == 0 ) {
+				if ( $( '#wlightbox-overlay' ).length === 0 ) {
 					$( s.options.overlayContainer ).append( $wlightboxOverlay );
 				}
 
 				// close button
-				if ( s.options.closeButton && $( '#wlightbox-close' ).length == 0 ) {
+				if ( s.options.closeButton && $( '#wlightbox-close' ).length === 0 ) {
 					$wlightbox.append( $wlightboxClose );
 				}
 
 				// position & size
 				$.each( 'top bottom left right width height maxWidth maxHeight'.split( ' ' ), function ( index, item ) {
 					switch ( typeof s.options[ item ] ) {
-						case "undefined":
-						    return;
-						case "function":
-							$wlightbox.css( item, s.options[ item ]( item ) );;
+						case 'undefined':
+							return;
+						case 'function':
+							$wlightbox.css( item, s.options[ item ]( item ) );
+							break;
 						default:
 							$wlightbox.css( item, s.options[ item ] );
 					}
@@ -101,7 +101,7 @@
 					$wlightboxCss = $( '<style type="text/css" id="wlightbox-css"></style>' );
 					$wlightboxCss.empty();
 
-					if ( $( '#wlightbox-css' ).length == 0 ) {
+					if ( $( '#wlightbox-css' ).length === 0 ) {
 						$( 'head' ).append( $wlightboxCss );
 					}
 
@@ -194,4 +194,4 @@
 		$.fn.wlightbox.css = document.createStyleSheet( '' );
 	}
 
-} )( jQuery );
+}( jQuery ) );

@@ -20,11 +20,11 @@ describe( 'TrackingEvents', function () {
 		trackingEvents = null;
 
 	describe( '#trackClickEvent()', function () {
-		
+
 		beforeEach( function () {
 			$trackedElement = $( '<div />' );
 			$trackingElement = $( '<img />' );
-			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement )
+			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
 		} );
 
 		it( 'Click event tracking URL is built correctly', function () {
@@ -53,7 +53,7 @@ describe( 'TrackingEvents', function () {
 
 		beforeEach( function () {
 			$trackingElement = $( '<img />' );
-			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement )
+			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
 		} );
 
 		it( 'Size issue event tracking URL is built correctly', function () {

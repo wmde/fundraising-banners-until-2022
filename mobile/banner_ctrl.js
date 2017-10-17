@@ -1,3 +1,5 @@
+/* eslint no-alert: 1 */
+
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
@@ -6,31 +8,29 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-const fundraisingBanner = {};
-
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection( {
-	campaignStartDate: new Date( GlobalBannerSettings['campaign-start-date'] ),
-	campaignEndDate: new Date( GlobalBannerSettings['campaign-end-date'] ),
-	baseDonationSum: GlobalBannerSettings['donations-collected-base'],
-	donationAmountPerMinute: GlobalBannerSettings['appr-donations-per-minute'],
-	donorsBase: GlobalBannerSettings['donators-base'],
-	donorsPerMinute: GlobalBannerSettings['appr-donators-per-minute']
+	campaignStartDate: new Date( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	campaignEndDate: new Date( GlobalBannerSettings[ 'campaign-end-date' ] ),
+	baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
+	donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
+	donorsBase: GlobalBannerSettings[ 'donators-base' ],
+	donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
 } );
 
 const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( {round: 0, integerSeparator: '.' } );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
 import TrackingEvents from '../shared/tracking_events';
 
-const bannerTemplate = require('./templates/banner_html.hbs');
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 
@@ -62,7 +62,7 @@ trackingEvents.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', banner
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.send' ).click( function( e ) {
+$( '.send' ).click( function () {
 	return validateForm();
 } );
 
@@ -73,7 +73,7 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 
 $( '#btn-ppl' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if( $checkedAmountElement.length > 0 ) {
+	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'PPL' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
@@ -84,7 +84,7 @@ $( '#btn-ppl' ).click( function () {
 
 $( '#btn-cc' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if( $checkedAmountElement.length > 0 ) {
+	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'MCP' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
@@ -95,7 +95,7 @@ $( '#btn-cc' ).click( function () {
 
 $( '#btn-ueb' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if( $checkedAmountElement.length > 0 ) {
+	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'UEB' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
@@ -106,7 +106,7 @@ $( '#btn-ueb' ).click( function () {
 
 $( '#btn-bez' ).click( function () {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if( $checkedAmountElement.length > 0 ) {
+	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( 'BEZ' );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
@@ -118,20 +118,24 @@ $( '#btn-bez' ).click( function () {
 
 function debounce( func, wait, immediate ) {
 	var timeout;
-	return function() {
+	return function () {
 		var context = this, args = arguments;
-		var later = function() {
+		var later = function () {
 			timeout = null;
-			if ( !immediate ) func.apply( context, args );
+			if ( !immediate ) {
+				func.apply( context, args );
+			}
 		};
 		var callNow = immediate && !timeout;
 		clearTimeout( timeout );
 		timeout = setTimeout( later, wait );
-		if ( callNow ) func.apply( context, args );
+		if ( callNow ) {
+			func.apply( context, args );
+		}
 	};
-};
+}
 
-var lazyResize = debounce( function() {
+var lazyResize = debounce( function () {
 	animateProgressBar();
 }, 100 );
 $( window ).on( 'orientationchange', lazyResize );
@@ -151,17 +155,17 @@ function addBannerSpace() {
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
 }
 
-$(document).ready(function() {
-	$('body').prepend($('#centralNotice'));
+$( document ).ready( function () {
+	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
-	$("#frbanner-close").click(function() {
+	$( '#frbanner-close' ).click( function () {
 		// Close only the full-screen
-		$("#frbanner").hide();
-	});
+		$( '#frbanner' ).hide();
+	} );
 
-	$("#frbanner2-close").click(function() {
+	$( '#frbanner2-close' ).click( function () {
 		$( '#frbanner2' ).hide();
 		BannerFunctions.removeBannerSpace();
 
@@ -170,48 +174,52 @@ $(document).ready(function() {
 		}
 
 		return false;
-	});
+	} );
 
-	$("#frbanner2").click(function() {
-		window.scrollTo(0,0);
+	$( '#frbanner2' ).click( function () {
+		window.scrollTo( 0, 0 );
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
-		$("#frbanner").show();
-		$("#frbanner2").slideToggle();
+		$( '#frbanner' ).show();
+		$( '#frbanner2' ).slideToggle();
 
 		animateProgressBar();
 		window.setTimeout( function () {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
-	});
+	} );
 
 	// Show page 2 in preview
-	var forced = location.search.match(/\bforce=1/);
-	if (forced) {
+	var forced = location.search.match( /\bforce=1/ );
+	if ( forced ) {
 		// Fullscreen banner
-		window.scrollTo(0,0);
-		$("#frbanner").show();
+		window.scrollTo( 0, 0 );
+		$( '#frbanner' ).show();
 
 		animateProgressBar();
 		window.setTimeout( function () {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
 	}
-});
+} );
+
+function addPointsToNum() {
+	// fixme Called in animateProgressBar() but not implemented!
+}
 
 function animateProgressBar() {
-	var donationFillElement = $( "#donationFill" );
+	var donationFillElement = $( '#donationFill' );
 	donationFillElement.width( '0px' );
 
 	$( 'div#daysLeft' ).hide();
 
 	var barWidth = $( '#donationMeter' ).width();
-	var dTarget = parseInt( GlobalBannerSettings['goalSum'] );
+	var dTarget = parseInt( GlobalBannerSettings.goalSum );
 	var dCollected = campaignProjection.getProjectedDonationSum();
-	if( dCollected > ( dTarget ) ) {
+	if ( dCollected > ( dTarget ) ) {
 		dCollected = dTarget;
 	}
 	var dRemaining = dTarget - dCollected;
-	var widthToFill = (dCollected / dTarget * barWidth) - 3;
+	var widthToFill = ( dCollected / dTarget * barWidth ) - 3;
 
 	donationFillElement.animate( { width: widthToFill + 'px' }, {
 		duration: 2500,
@@ -220,21 +228,19 @@ function animateProgressBar() {
 
 			var fillWidth = $( 'div#donationFill' ).width();
 			var tooltipWidth = $( 'div#donationTooltip' ).width();
-			var tooltipMaxLeft = $('#donationMeterWrapper').outerWidth() - tooltipWidth - 5;
+			var tooltipMaxLeft = $( '#donationMeterWrapper' ).outerWidth() - tooltipWidth - 5;
 
 			$( '#sumDonations' ).text( addPointsToNum( dRemaining ) );
 
 			$( 'div#donationTooltip' ).css( 'left', Math.min( ( fillWidth - tooltipWidth / 2 ), tooltipMaxLeft ) + 'px' ).show();
 			$( 'div#donationTooltipArrow' ).css( 'left', ( fillWidth - 11 ) + 'px' ).show();
 
-			var dFill = donationFillElement.width();
-			var pFill = dFill / barWidth;
 			var vRem = dRemaining / 1000000;
 
 			vRem = vRem.toFixed( 1 );
-			vRem = vRem.replace( ".", "," );
+			vRem = vRem.replace( '.', ',' );
 
-			$( "#valRem" ).html( vRem );
+			$( '#valRem' ).html( vRem );
 		}
 	} );
 }
@@ -243,28 +249,28 @@ function validateForm() {
 	var form = document.donationForm;
 	var error = false;
 
-	if($('#interval_multiple').attr('checked') === 'checked') {
-		if($('input[name=interval]:checked', form).length !== 1) {
-			alert("Es wurde kein Zahlungsintervall ausgewählt.");
+	if ( $( '#interval_multiple' ).attr( 'checked' ) === 'checked' ) {
+		if ( $( 'input[name=interval]:checked', form ).length !== 1 ) {
+			alert( 'Es wurde kein Zahlungsintervall ausgewählt.' );
 			return false;
 		} else {
-			$('#intervalType').val( "1" );
-			$('#periode').val($('input[name=interval]:checked', form).val());
+			$( '#intervalType' ).val( '1' );
+			$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
 		}
 	} else {
-		$('#periode').val("0");
+		$( '#periode' ).val( '0' );
 	}
 
 	// Get amount selection
 	var amount = null;
 	for ( var i = 0; i < form.betrag_auswahl.length; i++ ) {
-		if ( form.betrag_auswahl[i].checked ) {
-			amount = form.betrag_auswahl[i].value;
+		if ( form.betrag_auswahl[ i ].checked ) {
+			amount = form.betrag_auswahl[ i ].value;
 			break;
 		}
 	}
 	// Check amount is a real number
-	error = ( amount == null || isNaN( amount ) || amount.value <= 0 );
+	error = ( amount === null || isNaN( amount ) || amount.value <= 0 );
 	// Check amount is at least the minimum
 	if ( amount < 1 || error ) {
 

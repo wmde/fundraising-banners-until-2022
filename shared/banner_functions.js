@@ -1,5 +1,5 @@
-/*jshint latedef: nofunc */
-/*jshint unused: false */
+/* jshint latedef: nofunc */
+/* jshint unused: false */
 /* globals mw, alert */
 
 var $ = require( 'jquery' );
@@ -7,19 +7,13 @@ var $ = require( 'jquery' );
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
-		baseDate = GlobalBannerSettings[ 'donations-date-base' ] || '2017-11-01',
-		collectedBase = parseInt( GlobalBannerSettings.collectedBase || 0, 10 ),
-		donorsBase = parseInt( GlobalBannerSettings.donorsBase, 10 ),
-		donationsPerMinApproximation = parseFloat( GlobalBannerSettings[ 'appr-donations-per-minute' ] || 0.1 ),
-		donorsPerMinApproximation = parseFloat( GlobalBannerSettings[ 'appr-donators-per-minute' ] ),
 		noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 		amountEmptyMessage = Translations[ 'amount-empty-message' ] || 'Bitte wählen Sie zuerst einen Betrag.',
 		amountTooLowMessage = Translations[ 'amount-too-low-message' ] || 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
-		showBanner = true,
-		BannerEventHandlers = BannerEventHandlers || {},
+		BannerEventHandlers = {},
 		messages = {
 			en: {
 				day: 'day',
@@ -40,7 +34,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		hideAmountError();
 	};
 
-	BannerEventHandlers.handleCustomAmount = function() {
+	BannerEventHandlers.handleCustomAmount = function () {
 		$( 'input:radio[name=betrag_auswahl]' ).prop( 'checked', false );
 		$( '#amount_other' ).prop( 'checked', true );
 		hideAmountError();
@@ -88,27 +82,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 				return 'Freitag';
 			case 6:
 				return 'Samstag';
-			default:
-				return '';
-		}
-	}
-
-	function getCurrentDayInEnglish() {
-		switch ( new Date().getDay() ) {
-			case 0:
-				return 'Sunday';
-			case 1:
-				return 'Monday';
-			case 2:
-				return 'Tuesday';
-			case 3:
-				return 'Wednesday';
-			case 4:
-				return 'Thursday';
-			case 5:
-				return 'Friday';
-			case 6:
-				return 'Saturday';
 			default:
 				return '';
 		}
@@ -207,6 +180,8 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 	 * Check the "interval" radio buttons and change the "period" and "intervalType" fields accordingly.
 	 * If "periodically" is selected but no interval is selected, this function
 	 * will display an error message via alert.
+	 *
+	 * @return {boolean}
 	 */
 	function validateAndSetPeriod() {
 		var form = document.donationForm;
@@ -218,7 +193,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 				$( '#intervalType' ).val( '1' );
 				$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
 			}
-		} else if ( $( '#interval_onetime' ).is( ':checked' ) )  {
+		} else if ( $( '#interval_onetime' ).is( ':checked' ) ) {
 			$( '#periode' ).val( '0' );
 			$( '#intervalType' ).val( '0' );
 		} else {
@@ -226,8 +201,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			if ( $( '.interval_tab' ).length > 0 ) {
 				$( '#periode' ).val( '0' );
 				$( '#intervalType' ).val( '0' );
-					}
-			else {
+			} else {
 				showFrequencyError( noIntervalSelectedMessage );
 				return false;
 			}
@@ -238,15 +212,14 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	function getAmount() {
 		var amount = null,
-			otherAmount = $( '#amount-other-input' ).val(),
-			form = document.donationForm;
+			otherAmount = $( '#amount-other-input' ).val();
 
 		amount = $( 'input[name=betrag_auswahl]:checked' ).val();
 
 		if ( otherAmount !== '' ) {
-			otherAmount = otherAmount.replace( /[,.](\d)$/, '\:$10' );
-			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, '\:$1$2' );
-			otherAmount = otherAmount.replace( /[\$,.]/g, '' );
+			otherAmount = otherAmount.replace( /[,.](\d)$/, ':$10' );
+			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, ':$1$2' );
+			otherAmount = otherAmount.replace( /[$,.]/g, '' );
 			otherAmount = otherAmount.replace( /:/, '.' );
 			$( '#amount-other-input' ).val( otherAmount );
 			amount = otherAmount;
@@ -261,22 +234,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	function removeBannerSpace() {
 		getSkin().removeSpace();
-	}
-
-	/**
-	 * Calculate the number of donors needed, given an average donation amount.
-	 *
-	 * This function cannot return less than 0 donors when the target has been reached.
-	 *
-	 * @param  {number} averageDonation Average donation amount in EUR
-	 * @return {number} Number of donors needed (rounded up)
-	 */
-	function getRemainingDonorsNeeded( averageDonation ) {
-		var dRemaining, dCollected, numDonors;
-		dCollected = getApprDonationsRaw();
-		dRemaining = GlobalBannerSettings.goalSum - dCollected;
-		numDonors = Math.ceil( dRemaining / averageDonation );
-		return Math.max( 0, numDonors );
 	}
 
 	/**
@@ -296,8 +253,10 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 				skinName = 'wpde';
 			}
 
+			/* eslint new-cap: [ "error", { "newIsCapExceptions": [ "skinClass" ] } ] */
+
 			skinClass = require( './skin/' + skinName );
-			skin = new skinClass;
+			skin = new skinClass();
 		}
 
 		return skin;
@@ -325,6 +284,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		hideFrequencyError: hideFrequencyError,
 		removeBannerSpace: removeBannerSpace,
 		getDigitGroupingCharacter: getDigitGroupingCharacter
-	}
+	};
 
 };

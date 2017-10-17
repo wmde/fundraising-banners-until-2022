@@ -2,6 +2,8 @@
  * This entry point is for development only
  */
 
+/* global CAMPAIGNS */
+
 const url = require( 'url' );
 const $ = require( 'jquery' );
 const CampaignConfig = require( './campaign_config' );
@@ -9,10 +11,10 @@ const bannerSelectionListTemplate = require( './banner_selection_list.hbs' );
 
 const currentUrl = url.parse( window.location.href, true );
 
-const Handlebars = require('handlebars/runtime');
-Handlebars.registerHelper('bannerlink', function( campaign, bannername ) {
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'bannerlink', function ( campaign, bannername ) {
 	return campaign.preview_link.replace( '{{banner}}', bannername );
-});
+} );
 
 if ( !currentUrl.query.devbanner ) {
 
@@ -28,7 +30,6 @@ if ( !currentUrl.query.devbanner ) {
 	const currentBanner = currentUrl.query.devbanner;
 	const container = $( '#WMDE-Banner-Container' );
 	if ( pages[ currentBanner ] ) {
-		console.log( 'current banner', currentBanner, pages[ currentBanner ].tracking, pages[ currentBanner ].campaign_tracking );
 		container.data( 'tracking', pages[ currentBanner ].tracking );
 		container.data( 'campaign-tracking', pages[ currentBanner ].campaign_tracking );
 	}

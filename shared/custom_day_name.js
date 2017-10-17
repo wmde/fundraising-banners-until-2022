@@ -1,4 +1,4 @@
-/*jshint unused: false */
+/* jshint unused: false */
 
 var customDayNames = {
 	'06.12': {

@@ -1,0 +1,25 @@
+{
+	"extends": "wikimedia",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module"
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"jquery": true,
+		"qunit": true,
+		"mocha": true
+	},
+	"globals": {
+		"mw": false
+	},
+	"rules": {
+		"dot-notation": [ "error", { "allowKeywords": true } ],
+		"one-var": [ "off" ],
+		"vars-on-top": [ "off" ],
+		"camelcase": [ "error", { "properties": "never" } ],
+		"no-use-before-define": [ "error", { "functions": false } ],
+		"quote-props": [ "error", "consistent-as-needed", { "keywords": true } ]
+	}
+}

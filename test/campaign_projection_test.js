@@ -12,7 +12,7 @@ describe( 'CampaignProjection', function () {
 			baseDonationSum: 0,
 			donationAmountPerMinute: DONATION_SUM_PER_MINUTE,
 			donorsBase: 0,
-			donorsPerMinute: DONORS_PER_MINUTE,
+			donorsPerMinute: DONORS_PER_MINUTE
 		};
 
 	beforeEach( function () {
@@ -89,7 +89,6 @@ describe( 'CampaignProjection', function () {
 			MockDate.set( new Date( '2017-10-19 00:00:00' ) );
 			assert.equal( campaignProjection.getProjectedNumberOfDonors(), 0 );
 		} );
-
 
 		it( 'should stop projecting donors after the campaign ends', function () {
 			const campaignProjection = new CampaignProjection( defaultOptions );

@@ -1,5 +1,3 @@
-"use strict";
-
 function generateTrackingData( dimensions ) {
 	if ( typeof dimensions !== 'object' ) {
 		return dimensions;
@@ -26,7 +24,7 @@ function getTrackingURL( baseUrl, actionName, bannerName, data ) {
 
 export default class TrackingEvents {
 
-	constructor ( baseUrl, bannerName, trackingImage ) {
+	constructor( baseUrl, bannerName, trackingImage ) {
 		this.baseUrl = baseUrl;
 		this.bannerName = bannerName;
 		this.trackingImage = trackingImage;
@@ -76,4 +74,4 @@ export default class TrackingEvents {
 		}
 	}
 
-};
+}

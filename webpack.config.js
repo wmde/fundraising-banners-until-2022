@@ -6,7 +6,7 @@ const webpack = require( 'webpack' );
 
 module.exports = Merge( CommonConfig, {
 	entry: {
-		'loader': './webpack/loader.js'
+		loader: './webpack/loader.js'
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
@@ -24,7 +24,7 @@ module.exports = Merge( CommonConfig, {
 		proxy: [
 			{
 				context: [ '/wikipedia.de', '/FundraisingBanners', '/img', '/js', '/style.css', '/suggest.js' ],
-				pathRewrite: { '^/wikipedia.de' : '' },
+				pathRewrite: { '^/wikipedia.de': '' },
 				target: 'https://wikipedia.de',
 				changeOrigin: true
 			},

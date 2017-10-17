@@ -1,5 +1,7 @@
 # Fundraising banners, webpack edition
 
+[![Build Status](https://travis-ci.org/wmde/fundraising-banners.svg?branch=master)](https://travis-ci.org/wmde/fundraising-banners)
+
 This project is bundling all assets and dependencies of WMDE fundraising banners with webpack.
 
 ## Installing dependencies
