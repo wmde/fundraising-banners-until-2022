@@ -76,7 +76,7 @@
                     
                     <legend class="form__section-head">Zahlweise wählen</legend>
                 
-                    <ol class="button-group button-group--tablet-2cols">
+                    <ol class="button-group button-group--tablet-2cols-var">
     
                         <li class="button-group__container">
                             <button id="btn-ppl" class="button-group__button send">
@@ -92,7 +92,7 @@
     
                         <li class="button-group__container">
                             <button id="btn-ueb" class="button-group__button send">
-                                Überweisung
+                                Überweisungszusage
                             </button>
                         </li>
     
@@ -101,9 +101,15 @@
                                 Lastschrift
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
-                            <a href="sms:81190" class="button-group__button a-sms">5€ per SMS</a>
+                            <a href="sms:81190" class="button-group__button send">5€ per SMS</a>
+                        </li>
+
+                        <li class="button-group__container">
+                            <button id="btn-sofort" class="button-group__button send">
+                                Sofort-Überweisung
+                            </button>
                         </li>
     
                         <li class="button-group__hint">
@@ -126,4 +132,4 @@
 
 </div><!--frbanner-->
 
-{{> mini_banner_var }}
+{{> mini_banner }}
