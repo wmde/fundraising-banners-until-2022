@@ -14,6 +14,13 @@ To build a minified version of the banner:
 
     docker-compose run js-build npm run build
 
+## Linting the sources
+
+To verify the code is up to our coding standards. These tests will also be run, and have to pass, in CI.
+
+    docker-compose run js-build npm run lint:js
+    docker-compose run js-build npm run lint:css
+
 ## Starting the preview
 
     docker-compose up js-serve
