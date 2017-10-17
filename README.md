@@ -22,10 +22,11 @@ It will display a selection of banners to preview in their respective channel (G
 
 Changes to the code base while the preview is running should be reflected via hot reload.
 
-## Linting the sources
+## Check the sources
 
-To verify the code is up to our coding standards. These tests will also be run, and have to pass, in CI.
+To verify the code is correct and up to our coding standards. These tests will also be run, and have to pass, in CI.
 
+    docker-compose run js-build npm run test
     docker-compose run js-build npm run lint:js
     docker-compose run js-build npm run lint:css
 
