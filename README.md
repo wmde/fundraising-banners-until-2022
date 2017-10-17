@@ -9,18 +9,6 @@ To install all dependencies run:
 
     docker-compose run js-build npm install
 
-## Building the assets
-To build a minified version of the banner:
-
-    docker-compose run js-build npm run build
-
-## Linting the sources
-
-To verify the code is up to our coding standards. These tests will also be run, and have to pass, in CI.
-
-    docker-compose run js-build npm run lint:js
-    docker-compose run js-build npm run lint:css
-
 ## Starting the preview
 
     docker-compose up js-serve
@@ -29,6 +17,18 @@ The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
 It will display a selection of banners to preview.
 Follow the links to preview them in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
+
+## Linting the sources
+
+To verify the code is up to our coding standards. These tests will also be run, and have to pass, in CI.
+
+    docker-compose run js-build npm run lint:js
+    docker-compose run js-build npm run lint:css
+
+## Building the assets
+To build a minified version of the banner:
+
+    docker-compose run js-build npm run build
 
 ## Using the compiled JavaScript on CentralNotice
 
