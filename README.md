@@ -39,6 +39,34 @@ For mobile banners on de.m.wikipedia.org you can use the mobile skin when previe
 
 	preview_skin = "minerva"
 
+### Naming conventions
+
+Each banner test needs to use unique names for banner pages as well as campaign and banner tracking.  
+
+#### Banner pages
+
+The `pagename` setting in the file `campaign_info.toml` defines the banner's on-wiki page title. Due to MediaWiki restrictions, this needs to be unique. The different parts of the page title need to be separated by underscores.
+
+Prefix | Project | Test ID | Date | banner identifier
+---|---|---|---|---
+B`yy`WMDE | `dewp` (de.wikipedia.org)<br>`enwp` (en.wikipedia.org)<br>`mob` (de.m.wikipedia.org)<br>`ipad` (de.m.wikipedia.org)<br>`wpde` (www.wikipedia.de) | `nn` | format `yymmdd` | e. g. `ctrl`, `var`
+
+#### Campaign tracking
+
+This defines the actual test and is being used by our website tracking system as well as wmde/fundraising-backend.  The different parts of the page title need to be separated by dashes. 
+
+Prefix | Test ID | Test type | Date of Test Start
+---|---|---|---
+`dewp` (de.wikipedia.org)<br>`enwp` (en.wikipedia.org)<br>`mob` (de.m.wikipedia.org)<br>`ipad` (de.m.wikipedia.org)<br>`wpde` (www.wikipedia.de) | incrementing `nn` | e. g. `ba` for banner tests<br>`lp` for landing page test | format `yymmdd`
+
+#### Banner tracking
+
+This defines the keyword of a banner in a specific campaign. It is also being used by our website tracking system and wmde/fundraising-backend.  The different parts of the page title need to be separated by dashes.
+
+Prefix | Test ID | Date | Banner Identifier
+---|---|---|---
+org-mob<br>org-dewp<br>org-ipad<br>org-enwp<br>wpde | nn | yymmdd | e. g. `ctrl`, `var`
+
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
 2. Create a new campaign and its banner configuration in `campaign_info.toml`. 
