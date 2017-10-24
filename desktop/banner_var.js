@@ -104,22 +104,11 @@ function validateAndSetPeriod() {
 }
 
 $( '#WMDE_Banner-payment button' ).click( function ( e ) {
-	const paymentType = $( this ).data( 'payment-type' );
-
-	if ( typeof paymentType === 'undefined' ) {
-		$( '.button-group__button--hidden' ).show();
-		addSpaceInstantly();
-		e.preventDefault();
-		return false;
-	}
-
-	$( '#zahlweise' ).val( paymentType );
+	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
 	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
 		e.preventDefault();
 		return false;
 	}
-
-	return true;
 } );
 
 /* Convert browser events to custom events */

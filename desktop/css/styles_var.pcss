@@ -40,11 +40,32 @@
 
 	.infobox__text {
 		color: #000000;
-		font-size: 17px;
+		font-size: 1.06em;
 		font-weight: bold;
 		line-height: 1.2em;
 		text-align: left;
 		margin-left: 2em;
+	}
+
+	@media ( min-width: 1000px ) {
+		.infobox__text {
+			font-size: 1.1em;
+			line-height: 1.25em;
+		}
+	}
+
+	@media ( min-width: 1200px ) {
+		.infobox__text {
+			font-size: 1.25em;
+			line-height: 1.35em;
+		}
+	}
+
+	@media ( min-width: 1500px ) {
+		.infobox__text {
+			font-size: 1.35em;
+			line-height: 1.4em;
+		}
 	}
 
 	.text__headline {
@@ -239,26 +260,11 @@
 		border: 0 none;
 		background: transparent;
 		font-size: inherit;
+		width: 100%;
 	}
 
 	.button-group__button--hidden {
 		display: none;
-	}
-
-	.button-group__button--halfwidth {
-		width: 50%;
-	}
-
-	@media ( max-width: 1024px ) {
-		.button-group__button--halfwidth .button-group__label {
-			padding: 0.3em 0.1em;
-		}
-	}
-
-	@media ( max-width: 900px ) {
-		.button-group__button--halfwidth {
-			width: 100%;
-		}
 	}
 
 	.button-group__label {
