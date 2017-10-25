@@ -13,7 +13,7 @@ const SENTENCES = {
 };
 
 function trans( language, msgId ) {
-	if ( typeof SENTENCES[ language ] === 'undefined' || SENTENCES[ language ][ msgId ] === 'undefined' ) {
+	if ( typeof SENTENCES[ language ] === 'undefined' || typeof SENTENCES[ language ][ msgId ] === 'undefined' ) {
 		return '';
 	}
 	return SENTENCES[ language ][ msgId ];

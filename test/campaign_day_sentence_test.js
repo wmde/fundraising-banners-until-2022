@@ -18,7 +18,7 @@ describe( 'CampaignDaySentence', function () {
 		sandbox.restore();
 	} );
 
-	describe( '#getSentence', function () {
+	describe( '#getSentence DE', function () {
 		it( 'returns a sentence when the campaign has not started yet', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( false );
 			const sentence = new CampaignDaySentence( campaignDays );
@@ -57,6 +57,49 @@ describe( 'CampaignDaySentence', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'campaignHasEnded' ).returns( true );
 			const sentence = new CampaignDaySentence( campaignDays );
+			assert.equal( '', sentence.getSentence() );
+		} );
+	} );
+
+	describe( '#getSentence EN', function () {
+		it( 'returns nothing when the campaign has not started yet', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( false );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( '', sentence.getSentence() );
+		} );
+
+		it( 'returns nothing on the first day of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 3600 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( '', sentence.getSentence() );
+		} );
+
+		it( 'returns nothing on the second day of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 86405 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( '', sentence.getSentence() );
+		} );
+
+		it( 'returns a sentence on the last week of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 259200 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( 'This is the last week of our donation campaign.', sentence.getSentence() );
+		} );
+
+		it( 'returns a sentence on the last day of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 86400 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( 'Today is the final day of our donation campaign.', sentence.getSentence() );
+		} );
+
+		it( 'returns nothing after campaign has ended', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'campaignHasEnded' ).returns( true );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
 			assert.equal( '', sentence.getSentence() );
 		} );
 	} );
