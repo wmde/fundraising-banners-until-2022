@@ -92,7 +92,7 @@
     
                         <li class="button-group__container">
                             <button id="btn-ueb" class="button-group__button send">
-                                Überweisung
+                                Überweisungszusage
                             </button>
                         </li>
     
@@ -101,11 +101,17 @@
                                 Lastschrift
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
-                            <a href="sms:81190" class="button-group__button a-sms">5€ per SMS</a>
+                            <button id="btn-sofort" class="button-group__button send">
+                                Sofort-Überweisung
+                            </button>
                         </li>
-    
+
+                        <li class="button-group__container">
+                            <a href="sms:81190" class="button-group__button send">5€ per SMS</a>
+                        </li>
+
                         <li class="button-group__hint">
                             SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
                         </li>
@@ -126,4 +132,4 @@
 
 </div><!--frbanner-->
 
-{{> mini_banner_var }}
+{{> mini_banner }}

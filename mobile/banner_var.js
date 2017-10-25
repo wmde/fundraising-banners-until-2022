@@ -1,7 +1,8 @@
 /* eslint no-alert: 1 */
 
+require( './css/styles.pcss' );
 require( './css/styles_var.pcss' );
-require( './css/styles_mini_var.pcss' );
+require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -115,6 +116,18 @@ $( '#btn-bez' ).click( function () {
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
 	}
 } );
+
+$( '#btn-sofort' ).click( function () {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	if ( $checkedAmountElement.length > 0 ) {
+		$( '#zahlweise' ).val( 'SUB' );
+		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#form' ).submit();
+	} else {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	}
+} );
+
 // END form initialization
 
 function debounce( func, wait, immediate ) {
@@ -189,19 +202,6 @@ $( document ).ready( function () {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
 	} );
-
-	// Show page 2 in preview
-	var forced = location.search.match( /\bforce=1/ );
-	if ( forced ) {
-		// Fullscreen banner
-		window.scrollTo( 0, 0 );
-		$( '#frbanner' ).show();
-
-		animateProgressBar();
-		window.setTimeout( function () {
-			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
-		}, 3000 );
-	}
 } );
 
 function addPointsToNum() {
