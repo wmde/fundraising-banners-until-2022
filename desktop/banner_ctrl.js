@@ -229,7 +229,7 @@ $( function () {
 			mw.centralNotice.setBannerLoadedButHidden();
 		}
 		trackingEvents.trackSizeIssueEvent(
-			sizeIssueIndicator.generateTrackingData( $bannerElement.height() ),
+			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
 	} else {
