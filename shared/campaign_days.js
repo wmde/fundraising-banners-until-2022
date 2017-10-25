@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 export default class CampaignDays {
 	/**
@@ -7,7 +7,7 @@ export default class CampaignDays {
 	 * @param {Date} endDate
 	 * @param {Date} now
 	 */
-	constructor ( startDate, endDate, now = new Date() ) {
+	constructor( startDate, endDate, now = new Date() ) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.now = now;
@@ -34,4 +34,3 @@ export default class CampaignDays {
 	}
 
 }
-

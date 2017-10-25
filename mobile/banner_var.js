@@ -10,8 +10,6 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-const fundraisingBanner = {};
-
 import CampaignDays from '../shared/campaign_days';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
@@ -19,15 +17,15 @@ const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSetti
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDays = new CampaignDays(
-	new Date( GlobalBannerSettings['campaign-start-date'] ),
-	new Date( GlobalBannerSettings['campaign-end-date'] )
+	new Date( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	new Date( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection( campaignDays, {
-	baseDonationSum: GlobalBannerSettings['donations-collected-base'],
-	donationAmountPerMinute: GlobalBannerSettings['appr-donations-per-minute'],
-	donorsBase: GlobalBannerSettings['donators-base'],
-	donorsPerMinute: GlobalBannerSettings['appr-donators-per-minute']
+	baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
+	donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
+	donorsBase: GlobalBannerSettings[ 'donators-base' ],
+	donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
 } );
 
 const formatNumber = require( 'format-number' );

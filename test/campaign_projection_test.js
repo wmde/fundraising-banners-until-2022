@@ -25,9 +25,9 @@ describe( 'CampaignProjection', function () {
 
 	const sandbox = sinon.createSandbox();
 
-	afterEach(function () {
+	afterEach( function () {
 		sandbox.restore();
-	});
+	} );
 
 	describe( '#getProjectedDonationSum()', function () {
 
@@ -76,7 +76,7 @@ describe( 'CampaignProjection', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 1444555345600 );
 			sandbox.stub( campaignDays, 'campaignHasEnded' ).returns( true );
-			sandbox.stub( campaignDays, 'getSecondsBetweenStartAndEndOfCampaign').returns( 5270400 );
+			sandbox.stub( campaignDays, 'getSecondsBetweenStartAndEndOfCampaign' ).returns( 5270400 );
 			const campaignProjection = new CampaignProjection( campaignDays, defaultOptions );
 
 			assert.equal( campaignProjection.getProjectedDonationSum(), 878400 );
@@ -130,7 +130,7 @@ describe( 'CampaignProjection', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 1444555345600 );
 			sandbox.stub( campaignDays, 'campaignHasEnded' ).returns( true );
-			sandbox.stub( campaignDays, 'getSecondsBetweenStartAndEndOfCampaign').returns( 5270400 );
+			sandbox.stub( campaignDays, 'getSecondsBetweenStartAndEndOfCampaign' ).returns( 5270400 );
 			const campaignProjection = new CampaignProjection( campaignDays, defaultOptions );
 
 			assert.equal( campaignProjection.getProjectedNumberOfDonors(), 263520 );
