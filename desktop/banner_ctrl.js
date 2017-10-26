@@ -225,14 +225,11 @@ $( function () {
 	}
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
-		if ( BannerFunctions.onMediaWiki() ) {
-			mw.centralNotice.setBannerLoadedButHidden();
-		}
 		trackingEvents.trackSizeIssueEvent(
-			sizeIssueIndicator.generateTrackingData( $bannerElement.height() ),
+			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
-	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 } );

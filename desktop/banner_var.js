@@ -1,9 +1,9 @@
-require( './css/styles.pcss' );
+// require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -230,14 +230,11 @@ $( function () {
 	}
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
-		if ( BannerFunctions.onMediaWiki() ) {
-			mw.centralNotice.setBannerLoadedButHidden();
-		}
 		trackingEvents.trackSizeIssueEvent(
 			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
-	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 } );
