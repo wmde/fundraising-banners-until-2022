@@ -15,12 +15,20 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 
 import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
+import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
+import CampaignDaySentence from '../shared/campaign_day_sentence';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
+const campaignDaySentence = new CampaignDaySentence(
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
+	LANGUAGE
+);
 const getCustomDayName = require( '../shared/custom_day_name' );
 
 // For A/B testing different text or markup, load
@@ -43,8 +51,7 @@ $bannerContainer.html( bannerTemplate( {
 	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
-	campaignDaySentence: getCampaignDaySentence( LANGUAGE ),
-	daysRemaining: BannerFunctions.getDaysRemaining( LANGUAGE ),
+	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName
 } ) );
