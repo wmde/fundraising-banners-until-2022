@@ -10,15 +10,15 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-import CampaignDays from '../shared/campaign_days';
+import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDays = new CampaignDays(
-	new Date( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	new Date( GlobalBannerSettings[ 'campaign-end-date' ] )
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection( campaignDays, {
