@@ -1,13 +1,14 @@
-<div class="progress_bar__wrapper">
-	<div class="progress_bar__donation_meter"></div>
-	<div class="progress_bar__donation_fill" style="width:1px;">
-		<div class="progress_bar__donation_text" style="display:none">{{{ text-inner-right }}}</div>
-		<div class="progress_bar__days_left">{{{ text-inner-left }}}</div>
-	</div>
-	<div class="progress_bar__donation_remaining--inner">{{#if needed-sum-inner }} {{{ text-right }}} {{/if }}</div>
-	<div class="progress_bar__donation_remaining--outer">
-		<div class="progress_bar__pointer_tip"></div>
-		<hr class="progress_bar__pointer_line">
-		{{#if needed-sum-outer }} {{{ text-right }}} {{/if }}
-	</div>
+<div class="progress_bar progress_bar--lateprogress">
+    <div class="progress_bar__wrapper">
+        <div class="progress_bar__donation_fill">
+            <div class="progress_bar__days_left">{{{ text-inner-left }}}</div>
+            <div class="progress_bar__donation_text">{{{ text-inner-right }}}</div>
+        </div>
+        <div class="progress_bar__donation_remaining progress_bar__donation_remaining--inner">{{{ text-right }}}</div>
+    </div>
+    <div class="progress_bar__donation_remaining progress_bar__donation_remaining--outer">
+        <div class="progress_bar__pointer_tip"></div>
+        <hr class="progress_bar__pointer_line">
+        {{{ text-right }}}
+    </div>
 </div>
