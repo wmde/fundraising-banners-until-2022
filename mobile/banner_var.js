@@ -23,7 +23,7 @@ const campaignProjection = new CampaignProjection( {
 	donorsBase: GlobalBannerSettings[ 'donators-base' ],
 	donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
 } );
-const ProgressBar = require('../shared/progress_bar/progress_bar');
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );

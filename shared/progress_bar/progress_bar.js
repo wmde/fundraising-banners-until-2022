@@ -1,4 +1,4 @@
-require('./style.pcss');
+require( './style.pcss' );
 
 /**
  * Display a progress bar
@@ -26,8 +26,8 @@ function ProgressBar( GlobalBannerSettings, campaignProjection ) {
 	this.positionNeededSum = 'inner';
 	this.minFillWidth = 100;
 
-	this.neededSumInner = (this.positionNeededSum === 'inner');
-	this.neededSumOuter = (this.positionNeededSum !== 'inner');
+	this.neededSumInner = ( this.positionNeededSum === 'inner' );
+	this.neededSumOuter = ( this.positionNeededSum !== 'inner' );
 }
 
 ProgressBar.prototype.getBarWidth = function () {
@@ -61,7 +61,7 @@ ProgressBar.prototype.animate = function () {
 	dCollected = this.campaignProjection.getProjectedDonationSum();
 
 	if ( dCollected > dTarget ) {
-		dCollected  = dTarget;
+		dCollected = dTarget;
 	}
 	dRemaining = dTarget - dCollected;
 	fWidth = dCollected / dTarget * barWidth;
@@ -73,12 +73,12 @@ ProgressBar.prototype.animate = function () {
 			var dFill = donationFillElement.width() / widthToFill * fWidth,
 				pFill = dFill / barWidth;
 
-			remainingValueElement.html( self._formatMillion( dTarget - ( dTarget * pFill ) ) );
-			donationValueElement.html( self._formatMillion( dTarget * pFill ) );
+			remainingValueElement.html( formatMillion( dTarget - ( dTarget * pFill ) ) );
+			donationValueElement.html( formatMillion( dTarget * pFill ) );
 		},
 		complete: function () {
-			remainingValueElement.html( self._formatMillion( dRemaining ) );
-			donationValueElement.html( self._formatMillion( dCollected ) );
+			remainingValueElement.html( formatMillion( dRemaining ) );
+			donationValueElement.html( formatMillion( dCollected ) );
 			$( '.progress_bar__donation_text' ).show();
 			if ( self.neededSumOuter ) {
 				$( '.progress_bar__donation_remaining--outer' ).show();
@@ -110,15 +110,15 @@ ProgressBar.prototype.getFillWidth = function ( donationBarWidth, donationTarget
 
 	widthToFill = Math.min( maxFillWidth, fWidth );
 	// Fill at least 100px or 15% (in case 15% fill is lower than 100px)
-	widthToFill = Math.max( this.minFillWidth, /*0.15 * donationBarWidth,*/ widthToFill );
+	widthToFill = Math.max( this.minFillWidth, /* 0.15 * donationBarWidth,*/ widthToFill );
 	return widthToFill;
 };
 
-ProgressBar.prototype._formatMillion = function( value ) {
-	return ( value / 1000000 ).toFixed( 1 ).replace( '.', this._getDecimalSeparator );
-};
+function formatMillion( value ) {
+	return ( value / 1000000 ).toFixed( 1 ).replace( '.', getDecimalSeparator );
+}
 
-ProgressBar.prototype._getDecimalSeparator = function () {
+function getDecimalSeparator() {
 	switch ( mw.config.get( 'wgContentLanguage' ) ) {
 		case 'de':
 			return ',';
@@ -127,10 +127,10 @@ ProgressBar.prototype._getDecimalSeparator = function () {
 		default:
 			return ',';
 	}
-};
+}
 
 ProgressBar.prototype.render = function () {
-	const template = require('./template.hbs');
+	const template = require( './template.hbs' );
 
 	return template( {
 		'text-inner-right': '<span id="donationValue">0,0</span> Mio. €',
