@@ -1,5 +1,24 @@
 require('./style.pcss');
 
+/**
+ * Display a progress bar
+ *
+ * Next refactoring steps:
+ * - Do "inner" and "outer" display of .progress_bar__donation_remaining with CSS instead of JavaScript:
+ *      create --outer and --inner modifiers for the root progress bar element and change the styling of
+ *      ._progress_bar__wrapper and .progress_bar__donation_remaining accordingly. This will also make
+ *      the getFillWidth method more slim/obsolete
+ * - Change width of .progress_bar__donation_fill to a percentage calculated from dCollected/dTarget. You can then
+ *      get rid of the resize function.
+ * - Set "--inner" and "--outer" modifier depending on the space the "inner" element would need vs the remaining free
+ *      space inside the progress bar. The percentage-based display from the previous step will keep the
+ *      .progress_bar__donation_fill in the right size.
+ * - Convert to ES2015 class
+ *
+ * @param {object} GlobalBannerSettings
+ * @param {CampaignProjection} campaignProjection
+ * @constructor
+ */
 function ProgressBar( GlobalBannerSettings, campaignProjection ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
