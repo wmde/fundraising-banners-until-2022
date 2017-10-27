@@ -4,7 +4,7 @@ function ProgressBar( GlobalBannerSettings, campaignProjection ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
 
-	this.positionNeededSum = 'outer';
+	this.positionNeededSum = 'inner';
 	this.minFillWidth = 100;
 
 	this.neededSumInner = (this.positionNeededSum === 'inner');
@@ -23,9 +23,10 @@ ProgressBar.prototype.animate = function () {
 		remainingValueElement = $( '#valRem' ),
 		preFillValue = 0,
 		barWidth, dTarget, dCollected, dRemaining, fWidth, widthToFill,
-		donationSumNeededElementWidth = $( '.progress_bar__donation_remaining--outer' ).width();
+		donationSumNeededElementWidth = this.neededSumOuter ? $( '.progress_bar__donation_remaining--outer' ).width() : 0,
+		wrapperRightMargin = parseInt( $( '.progress_bar__wrapper' ).css( 'marginRight' ) );
 
-	$( '.progress_bar__wrapper' ).css( { marginRight: donationSumNeededElementWidth + 10 } );
+	$( '.progress_bar__wrapper' ).css( { marginRight: donationSumNeededElementWidth + 10 + wrapperRightMargin } );
 	$( '.progress_bar__donation_remaining--outer' ).css( { right: 0 - donationSumNeededElementWidth + 10 } );
 
 	donationFillElement.clearQueue();
