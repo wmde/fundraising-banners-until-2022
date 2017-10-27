@@ -56,8 +56,8 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
-trackingEvents.trackClickEvent( $( '#frbanner2' ), 'banner-expanded' );
-trackingEvents.trackClickEvent( $( '#frbanner2-close' ), 'banner-closed', bannerCloseTrackRatio );
+trackingEvents.trackClickEvent( $( '.mini-banner' ), 'banner-expanded' );
+trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
