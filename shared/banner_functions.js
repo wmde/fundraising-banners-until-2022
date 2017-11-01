@@ -6,24 +6,13 @@ var $ = require( 'jquery' );
 
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
-	var finalDateTime = new Date( 2017, 11, 31, 23, 59, 59 ),
-		noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
+	var noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 		amountEmptyMessage = Translations[ 'amount-empty-message' ] || 'Bitte wählen Sie zuerst einen Betrag.',
 		amountTooLowMessage = Translations[ 'amount-too-low-message' ] || 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
-		BannerEventHandlers = {},
-		messages = {
-			en: {
-				day: 'day',
-				days: 'days'
-			},
-			de: {
-				day: 'Tag',
-				days: 'Tage'
-			}
-		};
+		BannerEventHandlers = {};
 
 	let skin;
 
@@ -53,17 +42,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		if ( bannerHasValidationEventHandling() ) {
 			banner.trigger( 'validation:init', banner.data( 'validation-event-handling' ) );
 		}
-	}
-
-	function getDaysLeft() {
-		var daysLeft = Math.floor( new Date( finalDateTime - new Date() ) / 1000 / 60 / 60 / 24 );
-		return ( daysLeft < 0 ) ? 0 : daysLeft;
-	}
-
-	function getDaysRemaining( language ) {
-		var daysRemaining = getDaysLeft(),
-			lang = language || 'de';
-		return daysRemaining + ' ' + ( daysRemaining > 1 ? messages[ lang ].days : messages[ lang ].day );
 	}
 
 	function getCurrentGermanDay() {
@@ -275,7 +253,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		getAmount: getAmount,
 		increaseImpCount: increaseImpCount,
 		increaseBannerImpCount: increaseBannerImpCount,
-		getDaysRemaining: getDaysRemaining,
 		getCurrentGermanDay: getCurrentGermanDay,
 		initializeBannerEvents: initializeBannerEvents,
 		showFrequencyError: showFrequencyError,

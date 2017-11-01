@@ -9,14 +9,21 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
+import TrackingEvents from '../shared/tracking_events';
+import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
+import CampaignDaySentence from '../shared/campaign_day_sentence';
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const campaignDays = new CampaignDays(
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+);
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
-const campaignProjection = new CampaignProjection( {
-	campaignStartDate: new Date( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	campaignEndDate: new Date( GlobalBannerSettings[ 'campaign-end-date' ] ),
+const campaignProjection = new CampaignProjection( campaignDays, {
 	baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 	donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
 	donorsBase: GlobalBannerSettings[ 'donators-base' ],
@@ -26,10 +33,8 @@ const campaignProjection = new CampaignProjection( {
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-const getCampaignDaySentence = require( '../shared/count_campaign_days' )( GlobalBannerSettings[ 'campaign-start-date' ], GlobalBannerSettings[ 'campaign-end-date' ] );
 const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
-import TrackingEvents from '../shared/tracking_events';
 
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
@@ -48,8 +53,7 @@ $bannerContainer.html( bannerTemplate( {
 	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
-	campaignDaySentence: getCampaignDaySentence( LANGUAGE ),
-	daysRemaining: BannerFunctions.getDaysRemaining( LANGUAGE ),
+	campaignDaySentence: campaignDaySentence.getSentence(),
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	CampaignName: CampaignName,
 	BannerName: BannerName
