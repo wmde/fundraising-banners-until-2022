@@ -1,7 +1,7 @@
 module.exports = {
 	'goalSum': 8600000,
 	'donations-date-base': '2017-10-27',
-	'donations-collected-base': 8000000,
+	'donations-collected-base': 80000,
 	'donators-base': 0,
 	'appr-donations-per-minute': 10,
 	'appr-donators-per-minute': 1,
