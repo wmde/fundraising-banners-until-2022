@@ -11,7 +11,7 @@ tracking = "org-10-171026-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_progress_bar_test"
+pagename = "B17WMDE_10_171018_var"
 tracking = "org-10-171026-var"
 
 
@@ -26,7 +26,7 @@ tracking = "org-mob02-171026-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B17WMDE_mob_progress_bar_test"
+pagename = "B17WMDE_mob_02_171019_var"
 tracking = "org-mob02-171026-var"
 
 
