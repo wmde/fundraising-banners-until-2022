@@ -182,7 +182,6 @@ function displayBanner() {
 	$( window ).resize( function () {
 		addSpaceInstantly();
 		calculateLightboxPosition();
-		progressBar.resize();
 	} );
 }
 

@@ -134,31 +134,6 @@ $( '#btn-sofort' ).click( function () {
 
 // END form initialization
 
-function debounce( func, wait, immediate ) {
-	var timeout;
-	return function () {
-		var context = this, args = arguments;
-		var later = function () {
-			timeout = null;
-			if ( !immediate ) {
-				func.apply( context, args );
-			}
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout( timeout );
-		timeout = setTimeout( later, wait );
-		if ( callNow ) {
-			func.apply( context, args );
-		}
-	};
-}
-
-var lazyResize = debounce( function () {
-	progressBar.resize();
-}, 100 );
-$( window ).on( 'orientationchange', lazyResize );
-$( window ).on( 'resize', lazyResize );
-
 function addBannerSpace() {
 
 	var bannerHeight = $( '.mini-banner' ).height();
