@@ -11,45 +11,66 @@ require( './style.pcss' );
  *
  * @param {object} GlobalBannerSettings
  * @param {CampaignProjection} campaignProjection
+ * @param {object} options
  * @constructor
  */
-function ProgressBar( GlobalBannerSettings, campaignProjection ) {
+function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
+	this.options = Object.assign( {
+		minWidth: 90
+	}, options || {} );
 }
 
 ProgressBar.prototype.animate = function () {
 	var donationFillElement = $( '.progress_bar__donation_fill' ),
 		donationValueElement = $( '.js-donation_value' ),
 		remainingValueElement = $( '.js-value_remaining' ),
-		dTarget, dCollected, dRemaining, widthToFill;
+		donationTarget, donationsCollected, donationsRemaining;
 
 	donationFillElement.clearQueue();
 	donationFillElement.stop();
 
-	dTarget = this.GlobalBannerSettings.goalSum;
-	dCollected = this.campaignProjection.getProjectedDonationSum();
+	donationTarget = this.GlobalBannerSettings.goalSum;
+	donationsCollected = this.campaignProjection.getProjectedDonationSum();
 
-	if ( dCollected > dTarget ) {
-		dCollected = dTarget;
+	if ( donationsCollected > donationTarget ) {
+		donationsCollected = donationTarget;
 	}
-	dRemaining = dTarget - dCollected;
-	widthToFill = ( dCollected / dTarget ) * 100;
+	donationsRemaining = donationTarget - donationsCollected;
 
-	donationFillElement.animate( { width: widthToFill + '%' }, {
-		duration: 3000,
-		progress: function ( animation, progress ) {
-			var aCollected = dCollected * progress,
-				aRemaining = dTarget - aCollected;
-			remainingValueElement.html( formatMillion( aRemaining ) );
-			donationValueElement.html( formatMillion( aCollected ) );
+	donationFillElement.animate(
+		{
+			width: this.getWidthToFill( donationsCollected, donationTarget, donationFillElement.parent().width() )
 		},
-		complete: function () {
-			remainingValueElement.html( formatMillion( dRemaining ) );
-			donationValueElement.html( formatMillion( dCollected ) );
-			$( '.progress_bar' ).addClass( 'progress_bar--finished' );
+		{
+			duration: 3000,
+			progress: function ( animation, progress ) {
+				var aCollected = donationsCollected * progress,
+					aRemaining = donationTarget - aCollected;
+				remainingValueElement.html( formatMillion( aRemaining ) );
+				donationValueElement.html( formatMillion( aCollected ) );
+			},
+			complete: function () {
+				remainingValueElement.html( formatMillion( donationsRemaining ) );
+				donationValueElement.html( formatMillion( donationsCollected ) );
+				$( '.progress_bar' ).addClass( 'progress_bar--finished' );
+			}
 		}
-	} );
+	);
+};
+
+/**
+ *
+ * @param {Number} donationsCollected
+ * @param {Number} donationsTarget
+ * @param {Number} containerWidth
+ * @return {string} Min width in pixel or fill width in percent
+ */
+ProgressBar.prototype.getWidthToFill = function ( donationsCollected, donationsTarget, containerWidth ) {
+	var widthToFill = ( donationsCollected / donationsTarget ) * 100,
+		barFilled = containerWidth * ( donationsCollected / donationsTarget );
+	return barFilled > this.options.minWidth ? widthToFill + '%' : this.options.minWidth + 'px';
 };
 
 function formatMillion( value ) {
