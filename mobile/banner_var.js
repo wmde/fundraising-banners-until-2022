@@ -23,7 +23,6 @@ const campaignProjection = new CampaignProjection( {
 	donorsBase: GlobalBannerSettings[ 'donators-base' ],
 	donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
 } );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
@@ -32,8 +31,6 @@ const getCampaignDaySentence = require( '../shared/count_campaign_days' )( Globa
 const getCustomDayName = require( '../shared/custom_day_name' );
 const animateHighlight = require( '../shared/animate_highlight' );
 import TrackingEvents from '../shared/tracking_events';
-
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection );
 
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
@@ -56,8 +53,7 @@ $bannerContainer.html( bannerTemplate( {
 	daysRemaining: BannerFunctions.getDaysRemaining( LANGUAGE ),
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	CampaignName: CampaignName,
-	BannerName: BannerName,
-	progressBar: progressBar.render()
+	BannerName: BannerName
 } ) );
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
@@ -134,6 +130,30 @@ $( '#btn-sofort' ).click( function () {
 
 // END form initialization
 
+function debounce( func, wait, immediate ) {
+	var timeout;
+	return function () {
+		var context = this, args = arguments;
+		var later = function () {
+			timeout = null;
+			if ( !immediate ) {
+				func.apply( context, args );
+			}
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout( timeout );
+		timeout = setTimeout( later, wait );
+		if ( callNow ) {
+			func.apply( context, args );
+		}
+	};
+}
+
+var lazyResize = debounce( function () {
+	animateProgressBar();
+}, 100 );
+$( window ).on( 'orientationchange', lazyResize );
+
 function addBannerSpace() {
 
 	var bannerHeight = $( '.mini-banner' ).height();
@@ -177,12 +197,55 @@ $( document ).ready( function () {
 		$( '#frbanner' ).show();
 		$( '.mini-banner' ).slideToggle();
 
-		progressBar.animate();
+		animateProgressBar();
 		window.setTimeout( function () {
 			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
 		}, 3000 );
 	} );
 } );
+
+function addPointsToNum() {
+	// fixme Called in animateProgressBar() but not implemented!
+}
+
+function animateProgressBar() {
+	var donationFillElement = $( '#donationFill' );
+	donationFillElement.width( '0px' );
+
+	$( 'div#daysLeft' ).hide();
+
+	var barWidth = $( '#donationMeter' ).width();
+	var dTarget = parseInt( GlobalBannerSettings.goalSum );
+	var dCollected = campaignProjection.getProjectedDonationSum();
+	if ( dCollected > ( dTarget ) ) {
+		dCollected = dTarget;
+	}
+	var dRemaining = dTarget - dCollected;
+	var widthToFill = ( dCollected / dTarget * barWidth ) - 3;
+
+	donationFillElement.animate( { width: widthToFill + 'px' }, {
+		duration: 2500,
+		complete: function () {
+			$( 'div#daysLeft' ).show();
+
+			var fillWidth = $( 'div#donationFill' ).width();
+			var tooltipWidth = $( 'div#donationTooltip' ).width();
+			var tooltipMaxLeft = $( '#donationMeterWrapper' ).outerWidth() - tooltipWidth - 5;
+
+			$( '#sumDonations' ).text( addPointsToNum( dRemaining ) );
+
+			$( 'div#donationTooltip' ).css( 'left', Math.min( ( fillWidth - tooltipWidth / 2 ), tooltipMaxLeft ) + 'px' ).show();
+			$( 'div#donationTooltipArrow' ).css( 'left', ( fillWidth - 11 ) + 'px' ).show();
+
+			var vRem = dRemaining / 1000000;
+
+			vRem = vRem.toFixed( 1 );
+			vRem = vRem.replace( '.', ',' );
+
+			$( '#valRem' ).html( vRem );
+		}
+	} );
+}
 
 function validateForm() {
 	var form = document.donationForm;
