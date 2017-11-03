@@ -23,6 +23,18 @@
 		margin: 20px 20px;
 	}
 
+	.progress_bar__donation_remaining--outer {
+		margin-top: 20px;
+	}
+
+	.progress_bar__pointer_tip {
+		margin-top: 18px;
+	}
+
+	.progress_bar__pointer_line {
+		margin-top: 20px;
+	}
+
 	@media ( max-width: 400px ) {
 		.progress_bar__donation_remaining--inner,
 		.progress_bar__donation_remaining--outer {
@@ -34,12 +46,21 @@
 		.progress_bar__wrapper {
 			margin: 48px 72px;
 		}
+
+		.progress_bar__donation_remaining--outer {
+			margin-top: 48px;
+		}
 	}
 
-	@media ( min-height: 1000px ) {
-		.progress_bar__wrapper {
-			margin: 48px 72px;
+	.progress_bar--lateprogress {
+		.progress_bar__donation_remaining--outer {
+			margin-right: 48px;
 		}
+
+		.progress_bar__wrapper {
+			margin-right: -16px;
+		}
+
 	}
 
 }
