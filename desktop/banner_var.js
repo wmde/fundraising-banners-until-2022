@@ -55,6 +55,8 @@ const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LAN
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -64,7 +66,8 @@ $bannerContainer.html( bannerTemplate( {
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -181,6 +184,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
