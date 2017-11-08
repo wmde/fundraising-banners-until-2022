@@ -31,9 +31,9 @@ const campaignDaySentence = new CampaignDaySentence(
 );
 const getCustomDayName = require( '../shared/custom_day_name' );
 
+// const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html.hbs' );
-// const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
