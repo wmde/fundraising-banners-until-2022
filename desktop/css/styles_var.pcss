@@ -11,9 +11,10 @@
 		margin: 0 0 0.5em 0.8em;
 	}
 
-	.text__headline--bold,
-	.text__paragraph--bold {
-		font-weight: bold;
+	.infobox {
+		border: 8px solid #990000;
+		border-radius: 12px;
+		margin: 0.25em 0 0.25em 0.25em;
 	}
 
 	.infobox__footer {
@@ -30,17 +31,34 @@
 		display: none;
 	}
 
+	.form:before {
+		border-color: transparent transparent transparent #990000;
+		border-style: solid;
+		border-width: 10px;
+		content: ' ';
+		position: absolute;
+		top: 50%;
+		margin: -0.75em 0 0 -0.75em;
+	}
+
 	.form {
 		width: 17em;
 		margin: 1.8em 0 0.5em 0.25em;
 	}
 
 	.select-group {
+		font-size: inherit;
+		font-weight: normal;
 		padding: 0 0 0.5em 0.5em;
 	}
 
 	.button-group {
 		padding: 0 0 0 0.5em;
+	}
+
+	.button-group__label {
+		font-size: 0.8em;
+		font-weight: normal;
 	}
 
 	.close {
