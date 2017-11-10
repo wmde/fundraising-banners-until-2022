@@ -46,15 +46,15 @@ tracking = "org-pad01-171117-var"
 
 
 [wikipediade]
-campaign_tracking = "09-ba-171006"
+campaign_tracking = "wpde-01-171111"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/banner_ctrl.js"
-pagename = "FR2016_09_171007_ctrl"
-tracking = "org-09-171006-ctrl"
+pagename = "B17WPDE_01_171111_ctrl"
+tracking = "wpde-01-171111-ctrl"
 
 [wikipediade.banners.var]
 filename = "./wikipedia.de/banner_var.js"
-pagename = "FR2016_09_171007_var"
-tracking = "org-09-171006-var"
+pagename = "B17WPDE_01_171111_var"
+tracking = "wpde-01-171111-var"
