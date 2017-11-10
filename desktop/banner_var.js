@@ -3,7 +3,7 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -22,18 +22,28 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDaySentence = new CampaignDaySentence(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
-	LANGUAGE
+const campaignDays = new CampaignDays(
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const getCustomDayName = require( '../shared/custom_day_name' );
+const CampaignProjection = require( '../shared/campaign_projection' );
+const campaignProjection = new CampaignProjection(
+	campaignDays,
+	{
+		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
+		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
+		donorsBase: GlobalBannerSettings[ 'donators-base' ],
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+	}
+);
+const formatNumber = require( 'format-number' );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
+// const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html.hbs' );
-// const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -45,15 +55,19 @@ const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LAN
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 
 $bannerContainer.html( bannerTemplate( {
-	// TODO approx. donors
+	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
+	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -170,6 +184,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();

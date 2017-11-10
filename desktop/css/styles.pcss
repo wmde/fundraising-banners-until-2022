@@ -31,38 +31,19 @@
 		justify-content: space-between;
 		flex: 0 1 100%;
 
-		border: 8px solid #990000;
-		border-radius: 12px;
+		border: 5px solid #990000;
+		border-radius: 9px;
 		background-color: #f8f9fa;
 		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.25em 0 0.25em 0.25em;
+		margin: 0.2em 0 0.2em 0.2em;
 	}
 
 	.infobox__text {
 		color: #000000;
-		font-size: 0.95em;
-		line-height: 1.4em;
+		font-size: 1.05em;
+		line-height: 1.2em;
 		text-align: left;
-		margin: 0 0 0.5em 1.4em;
-		font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
-	}
-
-	@media ( min-width: 850px ) {
-		.infobox__text {
-			font-size: 1em;
-		}
-	}
-
-	@media ( min-width: 960px ) {
-		.infobox__text {
-			font-size: 1.1em;
-		}
-	}
-
-	@media ( min-width: 1600px ) {
-		.infobox__text {
-			font-size: 1.3em;
-		}
+		margin: 0 0 0.5em 2em;
 	}
 
 	.text__headline {
@@ -73,11 +54,21 @@
 		margin: 0;
 	}
 
-	.text__paragraph .text-highlight {
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
+	}
+
+	.text__paragraph .text__highlight {
 		border-bottom: solid 3px #990000;
 		padding: 0 0.1em;
 		background: transparent;
-		font-weight: normal;
+		font-weight: bold;
 	}
 
 	.infobox__footer {
@@ -91,22 +82,10 @@
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 0.75em;
-		line-height: 1.7em;
+		font-size: 0.8em;
+		line-height: 1.6em;
 
 		border-top: 1px solid #990000;
-	}
-
-	@media ( min-width: 850px ) {
-		.footer {
-			font-size: 0.8em;
-		}
-	}
-
-	@media ( min-width: 960px ) {
-		.footer {
-			font-size: 0.9em;
-		}
 	}
 
 	.footer__info {
@@ -136,18 +115,8 @@
 
 	/* Form styling */
 
-	.form:before {
-		border-color: transparent transparent transparent #990000;
-		border-style: solid;
-		border-width: 10px;
-		content: ' ';
-		position: absolute;
-		top: 50%;
-		margin: -0.75em 0 0 -0.75em;
-	}
-
 	.form {
-		width: 25%;
+		width: 16em;
 		min-width: 12em;
 		flex-shrink: 0;
 		padding: 0 0 0 0.5em;
@@ -163,6 +132,8 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 1 1 100%;
+		font-size: 0.9em;
+		font-weight: bold;
 	}
 
 	.select-group--with-error {
@@ -286,7 +257,8 @@
 		border-radius: 2px;
 		padding: 0.1em 0;
 		line-height: 2em;
-		font-size: 0.8em;
+		font-size: 0.7em;
+		font-weight: bold;
 		text-align: center;
 		box-sizing: border-box;
 	}
@@ -307,6 +279,10 @@
 		height: 0;
 		width: 0;
 		border: 0 none;
+	}
+
+	.progress_bar__days_left {
+		display: none;
 	}
 
 }
