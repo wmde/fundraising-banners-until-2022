@@ -4,14 +4,11 @@ require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 180;
-const sizeIssueTrackRatio = 1;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
 import TrackingEvents from '../shared/tracking_events';
-import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 
@@ -49,7 +46,6 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
-const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 
@@ -240,21 +236,5 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' );
-
-	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
-		return;
-	}
-
-	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
-		if ( BannerFunctions.onMediaWiki() ) {
-			mw.centralNotice.setBannerLoadedButHidden();
-		}
-		trackingEvents.trackSizeIssueEvent(
-			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
-			sizeIssueTrackRatio
-		);
-	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
-	}
+	displayBanner();
 } );
