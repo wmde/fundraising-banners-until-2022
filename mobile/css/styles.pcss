@@ -63,7 +63,7 @@
 	}
 
 	.infobox__text {
-		padding: 20px;
+		padding: 20px 20px 0 20px;
 		font-weight: bold;
 	}
 
@@ -74,7 +74,7 @@
 		}
 
 		.infobox__text {
-			padding: 48px 72px;
+			padding: 48px 72px 0 72px;
 		}
 	}
 
@@ -84,7 +84,7 @@
 		}
 
 		.infobox__text {
-			padding: 48px 72px;
+			padding: 48px 72px 0 72px;
 		}
 	}
 
@@ -94,6 +94,55 @@
 
 	.infobox__text p:last-child {
 		margin-bottom: 0;
+	}
+
+	/* Progress bar styling */
+	.progress_bar__days_left {
+		display: none !important;
+	}
+
+	.progress_bar__wrapper {
+		margin: 20px 20px;
+	}
+
+	.progress_bar__donation_remaining--outer {
+		margin-top: 20px;
+	}
+
+	.progress_bar__pointer_tip {
+		margin-top: 18px;
+	}
+
+	.progress_bar__pointer_line {
+		margin-top: 20px;
+	}
+
+	@media ( max-width: 400px ) {
+		.progress_bar__donation_remaining--inner,
+		.progress_bar__donation_remaining--outer {
+			display: none !important;
+		}
+	}
+
+	@media ( min-width: 768px ) {
+		.progress_bar__wrapper {
+			margin: 48px 72px;
+		}
+
+		.progress_bar__donation_remaining--outer {
+			margin-top: 48px;
+		}
+	}
+
+	.progress_bar--lateprogress {
+		.progress_bar__donation_remaining--outer {
+			margin-right: 48px;
+		}
+
+		.progress_bar__wrapper {
+			margin-right: -16px;
+		}
+
 	}
 
 	/* Call to action */
