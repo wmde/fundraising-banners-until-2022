@@ -81,10 +81,10 @@ tracking = "org-pad-de-171121"
 campaign_tracking = "wpde-01-171111"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype&devbanner={{banner}}"
 
-[wikipediade.banners.ctrl]
-filename = "./wikipedia.de/banner_ctrl.js"
-pagename = "B17WPDE_01_171111_ctrl"
-tracking = "wpde-01-171111-ctrl"
+[wikipediade.banners.top-ctrl]
+filename = "./wikipedia.de/banner_top_ctrl.js"
+pagename = "B17WPDE_01_171111_top_ctrl"
+tracking = "wpde-01-171111-top-ctrl"
 
 [wikipediade.banners.var]
 filename = "./wikipedia.de/banner_var.js"
