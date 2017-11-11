@@ -1,4 +1,4 @@
-require( './css/styles.pcss' );
+require( './css/styles_top.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -36,7 +36,7 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_top.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
