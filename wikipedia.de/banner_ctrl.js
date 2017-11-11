@@ -22,6 +22,7 @@ const campaignDays = new CampaignDays(
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const getCustomDayName = require( '../shared/custom_day_name' );
+const animateHighlight = require( '../shared/animate_highlight' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	campaignDays,
@@ -176,6 +177,7 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlighted-character', 10 ); }, 4000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
