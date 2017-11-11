@@ -18,18 +18,23 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDays = new CampaignDays(
+const campaignDaySentence = new CampaignDaySentence( new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-);
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+), LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
-const campaignProjection = new CampaignProjection( campaignDays, {
-	baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-	donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-	donorsBase: GlobalBannerSettings[ 'donators-base' ],
-	donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
-} );
+const campaignProjection = new CampaignProjection(
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
+	{
+		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
+		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
+		donorsBase: GlobalBannerSettings[ 'donators-base' ],
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+	}
+);
 
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
