@@ -18,12 +18,14 @@ function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
 	this.options = Object.assign( {
-		minWidth: 90
+		minWidth: 90,
+		decimalSeparator: ','
 	}, options || {} );
 }
 
 ProgressBar.prototype.animate = function () {
-	var donationFillElement = $( '.progress_bar__donation_fill' ),
+	var decimalSeparator = this.options.decimalSeparator,
+		donationFillElement = $( '.progress_bar__donation_fill' ),
 		donationValueElement = $( '.js-donation_value' ),
 		remainingValueElement = $( '.js-value_remaining' ),
 		donationTarget, donationsCollected, donationsRemaining;
@@ -48,12 +50,12 @@ ProgressBar.prototype.animate = function () {
 			progress: function ( animation, progress ) {
 				var aCollected = donationsCollected * progress,
 					aRemaining = donationTarget - aCollected;
-				remainingValueElement.html( formatMillion( aRemaining ) );
-				donationValueElement.html( formatMillion( aCollected ) );
+				remainingValueElement.html( formatMillion( aRemaining, decimalSeparator ) );
+				donationValueElement.html( formatMillion( aCollected, decimalSeparator ) );
 			},
 			complete: function () {
-				remainingValueElement.html( formatMillion( donationsRemaining ) );
-				donationValueElement.html( formatMillion( donationsCollected ) );
+				remainingValueElement.html( formatMillion( donationsRemaining, decimalSeparator ) );
+				donationValueElement.html( formatMillion( donationsCollected, decimalSeparator ) );
 				$( '.progress_bar' ).addClass( 'progress_bar--finished' );
 			}
 		}
@@ -73,19 +75,8 @@ ProgressBar.prototype.getWidthToFill = function ( donationsCollected, donationsT
 	return barFilled > this.options.minWidth ? widthToFill + '%' : this.options.minWidth + 'px';
 };
 
-function formatMillion( value ) {
-	return ( value / 1000000 ).toFixed( 1 ).replace( '.', getDecimalSeparator );
-}
-
-function getDecimalSeparator() {
-	switch ( mw.config.get( 'wgContentLanguage' ) ) {
-		case 'de':
-			return ',';
-		case 'en':
-			return '.';
-		default:
-			return ',';
-	}
+function formatMillion( value, decimalSeparator ) {
+	return ( value / 1000000 ).toFixed( 1 ).replace( '.', decimalSeparator );
 }
 
 ProgressBar.prototype.render = function () {
