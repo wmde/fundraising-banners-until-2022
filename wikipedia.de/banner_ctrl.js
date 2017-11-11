@@ -197,7 +197,7 @@ $( '#bImpCount' ).val( bannerImpCount );
 
 // Lightbox
 $( '#application-of-funds-link' ).wlightbox( {
-	container: $( '#mw-page-base' ),
+	container: $( '#main' ),
 	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 	top: function () {
 		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
@@ -218,20 +218,10 @@ trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
 	$( '#WMDE_Banner' ).hide();
-	if ( BannerFunctions.onMediaWiki() ) {
-		mw.centralNotice.hideBanner();
-	}
 	removeBannerSpace();
 
 	return false;
 } );
-
-// hide banner when the visual editor is initialized
-$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
-	$( '#WMDE_Banner' ).hide();
-	removeBannerSpace();
-} );
-
 // END Banner close functions
 
 // Display banner on load
