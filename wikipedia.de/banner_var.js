@@ -183,8 +183,8 @@ function displayBanner() {
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
-	addSpace();
-	bannerElement.animate( { top: 0 }, 1000 );
+	addSpaceInstantly();
+	bannerElement.css( { top: 0 } );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
