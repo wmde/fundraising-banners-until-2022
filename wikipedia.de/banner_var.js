@@ -207,7 +207,7 @@ $( '#bImpCount' ).val( bannerImpCount );
 
 // Lightbox
 $( '#application-of-funds-link' ).wlightbox( {
-	container: $( '#main' ),
+	container: $( 'body' ),
 	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 	top: function () {
 		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
