@@ -44,7 +44,7 @@
 		line-height: 1.4em;
 		text-align: left;
 		margin: 0.25em 0 0.5em 1.5em;
-		font-family: 'Linux Libertine', Georgia, Times, serif;
+		font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
 	}
 
 	.text__headline {
@@ -70,7 +70,7 @@
 	}
 
 	.infobox__footer {
-		margin: 0 1.75em 0 1.75em;	
+		margin: 0 1.75em 0 1.75em;
 		padding: 0.025em 0 0 2em;
 		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.25em/18px 18px;
 	}
@@ -106,13 +106,13 @@
 		color: #000000;
 	}
 
-	@media (min-width : 960px) {
+	@media ( min-width: 960px ) {
 		.infobox__text {
 			font-size: 1em;
 		}
 	}
 
-	@media (min-width : 1300px) {
+	@media ( min-width: 1300px ) {
 		.infobox__text {
 			font-size: 1.1em;
 		}
@@ -124,7 +124,7 @@
 		}
 	}
 
-	@media (min-width : 1500px) {
+	@media ( min-width: 1500px ) {
 		.infobox__text {
 			font-size: 1.2em;
 		}
@@ -149,11 +149,19 @@
 	}
 
 	.form {
-		width: 25%	;
+		width: 25%;
 		min-width: 12em;
 		flex-shrink: 0;
 		padding: 1.4em 0 0 0;
 		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
+	}
+
+	.select-group__state,
+	.button-group__button,
+	#amount-other-input {
+		-webkit-transition: all 0.25s ease-in-out;
+		-moz-transition: all 0.25s ease-in-out;
+		transition: all 0.25s ease-in-out;
 	}
 
 	.select-group {
@@ -237,6 +245,12 @@
 		box-sizing: border-box;
 	}
 
+	.select-group__state:hover {
+		background-color: #ffffff;
+		color: #444444;
+		border-color: #a2a9b1;
+	}
+
 	.select-group__input:checked + .select-group__state {
 		background: #2a4b8d;
 		border-color: #7d8389;
@@ -292,30 +306,16 @@
 		box-sizing: border-box;
 	}
 
-	.select-group__state:hover {
-		background-color: #ffffff;
-		color: #444444;
-		border-color: #a2a9b1;
-	}
-
 	.button-group__label:hover {
 		background-color: #ffffff;
 		border-color: #859dcc;
 	}
 
-	.select-group__state,
-	.button-group__button,
-	#amount-other-input {
-		-webkit-transition: all .25s ease-in-out;
-		-moz-transition: all .25s ease-in-out;
-		transition: all .25s ease-in-out;
-	}
-
 	.close {
 		display: inline-block;
 		position: absolute;
-		right: .5em;
-		top: .5em;
+		right: 0.5em;
+		top: 0.5em;
 		z-index: 999;
 		font-size: 0.75em;
 		text-transform: uppercase;
@@ -328,12 +328,12 @@
 	}
 
 	.close__icon {
-		background: url( '//upload.wikimedia.org/wikipedia/donate/3/32/Close-thin.png' ) no-repeat center center;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/32/Close-thin.png' ) no-repeat center center;
 		width: 9px;
 		height: 9px;
 		float: right;
 		display: block;
-		margin: .2em .4em;
+		margin: 0.2em 0.4em;
 	}
 
 	.click-tracking {
