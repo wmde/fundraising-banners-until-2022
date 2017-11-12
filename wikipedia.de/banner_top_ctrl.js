@@ -146,15 +146,6 @@ BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
-function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
-	if ( !$bannerElement.is( ':visible' ) ) {
-		return;
-	}
-
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
-}
-
 function addSpaceInstantly() {
 	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;

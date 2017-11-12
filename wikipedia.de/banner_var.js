@@ -150,15 +150,6 @@ BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
-function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
-	if ( !$bannerElement.is( ':visible' ) ) {
-		return;
-	}
-
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
-}
-
 function addSpaceInstantly() {
 	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;
@@ -236,11 +227,5 @@ $( '#WMDE_Banner .close__link' ).click( function () {
 
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' );
-
-	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
-		return;
-	}
-
 	displayBanner();
 } );
