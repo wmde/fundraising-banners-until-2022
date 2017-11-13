@@ -119,7 +119,7 @@ function setupAmountEventHandling() {
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( 'Bitte wählen Sie zuerst ein Zahlungsintervall.' );
+		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
