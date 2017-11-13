@@ -210,6 +210,9 @@ $( '#application-of-funds-link' ).click( function () {
 	window.scrollTo( 0, 0 );
 } );
 
+// record banner impression
+trackingEvents.recordBannerImpression();
+
 // track lightbox link clicking and banner closing
 trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
 trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );

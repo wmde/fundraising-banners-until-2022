@@ -11,6 +11,7 @@ describe( 'TrackingEvents', function () {
 	const trackingBaseUrl = 'http://tracking-server/path?trackPage=http://tracked-server',
 		clickActionName = 'click-action',
 		sizeIssueActionName = 'banner-size-issue',
+		recordBannerImpressionActionName = 'banner-shown',
 		bannerName = 'some-banner',
 		fullTrackingRatio = 1,
 		noTrackingRatio = 0;
@@ -73,6 +74,24 @@ describe( 'TrackingEvents', function () {
 			assert.equal(
 				$trackingElement.attr( 'src' ),
 				undefined
+			);
+		} );
+
+	} );
+
+	describe( '#trackBannerImpression()', function () {
+
+		beforeEach( function () {
+			$trackingElement = $( '<img />' );
+			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
+		} );
+
+		it( 'URL for recording a banner impression is built correctly', function () {
+			trackingEvents.recordBannerImpression();
+
+			assert.equal(
+				$trackingElement.attr( 'src' ),
+				trackingBaseUrl + '/' + recordBannerImpressionActionName + '/' + bannerName
 			);
 		} );
 
