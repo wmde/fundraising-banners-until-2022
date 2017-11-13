@@ -55,7 +55,7 @@ module.exports = {
 			context: {
 				bannerValues: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}'
 			},
-			filePattern: 'B17WMDE_*.js',
+			filePattern: 'B*.js',
 			campaignConfig: campaigns.getConfigForPages()
 		} )
 	]
