@@ -14,10 +14,10 @@ import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
-import Translations from '../shared/messages/en';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
+import Translations from '../shared/messages/en';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDaySentence = new CampaignDaySentence(
 	new CampaignDays(
@@ -27,6 +27,21 @@ const campaignDaySentence = new CampaignDaySentence(
 	LANGUAGE
 );
 const getCustomDayName = require( '../shared/custom_day_name' );
+const CampaignProjection = require( '../shared/campaign_projection' );
+const campaignProjection = new CampaignProjection(
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
+	{
+		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
+		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
+		donorsBase: GlobalBannerSettings[ 'donators-base' ],
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+	}
+);
+const formatNumber = require( 'format-number' );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
@@ -42,11 +57,11 @@ const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am h
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 $bannerContainer.html( bannerTemplate( {
-	// TODO approx. donors
+	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
+	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
-	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName
@@ -233,11 +248,14 @@ $( function () {
 	}
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
+		if ( BannerFunctions.onMediaWiki() ) {
+			mw.centralNotice.setBannerLoadedButHidden();
+		}
 		trackingEvents.trackSizeIssueEvent(
 			sizeIssueIndicator.getDimensions( $bannerElement.height() ),
 			sizeIssueTrackRatio
 		);
+	} else {
+		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
-
-	setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 } );
