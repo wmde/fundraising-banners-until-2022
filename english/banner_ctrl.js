@@ -154,20 +154,31 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function removeBannerSpace() {
@@ -201,6 +212,16 @@ function calculateLightboxPosition() {
 		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
+}
+
+function showLanguageInfoBox() {
+	var langInfoElement = $( '#langInfo' ),
+		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
+		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
+	langInfoElement.css( 'top', bannerHeight );
+	langInfoElement.css( 'width', formWidth );
+	langInfoElement.show();
+	addSpaceInstantly();
 }
 
 var impCount = BannerFunctions.increaseImpCount();
@@ -266,4 +287,9 @@ $( function () {
 	} else {
 		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	$( '.select-group__option, .button-group__button' ).click( function () {
+		showLanguageInfoBox();
+	} );
+
 } );
