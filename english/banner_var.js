@@ -1,9 +1,9 @@
-// require( './css/styles.pcss' );
+require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-require( './css/styles_var.pcss' );
+// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -46,9 +46,9 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-// const bannerTemplate = require('./banner_var.hbs');
+// const bannerTemplate = require('./banner_html.hbs');
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -60,6 +60,12 @@ const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LAN
 const currentDayName = BannerFunctions.getCurrentGermanDay();
 const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection,
+	{
+		textRight: 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €'
+	}
+);
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -69,7 +75,8 @@ $bannerContainer.html( bannerTemplate( {
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -117,7 +124,7 @@ function setupAmountEventHandling() {
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( 'Bitte wählen Sie zuerst ein Zahlungsintervall.' );
+		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
@@ -152,20 +159,31 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function removeBannerSpace() {
@@ -186,6 +204,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -198,6 +217,16 @@ function calculateLightboxPosition() {
 		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
+}
+
+function showLanguageInfoBox() {
+	var langInfoElement = $( '#langInfo' ),
+		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
+		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
+	langInfoElement.css( 'top', bannerHeight );
+	langInfoElement.css( 'width', formWidth );
+	langInfoElement.show();
+	addSpaceInstantly();
 }
 
 var impCount = BannerFunctions.increaseImpCount();
@@ -263,4 +292,9 @@ $( function () {
 	} else {
 		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	$( '.select-group__option, .button-group__button' ).click( function () {
+		showLanguageInfoBox();
+	} );
+
 } );
