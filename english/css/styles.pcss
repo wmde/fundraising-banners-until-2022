@@ -40,44 +40,29 @@
 
 	.infobox__text {
 		color: #000000;
-		font-size: 1.06em;
+		font-size: 1.05em;
 		font-weight: bold;
 		line-height: 1.2em;
 		text-align: left;
 		margin-left: 2rem;
 	}
 
-	@media ( min-width: 1000px ) {
-		.infobox__text {
-			font-size: 1.1em;
-			line-height: 1.25em;
-		}
-	}
-
-	@media ( min-width: 1200px ) {
-		.infobox__text {
-			font-size: 1.25em;
-			line-height: 1.35em;
-		}
-	}
-
-	@media ( min-width: 1500px ) {
-		.infobox__text {
-			font-size: 1.35em;
-			line-height: 1.4em;
-		}
-	}
-
 	.text__headline {
 		margin: 0.4em 0 0.5em 0;
 	}
 
-	.text__headline--italic {
-		font-style: italic;
-	}
-
 	.text__paragraph {
 		margin: 0.25em 0;
+	}
+
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
 	}
 
 	.text__highlight {
@@ -95,11 +80,6 @@
 
 	.infobox__footer {
 		padding: 0.025rem 0 0 2rem;
-
-		background-image: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' );
-		background-size: 18px 18px;
-		background-repeat: no-repeat;
-		background-position: left 0.5em top;
 	}
 
 	.footer {
@@ -108,8 +88,8 @@
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 0.81em;
-		line-height: 1.7em;
+		font-size: 0.8em;
+		line-height: 1.6em;
 
 		border-top: 1px solid #990000;
 	}
@@ -250,7 +230,10 @@
 		border: 0 none;
 		background: transparent;
 		font-size: inherit;
-		width: 100%;
+	}
+
+	.button-group__button--halfwidth {
+		width: 50%;
 	}
 
 	.button-group__button--invisible {
