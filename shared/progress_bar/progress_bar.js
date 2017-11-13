@@ -18,7 +18,8 @@ function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
 	this.options = Object.assign( {
-		minWidth: 90
+		minWidth: 90,
+		textRight: 'es fehlen <span class="js-value_remaining">1,2</span> Mio. €'
 	}, options || {} );
 }
 
@@ -94,7 +95,7 @@ ProgressBar.prototype.render = function () {
 	return template( {
 		'text-inner-right': '<span class="js-donation_value">0,0</span> Mio. €',
 		'text-inner-left': 'Nur noch <span class="numDaysLeft">1 Tag</span>',
-		'text-right': 'es fehlen <span class="js-value_remaining">1,2</span> Mio. €'
+		'text-right': this.options.textRight
 	} );
 };
 
