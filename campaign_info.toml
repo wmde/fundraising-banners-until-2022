@@ -47,7 +47,7 @@ tracking = "org-pad01-171117-var"
 
 [wikipediade]
 campaign_tracking = "wpde-01-171111"
-preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_fulltop_ctrl.js"
