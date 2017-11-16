@@ -22,15 +22,20 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDays = new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+const campaignDaySentence = new CampaignDaySentence(
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
+	LANGUAGE
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const getCustomDayName = require( '../shared/custom_day_name' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
-	campaignDays,
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
 	{
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
