@@ -2,6 +2,9 @@ require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
+// For A/B testing different styles, load
+// require( './css/styles_var.pcss' );
+
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
@@ -44,6 +47,8 @@ const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const bannerTemplate = require( './templates/banner_html.hbs' );
+// For A/B testing different text or markup, load
+// const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
