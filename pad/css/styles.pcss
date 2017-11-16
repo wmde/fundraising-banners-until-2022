@@ -120,7 +120,7 @@
 		min-width: 12em;
 		flex-shrink: 0;
 		padding: 0 0 0 0.5em;
-		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
+		margin: 0.5em 1.5em 0.5em 0.25em;
 	}
 
 	.select-group {
@@ -264,11 +264,15 @@
 	}
 
 	.close {
-		width: 18px;
-		margin: 0.25em 0.25em 0.25em 0;
-		top: auto;
-		right: auto;
-		flex: 0 0 18px;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	.close__link {
+		padding: 1em 2.25em 1.5em 0;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Close_x_-_black.png' ) no-repeat center center;
+		cursor: pointer;
 	}
 
 	.click-tracking {
