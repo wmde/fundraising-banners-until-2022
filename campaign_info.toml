@@ -39,6 +39,11 @@ filename = "./pad/banner_ctrl.js"
 pagename = "B17WMDE_pad_01_171115_ctrl"
 tracking = "org-pad01-171115-ctrl"
 
+[pad.banners.pad]
+filename = "./pad/banner_var.js"
+pagename = "B17WMDE_pad_01_171115_var"
+tracking = "org-pad01-171115-var"
+
 
 [wikipediade]
 campaign_tracking = "09-ba-171006"
