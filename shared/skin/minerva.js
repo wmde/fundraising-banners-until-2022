@@ -25,7 +25,7 @@ module.exports = class Minerva extends Skin {
 	}
 
 	addSearchObserver( onSearchFocus ) {
-		if( this.searchField.is( ':focus' ) ) {
+		if ( this.searchField.is( ':focus' ) ) {
 			onSearchFocus();
 		} else {
 			this.searchField.one( 'focus', onSearchFocus );

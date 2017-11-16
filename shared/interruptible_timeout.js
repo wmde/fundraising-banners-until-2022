@@ -4,10 +4,10 @@ class InterruptibleTimeout {
 	}
 
 	run( callback, delay ) {
-		this.timeout = setTimeout( function() {
+		this.timeout = setTimeout( function () {
 			callback();
 			this.timeout = null;
-		}.bind( this ) , delay);
+		}.bind( this ), delay );
 	}
 
 	cancel() {

@@ -269,5 +269,5 @@ $( function () {
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
-	})
+	} );
 } );

@@ -27,7 +27,7 @@ module.exports = class Skin {
 	 * Some Children must implement this, if their search UI interferes with the banner
 	 * @param {function} onSearchFocus
 	 */
-	addSearchObserver( onSearchFocus ) {
+	addSearchObserver( onSearchFocus ) { // eslint-disable-line no-unused-vars
 	}
 
 	getName() {

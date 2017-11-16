@@ -67,6 +67,7 @@ export default class TrackingEvents {
 	 *
 	 * @param {string} actionName Name of the action to be tracked
 	 * @param {number} trackRatio The probability of the event being tracked (between 0 and 1)
+	 * @return {function}
 	 */
 	createTrackHandler( actionName, trackRatio ) {
 		const self = this;
@@ -81,7 +82,7 @@ export default class TrackingEvents {
 					getTrackingURL( self.baseUrl, actionName, self.bannerName, '' )
 				);
 			}
-		}
+		};
 	}
 
 }
