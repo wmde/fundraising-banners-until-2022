@@ -38,19 +38,7 @@ export default class TrackingEvents {
 	 * @param {number} trackRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackClickEvent( $trackedElement, actionName, trackRatio ) {
-		const self = this;
-		if ( typeof trackRatio === 'undefined' ) {
-			trackRatio = 1;
-		}
-
-		$trackedElement.click( function () {
-			if ( Math.random() < trackRatio ) {
-				self.trackingImage.attr(
-					'src',
-					getTrackingURL( self.baseUrl, actionName, self.bannerName, '' )
-				);
-			}
-		} );
+		$trackedElement.click( this.createTrackHandler( actionName, trackRatio ) );
 	}
 
 	/**
@@ -71,6 +59,28 @@ export default class TrackingEvents {
 				'src',
 				getTrackingURL( this.baseUrl, 'banner-size-issue', this.bannerName, generateTrackingData( dimensionData ) )
 			);
+		}
+	}
+
+	/**
+	 * Generate a tracking function
+	 *
+	 * @param {string} actionName Name of the action to be tracked
+	 * @param {number} trackRatio The probability of the event being tracked (between 0 and 1)
+	 */
+	createTrackHandler( actionName, trackRatio ) {
+		const self = this;
+		if ( typeof trackRatio === 'undefined' ) {
+			trackRatio = 1;
+		}
+
+		return function () {
+			if ( Math.random() < trackRatio ) {
+				self.trackingImage.attr(
+					'src',
+					getTrackingURL( self.baseUrl, actionName, self.bannerName, '' )
+				);
+			}
 		}
 	}
 

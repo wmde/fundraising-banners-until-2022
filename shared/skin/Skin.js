@@ -23,6 +23,13 @@ module.exports = class Skin {
 	removeSpace() {
 	}
 
+	/**
+	 * Some Children must implement this, if their search UI interferes with the banner
+	 * @param {function} onSearchFocus
+	 */
+	addSearchObserver( onSearchFocus ) {
+	}
+
 	getName() {
 		return this.constructor.name.toLowerCase();
 	}
