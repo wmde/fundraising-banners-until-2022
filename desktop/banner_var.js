@@ -129,6 +129,10 @@ function setupAmountEventHandling() {
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+	} );
 }
 
 function validateAndSetPeriod() {
