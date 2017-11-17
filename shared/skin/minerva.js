@@ -8,6 +8,7 @@ module.exports = class Minerva extends Skin {
 		super();
 
 		this.viewport = $( '#mw-mf-viewport' );
+		this.searchField = $( '#searchInput, input.search' );
 	}
 
 	addSpace( bannerHeight ) {
@@ -21,5 +22,13 @@ module.exports = class Minerva extends Skin {
 	removeSpace() {
 		this.viewport.css( { top: 0, marginTop: 0 } );
 		$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
+	}
+
+	addSearchObserver( onSearchFocus ) {
+		if ( this.searchField.is( ':focus' ) ) {
+			onSearchFocus();
+		} else {
+			this.searchField.one( 'focus', onSearchFocus );
+		}
 	}
 };

@@ -6,6 +6,7 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
+const searchBoxTrackRatio = 1;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -14,6 +15,7 @@ import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -57,6 +59,7 @@ const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am h
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
+const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -260,6 +263,11 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	BannerFunctions.getSkin().addSearchObserver( function () {
+		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
+		bannerDisplayTimeout.cancel();
+	} );
 } );

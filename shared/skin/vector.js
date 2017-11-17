@@ -10,6 +10,7 @@ module.exports = class Vector extends Skin {
 		this.panel = $( '#mw-panel' );
 		this.head = $( '#mw-head' );
 		this.pageBase = $( '#mw-page-base' );
+		this.searchField = $( '#searchInput' );
 	}
 
 	addSpace( bannerHeight ) {
@@ -28,5 +29,9 @@ module.exports = class Vector extends Skin {
 		this.panel.css( 'top', 0 );
 		this.head.css( 'top', 0 );
 		this.pageBase.css( 'padding-top', 0 );
+	}
+
+	addSearchObserver( onSearchFocus ) {
+		this.searchField.one( 'focus', onSearchFocus );
 	}
 };
