@@ -1,14 +1,15 @@
 module.exports = {
-	'goalSum': 8600000,
-	'donations-date-base': '2017-07-05',
+	'goalSum': 7900000,
+	'donations-date-base': '2017-11-10',
 	'donations-collected-base': 0,
 	'donators-base': 0,
-	'appr-donations-per-minute': 10,
-	'appr-donators-per-minute': 1,
-	'impressions-per-day-in-million': 8, 'milion-impressions-per-day': 8, /** @deprecated kept for legacy reasons */
+	'appr-donations-per-minute': 110,
+	'appr-donators-per-minute': 5.67,
+	'milion-impressions-per-day': 7, /** @deprecated kept for legacy reasons */
+	'impressions-per-day-in-million': 7,
 	'allBannersCookie': 'banner_impression_count',
 	'singleBannerCookie': 'single_banner_impression_count',
-	'campaign-start-date': '2017-11-06',
+	'campaign-start-date': '2017-11-10',
 	'campaign-end-date': '2017-12-31',
 	'banner-close-track-ratio': 1
 };
