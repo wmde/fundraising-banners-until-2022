@@ -31,18 +31,18 @@ tracking = "org-mob03-171110-var"
 
 
 [pad]
-campaign_tracking = "pad01-ba-171116"
+campaign_tracking = "pad01-ba-171117"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
 pagename = "B17WMDE_pad_01_171116_ctrl"
-tracking = "org-pad01-171116-ctrl"
+tracking = "org-pad01-171117-ctrl"
 
 [pad.banners.pad]
 filename = "./pad/banner_var.js"
 pagename = "B17WMDE_pad_01_171116_var"
-tracking = "org-pad01-171116-var"
+tracking = "org-pad01-171117-var"
 
 
 [wikipediade]
