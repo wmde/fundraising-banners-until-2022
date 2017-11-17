@@ -8,7 +8,7 @@ module.exports = class Minerva extends Skin {
 		super();
 
 		this.viewport = $( '#mw-mf-viewport' );
-		this.searchField = $( '#searchInput' );
+		this.searchField = $( '#searchInput, input.search' );
 	}
 
 	addSpace( bannerHeight ) {
