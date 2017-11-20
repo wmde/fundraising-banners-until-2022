@@ -6,10 +6,14 @@ const Minimatch = require( 'minimatch' ).Minimatch;
 const Handlebars = require( 'handlebars' );
 
 function MediaWikiTextWrapper( options ) {
-	this.template = Handlebars.compile( options.template ) || '{{{ banner }}}';
+	this.templates = {} ;
 	this.filePattern = options.filePattern || '*.js';
 	this.context = options.context || {};
 	this.campaignConfig = options.campaignConfig || {};
+
+	Object.keys( options.templates ).forEach( function( pageName ) {
+		this.templates[ pageName ] = Handlebars.compile( options.templates[ pageName ] );
+	}.bind( this ) );
 }
 
 MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
@@ -23,9 +27,11 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 				continue;
 			}
 
-			wrappedFiles[ filename + '.wikitext' ] = self.template( Object.assign( {
+			let pagename = filename.replace( /\.js$/, '' );
+			let template = self.templates[ pagename ];
+			wrappedFiles[ filename + '.wikitext' ] = template( Object.assign( {
 				banner: compilation.assets[ filename ].source(),
-				campaignConfig: self.campaignConfig[ filename.replace( /\.js$/, '' ) ] || {}
+				campaignConfig: self.campaignConfig[ pagename ] || {}
 			}, self.context ) );
 		}
 
