@@ -3,13 +3,13 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
-const sizeIssueTrackRatio = 1;
-const searchBoxTrackRatio = 1;
+const sizeIssueTrackRatio = 0.01;
+const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -104,16 +104,6 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
-		addSpaceInstantly();
-	} );
 }
 
 function setupAmountEventHandling() {
@@ -171,10 +161,6 @@ $( '#amount-other-input' ).change( function () {
 
 $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
 } );
 
 BannerFunctions.initializeBannerEvents();
