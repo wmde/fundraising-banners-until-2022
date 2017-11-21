@@ -77,3 +77,13 @@ tracking = "org-en01-171114-ctrl"
 filename = "./english/banner_var.js"
 pagename = "B17WMDE_en01_171113_var"
 tracking = "org-en01-171114-var"
+
+
+[enwiki-default]
+campaign_tracking = "ca17-default"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+
+[enwiki-default.banners.default]
+filename = "./english/banner_ctrl.js"
+pagename = "B17WMDE_enwiki_desktop_default"
+tracking = "org-desktop-en-171121"
