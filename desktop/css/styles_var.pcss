@@ -1,43 +1,30 @@
 #WMDE_Banner {
-
-	.infobox {
-		border: 5px solid #66b1e5;
-		background-color: #daeefb;
+	.redirect-spinner-overlay {
+		position: absolute;
+		height: 100%;
+		width: 18em;
+		background: rgba( 255, 255, 255, 0.9 );
+		right: 0;
+		margin: 0;
+		padding: 0;
 	}
 
-	.infobox__footer {
-		background: transparent;
+	.spinner {
+		width: 32px;
+		height: 32px;
+		margin: 1em auto 3em auto;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif' ) no-repeat center;
 	}
 
-	.text__paragraph .text__highlight {
-		background: #fde800;
-		border-bottom: 0;
+	.redirect-overlay-content {
+		text-align: center;
+		padding: 3.5em 0 0 0;
+		color: #4f4f4f;
+		line-height: 1.4em;
 	}
 
-	.button-group__label {
-		display: block;
+	.immediate-redirect {
 		color: #000000;
-		background: linear-gradient( to bottom, rgb( 253, 232, 0 ) 23%, rgb( 251, 201, 0 ) 100% );
-		border: 1px solid #e4c410;
-	}
-
-	.select-group__state {
-		background: linear-gradient( to bottom, hsl( 0, 0%, 97% ) 23%, hsl( 0, 0%, 92% ) 100% );
-	}
-
-	.select-group__input:checked + .select-group__state {
-		border-radius: 2px;
-		border: 1px solid #2a4b8d;
-		outline: 0;
-		background: linear-gradient( to bottom, hsl( 208, 34%, 75% ) 70%, hsl( 204, 43%, 84% ) 100% );
-	}
-
-	.progress_bar__wrapper {
-		border-color: #66b1e5;
-		background: #ffffff;
-	}
-
-	.progress_bar__donation_fill {
-		background: #66b1e5;
+		text-decoration: underline;
 	}
 }

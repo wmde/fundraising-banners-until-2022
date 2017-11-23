@@ -66,6 +66,7 @@ const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
+const bannerRedirectTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -160,8 +161,23 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+function finallySubmitBanner() {
+	$( '#WMDE_Banner' ).find( 'form' ).submit();
+}
+
+function showRedirectSpinner() {
+	$( '#WMDE_Banner' ).find( '.redirect-spinner-overlay' ).fadeIn( 100 );
+	bannerRedirectTimeout.run( finallySubmitBanner, 2000 );
+}
+
+$( '.WMDE-Banner-submit button' ).click( function ( e ) {
+	if ( !validateForm() ) {
+		e.preventDefault();
+		return false;
+	}
+	showRedirectSpinner();
+	e.preventDefault();
+	return false;
 } );
 
 /* Convert browser events to custom events */
@@ -302,5 +318,10 @@ $( function () {
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
+	} );
+
+	$bannerElement.find( '.immediate-redirect' ).click( function () {
+		bannerRedirectTimeout.cancel();
+		finallySubmitBanner();
 	} );
 } );
