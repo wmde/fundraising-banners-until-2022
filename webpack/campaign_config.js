@@ -40,10 +40,10 @@ CampaignConfig.prototype.getConfigForPages = function () {
 /**
  * Load wrapper template for each campaign, based on config
  *
- * @param {function} load_template callback function to load the template from the file system, must return a template string
+ * @param {function} loadTemplate callback function to load the template from the file system, must return a template string
  * @return {object}
  */
-CampaignConfig.prototype.getWrapperTemplates = function ( load_template ) {
+CampaignConfig.prototype.getWrapperTemplates = function ( loadTemplate ) {
 	let wrapperTemplates = {};
 	let loadedTemplates = {};
 	let wrapperTemplate;
@@ -54,7 +54,7 @@ CampaignConfig.prototype.getWrapperTemplates = function ( load_template ) {
 
 		wrapperTemplate = this.config[ campaign ].wrapper_template;
 		if ( !loadedTemplates[ wrapperTemplate ] ) {
-			loadedTemplates[ wrapperTemplate ] = load_template( wrapperTemplate );
+			loadedTemplates[ wrapperTemplate ] = loadTemplate( wrapperTemplate );
 		}
 
 		Object.keys( this.config[ campaign ].banners ).forEach( function ( banner ) {

@@ -6,12 +6,12 @@ const Minimatch = require( 'minimatch' ).Minimatch;
 const Handlebars = require( 'handlebars' );
 
 function MediaWikiTextWrapper( options ) {
-	this.templates = {} ;
+	this.templates = {};
 	this.filePattern = options.filePattern || '*.js';
 	this.context = options.context || {};
 	this.campaignConfig = options.campaignConfig || {};
 
-	Object.keys( options.templates ).forEach( function( pageName ) {
+	Object.keys( options.templates ).forEach( function ( pageName ) {
 		this.templates[ pageName ] = Handlebars.compile( options.templates[ pageName ] );
 	}.bind( this ) );
 }

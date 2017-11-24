@@ -7,8 +7,8 @@ const CampaignConfig = require( './webpack/campaign_config' );
 
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
-function read_wrapper_template( name ) {
-	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' )
+function readWrapperTemplate( name ) {
+	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' );
 }
 
 module.exports = {
@@ -55,7 +55,7 @@ module.exports = {
 			jQuery: 'jquery'
 		} ),
 		new MediaWikiTextWrapper( {
-			templates: campaigns.getWrapperTemplates( read_wrapper_template ),
+			templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 			context: {
 				bannerValues: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}'
 			},
