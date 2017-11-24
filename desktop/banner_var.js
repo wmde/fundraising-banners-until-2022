@@ -170,13 +170,11 @@ function showRedirectSpinner() {
 	bannerRedirectTimeout.run( finallySubmitBanner, 2000 );
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
+$( '.WMDE-Banner-submit button' ).click( function () {
+	if ( validateForm() ) {
+		showRedirectSpinner();
 	}
-	showRedirectSpinner();
-	e.preventDefault();
+
 	return false;
 } );
 
