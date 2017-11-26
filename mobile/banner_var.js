@@ -86,11 +86,33 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
 } );
 
+function getTrackingParameters() {
+	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
+}
+
+function setTrackAndRedirect() {
+	$( '#frbanner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '1' );
+	$( '#address_type' ).val( 'anonym' );
+}
+
+function unsetTrackAndRedirect() {
+	$( '#frbanner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '' );
+	$( '#address_type' ).val( 'person' );
+}
+
 $( '.button-group__container button' ).click( function ( event ) {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
+
+		if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( event.target ).data( 'payment-type' ) ) > -1 ) {
+			setTrackAndRedirect();
+		} else {
+			unsetTrackAndRedirect();
+		}
 
 		return true;
 	}

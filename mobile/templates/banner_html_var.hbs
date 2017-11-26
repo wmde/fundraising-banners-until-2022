@@ -21,7 +21,7 @@
 			</div>
 
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -33,6 +33,7 @@
 				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
 				<input type="hidden" id="betrag" name="betrag" value="" />
 
+				<input type="hidden" id="track-and-redirect" name="mbt" value="" />
 
 				<fieldset class="form__section cf">
 
