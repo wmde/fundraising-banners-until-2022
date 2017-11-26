@@ -81,10 +81,6 @@ trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-close
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.send' ).click( function () {
-	return validateForm();
-} );
-
 // Reset "other box" if they click a different amount
 $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
@@ -95,12 +91,13 @@ $( '.button-group__container button' ).click( function ( event ) {
 	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
 
+		return true;
+	}
+
+	alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	return false;
+} );
 // END form initialization
 
 function displayMiniBanner() {
@@ -163,40 +160,3 @@ $( document ).ready( function () {
 	} );
 
 } );
-
-function validateForm() {
-	var form = document.donationForm;
-	var error = false;
-
-	if ( $( '#interval_multiple' ).attr( 'checked' ) === 'checked' ) {
-		if ( $( 'input[name=interval]:checked', form ).length !== 1 ) {
-			alert( 'Es wurde kein Zahlungsintervall ausgewählt.' );
-			return false;
-		} else {
-			$( '#intervalType' ).val( '1' );
-			$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
-		}
-	} else {
-		$( '#periode' ).val( '0' );
-	}
-
-	// Get amount selection
-	var amount = null;
-	for ( var i = 0; i < form.betrag_auswahl.length; i++ ) {
-		if ( form.betrag_auswahl[ i ].checked ) {
-			amount = form.betrag_auswahl[ i ].value;
-			break;
-		}
-	}
-	// Check amount is a real number
-	error = ( amount === null || isNaN( amount ) || amount.value <= 0 );
-	// Check amount is at least the minimum
-	if ( amount < 1 || error ) {
-
-		return false;
-	} else if ( amount > 99999 ) {
-
-		return false;
-	}
-	return !error;
-}
