@@ -6,6 +6,7 @@ require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
+const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -14,6 +15,7 @@ import TrackingEvents from '../shared/tracking_events';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -58,6 +60,7 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
+const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
@@ -144,12 +147,13 @@ $( '#btn-sofort' ).click( function () {
 
 // END form initialization
 
-function addBannerSpace() {
+function displayMiniBanner() {
 
-	var bannerHeight = $( '.mini-banner' ).height();
-	$( '.mini-banner' ).css( 'top', 0 - bannerHeight ).show();
+	const miniBanner = $( '.mini-banner' );
+	const bannerHeight = miniBanner.height();
+	miniBanner.css( 'top', 0 - bannerHeight ).show();
 
-	$( '.mini-banner' ).animate( {
+	miniBanner.animate( {
 		top: 0
 	}, 1000 );
 
@@ -160,10 +164,22 @@ function addBannerSpace() {
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
 }
 
+function displayFullBanner() {
+	window.scrollTo( 0, 0 );
+	$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
+	$( '#frbanner' ).show();
+	$( '.mini-banner' ).slideToggle();
+
+	progressBar.animate();
+	window.setTimeout( function () {
+		animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+	}, 3000 );
+}
+
 $( document ).ready( function () {
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
-	setTimeout( addBannerSpace, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
+	bannerDisplayTimeout.run( displayMiniBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
 	$( '#frbanner-close' ).click( function () {
 		// Close only the full-screen
@@ -181,17 +197,15 @@ $( document ).ready( function () {
 		return false;
 	} );
 
-	$( '.mini-banner' ).click( function () {
-		window.scrollTo( 0, 0 );
-		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
-		$( '#frbanner' ).show();
-		$( '.mini-banner' ).slideToggle();
+	$( '.mini-banner' ).click( displayFullBanner );
 
-		progressBar.animate();
-		window.setTimeout( function () {
-			animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
-		}, 3000 );
+	BannerFunctions.getSkin().addSearchObserver( function () {
+		bannerDisplayTimeout.cancel();
+		$( '.mini-banner' ).hide();
+		BannerFunctions.removeBannerSpace();
+		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 	} );
+
 } );
 
 function validateForm() {
