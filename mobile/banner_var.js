@@ -90,54 +90,10 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
 } );
 
-$( '#btn-ppl' ).click( function () {
+$( '.button-group__container button' ).click( function ( event ) {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'PPL' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-cc' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'MCP' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-ueb' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'UEB' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-bez' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'BEZ' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-sofort' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'SUB' );
+		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
 		$( '#form' ).submit();
 	} else {
