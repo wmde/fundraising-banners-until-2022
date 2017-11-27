@@ -48,7 +48,7 @@ const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
-const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-this' ] : Translations[ 'day-name-prefix-todays' ];
+const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
 // const bannerTemplate = require('./banner_html.hbs');
 // For A/B testing different text or markup, load
