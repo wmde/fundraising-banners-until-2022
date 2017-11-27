@@ -8,7 +8,8 @@ require( './css/wlightbox.css' );
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
-const sizeIssueTrackRatio = 1;
+const sizeIssueTrackRatio = 0.01;
+const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'en';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -17,6 +18,7 @@ import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
@@ -67,6 +69,7 @@ const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection,
 		textRight: 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €'
 	}
 );
+const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -112,19 +115,19 @@ function setupAmountEventHandling() {
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 	} );
 }
 
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
+		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
@@ -196,8 +199,6 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
-
-	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
@@ -281,6 +282,8 @@ $( function () {
 		return;
 	}
 
+	$( 'body' ).prepend( $( '#centralNotice' ) );
+
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
@@ -290,8 +293,13 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	BannerFunctions.getSkin().addSearchObserver( function () {
+		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
+		bannerDisplayTimeout.cancel();
+	} );
 
 	$( '.select-group__option, .button-group__button' ).click( function () {
 		showLanguageInfoBox();
