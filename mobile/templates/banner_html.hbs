@@ -21,7 +21,7 @@
 			</div>
 
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?mbt=1&piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&pmt=0">
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -104,11 +104,17 @@
                                 Lastschrift
                             </button>
                         </li>
-    
+
+                        <li class="button-group__container">
+                            <button class="button-group__button" data-payment-type="SUB">
+                                Sofort-Überweisung
+                            </button>
+                        </li>
+
                         <li class="button-group__container">
                             <a href="sms:81190" class="button-group__button a-sms">5€ per SMS</a>
                         </li>
-    
+
                         <li class="button-group__hint">
                             SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
                         </li>
