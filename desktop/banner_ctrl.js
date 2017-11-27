@@ -106,19 +106,19 @@ function setupAmountEventHandling() {
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 	} );
 }
 
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
+		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
