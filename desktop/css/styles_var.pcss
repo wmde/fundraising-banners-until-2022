@@ -1,9 +1,42 @@
 #WMDE_Banner {
 
+	.infobox {
+		border-radius: 9px;
+		background-color: #0166a5;
+		margin: 0.2em 0 0.2em 4em;
+	}
+
+	.infobox:before {
+		position: absolute;
+		top: 75%;
+		content: ' ';
+		margin-left: -25px;
+		border-style: solid;
+		border-width: 0 0 25px 25px;
+		border-color: transparent transparent #0166a5 transparent;
+	}
+
+	.infobox__text {
+		font-family: serif;
+		color: #ffffff;
+	}
+
+	.progress_bar__wrapper {
+		border-color: #dce4e8;
+		background-color: #ffffff;
+	}
+
+	.progress_bar__donation_fill {
+		background: #97b314;
+	}
+
+	.progress_bar__donation_remaining {
+		color: #97b314;
+	}
+
 	.progress_bar__days_left {
 		display: block;
 		color: #000000;
 		line-height: 2em;
 	}
-
 }
