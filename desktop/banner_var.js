@@ -3,7 +3,7 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -101,6 +101,16 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -114,6 +124,10 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		BannerFunctions.hideAmountError();
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
 
@@ -129,12 +143,14 @@ function validateAndSetPeriod() {
 	return true;
 }
 
-$( '#WMDE_Banner-payment button' ).click( function ( e ) {
-	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
-	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
-		e.preventDefault();
-		return false;
-	}
+function validateForm() {
+	return validateAndSetPeriod() &&
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
+}
+
+$( '.WMDE-Banner-submit button' ).click( function () {
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
@@ -148,6 +164,10 @@ $( '#amount-other-input' ).change( function () {
 
 $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 	BannerFunctions.hideFrequencyError();
+} );
+
+$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
+	$( this ).trigger( 'paymenttype:selected' );
 } );
 
 BannerFunctions.initializeBannerEvents();

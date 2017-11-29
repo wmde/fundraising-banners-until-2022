@@ -1,18 +1,18 @@
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "14-ba-171115"
+campaign_tracking = "15-ba-171117"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_14_171115_ctrl"
-tracking = "org-14-171115-ctrl"
+pagename = "B17WMDE_15_171117_ctrl"
+tracking = "org-15-171117-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_14_171115_var"
-tracking = "org-14-171115-var"
+pagename = "B17WMDE_15_171117_var"
+tracking = "org-15-171117-var"
 
 
 # Mobile Campaign

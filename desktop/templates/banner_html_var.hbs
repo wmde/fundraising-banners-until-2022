@@ -2,7 +2,7 @@
 	<div class="banner">
 		<div class="infobox">
 			<div class="infobox__text">
-				{{> banner_text_var }}
+				{{> banner_text }}
 			</div>
 			{{{ progressBar }}}
 			<div class="infobox__footer">
@@ -31,7 +31,7 @@
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
 			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}&pmt=0">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
-					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
+					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{ no-interval-message }}</span>
 					<label class="select-group__option select-group__option--halfwidth">
 						<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
 						<span class="select-group__state">einmalig</span>
@@ -51,7 +51,7 @@
 				</div>
 
 				<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
-					<span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>{{amount-empty-message}}</span>
+					<span id="WMDE_Banner-amounts-error-text" class="select-group__errormessage">{{ amount-empty-message }}</span>
 					<label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
 						<input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
 						<span class="select-group__state">5 €</span>
@@ -93,21 +93,36 @@
 					</label>
 				</div>
 
-				<div id="WMDE_Banner-payment" class="WMDE-Banner-payment button-group">
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="BEZ">
-						<span class="button-group__label">Lastschrift</span>
-					</button>
+				<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment-type select-group">
+					<!--
+						TODO:
+						add message when https://github.com/wmde/fundraising-banners/pull/45 is merge
+					-->
+					<span id="WMDE_Banner-payment-type-error-text" class="select-group__errormessage">{{ no-payment-type-message }}</span>
+					<label class="select-group__option select-group__option--halfwidth">
+						<input type="radio" name="zahlweise" class="select-group__input" value="BEZ">
+						<span class="select-group__state">Lastschrift</span>
+					</label>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="UEB">
-						<span class="button-group__label">Überweisung</span>
-					</button>
+					<label class="select-group__option select-group__option--halfwidth">
+						<input type="radio" name="zahlweise" class="select-group__input" value="UEB">
+						<span class="select-group__state">Überweisung</span>
+					</label>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="MCP">
-						<span class="button-group__label">Kreditkarte</span>
-					</button>
+					<label class="select-group__option select-group__option--halfwidth">
+						<input type="radio" name="zahlweise" class="select-group__input" value="MCP">
+						<span class="select-group__state">Kreditkarte</span>
+					</label>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="PPL">
-						<span class="button-group__label">PayPal</span>
+					<label class="select-group__option select-group__option--halfwidth">
+						<input type="radio" name="zahlweise" class="select-group__input" value="PPL">
+						<span class="select-group__state">PayPal</span>
+					</label>
+				</div>
+
+				<div class="WMDE-Banner-submit button-group">
+					<button class="button-group__button button-group__button--fullwidth">
+						<span class="button-group__label">Weiter, um Spende abzuschließen</span>
 					</button>
 				</div>
 
@@ -115,7 +130,6 @@
 				<input type="hidden" id="intervalType" name="intervalType" value="0"/>
 				<input type="hidden" id="impCount" name="impCount" value=""/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
-				<input type="hidden" id="zahlweise" name="zahlweise" value=""/>
 			</form>
 		</div>
 

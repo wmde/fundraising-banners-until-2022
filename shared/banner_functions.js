@@ -9,6 +9,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 	var noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 		amountEmptyMessage = Translations[ 'amount-empty-message' ] || 'Bitte wählen Sie zuerst einen Betrag.',
 		amountTooLowMessage = Translations[ 'amount-too-low-message' ] || 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
+		noPaymentTypeSelectedMessage = Translations[ 'amount-too-low-message' ] || 'Bitte wählen Sie eine Zahlmethode aus.',
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
@@ -120,6 +121,9 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		if ( !validateAmount( getAmount() ) ) {
 			return false;
 		}
+		if ( !validatePaymentType() ) {
+			return false;
+		}
 	}
 
 	function showAmountError( text ) {
@@ -136,6 +140,14 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	function hideFrequencyError() {
 		$( '#WMDE_Banner' ).trigger( 'validation:period:ok' );
+	}
+
+	function showPaymentTypeError( text ) {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:error', text );
+	}
+
+	function hidePaymentTypeError() {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	}
 
 	function validateAmount( amount ) {
@@ -185,6 +197,16 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			}
 		}
 		hideFrequencyError();
+		return true;
+	}
+
+	function validatePaymentType() {
+		if ( $( 'input[name=zahlweise]:checked', document.donationForm ).length !== 1 ) {
+			showPaymentTypeError( noPaymentTypeSelectedMessage );
+			return false;
+		}
+
+		hidePaymentTypeError();
 		return true;
 	}
 
@@ -250,15 +272,18 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		validateForm: validateForm,
 		validateAndSetPeriod: validateAndSetPeriod,
 		validateAmount: validateAmount,
+		validatePaymentType: validatePaymentType,
 		getAmount: getAmount,
 		increaseImpCount: increaseImpCount,
 		increaseBannerImpCount: increaseBannerImpCount,
 		getCurrentGermanDay: getCurrentGermanDay,
 		initializeBannerEvents: initializeBannerEvents,
 		showFrequencyError: showFrequencyError,
+		hideFrequencyError: hideFrequencyError,
 		showAmountError: showAmountError,
 		hideAmountError: hideAmountError,
-		hideFrequencyError: hideFrequencyError,
+		showPaymentTypeError: showPaymentTypeError,
+		hidePaymentTypeError: hidePaymentTypeError,
 		removeBannerSpace: removeBannerSpace,
 		getDigitGroupingCharacter: getDigitGroupingCharacter
 	};
