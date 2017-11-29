@@ -3,12 +3,13 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-require( './css/styles_var.pcss' );
+// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
+const searchBoxTrackRatio = 1;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -18,6 +19,7 @@ import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -63,6 +65,7 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
+const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -124,6 +127,10 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		BannerFunctions.hideAmountError();
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
@@ -285,6 +292,11 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
+
+	BannerFunctions.getSkin().addSearchObserver( function () {
+		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
+		bannerDisplayTimeout.cancel();
+	} );
 } );
