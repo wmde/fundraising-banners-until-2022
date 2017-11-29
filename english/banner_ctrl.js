@@ -6,8 +6,7 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 1;
-const searchBoxTrackRatio = 1;
-const LANGUAGE = 'de';
+const LANGUAGE = 'en';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
@@ -15,12 +14,11 @@ import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
-import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-import Translations from '../shared/messages/de';
+import Translations from '../shared/messages/en';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDaySentence = new CampaignDaySentence(
 	new CampaignDays(
@@ -59,8 +57,11 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
-const bannerDisplayTimeout = new InterruptibleTimeout();
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection,
+	{
+		textRight: 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €'
+	}
+);
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -106,19 +107,19 @@ function setupAmountEventHandling() {
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
-		BannerFunctions.hideAmountError();
+		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		BannerFunctions.hideAmountError();
+		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 }
 
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
+		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
@@ -153,20 +154,31 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function removeBannerSpace() {
@@ -200,6 +212,16 @@ function calculateLightboxPosition() {
 		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
+}
+
+function showLanguageInfoBox() {
+	var langInfoElement = $( '#langInfo' ),
+		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
+		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
+	langInfoElement.css( 'top', bannerHeight );
+	langInfoElement.css( 'width', formWidth );
+	langInfoElement.show();
+	addSpaceInstantly();
 }
 
 var impCount = BannerFunctions.increaseImpCount();
@@ -263,11 +285,11 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		setTimeout( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
-	BannerFunctions.getSkin().addSearchObserver( function () {
-		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
-		bannerDisplayTimeout.cancel();
+	$( '.select-group__option, .button-group__button' ).click( function () {
+		showLanguageInfoBox();
 	} );
+
 } );
