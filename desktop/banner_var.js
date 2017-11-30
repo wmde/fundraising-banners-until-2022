@@ -52,9 +52,9 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+// const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-// const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
