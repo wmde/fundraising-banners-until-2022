@@ -1,20 +1,43 @@
 #WMDE_Banner {
 
-	.form {
-		padding-top: 0;
-		margin-top: 0.4em;
+	.infobox {
+		border: 5px solid #66b1e5;
+		background-color: #daeefb;
 	}
 
-	.select-group__input:checked + .select-group__state {
-		background: #2a4b8d;
-		border: 1px solid #7d8389;
-		color: #ffffff;
-		outline: 0 none;
+	.infobox__footer {
+		background: transparent;
+	}
+
+	.text__paragraph .text__highlight {
+		background: #fde800;
+		border-bottom: 0;
 	}
 
 	.button-group__label {
-		color: #3366cc;
-		background: #f8f9fa;
+		display: block;
+		color: #000000;
+		background: linear-gradient( to bottom, rgb( 253, 232, 0 ) 23%, rgb( 251, 201, 0 ) 100% );
+		border: 1px solid #e4c410;
 	}
 
+	.select-group__state {
+		background: linear-gradient( to bottom, hsl( 0, 0%, 97% ) 23%, hsl( 0, 0%, 92% ) 100% );
+	}
+
+	.select-group__input:checked + .select-group__state {
+		border-radius: 2px;
+		border: 1px solid #2a4b8d;
+		outline: 0;
+		background: linear-gradient( to bottom, hsl( 208, 34%, 75% ) 70%, hsl( 204, 43%, 84% ) 100% );
+	}
+
+	.progress_bar__wrapper {
+		border-color: #66b1e5;
+		background: #ffffff;
+	}
+
+	.progress_bar__donation_fill {
+		background: #66b1e5;
+	}
 }
