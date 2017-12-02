@@ -31,15 +31,15 @@
 		justify-content: space-between;
 		flex: 0 1 100%;
 
-		border: 5px solid #990000;
-		border-radius: 9px;
-		background-color: #f8f9fa;
+		border: 0 none;
+		border-radius: 0;
+		background-color: #2b8156;
 		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.2em 0 0.2em 0.2em;
+		margin: 0;
 	}
 
 	.infobox__text {
-		color: #000000;
+		color: #ffffff;
 		font-size: 1.05em;
 		line-height: 1.2em;
 		text-align: left;
@@ -65,10 +65,11 @@
 	}
 
 	.text__paragraph .text__highlight {
-		border-bottom: solid 3px #990000;
+		border: 0 none;
 		padding: 0 0.1em;
-		background: transparent;
+		background: #ffdd5b;
 		font-weight: bold;
+		color: #000000;
 	}
 
 	/* This is for keeping the same banner size when testing different banner texts.
@@ -80,7 +81,7 @@
 
 	.infobox__footer {
 		padding: 0.025em 0 0 2em;
-		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.1em/18px 18px;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/37/Information-icon-yellow.png' ) no-repeat left 0.5em top 0.1em/18px 18px;
 	}
 
 	.footer {
@@ -91,6 +92,7 @@
 
 		font-size: 0.8em;
 		line-height: 1.6em;
+		color: #ffffff;
 	}
 
 	.footer__info {
@@ -115,7 +117,7 @@
 	}
 
 	.application-of-funds-link {
-		color: #000000;
+		color: #ffffff;
 	}
 
 	/* Form styling */
@@ -142,12 +144,12 @@
 	}
 
 	.select-group--with-error {
-		background: #990000;
+		background: #ffdd5b;
 	}
 
 	.select-group__errormessage {
 		display: none; /* Message will be shown by JS code */
-		color: #ffffff;
+		color: #000000;
 		font-weight: bold;
 		text-align: center;
 		width: 100%;
@@ -211,8 +213,8 @@
 	.select-group__input:checked + .select-group__state {
 		color: #000000;
 		background: #f8f9fa;
-		border: 1px solid #2a4b8d;
-		outline: 2px solid #2a4b8d;
+		border: 1px solid #2b8156;
+		outline: 2px solid #2b8156;
 		border-radius: 0;
 	}
 
@@ -259,8 +261,8 @@
 	.button-group__label {
 		display: block;
 		color: #ffffff;
-		background: #2a4b8d;
-		border: 1px solid #9aa0a7;
+		background: #2b8156;
+		border: 1px solid #2b6045;
 		border-radius: 2px;
 		padding: 0.1em 0;
 		line-height: 2em;
@@ -290,6 +292,22 @@
 
 	.progress_bar__days_left {
 		display: none;
+	}
+
+	.progress_bar__wrapper {
+		border-color: #ffdd5b;
+	}
+
+	.progress_bar__donation_fill {
+		background-color: #ffdd5b;
+	}
+
+	.progress_bar__donation_text {
+		color: #000000;
+	}
+
+	.progress_bar__donation_remaining {
+		color: #ffffff;
 	}
 
 }
