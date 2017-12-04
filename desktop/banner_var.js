@@ -66,6 +66,7 @@ const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
+const bannerRedirectTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -160,8 +161,21 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
+function finallySubmitBanner() {
+	$( '#WMDE_Banner' ).find( 'form' ).submit();
+}
+
+function showRedirectSpinner() {
+	$( '#WMDE_Banner' ).find( '.redirect-spinner-overlay' ).fadeIn( 100 );
+	bannerRedirectTimeout.run( finallySubmitBanner, 2000 );
+}
+
 $( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+	if ( validateForm() ) {
+		showRedirectSpinner();
+	}
+
+	return false;
 } );
 
 /* Convert browser events to custom events */
@@ -212,8 +226,6 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
-
-	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
@@ -287,6 +299,8 @@ $( function () {
 		return;
 	}
 
+	$( 'body' ).prepend( $( '#centralNotice' ) );
+
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
@@ -302,5 +316,10 @@ $( function () {
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
+	} );
+
+	$bannerElement.find( '.immediate-redirect' ).click( function () {
+		bannerRedirectTimeout.cancel();
+		finallySubmitBanner();
 	} );
 } );
