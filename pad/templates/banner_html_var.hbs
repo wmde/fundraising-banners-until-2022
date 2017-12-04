@@ -29,7 +29,7 @@
 
 		<div class="form">
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
-			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}">
+			      action="https://spenden.wikimedia.de/donation/add?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
 					<label class="select-group__option select-group__option--thirdwidth">
@@ -116,6 +116,10 @@
 				<input type="hidden" id="impCount" name="impCount" value=""/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
 				<input type="hidden" id="zahlweise" name="zahlweise" value=""/>
+				<input type="hidden" id="addressType" name="addressType" value=""/>
+				<input type="hidden" id="betrag" name="betrag" value=""/>
+				<input type="hidden" id="track-and-redirect" name="mbt" value=""/>
+				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 			</form>
 		</div>
 
