@@ -112,11 +112,13 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:selected', null, function () {
 		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
 		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
+		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 }
