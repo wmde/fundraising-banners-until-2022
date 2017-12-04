@@ -2,7 +2,7 @@
 	<div class="banner">
 		<div class="infobox">
 			<div class="infobox__text">
-				{{> banner_text_var }}
+				{{> banner_text }}
 			</div>
 			{{{ progressBar }}}
 			<div class="infobox__footer">
@@ -31,7 +31,7 @@
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
 			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}&pmt=0">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
-					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{ no-interval-message }}</span>
+					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
 					<label class="select-group__option select-group__option--fullwidth">
 						<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
 						<span class="select-group__state">einmalig</span>
@@ -47,7 +47,7 @@
 				</div>
 
 				<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
-					<span id="WMDE_Banner-amounts-error-text" class="select-group__errormessage">{{ amount-empty-message }}</span>
+					<span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>{{amount-empty-message}}</span>
 					<label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
 						<input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
 						<span class="select-group__state">5 €</span>
