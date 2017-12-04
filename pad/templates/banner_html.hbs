@@ -29,7 +29,7 @@
 
 		<div class="form">
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
-			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}&pmt=0">
+			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
 					<label class="select-group__option select-group__option--thirdwidth">
@@ -95,19 +95,19 @@
 					</button>
 
 					<button class="button-group__button button-group__button--halfwidth" data-payment-type="UEB">
-						<span class="button-group__label">Überweisung</span>
+						<span class="button-group__label">Überweisungszusage</span>
 					</button>
 
 					<button class="button-group__button button-group__button--halfwidth" data-payment-type="MCP">
 						<span class="button-group__label">Kreditkarte</span>
 					</button>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="PPL">
-						<span class="button-group__label">PayPal</span>
+					<button class="button-group__button button-group__button--halfwidth" data-payment-type="SUB">
+						<span class="button-group__label">Sofortüberweisung</span>
 					</button>
 
-					<button class="button-group__button button-group__button--fullwidth button-group__button--invisible">
-						<span class="button-group__label">Dummy</span>
+					<button class="button-group__button button-group__button--halfwidth" data-payment-type="PPL">
+						<span class="button-group__label">PayPal</span>
 					</button>
 				</div>
 
