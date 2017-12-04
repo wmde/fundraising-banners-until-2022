@@ -14,6 +14,7 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 import TrackingEvents from '../shared/tracking_events';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
+import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -26,7 +27,6 @@ const campaignDaySentence = new CampaignDaySentence(
 	),
 	LANGUAGE
 );
-const getCustomDayName = require( '../shared/custom_day_name' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -43,6 +43,10 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
+const dayName = new DayName( new Date() );
+const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
+const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
 // const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
@@ -53,16 +57,12 @@ require( '../shared/wlightbox.js' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
-const currentDayName = BannerFunctions.getCurrentGermanDay();
-const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
