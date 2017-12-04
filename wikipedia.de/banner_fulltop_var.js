@@ -133,11 +133,9 @@ function validateForm() {
 		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
-	}
+$( '.WMDE-Banner-payment button' ).click( function () {
+	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
