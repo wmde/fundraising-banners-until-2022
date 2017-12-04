@@ -110,12 +110,15 @@ function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
+		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
 		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
+		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
 	} );
 }
@@ -132,10 +135,30 @@ function validateAndSetPeriod() {
 	return true;
 }
 
-$( '#WMDE_Banner-payment button' ).click( function ( e ) {
+function getTrackingParameters() {
+	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
+}
+
+function setTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '1' );
+	$( '#addressType' ).val( 'anonym' );
+}
+
+function unsetTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '' );
+	$( '#addressType' ).val( 'person' );
+}
+
+$( '#WMDE_Banner-payment button' ).click( function ( event ) {
+	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( event.target ).data( 'payment-type' ) ) > -1 ) {
+		setTrackAndRedirect();
+	} else {
+		unsetTrackAndRedirect();
+	}
 	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
 	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
-		e.preventDefault();
 		return false;
 	}
 } );
@@ -184,8 +207,6 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
-
-	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
@@ -258,6 +279,8 @@ $( function () {
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
 	}
+
+	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
