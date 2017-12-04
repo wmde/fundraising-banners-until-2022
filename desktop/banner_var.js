@@ -3,7 +3,7 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-require( './css/styles_var.pcss' );
+// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -213,8 +213,6 @@ function displayBanner() {
 	setupValidationEventHandling();
 	setupAmountEventHandling();
 
-	$( 'body' ).prepend( $( '#centralNotice' ) );
-
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
@@ -282,6 +280,8 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 // Display banner on load
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
+
+	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
