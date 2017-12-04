@@ -196,7 +196,7 @@
 	}
 
 	.select-group__custom-input {
-		padding: 0.4em;
+		padding: 0.4em 1.4em 0.4em 0.4em;
 		width: 100%;
 		height: 100%;
 		margin: 0;
@@ -213,6 +213,7 @@
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
+		position: relative;
 	}
 
 	.select-group__option--fullwidth {
@@ -255,6 +256,14 @@
 		background: #2a4b8d;
 		border-color: #7d8389;
 		color: #ffffff;
+	}
+
+	.select-group__custom-input + .select-group__state {
+		position: absolute;
+		top: 0;
+		right: 2em;
+		border: 0 none;
+		background: transparent;
 	}
 
 	.button-group {
