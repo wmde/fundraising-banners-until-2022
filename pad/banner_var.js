@@ -208,8 +208,6 @@ function displayBanner() {
 	setupValidationEventHandling();
 	setupAmountEventHandling();
 
-	$( 'body' ).prepend( $( '#centralNotice' ) );
-
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
@@ -281,6 +279,8 @@ $( function () {
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
 	}
+
+	$( 'body' ).prepend( $( '#centralNotice' ) );
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
