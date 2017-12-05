@@ -1,321 +1,354 @@
 #WMDE_Banner {
-
-	.banner {
-		flex-direction: column;
-		font-size: 14px;
-	}
-
-	.banner__content {
-		margin-top: 0.5em;
-	}
-
 	.infobox {
-		margin: 0.2em 5em 0.2em 5em;
-		border-radius: 9px;
-		background-color: #0166a5;
-		position: relative;
+		flex: 0 1 45%;
+		border: 0;
+		border-radius: 0;
+		padding: 0;
+		margin: 0;
+		background: #dce4e7;
+
+		.infobox__text {
+			color: #98b414;
+			margin: 0 1em 0.5em 1em;
+		}
+
+		.text__headline:nth-of-type( 1 ) {
+			margin-top: 35px;
+		}
+
+		.text__headline:nth-of-type( 2 ) {
+			margin: 20px 0 0 10px;
+		}
 	}
 
-	.infobox:before {
-		position: absolute;
-		bottom: 1.5em;
-		content: ' ';
-		margin-left: -25px;
-		border-style: solid;
-		border-width: 0 0 25px 25px;
-		border-color: transparent transparent #0166a5 transparent;
+	.infobox__footer,
+	.form__footer {
+		font-size: 14px;
+		background: transparent;
+		padding: 0 0.4em 0.4em 0.9em;
 	}
 
-	.infobox__text {
-		font-family: serif;
-		margin: 0.5em 1em;
-		font-size: 1.2em;
-		line-height: 1.2em;
-	}
-
-	.banner__footer {
-		padding: 0.3em 0 0 0;
-		font-size: 1.1em;
+	.footer__item {
 		color: #808080;
+		.application-of-funds-link {
+			color: #808080;
+		}
 	}
 
-	.banner > .banner__footer {
-		display: none;
+	.presents {
+		flex: 1 0 190px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+
+		.presents__secoundrow {
+			display: flex;
+		}
+
+		.present_image {
+			cursor: pointer;
+			margin: auto;
+		}
+
+		.present_button {
+			display: flex;
+			width: 75px;
+			height: 25px;
+			line-height: 25px;
+			margin: 5px auto;
+			background: #d1d8de;
+			color: #ffffff;
+			text-align: center;
+			font-size: 0.8em;
+			font-weight: bold;
+			cursor: pointer;
+
+			input {
+				display: none;
+			}
+
+			.present__amount,
+			.reduce__amount,
+			.increase__amount {
+				display: inline-block;
+				height: 25px;
+			}
+
+			.reduce__amount {
+				margin-right: auto;
+				width: 18px;
+				background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/93/Minus_im_Kreis.png' ) no-repeat  center;
+				opacity: 0;
+			}
+
+			.increase__amount {
+				margin-left: auto;
+				width: 18px;
+				background: url( 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Plus_im_Kreis.png' ) no-repeat  center;
+			}
+		}
 	}
 
-	.footer {
-		color: #808080;
+	.present {
+		text-align: center;
 	}
 
-	.application-of-funds-link {
-		color: #808080;
+	.present.active {
+		.reduce__amount {
+			opacity: 1;
+		}
+		.present_button {
+			background: #98b414;
+		}
+	}
+
+	.present.hovered {
+		.present_button {
+			background: #98b414;
+		}
+	}
+
+	.present__small {
+		flex: 1 0 95px;
+		margin-top: 20px;
+		.present_image {
+			width: 35px;
+			height: 40px;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/6/68/5%E2%82%AC-Box-grey.png' ) no-repeat center;
+		}
+	}
+
+	.present__medium {
+		width: 100%;
+		margin-top: 25px;
+		.present_image {
+			width: 41px;
+			height: 46px;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/e/e7/20%E2%82%AC-Box-grey.png' ) no-repeat  center;
+		}
+	}
+
+	.present__large {
+		flex: 1 0 95px;
+		margin-top: 25px;
+		.present_image {
+			width: 54px;
+			height: 60px;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/a2/100%E2%82%AC-Box-grey.png' ) no-repeat  center;
+		}
+	}
+
+	.present__small.hovered,
+	.present__small.active {
+		.present_image {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/1/1b/5%E2%82%AC-Box-col.png' ) no-repeat center;
+		}
+	}
+
+	.present__medium.hovered,
+	.present__medium.active {
+		.present_image {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/de/20%E2%82%AC-Box-col.png' ) no-repeat center;
+		}
+	}
+
+	.present__large.hovered,
+	.present__large.active {
+		.present_image {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/100%E2%82%AC-Box-col.png' ) no-repeat center;
+		}
 	}
 
 	.form {
-		order: 2;
-		width: auto;
-		margin: 0 5em;
-		min-width: inherit;
-		padding: 0.2em 0 0 0.5em;
+		flex: 0 0 220px;
+		margin: 0 0.5em 0 0;
 	}
 
-	#WMDE_Banner-form {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-
-	.form__header {
-		display: flex;
-		justify-content: space-between;
-		color: #97b314;
-		width: 100%;
+	.form__text {
+		color: #98b414;
+		text-align: center;
 		font-weight: bold;
+		font-size: 0.8em;
+		padding: 0 0.5em 0.5em 0.5em;
+
+		p {
+			margin: 0 0 0.4em 0;
+		}
 	}
 
-	.form-field-group {
-		display: flex;
-		flex-wrap: nowrap;
-		flex: 1 1 auto;
+	.WMDE-Banner-amounts,
+	.WMDE-Banner-frequency,
+	.WMDE-Banner-payment-type {
+		padding: 0.1em 0.5em 0.1em 0.5em;
+		margin: 0 0 0.1em 0;
 	}
 
-	.select-group-container {
-		display: flex;
-		flex: 1 1 auto;
-		flex-direction: column;
-		margin-right: 0.5em;
-	}
-
-	.select-group-container--with-error .select-group__errormessage {
-		background: #990000;
+	.WMDE-Banner-payment-type .select-group__state {
 		color: #ffffff;
+		background: #98b414;
 	}
 
-	.select-group {
-		flex-wrap: nowrap;
-		flex: 1 0 auto;
-		padding-top: 0.4em;
-		padding-bottom: 0;
-		width: 100%;
-	}
-
-	.button-group {
-		display: block;
-		margin: 0;
-		padding-left: 0;
-		padding-top: 0.3em;
-		padding-bottom: 0.3em;
-		flex: 0 1 auto;
-	}
-
-	.select-group:first-child {
-		padding-left: 0;
-	}
-
-	.select-group:last-child {
-		padding-right: 0;
-	}
-
-	.select-group__option {
-		padding: 0 0.2em 0.2em 0;
-	}
-
-	.select-group__state {
-		border-radius: unset;
-		background: #e5ecc4;
-		border: 0 none;
-		color: #97b314;
-		padding: 0 0.4em;
-		font-size: 0.95em;
-	}
-
-	.select-group__option:first-child .select-group__state {
-		border-radius: 6px 0 0 6px;
-	}
-
-	.select-group__option:last-child .select-group__state,
-	.select-group__custom-input {
-		border-radius: 0 6px 6px 0;
-	}
-
-	.select-group__custom-input {
-		border: 0 none;
-		background: #e5ecc4;
-		color: #97b314;
-		font-size: 0.9em;
-		padding: 0.4em;
-		height: inherit;
-	}
-
-	.select-group__input:checked + .select-group__state {
-		color: #e5ecc4;
-		background-color: #97b314;
-		border: 0 none;
-		outline: 0 none;
-	}
-
-	.select-group__custom-input--value-entered {
-		color: #e5ecc4;
-		background-color: #97b314;
-		border: 0 none;
-		outline: 0 none;
-	}
-
-	.button-group__button {
-		width: 100%;
-	}
-
-	.button-group__label {
-		color: #e5ecc4;
-		border: 0 none;
-		background: #97b314;
-		padding: 0 0.4em;
-		font-size: 0.85em;
+	.WMDE-Banner-frequency .select-group__input:checked + .select-group__state {
+		color: #98b414;
+		background: #ffffff;
+		border: 1px solid #98b414;
+		outline: 2px solid #98b414;
 		border-radius: 0;
 	}
 
-	.button-group__button .button-group__label {
-		border-radius: 6px;
+	.WMDE-Banner-amounts {
+		text-align: center;
+	}
+
+	.select-group__option--thirdwidth {
+		width: 33%;
+	}
+
+	.select-group__option__custom-input {
+		width: 100%;
+	}
+
+	.select-group__custom--big .select-group__custom-input {
+		margin: auto;
+		width: 50%;
+		border-top: 0;
+		border-right: 0;
+		border-left: 0;
+		color: #98b414;
+		font-weight: bold;
+		font-size: 1em;
+	}
+
+	.select-group__custom--big:after {
+		font-size: 0.9em;
+		color: #98b414;
+		content: '€';
+	}
+
+	.select-group__custom-input::placeholder {
+		color: #000000;
+		font-size: 0.8em;
+		font-weight: normal;
+		font-style: italic;
+	}
+
+	.form--with-error {
+		.form__text-middle {
+			display: none;
+		}
+
+		.select-group__errormessage {
+			color: #dd3334;
+			font-size: 0.7em;
+		}
+	}
+
+	.select-group--with-error {
+		background: #fee7e6;
+		border: 1px solid #dd3334;
+
+		.select-group__custom--big .select-group__custom-input {
+			border-color: #dd3334;
+		}
+
+		.select-group__custom-input::placeholder {
+			color: #dd3334;
+		}
+	}
+
+	#amount_label_1,
+	#amount_label_2,
+	#amount_label_3,
+	#amount_label_4,
+	#amount_label_5 {
+		display: none;
 	}
 
 	.close {
 		position: absolute;
-		top: 0.5em;
-		right: 0.5em;
-		opacity: 0.5;
+		flex: auto;
+		top: 0;
+		right: 0;
 	}
 
-	.progress_bar__wrapper {
-		border-color: #dce4e8;
-		background-color: #ffffff;
-		margin: 0.5em 1em;
+	.close img {
+		width: 14px;
+		height: 14px;
 	}
 
-	.progress_bar__donation_fill {
-		background: #97b314;
-		height: 1.6em;
-	}
-
-	.progress_bar__donation_text {
-		line-height: 1.8em;
-		color: #ffffff;
-	}
-
-	.progress_bar__donation_remaining {
-		color: #97b314;
-		line-height: 1.8em;
-	}
-
-	@media ( min-width: 1280px ) {
-		.banner__content {
-			display: flex;
-			flex-direction: row;
-			order: 1;
+	@media screen and ( min-width: 1440px ) {
+		.infobox__text {
+			font-size: 1.2em;
+			line-height: 1.3em;
 		}
+	}
 
-		.banner__footer {
-			order: 2;
-			padding: 0.5em 0 0 6.5em;
+	@media screen and ( max-width: 1440px ) {
+		.infobox__text {
+			font-size: 1.1em;
+			line-height: 1.2em;
 		}
+	}
 
-		.banner > .banner__footer {
-			display: block;
+	@media screen and ( max-width: 1280px ) {
+		.infobox__text {
+			font-size: 1em;
+			line-height: 1.15em;
 		}
+	}
 
+	@media screen and ( max-width: 1060px ) {
+		.infobox__text {
+			font-size: 0.95em;
+		}
+	}
+
+	@media screen and ( max-width: 960px ) {
 		.infobox {
-			margin: 0.2em 0 0.2em 5em;
+			flex: 0 1 55%;
 		}
 
-		.form {
-			margin: 0 1.5em 0 0.25em;
-			padding-top: 0;
-			width: 18em;
+		.infobox__text {
+			font-size: 0.9em;
+			line-height: 1.1em;
 		}
 
-		.form__header > p {
-			width: 100%;
+		.footer {
+			line-height: inherit;
 		}
 
-		.form__header > .banner__footer {
+		.presents {
 			display: none;
 		}
 
-		.form > div {
-			width: 100%;
+		.form {
+			padding: 0.5em 0 0 0.5em;
 		}
 
-		.form__header {
-			text-align: center;
+		.form__text {
+			padding: 0 0.5em 0.3em 0.5em;
 		}
 
-		.form-field-group {
-			flex-wrap: wrap;
+		.form__text-middle {
+			display: none;
 		}
 
-		.select-group,
-		.button-group {
-			flex-wrap: wrap;
-			flex: 1 0 97%;
-		}
-
-		.select-group:first-child {
-			padding-left: 0.5em;
-		}
-
-		.select-group:last-child {
-			padding-right: 0.5em;
-		}
-
-		.select-group-container--with-error .select-group__errormessage {
-			margin-left: 0.5em;
-		}
-
-		.WMDE-Banner-amounts {
-			.select-group__option:nth-child( 1 ) .select-group__state {
-				border-radius: 6px 0 0 0;
-			}
-
-			.select-group__option:nth-child( 4 ) .select-group__state {
-				border-radius: 0 6px 0 0;
-			}
-
-			.select-group__option:nth-child( 5 ) .select-group__state {
-				border-radius: 0 0 0 6px;
-			}
-
-			.select-group__custom-input {
-				border-radius: 0 0 6px 0;
+		.form--with-error {
+			.form__text-top {
+				display: none;
 			}
 		}
 
-		.button-group {
-			margin-left: 0.5em;
+		.select-group__state {
+			line-height: 1.7em;
 		}
 
-		#WMDE_Banner-form {
+		#amount_label_1,
+		#amount_label_2,
+		#amount_label_3,
+		#amount_label_4,
+		#amount_label_5 {
 			display: block;
 		}
-
-		.footer__item--rightflex {
-			margin-right: 5em;
-		}
-	}
-
-	@media ( max-width: 1100px ) {
-		.button-group__button--halfwidth .button-group__label {
-			padding: unset;
-		}
-	}
-
-	@media ( max-width: 1100px ) {
-		.button-group__button--halfwidth {
-			width: unset;
-		}
-	}
-
-	.progress_bar__days_left {
-		display: block;
-		color: #ffffff;
-		line-height: 1.9em;
 	}
 }
