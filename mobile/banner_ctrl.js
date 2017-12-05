@@ -5,7 +5,7 @@ require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
-const searchBoxTrackRatio = 1;
+const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
@@ -80,57 +80,21 @@ trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-close
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.send' ).click( function () {
-	return validateForm();
-} );
-
 // Reset "other box" if they click a different amount
 $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
 } );
 
-$( '#btn-ppl' ).click( function () {
+$( '.button-group__container button' ).click( function ( event ) {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'PPL' );
+		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return true;
 	}
-} );
 
-$( '#btn-cc' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'MCP' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-ueb' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'UEB' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
-} );
-
-$( '#btn-bez' ).click( function () {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( 'BEZ' );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '#form' ).submit();
-	} else {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	}
+	alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+	return false;
 } );
 // END form initialization
 
@@ -194,40 +158,3 @@ $( document ).ready( function () {
 	} );
 
 } );
-
-function validateForm() {
-	var form = document.donationForm;
-	var error = false;
-
-	if ( $( '#interval_multiple' ).attr( 'checked' ) === 'checked' ) {
-		if ( $( 'input[name=interval]:checked', form ).length !== 1 ) {
-			alert( 'Es wurde kein Zahlungsintervall ausgewählt.' );
-			return false;
-		} else {
-			$( '#intervalType' ).val( '1' );
-			$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
-		}
-	} else {
-		$( '#periode' ).val( '0' );
-	}
-
-	// Get amount selection
-	var amount = null;
-	for ( var i = 0; i < form.betrag_auswahl.length; i++ ) {
-		if ( form.betrag_auswahl[ i ].checked ) {
-			amount = form.betrag_auswahl[ i ].value;
-			break;
-		}
-	}
-	// Check amount is a real number
-	error = ( amount === null || isNaN( amount ) || amount.value <= 0 );
-	// Check amount is at least the minimum
-	if ( amount < 1 || error ) {
-
-		return false;
-	} else if ( amount > 99999 ) {
-
-		return false;
-	}
-	return !error;
-}
