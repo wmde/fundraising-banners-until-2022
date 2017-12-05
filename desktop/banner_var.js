@@ -91,22 +91,22 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
@@ -135,10 +135,6 @@ function setupAmountEventHandling() {
 		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
 }
 
 function validateAndSetPeriod() {
@@ -160,10 +156,8 @@ function validateForm() {
 }
 
 $( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
-	}
+	$( '#zahlweise' ).val( $( e.target ).data( 'payment-type' ) );
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
