@@ -14,15 +14,19 @@ import TrackingEvents from '../shared/tracking_events';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
+import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
+import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDaySentence = new CampaignDaySentence( new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-), LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence(
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
+	LANGUAGE
+);
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -40,7 +44,10 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-const getCustomDayName = require( '../shared/custom_day_name' );
+const dayName = new DayName( new Date() );
+const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
+const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
 const animateHighlight = require( '../shared/animate_highlight' );
 
 const bannerTemplate = require( './templates/banner_html.hbs' );
@@ -50,16 +57,12 @@ const $ = require( 'jquery' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
-const currentDayName = BannerFunctions.getCurrentGermanDay();
-const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),

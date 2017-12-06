@@ -16,10 +16,11 @@ import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
+import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const Translations = {}; // will only be needed for English banner, German defaults are in DesktopBanner
+import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDaySentence = new CampaignDaySentence(
 	new CampaignDays(
@@ -28,7 +29,6 @@ const campaignDaySentence = new CampaignDaySentence(
 	),
 	LANGUAGE
 );
-const getCustomDayName = require( '../shared/custom_day_name' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -45,6 +45,10 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
+const dayName = new DayName( new Date() );
+const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
+const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
@@ -53,9 +57,6 @@ require( '../shared/wlightbox.js' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const customDayName = getCustomDayName( BannerFunctions.getCurrentGermanDay, LANGUAGE );
-const currentDayName = BannerFunctions.getCurrentGermanDay();
-const weekdayPrepPhrase = customDayName === currentDayName ? 'an diesem' : 'am heutigen';
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
@@ -64,7 +65,6 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	customDayName: customDayName,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
@@ -118,7 +118,7 @@ function setupAmountEventHandling() {
 function validateAndSetPeriod() {
 	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( 'Bitte wählen Sie zuerst ein Zahlungsintervall.' );
+		$( '#WMDE_Banner' ).trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
