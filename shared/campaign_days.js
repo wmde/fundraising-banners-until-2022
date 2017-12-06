@@ -33,6 +33,10 @@ export default class CampaignDays {
 		return Math.floor( ( this.endDate.getTime() - this.startDate.getTime() ) / 1000 );
 	}
 
+	getNumberOfDaysUntilCampaignEnd() {
+		return Math.floor( this.getSecondsUntilCampaignEnds() / 60 / 60 / 24 );
+	}
+
 }
 
 /**

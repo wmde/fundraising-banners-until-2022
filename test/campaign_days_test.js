@@ -122,4 +122,22 @@ describe( 'CampaignDays', function () {
 
 	} );
 
+	describe( '#getNumberOfDaysUntilCampaignEnd', function () {
+		it( 'returns the number of days until the defined end of the campaign', function () {
+			const campaignDays = new CampaignDays( CAMPAIGN_START, CAMPAIGN_END, new Date( 2016, 9, 31, 23, 59, 59 ) );
+			assert.equal( 61, campaignDays.getNumberOfDaysUntilCampaignEnd() );
+		} );
+
+		it( 'returns zero on the day of the end of the campaign', function () {
+			const campaignDays = new CampaignDays( CAMPAIGN_START, CAMPAIGN_END, new Date( 2016, 11, 31, 23, 59, 54 ) );
+			assert.equal( 0, campaignDays.getNumberOfDaysUntilCampaignEnd() );
+		} );
+
+		it( 'returns a negative number after the end of the campaign', function () {
+			const campaignDays = new CampaignDays( CAMPAIGN_START, CAMPAIGN_END, new Date( 2017, 0, 1, 0, 0, 4 ) );
+			assert.equal( -1, campaignDays.getNumberOfDaysUntilCampaignEnd() );
+		} );
+
+	} );
+
 } );
