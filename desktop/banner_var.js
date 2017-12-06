@@ -54,7 +54,7 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 
 // const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -104,6 +104,16 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -140,12 +150,15 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-payment button' ).click( function () {
-	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
-	return validateForm();
+$( '.WMDE-Banner-submit button' ).click( function ( e ) {
+	if ( !validateForm() ) {
+		e.preventDefault();
+		return false;
+	}
 } );
 
 /* Convert browser events to custom events */
