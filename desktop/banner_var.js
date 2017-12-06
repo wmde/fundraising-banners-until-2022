@@ -25,13 +25,11 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDaySentence = new CampaignDaySentence(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
-	LANGUAGE
+const campaignDays = new CampaignDays(
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -64,7 +62,14 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
