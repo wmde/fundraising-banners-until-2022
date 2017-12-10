@@ -15,8 +15,8 @@ import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
-import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
@@ -86,22 +86,32 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 }
@@ -140,11 +150,11 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	$( '#zahlweise' ).val( $( e.target ).data( 'payment-type' ) );
+$( '.WMDE-Banner-submit button' ).click( function () {
 	return validateForm();
 } );
 
