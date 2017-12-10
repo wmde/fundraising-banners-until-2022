@@ -109,6 +109,16 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -124,6 +134,10 @@ function setupAmountEventHandling() {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
 
@@ -141,11 +155,11 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	$( '#zahlweise' ).val( $( e.target ).data( 'payment-type' ) );
+$( '.WMDE-Banner-submit button' ).click( function () {
 	return validateForm();
 } );
 

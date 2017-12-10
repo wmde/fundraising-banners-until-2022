@@ -90,25 +90,39 @@
 						<span id="WMDE_Banner-amounts-error-text" class="select-group__errormessage">{{ amount-empty-message }}</span>
 					</div>
 
-					<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
-						<button class="button-group__button button-group__button--halfwidth" data-payment-type="BEZ">
-							<span class="button-group__label">Lastschrift</span>
-						</button>
+					<div class="form-field-group">
+						<div class="select-group-container">
+							<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
+								<label class="select-group__option select-group__option--halfwidth">
+									<input type="radio" name="zahlweise" value="BEZ" class="select-group__input">
+									<span class="select-group__state">Lastschrift</span>
+								</label>
+		
+								<label class="select-group__option select-group__option--halfwidth">
+									<input type="radio" name="zahlweise" value="UEB" class="select-group__input">
+									<span class="select-group__state">Überweisung</span>
+								</label>
+		
+								<label class="select-group__option select-group__option--halfwidth">
+									<input type="radio" name="zahlweise" value="MCP" class="select-group__input">
+									<span class="select-group__state">Kreditkarte</span>
+								</label>
+		
+								<label class="select-group__option select-group__option--halfwidth">
+									<input type="radio" name="zahlweise" value="PPL" class="select-group__input">
+									<span class="select-group__state">PayPal</span>
+								</label>
+							</div>
+							<span id="WMDE_Banner-payment-type-error-text" class="select-group__errormessage">{{ no-payment-type-message }}</span>
+						</div>
 
-						<button class="button-group__button button-group__button--halfwidth" data-payment-type="UEB">
-							<span class="button-group__label">Überweisung</span>
-						</button>
-
-						<button class="button-group__button button-group__button--halfwidth" data-payment-type="MCP">
-							<span class="button-group__label">Kreditkarte</span>
-						</button>
-
-						<button class="button-group__button button-group__button--halfwidth" data-payment-type="PPL">
-							<span class="button-group__label">PayPal</span>
-						</button>
+						<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
+							<button class="button-group__button">
+								<span class="button-group__label">Weiter, um Spende abzuschließen</span>
+							</button>
+						</div>
 					</div>
 
-					<input type="hidden" id="zahlweise" name="zahlweise" value=""/>
 					<input type="hidden" id="periode" name="periode" value="0"/>
 					<input type="hidden" id="intervalType" name="intervalType" value="0"/>
 					<input type="hidden" id="impCount" name="impCount" value=""/>

@@ -3,6 +3,7 @@ const Translations = {
 	'amount-empty-message': 'Bitte wählen Sie zuerst einen Betrag.',
 	'amount-too-low-message': 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
 	'amount-too-high-message': 'Der Spendenbetrag ist zu hoch.',
+	'no-payment-type-message': 'Bitte wählen Sie eine Zahlmethode aus.',
 	'prefix-days-left': 'Nur noch',
 	'suffix-days-left': '',
 	'day-singular': 'Tag',
