@@ -32,62 +32,65 @@
 
 				<form id="WMDE_Banner-form" method="post" name="donationForm"
 				      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&amp;piwik_kwd={{ BannerName }}&pmt=0">
-					<div class="select-group-container" style="flex: 0 0 30%">
-						<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
-							<label class="select-group__option select-group__option--thirdwidth">
-								<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
-								<span class="select-group__state">einmalig</span>
-							</label>
-							<label class="select-group__option select-group__option--thirdwidth  donation-frequency-monthly">
-								<input type="radio" id="interval1" name="interval" value="1" class="select-group__input">
-								<span class="select-group__state">monatlich</span>
-							</label>
-							<label class="select-group__option select-group__option--thirdwidth donation-frequency-yearly">
-								<input type="radio" id="interval12" name="interval" value="12" class="select-group__input">
-								<span class="select-group__state">jährlich</span>
-							</label>
+
+					<div class="form-field-group">
+						<div class="select-group-container">
+							<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
+								<label class="select-group__option select-group__option--thirdwidth">
+									<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
+									<span class="select-group__state">einmalig</span>
+								</label>
+								<label class="select-group__option select-group__option--thirdwidth  donation-frequency-monthly">
+									<input type="radio" id="interval1" name="interval" value="1" class="select-group__input">
+									<span class="select-group__state">monatlich</span>
+								</label>
+								<label class="select-group__option select-group__option--thirdwidth donation-frequency-yearly">
+									<input type="radio" id="interval12" name="interval" value="12" class="select-group__input">
+									<span class="select-group__state">jährlich</span>
+								</label>
+							</div>
+							<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{ no-interval-message }}</span>
 						</div>
-						<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{ no-interval-message }}</span>
-					</div>
 
-					<div class="select-group-container" style="flex: 0 0 33%">
-						<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
-							<label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
-								<span class="select-group__state">5 €</span>
-							</label>
-
-							<label id="amount_label_2" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="15">
-								<span class="select-group__state">15 €</span>
-							</label>
-
-							<label id="amount_label_3" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="25">
-								<span class="select-group__state">25 €</span>
-							</label>
-
-							<label id="amount_label_4" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="50">
-								<span class="select-group__state">50 €</span>
-							</label>
-
-							<label id="amount_label_5" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="75">
-								<span class="select-group__state">75 €</span>
-							</label>
-
-							<label id="amount_label_6" class="select-group__option select-group__option--quarterwidth">
-								<input type="radio" name="betrag_auswahl" id="field-amount_total_6" class="select-group__input" value="100">
-								<span class="select-group__state">100 €</span>
-							</label>
-
-							<label class="select-group__option select-group__option--halfwidth">
-								<input type="text" name="amountGiven" id="amount-other-input" size="3"
-								       autocomplete="off" value="" placeholder="anderer" class="select-group__custom-input">
-							</label>
+						<div class="select-group-container">
+							<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
+								<label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
+									<span class="select-group__state">5 €</span>
+								</label>
+	
+								<label id="amount_label_2" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="15">
+									<span class="select-group__state">15 €</span>
+								</label>
+	
+								<label id="amount_label_3" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="25">
+									<span class="select-group__state">25 €</span>
+								</label>
+	
+								<label id="amount_label_4" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="50">
+									<span class="select-group__state">50 €</span>
+								</label>
+	
+								<label id="amount_label_5" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="75">
+									<span class="select-group__state">75 €</span>
+								</label>
+	
+								<label id="amount_label_6" class="select-group__option select-group__option--quarterwidth">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_6" class="select-group__input" value="100">
+									<span class="select-group__state">100 €</span>
+								</label>
+	
+								<label class="select-group__option select-group__option--halfwidth">
+									<input type="text" name="amountGiven" id="amount-other-input" size="3"
+									       autocomplete="off" value="" placeholder="anderer" class="select-group__custom-input">
+								</label>
+							</div>
+							<span id="WMDE_Banner-amounts-error-text" class="select-group__errormessage">{{ amount-empty-message }}</span>
 						</div>
-						<span id="WMDE_Banner-amounts-error-text" class="select-group__errormessage">{{ amount-empty-message }}</span>
 					</div>
 
 					<div class="form-field-group">
