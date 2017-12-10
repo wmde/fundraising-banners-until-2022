@@ -29,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
