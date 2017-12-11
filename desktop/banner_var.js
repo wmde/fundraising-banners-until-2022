@@ -159,7 +159,35 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
+function getTrackingParameters() {
+	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
+}
+
+function setTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '1' );
+	$( '#address_type' ).val( 'anonym' );
+}
+
+function unsetTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '' );
+	$( '#address_type' ).val( 'person' );
+}
+
+function setPaymentAmount() {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	$( '#betrag' ).val( $checkedAmountElement.length > 0 ? $checkedAmountElement.val() : $( 'input[name=amountGiven]' ).val() );
+}
+
 $( '.WMDE-Banner-submit button' ).click( function () {
+	setPaymentAmount();
+	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( 'input[name=zahlweise]:checked' ).val() ) > -1 ) {
+		setTrackAndRedirect();
+	} else {
+		unsetTrackAndRedirect();
+	}
+
 	return validateForm();
 } );
 
