@@ -109,16 +109,6 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
-		addSpaceInstantly();
-	} );
 }
 
 function setupAmountEventHandling() {
@@ -151,8 +141,7 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
 }
 
 $( '.WMDE-Banner-submit button' ).click( function ( e ) {
