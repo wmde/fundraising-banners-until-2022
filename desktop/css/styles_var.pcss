@@ -34,14 +34,14 @@
 		line-height: 1.2em;
 	}
 
-	.banner > .banner__footer {
-		display: none;
-	}
-
 	.banner__footer {
 		padding: 0.3em 0 0 0;
 		font-size: 1.1em;
 		color: #808080;
+	}
+
+	.banner > .banner__footer {
+		display: none;
 	}
 
 	.footer {
@@ -111,8 +111,17 @@
 		padding-right: 0;
 	}
 
+	.select-group__option {
+		padding: 0 0.2em 0.2em 0;
+	}
+
 	.select-group__state {
 		border-radius: unset;
+		background: #e5ecc4;
+		border: 0 none;
+		color: #97b314;
+		padding: 0;
+		font-size: 0.95em;
 	}
 
 	.select-group__option:first-child .select-group__state {
@@ -122,18 +131,6 @@
 	.select-group__option:last-child .select-group__state,
 	.select-group__custom-input {
 		border-radius: 0 6px 6px 0;
-	}
-
-	.select-group__option {
-		padding: 0 0.2em 0.2em 0;
-	}
-
-	.select-group__state {
-		background: #e5ecc4;
-		border: 0 none;
-		color: #97b314;
-		padding: 0;
-		font-size: 0.95em;
 	}
 
 	.select-group__custom-input {
@@ -211,6 +208,11 @@
 			order: 1;
 		}
 
+		.banner__footer {
+			order: 2;
+			padding: 0.5em 0 0 6.5em;
+		}
+
 		.banner > .banner__footer {
 			display: block;
 		}
@@ -241,7 +243,8 @@
 			text-align: center;
 		}
 
-		.select-group, .button-group {
+		.select-group,
+		.button-group {
 			flex-wrap: wrap;
 		}
 
@@ -307,11 +310,6 @@
 
 		#WMDE_Banner-form {
 			display: block;
-		}
-
-		.banner__footer {
-			order: 2;
-			padding: 0.5em 0 0 6.5em;
 		}
 
 		.footer__item--rightflex {
