@@ -151,8 +151,8 @@ function unsetTrackAndRedirect() {
 	$( '#addressType' ).val( 'person' );
 }
 
-$( '#WMDE_Banner-payment button' ).click( function ( event ) {
-	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( event.target ).data( 'payment-type' ) ) > -1 ) {
+$( '#WMDE_Banner-payment button' ).click( function () {
+	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( this ).data( 'payment-type' ) ) > -1 ) {
 		setTrackAndRedirect();
 	} else {
 		unsetTrackAndRedirect();
