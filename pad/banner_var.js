@@ -135,6 +135,11 @@ function validateAndSetPeriod() {
 	return true;
 }
 
+function setPaymentAmount() {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	$( '#betrag' ).val( $checkedAmountElement.length > 0 ? $checkedAmountElement.val() : $( 'input[name=amountGiven]' ).val() );
+}
+
 function getTrackingParameters() {
 	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
 }
@@ -157,6 +162,7 @@ $( '#WMDE_Banner-payment button' ).click( function () {
 	} else {
 		unsetTrackAndRedirect();
 	}
+	setPaymentAmount();
 	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
 	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
 		return false;
