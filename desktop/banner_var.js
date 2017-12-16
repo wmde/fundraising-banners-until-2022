@@ -50,9 +50,9 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+// const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-// const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -159,7 +159,35 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
+function getTrackingParameters() {
+	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
+}
+
+function setTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '1' );
+	$( '#address_type' ).val( 'anonym' );
+}
+
+function unsetTrackAndRedirect() {
+	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
+	$( '#track-and-redirect' ).val( '' );
+	$( '#address_type' ).val( 'person' );
+}
+
+function setPaymentAmount() {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
+	$( '#betrag' ).val( $checkedAmountElement.length > 0 ? $checkedAmountElement.val() : $( 'input[name=amountGiven]' ).val() );
+}
+
 $( '.WMDE-Banner-submit button' ).click( function () {
+	setPaymentAmount();
+	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( 'input[name=zahlweise]:checked' ).val() ) > -1 ) {
+		setTrackAndRedirect();
+	} else {
+		unsetTrackAndRedirect();
+	}
+
 	return validateForm();
 } );
 
