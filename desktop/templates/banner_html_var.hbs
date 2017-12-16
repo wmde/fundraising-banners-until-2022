@@ -3,7 +3,7 @@
 		<div class="banner__content">
 			<div class="infobox">
 				<div class="infobox__text">
-					{{> banner_text }}
+					{{> banner_text_var }}
 				</div>
 				{{{ progressBar }}}
 			</div>
@@ -126,14 +126,10 @@
 						</div>
 					</div>
 
-					<input type="hidden" id="track-and-redirect" name="mbt" value="" />
-					<input type="hidden" id="address_type" name="addressType" value="person">
 					<input type="hidden" id="periode" name="periode" value="0"/>
 					<input type="hidden" id="intervalType" name="intervalType" value="0"/>
-					<input type="hidden" id="betrag" name="betrag" value="" />
 					<input type="hidden" id="impCount" name="impCount" value=""/>
 					<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
-					<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 				</form>
 			</div>
 		</div>
