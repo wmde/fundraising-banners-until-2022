@@ -3,7 +3,7 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-require( './css/styles_var.pcss' );
+// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -29,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -50,9 +50,9 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-// const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+// const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -109,6 +109,16 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -124,6 +134,10 @@ function setupAmountEventHandling() {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
 
@@ -141,11 +155,11 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	$( '#zahlweise' ).val( $( e.target ).data( 'payment-type' ) );
+$( '.WMDE-Banner-submit button' ).click( function () {
 	return validateForm();
 } );
 

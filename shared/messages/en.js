@@ -3,6 +3,7 @@ const Translations = {
 	'amount-empty-message': 'Please select a donation amount.',
 	'amount-too-low-message': 'The minimum donation amount is 1 Euro.',
 	'amount-too-high-message': 'The donation amount is too high.',
+	'no-payment-type-message': 'Please choose a payment method.',
 	'prefix-days-left': 'Only',
 	'suffix-days-left': 'left',
 	'day-singular': 'day',

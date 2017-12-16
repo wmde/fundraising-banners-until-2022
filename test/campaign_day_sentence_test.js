@@ -39,11 +39,11 @@ describe( 'CampaignDaySentence', function () {
 			assert.equal( 'Heute ist der 2. Tag unserer Spendenkampagne.', sentence.getSentence() );
 		} );
 
-		it( 'returns a sentence on the last week of the campaign', function () {
+		it( 'returns the only_n_days sentence when a specified threshold is exceeded', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
-			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 259200 );
-			const sentence = new CampaignDaySentence( campaignDays );
-			assert.equal( 'Es bleiben nur noch 3 Tage, um Wikipedia in diesem Jahr zu unterstützen.', sentence.getSentence() );
+			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 1123200 );
+			const sentence = new CampaignDaySentence( campaignDays, 'de', 20 );
+			assert.equal( 'Es bleiben nur noch 13 Tage, um Wikipedia in diesem Jahr zu unterstützen.', sentence.getSentence() );
 		} );
 
 		it( 'returns a sentence on the last day of the campaign', function () {
@@ -82,11 +82,11 @@ describe( 'CampaignDaySentence', function () {
 			assert.equal( '', sentence.getSentence() );
 		} );
 
-		it( 'returns a sentence on the last week of the campaign', function () {
+		it( 'returns the only_n_days sentence when a specified threshold is exceeded', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
-			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 259200 );
-			const sentence = new CampaignDaySentence( campaignDays, 'en' );
-			assert.equal( 'This is the last week of our donation campaign.', sentence.getSentence() );
+			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 1123200 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en', 22 );
+			assert.equal( 'Only 13 left until our fundraising campaign ends.', sentence.getSentence() );
 		} );
 
 		it( 'returns a sentence on the last day of the campaign', function () {

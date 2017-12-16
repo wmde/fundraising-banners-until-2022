@@ -8,7 +8,7 @@ const SENTENCES = {
 	},
 	en: {
 		last_day: 'Today is the final day of our donation campaign.',
-		only_n_days: 'This is the last week of our donation campaign.'
+		only_n_days: 'Only {{days}} left until our fundraising campaign ends.'
 	}
 };
 
@@ -24,10 +24,12 @@ export default class CampaignDaySentence {
 	/**
 	 * @param {CampaignDays} campaignDays
 	 * @param {string} language
+	 * @param {int} urgencyThreshold
 	 */
-	constructor( campaignDays, language = 'de' ) {
+	constructor( campaignDays, language = 'de', urgencyThreshold = 7 ) {
 		this.campaignDays = campaignDays;
 		this.language = language;
+		this.urgencyThreshold = urgencyThreshold;
 	}
 
 	getSentence() {
@@ -42,7 +44,7 @@ export default class CampaignDaySentence {
 
 		if ( daysUntilCampaignEnds === 1 ) {
 			return trans( this.language, 'last_day' );
-		} else if ( daysUntilCampaignEnds <= 7 ) {
+		} else if ( daysUntilCampaignEnds <= this.urgencyThreshold ) {
 			return trans( this.language, 'only_n_days' ).replace( '{{days}}', daysUntilCampaignEnds );
 		}
 
