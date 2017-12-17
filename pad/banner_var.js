@@ -110,7 +110,6 @@ function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
-		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
@@ -135,34 +134,7 @@ function validateAndSetPeriod() {
 	return true;
 }
 
-function setPaymentAmount() {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	$( '#betrag' ).val( $checkedAmountElement.length > 0 ? $checkedAmountElement.val() : $( 'input[name=amountGiven]' ).val() );
-}
-
-function getTrackingParameters() {
-	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
-}
-
-function setTrackAndRedirect() {
-	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
-	$( '#track-and-redirect' ).val( '1' );
-	$( '#addressType' ).val( 'anonym' );
-}
-
-function unsetTrackAndRedirect() {
-	$( '#WMDE_Banner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
-	$( '#track-and-redirect' ).val( '' );
-	$( '#addressType' ).val( 'person' );
-}
-
 $( '#WMDE_Banner-payment button' ).click( function () {
-	if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( this ).data( 'payment-type' ) ) > -1 ) {
-		setTrackAndRedirect();
-	} else {
-		unsetTrackAndRedirect();
-	}
-	setPaymentAmount();
 	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
 	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
 		return false;
