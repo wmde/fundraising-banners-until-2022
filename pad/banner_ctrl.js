@@ -129,10 +129,9 @@ function validateAndSetPeriod() {
 	return true;
 }
 
-$( '#WMDE_Banner-payment button' ).click( function ( e ) {
+$( '#WMDE_Banner-payment button' ).click( function () {
 	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
 	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
-		e.preventDefault();
 		return false;
 	}
 } );
