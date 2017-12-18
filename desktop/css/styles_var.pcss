@@ -1,28 +1,303 @@
 #WMDE_Banner {
+
+	/**
+	 * GLOBAL RESET
+	 */
+	img {
+		border: 0 none;
+	}
+
+	/**
+	 * CUSTOM
+	 */
+
+	display: none;
+	width: 100%;
+	position: fixed;
+	z-index: 10000;
+	font-size: 16px;
+
 	.banner {
 		height: 247px;
+		display: flex;
+
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #ffffff;
 	}
 
 	.infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		flex: 0 1 45%;
-		border: 0;
+
+		border: 0 none;
 		border-radius: 0;
+		background: #dce4e7;
 		padding: 0;
 		margin: 0;
-		background: #dce4e7;
 
-		.infobox__text {
-			color: #98b414;
-			margin: 0 1em 0.5em 1em;
-		}
+	}
 
-		.text__headline:nth-of-type( 1 ) {
-			margin-top: 35px;
-		}
+	.infobox__text {
+		color: #98b414;
+		font-size: 1.05em;
+		line-height: 1.2em;
+		text-align: left;
+		margin: 0 1em 0.5em 1em;
+	}
 
-		.text__headline:nth-of-type( 2 ) {
-			margin: 20px 0 0 10px;
-		}
+	.text__headline {
+		margin: 0.2em 0;
+	}
+
+	.text__headline:nth-of-type( 1 ) {
+		margin-top: 35px;
+	}
+
+	.text__headline:nth-of-type( 2 ) {
+		margin: 20px 0 0 10px;
+	}
+
+	.text__paragraph {
+		margin: 0;
+	}
+
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
+	}
+
+	.text__paragraph .text__highlight {
+		border-bottom: solid 3px #990000;
+		padding: 0 0.1em;
+		background: transparent;
+		font-weight: bold;
+	}
+
+	/* This is for keeping the same banner size when testing different banner texts.
+	The placeholder text element should contain the text that was removed.
+	*/
+	.text__hidden-placeholder {
+		visibility: hidden;
+	}
+
+	.infobox__footer {
+		padding: 0.025em 0 0 2em;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.1em/18px 18px;
+	}
+
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		font-size: 0.8em;
+		line-height: 1.6em;
+	}
+
+	.footer__info {
+		text-transform: uppercase;
+	}
+
+	.footer__item span {
+		margin-right: 0.5em;
+	}
+
+	.footer__importantinfo {
+		font-weight: bold;
+	}
+
+	.footer__item {
+		color: #808080;
+		white-space: nowrap;
+	}
+
+	.footer__item--rightflex {
+		flex-grow: 1;
+		text-align: right;
+	}
+
+	.application-of-funds-link {
+		color: #808080;
+	}
+
+	/* Form styling */
+
+	.form {
+		position: relative;
+		flex: 0 0 220px;
+		width: 16em;
+		min-width: 12em;
+		padding: 1em 0 0 0.5em;
+		margin: 0 0.5em 0 0;
+	}
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 0.5em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+		font-size: 0.9em;
+		font-weight: bold;
+	}
+
+	.select-group--with-error {
+		background: #fee7e6;
+		border: 1px solid #dd3334;
+	}
+
+	.select-group__errormessage {
+		display: none; /* Message will be shown by JS code */
+		color: #ffffff;
+		font-weight: bold;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.74em;
+	}
+
+	.select-group__input {
+		display: none;
+	}
+
+	.select-group__custom-input {
+		padding: 0.4em;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		font-size: 0.74em;
+		text-align: center;
+		border: 1px solid #9aa0a7;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.select-group__option {
+		flex: 1 1 auto;
+		padding: 0 0.3em 0.3em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+	}
+
+	.select-group__option--fullwidth {
+		width: 100%;
+	}
+
+	.select-group__option--halfwidth {
+		width: 50%;
+	}
+
+	.select-group__option--quarterwidth {
+		width: 25%;
+	}
+
+	.select-group__option--biggertext {
+		font-size: 1em;
+	}
+
+	.select-group__state {
+		display: block;
+		color: #000000;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.1em 0;
+		line-height: 2em;
+		cursor: pointer;
+		text-align: center;
+		font-size: 0.8em;
+		box-sizing: border-box;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		color: #98b414;
+		background: #ffffff;
+		border: 1px solid #98b414;
+		outline: 2px solid #98b414;
+		border-radius: 0;
+	}
+
+	.button-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+	}
+
+	.button-group__button {
+		flex: 1 1 auto;
+		padding: 0 0.3em 0.3em 0;
+		margin: 0 -1px 0 -1px;
+		box-sizing: border-box;
+		display: block;
+		cursor: pointer;
+		/* Override browser defaults */
+		border: 0 none;
+		background: transparent;
+		font-size: inherit;
+	}
+
+	.button-group__button--halfwidth {
+		width: 50%;
+	}
+
+	.button-group__label {
+		display: block;
+		color: #ffffff;
+		background: #98b414;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.1em 0;
+		line-height: 2em;
+		font-size: 0.7em;
+		font-weight: bold;
+		text-align: center;
+		box-sizing: border-box;
+	}
+
+	.close {
+		position: absolute;
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 0;
+		right: 0;
+		flex: auto;
+	}
+
+	.close img {
+		width: 14px;
+		height: 14px;
+	}
+
+	.click-tracking {
+		display: none;
+	}
+
+	.click-tracking__pixel {
+		height: 0;
+		width: 0;
+		border: 0 none;
+	}
+
+	.progress_bar__days_left {
+		display: none;
 	}
 
 	.infobox__footer,
@@ -36,13 +311,6 @@
 		position: absolute;
 		bottom: 0;
 		right: 9px;
-	}
-
-	.footer__item {
-		color: #808080;
-		.application-of-funds-link {
-			color: #808080;
-		}
 	}
 
 	.presents {
@@ -169,12 +437,6 @@
 		}
 	}
 
-	.form {
-		position: relative;
-		flex: 0 0 220px;
-		margin: 0 0.5em 0 0;
-	}
-
 	.form__text {
 		color: #98b414;
 		text-align: center;
@@ -192,19 +454,6 @@
 	.WMDE-Banner-payment-type {
 		padding: 0.1em 0.5em 0.1em 0.5em;
 		margin: 0 0 0.1em 0;
-	}
-
-	.WMDE-Banner-payment-type .select-group__state {
-		color: #ffffff;
-		background: #98b414;
-	}
-
-	.WMDE-Banner-frequency .select-group__input:checked + .select-group__state {
-		color: #98b414;
-		background: #ffffff;
-		border: 1px solid #98b414;
-		outline: 2px solid #98b414;
-		border-radius: 0;
 	}
 
 	.WMDE-Banner-amounts {
@@ -254,37 +503,12 @@
 		}
 	}
 
-	.select-group--with-error {
-		background: #fee7e6;
-		border: 1px solid #dd3334;
-
-		.select-group__custom--big .select-group__custom-input {
-			border-color: #dd3334;
-		}
-
-		.select-group__custom-input::placeholder {
-			color: #dd3334;
-		}
-	}
-
 	#amount_label_1,
 	#amount_label_2,
 	#amount_label_3,
 	#amount_label_4,
 	#amount_label_5 {
 		display: none;
-	}
-
-	.close {
-		position: absolute;
-		flex: auto;
-		top: 0;
-		right: 0;
-	}
-
-	.close img {
-		width: 14px;
-		height: 14px;
 	}
 
 	@media screen and ( min-width: 1440px ) {
@@ -320,11 +544,7 @@
 
 	@media screen and ( max-width: 960px ) {
 		.banner {
-			height: 204px;
-		}
-
-		.close {
-			right: -5px;
+			height: 235px;
 		}
 
 		.infobox {
