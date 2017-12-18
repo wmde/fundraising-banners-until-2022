@@ -1,4 +1,8 @@
 #WMDE_Banner {
+	.banner {
+		height: 247px;
+	}
+
 	.infobox {
 		flex: 0 1 45%;
 		border: 0;
@@ -25,7 +29,13 @@
 	.form__footer {
 		font-size: 14px;
 		background: transparent;
-		padding: 0 0.4em 0.4em 0.9em;
+		padding: 0 0.3em 0.3em 0.9em;
+	}
+
+	.form__footer {
+		position: absolute;
+		bottom: 0;
+		right: 9px;
 	}
 
 	.footer__item {
@@ -160,6 +170,7 @@
 	}
 
 	.form {
+		position: relative;
 		flex: 0 0 220px;
 		margin: 0 0.5em 0 0;
 	}
@@ -298,12 +309,24 @@
 	}
 
 	@media screen and ( max-width: 1060px ) {
+		.banner {
+			height: 235px;
+		}
+
 		.infobox__text {
 			font-size: 0.95em;
 		}
 	}
 
 	@media screen and ( max-width: 960px ) {
+		.banner {
+			height: 204px;
+		}
+
+		.close {
+			right: -5px;
+		}
+
 		.infobox {
 			flex: 0 1 55%;
 		}

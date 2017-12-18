@@ -1,6 +1,8 @@
 #WMDE_Banner {
 	.progress__tree {
+		position: relative;
 		flex: 0 0 358px;
+		height: 247px;
 		background: linear-gradient( to right, #dce4e7 50%, #ffffff 50% );
 	}
 
@@ -13,18 +15,23 @@
 
 	.tree__white {
 		position: absolute;
-		top: -15px;
-		margin-left: 179px;
+		bottom: 20px;
+		left: 179px;
 		width: 179px;
+		height: 207px;
+	}
+
+	.tree__fill {
 		height: 100%;
 		background: #ffffff;
 	}
 
 	.tree__green {
 		position: absolute;
+		top: 19px;
 		width: 358px;
 		height: 100%;
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Tree-colored-big.png' ) no-repeat 179px 13px;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Tree-colored-big.png' ) no-repeat 179px 0px;
 	}
 
 	.missing__text {
@@ -51,6 +58,7 @@
 	@media screen and ( max-width: 1060px ) {
 		.progress__tree {
 			flex: 0 0 253px;
+			height: 235px;
 		}
 
 		.tree__front {
@@ -59,14 +67,16 @@
 		}
 
 		.tree__white {
-			top: -15px;
-			margin-left: 126px;
+			height: 170px;
+			bottom: 32px;
+			left: 126px;
 			width: 126px;
 		}
 
 		.tree__green {
 			width: 253px;
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/06/Tree-colored-small.png' ) no-repeat 126px 30px;
+			top: 32px;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/06/Tree-colored-small.png' ) no-repeat 126px 0px;
 		}
 
 		.missing__text {
@@ -82,12 +92,21 @@
 	}
 
 	@media screen and ( max-width: 960px ) {
+		.progress__tree {
+			height: 204px;
+		}
+
+		.tree__white {
+			bottom: 16px;
+		}
+
 		.tree__front {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Tree-cut-small.png' ) no-repeat center;
 		}
 
 		.tree__green {
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/06/Tree-colored-small.png' ) no-repeat 126px 18px;
+			top: 17px;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/06/Tree-colored-small.png' ) no-repeat 126px 0px;
 		}
 	}
 }
