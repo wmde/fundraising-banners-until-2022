@@ -23,7 +23,7 @@ function ProgressTree( GlobalBannerSettings, campaignProjection, options ) {
 }
 
 ProgressTree.prototype.animate = function () {
-	var donationFillElement = $( '.tree__white' ),
+	var donationFillElement = $( '.tree__fill' ),
 		donationValueElement = $( '.js-donation_value' ),
 		remainingValueElement = $( '.js-value_remaining' ),
 		donationTarget, donationsCollected, donationsRemaining;
@@ -68,7 +68,7 @@ ProgressTree.prototype.animate = function () {
  * @return {string} Min space in pixel or fill space in percent
  */
 ProgressTree.prototype.getSpaceToFill = function ( donationsCollected, donationsTarget, containerSpace ) {
-	var spaceToFill = ( donationsCollected / donationsTarget ) * 100,
+	var spaceToFill = 100 - ( donationsCollected / donationsTarget ) * 100,
 		barFilled = containerSpace * ( donationsCollected / donationsTarget );
 	return barFilled > this.options.minSpace ? spaceToFill + '%' : this.options.minSpace + 'px';
 };
