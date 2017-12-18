@@ -27,7 +27,8 @@ const campaignDaySentence = new CampaignDaySentence(
 		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 	),
-	LANGUAGE
+	LANGUAGE,
+	14
 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
