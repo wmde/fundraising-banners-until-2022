@@ -68,6 +68,7 @@ $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
+	remainingDays: campaignDays.getNumberOfDaysUntilCampaignEnd(),
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
