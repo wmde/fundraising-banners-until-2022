@@ -1,9 +1,9 @@
-require( './css/styles.pcss' );
+// require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -91,32 +91,32 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 }
