@@ -1,4 +1,4 @@
-// require( './css/styles.pcss' );
+require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -50,8 +50,6 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-// const bannerTemplate = require( './templates/banner_html.hbs' );
-// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
@@ -61,6 +59,7 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+const animateHighlight = require( '../shared/animate_highlight' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextInnerLeft = [
@@ -218,6 +217,7 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlighted-character', 10 ); }, 4000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
