@@ -94,18 +94,18 @@ tracking = "org-09-171006-var"
 
 # English Campaign
 [english]
-campaign_tracking = "en02-ba-171127"
+campaign_tracking = "en03-ba-171218"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B17WMDE_en02_171127_ctrl"
-tracking = "org-en02-171127-ctrl"
+pagename = "B17WMDE_en03_171218_ctrl"
+tracking = "org-en03-171218-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B17WMDE_en02_171127_var"
-tracking = "org-en02-171127-var"
+pagename = "B17WMDE_en03_171218_var"
+tracking = "org-en03-171218-var"
 
 
 [enwiki-default]
