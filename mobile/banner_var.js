@@ -15,20 +15,18 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 import TrackingEvents from '../shared/tracking_events';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
-import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
+import DayName from '../shared/day_name';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDaySentence = new CampaignDaySentence(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
-	LANGUAGE
+const campaignDays = new CampaignDays(
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 14 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -60,7 +58,14 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {} );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -87,34 +92,11 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
 } );
 
-function getTrackingParameters() {
-	return '?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName;
-}
-
-function setTrackAndRedirect() {
-	$( '#frbanner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/add' + getTrackingParameters() );
-	$( '#track-and-redirect' ).val( '1' );
-	$( '#address_type' ).val( 'anonym' );
-}
-
-function unsetTrackAndRedirect() {
-	$( '#frbanner-form' ).attr( 'action', 'https://spenden.wikimedia.de/donation/new' + getTrackingParameters() );
-	$( '#track-and-redirect' ).val( '' );
-	$( '#address_type' ).val( 'person' );
-}
-
 $( '.button-group__container button' ).click( function ( event ) {
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
-
-		if ( [ 'SUB', 'MCP', 'PPL' ].indexOf( $( event.target ).data( 'payment-type' ) ) > -1 ) {
-			setTrackAndRedirect();
-		} else {
-			unsetTrackAndRedirect();
-		}
-
 		return true;
 	}
 
