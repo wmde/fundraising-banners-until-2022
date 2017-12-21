@@ -1,9 +1,9 @@
-// require( './css/styles.pcss' );
+require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-require( './css/styles_var.pcss' );
+// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -29,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -59,8 +59,15 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
-const ProgressTree = require( '../shared/progress_tree/progress_tree' );
-const progressTree = new ProgressTree( GlobalBannerSettings, campaignProjection, {} );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -68,11 +75,10 @@ $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
-	remainingDays: campaignDays.getNumberOfDaysUntilCampaignEnd(),
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressTree: progressTree.render()
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -83,44 +89,32 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
+		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
+		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 }
@@ -129,8 +123,9 @@ function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
-		// $( '#amount-other-input' ).val( '' );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
+		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
+		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
@@ -162,11 +157,8 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
-$( '#WMDE_Banner-form' ).on( 'submit', function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
-	}
+$( '.WMDE-Banner-submit button' ).click( function () {
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
@@ -223,7 +215,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressTree.animate(); }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -281,135 +273,6 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 } );
 
 // END Banner close functions
-
-// BEGIN Presents code
-
-function resetPresents() {
-	$( '#WMDE_Banner' ).find( '.present' ).each( function () {
-		var $present = $( this ),
-			$input = $present.find( 'input' );
-
-		$present.removeClass( 'active' );
-		$present.find( '.present__amount' ).text(
-			Number( $input.attr( 'step' ) ) + ' €'
-		);
-		$input.val( 0 );
-	} );
-}
-
-function increasePresentAmount( $present ) {
-	var $input = $present.find( 'input' ),
-		$otherAmount = $( '#amount-other-input' ),
-		stepSize = Number( $input.attr( 'step' ) ),
-		newPresentAmount = Number( $input.val() ) + stepSize;
-
-	$input.val( newPresentAmount );
-	$otherAmount.val( Number( $otherAmount.val() ) + stepSize );
-
-	if ( newPresentAmount > stepSize ) {
-		$present.find( '.present__amount' ).text( newPresentAmount + ' €' );
-	}
-
-	$present.addClass( 'active' );
-}
-
-function decreasePresentAmount( $present ) {
-	var $input = $present.find( 'input' ),
-		$otherAmount = $( '#amount-other-input' ),
-		stepSize = Number( $input.attr( 'step' ) ),
-		newPresentAmount = Number( $input.val() ) - stepSize,
-		newOtherAmount = Number( $otherAmount.val() ) - stepSize;
-
-	if ( newPresentAmount < 0 ) {
-		return;
-	}
-
-	if ( newOtherAmount < 0 ) {
-		resetPresents();
-		$otherAmount.val( '' );
-		return;
-	}
-
-	$input.val( newPresentAmount );
-	$otherAmount.val( newOtherAmount );
-
-	if ( newPresentAmount >= stepSize ) {
-		$present.find( '.present__amount' ).text( newPresentAmount + ' €' );
-	}
-
-	if ( newPresentAmount === 0 ) {
-		$present.removeClass( 'active' );
-	}
-}
-
-$( function () {
-	var $presents = $( '#WMDE_Banner' ).find( '.presents' ),
-		$presentsHoverGroup = $presents.find( '.present_image, .present_button' );
-
-	$presentsHoverGroup.on( 'mouseenter', function () {
-		$( this ).parent().addClass( 'hovered' );
-	} );
-
-	$presentsHoverGroup.on( 'mouseleave', function () {
-		$( this ).parent().removeClass( 'hovered' );
-	} );
-
-	$presents.find( '.present_image' ).click( function () {
-		increasePresentAmount( $( this ).parent() );
-	} );
-
-	$presents.find( '.increase__amount' ).click( function () {
-		increasePresentAmount( $( this ).parent().parent() );
-	} );
-
-	$presents.find( '.reduce__amount' ).click( function () {
-		decreasePresentAmount( $( this ).parent().parent() );
-	} );
-} );
-
-// END Presents code
-
-// BEGIN tree banner viewport code
-
-// get window width compatible with CSS media queries
-function getAccurateWindowWidth() {
-	return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-}
-
-const smallScreenSize = 960; // this is 15px less from the CSS probably related to the scrollbar size
-var	smallScreenMode = getAccurateWindowWidth() <= smallScreenSize;
-function sizeOtherAmountFromScreenWidth( screenWidth ) {
-	if ( screenWidth > smallScreenSize ) {
-		$( '#amount-other-input' ).attr( 'placeholder', 'Betrag eingeben' )
-			.parent().removeClass( 'select-group__option--thirdwidth select-group__custom--small' )
-			.addClass( 'select-group__option--fullwidth select-group__custom--big' );
-		smallScreenMode = false;
-	}
-	if ( screenWidth <= smallScreenSize ) {
-		$( '#amount-other-input' ).attr( 'placeholder', 'anderes' )
-			.parent().addClass( 'select-group__option--thirdwidth select-group__custom--small' )
-			.removeClass( 'select-group__option--fullwidth select-group__custom--big' );
-		smallScreenMode = true;
-	}
-}
-
-$( function () {
-// init other amount button size
-	sizeOtherAmountFromScreenWidth( $( window ).width() );
-
-	$( window ).resize( function () {
-		var newScreenSize = getAccurateWindowWidth();
-
-		if ( newScreenSize > 960 && !smallScreenMode ||
-			newScreenSize <= 960 && smallScreenMode ) {
-			return;
-		}
-
-		sizeOtherAmountFromScreenWidth( newScreenSize );
-	} );
-} );
-
-// END tree banner viewport code
 
 // Display banner on load
 $( function () {
