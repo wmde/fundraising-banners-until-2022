@@ -1,4 +1,4 @@
-require( './css/styles.pcss' );
+// require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -22,11 +22,6 @@ import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
-const Handlebars = require( 'handlebars/runtime' );
-Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-} );
-
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
@@ -34,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -45,8 +40,7 @@ const campaignProjection = new CampaignProjection(
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
 		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
-		goalDonationSum: GlobalBannerSettings.goalSum
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
 	}
 );
 const formatNumber = require( 'format-number' );
@@ -55,6 +49,7 @@ const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
@@ -65,131 +60,32 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft,
-	modifier: 'progress_bar--lateprogress'
+	textRight: '',
+	textInnerRight: 'Geschafft: <span class="js-donation_value">0,0</span> Mio. Euro'
 } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
+	remainingDays: campaignDays.getNumberOfDaysUntilCampaignEnd(),
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressBar: progressBar.render()
+	progressBar: progressBar.render(),
+	numberOfNewMembersLastYear: 'xx.xxx'
 } ) );
-
-// BEGIN form init code
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
-function setupValidationEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
-	} );
-}
-
-function setupAmountEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
-		$( '#amount-other-input' ).val( '' );
-		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
-}
-
-function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
-	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
-		return false;
-	}
-	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
-	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
-	return true;
-}
-
-function validateForm() {
-	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
-}
-
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+$( '.expand_button' ).on( 'click', function ( e ) {
+	e.preventDefault();
+	$( 'div#WMDE_Banner .banner' ).toggleClass( 'expanded' );
+	addSpaceInstantly();
 } );
-
-/* Convert browser events to custom events */
-$( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
-	$( this ).trigger( 'amount:selected' );
-} );
-
-$( '#amount-other-input' ).change( function () {
-	$( this ).trigger( 'amount:custom' );
-} );
-
-$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
-	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
-} );
-
-BannerFunctions.initializeBannerEvents();
-
-// END form init code
 
 function addSpace() {
 	var $bannerElement = $( 'div#WMDE_Banner' );
@@ -200,12 +96,12 @@ function addSpace() {
 	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
-function addSpaceInstantly( $bannerElement ) {
-	if ( !$bannerElement.is( ':visible' ) ) {
+function addSpaceInstantly() {
+	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
@@ -216,17 +112,15 @@ function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
 
-	setupValidationEventHandling();
-	setupAmountEventHandling();
-
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
-		addSpaceInstantly( bannerElement );
+		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
 }
@@ -280,12 +174,9 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 	removeBannerSpace();
 } );
 
-// END Banner close functions
-
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' ),
-		$instantBanner = $( '#WMDE_InstantBanner' );
+	var $bannerElement = $( '#WMDE_Banner' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -302,10 +193,6 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		$instantBanner.height( $bannerElement.height() );
-		$instantBanner.show();
-		addSpaceInstantly( $instantBanner );
-		setTimeout( function () { progressBar.animate(); }, 1000 );
 		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
