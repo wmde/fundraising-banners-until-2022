@@ -22,6 +22,11 @@ import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
@@ -49,7 +54,6 @@ const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
-const weekdayPrepPhraseCapitalized = weekdayPrepPhrase.charAt( 0 ).toUpperCase() + weekdayPrepPhrase.slice( 1 );
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
@@ -78,7 +82,6 @@ $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
-	weekdayPrepPhraseCapitalized: weekdayPrepPhraseCapitalized,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
