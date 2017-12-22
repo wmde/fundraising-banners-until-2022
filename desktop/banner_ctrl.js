@@ -19,6 +19,11 @@ import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
