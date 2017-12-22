@@ -1,0 +1,13 @@
+.close {
+	position: absolute;
+	width: 18px;
+	margin: 0.25em 0.25em 0.25em 0;
+	top: 0;
+	right: 0;
+	flex: auto;
+}
+
+.close img {
+	width: 14px;
+	height: 14px;
+}

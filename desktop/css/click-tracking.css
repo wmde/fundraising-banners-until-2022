@@ -1,0 +1,9 @@
+.click-tracking {
+	display: none;
+}
+
+.click-tracking__pixel {
+	height: 0;
+	width: 0;
+	border: 0 none;
+}

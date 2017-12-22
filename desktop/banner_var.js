@@ -59,8 +59,11 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
-const ProgressTree = require( '../shared/progress_tree/progress_tree' );
-const progressTree = new ProgressTree( GlobalBannerSettings, campaignProjection, {} );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
+	textRight: '',
+	textInnerRight: 'Geschafft: <span class="js-donation_value">0,0</span> Mio. Euro'
+} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -72,123 +75,17 @@ $bannerContainer.html( bannerTemplate( {
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressTree: progressTree.render()
+	progressBar: progressBar.render(),
+	numberOfNewMembersLastYear: 'xx.xxx'
 } ) );
-
-// BEGIN form init code
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
-function setupValidationEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
-		if ( $( '.select-group--with-error' ).length === 0 ) {
-			$( '#WMDE_Banner-form' ).removeClass( 'form--with-error' );
-		}
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
-		$( '#WMDE_Banner-form' ).addClass( 'form--with-error' );
-		addSpaceInstantly();
-	} );
-}
-
-function setupAmountEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
-		// $( '#amount-other-input' ).val( '' );
-		$( '#WMDE_Banner' ).trigger( 'validation:amount:ok' );
-	} );
-
-	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
-}
-
-function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
-	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
-		return false;
-	}
-	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
-	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
-	return true;
-}
-
-function validateForm() {
-	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
-}
-
-$( '#WMDE_Banner-form' ).on( 'submit', function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
-	}
+$( '.expand_button' ).on( 'click', function ( e ) {
+	e.preventDefault();
+	$( 'div#WMDE_Banner .banner' ).toggleClass( 'expanded' );
+	addSpaceInstantly();
 } );
-
-/* Convert browser events to custom events */
-$( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
-	$( this ).trigger( 'amount:selected' );
-} );
-
-$( '#amount-other-input' ).change( function () {
-	$( this ).trigger( 'amount:custom' );
-} );
-
-$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
-	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
-} );
-
-BannerFunctions.initializeBannerEvents();
-
-// END form init code
 
 function addSpace() {
 	var $bannerElement = $( 'div#WMDE_Banner' );
@@ -215,15 +112,12 @@ function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
 
-	setupValidationEventHandling();
-	setupAmountEventHandling();
-
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressTree.animate(); }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -279,137 +173,6 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 	$( '#WMDE_Banner' ).hide();
 	removeBannerSpace();
 } );
-
-// END Banner close functions
-
-// BEGIN Presents code
-
-function resetPresents() {
-	$( '#WMDE_Banner' ).find( '.present' ).each( function () {
-		var $present = $( this ),
-			$input = $present.find( 'input' );
-
-		$present.removeClass( 'active' );
-		$present.find( '.present__amount' ).text(
-			Number( $input.attr( 'step' ) ) + ' €'
-		);
-		$input.val( 0 );
-	} );
-}
-
-function increasePresentAmount( $present ) {
-	var $input = $present.find( 'input' ),
-		$otherAmount = $( '#amount-other-input' ),
-		stepSize = Number( $input.attr( 'step' ) ),
-		newPresentAmount = Number( $input.val() ) + stepSize;
-
-	$input.val( newPresentAmount );
-	$otherAmount.val( Number( $otherAmount.val() ) + stepSize );
-
-	if ( newPresentAmount > stepSize ) {
-		$present.find( '.present__amount' ).text( newPresentAmount + ' €' );
-	}
-
-	$present.addClass( 'active' );
-}
-
-function decreasePresentAmount( $present ) {
-	var $input = $present.find( 'input' ),
-		$otherAmount = $( '#amount-other-input' ),
-		stepSize = Number( $input.attr( 'step' ) ),
-		newPresentAmount = Number( $input.val() ) - stepSize,
-		newOtherAmount = Number( $otherAmount.val() ) - stepSize;
-
-	if ( newPresentAmount < 0 ) {
-		return;
-	}
-
-	if ( newOtherAmount < 0 ) {
-		resetPresents();
-		$otherAmount.val( '' );
-		return;
-	}
-
-	$input.val( newPresentAmount );
-	$otherAmount.val( newOtherAmount );
-
-	if ( newPresentAmount >= stepSize ) {
-		$present.find( '.present__amount' ).text( newPresentAmount + ' €' );
-	}
-
-	if ( newPresentAmount === 0 ) {
-		$present.removeClass( 'active' );
-	}
-}
-
-$( function () {
-	var $presents = $( '#WMDE_Banner' ).find( '.presents' ),
-		$presentsHoverGroup = $presents.find( '.present_image, .present_button' );
-
-	$presentsHoverGroup.on( 'mouseenter', function () {
-		$( this ).parent().addClass( 'hovered' );
-	} );
-
-	$presentsHoverGroup.on( 'mouseleave', function () {
-		$( this ).parent().removeClass( 'hovered' );
-	} );
-
-	$presents.find( '.present_image' ).click( function () {
-		increasePresentAmount( $( this ).parent() );
-	} );
-
-	$presents.find( '.increase__amount' ).click( function () {
-		increasePresentAmount( $( this ).parent().parent() );
-	} );
-
-	$presents.find( '.reduce__amount' ).click( function () {
-		decreasePresentAmount( $( this ).parent().parent() );
-	} );
-} );
-
-// END Presents code
-
-// BEGIN tree banner viewport code
-
-// get window width compatible with CSS media queries
-function getAccurateWindowWidth() {
-	return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-}
-
-const smallScreenSize = 960; // this is 15px less from the CSS probably related to the scrollbar size
-var	smallScreenMode = getAccurateWindowWidth() <= smallScreenSize;
-function sizeOtherAmountFromScreenWidth( screenWidth ) {
-	if ( screenWidth > smallScreenSize ) {
-		$( '#amount-other-input' ).attr( 'placeholder', 'Betrag eingeben' )
-			.parent().removeClass( 'select-group__option--thirdwidth select-group__custom--small' )
-			.addClass( 'select-group__option--fullwidth select-group__custom--big' );
-		smallScreenMode = false;
-	}
-	if ( screenWidth <= smallScreenSize ) {
-		$( '#amount-other-input' ).attr( 'placeholder', 'anderes' )
-			.parent().addClass( 'select-group__option--thirdwidth select-group__custom--small' )
-			.removeClass( 'select-group__option--fullwidth select-group__custom--big' );
-		smallScreenMode = true;
-	}
-}
-
-$( function () {
-// init other amount button size
-	sizeOtherAmountFromScreenWidth( $( window ).width() );
-
-	$( window ).resize( function () {
-		var newScreenSize = getAccurateWindowWidth();
-
-		if ( newScreenSize > 960 && !smallScreenMode ||
-			newScreenSize <= 960 && smallScreenMode ) {
-			return;
-		}
-
-		sizeOtherAmountFromScreenWidth( newScreenSize );
-	} );
-} );
-
-// END tree banner viewport code
 
 // Display banner on load
 $( function () {

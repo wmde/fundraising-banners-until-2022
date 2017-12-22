@@ -17,56 +17,30 @@
 	z-index: 10000;
 	font-size: 16px;
 
-	.banner {
-		height: 247px;
-		display: flex;
-
-		font-family: 'Liberation Sans', 'Arial', 'Helvetica', 'Verdana', sans-serif;
-		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
-		background-color: #ffffff;
+	.progress_bar__donation_fill {
+		height: 40px;
+		background-color: #009ee0;
 	}
 
-	.infobox {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex: 0 1 45%;
+	.progress_bar__donation_text {
+		line-height: 40px;
+		font-family: 'Helvetica', 'Verdana', sans-serif;
+		font-size: 16px;
+	}
 
-		border: 0 none;
-		border-radius: 0;
-		background: #dce4e7;
-		padding: 0;
+	.progress_bar__wrapper {
+		border: 3px solid #ffffff;
 		margin: 0;
-
-	}
-
-	.infobox__text {
-		color: #98b414;
-		font-size: 1.05em;
-		line-height: 1.2em;
-		text-align: left;
-		margin: 0 1em 0.5em 1em;
-	}
-
-	.text__headline {
-		margin: 0.2em 0;
-	}
-
-	.text__headline:nth-of-type( 1 ) {
-		margin-top: 35px;
-	}
-
-	.text__headline:nth-of-type( 2 ) {
-		margin: 20px 0 0 10px;
-	}
-
-	.text__headline:nth-of-type( 3 ) {
-		margin: 20px 10px 0 0;
-		text-align: right;
 	}
 
 	.text__paragraph {
-		margin: 0;
+		margin-bottom: 20px;
+		line-height: 120%;
+	}
+
+	.text__paragraph--listintro,
+	.text__paragraph--closing {
+		margin-bottom: 0;
 	}
 
 	.text__headline--bold,
@@ -79,200 +53,116 @@
 		font-style: italic;
 	}
 
-	.text__paragraph .text__highlight {
-		border-bottom: solid 3px #990000;
-		padding: 0 0.1em;
-		background: transparent;
-		font-weight: bold;
-	}
+	.banner {
+		font-family: 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #0065a4;
 
-	/* This is for keeping the same banner size when testing different banner texts.
-	The placeholder text element should contain the text that was removed.
-	*/
-	.text__hidden-placeholder {
-		visibility: hidden;
-	}
-
-	.infobox__footer {
-		padding: 0.025em 0 0 2em;
-		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.1em/18px 18px;
-	}
-
-	.footer {
 		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
+		flex-direction: column;
 
-		font-size: 0.8em;
-		line-height: 1.6em;
+		.teaser {
+			background-color: #dce4e8;
+			margin: 10px 10px 20px 10px;
+			padding: 20px 20px 0 20px;
+			height: 180px;
+			position: relative;
+
+			.infobox__text {
+				color: #000000;
+				font-size: 16px;
+				line-height: 1.2em;
+				text-align: left;
+				padding-top: 10px;
+
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+
+				.text__paragraph {
+					flex: 1 1 auto;
+					width: 50%;
+					padding: 0 20px;
+				}
+			}
+
+			.expand_button {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				right: 1.5em;
+
+				color: #ffffff;
+				font-family: 'Helvetica', 'Verdana', sans-serif;
+				font-size: 16px;
+				background-color: #0065a4;
+				line-height: 60px;
+				height: 60px;
+				width: 215px;
+				text-align: center;
+			}
+		}
+
+		.expand_button__text--collapsed {
+			display: inline;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/6/68/Triangle_Down.svg' ) no-repeat right 0 center;
+			background-size: 28px 18px;
+			padding-right: 30px;
+		}
+
+		.expand_button__text--expanded {
+			display: none;
+		}
+
+		.beef {
+			display: none;
+		}
+
 	}
 
-	.footer__info {
-		text-transform: uppercase;
-	}
+	.banner.expanded {
 
-	.footer__item span {
-		margin-right: 0.5em;
-	}
+		.expand_button__text--collapsed {
+			display: none;
+		}
 
-	.footer__importantinfo {
-		font-weight: bold;
-	}
+		.expand_button__text--expanded {
+			display: inline;
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Triangle_Up.svg' ) no-repeat right 0 center;
+			background-size: 28px 18px;
+			padding-right: 30px;
+		}
 
-	.footer__item {
-		color: #636466;
-		white-space: nowrap;
-	}
+		.beef {
+			display: flex;
+			margin: 15px 30px 20px 30px;
+			color: #ffffff;
 
-	.footer__item--rightflex {
-		flex-grow: 1;
-		text-align: right;
-	}
+			.beef__column {
+				flex: 1 1 auto;
+				width: 50%;
+				margin-bottom: 20px;
+				padding: 0 20px;
 
-	.application-of-funds-link {
-		color: #636466;
-	}
+				.feature_list {
+					margin-bottom: 20px;
+				}
 
-	/* Form styling */
-
-	.form {
-		position: relative;
-		flex: 0 0 250px;
-		padding: 0.5em 0 0 0.5em;
-		margin: 0 0.5em 0 0;
-	}
-
-	.select-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em 0.5em 0.5em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 1 100%;
-		font-size: 0.9em;
-		font-weight: bold;
-	}
-
-	.select-group--with-error {
-		background: #fee7e6;
-		border: 1px solid #dd3334;
-	}
-
-	.select-group__errormessage {
-		display: none; /* Message will be shown by JS code */
-		color: #ffffff;
-		font-weight: bold;
-		text-align: center;
-		width: 100%;
-		margin-bottom: 0.2em;
-		font-size: 0.74em;
-	}
-
-	.select-group__input {
-		display: none;
-	}
-
-	.select-group__custom-input {
-		padding: 0.4em;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		font-size: 0.74em;
-		text-align: center;
-		border: 1px solid #9aa0a7;
-		border-radius: 4px;
-		box-sizing: border-box;
-	}
-
-	.select-group__option {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0;
-		box-sizing: border-box;
-		display: block;
-	}
-
-	.select-group__option--fullwidth {
-		width: 100%;
-	}
-
-	.select-group__option--halfwidth {
-		width: 50%;
-	}
-
-	.select-group__option--quarterwidth {
-		width: 25%;
-	}
-
-	.select-group__option--biggertext {
-		font-size: 1em;
-	}
-
-	.select-group__state {
-		display: block;
-		color: #000000;
-		background: #f8f9fa;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.1em 0;
-		line-height: 2em;
-		cursor: pointer;
-		text-align: center;
-		font-size: 0.8em;
-		box-sizing: border-box;
-	}
-
-	.select-group__input:checked + .select-group__state {
-		color: #98b414;
-		background: #ffffff;
-		border: 1px solid #98b414;
-		outline: 2px solid #98b414;
-		border-radius: 0;
-	}
-
-	.button-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 1 100%;
-	}
-
-	.button-group__button {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0 -1px 0 -1px;
-		box-sizing: border-box;
-		display: block;
-		cursor: pointer;
-		/* Override browser defaults */
-		border: 0 none;
-		background: transparent;
-		font-size: inherit;
-	}
-
-	.button-group__button--halfwidth {
-		width: 50%;
-	}
-
-	.button-group__label {
-		display: block;
-		color: #ffffff;
-		background: #98b414;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.1em 0;
-		line-height: 2em;
-		font-size: 0.7em;
-		font-weight: bold;
-		text-align: center;
-		box-sizing: border-box;
+				.become_member__button {
+					display: inline-block;
+					width: 280px;
+					height: 40px;
+					line-height: 40px;
+					background-color: #009ee0;
+					color: #ffffff;
+					font-family: 'Helvetica', 'Verdana', sans-serif;
+					font-size: 16px;
+					font-weight: bold;
+					text-align: center;
+					margin: 20px 0;
+				}
+			}
+		}
 	}
 
 	.close {
@@ -299,221 +189,7 @@
 		border: 0 none;
 	}
 
-	.progress_bar__days_left {
-		display: none;
-	}
-
-	.infobox__footer,
-	.form__footer {
-		font-size: 14px;
-		background: transparent;
-		padding: 0 0.3em 0.3em 0.9em;
-	}
-
-	.form__footer {
-		position: absolute;
-		bottom: 0;
-		right: 9px;
-	}
-
-	.presents {
-		flex: 1 0 190px;
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-
-		.presents__secoundrow {
-			display: flex;
-		}
-
-		.present_image {
-			cursor: pointer;
-			margin: auto;
-		}
-
-		.present_button {
-			display: flex;
-			width: 75px;
-			height: 25px;
-			line-height: 25px;
-			margin: 5px auto;
-			background: #d1d8de;
-			color: #ffffff;
-			text-align: center;
-			font-size: 0.8em;
-			font-weight: bold;
-			cursor: pointer;
-
-			input {
-				display: none;
-			}
-
-			.present__amount,
-			.reduce__amount,
-			.increase__amount {
-				display: inline-block;
-				height: 25px;
-			}
-
-			.reduce__amount {
-				margin-right: auto;
-				width: 18px;
-				background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/93/Minus_im_Kreis.png' ) no-repeat  center;
-				opacity: 0;
-			}
-
-			.increase__amount {
-				margin-left: auto;
-				width: 18px;
-				background: url( 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Plus_im_Kreis.png' ) no-repeat  center;
-			}
-		}
-	}
-
-	.present {
-		text-align: center;
-	}
-
-	.present.active {
-		.reduce__amount {
-			opacity: 1;
-		}
-		.present_button {
-			background: #98b414;
-		}
-	}
-
-	.present.hovered {
-		.present_button {
-			background: #98b414;
-		}
-	}
-
-	.present__small {
-		flex: 1 0 95px;
-		margin-top: 20px;
-		.present_image {
-			width: 35px;
-			height: 40px;
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/6/68/5%E2%82%AC-Box-grey.png' ) no-repeat center;
-		}
-	}
-
-	.present__medium {
-		width: 100%;
-		margin-top: 25px;
-		.present_image {
-			width: 41px;
-			height: 46px;
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/e/e7/20%E2%82%AC-Box-grey.png' ) no-repeat  center;
-		}
-	}
-
-	.present__large {
-		flex: 1 0 95px;
-		margin-top: 25px;
-		.present_image {
-			width: 54px;
-			height: 60px;
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/a2/100%E2%82%AC-Box-grey.png' ) no-repeat  center;
-		}
-	}
-
-	.present__small.hovered,
-	.present__small.active {
-		.present_image {
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/1/1b/5%E2%82%AC-Box-col.png' ) no-repeat center;
-		}
-	}
-
-	.present__medium.hovered,
-	.present__medium.active {
-		.present_image {
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/de/20%E2%82%AC-Box-col.png' ) no-repeat center;
-		}
-	}
-
-	.present__large.hovered,
-	.present__large.active {
-		.present_image {
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/100%E2%82%AC-Box-col.png' ) no-repeat center;
-		}
-	}
-
-	.form__text {
-		color: #98b414;
-		text-align: center;
-		font-weight: bold;
-		font-size: 0.8em;
-		padding: 0 0.5em 0 0.5em;
-
-		p {
-			margin: 0 0 0.2em 0;
-		}
-	}
-
-	.WMDE-Banner-amounts,
-	.WMDE-Banner-frequency,
-	.WMDE-Banner-payment-type {
-		padding: 0.1em 0.5em 0.1em 0.5em;
-		margin: 0 0 0.1em 0;
-	}
-
-	.WMDE-Banner-amounts {
-		text-align: center;
-	}
-
-	.select-group__option--thirdwidth {
-		width: 33%;
-	}
-
-	.select-group__option__custom-input {
-		width: 100%;
-	}
-
-	.select-group__custom--big .select-group__custom-input {
-		margin: auto;
-		width: 75%;
-		border-top: 0;
-		border-right: 0;
-		border-left: 0;
-		color: #98b414;
-		font-weight: bold;
-		font-size: 1em;
-	}
-
-	.select-group__custom--big:after {
-		font-size: 0.9em;
-		color: #98b414;
-		content: '€';
-	}
-
-	.select-group__custom-input::placeholder {
-		color: #000000;
-		font-size: 0.8em;
-		font-weight: normal;
-		font-style: italic;
-	}
-
-	.form--with-error {
-		.form__text-middle {
-			display: none;
-		}
-
-		.select-group__errormessage {
-			color: #dd3334;
-			font-size: 0.7em;
-		}
-	}
-
-	#amount_label_1,
-	#amount_label_2,
-	#amount_label_3,
-	#amount_label_4,
-	#amount_label_5 {
-		display: none;
-	}
-
+	/*
 	@media screen and ( min-width: 1440px ) {
 		.infobox__text {
 			font-size: 1.2em;
@@ -543,10 +219,6 @@
 		.infobox__text {
 			font-size: 0.95em;
 		}
-
-		.infobox__footer .footer {
-			line-height: 1.4em;
-		}
 	}
 
 	@media screen and ( max-width: 960px ) {
@@ -567,49 +239,12 @@
 			line-height: inherit;
 		}
 
-		.presents {
-			display: none;
-		}
-
-		.form {
-			padding: 0.5em 0 0 0.5em;
-		}
-
-		.form__text {
-			padding: 0 0.5em 0.3em 0.5em;
-		}
-
-		.form__text-middle {
-			display: none;
-		}
-
-		.form--with-error {
-			.form__text-top {
-				display: none;
-			}
-		}
-
-		.select-group__state {
-			line-height: 1.7em;
-		}
-
-		#amount_label_1,
-		#amount_label_2,
-		#amount_label_3,
-		#amount_label_4,
-		#amount_label_5 {
-			display: block;
-		}
 	}
 
 	@media screen and ( max-width: 750px ) {
 		.infobox {
 			flex: 1 1 55%;
 		}
-
-		.progress__tree {
-			display: none;
-		}
 	}
-
+	*/
 }
