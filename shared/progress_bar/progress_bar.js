@@ -4,7 +4,7 @@ require( './style.pcss' );
  * Display a progress bar
  *
  * Next refactoring steps:
- * - Set "--lateprogress" modifier depending on the space the "inner" element would need vs the remaining free
+ * - Set "--lateprogress" modifier automatically depending on the space the "inner" element would need vs the remaining free
  *      space inside the progress bar.
  * - Use campaign_days.js from https://github.com/wmde/fundraising-banners/pull/27 to calculate remaining days
  * - Convert to ES2015 class
@@ -19,6 +19,7 @@ function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 	this.campaignProjection = campaignProjection;
 	this.options = Object.assign( {
 		minWidth: 90,
+		modifier: '',
 		textRight: 'es fehlen <span class="js-value_remaining">1,2</span> Mio. €',
 		textInnerLeft: ''
 	}, options || {} );
@@ -96,7 +97,8 @@ ProgressBar.prototype.render = function () {
 	return template( {
 		'text-inner-right': '<span class="js-donation_value">0,0</span> Mio. €',
 		'text-inner-left': this.options.textInnerLeft,
-		'text-right': this.options.textRight
+		'text-right': this.options.textRight,
+		'modifier': this.options.modifier
 	} );
 };
 
