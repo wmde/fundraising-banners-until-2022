@@ -72,7 +72,8 @@ const progressBarTextInnerLeft = [
 const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
 	textInnerLeft: progressBarTextInnerLeft,
-	textRight: progressBarTextRight
+	textRight: progressBarTextRight,
+	modifier: 'progress_bar--lateprogress'
 } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
