@@ -65,7 +65,8 @@ const progressBarTextInnerLeft = [
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft
+	textInnerLeft: progressBarTextInnerLeft,
+	modifier: 'progress_bar--lateprogress'
 } );
 
 $bannerContainer.html( bannerTemplate( {
