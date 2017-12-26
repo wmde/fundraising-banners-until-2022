@@ -3,8 +3,8 @@ module.exports = {
 	'donations-date-base': '2017-11-10',
 	'donations-collected-base': 0,
 	'donators-base': 0,
-	'appr-donations-per-minute': 106,
-	'appr-donators-per-minute': 4.96,
+	'appr-donations-per-minute': 103,
+	'appr-donators-per-minute': 4.705,
 	'milion-impressions-per-day': 6, /** @deprecated kept for legacy reasons */
 	'impressions-per-day-in-million': 6,
 	'allBannersCookie': 'banner_impression_count',
