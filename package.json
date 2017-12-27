@@ -36,6 +36,7 @@
     "minimatch": "^3.0.4",
     "mocha": "^3.5.0",
     "mocha-jsdom": "^1.1.0",
+    "postcss-inline-svg": "^3.0.0",
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.0",
     "sinon": "^4.0.1",
