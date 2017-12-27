@@ -17,10 +17,10 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
+import Translations from '../shared/messages/de';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
@@ -64,7 +64,10 @@ const progressBarTextInnerLeft = [
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
+	textInnerLeft: progressBarTextInnerLeft,
+	modifier: 'progress_bar--lateprogress'
+} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
