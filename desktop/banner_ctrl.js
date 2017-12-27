@@ -92,99 +92,6 @@ $bannerContainer.html( bannerTemplate( {
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
-function setupValidationEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-}
-
-function setupAmountEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
-		$( '#amount-other-input' ).val( '' );
-		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
-}
-
-function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
-	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
-		return false;
-	}
-	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
-	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
-	return true;
-}
-
-function validateForm() {
-	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
-}
-
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
-} );
-
-/* Convert browser events to custom events */
-$( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
-	$( this ).trigger( 'amount:selected' );
-} );
-
-$( '#amount-other-input' ).change( function () {
-	$( this ).trigger( 'amount:custom' );
-} );
-
-$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
-	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
-} );
-
 BannerFunctions.initializeBannerEvents();
 
 // END form init code
@@ -213,9 +120,6 @@ function removeBannerSpace() {
 function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
-
-	setupValidationEventHandling();
-	setupAmountEventHandling();
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
