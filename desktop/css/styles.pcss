@@ -19,17 +19,83 @@
 
 	.banner {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		font-size: 14px;
 		padding-bottom: 0.75em;
+		width: 100%;
 
 		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
 		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background-color: #ffffff;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Thank-you-2017-background-1200.svg' ) no-repeat;
+		background-position: top left;
+		background-size: cover;
 	}
 
-	.banner__content {
-		margin-top: 0.5em;
+	.thankyou-message {
+		flex: 1;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		padding: 40px 20px 20px 40px;
+		box-sizing: border-box;
+	}
+
+	.thankyou-message__image {
+		box-sizing: border-box;
+		padding-right: 30px;
+	}
+
+	.thankyou-message__image img {
+		width: 180px;
+	}
+
+	.thankyou-message__text {
+		flex: 1 1 50%;
+		font-size: 26px;
+		line-height: 32px;
+		font-weight: bold;
+		color: #ffffff;
+		box-sizing: border-box;
+	}
+
+	.thankyou-message__text--num-donors {
+		color: #2a0064;
+		border-bottom: solid 2px #2a0064;
+	}
+
+	.thankyou-message__call-to-action {
+		flex: 2;
+		padding-top: 20px;
+	}
+
+	.thankyou-message__call-to-action a {
+		color: #ffffff;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Thank-you-2017-button-thanks.svg' ) no-repeat;
+		font-size: 18px;
+		padding: 8px 16px 8px 46px;
+		position: relative;
+	}
+
+	.thankyou-message__call-to-action a:before {
+		transform: scaleY(-1);
+		content: '';
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/2/25/Thank-you-2017-icon-dankesbotschaft.svg' ) no-repeat;
+		background-size: 18px;
+		width: 45px;
+		height: 45px;
+		position: absolute;
+		display: block;
+		top: -20px;
+		left: 15px;
+	}
+
+	.thankyou-message__call-to-action a.showmessage:before {
+		transform: none;
+		top: 20px;
+	}
+
+	.author-message {
+		flex: 1;
 	}
 
 	.application-of-funds-link {
