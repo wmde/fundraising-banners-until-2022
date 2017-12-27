@@ -65,7 +65,10 @@ const progressBarTextInnerLeft = [
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
+	textInnerLeft: progressBarTextInnerLeft,
+	modifier: 'progress_bar--lateprogress'
+} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
