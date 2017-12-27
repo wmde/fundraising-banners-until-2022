@@ -76,7 +76,7 @@ $bannerContainer.html( bannerTemplate( {
 	CampaignName: CampaignName,
 	BannerName: BannerName,
 	progressBar: progressBar.render(),
-	numberOfNewMembersLastYear: 'xx.xxx'
+	numberOfNewMembersLastYear: '64.334' // @todo Update with real number, or add to projections
 } ) );
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
