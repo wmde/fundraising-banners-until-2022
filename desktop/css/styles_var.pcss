@@ -1,0 +1,345 @@
+#WMDE_Banner {
+
+	/**
+	 * GLOBAL RESET
+	 */
+	img {
+		border: 0 none;
+	}
+
+	/**
+	 * CUSTOM
+	 */
+
+	display: none;
+	width: 100%;
+	position: fixed;
+	z-index: 10000;
+	font-size: 16px;
+
+	.banner {
+		display: flex;
+
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #ffffff;
+	}
+
+	.infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 0 1 100%;
+
+		border: 0 none;
+		border-radius: 0;
+		background-color: #040931;
+		padding: 0.25em 0.5em 0.25em 0;
+		margin: 0;
+	}
+
+	.infobox__text {
+		color: #ffffff;
+		font-size: 1.05em;
+		line-height: 1.2em;
+		text-align: left;
+		margin: 0 0 0.5em 2em;
+	}
+
+	.text__headline {
+		margin: 0.2em 0;
+	}
+
+	.text__paragraph {
+		margin: 0;
+	}
+
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
+	}
+
+	.text__paragraph .text__highlight {
+		border: 0 none;
+		padding: 0 0.1em;
+		background: #ffdd5b;
+		font-weight: bold;
+		color: #000000;
+	}
+
+	/* This is for keeping the same banner size when testing different banner texts.
+	The placeholder text element should contain the text that was removed.
+	*/
+	.text__hidden-placeholder {
+		visibility: hidden;
+	}
+
+	.infobox__footer {
+		padding: 0.025em 0 0 2em;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/37/Information-icon-yellow.png' ) no-repeat left 0.5em top 0.1em/18px 18px;
+	}
+
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		font-size: 0.8em;
+		line-height: 1.6em;
+		color: #ffffff;
+	}
+
+	.footer__info {
+		text-transform: uppercase;
+	}
+
+	.footer__item span {
+		margin-right: 0.5em;
+	}
+
+	.footer__importantinfo {
+		font-weight: bold;
+	}
+
+	.footer__item {
+		white-space: nowrap;
+	}
+
+	.footer__item--rightflex {
+		flex-grow: 1;
+		text-align: right;
+	}
+
+	.application-of-funds-link {
+		color: #ffffff;
+	}
+
+	/* Form styling */
+
+	.form {
+		width: 16em;
+		min-width: 12em;
+		flex-shrink: 0;
+		padding: 1em 0 0 0.5em;
+		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
+	}
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 0.5em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+		font-size: 0.9em;
+		font-weight: bold;
+	}
+
+	.select-group--with-error {
+		background: #ffdd5b;
+	}
+
+	.select-group__errormessage {
+		display: none; /* Message will be shown by JS code */
+		color: #000000;
+		font-weight: bold;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.74em;
+	}
+
+	.select-group__input {
+		display: none;
+	}
+
+	.select-group__custom-input {
+		padding: 0.4em 1.4em 0.4em 0.4em;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		font-size: 0.8em;
+		font-weight: bold;
+		text-align: center;
+		border: 1px solid #9aa0a7;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.select-group__option {
+		flex: 1 1 auto;
+		padding: 0 0.3em 0.3em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+		position: relative;
+	}
+
+	.select-group__option--fullwidth {
+		width: 100%;
+	}
+
+	.select-group__option--halfwidth {
+		width: 50%;
+	}
+
+	.select-group__option--thirdwidth {
+		width: 33%;
+	}
+
+	.select-group__option--quarterwidth {
+		width: 25%;
+	}
+
+	.select-group__option--biggertext {
+		font-size: 1em;
+	}
+
+	.select-group__state {
+		display: block;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.1em 0;
+		line-height: 2em;
+		cursor: pointer;
+		text-align: center;
+		font-size: 0.8em;
+		box-sizing: border-box;
+	}
+
+	.select-group__custom-input + .select-group__state {
+		position: absolute;
+		top: 0;
+		right: 1em;
+		border-color: transparent;
+		background: transparent;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		color: #000000;
+		background: #f8f9fa;
+		border: 1px solid #2b8156;
+		outline: 2px solid #2b8156;
+		border-radius: 0;
+	}
+
+	.select-group__custom-input--value-entered {
+		border: 1px solid #2b8156;
+		outline: 2px solid #2b8156;
+		border-radius: 0;
+	}
+
+	.button-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+	}
+
+	.button-group__button {
+		flex: 1 1 auto;
+		padding: 0 0.3em 0.3em 0;
+		margin: 0 -1px 0 -1px;
+		box-sizing: border-box;
+		display: block;
+		cursor: pointer;
+		/* Override browser defaults */
+		border: 0 none;
+		background: transparent;
+		font-size: inherit;
+	}
+
+	.button-group__button--halfwidth {
+		width: 50%;
+	}
+
+	@media ( max-width: 1100px ) {
+		.button-group__button--halfwidth .button-group__label {
+			padding: 0.3em 0.1em;
+		}
+	}
+
+	@media ( max-width: 1100px ) {
+		.button-group__button--halfwidth {
+			width: 100%;
+		}
+	}
+
+	.button-group__label {
+		display: block;
+		color: #3366cc;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.1em 0;
+		line-height: 2em;
+		font-size: 0.7em;
+		font-weight: bold;
+		text-align: center;
+		box-sizing: border-box;
+	}
+
+	.close {
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: auto;
+		right: auto;
+		flex: 0 0 18px;
+	}
+
+	.click-tracking {
+		display: none;
+	}
+
+	.click-tracking__pixel {
+		height: 0;
+		width: 0;
+		border: 0 none;
+	}
+
+	.progress_bar__days_left {
+		display: block;
+		color: #000000;
+		line-height: 2em;
+	}
+
+	.progress_bar__wrapper {
+		border-color: #ffdd5b;
+	}
+
+	.progress_bar__donation_fill {
+		background-color: #ffdd5b;
+	}
+
+	.progress_bar__donation_text {
+		color: #000000;
+	}
+
+	.progress_bar__donation_remaining {
+		color: #ffffff;
+	}
+
+	.progress_bar__pointer_tip {
+		background-color: #ffffff;
+		margin-top: 18px;
+	}
+
+	.progress_bar__pointer_line {
+		background-color: #ffffff;
+		margin-top: 20px;
+	}
+
+}
