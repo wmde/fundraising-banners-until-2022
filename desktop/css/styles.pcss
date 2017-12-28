@@ -27,16 +27,18 @@
 
 		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
 		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Thank-you-2017-background-1200.svg' ) no-repeat top center;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' ) no-repeat top center;
 		background-size: cover;
 	}
 
 	.thankyou-message {
 		flex: 1;
 		display: flex;
+		flex-direction: column;
 		align-items: flex-start;
 		box-sizing: border-box;
 		position: relative;
+		padding: 40px 20px 60px 20px;
 	}
 
 	.thankyou-message__image {
@@ -45,13 +47,13 @@
 	}
 
 	.thankyou-message__image img {
-		width: 180px;
+		width: 120px;
 	}
 
 	.thankyou-message__text {
 		flex: 1 1 50%;
-		font-size: 26px;
-		line-height: 32px;
+		font-size: 16px;
+		line-height: 20px;
 		font-weight: bold;
 		color: #ffffff;
 		box-sizing: border-box;
@@ -70,9 +72,14 @@
 	.thankyou-message__call-to-action a {
 		color: #ffffff;
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Thank-you-2017-button-thanks.svg' ) no-repeat;
-		padding: 8px 16px 8px 46px;
 		position: relative;
 		font-weight: lighter;
+		font-size: 14px;
+		padding: 4px 8px 8px 32px;
+		display: block;
+		background-size: cover;
+		max-width: 100px;
+		margin-right: 5px;
 	}
 
 	.thankyou-message__call-to-action a:before {
@@ -82,6 +89,9 @@
 		position: absolute;
 		display: block;
 		left: 12px;
+		background-size: 14px;
+		width: 32px;
+		height: 14px;
 	}
 
 	.thankyou-message__call-to-action a.showmessage:before {
@@ -91,13 +101,14 @@
 
 	.author-message {
 		flex: 1;
-		padding: 40px 40px 60px 20px;
+		padding: 40px 5px 60px 20px;
 		position: relative;
 		box-sizing: border-box;
 	}
 
 	.author-message__text {
-		font-size: 18px;
+		font-size: 16px;
+		line-height: 20px;
 		font-weight: bold;
 		color: #2a0064;
 		box-sizing: border-box;
@@ -112,12 +123,19 @@
 		color: #ffffff;
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/af/Thank-you-2017-button-lernen.svg' ) no-repeat;
 		font-weight: lighter;
-		padding: 8px 16px 8px 46px;
 		position: relative;
+		font-size: 14px;
+		padding: 4px 8px 8px 32px;
+		display: block;
+		background-size: cover;
+		max-width: 150px;
+		margin-right: 5px;
 	}
 
-	.application-of-funds-link {
-		color: #808080;
+	.author-message__call-to-action a:before {
+		background-size: 14px;
+		width: 32px;
+		height: 14px;
 	}
 
 	.close {
@@ -137,58 +155,6 @@
 		height: 0;
 		width: 0;
 		border: 0 none;
-	}
-
-	@media ( min-width: 320px ) {
-		.banner {
-			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' );
-		}
-
-		.thankyou-message {
-			padding: 40px 20px 60px 20px;
-			flex-direction: column;
-		}
-
-		.thankyou-message__image img {
-			width: 120px;
-		}
-
-		.thankyou-message__text,
-		.author-message__text {
-			font-size: 16px;
-			line-height: 20px;
-		}
-
-		.thankyou-message__call-to-action a,
-		.author-message__call-to-action a {
-			font-size: 14px;
-			padding: 4px 8px 8px 32px;
-			display: block;
-			background-size: cover;
-			max-width: 150px;
-			margin-right: 5px;
-		}
-
-		.thankyou-message__call-to-action a {
-			max-width: 100px;
-		}
-
-		.thankyou-message__call-to-action a:before {
-			background-size: 14px;
-			width: 32px;
-			height: 14px;
-		}
-
-		.author-message {
-			padding: 40px 5px 60px 20px;
-		}
-
-		.author-message__call-to-action a:before {
-			background-size: 14px;
-			width: 32px;
-			height: 14px;
-		}
-
 	}
 
 	@media ( min-width: 600px ) {
