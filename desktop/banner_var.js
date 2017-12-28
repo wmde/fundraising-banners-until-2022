@@ -81,6 +81,7 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
