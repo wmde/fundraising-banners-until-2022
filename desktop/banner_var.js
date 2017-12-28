@@ -119,6 +119,18 @@ function displayBanner() {
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
+	var $numberOfDonors = $( '.infobox .mobile-only .number_of_donors' );
+	$( { Counter: 0 } ).animate(
+		{ Counter: campaignProjection.getProjectedNumberOfDonors() },
+		{
+			duration: 3000,
+			easing: 'swing',
+			step: function () {
+				$numberOfDonors.text( donorFormatter( Math.ceil( this.Counter ) ) );
+			}
+		}
+	);
+
 	$( window ).resize( function () {
 		addSpaceInstantly();
 		calculateLightboxPosition();

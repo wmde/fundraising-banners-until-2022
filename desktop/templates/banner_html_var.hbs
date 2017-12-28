@@ -1,11 +1,27 @@
 <div id="WMDE_Banner">
 	<div class="banner">
 		<div class="teaser">
-			{{{ progressBar }}}
+			<div class="desktop-only">
+				{{{ progressBar }}}
+			</div>
 
 			<div class="infobox">
-				<div class="infobox__text">
-					{{> banner_text_var }}
+				<div class="infobox__text desktop-only">
+					<p class="text__paragraph">
+						{{ numberOfDonors }} Menschen haben in den letzten Wochen gezeigt, dass Wikipedia einzigartig ist.
+						Wir bedanken uns ganz herzlich bei allen Spenderinnen und Spendern für die Unterstützung im letzten Jahr.
+					</p>
+
+					<p class="text__paragraph">
+						Doch Wikipedia ist nicht nur deshalb etwas Besonderes. Lesen Sie, warum Wikipedia mehr ist als eine Website.
+					</p>
+				</div>
+
+				<div class="infobox__text mobile-only">
+					<p class="text__paragraph number_of_donors">{{ numberOfDonors }}</p>
+					<p class="text__paragraph">
+						Menschen haben in den letzten Wochen gezeigt, dass Wikipedia einzigartig ist. Vielen Dank!
+					</p>
 				</div>
 			</div>
 
@@ -36,7 +52,7 @@
 
 				<p class="text__paragraph text__paragraph--bold">Kurzum: Wikipedia ist einzigartig, weil Menschen dieses Projekt ehrenamtlich erschaffen und finanzieren.</p>
 
-				<p class="text__paragraph">
+				<p class="text__paragraph desktop-only">
 					Wenngleich Wikipedia frei nutzbar ist, so entstehen doch Kosten. Kosten für die technische Infrastruktur,
 					die Weiterentwicklung der Software, die Unterstützung der Freiwilligen und die weitergehenden Projekte zur
 					Förderung Freien Wissens. Die Kosten entstehen dabei nicht nur in Deutschland, sondern auch international,
@@ -44,9 +60,16 @@
 					die jeden Monat 15 Milliarden Mal aufgerufen werden.
 				</p>
 
-				<p class="text__paragraph">
+				<p class="text__paragraph desktop-only">
 					Unsere jährliche Spendenkampagne finanziert diese Kosten. Wir sind sehr dankbar für das Engagement der knapp
 					{{ numberOfDonors }} Menschen in Deutschland, die sich in den letzten Wochen für Freies Wissen eingesetzt haben.
+				</p>
+
+				<p class="text__paragraph mobile-only">
+					Wenngleich Wikipedia frei nutzbar ist, so entstehen Kosten für eine Website, die 300 unterschiedliche
+					Sprachversionen hat und jeden Monat 15 Milliarden Mal aufgerufen wird. Unsere jährliche Spendenkampagne
+					finanziert diese Kosten. Ich bin sehr dankbar für das Engagement der knapp {{ numberOfDonors }} Menschen
+					in Deutschland, die sich in den letzten Wochen für Freies Wissen eingesetzt haben.
 				</p>
 
 				<p class="text__paragraph text__paragraph--bold">Bei Ihnen bedanke ich mich ganz herzlich.</p>
@@ -74,7 +97,7 @@
 
 				<a href="https://spenden.wikimedia.de/apply-for-membership?skin=cat17&type=sustaining" class="become_member__button">Jetzt Fördermitglied werden</a>
 
-				<p class="text__paragraph">
+				<p class="text__paragraph desktop-only">
 					Unser Ziel ist eine Welt, in der alle Menschen gleichermaßen ungehinderten Zugang zu Freiem Wissen haben.
 					Das schaffen wir nur gemeinsam mit Ihnen. Ich bin sehr dankbar, dass so viele Menschen ‒
 					sei es durch die aktive Mitarbeit in der Wikipedia, durch eine Spende oder durch eine Mitgliedschaft
