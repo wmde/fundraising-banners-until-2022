@@ -133,9 +133,14 @@
 	}
 
 	.author-message__call-to-action a:before {
+		content: '';
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Thank-you-2017-icon-lernen.svg' ) no-repeat;
 		background-size: 14px;
 		width: 32px;
 		height: 14px;
+		position: absolute;
+		display: block;
+		left: 12px;
 	}
 
 	.close {
@@ -226,6 +231,12 @@
 		}
 
 		.thankyou-message__call-to-action a:before {
+			background-size: 18px;
+			width: 45px;
+			height: 18px;
+		}
+
+		.author-message__call-to-action a:before {
 			background-size: 18px;
 			width: 45px;
 			height: 18px;
