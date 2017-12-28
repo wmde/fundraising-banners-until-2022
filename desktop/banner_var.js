@@ -224,7 +224,6 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly( bannerElement );
@@ -285,7 +284,8 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$instantBanner = $( '#WMDE_InstantBanner' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -302,6 +302,9 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
+		$instantBanner.height( $bannerElement.height() );
+		addSpaceInstantly( $instantBanner );
+		setTimeout( function () { progressBar.animate(); }, 1000 );
 		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
