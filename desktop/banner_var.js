@@ -99,32 +99,32 @@ function setupValidationEventHandling() {
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
 		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
 		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
 		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 }
 
@@ -200,12 +200,12 @@ function addSpace() {
 	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
-function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+function addSpaceInstantly( $bannerElement ) {
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
 }
 
 function removeBannerSpace() {
@@ -227,7 +227,7 @@ function displayBanner() {
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
-		addSpaceInstantly();
+		addSpaceInstantly( bannerElement );
 		calculateLightboxPosition();
 	} );
 }
