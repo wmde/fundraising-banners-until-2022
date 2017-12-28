@@ -4,7 +4,7 @@ module.exports = {
 	'donations-collected-base': 0,
 	'donators-base': 0,
 	'appr-donations-per-minute': 103,
-	'appr-donators-per-minute': 4.705,
+	'appr-donators-per-minute': 4.758,
 	'milion-impressions-per-day': 6, /** @deprecated kept for legacy reasons */
 	'impressions-per-day-in-million': 6,
 	'allBannersCookie': 'banner_impression_count',
