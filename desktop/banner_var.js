@@ -45,7 +45,8 @@ const campaignProjection = new CampaignProjection(
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
 		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
+		goalDonationSum: GlobalBannerSettings.goalSum
 	}
 );
 const formatNumber = require( 'format-number' );
