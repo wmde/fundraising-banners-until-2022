@@ -6,8 +6,8 @@ preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devb
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_36_171220_ctrl"
-tracking = "org-36-171220-ctrl"
+pagename = "B17WMDE_thankyou_ctrl"
+tracking = "thankyou-36-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
@@ -30,8 +30,8 @@ campaign_tracking = "mob05-ba-171218"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [mobile.banners.ctrl]
-filename = "./mobile/banner_ctrl.js"
-pagename = "B17WMDE_mob_05_171218_ctrl"
+filename = "./desktop/banner_ctrl.js"
+pagename = "B17WMDE_mob_thankyou_ctrl"
 tracking = "org-mob05-171218-ctrl"
 
 [mobile.banners.var]
