@@ -34,7 +34,6 @@
 	.thankyou-message {
 		flex: 1;
 		display: flex;
-		flex-direction: row;
 		align-items: flex-start;
 		box-sizing: border-box;
 		position: relative;
@@ -82,7 +81,7 @@
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/2/25/Thank-you-2017-icon-dankesbotschaft.svg' ) no-repeat;
 		position: absolute;
 		display: block;
-		left: 15px;
+		left: 12px;
 	}
 
 	.thankyou-message__call-to-action a.showmessage:before {
@@ -145,11 +144,51 @@
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' );
 		}
 
+		.thankyou-message {
+			padding: 40px 20px 60px 20px;
+			flex-direction: column;
+		}
+
+		.thankyou-message__image img {
+			width: 120px;
+		}
+
 		.thankyou-message__text,
 		.author-message__text {
 			font-size: 16px;
 			line-height: 20px;
 		}
+
+		.thankyou-message__call-to-action a,
+		.author-message__call-to-action a {
+			font-size: 14px;
+			padding: 4px 8px 8px 32px;
+			display: block;
+			background-size: cover;
+			max-width: 150px;
+			margin-right: 5px;
+		}
+
+		.thankyou-message__call-to-action a {
+			max-width: 100px;
+		}
+
+		.thankyou-message__call-to-action a:before {
+			background-size: 14px;
+			width: 32px;
+			height: 14px;
+		}
+
+		.author-message {
+			padding: 40px 5px 60px 20px;
+		}
+
+		.author-message__call-to-action a:before {
+			background-size: 14px;
+			width: 32px;
+			height: 14px;
+		}
+
 	}
 
 	@media ( min-width: 600px ) {
@@ -159,6 +198,8 @@
 
 		.thankyou-message {
 			padding: 30px 20px 60px 40px;
+			flex-direction: row;
+			justify-content: flex-start;
 		}
 
 		.thankyou-message__image img {
@@ -169,6 +210,11 @@
 		.author-message__text {
 			font-size: 20px;
 			line-height: 24px;
+		}
+
+		.thankyou-message__call-to-action {
+			position: absolute;
+			flex: none;
 		}
 
 		.thankyou-message__call-to-action a,
@@ -208,8 +254,9 @@
 		.thankyou-message__call-to-action a,
 		.author-message__call-to-action a {
 			font-size: 18px;
-			height: 48px;
 			padding: 8px 16px 8px 46px;
+			max-width: none;
+			background-size: auto;
 		}
 
 		.thankyou-message__call-to-action a:before {
