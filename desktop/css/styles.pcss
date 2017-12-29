@@ -13,22 +13,30 @@
 
 	display: none;
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	z-index: 10000;
 	font-size: 16px;
 
 	.banner {
+		width: 100%;
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+	}
+
+	.teaser {
 		display: flex;
 		flex-direction: row;
 		align-items: stretch;
-		font-size: 14px;
-		padding-bottom: 0.75em;
-		width: 100%;
-
-		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' ) no-repeat top center;
 		background-size: cover;
+	}
+
+	.beef {
+		display: none;
+		background: #2a0064;
+		color: #ffffff;
+		font-size: 16px;
+		padding: 20px 40px;
 	}
 
 	.thankyou-message {
@@ -94,9 +102,8 @@
 		top: 9px;
 	}
 
-	.thankyou-message__call-to-action a.showmessage:before {
-		transform: none;
-		top: 20px;
+	.thankyou-message__hide-text {
+		display: none;
 	}
 
 	.author-message {
@@ -143,6 +150,35 @@
 		left: 12px;
 	}
 
+	.text__paragraph a {
+		color: #ffffff;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+
+	.text__paragraph--signature {
+		margin: 1.5em 0 0 0;
+	}
+
+	.text__paragraph--signature + .text__paragraph {
+		margin-top: 0;
+	}
+
+	.banner.enabled {
+
+		.beef {
+			display: block;
+		}
+
+		.thankyou-message__show-text {
+			display: none;
+		}
+
+		.thankyou-message__hide-text {
+			display: inline;
+		}
+	}
+
 	.close {
 		position: absolute;
 		width: 18px;
@@ -163,7 +199,7 @@
 	}
 
 	@media ( min-width: 600px ) {
-		.banner {
+		.teaser {
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
 		}
 
@@ -206,7 +242,7 @@
 	}
 
 	@media ( min-width: 900px ) {
-		.banner {
+		.teaser {
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Thank-you-2017-background-900.svg' );
 		}
 
@@ -245,7 +281,7 @@
 	}
 
 	@media ( min-width: 1200px ) {
-		.banner {
+		.teaser {
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Thank-you-2017-background-1200.svg' );
 		}
 	}

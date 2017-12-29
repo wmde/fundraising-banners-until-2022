@@ -96,6 +96,10 @@ BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
+$( '.show-beef', $bannerContainer ).click( function () {
+	$( '.banner', $bannerContainer ).toggleClass( 'enabled' );
+} );
+
 function addSpace() {
 	var $bannerElement = $( 'div#WMDE_Banner' );
 	if ( !$bannerElement.is( ':visible' ) ) {
