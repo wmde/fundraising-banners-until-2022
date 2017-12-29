@@ -101,10 +101,12 @@ BannerFunctions.initializeBannerEvents();
 
 $( '.show-beef', $bannerContainer ).click( function () {
 	$( '.banner', $bannerContainer ).toggleClass( 'enabled' );
+	addSpaceInstantly();
 } );
 
 $( '.close__beef', $bannerContainer ).click( function () {
 	$( '.banner', $bannerContainer ).removeClass( 'enabled' );
+	addSpaceInstantly();
 } );
 
 function addSpace() {
