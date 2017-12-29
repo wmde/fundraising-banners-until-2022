@@ -17,16 +17,16 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
+import Translations from '../shared/messages/de';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-import Translations from '../shared/messages/de';
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -57,14 +57,10 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, { textInnerLeft: progressBarTextInnerLeft } );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
+	textRight: '',
+	textInnerRight: 'Geschafft: <span class="js-donation_value">0,0</span> Mio. Euro'
+} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -75,109 +71,20 @@ $bannerContainer.html( bannerTemplate( {
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressBar: progressBar.render()
+	progressBar: progressBar.render(),
+	numberOfNewMembersLastYear: '64.334', // @todo Update with real number, or add to projections,
+	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=10h16&type=sustaining' // @todo Set skin, tracking
 } ) );
 
 // BEGIN form init code
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
-function setupValidationEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
-	} );
-}
-
-function setupAmountEventHandling() {
-	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
-		$( '#amount-other-input' ).val( '' );
-		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
-}
-
-function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
-	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
-		return false;
-	}
-	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
-	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
-	return true;
-}
-
-function validateForm() {
-	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
-}
-
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+$( '.expand_button' ).on( 'click', function ( e ) {
+	e.preventDefault();
+	$( 'div#WMDE_Banner .banner' ).toggleClass( 'expanded' );
+	addSpaceInstantly();
 } );
-
-/* Convert browser events to custom events */
-$( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
-	$( this ).trigger( 'amount:selected' );
-} );
-
-$( '#amount-other-input' ).change( function () {
-	$( this ).trigger( 'amount:custom' );
-} );
-
-$( '#WMDE_Banner-frequency label' ).on( 'click', function () {
-	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
-} );
-
-BannerFunctions.initializeBannerEvents();
-
-// END form init code
 
 function addSpace() {
 	var $bannerElement = $( 'div#WMDE_Banner' );
@@ -204,15 +111,24 @@ function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
 
-	setupValidationEventHandling();
-	setupAmountEventHandling();
-
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
+
+	var $numberOfDonors = $( '.infobox .mobile-only .number_of_donors' );
+	$( { Counter: 0 } ).animate(
+		{ Counter: campaignProjection.getProjectedNumberOfDonors() },
+		{
+			duration: 3000,
+			easing: 'swing',
+			step: function () {
+				$numberOfDonors.text( donorFormatter( Math.ceil( this.Counter ) ) );
+			}
+		}
+	);
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
