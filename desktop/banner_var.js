@@ -77,7 +77,8 @@ $bannerContainer.html( bannerTemplate( {
 	BannerName: BannerName,
 	progressBar: progressBar.render(),
 	numberOfNewMembersLastYear: '64.334', // @todo Update with real number, or add to projections,
-	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=cat17&type=sustaining' // @todo Set skin, tracking
+	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=cat17&type=sustaining&' +
+	'piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
 } ) );
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
