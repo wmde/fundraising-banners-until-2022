@@ -303,6 +303,7 @@ $( function () {
 		);
 	} else {
 		$instantBanner.height( $bannerElement.height() );
+		$instantBanner.show();
 		addSpaceInstantly( $instantBanner );
 		setTimeout( function () { progressBar.animate(); }, 1000 );
 		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
