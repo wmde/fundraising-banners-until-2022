@@ -90,6 +90,10 @@ $( '.show-beef', $bannerContainer ).click( function () {
 	$( '.banner', $bannerContainer ).toggleClass( 'enabled' );
 } );
 
+$( '.close__beef', $bannerContainer ).click( function () {
+	$( '.banner', $bannerContainer ).removeClass( 'enabled' );
+} );
+
 function addSpace() {
 	var $bannerElement = $( 'div#WMDE_Banner' );
 	if ( !$bannerElement.is( ':visible' ) ) {
