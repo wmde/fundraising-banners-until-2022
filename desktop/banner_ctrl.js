@@ -7,15 +7,12 @@ const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
-const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
 import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
-import CampaignDaySentence from '../shared/campaign_day_sentence';
-import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
@@ -27,11 +24,6 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const campaignDays = new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-);
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 22 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -49,43 +41,20 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-const dayName = new DayName( new Date() );
-const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
-const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
-
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
-require( '../shared/wlightbox.js' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft,
-	modifier: 'progress_bar--lateprogress'
-} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
-	currentDayName: currentDayName,
-	weekdayPrepPhrase: weekdayPrepPhrase,
-	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressBar: progressBar.render(),
 	numberOfNewMembersLastYear: '64.334', // @todo Update with real number, or add to projections,
 	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=10h16&type=sustaining&' +
 		'piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
@@ -143,38 +112,10 @@ function displayBanner() {
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
-		calculateLightboxPosition();
 	} );
 }
 
-function calculateLightboxPosition() {
-	$( '#wlightbox' ).css( {
-		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
-	} );
-}
-
-var impCount = BannerFunctions.increaseImpCount();
-$( '#impCount' ).val( impCount );
-var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
-$( '#bImpCount' ).val( bannerImpCount );
-
-// Lightbox
-$( '#application-of-funds-link' ).wlightbox( {
-	container: $( '#mw-page-base' ),
-	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-	top: function () {
-		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
-	}
-} );
-
-$( '#application-of-funds-link' ).click( function () {
-	// Lightbox position is relative to banner position
-	window.scrollTo( 0, 0 );
-} );
-
-// track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '.expand_button' ), 'banner-expanded', 1 );
+// track banner expansion and closing
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
