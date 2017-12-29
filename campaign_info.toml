@@ -7,8 +7,8 @@ wrapper_template = "wikipedia_org"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_thankyou_ctrl"
-tracking = "thankyou-36-ctrl"
+pagename = "B17WMDE_thankYou1_180101_ctrl"
+tracking = "org-thankYou1-180101-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
@@ -33,8 +33,8 @@ preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpac
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
-filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_mob_thankyou_ctrl"
+filename = "./mobile/banner_ctrl.js"
+pagename = "B17WMDE_mob_05_171218_ctrl"
 tracking = "org-mob05-171218-ctrl"
 
 [mobile.banners.var]
