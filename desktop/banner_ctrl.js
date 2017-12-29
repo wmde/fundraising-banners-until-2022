@@ -42,7 +42,8 @@ const campaignProjection = new CampaignProjection(
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
 		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
+		goalDonationSum: GlobalBannerSettings.goalSum
 	}
 );
 const formatNumber = require( 'format-number' );
@@ -78,6 +79,7 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
