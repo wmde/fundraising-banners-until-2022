@@ -1,1 +1,1 @@
-require( './../desktop/banner_ctrl' );
+require( './../desktop/banner_s1' );

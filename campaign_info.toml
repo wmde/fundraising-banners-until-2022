@@ -4,10 +4,10 @@ campaign_tracking = "thankYou1-ba-180101"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 # Banners of the campaign, key after "banners" can be anything
-[desktop.banners.ctrl]
-filename = "./desktop/banner_ctrl.js"
+[desktop.banners.s1]
+filename = "./desktop/banner_s1.js"
 pagename = "B17WMDE_thankYou1_180101_ctrl"
-tracking = "org-thankYou1-180101-ctrl"
+tracking = "org-thankYou1-180101-s1"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
@@ -19,7 +19,7 @@ campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 
 [dewiki-default.banners.default]
-filename = "./desktop/banner_ctrl.js"
+filename = "./desktop/banner_s1.js"
 pagename = "B17WMDE_dewiki_desktop_default"
 tracking = "org-desktop-de-171113"
 
