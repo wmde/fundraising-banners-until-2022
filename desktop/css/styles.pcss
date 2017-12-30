@@ -31,6 +31,14 @@
 		background-size: cover;
 	}
 
+	.desktop-only {
+		display: none;
+	}
+
+	.mobile-only {
+		display: block;
+	}
+
 	.beef {
 		display: none;
 		background: #2a0064;
@@ -203,6 +211,14 @@
 	@media ( min-width: 600px ) {
 		.teaser {
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
+		}
+
+		.desktop-only {
+			display: block;
+		}
+
+		.mobile-only {
+			display: none;
 		}
 
 		.thankyou-message {
