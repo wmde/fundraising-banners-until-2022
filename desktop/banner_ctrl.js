@@ -161,9 +161,7 @@ $( '#application-of-funds-link' ).click( function () {
 } );
 
 // track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( 'thankyou-message__call-to-action' ), 'banner-expanded', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
