@@ -21,6 +21,7 @@ import Translations from '../shared/messages/de';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
+GlobalBannerSettings[ 'appr-donations-per-minute' ] = 200;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
