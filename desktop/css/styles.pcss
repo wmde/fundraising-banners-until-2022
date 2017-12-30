@@ -17,175 +17,162 @@
 	z-index: 10000;
 	font-size: 16px;
 
-	.banner {
-		width: 100%;
-		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+	.progress_bar__donation_fill {
+		height: 40px;
+		background-color: #009ee0;
+		border-radius: 8px;
+	}
+
+	.progress_bar__donation_text {
+		line-height: 40px;
+		font-family: 'Helvetica', 'Verdana', sans-serif;
+		font-size: 16px;
+	}
+
+	.progress_bar__wrapper {
+		border: 3px solid #ffffff;
+		margin: 0;
+	}
+
+	.progress_bar__donation_remaining--inner {
+		padding-right: 0;
+	}
+
+	.text__paragraph {
+		margin-bottom: 20px;
+		line-height: 140%;
+	}
+
+	.text__paragraph--listintro,
+	.text__paragraph--closing {
+		margin-bottom: 0;
+	}
+
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
 	}
 
 	.teaser {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' ) no-repeat top center;
-		background-size: cover;
-	}
+		background-color: #dce4e8;
+		margin: 10px 10px 20px 10px;
+		padding: 20px 20px 0 20px;
+		height: 180px;
+		position: relative;
 
-	.desktop-only {
-		display: none;
-	}
+		.infobox__text {
+			color: #000000;
+			font-size: 16px;
+			line-height: 1.2em;
+			text-align: left;
+			padding-top: 10px;
 
-	.mobile-only {
-		display: block;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+
+			.text__paragraph {
+				flex: 1 1 auto;
+				width: 50%;
+				padding: 0 20px;
+			}
+		}
+
+		.expand_button {
+			display: block;
+			position: absolute;
+			bottom: 0;
+			right: 1.5em;
+
+			color: #ffffff;
+			font-family: 'Helvetica', 'Verdana', sans-serif;
+			font-size: 16px;
+			background-color: #0065a4;
+			line-height: 60px;
+			height: 60px;
+			width: 215px;
+			text-align: center;
+		}
+
+		.expand_button__text--collapsed,
+		.expand_button__text--expanded {
+			padding-right: 36px;
+			background-size: 36px 36px;
+			background-repeat: no-repeat;
+			background-position: right center;
+		}
+
+		.expand_button__text--collapsed {
+			display: inline;
+			background-image: svg-load( '../assets/Ic_expand_more_36px.svg', fill=#ffffff );
+		}
+
+		.expand_button__text--expanded {
+			display: none;
+			background-image: svg-load( '../assets/Ic_expand_less_36px.svg', fill=#ffffff );
+		}
 	}
 
 	.beef {
 		display: none;
-		background: #2a0064;
+
+		margin: 15px 30px 20px 30px;
 		color: #ffffff;
-		font-size: 16px;
-		padding: 20px 40px;
-		position: relative;
+
+		.beef__column {
+			flex: 1 1 auto;
+			width: 50%;
+			margin-bottom: 20px;
+			padding: 0 20px;
+		}
+
+		.feature_list {
+			margin-bottom: 20px;
+			list-style: disc none;
+		}
+
+		.become_member__button {
+			display: inline-block;
+			width: 280px;
+			height: 40px;
+			line-height: 40px;
+			background-color: #009ee0;
+			color: #ffffff;
+			font-family: 'Helvetica', 'Verdana', sans-serif;
+			font-size: 16px;
+			font-weight: bold;
+			text-align: center;
+			margin: 20px 0;
+		}
 	}
 
-	.thankyou-message {
-		flex: 1;
+	.banner {
+		font-family: 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #0065a4;
+
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-		box-sizing: border-box;
-		position: relative;
-		padding: 40px 10px 60px 20px;
-		max-width: 50%;
 	}
 
-	.thankyou-message__image {
-		box-sizing: border-box;
-		padding-right: 30px;
-	}
+	.banner.expanded {
+		.teaser {
+			.expand_button__text--collapsed {
+				display: none;
+			}
 
-	.thankyou-message__image img {
-		width: 120px;
-	}
-
-	.thankyou-message__text {
-		flex: 1 1 50%;
-		font-size: 16px;
-		line-height: 20px;
-		font-weight: bold;
-		color: #ffffff;
-		box-sizing: border-box;
-	}
-
-	.thankyou-message__text--num-donors {
-		color: #2a0064;
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Thank-you-2017-underline.svg' ) no-repeat bottom center;
-	}
-
-	.thankyou-message__call-to-action {
-		position: absolute;
-		bottom: 15px;
-	}
-
-	.thankyou-message__call-to-action a {
-		color: #ffffff;
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Thank-you-2017-button-thanks.svg' ) no-repeat;
-		position: relative;
-		font-weight: lighter;
-		font-size: 14px;
-		padding: 4px 8px 8px 32px;
-		display: block;
-		background-size: cover;
-		max-width: 110px;
-		margin-right: 5px;
-	}
-
-	.thankyou-message__call-to-action a:before {
-		content: '';
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/32/Thank-you-2017-icon-arrow-down.svg' ) no-repeat;
-		position: absolute;
-		display: block;
-		left: 12px;
-		background-size: 14px;
-		width: 32px;
-		height: 14px;
-		top: 9px;
-	}
-
-	.thankyou-message__hide-text {
-		display: none;
-	}
-
-	.author-message {
-		flex: 1;
-		padding: 40px 5px 60px 0;
-		position: relative;
-		box-sizing: border-box;
-	}
-
-	.author-message__text {
-		font-size: 16px;
-		line-height: 20px;
-		font-weight: bold;
-		color: #2a0064;
-		box-sizing: border-box;
-	}
-
-	.author-message__call-to-action {
-		position: absolute;
-		bottom: 15px;
-	}
-
-	.author-message__call-to-action a {
-		color: #ffffff;
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/af/Thank-you-2017-button-lernen.svg' ) no-repeat;
-		font-weight: lighter;
-		position: relative;
-		font-size: 14px;
-		padding: 4px 8px 8px 32px;
-		display: block;
-		background-size: cover;
-		max-width: 150px;
-		margin-right: 5px;
-	}
-
-	.author-message__call-to-action a:before {
-		content: '';
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Thank-you-2017-icon-lernen.svg' ) no-repeat;
-		background-size: 14px;
-		width: 32px;
-		height: 14px;
-		position: absolute;
-		display: block;
-		left: 12px;
-	}
-
-	.text__paragraph a {
-		color: #ffffff;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-
-	.text__paragraph--signature {
-		margin: 1.5em 0 0 0;
-	}
-
-	.text__paragraph--signature + .text__paragraph {
-		margin-top: 0;
-	}
-
-	.banner.enabled {
+			.expand_button__text--expanded {
+				display: inline;
+			}
+		}
 
 		.beef {
-			display: block;
-		}
-
-		.thankyou-message__show-text {
-			display: none;
-		}
-
-		.thankyou-message__hide-text {
-			display: inline;
+			display: flex;
 		}
 	}
 
@@ -193,9 +180,14 @@
 		position: absolute;
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
-		top: 0.5em;
-		right: 0.5em;
-		opacity: 0.5;
+		top: 0;
+		right: 0;
+		flex: auto;
+	}
+
+	.close img {
+		width: 14px;
+		height: 14px;
 	}
 
 	.click-tracking {
@@ -208,91 +200,103 @@
 		border: 0 none;
 	}
 
-	@media ( min-width: 600px ) {
+	@media screen and ( max-width: 960px ) {
+		.text__paragraph {
+			margin-bottom: 10px;
+			font-size: 12px;
+		}
+
+		.progress_bar__donation_text {
+			font-size: 12px;
+		}
+
 		.teaser {
-			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
+			height: 160px;
+			margin: 5px 5px 10px 5px;
+
+			.expand_button {
+				font-size: 12px;
+				height: 50px;
+				width: 160px;
+			}
 		}
 
+		.beef {
+			.feature_list {
+				font-size: 12px;
+			}
+
+			.become_member__button {
+				font-size: 12px;
+				width: 230px;
+				height: 30px;
+				line-height: 30px;
+			}
+		}
+	}
+
+	@media screen and ( max-width: 660px ) {
 		.desktop-only {
-			display: block;
+			display: none !important;
 		}
 
-		.mobile-only {
-			display: none;
-		}
-
-		.thankyou-message {
-			padding: 30px 20px 60px 40px;
-			flex-direction: row;
-			justify-content: flex-start;
-			max-width: none;
-		}
-
-		.thankyou-message__image img {
-			width: 120px;
-		}
-
-		.thankyou-message__text,
-		.author-message__text {
-			font-size: 20px;
-			line-height: 24px;
-		}
-
-		.thankyou-message__call-to-action {
-			position: absolute;
-			flex: none;
-		}
-
-		.thankyou-message__call-to-action a,
-		.author-message__call-to-action a {
-			font-size: 14px;
-			padding: 4px 16px 8px 32px;
-		}
-
-		.thankyou-message__call-to-action a:before {
-			background-size: 14px;
-			width: 32px;
-			height: 14px;
-		}
-
-		.author-message {
-			padding: 30px 40px 60px 80px;
-		}
-	}
-
-	@media ( min-width: 900px ) {
-		.thankyou-message {
-			padding: 40px 20px 60px 40px;
-		}
-
-		.author-message {
-			padding: 40px 40px 60px 120px;
-		}
-
-		.thankyou-message__image img {
-			width: 180px;
-		}
-
-		.thankyou-message__call-to-action a,
-		.author-message__call-to-action a {
+		.text__paragraph {
 			font-size: 18px;
-			padding: 8px 16px 8px 46px;
-			max-width: none;
-			background-size: auto;
 		}
 
-		.thankyou-message__call-to-action a:before {
-			background-size: 18px;
-			width: 45px;
-			height: 18px;
-			top: 14px;
+		.teaser {
+			height: 190px;
+			padding-top: 10px;
+			margin: 6px 6px 12px 6px;
+
+			.expand_button {
+				margin: auto;
+				left: 0;
+				right: 0;
+			}
+
+			.infobox__text {
+				flex-direction: column;
+				padding-top: 0;
+
+				.text__paragraph {
+					width: 100%;
+					padding: 0;
+					margin: 0;
+					text-align: center;
+					font-size: 18px;
+				}
+
+				.number_of_donors {
+					font-size: 30px;
+				}
+			}
 		}
 
-		.author-message__call-to-action a:before {
-			background-size: 18px;
-			width: 45px;
-			height: 18px;
+		.beef {
+			flex-direction: column;
+
+			.beef__column {
+				width: 100%;
+				padding: 0;
+			}
+
+			.feature_list {
+				font-size: 18px;
+			}
+
+			.become_member__button {
+				font-size: 18px;
+				width: 300px;
+				height: 40px;
+				line-height: 40px;
+			}
 		}
 	}
 
+	@media screen and ( min-width: 661px ) {
+		.mobile-only {
+			display: none !important;
+		}
+	}
 }

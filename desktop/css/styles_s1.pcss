@@ -1,0 +1,298 @@
+#WMDE_Banner {
+
+	/**
+	 * GLOBAL RESET
+	 */
+	img {
+		border: 0 none;
+	}
+
+	/**
+	 * CUSTOM
+	 */
+
+	display: none;
+	width: 100%;
+	position: absolute;
+	z-index: 10000;
+	font-size: 16px;
+
+	.banner {
+		width: 100%;
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+	}
+
+	.teaser {
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Thank-you-2017-background-320.svg' ) no-repeat top center;
+		background-size: cover;
+	}
+
+	.desktop-only {
+		display: none;
+	}
+
+	.mobile-only {
+		display: block;
+	}
+
+	.beef {
+		display: none;
+		background: #2a0064;
+		color: #ffffff;
+		font-size: 16px;
+		padding: 20px 40px;
+		position: relative;
+	}
+
+	.thankyou-message {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		box-sizing: border-box;
+		position: relative;
+		padding: 40px 10px 60px 20px;
+		max-width: 50%;
+	}
+
+	.thankyou-message__image {
+		box-sizing: border-box;
+		padding-right: 30px;
+	}
+
+	.thankyou-message__image img {
+		width: 120px;
+	}
+
+	.thankyou-message__text {
+		flex: 1 1 50%;
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: bold;
+		color: #ffffff;
+		box-sizing: border-box;
+	}
+
+	.thankyou-message__text--num-donors {
+		color: #2a0064;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Thank-you-2017-underline.svg' ) no-repeat bottom center;
+	}
+
+	.thankyou-message__call-to-action {
+		position: absolute;
+		bottom: 15px;
+	}
+
+	.thankyou-message__call-to-action a {
+		color: #ffffff;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Thank-you-2017-button-thanks.svg' ) no-repeat;
+		position: relative;
+		font-weight: lighter;
+		font-size: 14px;
+		padding: 4px 8px 8px 32px;
+		display: block;
+		background-size: cover;
+		max-width: 110px;
+		margin-right: 5px;
+	}
+
+	.thankyou-message__call-to-action a:before {
+		content: '';
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/32/Thank-you-2017-icon-arrow-down.svg' ) no-repeat;
+		position: absolute;
+		display: block;
+		left: 12px;
+		background-size: 14px;
+		width: 32px;
+		height: 14px;
+		top: 9px;
+	}
+
+	.thankyou-message__hide-text {
+		display: none;
+	}
+
+	.author-message {
+		flex: 1;
+		padding: 40px 5px 60px 0;
+		position: relative;
+		box-sizing: border-box;
+	}
+
+	.author-message__text {
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: bold;
+		color: #2a0064;
+		box-sizing: border-box;
+	}
+
+	.author-message__call-to-action {
+		position: absolute;
+		bottom: 15px;
+	}
+
+	.author-message__call-to-action a {
+		color: #ffffff;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/a/af/Thank-you-2017-button-lernen.svg' ) no-repeat;
+		font-weight: lighter;
+		position: relative;
+		font-size: 14px;
+		padding: 4px 8px 8px 32px;
+		display: block;
+		background-size: cover;
+		max-width: 150px;
+		margin-right: 5px;
+	}
+
+	.author-message__call-to-action a:before {
+		content: '';
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Thank-you-2017-icon-lernen.svg' ) no-repeat;
+		background-size: 14px;
+		width: 32px;
+		height: 14px;
+		position: absolute;
+		display: block;
+		left: 12px;
+	}
+
+	.text__paragraph a {
+		color: #ffffff;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+
+	.text__paragraph--signature {
+		margin: 1.5em 0 0 0;
+	}
+
+	.text__paragraph--signature + .text__paragraph {
+		margin-top: 0;
+	}
+
+	.banner.enabled {
+
+		.beef {
+			display: block;
+		}
+
+		.thankyou-message__show-text {
+			display: none;
+		}
+
+		.thankyou-message__hide-text {
+			display: inline;
+		}
+	}
+
+	.close {
+		position: absolute;
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 0.5em;
+		right: 0.5em;
+		opacity: 0.5;
+	}
+
+	.click-tracking {
+		display: none;
+	}
+
+	.click-tracking__pixel {
+		height: 0;
+		width: 0;
+		border: 0 none;
+	}
+
+	@media ( min-width: 600px ) {
+		.teaser {
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
+		}
+
+		.desktop-only {
+			display: block;
+		}
+
+		.mobile-only {
+			display: none;
+		}
+
+		.thankyou-message {
+			padding: 30px 20px 60px 40px;
+			flex-direction: row;
+			justify-content: flex-start;
+			max-width: none;
+		}
+
+		.thankyou-message__image img {
+			width: 120px;
+		}
+
+		.thankyou-message__text,
+		.author-message__text {
+			font-size: 20px;
+			line-height: 24px;
+		}
+
+		.thankyou-message__call-to-action {
+			position: absolute;
+			flex: none;
+		}
+
+		.thankyou-message__call-to-action a,
+		.author-message__call-to-action a {
+			font-size: 14px;
+			padding: 4px 16px 8px 32px;
+		}
+
+		.thankyou-message__call-to-action a:before {
+			background-size: 14px;
+			width: 32px;
+			height: 14px;
+		}
+
+		.author-message {
+			padding: 30px 40px 60px 80px;
+		}
+	}
+
+	@media ( min-width: 900px ) {
+		.thankyou-message {
+			padding: 40px 20px 60px 40px;
+		}
+
+		.author-message {
+			padding: 40px 40px 60px 120px;
+		}
+
+		.thankyou-message__image img {
+			width: 180px;
+		}
+
+		.thankyou-message__call-to-action a,
+		.author-message__call-to-action a {
+			font-size: 18px;
+			padding: 8px 16px 8px 46px;
+			max-width: none;
+			background-size: auto;
+		}
+
+		.thankyou-message__call-to-action a:before {
+			background-size: 18px;
+			width: 45px;
+			height: 18px;
+			top: 14px;
+		}
+
+		.author-message__call-to-action a:before {
+			background-size: 18px;
+			width: 45px;
+			height: 18px;
+		}
+	}
+
+}

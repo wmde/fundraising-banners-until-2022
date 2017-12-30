@@ -15,13 +15,18 @@ filename = "./desktop/banner_var.js"
 pagename = "B17WMDE_thankYou1_180101_var"
 tracking = "org-thankYou1-180101-var"
 
+[desktop.banners.s1]
+filename = "./desktop/banner_s1.js"
+pagename = "B17WMDE_thankyou_authors"
+tracking = "org-thankYou1-180101-s1"
+
 [dewiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [dewiki-default.banners.default]
-filename = "./desktop/banner_ctrl.js"
+filename = "./desktop/banner_s1.js"
 pagename = "B17WMDE_dewiki_desktop_default"
 tracking = "org-desktop-de-171113"
 
