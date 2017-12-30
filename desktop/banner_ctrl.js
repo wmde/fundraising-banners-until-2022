@@ -116,6 +116,7 @@ function displayBanner() {
 }
 
 // track banner expansion and closing
+trackingEvents.trackClickEvent( $( 'thankyou-message__call-to-action' ), 'banner-expanded', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
