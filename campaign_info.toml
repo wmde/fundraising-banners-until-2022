@@ -1,6 +1,6 @@
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "thankYou1-ba-180101"
+campaign_tracking = "thankyou-ba-180101"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
@@ -8,17 +8,17 @@ wrapper_template = "wikipedia_org"
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
 pagename = "B17WMDE_thankYou1_180101_ctrl"
-tracking = "org-thankYou1-180101-ctrl"
+tracking = "org-thankyou-180101-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
 pagename = "B17WMDE_thankYou1_180101_var"
-tracking = "org-thankYou1-180101-var"
+tracking = "org-thankyou-180101-var"
 
 [desktop.banners.s1]
 filename = "./desktop/banner_s1.js"
-pagename = "B17WMDE_thankyou_authors"
-tracking = "org-thankYou1-180101-s1"
+pagename = "B17WMDE_thankYou_authors"
+tracking = "org-thankyou-180101-s1"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
