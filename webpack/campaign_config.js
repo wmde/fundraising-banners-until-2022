@@ -37,4 +37,33 @@ CampaignConfig.prototype.getConfigForPages = function () {
 	return pageConfig;
 };
 
+/**
+ * Load wrapper template for each campaign, based on config
+ *
+ * @param {function} loadTemplate callback function to load the template from the file system, must return a template string
+ * @return {object}
+ */
+CampaignConfig.prototype.getWrapperTemplates = function ( loadTemplate ) {
+	let wrapperTemplates = {};
+	let loadedTemplates = {};
+	let wrapperTemplate;
+	Object.keys( this.config ).forEach( function ( campaign ) {
+		if ( !this.config[ campaign ].wrapper_template ) {
+			throw new Error( 'No wrapper template defined for campaign ' + campaign );
+		}
+
+		wrapperTemplate = this.config[ campaign ].wrapper_template;
+		if ( !loadedTemplates[ wrapperTemplate ] ) {
+			loadedTemplates[ wrapperTemplate ] = loadTemplate( wrapperTemplate );
+		}
+
+		Object.keys( this.config[ campaign ].banners ).forEach( function ( banner ) {
+			let bannerConf = this.config[ campaign ].banners[ banner ];
+			wrapperTemplates[ bannerConf.pagename ] = loadedTemplates[ wrapperTemplate ];
+		}.bind( this ) );
+	}.bind( this ) );
+	return wrapperTemplates;
+
+};
+
 module.exports = CampaignConfig;

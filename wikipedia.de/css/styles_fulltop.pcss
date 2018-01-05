@@ -1,0 +1,353 @@
+#WMDE_Banner {
+
+	/**
+	 * GLOBAL RESET
+	 */
+	img {
+		border: 0 none;
+	}
+
+	/**
+	 * CUSTOM
+	 */
+
+	display: none;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+	font-size: 16px;
+
+	.banner {
+		display: flex;
+
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
+		background-color: #ffffff;
+	}
+
+	.infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 0 1 100%;
+
+		border: solid 8px #990000;
+		border-radius: 0.5em;
+		background-color: #f8f9fa;
+		padding: 0.25em 0.5em 0.25em 0;
+		margin: 0.5em 1em 0.5em 0.5em;
+	}
+
+	.infobox__text {
+		color: #000000;
+		font-size: 0.9em;
+		line-height: 1.4em;
+		text-align: left;
+		margin: 0.25em 0 0.5em 1.5em;
+		font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+	}
+
+	.text__headline {
+		margin: 0.2em 0;
+	}
+
+	.text__paragraph {
+		margin: 0;
+	}
+
+	.text__headline--bold,
+	.text__paragraph--bold {
+		font-weight: bold;
+	}
+
+	.text__headline--italic,
+	.text__paragraph--italic {
+		font-style: italic;
+	}
+
+	.text__paragraph .text__highlighted-character {
+		border-bottom: solid 3px #990000;
+	}
+
+	.infobox__footer {
+		margin: 0 1.75em 0 1.75em;
+		padding: 0.025em 0 0 2em;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.25em/18px 18px;
+	}
+
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		font-size: 0.8em;
+		line-height: 1.6em;
+	}
+
+	.footer__item span {
+		margin-right: 0.5em;
+	}
+
+	.footer__importantinfo {
+		font-weight: bold;
+	}
+
+	.footer__item {
+		white-space: nowrap;
+	}
+
+	.footer__item--rightflex {
+		flex-grow: 1;
+		text-align: right;
+	}
+
+	.application-of-funds-link {
+		color: #000000;
+	}
+
+	@media ( min-width: 960px ) {
+		.infobox__text {
+			font-size: 1em;
+		}
+	}
+
+	@media ( min-width: 1300px ) {
+		.infobox__text {
+			font-size: 1.1em;
+		}
+	}
+
+	@media ( min-width: 1400px ) {
+		.footer {
+			font-size: 0.9em;
+		}
+	}
+
+	@media ( min-width: 1500px ) {
+		.infobox__text {
+			font-size: 1.2em;
+		}
+	}
+
+	@media ( min-width: 1550px ) {
+		.footer {
+			font-size: 1em;
+		}
+	}
+
+	/* Form styling */
+
+	.form:before {
+		border-color: transparent transparent transparent #990000;
+		border-style: solid;
+		border-width: 10px;
+		content: ' ';
+		position: absolute;
+		top: 50%;
+		right: 25%;
+	}
+
+	.form {
+		width: 25%;
+		min-width: 12em;
+		flex-shrink: 0;
+		padding: 1.4em 0 0 0;
+		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
+	}
+
+	.select-group__state,
+	.button-group__button,
+	#amount-other-input {
+		-webkit-transition: all 0.25s ease-in-out;
+		-moz-transition: all 0.25s ease-in-out;
+		transition: all 0.25s ease-in-out;
+	}
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 1em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+		font-size: 0.9em;
+		font-weight: bold;
+	}
+
+	.select-group--with-error {
+		background: #990000;
+	}
+
+	.select-group__errormessage {
+		display: none; /* Message will be shown by JS code */
+		color: #ffffff;
+		font-weight: bold;
+		text-align: center;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.74em;
+	}
+
+	.select-group__input {
+		display: none;
+	}
+
+	.select-group__custom-input {
+		padding: 0.4em;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		font-size: 0.74em;
+		text-align: center;
+		border: 1px solid #9aa0a7;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.select-group__option {
+		flex: 1 1 auto;
+		padding: 0 0.45em 0.45em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+	}
+
+	.select-group__option--fullwidth {
+		width: 100%;
+	}
+
+	.select-group__option--halfwidth {
+		width: 50%;
+	}
+
+	.select-group__option--quarterwidth {
+		width: 25%;
+	}
+
+	.select-group__option--biggertext {
+		font-size: 1em;
+	}
+
+	.select-group__state {
+		display: block;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.3em 0;
+		line-height: 2em;
+		cursor: pointer;
+		text-align: center;
+		font-size: 0.9em;
+		font-weight: normal;
+		box-sizing: border-box;
+	}
+
+	.select-group__state:hover {
+		background-color: #ffffff;
+		color: #444444;
+		border-color: #a2a9b1;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
+	}
+
+	.button-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+	}
+
+	.button-group__button {
+		flex: 1 1 auto;
+		padding: 0 0.45em 0.45em 0;
+		margin: 0;
+		box-sizing: border-box;
+		display: block;
+		cursor: pointer;
+		/* Override browser defaults */
+		border: 0 none;
+		background: transparent;
+		font-size: inherit;
+		font-weight: normal;
+	}
+
+	.button-group__button--halfwidth {
+		width: 50%;
+	}
+
+	@media ( max-width: 1250px ) {
+		.button-group__button--halfwidth {
+			width: 100%;
+		}
+	}
+
+	.button-group__label {
+		display: block;
+		color: #3366cc;
+		background: #f8f9fa;
+		border: 1px solid #9aa0a7;
+		border-radius: 2px;
+		padding: 0.5em 0;
+		line-height: 2em;
+		font-size: 0.75em;
+		font-weight: normal;
+		text-align: center;
+		box-sizing: border-box;
+	}
+
+	.button-group__label:hover {
+		background-color: #ffffff;
+		border-color: #859dcc;
+	}
+
+	.close {
+		display: inline-block;
+		position: absolute;
+		right: 0.5em;
+		top: 0.5em;
+		z-index: 999;
+		font-size: 0.75em;
+		text-transform: uppercase;
+		opacity: 0.5;
+	}
+
+	.close:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	.close__icon {
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/32/Close-thin.png' ) no-repeat center center;
+		width: 9px;
+		height: 9px;
+		float: right;
+		display: block;
+		margin: 0.2em 0.4em;
+	}
+
+	.click-tracking {
+		display: none;
+	}
+
+	.click-tracking__pixel {
+		height: 0;
+		width: 0;
+		border: 0 none;
+	}
+
+	.progress_bar__days_left {
+		display: none;
+	}
+
+}

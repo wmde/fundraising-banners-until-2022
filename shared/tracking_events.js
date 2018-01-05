@@ -85,4 +85,8 @@ export default class TrackingEvents {
 		};
 	}
 
+	recordBannerImpression() {
+		this.trackingImage.attr( 'src', getTrackingURL( this.baseUrl, 'banner-shown', this.bannerName, '' ) );
+	}
+
 }
