@@ -157,7 +157,7 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 0 );
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
