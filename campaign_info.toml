@@ -1,19 +1,19 @@
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "39-ba-171227"
+campaign_tracking = "40-ba-171228"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_39_171227_ctrl"
-tracking = "org-39-171227-ctrl"
+pagename = "B17WMDE_40_171228_ctrl"
+tracking = "org-40-171228-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_39_171227_var"
-tracking = "org-39-171227-var"
+pagename = "B17WMDE_40_171228_var"
+tracking = "org-40-171228-var"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
