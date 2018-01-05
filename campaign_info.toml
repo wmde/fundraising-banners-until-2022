@@ -84,24 +84,29 @@ tracking = "org-pad-de-171121"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-01-171111"
+campaign_tracking = "wpde-02-171124"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_fulltop_ctrl.js"
-pagename = "B17WPDE_01_171111_fulltop_ctrl"
-tracking = "wpde-01-171111-fulltop-ctrl"
+pagename = "B17WPDE_02_171124_fulltop_ctrl"
+tracking = "wpde-02-171124-fulltop-ctrl"
 
 [wikipediade.banners.top-ctrl]
 filename = "./wikipedia.de/banner_top_ctrl.js"
-pagename = "B17WPDE_01_171111_top_ctrl"
-tracking = "wpde-01-171111-top-ctrl"
+pagename = "B17WPDE_02_171124_top_ctrl"
+tracking = "wpde-02-171124-top-ctrl"
 
-[wikipediade.banners.var]
-filename = "./wikipedia.de/banner_var.js"
-pagename = "B17WPDE_01_171111_var"
-tracking = "wpde-01-171111-var"
+[wikipediade.banners.fulltop-var]
+filename = "./wikipedia.de/banner_fulltop_var.js"
+pagename = "B17WPDE_02_171124_fulltop_var"
+tracking = "wpde-02-171124-fulltop-var"
+
+[wikipediade.banners.top-var]
+filename = "./wikipedia.de/banner_top_var.js"
+pagename = "B17WPDE_02_171124_top_var"
+tracking = "wpde-02-171124-top-var"
 
 
 # English Campaign
