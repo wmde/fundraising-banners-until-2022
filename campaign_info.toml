@@ -18,6 +18,7 @@ tracking = "org-37-171222-var"
 [dewiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
 
 [dewiki-default.banners.default]
 filename = "./desktop/banner_ctrl.js"
@@ -45,6 +46,7 @@ tracking = "org-mob05-171218-var"
 [mobile-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
 
 [mobile-default.banners.default]
 filename = "./mobile/banner_ctrl.js"
@@ -72,6 +74,7 @@ tracking = "org-pad04-171218-var"
 [pad-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
 
 [pad-default.banners.default]
 filename = "./pad/banner_ctrl.js"
