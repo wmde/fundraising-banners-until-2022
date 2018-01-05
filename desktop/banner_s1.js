@@ -12,7 +12,6 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 
 import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
-import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
@@ -24,20 +23,6 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const CampaignProjection = require( '../shared/campaign_projection' );
-const campaignProjection = new CampaignProjection(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
-	{
-		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
-		goalDonationSum: GlobalBannerSettings.goalSum
-	}
-);
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
@@ -52,19 +37,14 @@ const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	numberOfDonors: donorFormatter( 359444 ),
 	CampaignName: CampaignName,
-	BannerName: BannerName,
-	numberOfNewMembersLastYear: '64.334', // @todo Update with real number, or add to projections,
-	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=10h16&type=sustaining&' +
-		'piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
+	BannerName: BannerName
 } ) );
 
 // BEGIN form init code
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
-
-BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
