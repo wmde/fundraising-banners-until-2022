@@ -55,11 +55,11 @@ const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	numberOfDonors: donorFormatter( 359444 ),
 	CampaignName: CampaignName,
 	BannerName: BannerName,
 	progressBar: progressBar.render(),
-	numberOfNewMembersLastYear: '64.334', // @todo Update with real number, or add to projections,
+	numberOfNewMembersLastYear: '64.596',
 	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=cat17&type=sustaining&' +
 	'piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
 } ) );
@@ -106,7 +106,7 @@ function displayBanner() {
 
 	var $numberOfDonors = $( '.infobox .mobile-only .number_of_donors' );
 	$( { Counter: 0 } ).animate(
-		{ Counter: campaignProjection.getProjectedNumberOfDonors() },
+		{ Counter: 359444 },
 		{
 			duration: 3000,
 			easing: 'swing',
