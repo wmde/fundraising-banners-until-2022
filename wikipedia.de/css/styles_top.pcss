@@ -157,6 +157,7 @@
 		height: 100%;
 		margin: 0;
 		font-size: 0.74em;
+		font-weight: bold;
 		text-align: center;
 		border: 1px solid #9aa0a7;
 		border-radius: 4px;
@@ -169,6 +170,7 @@
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
+		position: relative;
 	}
 
 	.select-group__option--fullwidth {
@@ -204,6 +206,16 @@
 		background-color: #ffffff;
 		color: #444444;
 		border-color: #a2a9b1;
+	}
+
+	.select-group__custom-input--value-entered {
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
+	}
+
+	.select-group__custom-input--value-entered + .select-group__state {
+		color: #ffffff;
 	}
 
 	.select-group__input:checked + .select-group__state {

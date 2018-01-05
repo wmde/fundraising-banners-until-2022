@@ -196,11 +196,11 @@
 	}
 
 	.select-group__custom-input {
-		padding: 0.4em;
+		padding: 0.4em 1.4em 0.4em 0.4em;
 		width: 100%;
 		height: 100%;
 		margin: 0;
-		font-size: 0.74em;
+		font-size: 0.9em;
 		text-align: center;
 		border: 1px solid #9aa0a7;
 		border-radius: 4px;
@@ -213,6 +213,7 @@
 		margin: 0;
 		box-sizing: border-box;
 		display: block;
+		position: relative;
 	}
 
 	.select-group__option--fullwidth {
@@ -249,6 +250,24 @@
 		background-color: #ffffff;
 		color: #444444;
 		border-color: #a2a9b1;
+	}
+
+	.select-group__custom-input--value-entered {
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
+	}
+
+	.select-group__custom-input--value-entered + .select-group__state {
+		color: #ffffff;
+	}
+
+	.select-group__custom-input + .select-group__state {
+		position: absolute;
+		top: 0;
+		right: 1em;
+		border: 0 none;
+		background: transparent;
 	}
 
 	.select-group__input:checked + .select-group__state {

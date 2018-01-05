@@ -3,7 +3,7 @@ require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 // For A/B testing different styles, load
-// require( './css/styles_top_var.pcss' );
+require( './css/styles_top_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -105,11 +105,13 @@ function setupAmountEventHandling() {
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
+		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 }

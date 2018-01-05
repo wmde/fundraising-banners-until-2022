@@ -105,11 +105,13 @@ function setupAmountEventHandling() {
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
+		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 }
@@ -131,11 +133,9 @@ function validateForm() {
 		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
 }
 
-$( '.WMDE-Banner-submit button' ).click( function ( e ) {
-	if ( !validateForm() ) {
-		e.preventDefault();
-		return false;
-	}
+$( '.WMDE-Banner-payment button' ).click( function () {
+	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
