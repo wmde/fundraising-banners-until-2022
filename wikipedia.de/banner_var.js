@@ -148,8 +148,12 @@ $( function () {
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
-	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
-		return;
+	if ( BannerFunctions.onMediaWiki() ) {
+		if ( window.mw.config.get( 'wgAction' ) !== 'view' ) {
+			return;
+		}
+	} else {
+		trackingEvents.recordBannerImpression();
 	}
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {

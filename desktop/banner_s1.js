@@ -1,9 +1,6 @@
-require( './css/styles.pcss' );
+require( './css/styles_s1.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
-
-// For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -15,31 +12,21 @@ const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&
 
 import TrackingEvents from '../shared/tracking_events';
 import SizeIssueIndicator from '../shared/track_size_issues';
-import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
 
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-GlobalBannerSettings[ 'appr-donations-per-minute' ] = 200;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const CampaignProjection = require( '../shared/campaign_projection' );
-const campaignProjection = new CampaignProjection(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
-	{
-		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
-	}
-);
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_s1.hbs' );
 
 const $ = require( 'jquery' );
 
@@ -47,28 +34,27 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textRight: '',
-	textInnerRight: 'Geschafft: <span class="js-donation_value">0,0</span> Mio. Euro'
-} );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( 359444 ),
 	CampaignName: CampaignName,
-	BannerName: BannerName,
-	progressBar: progressBar.render(),
-	numberOfNewMembersLastYear: '64.596',
-	becomeMemberLink: 'https://spenden.wikimedia.de/apply-for-membership?skin=cat17&type=sustaining&' +
-	'piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
+	BannerName: BannerName
 } ) );
+
+// BEGIN form init code
 
 const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
-$( '.expand_button' ).on( 'click', function ( e ) {
-	e.preventDefault();
-	$( 'div#WMDE_Banner .banner' ).toggleClass( 'expanded' );
+// END form init code
+
+$( '.show-beef', $bannerContainer ).click( function () {
+	$( '.banner', $bannerContainer ).toggleClass( 'enabled' );
+	addSpaceInstantly();
+} );
+
+$( '.close__beef', $bannerContainer ).click( function () {
+	$( '.banner', $bannerContainer ).removeClass( 'enabled' );
 	addSpaceInstantly();
 } );
 
@@ -102,19 +88,6 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressBar.animate(); }, 1000 );
-
-	var $numberOfDonors = $( '.infobox .mobile-only .number_of_donors' );
-	$( { Counter: 0 } ).animate(
-		{ Counter: 359444 },
-		{
-			duration: 3000,
-			easing: 'swing',
-			step: function () {
-				$numberOfDonors.text( donorFormatter( Math.ceil( this.Counter ) ) );
-			}
-		}
-	);
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -122,7 +95,7 @@ function displayBanner() {
 }
 
 // track banner expansion and closing
-trackingEvents.trackClickEvent( $( '.expand_button' ), 'banner-expanded', 1 );
+trackingEvents.trackClickEvent( $( 'thankyou-message__call-to-action' ), 'banner-expanded', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
@@ -141,6 +114,8 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 	$( '#WMDE_Banner' ).hide();
 	removeBannerSpace();
 } );
+
+// END Banner close functions
 
 // Display banner on load
 $( function () {

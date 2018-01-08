@@ -1,19 +1,24 @@
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "41-ba-171229"
+campaign_tracking = "thankyou-ba-180101"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_41_171230_ctrl"
-tracking = "org-41-171229-ctrl"
+pagename = "B17WMDE_thankYou1_180101_ctrl"
+tracking = "org-thankyou-180101-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B17WMDE_41_171230_var"
-tracking = "org-41-171229-var"
+pagename = "B17WMDE_thankYou1_180101_var"
+tracking = "org-thankyou-180101-var"
+
+[desktop.banners.s1]
+filename = "./desktop/banner_s1.js"
+pagename = "B17WMDE_thankYou_authors"
+tracking = "org-thankyou-180101-s1"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
@@ -21,7 +26,7 @@ preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devb
 wrapper_template = "wikipedia_org"
 
 [dewiki-default.banners.default]
-filename = "./desktop/banner_ctrl.js"
+filename = "./desktop/banner_s1.js"
 pagename = "B17WMDE_dewiki_desktop_default"
 tracking = "org-desktop-de-171113"
 
@@ -84,29 +89,24 @@ tracking = "org-pad-de-171121"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-04-171218"
+campaign_tracking = "wpde-thankyou-180101"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
-[wikipediade.banners.fulltop-ctrl]
-filename = "./wikipedia.de/banner_fulltop_ctrl.js"
-pagename = "B17WPDE_04_171218_fulltop_ctrl"
-tracking = "wpde-04-171218-fulltop-ctrl"
+[wikipediade.banners.ctrl]
+filename = "./wikipedia.de/banner_ctrl.js"
+pagename = "B17WPDE_thankyou_ctrl"
+tracking = "wpde-thankyou-180101-ctrl"
 
-[wikipediade.banners.top-ctrl]
-filename = "./wikipedia.de/banner_top_ctrl.js"
-pagename = "B17WPDE_04_171218_top_ctrl"
-tracking = "wpde-04-171218-top-ctrl"
+[wikipediade.banners.var]
+filename = "./wikipedia.de/banner_var.js"
+pagename = "B17WPDE_thankyou_var"
+tracking = "wpde-thankyou-180101-var"
 
-[wikipediade.banners.fulltop-var]
-filename = "./wikipedia.de/banner_fulltop_var.js"
-pagename = "B17WPDE_04_171218_fulltop_var"
-tracking = "wpde-04-171218-fulltop-var"
-
-[wikipediade.banners.top-var]
-filename = "./wikipedia.de/banner_top_var.js"
-pagename = "B17WPDE_04_171218_top_var"
-tracking = "wpde-04-171218-top-var"
+[wikipediade.banners.s1]
+filename = "./wikipedia.de/banner_s1.js"
+pagename = "B17WPDE_thankyou_s1"
+tracking = "wpde-thankyou-180101-s1"
 
 
 # English Campaign
