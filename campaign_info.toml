@@ -25,7 +25,6 @@ filename = "./desktop/banner_ctrl.js"
 pagename = "B17WMDE_dewiki_desktop_default"
 tracking = "org-desktop-de-171113"
 
-
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob05-ba-171218"
@@ -52,7 +51,6 @@ wrapper_template = "wikipedia_org"
 filename = "./mobile/banner_ctrl.js"
 pagename = "B17WMDE_dewiki_mobile_default"
 tracking = "org-mob-de-171121"
-
 
 # iPad campaign
 [pad]
@@ -125,7 +123,6 @@ filename = "./english/banner_var.js"
 pagename = "B17WMDE_en03_171218_var"
 tracking = "org-en03-171218-var"
 
-
 [enwiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
@@ -135,3 +132,14 @@ wrapper_template = "wikipedia_org"
 filename = "./english/banner_ctrl.js"
 pagename = "B17WMDE_enwiki_desktop_default"
 tracking = "org-desktop-en-171121"
+
+# Prototype Campaign
+[prototype]
+campaign_tracking = ""
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[prototype.banners.ctrl]
+filename = "./prototype/banner_ctrl.js"
+pagename = "prototype_ctrl"
+tracking = "org-mob05-171218-ctrl"
