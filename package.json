@@ -17,8 +17,8 @@
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
-    "format-number": "^3.0.0",
-    "swiper": "^4.2.2"
+    "flickity": "^2.1.0",
+    "format-number": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.6",

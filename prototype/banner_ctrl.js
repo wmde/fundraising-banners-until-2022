@@ -15,7 +15,7 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import Swiper from '../node_modules/swiper';
+import Flickity from 'flickity';
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 
@@ -111,8 +111,7 @@ $( '.button-group__container button' ).click( function ( event ) {
 function displayMiniBanner() {
 
 	const miniBanner = $( '.mini-banner' );
-	const bannerHeight = miniBanner.height();
-	miniBanner.css( 'top', 0 - bannerHeight ).show();
+	const bannerHeight = miniBanner.outerHeight();
 
 	miniBanner.animate( {
 		top: 0
@@ -129,7 +128,7 @@ function displayFullBanner() {
 	window.scrollTo( 0, 0 );
 	$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 	$( '#frbanner' ).show();
-	$( '.mini-banner' ).slideToggle();
+	$( '.mini-banner' ).show();
 
 	progressBar.animate();
 	window.setTimeout( function () {
@@ -150,15 +149,11 @@ $( document ).ready( function () {
 	$( '.mini-banner__close-button' ).click( function () {
 		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
-
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.hideBanner();
 		}
-
 		return false;
 	} );
-
-	$( '.mini-banner' ).click( displayFullBanner );
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
@@ -167,10 +162,10 @@ $( document ).ready( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 	} );
 
-    var swiper = new Swiper('.swiper-container', {
-        pagination: {
-            el: '.swiper-pagination',
-        },
-    });
-    console.log(swiper);
+	//TODO add listener which stops sliding at last slide, see response at https://github.com/metafizzy/flickity/issues/584
+	const slider = new Flickity( document.querySelector( '.main-carousel' ), {
+        wrapAround: true,
+		autoPlay: 2000,
+        prevNextButtons: false
+	} );
 } );

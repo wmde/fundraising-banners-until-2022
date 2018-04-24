@@ -9,21 +9,29 @@
 	width: 100%;
 	position: fixed;
 	left: 0;
-	top: 0;
+	top: -148px;
 	cursor: pointer;
 	text-align: center;
+	box-sizing: border-box;
 	z-index: 1000;
-	display: none;
+	display: block;
+	margin: 0 auto;
 }
 
-.mini-banner__text {
+.mini-banner-content {
+	width: 98%;
+	position: relative;
+	left: 0;
+	text-align: center;
+	box-sizing: border-box;
+	z-index: 1000;
+	display: inline-block;
 	background: #f8f9fa;
-	border: 5px solid #990000;
-	border-radius: 4px;
-	padding: 0.7em;
-	margin: 0.25em 0.25em 0 0.25em;
-	color: #1c1c1c;
-	text-align: left;
+	border: 8px solid #990a00;
+	box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+	border-radius: 15px;
+	padding: 5px;
+	margin: 5px 0 0;
 }
 
 .mini-banner__tab {
@@ -43,14 +51,8 @@
 	cursor: pointer;
 }
 
-.mini-banner__tab img {
-	float: left;
-	margin: 0.4em 0.15em 0 0.4em;
-	transform: rotate( 180deg );
-}
-
 .mini-banner__close-button {
-	background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
+	background: url('https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png') no-repeat center center;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -61,9 +63,95 @@
 	padding: 2em 2em 2.5em 2.5em;
 }
 
-.text__highlight {
-	background-color: #ffff00;
-	color: #000000;
-	font-weight: bold;
-	padding: 0 5px;
+.carousel-cell {
+	width: 100%;
+	height: 100px;
+	margin-right: 10px;
+}
+
+.flickity {
+	&-enabled {
+		position: relative;
+		&:focus {
+			outline: none;
+		}
+		&.is-draggable {
+			-webkit-tap-highlight-color: transparent;
+			tap-highlight-color: transparent;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			.flickity-viewport {
+				cursor: move;
+				cursor: -webkit-grab;
+				cursor: grab;
+				&.is-pointer-down {
+					cursor: -webkit-grabbing;
+					cursor: grabbing;
+				}
+			}
+		}
+	}
+	&-viewport {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
+	&-slider {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	&-button {
+		position: absolute;
+		background: hsla( 0, 0%, 100%, 0.75 );
+		border: none;
+		color: #333333;
+		&-icon {
+			fill: #333333;
+		}
+
+		&:hover {
+			background: white;
+			cursor: pointer;
+		}
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 0 5px #1199ff;
+		}
+		&:active {
+			opacity: 0.6;
+		}
+		&:disabled {
+			opacity: 0.3;
+			cursor: auto;
+			pointer-events: none;
+		}
+	}
+	&-page-dots {
+		position: relative;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		text-align: center;
+		line-height: 1;
+		.dot {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 8px;
+			background: #990a00;
+			border-radius: 50%;
+			opacity: 0.25;
+			cursor: pointer;
+			&.is-selected {
+				opacity: 1;
+			}
+		}
+	}
+	&-rtl .flickity-page-dots {
+		direction: rtl;
+	}
 }
