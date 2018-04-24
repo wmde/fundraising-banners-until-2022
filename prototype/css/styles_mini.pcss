@@ -1,3 +1,8 @@
+:root {
+	--banner-color-red: #990a00;
+	--banner-color-offwhite: #f8f9fa;
+}
+
 @media ( min-width: 768px ) {
 	.mini-banner {
 		font-size: 1em;
@@ -16,104 +21,93 @@
 	z-index: 1000;
 	display: block;
 	margin: 0 auto;
-}
-
-.mini-banner-content {
-	width: 98%;
-	position: relative;
-	left: 0;
-	text-align: center;
-	box-sizing: border-box;
-	z-index: 1000;
-	display: inline-block;
-	background: #f8f9fa;
-	border: 8px solid #990a00;
-	box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
-	border-radius: 15px;
-	padding: 5px;
-	margin: 5px 0 0;
-}
-
-.container {
-  max-width: 50%;
-  margin: 40px auto;
-}
-
-h1 {
- position: relative;
-     opacity: 0.3;
-     font-family: Arial-BoldMT;
-     font-size: 16px;
-     color: #990A00;
-     letter-spacing: 1.6px;
-     line-height: 32px;
-}
-
-
-h1.one:before {
-  content: "";
-    display: block;
-    border-top: solid 1px #990A00;
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    opacity: 0.3;
-}
-
-h1.one span {
-background: #fff;
-    padding: 0 20px;
-    position: relative;
-    z-index: 5;
-}
-
-
-
-.mini-banner__tab {
-	background: #f8f9fa;
-	border: 8px solid #990000;
-	border-radius: 8px;
-	border-top: 0 none;
-	width: 130px;
-	margin: 0 auto;
-	padding: 0 0.8em 0.3em 0.8em;
-	display: block;
-	position: relative;
-	top: -8px;
-	font-size: 0.9em;
-	color: #6c0000 !important;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.mini-banner__close-button {
-	background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
-	position: fixed;
-	top: 0;
-	right: 0;
-	padding: 0em 0em 2em 2em;
-	font-size: 34px;
-	opacity: 0.5;
-	color: #990A00 !important;
-}
-
-.carousel-cell {
-	width: 100%;
-	height: 100px;
-	margin-right: 10px;
+	&-content {
+		width: 98%;
+		position: relative;
+		left: 0;
+		text-align: center;
+		box-sizing: border-box;
+		z-index: 1000;
+		display: inline-block;
+		background: var( --banner-color-offwhite );
+		border: 8px solid var( --banner-color-red );
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		border-radius: 15px;
+		padding: 5px;
+		margin: 5px 0 0;
+	}
+	&-headline {
+		& > div {
+			position: relative;
+			&:before {
+				content: '';
+				display: block;
+				border-top: solid 1px var( --banner-color-red );
+				width: 100%;
+				height: 1px;
+				position: absolute;
+				top: 50%;
+				z-index: -1;
+				opacity: 0.3;
+			}
+		}
+		span {
+			font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
+			font-size: 16px;
+			color: var( --banner-color-red );
+			display: inline-block;
+			letter-spacing: 2px;
+			line-height: 32px;
+			text-transform: uppercase;
+			padding: 0 15px;
+			background-color: var( --banner-color-offwhite );
+		}
+	}
+	.carousel-cell {
+		width: 100%;
+		height: 100px;
+		margin-right: 10px;
+	}
+	&__tab {
+		background: var( --banner-color-offwhite );
+		border: 8px solid var( --banner-color-red );
+		border-radius: 8px;
+		border-top: 0 none;
+		width: 130px;
+		margin: 0 auto;
+		padding: 0 0.8em 0.3em 0.8em;
+		display: block;
+		position: relative;
+		top: -8px;
+		font-size: 0.9em;
+		color: var( --banner-color-red );
+		font-weight: bold;
+		cursor: pointer;
+	}
+	&__close-button {
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
+		position: fixed;
+		top: 0;
+		right: 0;
+		padding: 0 0 2em 2em;
+		font-size: 34px;
+		opacity: 0.5;
+	}
 }
 
 .flickity {
+	&-viewport {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
 	&-enabled {
 		position: relative;
 		&:focus {
-			outline: none;
+			outline: transparent;
 		}
 		&.is-draggable {
 			-webkit-tap-highlight-color: transparent;
-			tap-highlight-color: transparent;
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
@@ -129,11 +123,6 @@ background: #fff;
 			}
 		}
 	}
-	&-viewport {
-		overflow: hidden;
-		position: relative;
-		height: 100%;
-	}
 	&-slider {
 		position: absolute;
 		width: 100%;
@@ -141,20 +130,20 @@ background: #fff;
 	}
 	&-button {
 		position: absolute;
-		background: hsla( 0, 0%, 100%, 0.75 );
-		border: none;
+		background: var( --banner-color-offwhite );
+		border: 0;
 		color: #333333;
 		&-icon {
 			fill: #333333;
 		}
 
 		&:hover {
-			background: white;
+			background: var( --banner-color-offwhite );
 			cursor: pointer;
 		}
 		&:focus {
-			outline: none;
-			box-shadow: 0 0 0 5px #1199ff;
+			outline: 0;
+			box-shadow: 0 0 0 5px var( --banner-color-red );
 		}
 		&:active {
 			opacity: 0.6;
@@ -178,7 +167,7 @@ background: #fff;
 			width: 10px;
 			height: 10px;
 			margin: 0 8px;
-			background: #990a00;
+			background: var( --banner-color-red );
 			border-radius: 50%;
 			opacity: 0.25;
 			cursor: pointer;

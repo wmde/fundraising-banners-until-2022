@@ -162,10 +162,28 @@ $( document ).ready( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 	} );
 
-	//TODO add listener which stops sliding at last slide, see response at https://github.com/metafizzy/flickity/issues/584
-	const slider = new Flickity( document.querySelector( '.main-carousel' ), {
-        wrapAround: true,
+	const slider = new Flickity( document.querySelector( '.banner-carousel' ), {
+		wrapAround: true,
 		autoPlay: 2000,
-        prevNextButtons: false
+		prevNextButtons: false
 	} );
+	// TODO Fix gallery stopping at last slide. See comment at https://github.com/metafizzy/flickity/issues/584
+	let slidesCount = $( '.banner-carousel .carousel-cell' ).length;
+	let autoplayCount = 0;
+
+	function onSelect() {
+		if ( slider.player.state !== 'playing' ) {
+			disableAutoplay();
+			return;
+		}
+		autoplayCount++;
+		if ( autoplayCount >= slidesCount ) {
+			disableAutoplay();
+		}
+	}
+
+	function disableAutoplay() {
+		slider.flickity( 'stopPlayer' );
+		slider.off( 'select.flickity', onSelect );
+	}
 } );
