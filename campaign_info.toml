@@ -4,6 +4,7 @@ campaign_tracking = "41-ba-171229"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
+
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
@@ -24,6 +25,7 @@ wrapper_template = "wikipedia_org"
 filename = "./desktop/banner_ctrl.js"
 pagename = "B17WMDE_dewiki_desktop_default"
 tracking = "org-desktop-de-171113"
+
 
 # Mobile Campaign
 [mobile]
@@ -51,6 +53,7 @@ wrapper_template = "wikipedia_org"
 filename = "./mobile/banner_ctrl.js"
 pagename = "B17WMDE_dewiki_mobile_default"
 tracking = "org-mob-de-171121"
+
 
 # iPad campaign
 [pad]
