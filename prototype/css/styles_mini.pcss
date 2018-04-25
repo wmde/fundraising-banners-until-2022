@@ -1,5 +1,6 @@
 :root {
 	--banner-color-red: #990a00;
+	--banner-color-red-light: #dbb0ad;
 	--banner-color-offwhite: #f8f9fa;
 }
 
@@ -42,19 +43,18 @@
 			&:before {
 				content: '';
 				display: block;
-				border-top: solid 1px var( --banner-color-red );
+				border-top: solid 1px var( --banner-color-red-light );
 				width: 100%;
 				height: 1px;
 				position: absolute;
 				top: 50%;
 				z-index: -1;
-				opacity: 0.3;
 			}
 		}
 		span {
 			font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
 			font-size: 16px;
-			color: var( --banner-color-red );
+			color: var( --banner-color-red-light );
 			display: inline-block;
 			letter-spacing: 2px;
 			line-height: 32px;
