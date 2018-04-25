@@ -2,6 +2,7 @@
 	--banner-color-red: #990a00;
 	--banner-color-red-light: #dbb0ad;
 	--banner-color-offwhite: #f8f9fa;
+	--banner-color-red-dark: #6c0000;
 }
 
 @media ( min-width: 768px ) {
@@ -38,6 +39,7 @@
 		margin: 5px 0 0;
 	}
 	&-headline {
+		margin-right: 3em;
 		& > div {
 			position: relative;
 			&:before {
@@ -80,9 +82,11 @@
 		position: relative;
 		top: -8px;
 		font-size: 0.9em;
-		color: var( --banner-color-red );
+		color: var( --banner-color-red-dark );
 		font-weight: bold;
 		cursor: pointer;
+		z-index: 1000;
+		text-transform: uppercase;
 	}
 	&__close-button {
 		background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
@@ -92,6 +96,7 @@
 		padding: 0 0 2em 2em;
 		font-size: 34px;
 		opacity: 0.5;
+		margin-right: 1%;
 	}
 }
 
