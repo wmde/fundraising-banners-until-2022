@@ -3,13 +3,7 @@
 	--banner-color-red-light: #dbb0ad;
 	--banner-color-offwhite: #f8f9fa;
 	--banner-color-red-dark: #6c0000;
-}
-
-@media ( min-width: 768px ) {
-	.mini-banner {
-		font-size: 1em;
-		line-height: 1.3em;
-	}
+	--banner-main-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
 }
 
 .mini-banner {
@@ -23,23 +17,32 @@
 	z-index: 1000;
 	display: block;
 	margin: 0 auto;
-	&-content {
-		width: 98%;
+	&-box {
+		display: inline-block;
 		position: relative;
 		left: 0;
 		text-align: center;
 		box-sizing: border-box;
 		z-index: 1000;
-		display: inline-block;
 		background: var( --banner-color-offwhite );
 		border: 8px solid var( --banner-color-red );
 		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 		border-radius: 15px;
 		padding: 5px;
 		margin: 5px 0 0;
+		width: 98%;
+	}
+	&-carousel {
+		width: 100%;
+		flex: 0 0 100%;
+	}
+	&-content {
+		display: flex;
+		flex-wrap: wrap;
 	}
 	&-headline {
-		margin-right: 3em;
+		width: 85%;
+		flex: 1 1 85%;
 		& > div {
 			position: relative;
 			&:before {
@@ -54,14 +57,16 @@
 			}
 		}
 		span {
-			font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
-			font-size: 16px;
+			font-weight: bold;
+			font-family: var( --banner-main-font-family );
+			font-size: 2.8vw;
 			color: var( --banner-color-red-light );
 			display: inline-block;
-			letter-spacing: 2px;
+			letter-spacing: 1px;
+			margin-left: 6%;
 			line-height: 32px;
 			text-transform: uppercase;
-			padding: 0 15px;
+			padding: 0 5px;
 			background-color: var( --banner-color-offwhite );
 		}
 	}
@@ -69,35 +74,63 @@
 		width: 100%;
 		height: 100px;
 		margin-right: 10px;
+		p {
+			font-weight: bold;
+			font-family: var( --banner-main-font-family );
+		}
 	}
 	&-tab {
-		background: var( --banner-color-offwhite );
-		border: 8px solid var( --banner-color-red );
-		border-radius: 8px;
-		border-top: 0 none;
-		width: 130px;
-		margin: 0 auto;
-		padding: 0 0.8em 0.3em 0.8em;
 		display: block;
-		position: relative;
-		top: -8px;
+		position: absolute;
+		left: 50%;
+		bottom: -37px;
 		font-size: 0.9em;
 		color: var( --banner-color-red-dark );
-		font-weight: bold;
-		cursor: pointer;
 		z-index: 1000;
 		text-transform: uppercase;
+		&-inner {
+			cursor: pointer;
+			position: relative;
+			left: -50%;
+			background: var( --banner-color-offwhite );
+			border: 8px solid var( --banner-color-red );
+			border-radius: 8px;
+			border-top: 0 none;
+			font-weight: bold;
+			width: 130px;
+			margin: 0 auto;
+			padding: 5px 15px 4px 15px;
+		}
 	}
 	&__close-button {
-		position: fixed;
+		position: relative;
+		padding: 0 5px;
+		flex: 0 0 auto;
 		top: 0;
 		right: 0;
-		padding: 0 0 2em 2em;
-		font-size: 34px;
-		margin-right: 1%;
+		font-size: 25px;
 		&:before {
+			top: 0;
+			position: relative;
 			content: '\2716';
 			color: var( --banner-color-red-light );
+		}
+	}
+}
+
+@media ( min-width: 480px ) {
+	.mini-banner {
+		&-headline {
+			span {
+				font-size: 16px;
+				padding: 0 15px;
+			}
+		}
+		&__close-button {
+			font-size: 30px;
+			&:before {
+				top: -3px;
+			}
 		}
 	}
 }

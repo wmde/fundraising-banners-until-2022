@@ -162,13 +162,13 @@ $( document ).ready( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 	} );
 
-	const slider = new Flickity( document.querySelector( '.banner-carousel' ), {
+	const slider = new Flickity( document.querySelector( '.mini-banner-carousel' ), {
 		wrapAround: true,
 		autoPlay: 2000,
 		prevNextButtons: false
 	} );
 
-	let slidesCount = $( '.banner-carousel .carousel-cell' ).length;
+	let slidesCount = $( '.mini-banner-carousel .carousel-cell' ).length;
 	let autoplayCount = 0;
 
 	slider.on( 'select', onSelect );
