@@ -1,3 +1,11 @@
+:root {
+	--banner-color-red: #990a00;
+	--banner-color-red-light: #dbb0ad;
+	--banner-color-offwhite: #f8f9fa;
+	--banner-color-red-dark: #6c0000;
+	--banner-color-gray: #e0e5e9;
+}
+
 /* Overall container */
 #frbanner {
 
@@ -42,19 +50,40 @@
 ------------------------------------ */
 
 #frbanner-window {
-
-	background: #ffffff;
+	background: var( --banner-color-offwhite );
 	width: 90%;
 	top: 20px !important;
 	left: 5% !important;
 	-moz-box-shadow: 0 0 10px rgba( 90, 97, 98, 0.25 );
 	-webkit-box-shadow: 0 0 10px rgba( 90, 97, 98, 0.25 );
-	box-shadow: 0 0 10px rgba( 90, 97, 98, 0.25 );
+	box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 	position: absolute;
 	z-index: 1001;
+	cursor: pointer;
+	text-align: center;
+	box-sizing: border-box;
+	display: block;
+	margin: 0 auto;
+	border: 8px solid var( --banner-color-red );
+	border-radius: 15px;
+	&-headline {
+		& > div {
+			position: relative;
+			&:before {
+				content: '';
+				display: block;
+				border-top: solid 1px var(--banner-color-red-light);
+				width: 100%;
+				height: 1px;
+				position: absolute;
+				top: 50%;
+				z-index: -1;
+			}
+		}
+	}
 
 	/* --- Message --- */
-
+/*
 	.infobox {
 		font-size: 20px;
 		line-height: 1.3;
@@ -102,7 +131,7 @@
 
 	.infobox__text--italic {
 		font-style: italic;
-	}
+	}*/
 
 	/* Progress bar styling */
 	.progress_bar__days_left {
@@ -160,11 +189,7 @@
 
 	/* Call to action */
 	.call-to-action {
-		text-align: center;
-		background: #990000;
-		color: #ffffff;
 		padding: 10px;
-		font-weight: normal;
 		font-size: 24px;
 		display: block;
 		margin: auto;
@@ -194,7 +219,7 @@
 		}
 	}
 
-	.call-to-action:after {
+/*	.call-to-action:after {
 		position: absolute;
 		left: 50%;
 		top: 100%;
@@ -206,7 +231,7 @@
 		border-top-color: #990000;
 		border-width: 10px;
 		pointer-events: none;
-	}
+	}*/
 
 	/* --- Dynamic highlighting --- */
 
@@ -367,10 +392,9 @@
 	.button-group__button {
 		display: inline-block;
 		width: 100%;
-		background-color: #f8f9fa;
+		background-color: var( --banner-color-gray );
 		color: #222222;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
+		border-radius: 10.89px;
 		padding: 24px 2px;
 		outline: 0;
 		text-align: center;
@@ -387,8 +411,8 @@
 		border-color: #a2a9b1;
 	}
 	.button-group__button:active {
-		background-color: #d9d9d9;
-		color: #000000;
+		background-color: var( --banner-color-red );
+		color: var( --banner-color-offwhite );
 		border-color: #7d8389;
 	}
 

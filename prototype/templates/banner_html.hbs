@@ -3,25 +3,25 @@
 	<div id="frbanner-mask"></div>
 
 	<div id="frbanner-window">
-
-		<div id="frbanner-close"></div>
+        <div class="mini-banner-headline">
+            <div>
+                <span>Die Wikimedia Spendenkampagne</span>
+            </div>
+        </div>
+        <div id="frbanner-close"></div>
 
 		<div id="modal-signup" class="cf">
 
-			<div class="infobox">
-                <div class="infobox__text">
-                    {{> banner_text }}
-                </div>
-
-                {{{ progressBar }}}
-
+            {{{ progressBar }}}
+			<div>
                 <div class="call-to-action">
-                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt!
                 </div>
-			</div>
+                <div class="mini-banner-headline"></div>
+            </div>
 
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
+            <form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
 				<input type="hidden" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -37,7 +37,6 @@
 				<fieldset class="form__section cf">
 
 
-					<legend class="form__section-head">Betrag wählen</legend>
 
                     <ol class="select-group select-group--tablet-3cols" >
 
@@ -75,10 +74,12 @@
 
 				</fieldset>
 
-				<fieldset class="form__section cf">
-                    
-                    <legend class="form__section-head">Zahlweise wählen</legend>
-                
+                <div class="mini-banner-headline"></div>
+
+
+                <fieldset class="form__section cf">
+
+
                     <ol class="button-group button-group--tablet-2cols">
     
                         <li class="button-group__container">
@@ -92,18 +93,23 @@
                                 Kreditkarte
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="UEB">
                                 Überweisung
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="BEZ">
                                 Lastschrift
                             </button>
                         </li>
+
+                    </ol>
+
+                        <ol class="button-group button-group--tablet-1col">
+
 
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="SUB">
@@ -118,6 +124,10 @@
                         <li class="button-group__hint">
                             SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
                         </li>
+
+                        <li class="button-group__container">
+                            <a href="" class="button-group__button ">Weiter, um Spende abzuschließen</a>
+                        </li>
     
                     </ol>
                 </fieldset>
@@ -125,8 +135,8 @@
 			</form>
 
 			<div class="smallprint" id="frbanner-smallprint">
-				<div class="smallprint--left"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
-				<div class="smallprint--right">
+				<div class="smallprint"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
+				<div class="smallprint">
 					<a href="https://spenden.wikimedia.de/page/Transparenz?skin=10h16">Wohin geht meine Spende?</a>
 				</div>
 			</div>
