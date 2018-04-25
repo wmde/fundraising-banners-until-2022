@@ -128,7 +128,7 @@ function displayFullBanner() {
 	window.scrollTo( 0, 0 );
 	$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 	$( '#frbanner' ).show();
-	$( '.mini-banner' ).show();
+	$( '.mini-banner' ).hide();
 
 	progressBar.animate();
 	window.setTimeout( function () {
@@ -167,9 +167,11 @@ $( document ).ready( function () {
 		autoPlay: 2000,
 		prevNextButtons: false
 	} );
-	// TODO Fix gallery stopping at last slide. See comment at https://github.com/metafizzy/flickity/issues/584
+
 	let slidesCount = $( '.banner-carousel .carousel-cell' ).length;
 	let autoplayCount = 0;
+
+	slider.on( 'select', onSelect );
 
 	function onSelect() {
 		if ( slider.player.state !== 'playing' ) {
@@ -177,13 +179,15 @@ $( document ).ready( function () {
 			return;
 		}
 		autoplayCount++;
-		if ( autoplayCount >= slidesCount ) {
+		if ( autoplayCount >= slidesCount - 1 ) {
 			disableAutoplay();
 		}
 	}
 
 	function disableAutoplay() {
-		slider.flickity( 'stopPlayer' );
-		slider.off( 'select.flickity', onSelect );
+		slider.stopPlayer();
+		slider.off( 'select', onSelect );
 	}
+
+	$( '.mini-banner-tab' ).click( displayFullBanner );
 } );
