@@ -4,6 +4,8 @@
 	--banner-color-offwhite: #f8f9fa;
 	--banner-color-red-dark: #6c0000;
 	--banner-color-gray: #e0e5e9;
+	--banner-color-gray-dark: #989a9a;
+	--banner-color-green: #6e9e00;
 }
 
 /* Overall container */
@@ -32,6 +34,16 @@
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
+	}
+}
+
+.frbanner {
+	&-separator {
+		border: 3px solid var( --banner-color-red-light );
+		opacity: 0.5;
+		width: 100%;
+		border-radius: 15px;
+		margin: 20px 0;
 	}
 }
 
@@ -72,7 +84,7 @@
 			&:before {
 				content: '';
 				display: block;
-				border-top: solid 1px var(--banner-color-red-light);
+				border-top: solid 1px var( --banner-color-red-light );
 				width: 100%;
 				height: 1px;
 				position: absolute;
@@ -81,57 +93,6 @@
 			}
 		}
 	}
-
-	/* --- Message --- */
-/*
-	.infobox {
-		font-size: 20px;
-		line-height: 1.3;
-		border: 5px solid #990000;
-		border-bottom: 0;
-	}
-
-	.infobox__greeting {
-		margin-right: 2em;
-	}
-
-	.infobox__text {
-		padding: 20px 20px 0 20px;
-		font-weight: bold;
-	}
-
-	@media ( min-width: 768px ) {
-		.infobox {
-			font-size: 24px;
-			line-height: 1.4;
-		}
-
-		.infobox__text {
-			padding: 48px 72px 0 72px;
-		}
-	}
-
-	@media ( min-height: 1000px ) {
-		.infobox {
-			font-size: 24px;
-		}
-
-		.infobox__text {
-			padding: 48px 72px 0 72px;
-		}
-	}
-
-	.infobox__text p {
-		margin-bottom: 10px;
-	}
-
-	.infobox__text p:last-child {
-		margin-bottom: 0;
-	}
-
-	.infobox__text--italic {
-		font-style: italic;
-	}*/
 
 	/* Progress bar styling */
 	.progress_bar__days_left {
@@ -193,8 +154,9 @@
 		font-size: 24px;
 		display: block;
 		margin: auto;
-		width: 100%;
+		width: 300px;
 		position: relative;
+		font-weight: bold;
 	}
 
 	.call-to-action__optional-text {
@@ -219,20 +181,6 @@
 		}
 	}
 
-/*	.call-to-action:after {
-		position: absolute;
-		left: 50%;
-		top: 100%;
-		height: 0;
-		width: 0;
-		margin-left: -10px;
-		content: ' ';
-		border: solid transparent;
-		border-top-color: #990000;
-		border-width: 10px;
-		pointer-events: none;
-	}*/
-
 	/* --- Dynamic highlighting --- */
 
 	.highlight {
@@ -256,7 +204,7 @@
 	/*  --- Form  ---  */
 
 	.form {
-		padding: 10px 15px 10px;
+		padding: 0 40px 20px;
 		position: relative;
 		height: 100%;
 	}
@@ -295,6 +243,7 @@
 		margin-bottom: 6px;
 		margin-right: 2%;
 		padding: 0 4px;
+		font-weight: bold;
 	}
 
 	.select-group__option:nth-child( 2n ) {
@@ -320,17 +269,16 @@
 
 	.select-group__label {
 		display: block;
-		background-color: #f8f9fa;
+		background-color: var( --banner-color-gray );
 		color: #222222;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 24px 2px;
+		border-radius: 10.89px;
+		padding: 15px 2px;
 		outline: 0;
 		text-align: center;
 		line-height: 1;
 		cursor: pointer;
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: bold;
 		font-size: 24px;
 		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 	}
@@ -340,15 +288,15 @@
 		border-color: #a2a9b1;
 	}
 	.select-group__label:active {
-		background-color: #d9d9d9;
-		color: #000000;
+		background-color: var( --banner-color-red );
+		color: var( --banner-color-offwhite );
 		border-color: #7d8389;
 	}
 
 	.select-group__input:checked + .select-group__label,
 	.select-group__label.checked {
-		background-color: #2a4b8d;
-		color: #ffffff;
+		background-color: var( --banner-color-red );
+		color: var( --banner-color-offwhite );
 		border-color: #7d8389;
 	}
 
@@ -366,76 +314,85 @@
 
 	/* Button Groups, 1 col by default for small screens */
 
-	.button-group__container {
-		display: block;
-		width: 100%;
-		clear: none;
-		float: left;
-		margin-bottom: 6px;
-		padding: 0 4px;
-	}
-
-	.button-group--tablet-2cols {
-		@media ( min-width: 980px ) {
-
-			.button-group__container {
-				width: 49%;
+	.button {
+		&-group {
+			&__container {
+				display: block;
+				width: 100%;
+				clear: none;
+				float: left;
+				margin-bottom: 6px;
+				padding: 3px 0;
 			}
 
-			.button-group__container:nth-child( 2n+1 ) {
-				margin-right: 2%;
+			&--tablet-2cols {
+				@media ( min-width: 980px ) {
+
+					&__container {
+						width: 49%;
+					}
+
+					&-group__container:nth-child( 2n+1 ) {
+						margin-right: 2%;
+					}
+
+				}
+			}
+
+			&__button {
+				display: inline-block;
+				width: 100%;
+				background-color: var( --banner-color-gray );
+				color: #222222;
+				border-radius: 10.89px;
+				padding: 24px 2px;
+				outline: 0;
+				text-align: center;
+				line-height: 1;
+				cursor: pointer;
+				font-family: inherit;
+				font-weight: bold;
+				font-size: 24px;
+				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+				&:hover {
+					background-color: #ffffff;
+					color: #444444;
+					border-color: #a2a9b1;
+				}
+				&:active {
+					background-color: var( --banner-color-red );
+					color: var( --banner-color-offwhite );
+					border-color: #7d8389;
+				}
+
+				&-submit {
+					background-color: var( --banner-color-green );
+					color: var( --banner-color-offwhite );
+				}
+			}
+
+			&__hint {
+				font-size: 9pt;
+				line-height: 12pt;
+				margin-right: 0;
+				width: 100%;
+				padding: 0 0 15px 0;
+				color: var( --banner-color-gray-dark );
 			}
 
 		}
 	}
-
-	.button-group__button {
-		display: inline-block;
-		width: 100%;
-		background-color: var( --banner-color-gray );
-		color: #222222;
-		border-radius: 10.89px;
-		padding: 24px 2px;
-		outline: 0;
-		text-align: center;
-		line-height: 1;
-		cursor: pointer;
-		font-family: inherit;
-		font-weight: 500;
-		font-size: 24px;
-		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
-	}
-	.button-group__button:hover {
-		background-color: #ffffff;
-		color: #444444;
-		border-color: #a2a9b1;
-	}
-	.button-group__button:active {
-		background-color: var( --banner-color-red );
-		color: var( --banner-color-offwhite );
-		border-color: #7d8389;
-	}
-
-	.button-group__hint {
-		font-size: 9pt;
-		line-height: 12pt;
-		margin-right: 0;
-		width: 100%;
-		padding: 0 4px;
-		text-align: right;
-	}
-
 	/* -- Smallprint -- */
 	.smallprint {
 		width: 100%;
 		font-size: 75%;
-		padding: 10px 20px 5px 20px;
 	}
 
 	.smallprint a {
 		font-size: 9pt;
 		line-height: 14pt;
-		color: #002bb8;
+		color: var( --banner-color-gray-dark );
 		text-decoration: none;
 	}
 

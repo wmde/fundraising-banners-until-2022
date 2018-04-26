@@ -1,4 +1,4 @@
-<div id="frbanner" style="display: none;">
+<div id="frbanner" class="frbanner" style="display: none;">
 	<div id="frbanner-mask"></div>
 	<div id="frbanner-window">
         <div class="mini-banner-headline">
@@ -6,14 +6,17 @@
                 <span>Die Wikimedia Spendenkampagne</span>
             </div>
         </div>
+
         <div id="frbanner-close"></div>
+
 		<div id="modal-signup" class="cf">
+
             {{{ progressBar }}}
-			<div>
+
+            <div>
                 <div class="call-to-action">
                     Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt!
                 </div>
-                <div class="mini-banner-headline"></div>
             </div>
 
             <form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
@@ -28,10 +31,9 @@
 				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
 				<input type="hidden" id="betrag" name="betrag" value="" />
 
+                <hr class="frbanner-separator">
 
 				<fieldset class="form__section cf">
-
-
 
                     <ol class="select-group select-group--tablet-3cols" >
 
@@ -69,12 +71,10 @@
 
 				</fieldset>
 
-                <div class="mini-banner-headline"></div>
-
+                <hr class="frbanner-separator">
 
                 <fieldset class="form__section cf">
-
-
+                    
                     <ol class="button-group button-group--tablet-2cols">
     
                         <li class="button-group__container">
@@ -121,7 +121,7 @@
                         </li>
 
                         <li class="button-group__container">
-                            <a href="" class="button-group__button ">Weiter, um Spende abzuschließen</a>
+                            <a href="" class="button-group__button button-group__button-submit">Weiter, um Spende abzuschließen</a>
                         </li>
     
                     </ol>
@@ -130,10 +130,11 @@
 			</form>
 
 			<div class="smallprint" id="frbanner-smallprint">
-				<div class="smallprint"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
 				<div class="smallprint">
-					<a href="https://spenden.wikimedia.de/page/Transparenz?skin=10h16">Wohin geht meine Spende?</a>
-				</div>
+                    <a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> |
+                    <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a> |
+                    <a href="https://spenden.wikimedia.de/page/Transparenz?skin=10h16">Wohin geht meine Spende?</a>
+                </div>
 			</div>
 			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
 
