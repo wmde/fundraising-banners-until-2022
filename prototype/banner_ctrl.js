@@ -113,6 +113,8 @@ function displayMiniBanner() {
 	const miniBanner = $( '.mini-banner' );
 	const bannerHeight = miniBanner.outerHeight();
 
+	// Banner starts in far off screen and needs to be reset, workaround to get sliders to work
+	miniBanner.css( 'top', -( bannerHeight + 40 ) );
 	miniBanner.animate( {
 		top: 0
 	}, 1000 );
