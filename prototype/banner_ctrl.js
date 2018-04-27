@@ -1,5 +1,22 @@
 /* eslint no-alert: 1 */
 
+import TrackingEvents from '../shared/tracking_events';
+import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
+import CampaignDaySentence from '../shared/campaign_day_sentence';
+import InterruptibleTimeout from '../shared/interruptible_timeout';
+import DayName from '../shared/day_name';
+import Flickity from 'flickity';
+import Translations from '../shared/messages/de';
+
+const $ = require( 'jquery' );
+const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
+const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
+const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const formatNumber = require( 'format-number' );
+const CampaignProjection = require( '../shared/campaign_projection' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
@@ -10,24 +27,11 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-import TrackingEvents from '../shared/tracking_events';
-import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
-import CampaignDaySentence from '../shared/campaign_day_sentence';
-import InterruptibleTimeout from '../shared/interruptible_timeout';
-import DayName from '../shared/day_name';
-import Flickity from 'flickity';
-
-const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
-
-const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-import Translations from '../shared/messages/de';
-const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 14 );
-const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
 		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
@@ -41,21 +45,15 @@ const campaignProjection = new CampaignProjection(
 	}
 );
 
-const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
-
-const $ = require( 'jquery' );
-
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
@@ -88,16 +86,14 @@ trackingEvents.trackClickEvent( $( '.mini-banner-close-button' ), 'banner-closed
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-// Reset "other box" if they click a different amount
-$( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
-	$( '#input_amount_other_box' ).val( '' );
-} );
-
 $( '.button-group__container button' ).click( function ( event ) {
+	event.preventDefault();
 	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
 	if ( $checkedAmountElement.length > 0 ) {
 		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '.selected-payment' ).removeClass( 'selected-payment' );
+		$( event.target ).addClass( 'selected-payment' );
 		return true;
 	}
 
@@ -161,7 +157,6 @@ $( document ).ready( function () {
 	bannerDisplayTimeout.run( displayMiniBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
 
 	$( '#frbanner-close' ).click( function () {
-		// Close only the full-screen
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 		$( '#frbanner' ).hide();
 	} );
@@ -188,6 +183,7 @@ $( document ).ready( function () {
 		prevNextButtons: false
 	} );
 
+	// Stopping the automatic sliding at the last slide
 	let slidesCount = $( '.mini-banner-carousel .carousel-cell' ).length;
 	let autoplayCount = 0;
 
