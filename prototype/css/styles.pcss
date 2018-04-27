@@ -7,6 +7,7 @@
 	--banner-color-gray: #e0e5e9;
 	--banner-color-gray-dark: #989a9a;
 	--banner-color-green: #6e9e00;
+	--banner-color-green-light: #88b81a;
 
 	--banner-main-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
 }
@@ -147,26 +148,6 @@
 	}
 }
 
-/* Accomodating for larger devices like tablets and desktops */
-
-@media ( min-width: 480px ) {
-	.banner {
-		&-close-button {
-			font-size: 30px;
-			&:before {
-				top: -4px;
-			}
-		}
-		&-headline {
-			span {
-				font-size: 14px;
-				padding: 0 15px;
-				margin-left: 35px;
-			}
-		}
-	}
-}
-
 /* Mini-banner slider */
 
 .flickity {
@@ -276,13 +257,17 @@
 		box-sizing: border-box;
 	}
 	&-separator {
+		box-sizing: border-box;
 		border: 3px solid var( --banner-color-red-light );
 		opacity: 0.5;
 		width: 100%;
 		border-radius: 15px;
 		margin: 20px 0;
 	}
-
+	&-headline {
+		display: flex;
+		padding: 10px 10px 0;
+	}
 	&-button {
 		color: var( --banner-color-red );
 		position: relative;
@@ -394,13 +379,12 @@
 			}
 		}
 
-		/* Call to action */
 		.call-to-action {
 			padding: 10px;
-			font-size: 24px;
+			font-size: 6vw;
 			display: block;
 			margin: auto;
-			width: 300px;
+			width: 80%;
 			position: relative;
 			font-weight: bold;
 		}
@@ -432,34 +416,20 @@
 				}
 			}
 		}
-
-		/* Select groups, 2 cols by default for small screens */
 		.select-group {
 			&__option {
+				box-sizing: border-box;
 				display: block;
-				width: 49%;
+				width: 50%;
 				clear: none;
 				float: left;
 				margin-bottom: 6px;
-				margin-right: 2%;
 				padding: 0 4px;
 				font-weight: bold;
-				&:nth-child( 2n ) {
-					margin-right: 0;
-				}
 			}
 			&--tablet-3cols {
-				@media ( min-width: 375px ) {
-					.select-group__option {
-						width: 32%;
-						&:nth-child( 2n ) {
-							margin-right: 2%;
-						}
-						&:nth-child( 3n ) {
-							margin-right: 0;
-						}
-					}
-				}
+				display: flex;
+				flex-wrap: wrap;
 			}
 			&__label {
 				display: block;
@@ -517,16 +487,17 @@
 
 				&--tablet-2cols {
 					@media ( min-width: 980px ) {
-						&__container {
+						.button-group__container {
 							width: 49%;
-						}
-						&-group__container:nth-child( 2n+1 ) {
-							margin-right: 2%;
+							&:nth-child( 2n+1 ) {
+								margin-right: 2%;
+							}
 						}
 					}
 				}
 
 				&__button {
+					box-sizing: border-box;
 					display: inline-block;
 					width: 100%;
 					background-color: var( --banner-color-gray );
@@ -556,6 +527,11 @@
 					&-submit {
 						background-color: var( --banner-color-green );
 						color: var( --banner-color-offwhite );
+						&:hover,
+						&:active  {
+							background-color: var( --banner-color-green-light );
+							color: var( --banner-color-offwhite );
+						}
 					}
 				}
 
@@ -579,15 +555,39 @@
 				line-height: 14pt;
 				color: var( --banner-color-gray-dark );
 				text-decoration: none;
+				margin: 0 2px;
 				&:hover {
 					text-decoration: underline;
 				}
 			}
-			&--left {
-				float: left;
+		}
+	}
+}
+
+/* Accomodating for larger devices like tablets and desktops */
+
+@media ( min-width: 480px ) {
+	.banner {
+		&-close-button {
+			font-size: 30px;
+			&:before {
+				top: -4px;
 			}
-			&--right {
-				float: right;
+		}
+		&-headline {
+			span {
+				font-size: 14px;
+				padding: 0 15px;
+				margin-left: 35px;
+			}
+		}
+	}
+
+	.frbanner {
+		&-window {
+			.call-to-action {
+				font-size: 30px;
+				width: 300px;
 			}
 		}
 	}
