@@ -239,6 +239,11 @@
 /* Banner donation form overlay */
 
 .frbanner {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	.cf:before,
 	.cf:after {
 		content: '';
@@ -333,6 +338,7 @@
 				display: none;
 			}
 			&__donation_fill {
+				z-index: 5;
 				border-radius: 0;
 			}
 			&__wrapper {
