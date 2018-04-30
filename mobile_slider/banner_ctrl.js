@@ -25,6 +25,7 @@ const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
+const sliderAutoPlaySpeed = 2000;
 // END Banner-Specific configuration
 
 const campaignDays = new CampaignDays(
@@ -88,18 +89,15 @@ $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
 $( '.button-group__container button' ).click( function ( event ) {
 	event.preventDefault();
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		$( '.selected-payment' ).removeClass( 'selected-payment' );
-		$( event.target ).addClass( 'selected-payment' );
-		return true;
-	}
-
-	alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	return false;
+	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
+	$( '.selected-payment' ).removeClass( 'selected-payment' );
+	$( event.target ).addClass( 'selected-payment' );
 } );
+
+$( '.select-group__option' ).click( function () {
+	$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+} );
+
 // END form initialization
 
 function displayMiniBanner() {
@@ -154,14 +152,12 @@ function displayFullBanner() {
 $( document ).ready( function () {
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
-	bannerDisplayTimeout.run( displayMiniBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000 );
-
 	$( '#frbanner-close' ).click( function () {
 		$( '#mw-mf-viewport' ).css( { marginTop: 0 } );
 		$( '#frbanner' ).hide();
 	} );
 
-	$( '.mini-banner-close-button' ).click( function () {
+	$( '#mini-banner-close-button' ).click( function () {
 		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
 		if ( BannerFunctions.onMediaWiki() ) {
@@ -179,7 +175,7 @@ $( document ).ready( function () {
 
 	const slider = new Flickity( document.querySelector( '.mini-banner-carousel' ), {
 		wrapAround: true,
-		autoPlay: 2000,
+		autoPlay: sliderAutoPlaySpeed,
 		prevNextButtons: false
 	} );
 
@@ -187,6 +183,7 @@ $( document ).ready( function () {
 	let slidesCount = $( '.mini-banner-carousel .carousel-cell' ).length;
 	let autoplayCount = 0;
 
+	disableAutoplay(); // Pausing autoplay until slider is shown to user
 	slider.on( 'select', onSelect );
 
 	function onSelect() {
@@ -204,6 +201,17 @@ $( document ).ready( function () {
 		slider.stopPlayer();
 		slider.off( 'select', onSelect );
 	}
+
+	function enableAutoplay() {
+		slider.playPlayer();
+	}
+
+	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
+	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
+	// Making sure automatic sliding only starts after slider is shown to the user
+	window.setTimeout( function () {
+		enableAutoplay();
+	}, bannerDelay );
 
 	$( '.mini-banner-tab' ).click( displayFullBanner );
 } );

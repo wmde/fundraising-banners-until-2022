@@ -136,13 +136,13 @@ filename = "./english/banner_ctrl.js"
 pagename = "B17WMDE_enwiki_desktop_default"
 tracking = "org-desktop-en-171121"
 
-# Prototype Campaign
-[prototype]
+# Mobile Slider Campaign
+[mobile_slider]
 campaign_tracking = ""
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
-[prototype.banners.ctrl]
-filename = "./prototype/banner_ctrl.js"
-pagename = "prototype_ctrl"
+[mobile_slider.banners.ctrl]
+filename = "./mobile_slider/banner_ctrl.js"
+pagename = "mobile_slider"
 tracking = "org-mob05-171218-ctrl"

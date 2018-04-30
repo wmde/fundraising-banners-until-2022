@@ -19,13 +19,14 @@
 		position: relative;
 		padding: 0 5px;
 		flex: 0 0 auto;
-		top: 0;
 		right: 0;
-		font-size: 25px;
+		line-height: 23px;
+		font-size: 40px;
+		font-weight: bold;
 		&:before {
 			top: 0;
 			position: relative;
-			content: '\2716';
+			content: '\00d7';
 			color: var( --banner-color-red-light );
 		}
 	}
@@ -119,6 +120,7 @@
 		z-index: 1000;
 		text-transform: uppercase;
 		&-inner {
+			box-sizing: content-box;
 			cursor: pointer;
 			position: relative;
 			left: -50%;
@@ -130,6 +132,7 @@
 			width: 130px;
 			margin: 0 auto;
 			padding: 5px 15px 4px 15px;
+			transform: translate3d( 0, 0, 0 );
 		}
 	}
 	&-close-button {
@@ -142,7 +145,7 @@
 		&:before {
 			top: 0;
 			position: relative;
-			content: '\2716';
+			content: '\00d7';
 			color: var( --banner-color-red-light );
 		}
 	}
@@ -240,6 +243,7 @@
 
 .frbanner {
 	-webkit-touch-callout: none;
+	-webkit-tap-highlight-color: transparent;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -281,19 +285,11 @@
 		top: 0;
 		right: 0;
 		font-size: 30px;
-		&-back {
-			transform: rotate( 180deg );
-			&:before {
-				top: 0;
-				position: relative;
-				content: '\279C';
-			}
-		}
 		&-close {
 			&:before {
 				top: 0;
 				position: relative;
-				content: '\2716';
+				content: '\00d7';
 			}
 		}
 	}
@@ -439,11 +435,6 @@
 				font-weight: bold;
 				font-size: 24px;
 				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
-				&:hover {
-					background-color: #ffffff;
-					color: #444444;
-					border-color: #a2a9b1;
-				}
 				&:active {
 					background-color: var( --banner-color-red );
 					color: var( --banner-color-offwhite );
@@ -510,16 +501,6 @@
 						background-color: var( --banner-color-red );
 						color: var( --banner-color-offwhite );
 						border-color: #7d8389;
-						&:hover {
-							background-color: var( --banner-color-red );
-							color: var( --banner-color-offwhite );
-							border-color: #7d8389;
-						}
-					}
-					&:hover {
-						background-color: #ffffff;
-						color: #444444;
-						border-color: #a2a9b1;
 					}
 					&:active {
 						background-color: var( --banner-color-red );
@@ -530,7 +511,6 @@
 					&-submit {
 						background-color: var( --banner-color-green );
 						color: var( --banner-color-offwhite );
-						&:hover,
 						&:active  {
 							background-color: var( --banner-color-green-light );
 							color: var( --banner-color-offwhite );
@@ -572,10 +552,8 @@
 @media ( min-width: 480px ) {
 	.banner {
 		&-close-button {
-			font-size: 30px;
-			&:before {
-				top: -4px;
-			}
+			font-size: 50px;
+			line-height: 21px;
 		}
 		&-headline {
 			span {
