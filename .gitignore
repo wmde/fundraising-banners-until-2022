@@ -1,6 +1,7 @@
 .env
 .eslintcache
 .idea/
+npm-debug.log
 node_modules/
 dist/
 !dist/index.html
