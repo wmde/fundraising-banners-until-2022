@@ -20,7 +20,7 @@
 		padding: 0 5px;
 		flex: 0 0 auto;
 		right: 0;
-		top: -2px;
+		top: -3px;
 		line-height: 39px;
 		font-size: 40px;
 		font-weight: bold;
@@ -46,7 +46,7 @@
 				width: 100%;
 				height: 1px;
 				position: absolute;
-				top: 50%;
+				top: 46%;
 				z-index: -1;
 			}
 		}
@@ -254,29 +254,7 @@
 /* Banner donation form overlay */
 
 .frbanner {
-	-webkit-touch-callout: none;
 	-webkit-tap-highlight-color: transparent;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	.cf:before,
-	.cf:after {
-		content: '';
-		display: table;
-	}
-
-	.cf:after {
-		clear: both;
-	}
-
-	*,
-	*:before,
-	*:after {
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-	}
 	&-separator {
 		box-sizing: border-box;
 		border: 3px solid var( --banner-color-red-light );
@@ -305,7 +283,6 @@
 			}
 		}
 	}
-
 	&-window {
 		background: var( --banner-color-offwhite );
 		width: 98%;
@@ -571,6 +548,11 @@
 				font-size: 14px;
 				padding: 0 15px;
 				margin-left: 35px;
+			}
+			& > div {
+				&:before {
+					top: 50%;
+				}
 			}
 		}
 	}

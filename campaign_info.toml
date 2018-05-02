@@ -1,3 +1,6 @@
+# NOTE: The "pagename" value must start with an uppercase "B" and should be followed by the year (YY) and WMDE.
+# Example: "B18WMDE_"
+
 # A Campaign with global settings
 [desktop]
 campaign_tracking = "41-ba-171229"
@@ -136,6 +139,7 @@ filename = "./english/banner_ctrl.js"
 pagename = "B17WMDE_enwiki_desktop_default"
 tracking = "org-desktop-en-171121"
 
+
 # Mobile Slider Campaign
 [mobile_slider]
 campaign_tracking = ""
@@ -144,5 +148,5 @@ wrapper_template = "wikipedia_org"
 
 [mobile_slider.banners.ctrl]
 filename = "./mobile_slider/banner_ctrl.js"
-pagename = "mobile_slider"
-tracking = "org-mob05-171218-ctrl"
+pagename = "B18WMDE_mob_prototype"
+tracking = "org-mob06-180501-ctrl"
