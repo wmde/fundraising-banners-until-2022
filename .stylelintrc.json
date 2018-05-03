@@ -2,6 +2,7 @@
 	"extends": "stylelint-config-wikimedia",
 	"rules": {
 		"selector-no-id": null,
+		"selector-max-id": 2,
 		"declaration-no-important": null,
 		"function-url-quotes": [ "always" ],
 		"color-hex-length": [ "long" ]
