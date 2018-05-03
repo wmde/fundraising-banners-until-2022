@@ -1,7 +1,7 @@
 {
   "name": "banners-webpack",
   "version": "1.0.0",
-  "description": "Building WMDE banners with webpack",
+  "description": "Building WMDE fundraising banners with webpack",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "gabriel.birke@wikimedia.de",
   "license": "MIT",
-  "repository": "https://github.com/gbirke/webpack-experiments",
+  "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
     "format-number": "^3.0.0"
   },
