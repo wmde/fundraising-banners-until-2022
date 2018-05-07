@@ -5,8 +5,8 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import Flickity from 'flickity';
 import Translations from '../shared/messages/de';
+import { Slider } from './Slider';
 
 const $ = require( 'jquery' );
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
@@ -26,7 +26,14 @@ const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 const sliderAutoPlaySpeed = 2000;
+const fullscreenBannerSlideInSpeed = 1250;
 // END Banner-Specific configuration
+
+/**
+ * Slider wrapper object holding a Flickity-based slider
+ * @type {Slider}
+ */
+const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
 const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
@@ -84,6 +91,7 @@ trackingEvents.trackClickEvent( $( '.mini-banner-tab' ), 'banner-expanded', bann
 trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
+
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
@@ -103,49 +111,57 @@ $( '.select-group__option' ).click( function () {
 function displayMiniBanner() {
 
 	const miniBanner = $( '.mini-banner' );
-	const bannerHeight = miniBanner.outerHeight() + 37;
+	const bannerHeight = miniBanner.outerHeight() + 40;
 
 	// Banner starts in far off screen and needs to be reset, workaround to get sliders to work
 	miniBanner.css( 'top', -bannerHeight );
-	miniBanner.animate( {
-		top: 0
-	}, 1000 );
+	miniBanner.animate( { top: 0 }, 1000 );
 
-	$( '#mw-mf-viewport' ).animate( {
-		marginTop: bannerHeight
-	}, 1000 );
+	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
 
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
+
+	// Making sure automatic sliding only starts after slider is shown to the user
+	bannerSlider.enableAutoplay();
 }
 
+/**
+ * Hides mini banner and slides down full-screen banner
+ * Animation is split into two parts:
+ * First it slides to the viewport, next it pushes the viewport further down along with the fullscreen banner
+ */
 function displayFullBanner() {
-	window.scrollTo( 0, 0 );
 	$( '.mini-banner' ).hide();
+	window.scrollTo( 0, 0 );
+
 	const viewport = $( '#mw-mf-viewport' );
-
 	const viewportOffset = viewport.css( 'margin-top' ).slice( 0, -2 );
-	const overlay = $( '.frbanner-window' );
-	const bannerHeight = overlay.outerHeight();
+	const fullscreenBanner = $( '.frbanner-window' );
+	const bannerHeight = fullscreenBanner.outerHeight();
 
-	// Resetting overlay to the top of the page and aligning animation with previous viewport offset for smooth "pushing" animation
-	overlay.css( 'top', -( bannerHeight ) );
+	// Placing fullscreen banner above of the page
+	fullscreenBanner.css( 'top', -bannerHeight );
+
+	// Calculating the percentage which the viewport was already pushed by the mini-banner
 	const viewPortOffsetFactor = viewportOffset / bannerHeight;
-	const baseSpeed = 1250;
-	const slideSpeed = baseSpeed * ( 1 - viewPortOffsetFactor );
 
-	overlay.animate( {
-		top: viewportOffset - bannerHeight
-	}, baseSpeed * viewPortOffsetFactor, 'linear' ).queue( function () {
-		viewport.animate( {
-			marginTop: bannerHeight
-		}, slideSpeed, 'linear' );
-		overlay.dequeue();
-		overlay.animate( {
-			top: 0
-		}, slideSpeed, 'linear' );
-		window.setTimeout( function () {
+	// Calculating the time that is needed to reach the previous mini-banner viewport offset without affecting the perceived speed of the banner
+	const initialSlideTime = fullscreenBannerSlideInSpeed * viewPortOffsetFactor;
+
+	// Pushing the fullscreen banner to where the mini banner previously was, aligning it with the viewport
+	fullscreenBanner.animate( { top: viewportOffset - bannerHeight },
+		initialSlideTime, 'linear' ).queue( function () {
+
+		// Calculating the remaining time at which the banner has to finish the slide to match the speed of the previous animation
+		const remainingSlideTime = fullscreenBannerSlideInSpeed * ( 1 - viewPortOffsetFactor );
+
+		// Now that the viewport and banner are aligned, both of them are pushed further down simultaneously
+		viewport.animate( { marginTop: bannerHeight }, remainingSlideTime, 'linear' );
+		fullscreenBanner.dequeue();
+		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
+			// Once fullscreen banner is fully shown, the progress bar is animated
 			progressBar.animate();
-		}, slideSpeed );
+		} );
 	} );
 }
 
@@ -166,6 +182,8 @@ $( document ).ready( function () {
 		return false;
 	} );
 
+	bannerSlider.initialize();
+
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
 		$( '.mini-banner' ).hide();
@@ -173,45 +191,8 @@ $( document ).ready( function () {
 		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 	} );
 
-	const slider = new Flickity( document.querySelector( '.mini-banner-carousel' ), {
-		wrapAround: true,
-		autoPlay: sliderAutoPlaySpeed,
-		prevNextButtons: false
-	} );
-
-	// Stopping the automatic sliding at the last slide
-	let slidesCount = $( '.mini-banner-carousel .carousel-cell' ).length;
-	let autoplayCount = 0;
-
-	disableAutoplay(); // Pausing autoplay until slider is shown to user
-	slider.on( 'select', onSelect );
-
-	function onSelect() {
-		if ( slider.player.state !== 'playing' ) {
-			disableAutoplay();
-			return;
-		}
-		autoplayCount++;
-		if ( autoplayCount >= slidesCount - 1 ) {
-			disableAutoplay();
-		}
-	}
-
-	function disableAutoplay() {
-		slider.stopPlayer();
-		slider.off( 'select', onSelect );
-	}
-
-	function enableAutoplay() {
-		slider.playPlayer();
-	}
-
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
-	// Making sure automatic sliding only starts after slider is shown to the user
-	window.setTimeout( function () {
-		enableAutoplay();
-	}, bannerDelay );
 
 	$( '.mini-banner-tab' ).click( displayFullBanner );
 } );

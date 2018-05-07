@@ -1,5 +1,6 @@
 # NOTE: The "pagename" value must start with an uppercase "B" and should be followed by the year (YY) and WMDE.
 # Example: "B18WMDE_"
+# See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
 
 # A Campaign with global settings
 [desktop]

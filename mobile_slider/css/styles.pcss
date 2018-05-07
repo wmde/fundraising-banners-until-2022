@@ -10,6 +10,7 @@
 	--banner-color-green-light: #88b81a;
 
 	--banner-main-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
+	--banner-symbol-close: '\00d7'; /* × */
 }
 
 /* Shared elements */
@@ -26,7 +27,7 @@
 		font-weight: bold;
 		&:before {
 			position: relative;
-			content: '\00d7';
+			content: var( --banner-symbol-close );
 			color: var( --banner-color-red-light );
 			float: left;
 			height: 100%;
@@ -157,7 +158,7 @@
 		&:before {
 			top: 0;
 			position: relative;
-			content: '\00d7';
+			content: var( --banner-symbol-close );
 			color: var( --banner-color-red-light );
 		}
 	}
@@ -279,7 +280,7 @@
 			&:before {
 				top: 0;
 				position: relative;
-				content: '\00d7';
+				content: var( --banner-symbol-close );
 			}
 		}
 	}
