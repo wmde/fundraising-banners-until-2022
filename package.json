@@ -17,6 +17,7 @@
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
+    "flickity": "^2.1.0",
     "format-number": "^3.0.0"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "minimatch": "^3.0.4",
     "mocha": "^3.5.3",
     "mocha-jsdom": "^1.1.0",
+    "postcss-custom-properties": "^7.0.0",
     "postcss-loader": "^2.1.4",
     "postcss-nested": "^2.1.2",
     "sinon": "^4.5.0",

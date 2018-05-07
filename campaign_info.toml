@@ -1,8 +1,13 @@
+# NOTE: The "pagename" value must start with an uppercase "B" and should be followed by the year (YY) and WMDE.
+# Example: "B18WMDE_"
+# See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
+
 # A Campaign with global settings
 [desktop]
 campaign_tracking = "41-ba-171229"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
+
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
@@ -125,7 +130,6 @@ filename = "./english/banner_var.js"
 pagename = "B17WMDE_en03_171218_var"
 tracking = "org-en03-171218-var"
 
-
 [enwiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
@@ -135,3 +139,15 @@ wrapper_template = "wikipedia_org"
 filename = "./english/banner_ctrl.js"
 pagename = "B17WMDE_enwiki_desktop_default"
 tracking = "org-desktop-en-171121"
+
+
+# Mobile Slider Campaign
+[mobile_slider]
+campaign_tracking = ""
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[mobile_slider.banners.ctrl]
+filename = "./mobile_slider/banner_ctrl.js"
+pagename = "B18WMDE_mob_prototype"
+tracking = "org-mob06-180501-ctrl"

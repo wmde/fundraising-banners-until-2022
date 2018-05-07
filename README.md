@@ -38,7 +38,7 @@ To build a minified version of the banner in order to use it on CentralNotice ru
 
 ## Using the compiled JavaScript on CentralNotice
 
-After the assets are compiled, the `dist` directory contains `.wikitext` files that can be inserted 1:1 in CentralNotice or uploaded via the [upload tool](https://github.com/wmde/banner-toolkit).
+After the assets are compiled, the `dist` directory contains `.wikitext` files that can be inserted 1:1 in CentralNotice.
 
 ## Campaigns, Banner assets and structure
 The file `campaign_info.toml` contains the metadata for all banners and campaigns. It'll be used to determine the unique file names of the output and the input files, the so-called *[entry points](https://webpack.js.org/configuration/entry-context/)*. Entry points are the local files (configured with the setting `filename`) which will be compiled by [Webpack](https://webpack.js.org) to pure JavaScript code and JavaScript code wrapped in wikitext that can be copied to CentralNotice. The CentralNotice banner names (which can also be used for the `devbanner` parameter in the preview) come from the `pagename` setting.

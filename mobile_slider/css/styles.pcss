@@ -1,0 +1,569 @@
+:root {
+	--banner-color-red: #990a00;
+	--banner-color-red-light: #dbb0ad;
+	--banner-color-offwhite: #f8f9fa;
+	--banner-color-red-dark: #6c0000;
+	--banner-color-offblack: #333333;
+	--banner-color-gray: #e0e5e9;
+	--banner-color-gray-dark: #989a9a;
+	--banner-color-green: #6e9e00;
+	--banner-color-green-light: #88b81a;
+
+	--banner-main-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
+	--banner-symbol-close: '\00d7'; /* × */
+}
+
+/* Shared elements */
+
+.banner {
+	&-close-button {
+		position: relative;
+		padding: 0 5px;
+		flex: 0 0 auto;
+		right: 0;
+		top: -3px;
+		line-height: 39px;
+		font-size: 40px;
+		font-weight: bold;
+		&:before {
+			position: relative;
+			content: var( --banner-symbol-close );
+			color: var( --banner-color-red-light );
+			float: left;
+			height: 100%;
+		}
+	}
+	&-headline {
+		cursor: default;
+		width: 85%;
+		flex: 1 1 85%;
+		margin-left: 5px;
+		& > div {
+			position: relative;
+			&:before {
+				content: '';
+				display: block;
+				border-top: solid 1px var( --banner-color-red-light );
+				width: 100%;
+				height: 1px;
+				position: absolute;
+				top: 46%;
+				z-index: -1;
+			}
+		}
+		span {
+			font-weight: bold;
+			font-family: var( --banner-main-font-family );
+			font-size: 2.8vw;
+			color: var( --banner-color-red-light );
+			display: inline-block;
+			letter-spacing: 1px;
+			margin-left: 6%;
+			line-height: 32px;
+			text-transform: uppercase;
+			padding: 0 5px;
+			background-color: var( --banner-color-offwhite );
+		}
+	}
+}
+
+@-moz-document url-prefix( '' ) {
+	/* Firefox places the button content different than all other browsers for some reason. Exhausted all other workarounds */
+	.banner {
+		&-close-button {
+			top: -8px;
+		}
+	}
+}
+
+/* Mini-banner elements */
+
+.mini-banner {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	cursor: pointer;
+	text-align: center;
+	box-sizing: border-box;
+	z-index: 1000;
+	display: block;
+	margin: 0 auto;
+	&-box {
+		display: inline-block;
+		position: relative;
+		left: 0;
+		text-align: center;
+		box-sizing: border-box;
+		z-index: 1000;
+		background: var( --banner-color-offwhite );
+		border: 8px solid var( --banner-color-red );
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		border-radius: 15px;
+		padding: 5px;
+		margin: 5px 0 0;
+		width: 98%;
+	}
+	&-carousel {
+		width: 100%;
+		flex: 0 0 100%;
+	}
+	.carousel-cell {
+		width: 100%;
+		height: auto;
+		margin-right: 10px;
+		padding: 5px 5px 15px;
+		box-sizing: border-box;
+		p {
+			font-weight: bold;
+			font-family: var( --banner-main-font-family );
+		}
+	}
+	&-content {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	&-tab {
+		display: block;
+		position: absolute;
+		left: 50%;
+		/* Solving border aliasing issue on some Webkit mobile devices by moving up the element 1px and applying 2px white top border on inner element */
+		top: 100%;
+		top: calc( 100% - 1px );
+		font-size: 0.9em;
+		color: var( --banner-color-red-dark );
+		z-index: 1000;
+		text-transform: uppercase;
+		&-inner {
+			box-sizing: border-box;
+			cursor: pointer;
+			position: relative;
+			left: -50%;
+			background: var( --banner-color-offwhite );
+			border: 8px solid var( --banner-color-red );
+			border-radius: 8px;
+			border-top: 2px solid var( --banner-color-offwhite );
+			font-weight: bold;
+			width: 170px;
+			margin: 0 auto;
+			padding: 5px 15px 4px 15px;
+			transform: translate3d( 0, 0, 0 );
+		}
+	}
+	&-close-button {
+		position: relative;
+		padding: 0 5px;
+		flex: 0 0 auto;
+		right: 0;
+		font-size: 25px;
+		&:before {
+			top: 0;
+			position: relative;
+			content: var( --banner-symbol-close );
+			color: var( --banner-color-red-light );
+		}
+	}
+}
+
+/* Mini-banner slider */
+
+.flickity {
+	&-viewport {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
+	&-enabled {
+		position: relative;
+		&:focus {
+			outline: transparent;
+		}
+		&.is-draggable {
+			-webkit-tap-highlight-color: transparent;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			.flickity-viewport {
+				cursor: move;
+				cursor: -webkit-grab;
+				cursor: grab;
+				&.is-pointer-down {
+					cursor: -webkit-grabbing;
+					cursor: grabbing;
+				}
+			}
+		}
+	}
+	&-slider {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	&-button {
+		position: absolute;
+		background: var( --banner-color-offwhite );
+		border: 0;
+		color: #333333;
+		&-icon {
+			fill: #333333;
+		}
+
+		&:hover {
+			background: var( --banner-color-offwhite );
+			cursor: pointer;
+		}
+		&:focus {
+			outline: 0;
+			box-shadow: 0 0 0 5px var( --banner-color-red );
+		}
+		&:active {
+			opacity: 0.6;
+		}
+		&:disabled {
+			opacity: 0.3;
+			cursor: auto;
+			pointer-events: none;
+		}
+	}
+	&-page-dots {
+		position: relative;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		text-align: center;
+		line-height: 1;
+		.dot {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 8px;
+			background: var( --banner-color-red );
+			border-radius: 50%;
+			opacity: 0.25;
+			cursor: pointer;
+			&.is-selected {
+				opacity: 1;
+			}
+		}
+	}
+	&-rtl .flickity-page-dots {
+		direction: rtl;
+	}
+}
+
+/* Banner donation form overlay */
+
+.frbanner {
+	-webkit-tap-highlight-color: transparent;
+	&-separator {
+		box-sizing: border-box;
+		border: 3px solid var( --banner-color-red-light );
+		opacity: 0.3;
+		width: 100%;
+		border-radius: 15px;
+		margin: 20px 0;
+	}
+	&-headline {
+		display: flex;
+		padding: 10px 10px 0;
+	}
+	&-button {
+		color: var( --banner-color-red );
+		position: relative;
+		padding: 0 5px;
+		flex: 0 0 auto;
+		top: 0;
+		right: 0;
+		font-size: 30px;
+		&-close {
+			&:before {
+				top: 0;
+				position: relative;
+				content: var( --banner-symbol-close );
+			}
+		}
+	}
+	&-window {
+		background: var( --banner-color-offwhite );
+		width: 98%;
+		left: 1%;
+		top: -10000px;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		position: absolute;
+		z-index: 1001;
+		cursor: pointer;
+		text-align: center;
+		box-sizing: border-box;
+		display: block;
+		margin: 0 auto;
+		border: 8px solid var( --banner-color-red );
+		border-radius: 15px;
+		&-headline {
+			& > div {
+				position: relative;
+				&:before {
+					content: '';
+					display: block;
+					border-top: solid 1px var( --banner-color-red-light );
+					width: 100%;
+					height: 1px;
+					position: absolute;
+					top: 50%;
+					z-index: -1;
+				}
+			}
+		}
+
+		.progress_bar {
+			position: relative;
+
+			&__pointer_line,
+			&__pointer_tip,
+			&__days_left {
+				display: none;
+			}
+			&__donation_fill {
+				z-index: 5;
+				border-radius: 0;
+			}
+			&__wrapper {
+				margin: 20px 40px 20px 40px;
+				font-size: 0.7em;
+				border: 4px solid var( --banner-color-red );
+				border-radius: 4px;
+			}
+			&__donation_text {
+				font-size: 12px;
+			}
+			&__donation_remaining {
+				padding: 0;
+				&--outer {
+					margin-top: 20px;
+					line-height: 2em;
+					position: absolute;
+					top: 7px;
+					font-size: 12px;
+					right: 50px;
+				}
+			}
+			.progress_bar--lateprogress .progress_bar__wrapper {
+				margin-right: 0;
+			}
+		}
+
+		.call-to-action {
+			padding: 10px;
+			font-size: 6vw;
+			display: block;
+			margin: auto;
+			width: 80%;
+			position: relative;
+			font-weight: bold;
+		}
+
+		.form {
+			padding: 0 40px 20px;
+			position: relative;
+			height: 100%;
+			&__section {
+				width: 100%;
+				overflow: auto;
+				zoom: 1;
+				margin: 0 auto;
+				padding: 0;
+				border: 0 none;
+				&-head {
+					display: block;
+					width: 100%;
+					margin: 0;
+					padding: 8px 0;
+					text-align: center;
+					font-size: 16px;
+				}
+
+				@media ( min-width: 768px ) {
+					&-head {
+						font-size: 18px;
+					}
+				}
+			}
+		}
+		.select-group {
+			&__option {
+				box-sizing: border-box;
+				display: block;
+				clear: none;
+				float: left;
+				margin: 0 2.5% 6px 2.5%;
+				font-weight: bold;
+				width: 31%;
+				&:nth-child( 1 ),
+				&:nth-child( 4 ) {
+					margin: 0 1% 6px 0;
+				}
+				&:nth-child( 3 ),
+				&:nth-child( 6 ) {
+					margin: 0 0 6px 1%;
+				}
+			}
+			&--tablet-3cols {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			&__label {
+				display: block;
+				background-color: var( --banner-color-gray );
+				color: #222222;
+				border-radius: 11px;
+				padding: 15px 2px;
+				outline: 0;
+				text-align: center;
+				line-height: 1;
+				cursor: pointer;
+				font-family: inherit;
+				font-weight: bold;
+				font-size: 24px;
+				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+				&:active {
+					background-color: var( --banner-color-red );
+					color: var( --banner-color-offwhite );
+					border-color: #7d8389;
+				}
+			}
+			&__input {
+				position: absolute;
+				overflow: hidden;
+				height: 1px;
+				width: 1px;
+				clip: rect( 0 0 0 0 );
+				border: 0;
+				margin: -1px;
+				padding: 0;
+			}
+		}
+		.select-group__input:checked + .select-group__label,
+		.select-group__label.checked {
+			background-color: var( --banner-color-red );
+			color: var( --banner-color-offwhite );
+			border-color: #7d8389;
+		}
+
+		.button {
+			&-group {
+				&__container {
+					display: block;
+					width: 100%;
+					clear: none;
+					float: left;
+					margin-bottom: 6px;
+					padding: 3px 0;
+				}
+
+				&--tablet-2cols {
+					@media ( min-width: 500px ) {
+						.button-group__container {
+							width: 49%;
+							&:nth-child( 2n+1 ) {
+								margin-right: 2%;
+							}
+						}
+					}
+				}
+
+				&__button {
+					box-sizing: border-box;
+					display: inline-block;
+					width: 100%;
+					background-color: var( --banner-color-gray );
+					color: #222222;
+					border-radius: 11px;
+					padding: 24px 10px;
+					outline: 0;
+					text-align: center;
+					line-height: 1;
+					cursor: pointer;
+					font-family: inherit;
+					font-weight: bold;
+					font-size: 24px;
+					transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+					&.selected-payment {
+						background-color: var( --banner-color-red );
+						color: var( --banner-color-offwhite );
+						border-color: #7d8389;
+					}
+					&:active {
+						background-color: var( --banner-color-red );
+						color: var( --banner-color-offwhite );
+						border-color: #7d8389;
+					}
+
+					&-submit {
+						background-color: var( --banner-color-green );
+						color: var( --banner-color-offwhite );
+						&:active  {
+							background-color: var( --banner-color-green-light );
+							color: var( --banner-color-offwhite );
+						}
+					}
+				}
+
+				&__hint {
+					font-size: 9pt;
+					line-height: 12pt;
+					margin-right: 0;
+					width: 100%;
+					padding: 0 0 15px 0;
+					color: var( --banner-color-gray-dark );
+				}
+
+			}
+		}
+
+		.smallprint {
+			width: 100%;
+			font-size: 75%;
+			a {
+				font-size: 9pt;
+				line-height: 14pt;
+				color: var( --banner-color-gray-dark );
+				text-decoration: none;
+				margin: 0 2px;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+/* Accomodating for larger devices like tablets and desktops */
+
+@media ( min-width: 480px ) {
+	.banner {
+		&-close-button {
+			font-size: 50px;
+		}
+		&-headline {
+			span {
+				font-size: 14px;
+				padding: 0 15px;
+				margin-left: 35px;
+			}
+			& > div {
+				&:before {
+					top: 50%;
+				}
+			}
+		}
+	}
+
+	.frbanner {
+		&-window {
+			.call-to-action {
+				font-size: 30px;
+				width: 300px;
+			}
+		}
+	}
+}
