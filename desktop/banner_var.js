@@ -1,9 +1,7 @@
 require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
-
-// For A/B testing different styles, load
-require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -55,6 +53,7 @@ const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
@@ -99,32 +98,32 @@ function setupValidationEventHandling() {
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
 		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
 		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
 		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly( banner );
+		addSpaceInstantly();
 	} );
 }
 
@@ -200,12 +199,12 @@ function addSpace() {
 	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
-function addSpaceInstantly( $bannerElement ) {
-	if ( !$bannerElement.is( ':visible' ) ) {
+function addSpaceInstantly() {
+	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
@@ -224,9 +223,10 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
-		addSpaceInstantly( bannerElement );
+		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
 }
@@ -284,8 +284,7 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' ),
-		$instantBanner = $( '#WMDE_InstantBanner' );
+	var $bannerElement = $( '#WMDE_Banner' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -302,10 +301,6 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		$instantBanner.height( $bannerElement.height() );
-		$instantBanner.show();
-		addSpaceInstantly( $instantBanner );
-		setTimeout( function () { progressBar.animate(); }, 1000 );
 		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
