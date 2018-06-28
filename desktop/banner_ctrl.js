@@ -123,7 +123,13 @@ function setupValidationEventHandling() {
 		addSpaceInstantly();
 	} );
 }
-
+function appendEuroSign( field ) {
+	if ( $( field ).val() !== '' &&
+		!/^.*(€)$/.test( $( field ).val() )
+	) {
+		$( field ).val( $( field ).val() + ' €' );
+	}
+}
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
@@ -137,6 +143,10 @@ function setupAmountEventHandling() {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+		$( '.select-group__custom-input' ).on( 'blur', function () {
+			var self = this;
+			appendEuroSign( self );
+		} );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
@@ -163,6 +173,7 @@ function validateForm() {
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
+
 	return validateForm();
 } );
 

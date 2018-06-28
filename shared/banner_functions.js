@@ -221,6 +221,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, ':$1$2' );
 			otherAmount = otherAmount.replace( /[$,.]/g, '' );
 			otherAmount = otherAmount.replace( /:/, '.' );
+			otherAmount = otherAmount.replace( /€/, '' );
 			$( '#amount-other-input' ).val( otherAmount );
 			amount = otherAmount;
 		}
