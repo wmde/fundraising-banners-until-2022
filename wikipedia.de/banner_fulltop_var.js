@@ -11,7 +11,7 @@ const LANGUAGE = 'de';
 const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-import TrackingEvents from '../shared/tracking_events';
+import UrlTracker from '../shared/url_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
@@ -82,7 +82,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
+const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
 
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );

@@ -1,4 +1,4 @@
-import TrackingEvents from '../shared/tracking_events';
+import UrlTracker from '../shared/url_tracker';
 
 const assert = require( 'assert' );
 
@@ -6,7 +6,7 @@ const { JSDOM } = require( 'jsdom' );
 const { window } = new JSDOM( '<!doctype html><html><body></body></html>' );
 const $ = require( 'jquery' )( window );
 
-describe( 'TrackingEvents', function () {
+describe( 'UrlTracker', function () {
 
 	const trackingBaseUrl = 'http://tracking-server/path?trackPage=http://tracked-server',
 		clickActionName = 'click-action',
@@ -25,7 +25,7 @@ describe( 'TrackingEvents', function () {
 		beforeEach( function () {
 			$trackedElement = $( '<div />' );
 			$trackingElement = $( '<img />' );
-			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
+			trackingEvents = new UrlTracker( trackingBaseUrl, bannerName, $trackingElement );
 		} );
 
 		it( 'Click event tracking URL is built correctly', function () {
@@ -54,7 +54,7 @@ describe( 'TrackingEvents', function () {
 
 		beforeEach( function () {
 			$trackingElement = $( '<img />' );
-			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
+			trackingEvents = new UrlTracker( trackingBaseUrl, bannerName, $trackingElement );
 		} );
 
 		it( 'Size issue event tracking URL is built correctly', function () {
@@ -83,7 +83,7 @@ describe( 'TrackingEvents', function () {
 
 		beforeEach( function () {
 			$trackingElement = $( '<img />' );
-			trackingEvents = new TrackingEvents( trackingBaseUrl, bannerName, $trackingElement );
+			trackingEvents = new UrlTracker( trackingBaseUrl, bannerName, $trackingElement );
 		} );
 
 		it( 'URL for recording a banner impression is built correctly', function () {
