@@ -211,24 +211,26 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 	}
 
 	function getAmount() {
-		var amount = null,
-			otherAmount = $( '#amount-other-input' ).val();
-
-		amount = $( 'input[name=betrag_auswahl]:checked' ).val();
+		var otherAmount = $( '#amount-other-input' ).val();
+		var amount = $( 'input[name=betrag_auswahl]:checked' ).val();
 
 		if ( otherAmount !== '' ) {
+			// Replace all commas with dots and then remove all dots except for the last one
+			otherAmount = otherAmount.replace( new RegExp( ',', 'g' ), '.' );
+			otherAmount = otherAmount.replace( /[.](?=.*[.])/g, '' );
+
 			otherAmount = otherAmount.replace( /[,.](\d)$/, ':$10' );
 			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, ':$1$2' );
-			otherAmount = otherAmount.replace( /[$,.]/g, '' );
 			otherAmount = otherAmount.replace( /:/, '.' );
-			otherAmount = otherAmount.replace( /€/, '' );
+			otherAmount = otherAmount.replace( /\s*€$/, '' );
 			$( '#amount-other-input' ).val( otherAmount );
 			amount = otherAmount;
 		}
-
 		if ( amount === null || isNaN( amount ) ) {
 			return false;
 		}
+
+		amount = Number( ( Number( amount ) ).toFixed( 2 ) );
 
 		return amount;
 	}

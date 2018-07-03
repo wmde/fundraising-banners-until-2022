@@ -124,7 +124,12 @@ function setupValidationEventHandling() {
 		addSpaceInstantly();
 	} );
 }
-
+function appendEuroSign( field ) {
+	if ( $( field ).val() !== '' &&
+		!/^.*(€)$/.test( $( field ).val() ) ) {
+		$( field ).val( $( field ).val() + ' €' );
+	}
+}
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
@@ -136,8 +141,10 @@ function setupAmountEventHandling() {
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
+		var input = $( '.select-group__custom-input' );
+		input.addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+		appendEuroSign( input );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
