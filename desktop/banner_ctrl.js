@@ -6,7 +6,6 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 0.01;
-const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
@@ -256,9 +255,7 @@ $( '#application-of-funds-link' ).click( function () {
 } );
 
 // track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
@@ -303,7 +300,6 @@ $( function () {
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
-		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
 	} );
 } );

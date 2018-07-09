@@ -7,12 +7,10 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 0.01;
-const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
-const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-import UrlTracker from '../shared/url_tracker';
+import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
@@ -91,7 +89,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
+const trackingEvents = new EventLoggingTracker( BannerName );
 
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
@@ -258,9 +256,7 @@ $( '#application-of-funds-link' ).click( function () {
 } );
 
 // track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
@@ -305,7 +301,6 @@ $( function () {
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
-		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
 	} );
 } );
