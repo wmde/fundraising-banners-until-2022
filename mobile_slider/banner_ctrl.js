@@ -1,6 +1,6 @@
 /* eslint no-alert: 1 */
 
-import TrackingEvents from '../shared/tracking_events';
+import UrlTracker from '../shared/url_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
@@ -86,7 +86,7 @@ $bannerContainer.html( bannerTemplate( {
 	progressBar: progressBar.render()
 } ) );
 
-const trackingEvents = new TrackingEvents( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
+const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
 trackingEvents.trackClickEvent( $( '.mini-banner-tab' ), 'banner-expanded', bannerClickTrackRatio );
 trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
 

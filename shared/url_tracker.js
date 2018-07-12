@@ -22,7 +22,7 @@ function getTrackingURL( baseUrl, actionName, bannerName, data ) {
 	} ).join( '/' );
 }
 
-export default class TrackingEvents {
+export default class UrlTracker {
 
 	constructor( baseUrl, bannerName, trackingImage ) {
 		this.baseUrl = baseUrl;
