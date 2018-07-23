@@ -49,7 +49,7 @@ The first commit should contain the following changes:
   * Delete `templates/banner_html_var.hbs`
   * Put the CTRL text both in `templates/banner_text.hbs` and `templates/banner_text_var.hbs`
   * Reference the correct templates in `banner_var.js`
-If this is a design change test:
+* If this is a design change test:
   * Copy the contents of `banner_ctrl.js` to `banner_var.js`.
   * If this is a markup change, copy the contents of `templates/banner_html.hbs` to `templates/banner_html_var.hbs` and change the template reference in `banner_var.js`  
   * Delete `templates/banner_text_var.hbs` and make sure, `templates/banner_html_var.hbs` includes `templates/banner_text.hbs`
