@@ -497,11 +497,16 @@
 	}
 
 	@media ( max-width: 640px ) {
-		.form-field-group {
-			flex-wrap: wrap;
-		}
-		.WMDE-Banner-submit {
-			width: 100%;
+		.banner {
+			&__content {
+				display: flex;
+				flex-direction: row;
+				order: 1;
+			}
+			&__footer {
+				order: 2;
+				padding: 0.5em 0 0 5.8em;
+			}
 		}
 	}
 }
