@@ -61,7 +61,7 @@ Prepare Campaign <CAMPAIGN_NAME>
 Resetting CTRL to (CTRL or VAR from <OLD_CAMPAIGN_NAME>)
 ```
 
-[See setup instrcution for campaign names][1].
+[See setup instruction for campaign names][1].
 
 #### Second Commit
 The second commit should only touch the necessary changes in `banner_var.js`, `templates/banner_html_var.hbs`, `styles_var.pcss` `templates/banner_text_var.hbs`, depending on the type of A/B test.
