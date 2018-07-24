@@ -44,7 +44,7 @@ From time to time we check if the instructions in this document still match our 
 The first commit should contain the following changes:
 * Changes to `campaign_info.toml`, adjusting banner and campaign names.
 * Deleting `styles_var.pcss`
-* Copy the contents of the last "winning" banner to `banner_ctrl.js`, `templates/banner_html.hbs` and `css/styles.styles.pcss`.  
+* Copy the contents of the last "winning" banner to `banner_ctrl.js`, `templates/banner_html.hbs` and `css/styles.pcss`.  
 * If this is a text change test:
   * Delete `templates/banner_html_var.hbs`
   * Put the CTRL text both in `templates/banner_text.hbs` and `templates/banner_text_var.hbs`
