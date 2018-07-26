@@ -3,7 +3,7 @@
         <div class="banner__content">
             <div class="infobox">
                 <div class="infobox__text">
-                    {{> banner_text }}
+                    {{> banner_text_var }}
                 </div>
             </div>
 
@@ -30,6 +30,8 @@
 
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
                       action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&pmt=0&skin=cat17">
+
+                    <div class="form-field-group">
                         <div class="select-group-container">
                             <div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
                                 <label class="select-group__option select-group__option--thirdwidth">
@@ -51,10 +53,52 @@
                             <span id="WMDE_Banner-frequency-error-text"
                                   class="select-group__errormessage">{{ no-interval-message }}</span>
                         </div>
-                    <div class="form-field-group">
+
                         <div class="select-group-container">
                             <div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
-                                <label class="select-group__option select-group__option--fullwidth select-group__custom--big select-group__option-amount-other-input">
+                                <label id="amount_label_1"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_1"
+                                           class="select-group__input" value="5">
+                                    <span class="select-group__state">5 €</span>
+                                </label>
+
+                                <label id="amount_label_2"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_2"
+                                           class="select-group__input" value="15">
+                                    <span class="select-group__state">15 €</span>
+                                </label>
+
+                                <label id="amount_label_3"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_3"
+                                           class="select-group__input" value="25">
+                                    <span class="select-group__state">25 €</span>
+                                </label>
+
+                                <label id="amount_label_4"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_4"
+                                           class="select-group__input" value="50">
+                                    <span class="select-group__state">50 €</span>
+                                </label>
+
+                                <label id="amount_label_5"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_5"
+                                           class="select-group__input" value="75">
+                                    <span class="select-group__state">75 €</span>
+                                </label>
+
+                                <label id="amount_label_6"
+                                       class="select-group__option select-group__option--quarterwidth">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_6"
+                                           class="select-group__input" value="100">
+                                    <span class="select-group__state">100 €</span>
+                                </label>
+
+                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input">
                                     <input type="text" name="amountGiven" id="amount-other-input" size="3"
                                            autocomplete="off" value="" placeholder="Wunschbetrag"
                                            class="select-group__custom-input">
