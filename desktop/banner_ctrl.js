@@ -9,13 +9,13 @@ const sizeIssueTrackRatio = 0.01;
 const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
+import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import Translations from '../shared/messages/de';
-import EventLoggingTracker from '../shared/event_logging_tracker';
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -51,7 +51,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_ctrl.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -170,7 +170,6 @@ function validateForm() {
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
-
 	return validateForm();
 } );
 
