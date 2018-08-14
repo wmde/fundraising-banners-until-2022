@@ -33,7 +33,7 @@ Branch names follow the pattern `C<year>_<environment>_<campaign_number>`. `<yea
 `<campaign_number>` is a zero-padded 2-digit number counting up for each A/B test on a platform.
 It should be the [same number used in CentralNotice][1].
 
-If we inadvertently commit something to master, we live with that commit and don't change the master branch.
+If we inadvertently commit something to master, we generally try to avoid changes to the master branch but allow amends of very minor changes if all team members agree and are aware of this change.
 
 ### Commits
 Each feature branch should have **two commits**.
@@ -44,15 +44,9 @@ From time to time we check if the instructions in this document still match our 
 The first commit should contain the following changes:
 * Changes to `campaign_info.toml`, adjusting banner and campaign names.
 * Deleting `styles_var.pcss`
-* Copy the contents of the last "winning" banner to `banner_ctrl.js`, `templates/banner_html.hbs` and `css/styles.pcss`.  
-* If this is a text change test:
-  * Delete `templates/banner_html_var.hbs`
-  * Put the CTRL text both in `templates/banner_text.hbs` and `templates/banner_text_var.hbs`
-  * Reference the correct templates in `banner_var.js`
-* If this is a design change test:
-  * Copy the contents of `banner_ctrl.js` to `banner_var.js`.
-  * If this is a markup change, copy the contents of `templates/banner_html.hbs` to `templates/banner_html_var.hbs` and change the template reference in `banner_var.js`  
-  * Delete `templates/banner_text_var.hbs` and make sure, `templates/banner_html_var.hbs` includes `templates/banner_text.hbs`
+* Copy the contents of the last "winning" banner into all ctrl and var files (`banner_xxx.js`, `templates/banner_html_xxx.hbs` and `css/styles_xxx.pcss`, [...]).
+* Ensure the correct (_var / _ctrl) templates are referenced in the relevant JavaScript and template files
+* If a banner requires general maintenance or improvements which are not subject to A/B testing, these changes must be implemented into both banners in the first commit
 
 The first commit message should have the following format:
 ```
