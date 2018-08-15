@@ -8,26 +8,6 @@
             </div>
 
             <div class="form">
-                <div class="form__header">
-                    <p style="visibility:hidden">Ja, ich spende...</p>
-
-                    <div class="banner__footer">
-                        <div class="footer">
-                            <div class="footer__item">
-                                <span>Spendenkonto Wikimedia Foerdergesellschaft</span>
-                            </div>
-                            <div class="footer__item">
-                                <span>BIC</span>
-                                <span class="footer__importantinfo">BFSWDE33BER</span>
-                            </div>
-                            <div class="footer__item">
-                                <span>IBAN</span>
-                                <span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
                       action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 
@@ -162,13 +142,14 @@
                 </div>
                 <div class="footer__item">
                     <span>IBAN</span>
-                    <span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                    <span class="footer__importantinfo"><span class="iban-block"><span>DE33</span><span>1002</span><span>0500</span><span>0001</span><span>1947</span><span>00</span></span></span>
                 </div>
 
                 <div class="footer__item footer__item--rightflex">
                     <a id="application-of-funds-link" class="application-of-funds-link"
-                       href="https://spenden.wikimedia.de/page/Transparenz?skin=cat17"
-                       data-href="#info-application-of-funds">Wohin geht meine Spende?</a>
+                       href="https://spenden.wikimedia.de/page/Transparenz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}"
+                       data-href="#info-application-of-funds">Wohin geht meine Spende?
+                    </a>
                 </div>
             </div>
         </div>
