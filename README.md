@@ -49,7 +49,7 @@ The `campaign_tracking` and `tracking` parameters in `campaign_info.toml` are us
 
 ## Creating new campaigns
 1. Duplicate an existing folder with banner entry points, e.g. `desktop`.
-2. Create a new campaign and its banner configuration in `campaign_info.toml`. 
+2. Create a new campaign and its banner configuration in `campaign_info.toml`.
 
 ### Creating A/B tests
 The changes to the code depend on which kind of test you are running.
@@ -63,7 +63,7 @@ The changes to the code depend on which kind of test you are running.
 
 ## How the preview feature works
 * Initially, the file `webpack/loader.js` will use the banner configuration to present links to a preview page for each banner.  
-* `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that 
+* `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that
   path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org.
 * there exist two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
   * [B17WMDE_webpack_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B17WMDE_webpack_prototype) on CentralNotice
@@ -77,10 +77,12 @@ The changes to the code depend on which kind of test you are running.
 ## Notes on possible Banner code improvements
 * Refactor old CSS to remove ID selectors and ensure that no new CSS uses ID selectors by setting "selector-max-id" in .stylelintrc.json to 0. The current legacy CSS often makes use of two-chained ID selectors (like `#elementOne #elementTwo { color: blah; }`) which is unnecessary and is something we should get rid of in the future.
 * Change banner JS code to improve reusability of markup, for A/B testing text changes: Load the `banner_text.hbs` template and render it as an unescaped variable into the markup in `banner_html.hbs`.
-* Move translatable strings from `banner_functions.js` and `campaign_day_sentence.js` into a central `messages.js` file and add a `Translations` object that can receive keys (and placeholder values) and returns translated strings. 
+* Move translatable strings from `banner_functions.js` and `campaign_day_sentence.js` into a central `messages.js` file and add a `Translations` object that can receive keys (and placeholder values) and returns translated strings.
 * Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
 * Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
-* Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module. 
+* Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module.
 * Refactor `banner_functions.js` to no longer require parameters after `require`. Use classes with constructor parameters instead.
-* Structure banner initialization into functions, call them one after each other. Select Banner object only once and use its `find` method with all other jQuery selections.
+* Structure banner initialization into functions, call them one after each other.
+* Select Banner DOM object only once and use its `find` method with all other jQuery selections.
+* Improve A/B testability by moving to the feature toggle/feature factory model we have in FundraisingFrontend. Get rid of `banner_ctrl.js` and `banner_var.js`. This will improve code sharing.
 * Re-Implement/Refactor lightbox module without the need for a global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.
