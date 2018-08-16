@@ -13,6 +13,9 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import DayName from '../shared/day_name';
 
+const bannerTemplate = require( './templates/banner_html_top.hbs' );
+const bannerTextTemplate = require( './templates/banner_text_top.hbs' ); // Change this for Text tests
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 import Translations from '../shared/messages/de';
@@ -43,8 +46,6 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_top.hbs' );
-
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
 
@@ -64,15 +65,21 @@ const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
 	modifier: 'progress_bar--lateprogress'
 } );
 
-$bannerContainer.html( bannerTemplate( {
+const templateData = {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	currentDayName: currentDayName,
-	weekdayPrepPhrase: weekdayPrepPhrase,
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	campaignDaySentence: campaignDaySentence.getSentence(),
-	CampaignName: CampaignName,
-	BannerName: BannerName,
-	progressBar: progressBar.render()
+	currentDayName,
+	weekdayPrepPhrase
+};
+
+$bannerContainer.html( bannerTemplate( {
+	...templateData,
+	CampaignName,
+	BannerName,
+	progressBar: progressBar.render(),
+	bannerText: bannerTextTemplate( templateData )
 } ) );
 
 // BEGIN form init code

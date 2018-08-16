@@ -16,6 +16,9 @@ import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 
+const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTextTemplate = require( './templates/banner_text.hbs' ); // Change this for Text tests
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 import Translations from '../shared/messages/de';
@@ -48,8 +51,6 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 
 const animateHighlight = require( '../shared/animate_highlight' );
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
-
 const $ = require( 'jquery' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
@@ -69,15 +70,21 @@ const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
 } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
-$bannerContainer.html( bannerTemplate( {
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	currentDayName: currentDayName,
-	weekdayPrepPhrase: weekdayPrepPhrase,
-	campaignDaySentence: campaignDaySentence.getSentence(),
+const templateData = {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
-	CampaignName: CampaignName,
-	BannerName: BannerName,
-	progressBar: progressBar.render()
+	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
+	campaignDaySentence: campaignDaySentence.getSentence(),
+	currentDayName,
+	weekdayPrepPhrase
+};
+
+$bannerContainer.html( bannerTemplate( {
+	...templateData,
+	CampaignName,
+	BannerName,
+	progressBar: progressBar.render(),
+	bannerText: bannerTextTemplate( templateData )
 } ) );
 
 const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );

@@ -2,5 +2,8 @@
   "presets": [
     ["env"]
   ],
-  "plugins": ["transform-object-assign"]
+  "plugins": [
+    "transform-object-assign",
+    "transform-object-rest-spread"
+  ]
 }

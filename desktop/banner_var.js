@@ -22,6 +22,9 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
 } );
 
+const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTextTemplate = require( './templates/banner_text.hbs' ); // Change this for Text tests
+
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
@@ -51,8 +54,6 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
-
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
 
@@ -74,16 +75,21 @@ const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
 } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
-$bannerContainer.html( bannerTemplate( {
+const templateData = {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
-	currentDayName: currentDayName,
-	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
-	CampaignName: CampaignName,
-	BannerName: BannerName,
-	progressBar: progressBar.render()
+	currentDayName,
+	weekdayPrepPhrase
+};
+
+$bannerContainer.html( bannerTemplate( {
+	...templateData,
+	CampaignName,
+	BannerName,
+	progressBar: progressBar.render(),
+	bannerText: bannerTextTemplate( templateData )
 } ) );
 
 // BEGIN form init code
