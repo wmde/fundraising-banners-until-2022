@@ -1,4 +1,5 @@
-<div id="frbanner" style="display: none;"><!-- the "full screen" banner -->
+<div id="frbanner" style="display: none;">
+	<!-- the "full screen" banner -->
 
 	<div id="frbanner-mask"></div>
 
@@ -17,8 +18,7 @@
 					Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
 				</div>
 			</div>
-
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" id="periode" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -33,30 +33,29 @@
 				<fieldset class="from__section cf">
 					<legend class="form__section-head">Häufigkeit wählen</legend>
 					<div class="select-group-container">
-						<ol class="select-group select-group--tablet-3cols" >
+						<ol class="select-group select-group--tablet-3cols">
 
 							<li class="select-group__option">
-								<input class="select-group__input" type="radio" id="interval_onetime" name="interval" value="0"/>
-								<label class="select-group__label" for="interval_onetime">Einmalig</label>
+								<input class="select-group__input" type="radio" id="interval_onetime" name="interval" value="0" />
+								<label class="select-group__label" for="interval_onetime">einmalig</label>
 							</li>
 							<li class="select-group__option">
 								<input class="select-group__input" type="radio" id="interval_1" name="interval" value="1" />
-								<label class="select-group__label" for="interval_1">Monatlich</label>
+								<label class="select-group__label" for="interval_1">monatlich</label>
 							</li>
 							<li class="select-group__option">
 								<input class="select-group__input" type="radio" id="interval_12" name="interval" value="12" />
-								<label class="select-group__label" for="interval_12">Jährlich</label>
+								<label class="select-group__label" for="interval_12">jährlich</label>
 							</li>
 						</ol>
-                    </div>
+					</div>
 				</fieldset>
 
 				<fieldset class="form__section cf">
 
-
 					<legend class="form__section-head">Betrag wählen</legend>
 
-					<ol class="select-group select-group--tablet-3cols" >
+					<ol class="select-group select-group--tablet-3cols">
 
 						<li class="select-group__option" id="amount_total_1">
 							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount1" value="5" />
