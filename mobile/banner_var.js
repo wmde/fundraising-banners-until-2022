@@ -1,8 +1,8 @@
 /* eslint no-alert: 1 */
 
-require( './css/styles.pcss' );
 // For A/B testing different styles, load
 // require( './css/styles_var.pcss' );
+require( './css/styles.pcss' );
 require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
@@ -50,7 +50,7 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 
 const animateHighlight = require( '../shared/animate_highlight' );
 
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 
