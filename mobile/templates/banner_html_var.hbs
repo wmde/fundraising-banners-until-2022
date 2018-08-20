@@ -1,14 +1,14 @@
 <div id="frbanner" style="display: none;"><!-- the "full screen" banner -->
 
-	<div id="frbanner-mask"></div>
+    <div id="frbanner-mask"></div>
 
-	<div id="frbanner-window">
+    <div id="frbanner-window">
 
-		<div id="frbanner-close"></div>
+        <div id="frbanner-close"></div>
 
-		<div id="modal-signup" class="cf">
+        <div id="modal-signup" class="cf">
 
-			<div class="infobox">
+            <div class="infobox">
                 <div class="infobox__text">
                     {{> banner_text }}
                 </div>
@@ -18,26 +18,26 @@
                 <div class="call-to-action">
                     Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
                 </div>
-			</div>
+            </div>
 
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=cat17">
-				<input type="hidden" name="periode" value="0">
-				<input type="hidden" id="address_type" name="addressType" value="person">
-				<input type="hidden" name="intervalType" id="intervalType" value="0" />
+            <form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
+                <input type="hidden" name="periode" value="0">
+                <input type="hidden" id="address_type" name="addressType" value="person">
+                <input type="hidden" name="intervalType" id="intervalType" value="0" />
 
-				<input type="hidden" id="impCount" name="impCount" value="" />
-				<input type="hidden" id="bImpCount" name="bImpCount" value="" />
-				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
+                <input type="hidden" id="impCount" name="impCount" value="" />
+                <input type="hidden" id="bImpCount" name="bImpCount" value="" />
+                <input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 
-				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
-				<input type="hidden" id="betrag" name="betrag" value="" />
-
-
-				<fieldset class="form__section cf">
+                <input type="hidden" id="zahlweise" name="zahlweise" value="" />
+                <input type="hidden" id="betrag" name="betrag" value="" />
 
 
-					<legend class="form__section-head">Betrag wählen</legend>
+                <fieldset class="form__section cf">
+
+
+                    <legend class="form__section-head">Betrag wählen</legend>
 
                     <ol class="select-group select-group--tablet-3cols" >
 
@@ -73,32 +73,32 @@
 
                     </ol>
 
-				</fieldset>
+                </fieldset>
 
-				<fieldset class="form__section cf">
-                    
+                <fieldset class="form__section cf">
+
                     <legend class="form__section-head">Zahlweise wählen</legend>
-                
+
                     <ol class="button-group button-group--tablet-2cols">
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="PPL">
                                 PayPal
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="MCP">
                                 Kreditkarte
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="UEB">
                                 Überweisung
                             </button>
                         </li>
-    
+
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="BEZ">
                                 Lastschrift
@@ -118,23 +118,23 @@
                         <li class="button-group__hint">
                             SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
                         </li>
-    
+
                     </ol>
                 </fieldset>
 
-			</form>
+            </form>
 
-			<div class="smallprint" id="frbanner-smallprint">
-				<div class="smallprint--left"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=cat17">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=cat17">Datenschutz</a></div>
-				<div class="smallprint--right">
-					<a href="https://spenden.wikimedia.de/page/Transparenz?skin=cat17">Wohin geht meine Spende?</a>
-				</div>
-			</div>
-			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
+            <div class="smallprint" id="frbanner-smallprint">
+                <div class="smallprint--left"><a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Impressum</a> | <a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=10h16">Datenschutz</a></div>
+                <div class="smallprint--right">
+                    <a href="https://spenden.wikimedia.de/page/Transparenz?skin=10h16">Wohin geht meine Spende?</a>
+                </div>
+            </div>
+            <img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
 
-		</div><!--modal-signup-->
+        </div><!--modal-signup-->
 
-	</div><!--frbanner-window-->
+    </div><!--frbanner-window-->
 
 </div><!--frbanner-->
 
