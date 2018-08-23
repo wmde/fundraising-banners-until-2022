@@ -93,17 +93,36 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 } );
 
 $( '.button-group__container button' ).click( function ( event ) {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
-		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
-		return true;
-	}
-
-	alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	return false;
+	return submitForm( event );
 } );
 // END form initialization
+
+function submitForm( event ) {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' ).val();
+	if ( isValidForm( $checkedAmountElement ) ) {
+		setParameters( event, $checkedAmountElement );
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function setParameters( event, amount ) {
+	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
+	$( '#betrag' ).val( amount );
+}
+
+function isValidForm( amount ) {
+	if ( !isValidAmount( amount ) ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return false;
+	} else {
+		return true;
+	}
+}
+function isValidAmount( amount ) {
+	return amount > 0;
+}
 
 function displayMiniBanner() {
 
