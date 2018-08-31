@@ -86,6 +86,8 @@ $bannerContainer.html( bannerTemplate( {
 	progressBar: progressBar.render()
 } ) );
 
+const $bannerForm = $( '#WMDE_Banner-form' );
+
 // BEGIN form init code
 
 const trackingEvents = new EventLoggingTracker( BannerName );
@@ -135,6 +137,7 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
+		$( '#betrag' ).val( BannerFunctions.getAmount() );
 		BannerFunctions.hideAmountError();
 	} );
 
@@ -143,10 +146,16 @@ function setupAmountEventHandling() {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+		$( '#betrag' ).val( BannerFunctions.getAmount() );
 		appendEuroSign( input );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
+		let bannerAction = $bannerForm.data( 'main-action' );
+		if ( $( 'input[name=zahlweise]:checked', document.donationForm ).val() === 'BEZ' ) {
+			bannerAction = $bannerForm.data( 'fallback-action' );
+		}
+		$bannerForm.attr( 'action', bannerAction );
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
