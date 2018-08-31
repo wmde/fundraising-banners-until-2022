@@ -116,7 +116,7 @@ tracking = "wpde-04-171218-top-var"
 # Wikipedia.de Featurebox development
 [wikipediade_featurebox]
 campaign_tracking = "B18WPDE_01_180901"
-preview_link = "/wikipedia.de/?featuretest={{banner}}"
+preview_link = "/wikipedia.de?featuretest=FeatureDev&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade_featurebox.banners.feature]
