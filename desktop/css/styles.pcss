@@ -37,12 +37,9 @@
 			margin-top: 0.5em;
 		}
 		&__footer {
-			padding: 0.3em 0 0 0;
+			padding: 0 2.6em 0 2.6em;
 			font-size: 1.1em;
 			color: var( --banner-color-gray );
-		}
-		& > .banner__footer {
-			display: none;
 		}
 	}
 
@@ -163,7 +160,7 @@
 		min-width: inherit;
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
-		margin: 0.2em 2.5em;
+		margin: 0.2em 2.5em 0;
 		&__header {
 			display: flex;
 			justify-content: space-between;
@@ -216,18 +213,20 @@
 			color: var( --banner-color-white );
 		}
 		&__state {
-			display: block;
+			display: flex;
 			background: var( --banner-color-green-light );
 			color: var( --banner-color-green );
 			border: 0 none;
 			height: 25px;
-			padding: 0 0.4em;
-			line-height: 2em;
 			cursor: pointer;
 			text-align: center;
 			font-size: 0.95em;
 			box-sizing: border-box;
 			white-space: nowrap;
+			align-content: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 5px;
 		}
 		&__custom-input + .select-group__state {
 			position: absolute;
@@ -347,7 +346,7 @@
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
 		top: 0.5em;
-		right: 0.5em;
+		right: 0;
 		opacity: 0.5;
 		&-tracking {
 			display: none;
@@ -358,6 +357,11 @@
 			}
 		}
 	}
+
+	.iban-block > span {
+		margin-right: 4px;
+	}
+
 	.progress_bar {
 		&__days_left {
 			display: block;
@@ -404,10 +408,6 @@
 				order: 2;
 				padding: 0.5em 0 0 5.8em;
 			}
-		}
-
-		.banner > .banner__footer {
-			display: block;
 		}
 
 		.infobox {
