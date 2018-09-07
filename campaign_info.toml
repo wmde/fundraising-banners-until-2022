@@ -4,7 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "05-ba-180903"
+campaign_tracking = "06-ba-180919"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
@@ -13,12 +13,12 @@ wrapper_template = "wikipedia_org"
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
 pagename = "B18WMDE_06_180914_ctrl"
-tracking = "org-06-180917-ctrl"
+tracking = "org-06-180919-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
 pagename = "B18WMDE_06_180914_var"
-tracking = "org-06-180917-var"
+tracking = "org-06-180919-var"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
