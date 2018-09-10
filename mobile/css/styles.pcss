@@ -272,6 +272,16 @@
 		padding: 0 4px;
 	}
 
+	/* Select groups, 1 col by default for small screens */
+	.select-group__period {
+		display: block;
+		width: 100%;
+		clear: none;
+		float: left;
+		margin-bottom: 6px;
+		padding: 0 4px;
+	}
+
 	.select-group__option:nth-child( 2n ) {
 		margin-right: 0;
 	}
@@ -288,6 +298,22 @@
 			}
 
 			.select-group__option:nth-child( 3n ) {
+				margin-right: 0;
+			}
+		}
+	}
+
+	.select-group--mobile-3cols {
+		@media ( min-width: 980px ) {
+			.select-group__period {
+				width: 32%;
+			}
+
+			.select-group__period:nth-child( 2n ) {
+				margin: 0 2%;
+			}
+
+			.select-group__period:nth-child( 3n ) {
 				margin-right: 0;
 			}
 		}
