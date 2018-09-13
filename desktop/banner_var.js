@@ -131,13 +131,28 @@ function appendEuroSign( field ) {
 		$( field ).val( $( field ).val() + ' €' );
 	}
 }
+
+function getPaymentType() {
+	return $( 'input[name=zahlweise]:checked', document.donationForm ).val();
+}
+
+function updateFormattedAmount() {
+	const amount = BannerFunctions.getAmount();
+	if ( getPaymentType() === 'BEZ' ) {
+		$( '#betrag' ).val( amount );
+	} else if ( amount ) {
+		$( '#betrag' ).val( ( Number( amount ) ).toFixed( 2 ).replace( '.', ',' ) );
+	}
+
+}
+
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		$( '#betrag' ).val( BannerFunctions.getAmount() );
+		updateFormattedAmount();
 		BannerFunctions.hideAmountError();
 	} );
 
@@ -146,17 +161,18 @@ function setupAmountEventHandling() {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
-		$( '#betrag' ).val( BannerFunctions.getAmount() );
+		updateFormattedAmount();
 		appendEuroSign( input );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
 		let bannerAction = $bannerForm.data( 'main-action' );
-		if ( $( 'input[name=zahlweise]:checked', document.donationForm ).val() === 'BEZ' ) {
+		if ( getPaymentType() === 'BEZ' ) {
 			bannerAction = $bannerForm.data( 'fallback-action' );
 		}
 		$bannerForm.attr( 'action', bannerAction );
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+		updateFormattedAmount();
 	} );
 }
 
