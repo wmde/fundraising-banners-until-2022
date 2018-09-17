@@ -1,14 +1,15 @@
 <div>
     <div class="call-to-action">
         <p>
-            Ich möchte in Zukunft informiert werden, wenn Wikipedia meine Hilfe braucht.<br>Die Einwilligung kann ich jederzeit per E-Mail an spenden@wikimedia.de mit Wirkung für die Zukunft widerrufen.
+            <strong>Ich möchte in Zukunft informiert werden, wenn Wikipedia meine Hilfe braucht.</strong> Ich bin damit einverstanden, dass die Wikimedia Fördergesellschaft mir zu diesem Zweck Spendenaufrufe per E-Mail zusendet und meine Daten hierfür bis auf Widerruf verarbeitet. Ich kann meine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen z. B. per E-Mail an spenden@wikimedia.de.
         </p>
-        <label for="call-to-action-input"><strong>Meine E-Mail-Adresse:</strong></label>
-        <p><input id="call-to-action-input" type="email"/></p>
+        <label for="call-to-action-input">Meine E-Mail-Adresse:</label>
+        <form>
+            <input id="call-to-action-input" type="email"/>
+            <button id="call-to-action-button" type="button">Ja, ich bin dabei!</button>
+        </form>
         <p class="call-to-action-error"></p>
-        <p class="call-to-action-button-wrapper">
-            <button id="call-to-action-button" type="button">E-Mail eintragen</button>
-        </p>
+        <a href="https://spenden.wikimedia.de/page/Datenschutz">Hinweise zum Datenschutz</a>
     </div>
 
     <div class="call-to-action-confirmation" style="display:none;">
