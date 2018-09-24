@@ -95,15 +95,39 @@ trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.button-group__container button' ).click( function ( event ) {
-	event.preventDefault();
-	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
-	$( '.selected-payment' ).removeClass( 'selected-payment' );
-	$( event.target ).addClass( 'selected-payment' );
-} );
-
 $( '.select-group__option' ).click( function () {
 	$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+} );
+
+// Disable Sofort-Überweisung payment option if chosen interval is not 'one time'
+$( 'input[name=interval]' ).click( function () {
+	const subPaymentButton = $( 'button[data-payment-type=SUB]' );
+	if ( $( this ).attr( 'id' ) !== 'interval_onetime' ) {
+		subPaymentButton.attr( 'disabled', true );
+		subPaymentButton.removeClass( 'selected-option' );
+		$( '#zahlweise' ).val( '' );
+	} else {
+		subPaymentButton.attr( 'disabled', false );
+	}
+} );
+
+$( '.interval-selection input' ).click( function ( event ) {
+	$( '.interval-selection .selected-option' ).removeClass( 'selected-option' );
+	$( event.target ).addClass( 'selected-option' );
+	$( '#periode' ).val( $( 'input[name=interval]:checked' ).val() );
+} );
+
+$( '.amount-selection button' ).click( function ( event ) {
+	$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
+	$( event.target ).addClass( 'selected-option' );
+	$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+} );
+
+$( '.payment-selection button' ).click( function ( event ) {
+	event.preventDefault();
+	$( '.payment-selection .selected-option' ).removeClass( 'selected-option' );
+	$( event.target ).addClass( 'selected-option' );
+	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 } );
 
 // END form initialization
@@ -194,5 +218,5 @@ $( document ).ready( function () {
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
-	$( '.mini-banner-tab' ).click( displayFullBanner );
+	$( '.mini-banner-tab, .banner-headline' ).click( displayFullBanner );
 } );

@@ -410,6 +410,15 @@
 			&--tablet-3cols {
 				display: flex;
 				flex-wrap: wrap;
+
+				@media ( max-width: 568px ) {
+					&.interval-selection {
+						.select-group__option {
+							width: 100%;
+							margin: 0 0 6px;
+						}
+					}
+				}
 			}
 			&__label {
 				display: block;
@@ -461,7 +470,7 @@
 				}
 
 				&--tablet-2cols {
-					@media ( min-width: 500px ) {
+					@media ( min-width: 568px ) {
 						.button-group__container {
 							width: 49%;
 							&:nth-child( 2n+1 ) {
@@ -487,7 +496,7 @@
 					font-weight: bold;
 					font-size: 24px;
 					transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
-					&.selected-payment {
+					&.selected-option {
 						background-color: var( --banner-color-red );
 						color: var( --banner-color-offwhite );
 						border-color: #7d8389;
@@ -497,7 +506,11 @@
 						color: var( --banner-color-offwhite );
 						border-color: #7d8389;
 					}
-
+					&:disabled {
+						opacity: 0.3;
+						cursor: auto;
+						pointer-events: none;
+					}
 					&-submit {
 						background-color: var( --banner-color-green );
 						color: var( --banner-color-offwhite );

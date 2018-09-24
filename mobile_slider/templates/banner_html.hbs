@@ -19,7 +19,7 @@
             </div>
 
             <form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
-                <input type="hidden" name="periode" value="0">
+                <input type="hidden" id="periode" name="periode" value="0">
                 <input type="hidden" id="address_type" name="addressType" value="person">
                 <input type="hidden" name="intervalType" id="intervalType" value="0" />
                 <input type="hidden" id="impCount" name="impCount" value="" />
@@ -30,8 +30,29 @@
 
                 <hr class="frbanner-separator">
 
+                <fieldset class="from__section cf">
+                    <div class="select-group-container">
+                        <ol class="select-group select-group--tablet-3cols interval-selection" >
+                            <li class="select-group__option">
+                                <input class="select-group__input" type="radio" id="interval_onetime" name="interval" value="0"/>
+                                <label class="select-group__label" for="interval_onetime">Einmalig</label>
+                            </li>
+                            <li class="select-group__option">
+                                <input class="select-group__input" type="radio" id="interval_1" name="interval" value="1" />
+                                <label class="select-group__label" for="interval_1">Monatlich</label>
+                            </li>
+                            <li class="select-group__option">
+                                <input class="select-group__input" type="radio" id="interval_12" name="interval" value="12" />
+                                <label class="select-group__label" for="interval_12">Jährlich</label>
+                            </li>
+                        </ol>
+                    </div>
+                </fieldset>
+
+                <hr class="frbanner-separator">
+
                 <fieldset class="form__section cf">
-                    <ol class="select-group select-group--tablet-3cols" >
+                    <ol class="select-group select-group--tablet-3cols amount-selection" >
                         <li class="select-group__option" id="amount_total_1">
                             <input class="select-group__input" name="betrag_auswahl" type="radio" id="amount1" value="5" />
                             <label class="select-group__label" id="amount_label_1" for="amount1">5 €</label>
@@ -60,7 +81,7 @@
                 </fieldset>
                 <hr class="frbanner-separator">
                 <fieldset class="form__section cf">
-                    <ol class="button-group button-group--tablet-2cols">
+                    <ol class="button-group button-group--tablet-2cols payment-selection">
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="PPL">
                                 PayPal
@@ -82,7 +103,7 @@
                             </button>
                         </li>
                     </ol>
-                        <ol class="button-group button-group--tablet-1col">
+                        <ol class="button-group button-group--tablet-1col payment-selection">
                         <li class="button-group__container">
                             <button class="button-group__button" data-payment-type="SUB">
                                 Sofort-Überweisung
@@ -94,6 +115,8 @@
                         <li class="button-group__hint">
                             SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
                         </li>
+                    </ol>
+                    <ol class="button-group button-group--tablet-1col">
                         <li class="button-group__container-submit">
                             <button class="button-group__button button-group__button-submit" >Weiter, um Spende abzuschließen</button>
                         </li>
