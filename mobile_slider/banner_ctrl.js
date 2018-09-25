@@ -1,6 +1,6 @@
 /* eslint no-alert: 1 */
 
-import UrlTracker from '../shared/url_tracker';
+import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
@@ -19,11 +19,10 @@ const bannerTemplate = require( './templates/banner_html.hbs' );
 require( './css/styles.pcss' );
 
 // BEGIN Banner-Specific configuration
-const bannerClickTrackRatio = 1;
+const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
-const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 const sliderAutoPlaySpeed = 2000;
 const fullscreenBannerSlideInSpeed = 1250;
 // END Banner-Specific configuration
@@ -58,6 +57,8 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
+const animateHighlight = require( '../shared/animate_highlight' );
+
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
@@ -71,11 +72,11 @@ $bannerContainer.html( bannerTemplate( {
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	CampaignName: CampaignName,
-	BannerName: BannerName,
+	BannerName: BannerName
 } ) );
 
-const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
-trackingEvents.trackClickEvent( $( '.mini-banner-tab' ), 'banner-expanded', bannerClickTrackRatio );
+const trackingEvents = new EventLoggingTracker( BannerName );
+trackingEvents.trackClickEvent( $( '.mini-banner' ), 'mobile-mini-banner-expanded', bannerClickTrackRatio );
 trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
@@ -91,9 +92,11 @@ $( '.select-group__option' ).click( function () {
 $( 'input[name=interval]' ).click( function () {
 	const subPaymentButton = $( 'button[data-payment-type=SUB]' );
 	if ( $( this ).attr( 'id' ) !== 'interval_onetime' ) {
+		if ( subPaymentButton.hasClass( 'selected-option' ) ) {
+			subPaymentButton.removeClass( 'selected-option' );
+			$( '#zahlweise' ).val( '' );
+		}
 		subPaymentButton.attr( 'disabled', true );
-		subPaymentButton.removeClass( 'selected-option' );
-		$( '#zahlweise' ).val( '' );
 	} else {
 		subPaymentButton.attr( 'disabled', false );
 	}
@@ -116,6 +119,22 @@ $( '.payment-selection button' ).click( function ( event ) {
 	$( '.payment-selection .selected-option' ).removeClass( 'selected-option' );
 	$( event.target ).addClass( 'selected-option' );
 	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
+} );
+
+$( '#banner-form-submit' ).click( function () {
+	if ( !$( '#periode' ).val() || jQuery( '.interval-selection .selected-option' ).length === 0 ) {
+		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
+		return false;
+	}
+	if ( !$( '#betrag' ).val() ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return false;
+	}
+	if ( !$( '#zahlweise' ).val() ) {
+		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
+		return false;
+	}
+	return true;
 } );
 
 // END form initialization
@@ -170,7 +189,13 @@ function displayFullBanner() {
 		// Now that the viewport and banner are aligned, both of them are pushed further down simultaneously
 		viewport.animate( { marginTop: bannerHeight }, remainingSlideTime, 'linear' );
 		fullscreenBanner.dequeue();
-		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' );
+		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
+			// Once fullscreen banner is fully shown, the contents are animated
+			setTimeout( function () {
+				animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+			}, 500 );
+		} );
+
 	} );
 }
 
@@ -203,5 +228,5 @@ $( document ).ready( function () {
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
-	$( '.mini-banner-tab, .banner-headline' ).click( displayFullBanner );
+	$( '.mini-banner-tab, .mini-banner .banner-headline' ).click( displayFullBanner );
 } );
