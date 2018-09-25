@@ -15,7 +15,6 @@ const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSet
 const formatNumber = require( 'format-number' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const bannerTemplate = require( './templates/banner_html.hbs' );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
 require( './css/styles.pcss' );
 
@@ -62,17 +61,7 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft,
-	modifier: 'progress_bar--lateprogress'
-} );
+
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -83,7 +72,6 @@ $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 	CampaignName: CampaignName,
 	BannerName: BannerName,
-	progressBar: progressBar.render()
 } ) );
 
 const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.banner-tracking' ) );
@@ -182,10 +170,7 @@ function displayFullBanner() {
 		// Now that the viewport and banner are aligned, both of them are pushed further down simultaneously
 		viewport.animate( { marginTop: bannerHeight }, remainingSlideTime, 'linear' );
 		fullscreenBanner.dequeue();
-		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
-			// Once fullscreen banner is fully shown, the progress bar is animated
-			progressBar.animate();
-		} );
+		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' );
 	} );
 }
 
