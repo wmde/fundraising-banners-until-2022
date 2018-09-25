@@ -352,14 +352,45 @@
 			}
 		}
 
-		.call-to-action {
-			padding: 10px;
-			font-size: 6vw;
-			display: block;
-			margin: auto;
-			width: 80%;
-			position: relative;
-			font-weight: bold;
+		.infobox {
+			font-size: 20px;
+			line-height: 1.3;
+			text-align: left;
+
+			.highlight {
+				background-color: #ffff00;
+				color: #000000;
+				line-height: 1.2;
+			}
+
+			&__greeting {
+				margin-right: 2em;
+			}
+
+			&__text {
+				padding: 0 20px;
+				font-weight: bold;
+
+				p {
+					margin-bottom: 10px;
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+
+				&--italic {
+					font-style: italic;
+				}
+
+				@media ( min-width: 768px ) {
+					padding: 0 72px;
+				}
+			}
+
+			@media ( min-width: 768px ) {
+				font-size: 24px;
+				line-height: 1.4;
+			}
 		}
 
 		.form {
@@ -567,15 +598,6 @@
 				&:before {
 					top: 50%;
 				}
-			}
-		}
-	}
-
-	.frbanner {
-		&-window {
-			.call-to-action {
-				font-size: 30px;
-				width: 300px;
 			}
 		}
 	}
