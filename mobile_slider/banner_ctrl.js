@@ -92,10 +92,11 @@ $( '.select-group__option' ).click( function () {
 $( 'input[name=interval]' ).click( function () {
 	const subPaymentButton = $( 'button[data-payment-type=SUB]' );
 	if ( $( this ).attr( 'id' ) !== 'interval_onetime' ) {
+		// Reset payment method selection when Sofortüberweisung was previously selected
 		if ( subPaymentButton.hasClass( 'selected-option' ) ) {
-			subPaymentButton.removeClass( 'selected-option' );
 			$( '#zahlweise' ).val( '' );
 		}
+		subPaymentButton.removeClass( 'selected-option' );
 		subPaymentButton.attr( 'disabled', true );
 	} else {
 		subPaymentButton.attr( 'disabled', false );
@@ -122,7 +123,7 @@ $( '.payment-selection button' ).click( function ( event ) {
 } );
 
 $( '#banner-form-submit' ).click( function () {
-	if ( !$( '#periode' ).val() || jQuery( '.interval-selection .selected-option' ).length === 0 ) {
+	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
 		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
 		return false;
 	}

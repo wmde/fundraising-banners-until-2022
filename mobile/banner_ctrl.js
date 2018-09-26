@@ -92,18 +92,40 @@ $( '#amount1, #amount2, #amount3, #amount4, #amount5' ).click( function () {
 	$( '#input_amount_other_box' ).val( '' );
 } );
 
+// Disable Sofort-Überweisung payment option if chosen interval is not 'one time'
+$( 'input[name=interval]' ).click( function () {
+	if ( $( this ).attr( 'id' ) !== 'interval_onetime' ) {
+		$( 'button[data-payment-type=SUB]' ).attr( 'disabled', true ).addClass( 'disabled' );
+	} else {
+		$( 'button[data-payment-type=SUB]' ).attr( 'disabled', false ).removeClass( 'disabled' );
+	}
+} );
+
 $( '.button-group__container button' ).click( function ( event ) {
-	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' );
-	if ( $checkedAmountElement.length > 0 ) {
+	var $checkedAmountElement = $( 'input[name=betrag_auswahl]:checked' ).val(),
+		$checkedIntervalElement = $( 'input[name=interval]:checked' ).val();
+	if ( !isValidAmount( $checkedAmountElement ) ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return false;
+	} else if ( !isValidPeriod( $checkedIntervalElement ) ) {
+		alert( 'Bitte wählen Sie zuerst ein Zahlungsintervall.' );
+		return false;
+	} else {
 		$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
-		$( '#betrag' ).val( $checkedAmountElement.val() );
+		$( '#betrag' ).val( $checkedAmountElement );
+		$( '#periode' ).val( $checkedIntervalElement );
 		return true;
 	}
-
-	alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-	return false;
 } );
 // END form initialization
+
+function isValidAmount( amount ) {
+	return amount > 0;
+}
+
+function isValidPeriod( interval ) {
+	return typeof interval !== 'undefined';
+}
 
 function displayMiniBanner() {
 

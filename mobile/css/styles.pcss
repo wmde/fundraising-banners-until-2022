@@ -406,6 +406,18 @@
 		font-weight: 500;
 		font-size: 24px;
 		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+		&.disabled {
+			background-color: #ffffff;
+			color: #999999;
+			border: 1px solid #9aa0a7;
+			&:hover {
+				cursor: auto;
+				background-color: #ffffff;
+				color: #999999;
+				border: 1px solid #9aa0a7;
+			}
+		}
 	}
 	.button-group__button:hover {
 		background-color: #ffffff;
