@@ -23,7 +23,6 @@ const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
-const sliderAutoPlaySpeed = 2000;
 const fullscreenBannerSlideInSpeed = 1250;
 // END Banner-Specific configuration
 
@@ -31,7 +30,7 @@ const fullscreenBannerSlideInSpeed = 1250;
  * Slider wrapper object holding a Flickity-based slider
  * @type {Slider}
  */
-const bannerSlider = new Slider( sliderAutoPlaySpeed );
+const bannerSlider = new Slider();
 
 const campaignDays = new CampaignDays(
 	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
@@ -152,9 +151,6 @@ function displayMiniBanner() {
 	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
 
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
-
-	// Making sure automatic sliding only starts after slider is shown to the user
-	bannerSlider.enableAutoplay();
 }
 
 /**
