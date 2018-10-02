@@ -75,7 +75,6 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingEvents = new EventLoggingTracker( BannerName );
-trackingEvents.trackClickEvent( $( '.mini-banner' ), 'mobile-mini-banner-expanded', bannerClickTrackRatio );
 trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
@@ -159,6 +158,13 @@ function displayMiniBanner() {
  * First it slides to the viewport, next it pushes the viewport further down along with the fullscreen banner
  */
 function displayFullBanner() {
+	trackingEvents.track(
+		'mobile-mini-banner-expanded',
+		bannerClickTrackRatio,
+		bannerSlider.getViewedSlides(),
+		bannerSlider.getCurrentSlide()
+	);
+
 	$( '.mini-banner' ).hide();
 	window.scrollTo( 0, 0 );
 
@@ -225,5 +231,7 @@ $( document ).ready( function () {
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
-	$( '.mini-banner-tab, .mini-banner .banner-headline' ).click( displayFullBanner );
+	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
+
+	clickableBannerArea.click( displayFullBanner );
 } );
