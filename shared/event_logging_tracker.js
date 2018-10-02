@@ -50,13 +50,19 @@ export default class EventLoggingTracker {
 		}
 
 		return () => {
-			if ( Math.random() < trackingRatio ) {
-				mw.track( 'event.WMDEBannerEvents', {
-					bannerName: this.bannerName,
-					bannerAction: actionName,
-					eventRate: trackingRatio
-				} );
-			}
+			this.track( actionName, trackingRatio, 0, 0 );
 		};
+	}
+
+	track( actionName, trackingRatio, slidesShown, finalSlide ) {
+		if ( Math.random() < trackingRatio ) {
+			mw.track( 'event.WMDEBannerEvents', {
+				bannerName: this.bannerName,
+				bannerAction: actionName,
+				eventRate: trackingRatio,
+				slidesShown: slidesShown,
+				finalSlide: finalSlide
+			} );
+		}
 	}
 }
