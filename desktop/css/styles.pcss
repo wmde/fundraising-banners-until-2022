@@ -161,6 +161,10 @@
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
 		margin: 0.2em 2.5em 0;
+
+		@media ( max-width: 640px ) {
+			margin: 0.2em 0 0;
+		}
 		&__header {
 			display: flex;
 			justify-content: space-between;
@@ -172,6 +176,10 @@
 			display: flex;
 			flex-wrap: nowrap;
 			flex: 1 1 auto;
+
+			@media ( max-width: 640px ) {
+				flex-wrap: wrap;
+			}
 		}
 	}
 
@@ -493,20 +501,6 @@
 
 		.footer__item--rightflex {
 			margin-right: 5em;
-		}
-	}
-
-	@media ( max-width: 640px ) {
-		.banner {
-			&__content {
-				display: flex;
-				flex-direction: row;
-				order: 1;
-			}
-			&__footer {
-				order: 2;
-				padding: 0.5em 0 0 5.8em;
-			}
 		}
 	}
 }
