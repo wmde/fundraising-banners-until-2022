@@ -1,9 +1,15 @@
-:root {
-	--banner-text-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-}
-
 #WMDE_Banner {
-	@media ( max-width: 1440px ) {
+	@media ( max-width: 1150px ) {
+		.infobox {
+			&:before {
+				display: none;
+			}
+			&__text {
+				font-size: 1em;
+				font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+			}
+			margin: 0.2em 0.5em;
+		}
 		.close {
 			top: 0.5em;
 			right: 1em;
@@ -12,22 +18,11 @@
 				color: #ffffff;
 			}
 		}
-	}
-
-	.infobox {
-		margin: 0.2em 0.5em 0.2em 0.5em;
-
-		@media ( min-width: 1440px ) {
-			margin: 0.2em 0 0.2em 0.5em;
+		.form {
+			margin: 0;
 		}
-
-		@media ( max-width: 1050px ) {
-			&__text {
-				font-size: 1em;
-			}
-		}
-		&:before {
-			display: none;
+		.banner__footer {
+			padding: 0 0.5em;
 		}
 	}
 
