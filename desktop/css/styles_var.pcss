@@ -6,7 +6,7 @@
 			}
 			&__text {
 				font-size: 1em;
-				font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+				font-family: var( --banner-main-font-family );
 			}
 			margin: 0.2em 0.5em;
 		}
@@ -29,6 +29,10 @@
 	.text {
 		&__headline {
 			display: inline;
+
+			@media ( min-width: 1150px ) {
+				display: block;
+			}
 		}
 		&__paragraph {
 			display: inline;
@@ -37,7 +41,8 @@
 			&_screen_ {
 				&s,
 				&m,
-				&l {
+				&l,
+				&xl {
 					display: none;
 				}
 
@@ -55,6 +60,12 @@
 
 				@media ( min-width: 1024px ) {
 					&l {
+						display: inline;
+					}
+				}
+
+				@media ( min-width: 1150px ) {
+					&xl {
 						display: inline;
 					}
 				}
