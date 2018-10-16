@@ -30,7 +30,7 @@ export default class SizeIssueIndicator {
 	}
 
 	/**
-	 * Check if Banner takes too much screen space and track the incident
+	 * Check if Banner takes too much screen space and trackBannerEvent the incident
 	 * @param {jQuery} $bannerElement
 	 * @return {boolean} whether or not the remaining viewport height is below the threshold
 	 */

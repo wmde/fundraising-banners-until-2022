@@ -22,13 +22,35 @@ export default class EventLoggingTracker {
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
+		this.trackViewportData( dimensionData, trackingRatio, '' );
+	}
+
+	/**
+	 * Track the dimensions of the user viewport for statistical purposes
+	 *
+	 * @param {object} dimensionData
+	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
+	 */
+	trackViewPortDimensions( dimensionData, trackingRatio ) {
+		this.trackViewportData( dimensionData, trackingRatio, 'viewport_tracking_' );
+	}
+
+	/**
+	 * Track dimension data depending on tracking ratio
+	 *
+	 * @param {object} dimensionData
+	 * @param {number} trackingRatio
+	 * @param {string} bannerPrefix
+	 * @private
+	 */
+	trackViewportData( dimensionData, trackingRatio, bannerPrefix ) {
 		if ( typeof trackingRatio === 'undefined' ) {
 			trackingRatio = 1;
 		}
 
 		if ( Math.random() < trackingRatio ) {
 			mw.track( 'event.WMDEBannerSizeIssue', {
-				bannerName: this.bannerName,
+				bannerName: bannerPrefix + this.bannerName,
 				viewportWidth: parseInt( dimensionData.window.width, 10 ),
 				viewportHeight: parseInt( dimensionData.window.height, 10 ),
 				bannerHeight: parseInt( dimensionData.bannerHeight, 10 ),
@@ -50,11 +72,19 @@ export default class EventLoggingTracker {
 		}
 
 		return () => {
-			this.track( actionName, trackingRatio, 0, 0 );
+			this.trackBannerEvent( actionName, trackingRatio, 0, 0 );
 		};
 	}
 
-	track( actionName, trackingRatio, slidesShown, finalSlide ) {
+	/**
+	 * Track banner event data
+	 * @param {string} actionName
+	 * @param {number} trackingRatio
+	 * @param {number} slidesShown
+	 * @param {number} finalSlide
+	 * @private
+	 */
+	trackBannerEvent( actionName, trackingRatio, slidesShown, finalSlide ) {
 		if ( Math.random() < trackingRatio ) {
 			mw.track( 'event.WMDEBannerEvents', {
 				bannerName: this.bannerName,

@@ -158,7 +158,7 @@ function displayMiniBanner() {
  * First it slides to the viewport, next it pushes the viewport further down along with the fullscreen banner
  */
 function displayFullBanner() {
-	trackingEvents.track(
+	trackingEvents.trackBannerEvent(
 		'mobile-mini-banner-expanded',
 		bannerClickTrackRatio,
 		bannerSlider.getViewedSlides(),

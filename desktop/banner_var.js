@@ -319,6 +319,11 @@ $( function () {
 		return;
 	}
 
+	trackingEvents.trackViewPortDimensions(
+		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
+		sizeIssueTrackRatio
+	);
+
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
