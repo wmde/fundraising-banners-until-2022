@@ -1,3 +1,5 @@
+const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
+
 export default class EventLoggingTracker {
 
 	constructor( bannerName ) {
@@ -22,7 +24,7 @@ export default class EventLoggingTracker {
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
-		this.trackViewportData( dimensionData, trackingRatio, '' );
+		this.trackViewportData( this.bannerName, dimensionData, trackingRatio );
 	}
 
 	/**
@@ -31,26 +33,22 @@ export default class EventLoggingTracker {
 	 * @param {object} dimensionData
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
-	trackViewPortDimensions( dimensionData, trackingRatio ) {
-		this.trackViewportData( dimensionData, trackingRatio, 'viewport_tracking_' );
+	trackViewPortDimensions( dimensionData, trackingRatio = 1 ) {
+		this.trackViewportData( VIEWPORT_TRACKING_IDENTIFIER, dimensionData, trackingRatio );
 	}
 
 	/**
 	 * Track dimension data depending on tracking ratio
 	 *
+	 * @param {string} bannerName
 	 * @param {object} dimensionData
 	 * @param {number} trackingRatio
-	 * @param {string} bannerPrefix
 	 * @private
 	 */
-	trackViewportData( dimensionData, trackingRatio, bannerPrefix ) {
-		if ( typeof trackingRatio === 'undefined' ) {
-			trackingRatio = 1;
-		}
-
+	trackViewportData( bannerName, dimensionData, trackingRatio = 0.01 ) {
 		if ( Math.random() < trackingRatio ) {
 			mw.track( 'event.WMDEBannerSizeIssue', {
-				bannerName: bannerPrefix + this.bannerName,
+				bannerName: bannerName,
 				viewportWidth: parseInt( dimensionData.window.width, 10 ),
 				viewportHeight: parseInt( dimensionData.window.height, 10 ),
 				bannerHeight: parseInt( dimensionData.bannerHeight, 10 ),
@@ -66,25 +64,20 @@ export default class EventLoggingTracker {
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 * @return {function}
 	 */
-	createTrackHandler( actionName, trackingRatio ) {
-		if ( typeof trackingRatio === 'undefined' ) {
-			trackingRatio = 1;
-		}
-
+	createTrackHandler( actionName, trackingRatio = 0.01 ) {
 		return () => {
-			this.trackBannerEvent( actionName, trackingRatio, 0, 0 );
+			this.trackBannerEvent( actionName, 0, 0, trackingRatio );
 		};
 	}
 
 	/**
 	 * Track banner event data
 	 * @param {string} actionName
-	 * @param {number} trackingRatio
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide
-	 * @private
+	 * @param {number} trackingRatio
 	 */
-	trackBannerEvent( actionName, trackingRatio, slidesShown, finalSlide ) {
+	trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio = 0.01 ) {
 		if ( Math.random() < trackingRatio ) {
 			mw.track( 'event.WMDEBannerEvents', {
 				bannerName: this.bannerName,

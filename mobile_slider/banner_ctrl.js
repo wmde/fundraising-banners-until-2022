@@ -158,9 +158,9 @@ function displayMiniBanner() {
 function displayFullBanner() {
 	trackingEvents.trackBannerEvent(
 		'mobile-mini-banner-expanded',
-		bannerClickTrackRatio,
 		bannerSlider.getViewedSlides(),
-		bannerSlider.getCurrentSlide()
+		bannerSlider.getCurrentSlide(),
+		bannerClickTrackRatio
 	);
 
 	$( '.mini-banner' ).hide();
