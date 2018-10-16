@@ -358,6 +358,12 @@
 		top: 0;
 		right: 0;
 		opacity: 0.5;
+
+		@media ( max-width: 1149px ) {
+			top: 0.5em;
+			right: 1em;
+			opacity: 0.8;
+		}
 		&-tracking {
 			display: none;
 			&__pixel {
@@ -368,7 +374,7 @@
 		}
 		&__link {
 			font-size: 25px;
-			color: #000000;
+			color: var( --banner-color-gray );
 			text-decoration: none;
 			&:hover {
 				text-decoration: none;
