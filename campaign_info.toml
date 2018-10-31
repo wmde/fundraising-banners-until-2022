@@ -6,7 +6,7 @@
 [desktop]
 campaign_tracking = "07-ba-181004"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 
 # Banners of the campaign, key after "banners" can be anything
@@ -23,7 +23,7 @@ tracking = "org-07-181004-var"
 [dewiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [dewiki-default.banners.default]
 filename = "./desktop/banner_ctrl.js"
@@ -35,7 +35,7 @@ tracking = "org-desktop-de-171113"
 [mobile]
 campaign_tracking = "mob02-ba-181012"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
@@ -51,7 +51,7 @@ tracking = "org-mob02-181012-var"
 [mobile-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [mobile-default.banners.default]
 filename = "./mobile/banner_ctrl.js"
@@ -63,7 +63,7 @@ tracking = "org-mob-de-171121"
 [pad]
 campaign_tracking = "pad04-ba-171218"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
@@ -79,7 +79,7 @@ tracking = "org-pad04-171218-var"
 [pad-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [pad-default.banners.default]
 filename = "./pad/banner_ctrl.js"
@@ -128,7 +128,7 @@ tracking = "B18WPDE_01_180901"
 [english]
 campaign_tracking = "en01-ba-181112"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
@@ -144,7 +144,7 @@ tracking = "org-en01-181112-var"
 [enwiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [enwiki-default.banners.default]
 filename = "./english/banner_ctrl.js"
@@ -156,7 +156,7 @@ tracking = "org-desktop-en-171121"
 [mobile_slider]
 campaign_tracking = ""
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
+wrapper_template = "wikipedia_org_js_banner_values"
 
 [mobile_slider.banners.ctrl]
 filename = "./mobile_slider/banner_ctrl.js"
