@@ -126,20 +126,21 @@ tracking = "B18WPDE_01_180901"
 
 # English Campaign
 [english]
-campaign_tracking = "en03-ba-171218"
+campaign_tracking = "en01-ba-181112"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B17WMDE_en03_171218_ctrl"
-tracking = "org-en03-171218-ctrl"
+pagename = "B18WMDE_en01_181112_ctrl"
+tracking = "org-en01-181112-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B17WMDE_en03_171218_var"
-tracking = "org-en03-171218-var"
+pagename = "B18WMDE_en01_181112_var"
+tracking = "org-en01-181112-var"
 
+# English fallback campaign
 [enwiki-default]
 campaign_tracking = "ca17-default"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"

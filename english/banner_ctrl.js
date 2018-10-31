@@ -6,12 +6,10 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 180;
 const sizeIssueTrackRatio = 0.01;
-const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'en';
-const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 // END Banner-Specific configuration
 
-import UrlTracker from '../shared/url_tracker';
+import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
@@ -66,9 +64,8 @@ const progressBarTextInnerLeft = [
 ].join( ' ' );
 const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft,
 	textRight: progressBarTextRight,
-	modifier: 'progress_bar--lateprogress'
+	textInnerLeft: progressBarTextInnerLeft
 } );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -85,7 +82,7 @@ $bannerContainer.html( bannerTemplate( {
 
 // BEGIN form init code
 
-const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.click-tracking__pixel' ) );
+const trackingEvents = new EventLoggingTracker( BannerName );
 
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
@@ -109,40 +106,64 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
+		addSpaceInstantly();
+	} );
+}
+
+function appendEuroSign( field ) {
+	if ( $( field ).val() !== '' &&
+		!/^.*(€)$/.test( $( field ).val() ) ) {
+		$( field ).val( $( field ).val() + ' €' );
+	}
 }
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+	// using delegated events with empty selector to be markup-independent and still have current value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
-		BannerFunctions.hideAmountError();
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
+		banner.trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		BannerFunctions.hideAmountError();
+		var input = $( '#WMDE_Banner-amounts .select-group__custom-input' );
+		input.addClass( 'select-group__custom-input--value-entered' );
+		banner.trigger( 'validation:amount:ok' );
+		appendEuroSign( input );
 	} );
 }
 
 function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
+	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val(),
+		banner = $( '#WMDE_Banner' );
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
+		banner.trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
 	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
+	banner.trigger( 'validation:period:ok' );
 	return true;
 }
 
-$( '#WMDE_Banner-payment button' ).click( function ( e ) {
-	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
-	if ( !validateAndSetPeriod() || !BannerFunctions.validateAmount( BannerFunctions.getAmount() ) ) {
-		e.preventDefault();
-		return false;
-	}
+function validateForm() {
+	return validateAndSetPeriod() &&
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
+}
+
+$( '.WMDE-Banner-submit button' ).click( function () {
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
@@ -156,6 +177,10 @@ $( '#amount-other-input' ).change( function () {
 
 $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 	BannerFunctions.hideFrequencyError();
+} );
+
+$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
+	$( this ).trigger( 'paymenttype:selected' );
 } );
 
 BannerFunctions.initializeBannerEvents();
@@ -209,6 +234,7 @@ function displayBanner() {
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
+		positionLanguageInfoBox();
 		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
@@ -222,13 +248,16 @@ function calculateLightboxPosition() {
 }
 
 function showLanguageInfoBox() {
+	positionLanguageInfoBox();
+	$( '#langInfo' ).show();
+}
+
+function positionLanguageInfoBox() {
 	var langInfoElement = $( '#langInfo' ),
 		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
 		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
 	langInfoElement.css( 'top', bannerHeight );
 	langInfoElement.css( 'width', formWidth );
-	langInfoElement.show();
-	addSpaceInstantly();
 }
 
 var impCount = BannerFunctions.increaseImpCount();
@@ -298,12 +327,12 @@ $( function () {
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
-		trackingEvents.createTrackHandler( 'search-box-used', searchBoxTrackRatio )();
 		bannerDisplayTimeout.cancel();
 	} );
 
 	$( '.select-group__option, .button-group__button' ).click( function () {
 		showLanguageInfoBox();
+		addSpaceInstantly();
 	} );
 
 } );
