@@ -56,20 +56,11 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{
-		textInnerLeft: progressBarTextInnerLeft,
-		modifier: 'progress_bar--lateprogress'
-	}
+	{}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -96,32 +87,32 @@ function setupValidationEventHandling() {
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
 		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
 		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
 		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
+		addSpaceInstantly( banner );
 	} );
 }
 function appendEuroSign( field ) {
@@ -218,21 +209,12 @@ BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
-function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
+function addSpaceInstantly( $bannerElement ) {
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
-}
-
-function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
-		return;
-	}
-
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
 }
 
 function removeBannerSpace() {
@@ -241,20 +223,23 @@ function removeBannerSpace() {
 
 function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
+		instantBanner = $( '#WMDE_InstantBanner' ),
 		bannerHeight;
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
 
 	bannerHeight = bannerElement.height();
+	instantBanner.addClass( 'fade-out' );
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
-	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () {
+		instantBanner.hide();
+	}, 1000 );
 
 	$( window ).resize( function () {
-		addSpaceInstantly();
+		addSpaceInstantly( bannerElement );
 		calculateLightboxPosition();
 	} );
 }
@@ -271,8 +256,10 @@ $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
+var applicationOfFundsLinks = $( '#application-of-funds-link, #application-of-funds-link-instant-banner' );
+
 // Lightbox
-$( '#application-of-funds-link' ).wlightbox( {
+applicationOfFundsLinks.wlightbox( {
 	container: $( '#mw-page-base' ),
 	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
 	top: function () {
@@ -280,13 +267,13 @@ $( '#application-of-funds-link' ).wlightbox( {
 	}
 } );
 
-$( '#application-of-funds-link' ).click( function () {
+applicationOfFundsLinks.click( function () {
 	// Lightbox position is relative to banner position
 	window.scrollTo( 0, 0 );
 } );
 
 // track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
+trackingEvents.trackClickEvent( applicationOfFundsLinks, 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
@@ -310,7 +297,8 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 
 // Display banner on load
 $( function () {
-	var $bannerElement = $( '#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$instantBanner = $( '#WMDE_InstantBanner' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -332,6 +320,10 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
+		$instantBanner.height( $bannerElement.height() );
+		$instantBanner.show();
+		addSpaceInstantly( $instantBanner );
+		setTimeout( function () { progressBar.animate(); }, 1000 );
 		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
