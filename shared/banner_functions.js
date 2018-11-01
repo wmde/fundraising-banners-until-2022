@@ -4,6 +4,12 @@
 
 var $ = require( 'jquery' );
 
+/**
+ *
+ * @param {object} GlobalBannerSettings deprecated, don't use!!
+ * @param {object} Translations
+ * @return {{onMediaWiki: (function(): boolean), getSkin: (function(): *), validateForm: validateForm, validateAndSetPeriod: validateAndSetPeriod, validateAmount: validateAmount, validatePaymentType: validatePaymentType, getAmount: getAmount, increaseImpCount: (function(): *), increaseBannerImpCount: (function(*=): *), getCurrentGermanDay: getCurrentGermanDay, initializeBannerEvents: initializeBannerEvents, showFrequencyError: showFrequencyError, hideFrequencyError: hideFrequencyError, showAmountError: showAmountError, hideAmountError: hideAmountError, showPaymentTypeError: showPaymentTypeError, hidePaymentTypeError: hidePaymentTypeError, removeBannerSpace: removeBannerSpace, getDigitGroupingCharacter: getDigitGroupingCharacter}}
+ */
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
 	var noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
