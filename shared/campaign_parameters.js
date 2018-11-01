@@ -1,27 +1,26 @@
 import * as DevGlobalBannerSettings from './global_banner_settings';
 
-
-/**
- * Legacy class for slow migration
- * @deprecated
- */
-export class GlobalCampaignParameters {
+export class HtmlDataCampaignParameters {
+	constructor( element ) {
+		this.element = element;
+	}
 	canProvideParameters() {
-		return !!window.GlobalBannerSettings;
+		return !!this.element;
 	}
 	getParameters() {
+		const data = this.element.dataset;
 		return {
-			goalSum: window.GlobalBannerSettings.goalSum,
+			goalSum: Number( data.goalSum ),
 			donationProjection: {
-				baseDate: window.GlobalBannerSettings['donations-date-base'],
-				baseDonationSum: window.GlobalBannerSettings['donations-collected-base'],
-				donorsBase: window.GlobalBannerSettings['donators-base'],
-				donationAmountPerMinute: window.GlobalBannerSettings[ 'appr-donations-per-minute' ],
-				donorsPerMinute: window.GlobalBannerSettings[ 'appr-donators-per-minute' ]
+				baseDate: data.donationsDateBase,
+				baseDonationSum: Number( data.donationsCollectedBase ),
+				donorsBase: Number( data.donorsBase ),
+				donationAmountPerMinute: Number( data.donationsPerMinute ),
+				donorsPerMinute: Number( data.donorsPerMinute )
 			},
-			millionImpressionsPerDay: window.GlobalBannerSettings['impressions-per-day-in-million'],
-			startDate: window.GlobalBannerSettings['campaign-start-date'],
-			endDate: window.GlobalBannerSettings['campaign-end-date']
+			millionImpressionsPerDay: data.millionImpressionsPerDay,
+			startDate: data.campaignStartDate,
+			endDate: data.campaignEndDate
 		};
 	}
 }
@@ -50,8 +49,11 @@ export class DevCampaignParameters {
 	}
 }
 
-export function createCampaignParameters() {
-	const paramCandidates = [ new GlobalCampaignParameters(), new DevCampaignParameters() ];
+export function createCampaignParameters(paramSources) {
+	const paramCandidates = paramSources || [
+		new HtmlDataCampaignParameters( document.getElementById('wmde-campaign-parameters') ),
+		new DevCampaignParameters()
+	];
 	while ( paramCandidates.length > 0 ) {
 		let paramCandidate = paramCandidates.shift();
 		if ( paramCandidate.canProvideParameters() ) {

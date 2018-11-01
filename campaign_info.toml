@@ -128,7 +128,7 @@ tracking = "B18WPDE_01_180901"
 [english]
 campaign_tracking = "en01-ba-181112"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org_js_banner_values"
+wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
