@@ -10,11 +10,11 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { Slider } from './banner_slider';
+import { createCampaignParameters } from '../shared/campaign_parameters';
 
 const $ = require( 'jquery' );
-const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
-const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const CampaignParameters = createCampaignParameters();
+const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
 const formatNumber = require( 'format-number' );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const bannerTemplate = require( './templates/banner_html.hbs' );
@@ -34,23 +34,17 @@ const fullscreenBannerSlideInSpeed = 1250;
 const bannerSlider = new Slider();
 
 const campaignDays = new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	startOfDay( CampaignParameters.startDate ),
+	endOfDay( CampaignParameters.endDate )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 14 );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+		startOfDay( CampaignParameters.donationProjection.baseDate ),
+		endOfDay( CampaignParameters.endDate )
 	),
-	{
-		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
-	}
+	CampaignParameters.donationProjection
 );
-
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
@@ -62,7 +56,22 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-
+const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+const progressBar = new ProgressBar(
+	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
+	campaignProjection,
+	{
+		textInnerLeft: progressBarTextInnerLeft,
+		modifier: 'progress_bar--lateprogress'
+	}
+);
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -70,9 +79,10 @@ $bannerContainer.html( bannerTemplate( {
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
-	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
+	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 const trackingEvents = new EventLoggingTracker( BannerName );
@@ -195,9 +205,8 @@ function displayFullBanner() {
 		fullscreenBanner.dequeue();
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
-			setTimeout( function () {
-				animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
-			}, 500 );
+			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
+			setTimeout( function () { progressBar.animate(); }, 1000 );
 		} );
 
 	} );
