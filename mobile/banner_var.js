@@ -1,6 +1,7 @@
 /* eslint no-alert: 1 */
 
-require( './css/styles_var.pcss' );
+require( './css/styles.pcss' );
+require( './css/styles_mini.pcss' );
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -8,7 +9,7 @@ import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
-import { Slider } from './banner_var_slider';
+import { Slider } from './banner_slider';
 
 const $ = require( 'jquery' );
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
@@ -16,7 +17,7 @@ const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSetti
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
 const formatNumber = require( 'format-number' );
 const CampaignProjection = require( '../shared/campaign_projection' );
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 // BEGIN Banner-Specific configuration
 const bannerClickTrackRatio = 0.01;
