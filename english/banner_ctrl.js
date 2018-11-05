@@ -15,28 +15,23 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-
-const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
-const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 import Translations from '../shared/messages/en';
-const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+import { createCampaignParameters } from '../shared/campaign_parameters';
+
+const CampaignParameters = createCampaignParameters();
+const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
 const campaignDays = new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	startOfDay( CampaignParameters.startDate ),
+	endOfDay( CampaignParameters.endDate )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+		startOfDay( CampaignParameters.donationProjection.baseDate ),
+		endOfDay( CampaignParameters.endDate )
 	),
-	{
-		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
-	}
+	CampaignParameters.donationProjection
 );
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
@@ -63,14 +58,18 @@ const progressBarTextInnerLeft = [
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
 const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textRight: progressBarTextRight,
-	textInnerLeft: progressBarTextInnerLeft
-} );
+const progressBar = new ProgressBar(
+	{ goalSum: CampaignParameters.goalSum },
+	campaignProjection,
+	{
+		textRight: progressBarTextRight,
+		textInnerLeft: progressBarTextInnerLeft
+	}
+);
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
+	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
