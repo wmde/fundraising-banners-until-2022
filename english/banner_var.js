@@ -19,7 +19,7 @@ import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/en';
-import { createCampaignParameters } from "../shared/campaign_parameters";
+import { createCampaignParameters } from '../shared/campaign_parameters';
 
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
@@ -32,7 +32,7 @@ const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
 		startOfDay( CampaignParameters.donationProjection.baseDate ),
-		endOfDay( CampaignParameters.endDate  )
+		endOfDay( CampaignParameters.endDate )
 	),
 	CampaignParameters.donationProjection
 );

@@ -36,22 +36,22 @@ export class DevCampaignParameters {
 		return {
 			goalSum: DevGlobalBannerSettings.goalSum,
 			donationProjection: {
-				baseDate: DevGlobalBannerSettings['donations-date-base'],
-				baseDonationSum: DevGlobalBannerSettings['donations-collected-base'],
-				donorsBase: DevGlobalBannerSettings['donators-base'],
+				baseDate: DevGlobalBannerSettings[ 'donations-date-base' ],
+				baseDonationSum: DevGlobalBannerSettings[ 'donations-collected-base' ],
+				donorsBase: DevGlobalBannerSettings[ 'donators-base' ],
 				donationAmountPerMinute: DevGlobalBannerSettings[ 'appr-donations-per-minute' ],
 				donorsPerMinute: DevGlobalBannerSettings[ 'appr-donators-per-minute' ]
 			},
-			millionImpressionsPerDay: DevGlobalBannerSettings['impressions-per-day-in-million'],
-			startDate: DevGlobalBannerSettings['campaign-start-date'],
-			endDate: DevGlobalBannerSettings['campaign-end-date']
-		}
+			millionImpressionsPerDay: DevGlobalBannerSettings[ 'impressions-per-day-in-million' ],
+			startDate: DevGlobalBannerSettings[ 'campaign-start-date' ],
+			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ]
+		};
 	}
 }
 
-export function createCampaignParameters(paramSources) {
+export function createCampaignParameters( paramSources ) {
 	const paramCandidates = paramSources || [
-		new HtmlDataCampaignParameters( document.getElementById('wmde-campaign-parameters') ),
+		new HtmlDataCampaignParameters( document.getElementById( 'wmde-campaign-parameters' ) ),
 		new DevCampaignParameters()
 	];
 	while ( paramCandidates.length > 0 ) {
@@ -61,4 +61,3 @@ export function createCampaignParameters(paramSources) {
 		}
 	}
 }
-
