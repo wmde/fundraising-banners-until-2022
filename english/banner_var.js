@@ -64,7 +64,7 @@ const progressBarTextInnerLeft = [
 ].join( ' ' );
 const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
 const progressBar = new ProgressBar(
-	{ goalSum: CampaignParameters.goalSum },
+	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
 		textRight: progressBarTextRight,

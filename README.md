@@ -82,7 +82,7 @@ The changes to the code depend on which kind of test you are running.
 * Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
 * Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module.
 * Refactor `banner_functions.js` to no longer require parameters after `require`. Use classes with constructor parameters instead.
-* Move calculations in from `progress_bar.s` to `campaign_projection.js`: Add the `goalSum` parameter to `CampaignProjection` class and add `remainingDonations` and `percentReached` methods to `CampaignProjection`.
+* Move calculations in from `progress_bar.s` to `campaign_projection.js`: Add the `goalDonationSum` parameter to `CampaignProjection` class and add `remainingDonations` and `percentReached` methods to `CampaignProjection`.
 * Structure banner initialization into functions, call them one after each other.
 * Select Banner DOM object only once and use its `find` method with all other jQuery selections.
 * Improve A/B testability by moving to the feature toggle/feature factory model we have in FundraisingFrontend. Get rid of `banner_ctrl.js` and `banner_var.js`. This will improve code sharing.

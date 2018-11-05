@@ -10,8 +10,8 @@ export class HtmlDataCampaignParameters {
 	getParameters() {
 		const data = this.element.dataset;
 		return {
-			goalSum: Number( data.goalSum ),
 			donationProjection: {
+				goalDonationSum: Number( data.goalDonationSum ),
 				baseDate: data.donationsDateBase,
 				baseDonationSum: Number( data.donationsCollectedBase ),
 				donorsBase: Number( data.donorsBase ),
@@ -34,8 +34,8 @@ export class DevCampaignParameters {
 	}
 	getParameters() {
 		return {
-			goalSum: DevGlobalBannerSettings.goalSum,
 			donationProjection: {
+				goalDonationSum: DevGlobalBannerSettings.goalDonationSum,
 				baseDate: DevGlobalBannerSettings[ 'donations-date-base' ],
 				baseDonationSum: DevGlobalBannerSettings[ 'donations-collected-base' ],
 				donorsBase: DevGlobalBannerSettings[ 'donators-base' ],

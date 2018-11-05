@@ -31,7 +31,7 @@ ProgressTree.prototype.animate = function () {
 	donationFillElement.clearQueue();
 	donationFillElement.stop();
 
-	donationTarget = this.GlobalBannerSettings.goalSum;
+	donationTarget = this.GlobalBannerSettings.goalDonationSum;
 	donationsCollected = this.campaignProjection.getProjectedDonationSum();
 
 	if ( donationsCollected > donationTarget ) {
