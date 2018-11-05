@@ -150,15 +150,3 @@ wrapper_template = "wikipedia_org_js_banner_values"
 filename = "./english/banner_ctrl.js"
 pagename = "B17WMDE_enwiki_desktop_default"
 tracking = "org-desktop-en-171121"
-
-
-# Mobile Slider Campaign
-[mobile_slider]
-campaign_tracking = ""
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org_js_banner_values"
-
-[mobile_slider.banners.ctrl]
-filename = "./mobile_slider/banner_ctrl.js"
-pagename = "B18WMDE_mob_prototype"
-tracking = "org-mob06-180501-ctrl"
