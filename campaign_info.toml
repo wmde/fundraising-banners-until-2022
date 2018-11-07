@@ -4,7 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "09-ba-181101"
+campaign_tracking = "10-ba-181108"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 

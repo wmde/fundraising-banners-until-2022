@@ -17,6 +17,7 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+const animateHighlight = require( '../shared/animate_highlight' );
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -45,7 +46,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -251,6 +252,7 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlight-character', 10 ); }, 1500 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
