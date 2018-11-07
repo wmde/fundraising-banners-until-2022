@@ -46,6 +46,23 @@ filename = "./mobile/banner_var.js"
 pagename = "B18WMDE_mob03_181112_var"
 tracking = "org-mob03-181112-var"
 
+
+# Mobile Campaign
+[mobile_english]
+campaign_tracking = "mob02-ba-181012"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org_js_banner_values"
+
+[mobile_english.banners.ctrl]
+filename = "./mobile_english/banner_ctrl.js"
+pagename = "B18WMDE_mob_en01_181112_ctrl"
+tracking = "org-mob_en01-181112-ctrl"
+
+[mobile_english.banners.var]
+filename = "./mobile_english/banner_var.js"
+pagename = "B18WMDE_mob_en01_181112_var"
+tracking = "org-mob_en01-181112-var"
+
 # Default mobile campaign
 [mobile-default]
 campaign_tracking = "ca17-default"
