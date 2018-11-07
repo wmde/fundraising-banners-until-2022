@@ -11,13 +11,13 @@ wrapper_template = "wikipedia_org"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B18WMDE_09_181101_ctrl"
-tracking = "org-09-181101-ctrl"
+pagename = "B18WMDE_10_181108_ctrl"
+tracking = "org-10-181108-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B18WMDE_09_181101_var"
-tracking = "org-09-181101-var"
+pagename = "B18WMDE_10_181108_var"
+tracking = "org-10-181108-var"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
