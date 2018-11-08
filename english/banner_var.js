@@ -55,20 +55,13 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
+
 const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textRight: progressBarTextRight,
-		textInnerLeft: progressBarTextInnerLeft
+		textRight: progressBarTextRight
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
