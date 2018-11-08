@@ -1,4 +1,5 @@
 require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -45,7 +46,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
