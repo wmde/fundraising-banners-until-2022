@@ -142,7 +142,6 @@ function updateFormattedAmount() {
 	} else if ( amount ) {
 		$( '#betrag' ).val( ( Number( amount ) ).toFixed( 2 ).replace( '.', ',' ) );
 	}
-
 }
 
 function setupAmountEventHandling() {

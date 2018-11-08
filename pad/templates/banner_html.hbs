@@ -21,7 +21,7 @@
 					</div>
 
 					<div class="footer__item footer__item--rightflex">
-						<a id="application-of-funds-link" class="application-of-funds-link" href="https://spenden.wikimedia.de/page/Transparenz?skin=" data-href="#info-application-of-funds">Wohin geht meine Spende?</a>
+						<a id="application-of-funds-link" class="application-of-funds-link" href="https://spenden.wikimedia.de/page/Transparenz?skin=0" data-href="#info-application-of-funds">Wohin geht meine Spende?</a>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 
 		<div class="form">
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
-			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=10h16">
+			      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
 					<label class="select-group__option select-group__option--thirdwidth">
@@ -54,23 +54,23 @@
 					</label>
 
 					<label id="amount_label_2" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="15">
-						<span class="select-group__state select-group__state--biggertext">15 €</span>
+						<input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="10">
+						<span class="select-group__state select-group__state--biggertext">10 €</span>
 					</label>
 
 					<label id="amount_label_3" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="25">
-						<span class="select-group__state select-group__state--biggertext">25 €</span>
+						<input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="20">
+						<span class="select-group__state select-group__state--biggertext">20 €</span>
 					</label>
 
 					<label id="amount_label_4" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="50">
-						<span class="select-group__state select-group__state--biggertext">50 €</span>
+						<input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="25">
+						<span class="select-group__state select-group__state--biggertext">25 €</span>
 					</label>
 
 					<label id="amount_label_5" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="75">
-						<span class="select-group__state select-group__state--biggertext">75 €</span>
+						<input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="50">
+						<span class="select-group__state select-group__state--biggertext">50 €</span>
 					</label>
 
 					<label id="amount_label_6" class="select-group__option select-group__option--quarterwidth">
@@ -78,44 +78,49 @@
 						<span class="select-group__state select-group__state--biggertext">100 €</span>
 					</label>
 
-					<label id="amount_label_7" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_7" class="select-group__input" value="250">
-						<span class="select-group__state select-group__state--biggertext">250 €</span>
-					</label>
-
-					<label class="select-group__option select-group__option--quarterwidth">
+					<label class="select-group__option select-group__option--halfwidth">
 						<input type="text" name="amountGiven" id="amount-other-input" size="3"
 						       autocomplete="off" value="" placeholder="anderer" class="select-group__custom-input">
 					</label>
 				</div>
+				<div class="form-field-group">
+					<div class="select-group-container">
+						<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
+							<label class="select-group__option select-group__option--halfwidth">
+								<input type="radio" name="zahlweise" value="BEZ" class="select-group__input">
+								<span class="select-group__state">Lastschrift</span>
+							</label>
 
-				<div id="WMDE_Banner-payment" class="WMDE-Banner-payment button-group">
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="BEZ">
-						<span class="button-group__label">Lastschrift</span>
-					</button>
+							<label class="select-group__option select-group__option--halfwidth">
+								<input type="radio" name="zahlweise" value="UEB" class="select-group__input">
+								<span class="select-group__state">Überweisung</span>
+							</label>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="UEB">
-						<span class="button-group__label">Überweisungszusage</span>
-					</button>
+							<label class="select-group__option select-group__option--halfwidth">
+								<input type="radio" name="zahlweise" value="MCP" class="select-group__input">
+								<span class="select-group__state">Kreditkarte</span>
+							</label>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="MCP">
-						<span class="button-group__label">Kreditkarte</span>
-					</button>
+							<label class="select-group__option select-group__option--halfwidth">
+								<input type="radio" name="zahlweise" value="PPL" class="select-group__input">
+								<span class="select-group__state">PayPal</span>
+							</label>
+						</div>
+						<span id="WMDE_Banner-payment-type-error-text"
+							  class="select-group__errormessage">{{ no-payment-type-message }}</span>
+					</div>
 
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="SUB">
-						<span class="button-group__label">Sofortüberweisung</span>
-					</button>
-
-					<button class="button-group__button button-group__button--halfwidth" data-payment-type="PPL">
-						<span class="button-group__label">PayPal</span>
-					</button>
+					<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
+						<button class="button-group__button">
+							<span class="button-group__label">Weiter, um Spende abzuschließen</span>
+						</button>
+					</div>
 				</div>
 
 				<input type="hidden" id="periode" name="periode" value="0"/>
 				<input type="hidden" id="intervalType" name="intervalType" value="0"/>
 				<input type="hidden" id="impCount" name="impCount" value=""/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
-				<input type="hidden" id="zahlweise" name="zahlweise" value=""/>
 			</form>
 		</div>
 
