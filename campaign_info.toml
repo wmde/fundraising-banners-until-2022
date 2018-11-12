@@ -88,29 +88,29 @@ tracking = "org-pad-de-171121"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-01-181112"
+campaign_tracking = "wpde-01-181113"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_fulltop_ctrl.js"
 pagename = "B18WPDE_01_181112_fulltop_ctrl"
-tracking = "wpde-01-181112-fulltop-ctrl"
+tracking = "wpde-01-181113-fulltop-ctrl"
 
 [wikipediade.banners.top-ctrl]
 filename = "./wikipedia.de/banner_top_ctrl.js"
 pagename = "B18WPDE_01_181112_top_ctrl"
-tracking = "wpde-01-181112-top-ctrl"
+tracking = "wpde-01-181113-top-ctrl"
 
 [wikipediade.banners.fulltop-var]
 filename = "./wikipedia.de/banner_fulltop_var.js"
 pagename = "B18WPDE_01_181112_fulltop_var"
-tracking = "wpde-01-181112-fulltop-var"
+tracking = "wpde-01-181113-fulltop-var"
 
 [wikipediade.banners.top-var]
 filename = "./wikipedia.de/banner_top_var.js"
 pagename = "B18WPDE_01_181112_top_var"
-tracking = "wpde-01-181112-top-var"
+tracking = "wpde-01-181113-top-var"
 
 # Wikipedia.de Featurebox development
 [wikipediade_featurebox]
