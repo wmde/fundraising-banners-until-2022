@@ -258,20 +258,6 @@ $( '#bImpCount' ).val( bannerImpCount );
 
 var applicationOfFundsLinks = $( '#application-of-funds-link, #application-of-funds-link-instant-banner' );
 
-// Lightbox
-applicationOfFundsLinks.wlightbox( {
-	container: $( '#mw-page-base' ),
-	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-	top: function () {
-		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
-	}
-} );
-
-applicationOfFundsLinks.click( function () {
-	// Lightbox position is relative to banner position
-	window.scrollTo( 0, 0 );
-} );
-
 // track lightbox link clicking and banner closing
 trackingEvents.trackClickEvent( applicationOfFundsLinks, 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
@@ -279,6 +265,16 @@ trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
 	$( '#WMDE_Banner' ).hide();
+	if ( BannerFunctions.onMediaWiki() ) {
+		mw.centralNotice.hideBanner();
+	}
+	removeBannerSpace();
+
+	return false;
+} );
+
+$( '#WMDE_InstantBanner .close__link' ).click( function () {
+	$( '#WMDE_InstantBanner, #WMDE_Banner' ).hide();
 	if ( BannerFunctions.onMediaWiki() ) {
 		mw.centralNotice.hideBanner();
 	}

@@ -236,20 +236,6 @@ $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
-// Lightbox
-$( '#application-of-funds-link' ).wlightbox( {
-	container: $( '#mw-page-base' ),
-	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-	top: function () {
-		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
-	}
-} );
-
-$( '#application-of-funds-link' ).click( function () {
-	// Lightbox position is relative to banner position
-	window.scrollTo( 0, 0 );
-} );
-
 // track lightbox link clicking and banner closing
 trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );

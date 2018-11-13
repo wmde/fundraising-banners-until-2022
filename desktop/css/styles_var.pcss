@@ -6,6 +6,37 @@
 	z-index: 10000;
 	font-size: 16px;
 
+	.close {
+		position: absolute;
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 0;
+		right: 0;
+		opacity: 0.5;
+
+		@media ( max-width: 1149px ) {
+			top: 0.5em;
+			right: 1em;
+			opacity: 0.8;
+		}
+		&-tracking {
+			display: none;
+			&__pixel {
+				height: 0;
+				width: 0;
+				border: 0 none;
+			}
+		}
+		&__link {
+			font-size: 25px;
+			color: var( --banner-color-gray );
+			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
 	.banner {
 		display: flex;
 		flex-direction: column;
