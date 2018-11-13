@@ -17,7 +17,6 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
-const animateHighlight = require( '../shared/animate_highlight' );
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -56,20 +55,11 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{
-		textInnerLeft: progressBarTextInnerLeft,
-		modifier: 'progress_bar--lateprogress'
-	}
+	{}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -227,7 +217,6 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
-	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlight-character', 10 ); }, 1500 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -246,20 +235,6 @@ var impCount = BannerFunctions.increaseImpCount();
 $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
-
-// Lightbox
-$( '#application-of-funds-link' ).wlightbox( {
-	container: $( '#mw-page-base' ),
-	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-	top: function () {
-		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
-	}
-} );
-
-$( '#application-of-funds-link' ).click( function () {
-	// Lightbox position is relative to banner position
-	window.scrollTo( 0, 0 );
-} );
 
 // track lightbox link clicking and banner closing
 trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
