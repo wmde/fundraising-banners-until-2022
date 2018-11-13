@@ -1,5 +1,4 @@
 require( './css/styles.pcss' );
-require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -18,6 +17,7 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+const animateHighlight = require( '../shared/animate_highlight' );
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -142,7 +142,6 @@ function updateFormattedAmount() {
 	} else if ( amount ) {
 		$( '#betrag' ).val( ( Number( amount ) ).toFixed( 2 ).replace( '.', ',' ) );
 	}
-
 }
 
 function setupAmountEventHandling() {
@@ -252,6 +251,7 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlight-character', 10 ); }, 1500 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();

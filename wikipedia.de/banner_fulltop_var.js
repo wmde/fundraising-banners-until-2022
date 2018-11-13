@@ -26,6 +26,10 @@ const campaignDays = new CampaignDays(
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 14 );
 const animateHighlight = require( '../shared/animate_highlight' );
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -57,17 +61,7 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
-	textInnerLeft: progressBarTextInnerLeft,
-	modifier: 'progress_bar--lateprogress'
-} );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection );
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
@@ -88,12 +82,12 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts-error-text' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts-error-text' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
@@ -106,20 +100,23 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:paymenttype:ok', function () {
+		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
-		$( '#amount-other-input' ).val( '' );
-		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		$( '.select-group__custom-input' ).addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 }
@@ -138,11 +135,11 @@ function validateAndSetPeriod() {
 
 function validateForm() {
 	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() );
+		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-payment button' ).click( function () {
-	$( '#zahlweise' ).val( $( this ).data( 'payment-type' ) );
+$( '.WMDE-Banner-submit button' ).click( function () {
 	return validateForm();
 } );
 

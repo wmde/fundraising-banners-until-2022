@@ -3,13 +3,13 @@
         <div class="banner__content">
             <div class="infobox">
                 <div class="infobox__text">
-                    {{> banner_text }}
+                    {{> banner_text_var }}
                 </div>
             </div>
 
             <div class="form">
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
-                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=1">
+                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
 
                     <div class="form-field-group">
                         <div class="select-group-container">
@@ -147,7 +147,7 @@
 
                 <div class="footer__item footer__item--rightflex">
                     <a id="application-of-funds-link" class="application-of-funds-link"
-                       href="https://spenden.wikimedia.de/page/Transparenz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}"
+                       href="https://spenden.wikimedia.de/page/Transparenz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0"
                        data-href="#info-application-of-funds">Wohin geht meine Spende?
                     </a>
                 </div>
@@ -159,6 +159,10 @@
                 &#x2715;
             </a>
         </div>
+    </div>
+
+    <div class="click-tracking">
+        <img class="click-tracking__pixel" src=""/>
     </div>
 </div>
 
