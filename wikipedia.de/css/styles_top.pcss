@@ -1,3 +1,9 @@
+:root {
+	--banner-color-gray: #9aa0a7;
+	--banner-color-red: #990000;
+	--banner-color-white: #ffffff;
+}
+
 #WMDE_Banner {
 
 	/**
@@ -119,20 +125,6 @@
 		padding: 0 0 0 0.5em;
 		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
 	}
-
-	.select-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em 0.5em 0.5em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 1 100%;
-		font-size: 0.9em;
-		font-weight: bold;
-	}
-
 	.select-group--with-error {
 		background: #990000;
 	}
@@ -147,21 +139,44 @@
 		font-size: 0.74em;
 	}
 
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0.5em 0.5em 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 1 100%;
+		font-size: 0.9em;
+		font-weight: bold;
+		&-container--with-error .select-group__errormessage {
+			background: var( --banner-color-red );
+			color: var( --banner-color-white );
+		}
+	}
+
 	.select-group__input {
 		display: none;
 	}
 
 	.select-group__custom-input {
-		padding: 0.4em 2.4em 0.4em 0.4em;
-		width: 100%;
+		padding: 0.4em 1.4em 0.4em 0.4em;
 		height: 100%;
-		margin: 0;
-		font-size: 0.74em;
-		font-weight: bold;
+		font-size: 0.9em;
 		text-align: center;
-		border: 1px solid #9aa0a7;
-		border-radius: 4px;
 		box-sizing: border-box;
+		&:focus,
+		&:active {
+			border: 0;
+			border-bottom: 1px solid var( --banner-color-gray );
+		}
+		border: 0;
+		border-radius: 0.4em;
+		border-bottom: 1px solid var( --banner-color-gray );
+		background-color: unset;
+		width: 70%;
+		margin: 0 3em;
 	}
 
 	.select-group__option {
@@ -200,6 +215,9 @@
 		text-align: center;
 		font-size: 0.8em;
 		box-sizing: border-box;
+		&.euro-sign {
+			right: 1.8em;
+		}
 	}
 
 	.select-group__state:hover {
@@ -214,10 +232,15 @@
 		color: #ffffff;
 	}
 
+	#WMDE-Banner-submit {
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
+	}
+
 	.select-group__custom-input + .select-group__state {
 		position: absolute;
 		top: 0;
-		right: 1em;
 		border-color: transparent;
 		background: transparent;
 	}
@@ -274,9 +297,9 @@
 
 	.button-group__label {
 		display: block;
-		color: #3366cc;
-		background: #f8f9fa;
-		border: 1px solid #9aa0a7;
+		background: #2a4b8d;
+		border-color: #7d8389;
+		color: #ffffff;
 		border-radius: 2px;
 		padding: 0.1em 0;
 		line-height: 2em;
