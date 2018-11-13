@@ -5,6 +5,7 @@
                 <div class="infobox__text">
                     {{> banner_text }}
                 </div>
+                {{{ progressBar }}}
             </div>
 
             <div class="form">
@@ -146,10 +147,9 @@
                 </div>
 
                 <div class="footer__item footer__item--rightflex">
-                    <a id="application-of-funds-link" class="application-of-funds-link"
-                       target="_bank"
-                       href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
-                        Wohin geht meine Spende?
+                    <a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
+                       href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0"
+                       data-href="#info-application-of-funds">Wohin geht meine Spende?
                     </a>
                 </div>
             </div>
@@ -160,10 +160,6 @@
                 &#x2715;
             </a>
         </div>
-    </div>
-
-    <div class="click-tracking">
-        <img class="click-tracking__pixel" src=""/>
     </div>
 </div>
 
