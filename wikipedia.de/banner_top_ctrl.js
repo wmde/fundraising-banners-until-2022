@@ -191,14 +191,6 @@ function displayBanner() {
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
-		calculateLightboxPosition();
-	} );
-}
-
-function calculateLightboxPosition() {
-	$( '#wlightbox' ).css( {
-		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 
@@ -206,20 +198,6 @@ var impCount = BannerFunctions.increaseImpCount();
 $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
-
-// Lightbox
-$( '#application-of-funds-link' ).wlightbox( {
-	container: $( 'body' ),
-	right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-	top: function () {
-		return ( $( '#WMDE_Banner' ).height() + 20 ) + 'px';
-	}
-} );
-
-$( '#application-of-funds-link' ).click( function () {
-	// Lightbox position is relative to banner position
-	window.scrollTo( 0, 0 );
-} );
 
 // record banner impression
 trackingEvents.recordBannerImpression();
