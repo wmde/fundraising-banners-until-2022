@@ -8,7 +8,7 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import Translations from '../shared/messages/de';
+import Translations from '../shared/messages/en';
 import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 
@@ -17,13 +17,13 @@ const CampaignParameters = createCampaignParameters();
 const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
 const formatNumber = require( 'format-number' );
 const CampaignProjection = require( '../shared/campaign_projection' );
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 // BEGIN Banner-Specific configuration
 const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
-const LANGUAGE = 'de';
+const LANGUAGE = 'en';
 const fullscreenBannerSlideInSpeed = 1250;
 // END Banner-Specific configuration
 
@@ -45,6 +45,7 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
+
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );

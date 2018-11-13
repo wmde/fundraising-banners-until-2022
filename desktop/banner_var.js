@@ -324,7 +324,7 @@ $( function () {
 		$instantBanner.show();
 		addSpaceInstantly( $instantBanner );
 		setTimeout( function () { progressBar.animate(); }, 1000 );
-		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, 7500 );
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
