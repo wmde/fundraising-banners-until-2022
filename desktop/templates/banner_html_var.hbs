@@ -1,42 +1,3 @@
-<div id="WMDE_InstantBanner">
-    <div class="banner">
-        <div class="banner__content">
-            <div class="infobox">
-                <div class="infobox__text">
-                    {{ campaignDaySentence }} Noch fehlen {{ amountNeeded }} Euro zur Erreichung unseres Spendenziels.
-                </div>
-                {{{ progressBar }}}
-            </div>
-        </div>
-
-        <div class="banner__footer">
-            <div class="footer">
-                <div class="footer__item">
-                    <span>Spendenkonto Wikimedia Foerdergesellschaft</span>
-                </div>
-                <div class="footer__item">
-                    <span>BIC</span>
-                    <span class="footer__importantinfo">BFSWDE33BER</span>
-                </div>
-                <div class="footer__item">
-                    <span>IBAN</span>
-                    <span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
-                </div>
-
-                <div class="footer__item footer__item--rightflex">
-                    <a id="application-of-funds-link-instant-banner"  class="application-of-funds-link" href="https://spenden.wikimedia.de/use-of-funds?skin=0" target="_blank" data-href="#info-application-of-funds">Wohin geht meine Spende?</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="close">
-            <a href="#" class="close__link">
-                &#x2715;
-            </a>
-        </div>
-    </div>
-</div>
-
 <div id="WMDE_Banner">
     <div class="banner">
         <div class="banner__content">
@@ -49,7 +10,7 @@
 
             <div class="form">
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
-                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
 
                     <div class="form-field-group">
                         <div class="select-group-container">
