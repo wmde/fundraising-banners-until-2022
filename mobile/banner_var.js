@@ -97,10 +97,6 @@ trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
 $( '#bImpCount' ).val( BannerFunctions.increaseBannerImpCount( BannerName ) );
 
-$( '.select-group__option' ).click( function () {
-	$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-} );
-
 // Disable Sofort-Überweisung payment option if chosen interval is not 'one time'
 $( 'input[name=interval]' ).click( function () {
 	const subPaymentButton = $( 'button[data-payment-type=SUB]' );
@@ -116,16 +112,44 @@ $( 'input[name=interval]' ).click( function () {
 	}
 } );
 
+function appendEuroSign( field ) {
+	if ( $( field ).val() !== '' &&
+		!/^.*(€)$/.test( $( field ).val() ) ) {
+		$( field ).val( $( field ).val() + ' €' );
+	}
+}
+function setupAmountEventHandling() {
+	var otherInput = $( '#amount-other-input' );
+	$( '.amount-selection .select-group__option' ).click( function ( event ) {
+		$( '#amount-other-input' ).val( '' );
+		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
+		$( event.target ).addClass( 'selected-option' );
+		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+	} );
+
+	otherInput.change( function () {
+		var input = $( '.select-group__custom-input' );
+		input.addClass( 'select-group__custom-input--value-entered' );
+		var amount = BannerFunctions.getAmount();
+		if ( amount === false ) {
+			$( '#betrag' ).val( '' );
+		} else {
+			$( '#betrag' ).val( amount );
+		}
+		appendEuroSign( input );
+	} );
+
+	otherInput.click( function () {
+		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
+		$( '.amount-selection .select-group__input' ).prop( 'checked', false );
+		otherInput.val( '' );
+	} );
+}
+
 $( '.interval-selection input' ).click( function ( event ) {
 	$( '.interval-selection .selected-option' ).removeClass( 'selected-option' );
 	$( event.target ).addClass( 'selected-option' );
 	$( '#periode' ).val( $( 'input[name=interval]:checked' ).val() );
-} );
-
-$( '.amount-selection button' ).click( function ( event ) {
-	$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
-	$( event.target ).addClass( 'selected-option' );
-	$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
 } );
 
 $( '.payment-selection button' ).click( function ( event ) {
@@ -187,6 +211,8 @@ function displayFullBanner() {
 	const viewportOffset = viewport.css( 'margin-top' ).slice( 0, -2 );
 	const fullscreenBanner = $( '.frbanner-window' );
 	const bannerHeight = fullscreenBanner.outerHeight();
+
+	setupAmountEventHandling();
 
 	// Placing fullscreen banner above of the page
 	fullscreenBanner.css( 'top', -bannerHeight );
