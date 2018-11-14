@@ -1,3 +1,8 @@
+:root {
+	--banner-color-black: #000000;
+	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+}
+
 #WMDE_Banner {
 
 	/**
@@ -20,7 +25,7 @@
 	.banner {
 		display: flex;
 
-		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+		font-family: var( --banner-main-font-family );
 		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
 		background-color: #ffffff;
 	}
@@ -162,6 +167,7 @@
 		border: 1px solid #9aa0a7;
 		border-radius: 4px;
 		box-sizing: border-box;
+		text-align: center;
 	}
 
 	.select-group__option {
@@ -300,6 +306,10 @@
 
 	.progress_bar__pointer_line {
 		margin-top: 20px;
+	}
+
+	.application-of-funds-link {
+		color: var( --banner-color-black );
 	}
 
 }
