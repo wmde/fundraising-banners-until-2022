@@ -46,7 +46,7 @@ const campaignProjection = new CampaignProjection(
 	CampaignParameters.donationProjection
 );
 
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: ',' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
