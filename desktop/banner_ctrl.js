@@ -4,7 +4,7 @@ require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 180;
+const sizeIssueThreshold = 160;
 const sizeIssueTrackRatio = 0.01;
 const LANGUAGE = 'de';
 // END Banner-Specific configuration
