@@ -116,29 +116,13 @@ function appendEuroSign( field ) {
 }
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
-	$( '.amount-selection .select-group__option' ).click( function ( event ) {
-		$( '#amount-other-input' ).val( '' );
-		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
-		$( event.target ).addClass( 'selected-option' );
-		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
-	} );
-
 	otherInput.change( function () {
 		var input = $( '.select-group__custom-input' );
-		input.addClass( 'select-group__custom-input--value-entered' );
+		input.addClass( 'select-group__custom-input--value-entered selected-option' );
 		var amount = BannerFunctions.getAmount();
-		if ( amount === false ) {
-			$( '#betrag' ).val( '' );
-		} else {
-			$( '#betrag' ).val( amount );
-		}
+		var betrag = amount === false ? '' : amount;
+		$( '#betrag' ).val( betrag );
 		appendEuroSign( input );
-	} );
-
-	otherInput.click( function () {
-		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
-		$( '.amount-selection .select-group__input' ).prop( 'checked', false );
-		otherInput.val( '' );
 	} );
 }
 
