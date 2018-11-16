@@ -64,11 +64,13 @@ const progressBarTextInnerLeft = [
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
+const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
 		textInnerLeft: progressBarTextInnerLeft,
+		textRight: progressBarTextRight,
 		modifier: 'progress_bar--lateprogress'
 	}
 );
