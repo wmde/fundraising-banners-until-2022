@@ -37,7 +37,7 @@ const campaignProjection = new CampaignProjection(
 	CampaignParameters.donationProjection
 );
 const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: ',' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -56,12 +56,15 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
-const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span> Mio.';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1,2</span> Mio.';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textRight: progressBarTextRight
+		textRight: progressBarTextRight,
+		textInnerRight: progressBarTextInnerRight,
+		decimalSeparator: '.'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
