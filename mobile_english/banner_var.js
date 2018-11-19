@@ -59,7 +59,8 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextRight = 'Still missing: <span class="js-value_remaining">1,2</span> Mio. €';
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span> Mio.';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span> Mio.';
 const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
 	numberOfDaysUntilCampaignEnd,
@@ -72,6 +73,8 @@ const progressBar = new ProgressBar(
 	{
 		textInnerLeft: progressBarTextInnerLeft,
 		textRight: progressBarTextRight,
+		textInnerRight: progressBarTextInnerRight,
+		decimalSeparator: '.',
 		modifier: 'progress_bar--lateprogress'
 	}
 );
