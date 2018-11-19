@@ -22,6 +22,7 @@ function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 		modifier: '',
 		decimalSeparator: ',',
 		textRight: 'es fehlen <span class="js-value_remaining">1,2</span> Mio. €',
+		textInnerRight: '<span class="js-donation_value">0</span> Mio. €',
 		textInnerLeft: ''
 	}, options || {} );
 }
@@ -86,7 +87,7 @@ ProgressBar.prototype.render = function () {
 	const template = require( './template.hbs' );
 
 	return template( {
-		'text-inner-right': '<span class="js-donation_value">0,0</span> Mio. €',
+		'text-inner-right': this.options.textInnerRight,
 		'text-inner-left': this.options.textInnerLeft,
 		'text-right': this.options.textRight,
 		'modifier': this.options.modifier
