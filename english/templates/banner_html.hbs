@@ -1,134 +1,134 @@
 <div id="WMDE_Banner">
-	<div class="banner">
-		<div class="infobox">
-			<div class="infobox__text">
-				{{> banner_text }}
-			</div>
-			{{{ progressBar }}}
-			<div class="infobox__footer">
-				<div class="footer">
-					<div class="footer__item">
-						<span class="footer__info">Donation account</span>
-						<span>Wikimedia Foerdergesellschaft</span>
-					</div>
-					<div class="footer__item">
-						<span>BIC</span>
-						<span class="footer__importantinfo">BFSWDE33BER</span>
-					</div>
-					<div class="footer__item">
-						<span>IBAN</span>
-						<span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
-					</div>
-					<div class="footer__item footer__item--rightflex">
-						<a id="application-of-funds-link" class="application-of-funds-link"
-						   target="_bank"
-						   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0">
+    <div class="banner">
+        <div class="infobox">
+            <div class="infobox__text">
+                {{> banner_text }}
+            </div>
+            {{{ progressBar }}}
+            <div class="infobox__footer">
+                <div class="footer">
+                    <div class="footer__item">
+                        <span class="footer__info">Donation account</span>
+                        <span>Wikimedia Foerdergesellschaft</span>
+                    </div>
+                    <div class="footer__item">
+                        <span>BIC</span>
+                        <span class="footer__importantinfo">BFSWDE33BER</span>
+                    </div>
+                    <div class="footer__item">
+                        <span>IBAN</span>
+                        <span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
+                    </div>
+                    <div class="footer__item footer__item--rightflex">
+                        <a id="application-of-funds-link" class="application-of-funds-link"
+                           target="_bank"
+                           href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0">
                             Where does my donation go?
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="form">
-			<form id="WMDE_Banner-form" method="post" name="donationForm"
-					action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
-				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
-					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
-					<label class="select-group__option select-group__option--thirdwidth">
-						<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
-						<span class="select-group__state">one-time</span>
-					</label>
-					<label class="select-group__option select-group__option--thirdwidth  donation-frequency-monthly">
-						<input type="radio" id="interval1" name="interval" value="1" class="select-group__input">
-						<span class="select-group__state">monthly</span>
-					</label>
-					<label class="select-group__option select-group__option--thirdwidth donation-frequency-yearly">
-						<input type="radio" id="interval12" name="interval" value="12" class="select-group__input">
-						<span class="select-group__state">yearly</span>
-					</label>
-				</div>
+        <div class="form">
+            <form id="WMDE_Banner-form" method="post" name="donationForm"
+                  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
+                <div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
+                    <span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
+                    <label class="select-group__option select-group__option--thirdwidth">
+                        <input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
+                        <span class="select-group__state">one-time</span>
+                    </label>
+                    <label class="select-group__option select-group__option--thirdwidth  donation-frequency-monthly">
+                        <input type="radio" id="interval1" name="interval" value="1" class="select-group__input">
+                        <span class="select-group__state">monthly</span>
+                    </label>
+                    <label class="select-group__option select-group__option--thirdwidth donation-frequency-yearly">
+                        <input type="radio" id="interval12" name="interval" value="12" class="select-group__input">
+                        <span class="select-group__state">yearly</span>
+                    </label>
+                </div>
 
-				<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
-					<span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>{{amount-empty-message}}</span>
-					<label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
-						<span class="select-group__state">5 €</span>
-					</label>
+                <div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
+                    <span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>{{amount-empty-message}}</span>
+                    <label id="amount_label_1" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_1" class="select-group__input" value="5">
+                        <span class="select-group__state">5 €</span>
+                    </label>
 
-					<label id="amount_label_2" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="10">
-						<span class="select-group__state">10 €</span>
-					</label>
+                    <label id="amount_label_2" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_2" class="select-group__input" value="10">
+                        <span class="select-group__state">10 €</span>
+                    </label>
 
-					<label id="amount_label_3" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="20">
-						<span class="select-group__state">20 €</span>
-					</label>
+                    <label id="amount_label_3" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_3" class="select-group__input" value="20">
+                        <span class="select-group__state">20 €</span>
+                    </label>
 
-					<label id="amount_label_4" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="25">
-						<span class="select-group__state">25 €</span>
-					</label>
+                    <label id="amount_label_4" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_4" class="select-group__input" value="25">
+                        <span class="select-group__state">25 €</span>
+                    </label>
 
-					<label id="amount_label_5" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="50">
-						<span class="select-group__state">50 €</span>
-					</label>
+                    <label id="amount_label_5" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_5" class="select-group__input" value="50">
+                        <span class="select-group__state">50 €</span>
+                    </label>
 
-					<label id="amount_label_6" class="select-group__option select-group__option--quarterwidth">
-						<input type="radio" name="betrag_auswahl" id="field-amount_total_6" class="select-group__input" value="100">
-						<span class="select-group__state">100 €</span>
-					</label>
+                    <label id="amount_label_6" class="select-group__option select-group__option--quarterwidth">
+                        <input type="radio" name="betrag_auswahl" id="field-amount_total_6" class="select-group__input" value="100">
+                        <span class="select-group__state">100 €</span>
+                    </label>
 
-					<label class="select-group__option select-group__option--halfwidth">
-						<input type="text" name="amountGiven" id="amount-other-input" size="3"
-							autocomplete="off" value="" placeholder="Other amount" class="select-group__custom-input">
-					</label>
-				</div>
+                    <label class="select-group__option select-group__option--halfwidth">
+                        <input type="text" name="amountGiven" id="amount-other-input" size="3"
+                               autocomplete="off" value="" placeholder="Other amount" class="select-group__custom-input">
+                    </label>
+                </div>
 
-				<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
-					<span id="WMDE_Banner-payment-type-error-text" class='select-group__errormessage'>{{no-payment-type-message}}</span>
-					<label class="select-group__option select-group__option--halfwidth">
-						<input type="radio" name="zahlweise" value="BEZ" class="select-group__input">
-						<span class="select-group__state">Direct Debit</span>
-					</label>
+                <div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
+                    <span id="WMDE_Banner-payment-type-error-text" class='select-group__errormessage'>{{no-payment-type-message}}</span>
+                    <label class="select-group__option select-group__option--halfwidth">
+                        <input type="radio" name="zahlweise" value="BEZ" class="select-group__input">
+                        <span class="select-group__state">Direct Debit</span>
+                    </label>
 
-					<label class="select-group__option select-group__option--halfwidth">
-						<input type="radio" name="zahlweise" value="UEB" class="select-group__input">
-						<span class="select-group__state">Bank Transfer</span>
-					</label>
+                    <label class="select-group__option select-group__option--halfwidth">
+                        <input type="radio" name="zahlweise" value="UEB" class="select-group__input">
+                        <span class="select-group__state">Bank Transfer</span>
+                    </label>
 
-					<label class="select-group__option select-group__option--halfwidth">
-						<input type="radio" name="zahlweise" value="MCP" class="select-group__input">
-						<span class="select-group__state">Credit Card</span>
-					</label>
+                    <label class="select-group__option select-group__option--halfwidth">
+                        <input type="radio" name="zahlweise" value="MCP" class="select-group__input">
+                        <span class="select-group__state">Credit Card</span>
+                    </label>
 
-					<label class="select-group__option select-group__option--halfwidth">
-						<input type="radio" name="zahlweise" value="PPL" class="select-group__input">
-						<span class="select-group__state">PayPal</span>
-					</label>
-				</div>
+                    <label class="select-group__option select-group__option--halfwidth">
+                        <input type="radio" name="zahlweise" value="PPL" class="select-group__input">
+                        <span class="select-group__state">PayPal</span>
+                    </label>
+                </div>
 
-				<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
-					<button class="button-group__button">
-						<span class="button-group__label">Proceed with the donation</span>
-					</button>
-				</div>
+                <div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
+                    <button class="button-group__button">
+                        <span class="button-group__label">Proceed with the donation</span>
+                    </button>
+                </div>
 
-				<input type="hidden" id="periode" name="periode" value="0"/>
-				<input type="hidden" id="intervalType" name="intervalType" value="0"/>
-				<input type="hidden" id="impCount" name="impCount" value=""/>
-				<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
-			</form>
-		</div>
+                <input type="hidden" id="periode" name="periode" value="0"/>
+                <input type="hidden" id="intervalType" name="intervalType" value="0"/>
+                <input type="hidden" id="impCount" name="impCount" value=""/>
+                <input type="hidden" id="bImpCount" name="bImpCount" value=""/>
+            </form>
+        </div>
 
-		<div class="close">
-			<a href="#" class="close__link">
-				<img src="//upload.wikimedia.org/wikipedia/commons/c/cb/Close_x_-_black.png" alt="schließen" title="schließen">
-			</a>
-		</div>
-		<div id="langInfo"><p>Please note: the next steps of the donation process are in German.</p></div>
-	</div>
+        <div class="close">
+            <a href="#" class="close__link">
+                <img src="//upload.wikimedia.org/wikipedia/commons/c/cb/Close_x_-_black.png" alt="schließen" title="schließen">
+            </a>
+        </div>
+        <div id="langInfo"><p>Please note: the next steps of the donation process are in German.</p></div>
+    </div>
 
 </div>
