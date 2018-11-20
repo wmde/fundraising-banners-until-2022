@@ -47,6 +47,8 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
+// const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
+// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 
 const $ = require( 'jquery' );
@@ -186,6 +188,14 @@ function displayBanner() {
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
+		calculateLightboxPosition();
+	} );
+}
+
+function calculateLightboxPosition() {
+	$( '#wlightbox' ).css( {
+		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
+		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 

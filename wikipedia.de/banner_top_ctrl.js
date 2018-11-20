@@ -22,7 +22,6 @@ const campaignDays = new CampaignDays(
 	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 14 );
-
 const animateHighlight = require( '../shared/animate_highlight' );
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -47,6 +46,9 @@ const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
+
+// const bannerTemplate = require( './templates/banner_html_top.hbs' );
+// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_top.hbs' );
 
 const $ = require( 'jquery' );
@@ -109,7 +111,6 @@ function setupValidationEventHandling() {
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
@@ -191,6 +192,14 @@ function displayBanner() {
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
+		calculateLightboxPosition();
+	} );
+}
+
+function calculateLightboxPosition() {
+	$( '#wlightbox' ).css( {
+		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
+		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 
