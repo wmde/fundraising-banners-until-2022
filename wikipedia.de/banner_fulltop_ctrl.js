@@ -47,6 +47,8 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
+// const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
+// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 
 const $ = require( 'jquery' );
@@ -76,13 +78,15 @@ const trackingEvents = new UrlTracker( trackingBaseUrl, BannerName, $( '.click-t
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts-error-text' ).removeClass( 'select-group--with-error' );
+		var errorText = $( '#WMDE_Banner-amounts-error-text' );
+		errorText.hide();
+		errorText.removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts-error-text' ).addClass( 'select-group--with-error' );
+		var errorText = $( '#WMDE_Banner-amounts-error-text' );
+		errorText.text( text ).show();
+		errorText.addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
@@ -107,12 +111,27 @@ function setupValidationEventHandling() {
 	} );
 }
 
+function appendEuroSign( field ) {
+	if ( $( field ).val() !== '' &&
+		!/^.*(€)$/.test( $( field ).val() ) ) {
+		$( field ).val( $( field ).val() + ' €' );
+	}
+}
+
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-
+	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+	banner.on( 'amount:selected', null, function () {
+		$( '#amount-other-input' ).val( '' );
+		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
+		BannerFunctions.hideAmountError();
+	} );
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
+		var input = $( '.select-group__custom-input' );
+		input.addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
+		appendEuroSign( input );
 	} );
 }
 
@@ -186,6 +205,14 @@ function displayBanner() {
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
+		calculateLightboxPosition();
+	} );
+}
+
+function calculateLightboxPosition() {
+	$( '#wlightbox' ).css( {
+		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
+		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 

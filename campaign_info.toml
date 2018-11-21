@@ -105,29 +105,29 @@ tracking = "org-pad-de-181113"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-01-181113"
+campaign_tracking = "wpde-02-181120"
 preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_fulltop_ctrl.js"
-pagename = "B18WPDE_01_181113_fulltop_ctrl"
-tracking = "wpde-01-181113-fulltop-ctrl"
+pagename = "B18WPDE_02_181120_fulltop_ctrl"
+tracking = "wpde-02-181120-fulltop-ctrl"
 
 [wikipediade.banners.top-ctrl]
 filename = "./wikipedia.de/banner_top_ctrl.js"
-pagename = "B18WPDE_01_181113_top_ctrl"
-tracking = "wpde-01-181113-top-ctrl"
+pagename = "B18WPDE_02_181120_top_ctrl"
+tracking = "wpde-02-181120-top-ctrl"
 
 [wikipediade.banners.fulltop-var]
 filename = "./wikipedia.de/banner_fulltop_var.js"
-pagename = "B18WPDE_01_181113_fulltop_var"
-tracking = "wpde-01-181113-fulltop-var"
+pagename = "B18WPDE_02_181120_fulltop_var"
+tracking = "wpde-02-181120-fulltop-var"
 
 [wikipediade.banners.top-var]
 filename = "./wikipedia.de/banner_top_var.js"
-pagename = "B18WPDE_01_181113_top_var"
-tracking = "wpde-01-181113-top-var"
+pagename = "B18WPDE_02_181120_top_var"
+tracking = "wpde-02-181120-top-var"
 
 # Wikipedia.de Featurebox development
 [wikipediade_featurebox]
