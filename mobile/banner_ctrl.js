@@ -27,6 +27,7 @@ const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'de';
+const sliderAutoPlaySpeed = 5000;
 const fullscreenBannerSlideInSpeed = 1250;
 // END Banner-Specific configuration
 
@@ -34,7 +35,7 @@ const fullscreenBannerSlideInSpeed = 1250;
  * Slider wrapper object holding a Flickity-based slider
  * @type {Slider}
  */
-const bannerSlider = new Slider();
+const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
 const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
@@ -48,6 +49,7 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
+
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
@@ -117,20 +119,32 @@ function appendEuroSign( field ) {
 		$( field ).val( $( field ).val() + ' €' );
 	}
 }
+
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
+	$( '.amount-selection .select-group__option' ).click( function ( event ) {
+		$( '#amount-other-input' ).val( '' );
+		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
+		$( event.target ).addClass( 'selected-option' );
+		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+	} );
+
 	otherInput.change( function () {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered selected-option' );
 		var amount = BannerFunctions.getAmount();
-		var betrag = amount === false ? '' : amount;
-		$( '#betrag' ).val( betrag );
+		if ( amount === false ) {
+			$( '#betrag' ).val( '' );
+		} else {
+			$( '#betrag' ).val( amount );
+		}
 		appendEuroSign( input );
 	} );
 
 	otherInput.click( function () {
 		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
 		$( '.amount-selection .select-group__input' ).prop( 'checked', false );
+		otherInput.val( '' );
 	} );
 }
 
@@ -177,6 +191,9 @@ function displayMiniBanner() {
 	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
 
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
+	// Making sure automatic sliding only starts after slider is shown to the user
+	bannerSlider.enableAutoplay();
+	progressBar.animate();
 }
 
 /**
@@ -224,7 +241,6 @@ function displayFullBanner() {
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
 			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
-			setTimeout( function () { progressBar.animate(); }, 1000 );
 		} );
 
 	} );

@@ -49,12 +49,38 @@
 				</fieldset>
 
 				<hr class="frbanner-separator">
+
 				<fieldset class="form__section cf">
-					<div class="select-group amount-selection" >
-						<input type="text" name="amountGiven" id="amount-other-input" size="1"
-							   autocomplete="off" value="" placeholder="Wunschbetrag" class="select-group__custom-input">
-					</div>
+					<ol class="select-group select-group--tablet-2cols amount-selection" >
+						<li class="select-group__option" id="amount_total_1">
+							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount1" value="5" />
+							<label class="select-group__label" id="amount_label_1" for="amount1">5 €</label>
+						</li>
+						<li class="select-group__option" id="amount_total_2">
+							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount2" value="15" />
+							<label class="select-group__label" id="amount_label_2" for="amount2">15 €</label>
+						</li>
+						<li class="select-group__option" id="amount_total_3">
+							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount3" value="25" />
+							<label class="select-group__label" id="amount_label_3" for="amount3">25 €</label>
+						</li>
+						<li class="select-group__option" id="amount_total_4">
+							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount4" value="50" />
+							<label class="select-group__label" id="amount_label_4" for="amount4">50 €</label>
+						</li>
+						<li class="select-group__option" id="amount_total_6">
+							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount6" value="100" />
+							<label class="select-group__label" id="amount_label_6" for="amount6">100 €</label>
+						</li>
+						<li class="select-group__option" id="amount_total_custom">
+							<div class="select-group amount-selection" >
+								<input type="text" name="amountGiven" id="amount-other-input" size="1"
+									   autocomplete="off" value="" placeholder="anderer" class="select-group__custom-input">
+							</div>
+						</li>
+					</ol>
 				</fieldset>
+
 				<hr class="frbanner-separator">
 				<fieldset class="form__section cf">
 					<ol class="button-group button-group--tablet-2cols payment-selection">

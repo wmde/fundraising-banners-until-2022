@@ -112,7 +112,6 @@
 		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 		position: absolute;
 		z-index: 1001;
-		cursor: pointer;
 		text-align: center;
 		box-sizing: border-box;
 		display: block;
@@ -271,6 +270,17 @@
 							padding: 3px 0;
 						}
 					}
+				}
+			}
+			&--tablet-2cols {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+
+				.select-group__option {
+					width: 49%;
+					margin: 0;
+					padding: 3px 0;
 				}
 			}
 			&__custom-input {
