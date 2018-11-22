@@ -32,19 +32,19 @@ tracking = "org-desktop-de-171114"
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob04-ba-181119"
+campaign_tracking = "mob05-ba-181126"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B18WMDE_mob04_181119_ctrl"
-tracking = "org-mob04-181119-ctrl"
+pagename = "B18WMDE_mob05_181126_ctrl"
+tracking = "org-mob05-181126-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B18WMDE_mob04_181119_var"
-tracking = "org-mob04-181119-var"
+pagename = "B18WMDE_mob05_181126_var"
+tracking = "org-mob05-181126-var"
 
 
 # Mobile English Campaign
@@ -142,19 +142,19 @@ tracking = "B18WPDE_01_180901"
 
 # English Campaign
 [english]
-campaign_tracking = "en02-ba-181119"
+campaign_tracking = "en02-ba-181126"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B18WMDE_en02_181119_ctrl"
-tracking = "org-en02-181119-ctrl"
+pagename = "B18WMDE_en02_181126_ctrl"
+tracking = "org-en02-181126-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B18WMDE_en02_181119_var"
-tracking = "org-en02-181119-var"
+pagename = "B18WMDE_en02_181126_var"
+tracking = "org-en02-181126-var"
 
 # English fallback campaign
 [enwiki-default]

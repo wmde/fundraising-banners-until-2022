@@ -11,7 +11,10 @@ import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
-
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
 const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
@@ -123,6 +126,11 @@ function setupAmountEventHandling() {
 		var betrag = amount === false ? '' : amount;
 		$( '#betrag' ).val( betrag );
 		appendEuroSign( input );
+	} );
+
+	otherInput.click( function () {
+		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
+		$( '.amount-selection .select-group__input' ).prop( 'checked', false );
 	} );
 }
 
