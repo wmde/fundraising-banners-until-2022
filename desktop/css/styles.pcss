@@ -2,8 +2,8 @@
 	--banner-color-gray: #808080;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
-	--banner-color-green: #97b314;
-	--banner-color-green-light: #e5ecc4;
+	--banner-color-green: #97b313;
+	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
 	--banner-color-yellow: #ffdd5b;
@@ -225,7 +225,7 @@
 		&__state {
 			display: flex;
 			background: var( --banner-color-green-light );
-			color: var( --banner-color-green );
+			color: var( --banner-color-black );
 			border: 0 none;
 			height: 25px;
 			cursor: pointer;
@@ -247,7 +247,7 @@
 		}
 		&__custom-input {
 			background: var( --banner-color-green-light );
-			color: var( --banner-color-green );
+			color: var( --banner-color-black );
 			padding: 0.4em;
 			width: 100%;
 			min-height: 25px;
@@ -260,7 +260,7 @@
 			border-radius: 0.4em;
 			box-sizing: border-box;
 			&--value-entered {
-				color: var( --banner-color-green-light );
+				color: var( --banner-color-white );
 				background-color: var( --banner-color-green );
 				border: 0 none;
 				outline: 0 none;
@@ -270,7 +270,7 @@
 		&__input {
 			display: none;
 			&:checked + .select-group__state {
-				color: var( --banner-color-green-light );
+				color: var( --banner-color-white );
 				background-color: var( --banner-color-green );
 				border: 0 none;
 				outline: 0 none;
@@ -337,8 +337,8 @@
 		}
 		&__label {
 			display: block;
-			color: var( --banner-color-green-light );
-			background: var( --banner-color-green );
+			color: var( --banner-color-white );
+			background-color: var( --banner-color-green );
 			border: 0 none;
 			border-radius: 0.4em;
 			padding: 0 0.4em;
