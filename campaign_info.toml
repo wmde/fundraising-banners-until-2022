@@ -77,19 +77,19 @@ tracking = "org-mob-de-171121"
 
 # iPad campaign
 [pad]
-campaign_tracking = "pad01-ba-181114"
+campaign_tracking = "pad02-ba-181123"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
-pagename = "B18WMDE_pad_01_181113_ctrl"
-tracking = "org-pad01-181114-ctrl"
+pagename = "B18WMDE_pad_02_181123_ctrl"
+tracking = "org-pad02-181123-ctrl"
 
 [pad.banners.pad]
 filename = "./pad/banner_var.js"
-pagename = "B18WMDE_pad_01_181113_var"
-tracking = "org-pad01-181114-var"
+pagename = "B18WMDE_pad_02_181123_var"
+tracking = "org-pad02-181123-var"
 
 # Default iPad campaign
 [pad-default]
