@@ -62,24 +62,38 @@ describe( 'CampaignDaySentence', function () {
 	} );
 
 	describe( '#getSentence EN', function () {
-		it( 'returns nothing when the campaign has not started yet', function () {
+		it( 'returns the general sentence when the campaign has not started yet', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( false );
 			const sentence = new CampaignDaySentence( campaignDays, 'en' );
-			assert.equal( '', sentence.getSentence() );
+			assert.equal( 'Today we ask for your support.', sentence.getSentence() );
 		} );
 
-		it( 'returns nothing on the first day of the campaign', function () {
+		it( 'returns the campaign start sentence on the first day of the campaign', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 3600 );
 			const sentence = new CampaignDaySentence( campaignDays, 'en' );
-			assert.equal( '', sentence.getSentence() );
+			assert.equal( 'Today our fundraising campaign starts.', sentence.getSentence() );
 		} );
 
-		it( 'returns nothing on the second day of the campaign', function () {
+		it( 'returns the 2nd day sentence on the second day of the campaign', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 86405 );
 			const sentence = new CampaignDaySentence( campaignDays, 'en' );
-			assert.equal( '', sentence.getSentence() );
+			assert.equal( 'This is the 2nd day of our campaign.', sentence.getSentence() );
+		} );
+
+		it( 'returns the 3rd day sentence on the second day of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 172810 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( 'This is the 3rd day of our campaign.', sentence.getSentence() );
+		} );
+
+		it( 'returns the 4th day sentence on the second day of the campaign', function () {
+			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
+			sandbox.stub( campaignDays, 'getSecondsSinceCampaignStart' ).returns( 259215 );
+			const sentence = new CampaignDaySentence( campaignDays, 'en' );
+			assert.equal( 'This is the 4th day of our campaign.', sentence.getSentence() );
 		} );
 
 		it( 'returns the only_n_days sentence when a specified threshold is exceeded', function () {
