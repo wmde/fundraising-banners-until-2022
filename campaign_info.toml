@@ -4,20 +4,20 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "14-ba-181119"
+campaign_tracking = "18-ba-181127"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B18WMDE_14_181119_ctrl"
-tracking = "org-14-181119-ctrl"
+pagename = "B18WMDE_18_181127_ctrl"
+tracking = "org-18-181127-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B18WMDE_14_181119_var"
-tracking = "org-14-181119-var"
+pagename = "B18WMDE_18_181127_var"
+tracking = "org-18-181127-var"
 
 [dewiki-default]
 campaign_tracking = "ca17-default"
@@ -32,19 +32,19 @@ tracking = "org-desktop-de-171114"
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob04-ba-181119"
+campaign_tracking = "mob05-ba-181126"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B18WMDE_mob04_181119_ctrl"
-tracking = "org-mob04-181119-ctrl"
+pagename = "B18WMDE_mob05_181126_ctrl"
+tracking = "org-mob05-181126-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B18WMDE_mob04_181119_var"
-tracking = "org-mob04-181119-var"
+pagename = "B18WMDE_mob05_181126_var"
+tracking = "org-mob05-181126-var"
 
 
 # Mobile English Campaign
@@ -77,19 +77,19 @@ tracking = "org-mob-de-171121"
 
 # iPad campaign
 [pad]
-campaign_tracking = "pad01-ba-181114"
+campaign_tracking = "pad02-ba-181123"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
-pagename = "B18WMDE_pad_01_181113_ctrl"
-tracking = "org-pad01-181114-ctrl"
+pagename = "B18WMDE_pad_02_181123_ctrl"
+tracking = "org-pad02-181123-ctrl"
 
 [pad.banners.pad]
 filename = "./pad/banner_var.js"
-pagename = "B18WMDE_pad_01_181113_var"
-tracking = "org-pad01-181114-var"
+pagename = "B18WMDE_pad_02_181123_var"
+tracking = "org-pad02-181123-var"
 
 # Default iPad campaign
 [pad-default]
