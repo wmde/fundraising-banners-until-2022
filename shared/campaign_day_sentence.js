@@ -7,8 +7,11 @@ const SENTENCES = {
 		last_day: 'Es bleibt nur noch ein Tag, um Wikipedia in diesem Jahr zu unterstützen.'
 	},
 	en: {
-		last_day: 'Today is the final day of our donation campaign.',
-		only_n_days: 'Only {{days}} left until our fundraising campaign ends.'
+		before_campaign: 'Today we ask for your support.',
+		first_day: 'Today our fundraising campaign starts.',
+		nth_day: 'This is the {{days}} day of our campaign.',
+		only_n_days: 'Only {{days}} left until our fundraising campaign ends.',
+		last_day: 'Today is the final day of our donation campaign.'
 	}
 };
 
@@ -39,8 +42,8 @@ export default class CampaignDaySentence {
 		if ( this.campaignDays.campaignHasEnded() ) {
 			return '';
 		}
-		const daysUntilCampaignEnds = Math.ceil( this.campaignDays.getSecondsUntilCampaignEnds() / 86400 );
-		const daysSinceCampaignStart = Math.ceil( this.campaignDays.getSecondsSinceCampaignStart() / 86400 );
+		let daysUntilCampaignEnds = Math.ceil( this.campaignDays.getSecondsUntilCampaignEnds() / 86400 );
+		let daysSinceCampaignStart = Math.ceil( this.campaignDays.getSecondsSinceCampaignStart() / 86400 );
 
 		if ( daysUntilCampaignEnds === 1 ) {
 			return trans( this.language, 'last_day' );
@@ -51,7 +54,25 @@ export default class CampaignDaySentence {
 		if ( daysSinceCampaignStart === 1 ) {
 			return trans( this.language, 'first_day' );
 		} else {
+			if ( this.language === 'en' ) {
+				daysSinceCampaignStart = this.getEnglishOrdinalSuffixOf( daysSinceCampaignStart );
+			}
 			return trans( this.language, 'nth_day' ).replace( '{{days}}', daysSinceCampaignStart );
 		}
+	}
+
+	getEnglishOrdinalSuffixOf( i ) {
+		let j = i % 10,
+			k = i % 100;
+		if ( j === 1 && k !== 11 ) {
+			return i + 'st';
+		}
+		if ( j === 2 && k !== 12 ) {
+			return i + 'nd';
+		}
+		if ( j === 3 && k !== 13 ) {
+			return i + 'rd';
+		}
+		return i + 'th';
 	}
 }
