@@ -26,10 +26,10 @@ export class Slider {
 	}
 
 	/**
-	 * Handler for "select" event which is triggered when a new slide is shown
+	 * Handler for "change" event which is triggered when a new slide is shown
 	 * This custom handler implements a way to stop the autoplay functionality at the last slide
 	 */
-	onSelect() {
+	onChange() {
 		this.viewedSlides++;
 		if ( this.slider.player.state !== 'playing' ) {
 			this.disableAutoplay();
@@ -41,12 +41,12 @@ export class Slider {
 	}
 
 	enableAutoplay() {
-		this.slider.on( 'select', this.onSelect.bind( this ) );
+		this.slider.on( 'change', this.onChange.bind( this ) );
 		this.slider.playPlayer();
 	}
 
 	disableAutoplay() {
-		this.slider.off( 'select', this.onSelect );
+		this.slider.off( 'change', this.onChange );
 		this.slider.stopPlayer();
 	}
 
