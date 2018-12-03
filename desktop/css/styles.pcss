@@ -124,7 +124,7 @@
 
 		font-size: 0.8em;
 		line-height: 1.6em;
-		color: var( --banner-color-gray );
+		color: var( --banner-color-black );
 		&__info {
 			text-transform: uppercase;
 		}
@@ -144,7 +144,7 @@
 	}
 
 	.application-of-funds-link {
-		color: var( --banner-color-gray );
+		color: var( --banner-color-black );
 	}
 
 	/* Form styling */
@@ -202,6 +202,10 @@
 			flex: 1 1 auto;
 			flex-direction: column;
 			margin-right: 0.5em;
+
+			@media ( min-width: 1400px ) {
+				max-width: 18em;
+			}
 		}
 		&:first-child {
 			padding-left: 0;
@@ -257,7 +261,7 @@
 			font-weight: bold;
 			text-align: center;
 			border: 0 none;
-			border-radius: 0.4em;
+			border-radius: 0 0.4em 0.4em 0;
 			box-sizing: border-box;
 			&--value-entered {
 				color: var( --banner-color-white );
@@ -415,7 +419,7 @@
 		}
 	}
 
-	@media ( min-width: 1440px ) {
+	@media ( min-width: 1400px ) {
 		.banner {
 			&__content {
 				display: flex;
@@ -433,6 +437,8 @@
 		}
 
 		.form {
+			align-items: center;
+			display: flex;
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
 			width: 18em;
@@ -484,6 +490,14 @@
 				&:focus,
 				&:active {
 					border: 1px solid var( --banner-color-green );
+				}
+			}
+		}
+
+		.WMDE-Banner-frequency {
+			.select-group__option {
+				&:nth-child( 1 ) .select-group__state {
+					border-radius: 0.4em 0 0 0.4em;
 				}
 			}
 		}

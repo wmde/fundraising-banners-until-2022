@@ -1,0 +1,50 @@
+#WMDE_Banner {
+	.optional-text {
+		display: none;
+		&.text-max-xl {
+			display: inline;
+		}
+
+		@media ( min-width: 1200px ) {
+			&.text-l {
+				display: inline;
+			}
+		}
+
+		@media ( min-width: 1400px ) {
+			&.text-xl {
+				display: inline;
+			}
+			&.text-max-xl {
+				display: none;
+			}
+		}
+
+		@media ( min-width: 1900px ) {
+			&.text-xxl {
+				display: inline;
+			}
+		}
+	}
+
+	.button-group {
+		&__label {
+			@media ( min-width: 1400px ) {
+				line-height: 3em;
+			}
+		}
+	}
+
+	.select-group {
+		&__state {
+			@media ( min-width: 1400px ) {
+				height: 35px;
+			}
+		}
+		&__custom-input {
+			@media ( min-width: 1400px ) {
+				height: 35px;
+			}
+		}
+	}
+}
