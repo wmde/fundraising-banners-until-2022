@@ -2,9 +2,6 @@ require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
-// For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
-
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 160;
@@ -121,7 +118,7 @@ function setupValidationEventHandling() {
 function appendEuroSign( field ) {
 	if ( $( field ).val() !== '' &&
 		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
+		$( field ).val( '€ ' + $( field ).val() );
 	}
 }
 

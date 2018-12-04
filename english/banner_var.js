@@ -1,9 +1,6 @@
-require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
-
-// For A/B testing different styles, load
-// require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -21,6 +18,11 @@ import DayName from '../shared/day_name';
 import Translations from '../shared/messages/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
+
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
 const campaignDays = new CampaignDays(
@@ -37,14 +39,12 @@ const campaignProjection = new CampaignProjection(
 	CampaignParameters.donationProjection
 );
 const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( { round: 0, integerSeparator: ',' } );
+const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-// const bannerTemplate = require('./banner_html.hbs');
-// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
@@ -56,8 +56,8 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
-const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span> Mio.';
-const progressBarTextInnerRight = '€ <span class="js-donation_value">1,2</span> Mio.';
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span> Mio.';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span> Mio.';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
@@ -72,6 +72,7 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
@@ -88,32 +89,32 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 }
@@ -121,7 +122,7 @@ function setupValidationEventHandling() {
 function appendEuroSign( field ) {
 	if ( $( field ).val() !== '' &&
 		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
+		$( field ).val( '€ ' + $( field ).val() );
 	}
 }
 
@@ -131,28 +132,31 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		banner.trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		var input = $( '#WMDE_Banner-amounts .select-group__custom-input' );
+		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
-		banner.trigger( 'validation:amount:ok' );
+		BannerFunctions.hideAmountError();
 		appendEuroSign( input );
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
 
 function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val(),
-		banner = $( '#WMDE_Banner' );
+	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
 	if ( typeof selectedInterval === 'undefined' ) {
-		banner.trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
+		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
 	$( '#periode' ).val( selectedInterval );
-	banner.trigger( 'validation:period:ok' );
+	BannerFunctions.hideFrequencyError();
 	return true;
 }
 
@@ -188,31 +192,20 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-	var $bannerElement = $( '#WMDE_Banner' ),
-		$languageInfoElement = $( '#langInfo' );
-
+	var $bannerElement = $( 'div#WMDE_Banner' );
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace(
-		$bannerElement.height() +
-		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
-	);
+	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
 }
 
 function addSpaceInstantly() {
-	var $bannerElement = $( '#WMDE_Banner' ),
-		$languageInfoElement = $( '#langInfo' );
-
-	if ( !$bannerElement.is( ':visible' ) ) {
+	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly(
-		$bannerElement.height() +
-		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
-	);
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
@@ -254,8 +247,8 @@ function showLanguageInfoBox() {
 
 function positionLanguageInfoBox() {
 	var langInfoElement = $( '#langInfo' ),
-		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
-		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
+		formWidth = $( '#WMDE_Banner-form' ).width(),
+		bannerHeight = $( '#WMDE_Banner' ).outerHeight() - 3;
 	langInfoElement.css( 'top', bannerHeight );
 	langInfoElement.css( 'width', formWidth );
 }
@@ -266,9 +259,7 @@ var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
 // track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
+trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN Banner close functions
@@ -294,11 +285,16 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
 
+	$( 'body' ).prepend( $( '#centralNotice' ) );
+
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
 	}
 
-	$( 'body' ).prepend( $( '#centralNotice' ) );
+	trackingEvents.trackViewPortDimensions(
+		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
+		sizeIssueTrackRatio
+	);
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
