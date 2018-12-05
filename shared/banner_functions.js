@@ -228,7 +228,8 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			otherAmount = otherAmount.replace( /[,.](\d)$/, ':$10' );
 			otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, ':$1$2' );
 			otherAmount = otherAmount.replace( /:/, '.' );
-			otherAmount = otherAmount.replace( /\s*€$/, '' );
+			otherAmount = otherAmount.replace( /[€]/, '' );
+			otherAmount = otherAmount.trim();
 			$( '#amount-other-input' ).val( otherAmount );
 			amount = otherAmount;
 		}
