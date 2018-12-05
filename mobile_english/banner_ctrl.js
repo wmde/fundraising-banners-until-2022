@@ -25,13 +25,14 @@ const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'en';
 const fullscreenBannerSlideInSpeed = 1250;
+const sliderAutoPlaySpeed = 5000;
 // END Banner-Specific configuration
 
 /**
  * Slider wrapper object holding a Flickity-based slider
  * @type {Slider}
  */
-const bannerSlider = new Slider();
+const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
 const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
@@ -58,14 +59,14 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
 const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
 	numberOfDaysUntilCampaignEnd,
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
-const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span> Mio.';
-const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span> Mio.';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
@@ -185,7 +186,11 @@ function displayMiniBanner() {
 
 	// Banner starts in far off screen and needs to be reset, workaround to get sliders to work
 	miniBanner.css( 'top', -bannerHeight );
-	miniBanner.animate( { top: 0 }, 1000 );
+	miniBanner.animate( { top: 0 }, 1000, 'swing', function() {
+		progressBar.animate();
+		// Making sure automatic sliding only starts after slider is shown to the user
+		bannerSlider.enableAutoplay();
+	} );
 
 	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
 
