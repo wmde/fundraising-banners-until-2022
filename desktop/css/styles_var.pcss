@@ -1,0 +1,81 @@
+#WMDE_Banner {
+	.button-group__button {
+		padding: 0;
+		.button-group__label {
+			height: 45px;
+			padding: 1em;
+		}
+	}
+
+	@media ( min-width: 1400px ) {
+		.footer__item {
+			&--leftflex {
+				margin-left: 20px;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
+			}
+		}
+	}
+
+	@media ( max-width: 1400px ) {
+		.banner__footer {
+			position: absolute;
+			bottom: 15px;
+			width: 100%;
+		}
+
+		.footer__item {
+			&--leftflex {
+				margin-left: 20px;
+				display: flex;
+				flex-flow: row wrap;
+				flex: 1;
+			}
+			&--rightflex {
+				margin-right: 100px;
+			}
+		}
+	}
+	.infobox {
+		&:before {
+			display: none;
+		}
+		&:after {
+			position: absolute;
+			bottom: 43%;
+			content: ' ';
+			margin-left: 100%;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 20px 0 20px 10px;
+			border-color: transparent var( --banner-color-blue ) transparent var( --banner-color-blue );
+			clear: both;
+
+			@media ( max-width: 1400px ) {
+				left: 49%;
+				left: calc( 50% - 35px );
+				top: 100%;
+				margin-left: 0;
+				border-style: hidden;
+				width: 0;
+				height: 0;
+				border-left: 35px solid transparent;
+				border-right: 35px solid transparent;
+				border-top: 10px solid var( --banner-color-blue );
+				clear: both;
+			}
+
+		}
+	}
+
+	@media ( max-width: 1400px ) {
+		.button-group {
+			margin: 5px auto 0;
+		}
+	}
+}
