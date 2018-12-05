@@ -53,8 +53,8 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
-const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span> Mio.';
-const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span> Mio.';
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span>M';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,

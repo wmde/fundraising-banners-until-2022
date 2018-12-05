@@ -39,7 +39,7 @@
 	.banner {
 		display: flex;
 		flex-direction: column;
-		font-size: 14px;
+		font-size: 1em;
 		padding-bottom: 0.75em;
 
 		font-family: var( --banner-main-font-family );
@@ -50,7 +50,7 @@
 		}
 		&__footer {
 			padding: 0 2.6em 0 2.6em;
-			font-size: 1.1em;
+			font-size: 1em;
 			color: var( --banner-color-gray );
 		}
 	}
@@ -165,10 +165,12 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+		width: 100%;
 	}
 
 	.form {
 		display: flex;
+		font-size: 0.9em;
 		order: 2;
 		width: auto;
 		min-width: inherit;
@@ -391,6 +393,7 @@
 			font-size: 25px;
 			color: var( --banner-color-gray );
 			text-decoration: none;
+			opacity: 0.5;
 			&:hover {
 				text-decoration: none;
 			}
