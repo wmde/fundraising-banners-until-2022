@@ -160,7 +160,7 @@ function validateForm() {
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+	return true;
 } );
 
 /* Convert browser events to custom events */
