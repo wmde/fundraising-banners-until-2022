@@ -37,7 +37,7 @@
     "minimatch": "^3.0.4",
     "mocha": "^5.2.0",
     "mocha-jsdom": "^1.1.0",
-    "postcss-custom-properties": "^7.0.0",
+    "postcss-custom-properties": "^8.0.0",
     "postcss-loader": "^2.1.4",
     "postcss-nested": "^2.1.2",
     "sinon": "^4.5.0",
