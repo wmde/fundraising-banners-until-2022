@@ -49,19 +49,19 @@ tracking = "org-mob05-181204-2-var"
 
 # Mobile English Campaign
 [mobile_english]
-campaign_tracking = "mob_en01-ba-181114"
+campaign_tracking = "mob_en02-ba-181205"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
 filename = "./mobile_english/banner_ctrl.js"
-pagename = "B18WMDE_mob_en01_181114_ctrl"
-tracking = "org-mob_en01-181114-ctrl"
+pagename = "B18WMDE_mob_en02_181205_ctrl"
+tracking = "org-mob_en02-181205-ctrl"
 
 [mobile_english.banners.var]
 filename = "./mobile_english/banner_var.js"
-pagename = "B18WMDE_mob_en01_181114_var"
-tracking = "org-mob_en01-181114-var"
+pagename = "B18WMDE_mob_en02_181205_var"
+tracking = "org-mob_en02-181205-var"
 
 # Default mobile campaign
 [mobile-default]
