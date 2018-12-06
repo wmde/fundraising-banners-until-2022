@@ -290,4 +290,5 @@ $( function () {
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
 	} );
+
 } );
