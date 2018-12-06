@@ -34,13 +34,14 @@
 }
 
 .progress_bar__donation_remaining {
-	padding-right: 10px;
+	padding: 0 10px;
 	text-align: right;
 	font-size: 0.9em;
 	color: #000000;
 	font-weight: bold;
 	line-height: 28px;
 	visibility: hidden;
+	white-space: nowrap;
 }
 
 .progress_bar__donation_remaining--outer {
@@ -75,24 +76,6 @@
 	font-weight: bold;
 	line-height: 36px;
 	padding-left: 5px;
-}
-
-.progress_bar--lateprogress {
-	.progress_bar__donation_remaining--inner {
-		display: none;
-	}
-
-	.progress_bar__donation_remaining--outer {
-		display: block;
-	}
-
-	.progress_bar__wrapper {
-		margin-right: -16px;
-	}
-
-	.progress_bar__donation_fill {
-		margin-right: 16px;
-	}
 }
 
 .progress_bar--finished {
