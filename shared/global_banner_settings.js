@@ -1,7 +1,7 @@
 // TODO When all banners use `createCampaignParameters`, rename the properties and use this object directly.
 module.exports = {
 	'goalDonationSum': 8200000,
-	'donations-date-base': '2018-10-25',
+	'donations-date-base': '2018-11-13',
 	'donations-collected-base': 10000,
 	'donators-base': 0,
 	'appr-donations-per-minute': 104,
