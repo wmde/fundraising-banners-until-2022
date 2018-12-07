@@ -141,28 +141,6 @@ function setupAmountEventHandling() {
 	} );
 }
 
-function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
-	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
-		return false;
-	}
-	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
-	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
-	return true;
-}
-
-function validateForm() {
-	return validateAndSetPeriod() &&
-		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
-}
-
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return true;
-} );
-
 /* Convert browser events to custom events */
 $( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
 	$( this ).trigger( 'amount:selected' );
