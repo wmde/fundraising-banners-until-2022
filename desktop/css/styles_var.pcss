@@ -1,0 +1,147 @@
+@import 'styles.pcss';
+
+:root {
+	--banner-color-black: #000000;
+	--banner-color-white: #ffffff;
+	--banner-color-gray: #f8f9fa;
+	--banner-color-darkgray: #9aa0a7;
+	--banner-color-red: #990000;
+	--banner-color-blue: #2a4b8d;
+}
+
+#WMDE_Banner {
+
+	.banner {
+		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+	}
+
+	.banner__content {
+		margin-top: 0;
+	}
+
+	.infobox {
+		background: var( --banner-color-gray );
+		border: 5px solid var( --banner-color-red );
+		border-radius: 5px;
+		padding: 0.25em 0.5em 0.25em 0;
+		margin: 0.2em 0 0.2em 0.2em;
+
+		&:before {
+			position: static;
+			content: none;
+			margin-left: 0;
+			border: 0;
+		}
+
+		&__footer {
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' );
+		}
+
+		&__text {
+			font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+			font-size: 1.05em;
+			line-height: 1.2em;
+			margin: 0 0 0.5em 2em;
+		}
+	}
+
+	.text {
+		&__paragraph,
+		&__headline {
+			color: var( --banner-color-black );
+		}
+	}
+
+	.progress_bar {
+		&__wrapper {
+			border-color: var( --banner-color-red );
+		}
+
+		&__donation_fill {
+			background: var( --banner-color-red );
+		}
+
+		&__days_left,
+		&__donation_text {
+			color: var( --banner-color-white );
+		}
+
+		&__donation_remaining {
+			color: var( --banner-color-red );
+		}
+	}
+
+	.footer {
+		font-size: 0.8em;
+		line-height: 1.6em;
+	}
+
+	.select-group {
+
+		&__state {
+			background: var( --banner-color-gray );
+			border: solid 1px var( --banner-color-darkgray );
+			border-radius: 2px;
+		}
+
+		&__input {
+			&:checked + .select-group__state {
+				background: var( --banner-color-red );
+				color: var( --banner-color-white );
+			}
+		}
+
+		&__option {
+			&:first-child .select-group__state,
+			&:last-child .select-group__state {
+				border-radius: 2px;
+			}
+		}
+	}
+
+	@media ( min-width: 1400px ) {
+		.select-group {
+			&__option {
+				&:nth-child( 1 ) .select-group__state,
+				&:nth-child( 4 ) .select-group__state,
+				&:nth-child( 5 ) .select-group__state {
+					border-radius: 2px;
+				}
+			}
+			&__custom-input {
+				border-radius: 2px;
+			}
+		}
+
+		.WMDE-Banner-frequency {
+			.select-group__option {
+				&:nth-child( 1 ) .select-group__state {
+					border-radius: 2px;
+				}
+			}
+		}
+
+		.WMDE-Banner-payment {
+			.select-group__option {
+				&:nth-child( 1 ) .select-group__state,
+				&:nth-child( 2 ) .select-group__state,
+				&:nth-child( 3 ) .select-group__state,
+				&:nth-child( 4 ) .select-group__state {
+					border-radius: 2px;
+				}
+			}
+		}
+	}
+
+	.button-group__label {
+		background: var( --banner-color-blue );
+		color: var( --banner-color-white );
+		border-radius: 2px;
+	}
+
+	.close__link {
+		font-weight: bold;
+		font-size: 36px;
+		color: var( --banner-color-black )
+	}
+}
