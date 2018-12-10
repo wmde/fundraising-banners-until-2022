@@ -1,9 +1,6 @@
-require( './css/styles_top.pcss' );
+require( './css/styles_fulltop.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
-
-// For A/B testing different styles, load
-// require( './css/styles_top_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -50,9 +47,9 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-// const bannerTemplate = require( './templates/banner_html_top.hbs' );
+// const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html_top_var.hbs' );
+const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -84,33 +81,27 @@ function setupValidationEventHandling() {
 		var errorText = $( '#WMDE_Banner-amounts-error-text' );
 		errorText.hide();
 		errorText.removeClass( 'select-group--with-error' );
-		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		var errorText = $( '#WMDE_Banner-amounts-error-text' );
 		errorText.text( text ).show();
 		errorText.addClass( 'select-group--with-error' );
-		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
 		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
-		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
-		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
 		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
-		addSpaceInstantly();
 	} );
 }
 
@@ -177,14 +168,6 @@ BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
-function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
-		return;
-	}
-
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
-}
-
 function removeBannerSpace() {
 	BannerFunctions.getSkin().removeSpace();
 }
@@ -201,13 +184,11 @@ function displayBanner() {
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
-	addSpaceInstantly();
 	bannerElement.css( { top: 0 } );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 	setTimeout( function () { animateHighlight( $( '.text__highlight' ), 'text__highlighted-character', 10 ); }, 4000 );
 
 	$( window ).resize( function () {
-		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
 }
