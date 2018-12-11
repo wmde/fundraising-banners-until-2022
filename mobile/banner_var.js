@@ -73,8 +73,7 @@ const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textInnerLeft: progressBarTextInnerLeft,
-		modifier: 'progress_bar--lateprogress'
+		textInnerLeft: progressBarTextInnerLeft
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
