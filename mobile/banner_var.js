@@ -91,7 +91,7 @@ $bannerContainer.html( bannerTemplate( {
 
 const trackingEvents = new EventLoggingTracker( BannerName );
 trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
-
+const $bannerForm = $( '#frbanner-form' );
 // BEGIN form initialization
 
 $( '#impCount' ).val( BannerFunctions.increaseImpCount() );
@@ -125,7 +125,7 @@ function setupAmountEventHandling() {
 		$( '#amount-other-input' ).val( '' );
 		$( '.amount-selection .selected-option' ).removeClass( 'selected-option' );
 		$( event.target ).addClass( 'selected-option' );
-		$( '#betrag' ).val( $( 'input[name=betrag_auswahl]:checked' ).val() );
+		$( '#betrag' ).val( BannerFunctions.getAmount() );
 	} );
 
 	otherInput.change( function () {
@@ -158,6 +158,11 @@ $( '.payment-selection button' ).click( function ( event ) {
 	$( '.payment-selection .selected-option' ).removeClass( 'selected-option' );
 	$( event.target ).addClass( 'selected-option' );
 	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
+	let bannerAction = $bannerForm.data( 'main-action' );
+	if ( $( event.target ).data( 'payment-type' ) === 'BEZ' ) {
+		bannerAction = $bannerForm.data( 'fallback-action' );
+	}
+	$bannerForm.attr( 'action', bannerAction );
 } );
 
 $( '#banner-form-submit' ).click( function () {
@@ -172,6 +177,12 @@ $( '#banner-form-submit' ).click( function () {
 	if ( !$( '#zahlweise' ).val() ) {
 		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
 		return false;
+	}
+	if ( $( '#zahlweise' ).val() === 'BEZ' ) {
+		$( '#address_type' ).val( 'person' );
+		$( '#betrag' ).val( BannerFunctions.getAmount() );
+	} else {
+		$( '#betrag' ).val( BannerFunctions.getAmount().toString().replace( /\./g, ',' ) );
 	}
 	return true;
 } );
