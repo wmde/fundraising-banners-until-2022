@@ -1,4 +1,5 @@
 const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
+const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
 
 export default class EventLoggingTracker {
 
@@ -35,6 +36,24 @@ export default class EventLoggingTracker {
 	 */
 	trackViewPortDimensions( dimensionData, trackingRatio = 1 ) {
 		this.trackViewportData( VIEWPORT_TRACKING_IDENTIFIER, dimensionData, trackingRatio );
+	}
+
+	/**
+	 * Track the dimensions of the user viewport at the time of the banner closing for statistical purposes
+	 *
+	 * @param {jQuery} $trackedElement
+	 * @param {function} dimensionCallback
+	 * @param {number} slidesShown
+	 * @param {number} finalSlide
+	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
+	 */
+	trackCloseEventViewPortDimensions( $trackedElement, dimensionCallback, slidesShown, finalSlide, trackingRatio = 0.01 ) {
+		$trackedElement.click( function () {
+			if ( this.trackBannerEvent( 'banner-closed', slidesShown, finalSlide, trackingRatio ) ) {
+				// 10% chance to also track viewport dimensions on top of recording the banner closed event.
+				this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER + '-' + this.bannerName, dimensionCallback(), 0.1 );
+			}
+		}.bind( this ) );
 	}
 
 	/**
@@ -76,6 +95,7 @@ export default class EventLoggingTracker {
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide
 	 * @param {number} trackingRatio
+	 * @return {boolean} Returns true if client was tracked
 	 */
 	trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio = 0.01 ) {
 		if ( Math.random() < trackingRatio ) {
@@ -86,6 +106,8 @@ export default class EventLoggingTracker {
 				slidesShown: slidesShown,
 				finalSlide: finalSlide
 			} );
+			return true;
 		}
+		return false;
 	}
 }

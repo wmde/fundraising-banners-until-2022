@@ -270,12 +270,6 @@ $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
-// track lightbox link clicking and banner closing
-trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-lightbox-opened' );
-trackingEvents.trackClickEvent( $( '#link-wmf-annual-plan' ), 'wmf-annual-plan' );
-trackingEvents.trackClickEvent( $( '#link-wmde-annual-plan' ), 'wmde-annual-plan' );
-trackingEvents.trackClickEvent( $( '#WMDE_Banner .close__link' ), 'banner-closed', bannerCloseTrackRatio );
-
 // BEGIN Banner close functions
 $( '#WMDE_Banner .close__link' ).click( function () {
 	$( '#WMDE_Banner' ).hide();
@@ -304,6 +298,15 @@ $( function () {
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
 	}
+
+	// track lightbox link clicking and banner closing
+	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
+	trackingEvents.trackCloseEventViewPortDimensions( $( '#WMDE_Banner .close__link' ),
+		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
+		0,
+		0,
+		bannerCloseTrackRatio
+	);
 
 	trackingEvents.trackViewPortDimensions(
 		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
