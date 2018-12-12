@@ -4,6 +4,7 @@ const toml = require( 'toml' );
 const webpack = require( 'webpack' );
 const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
 const CampaignConfig = require( './webpack/campaign_config' );
+const WrapperPlugin = require( 'wrapper-webpack-plugin' );
 
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
@@ -66,6 +67,13 @@ module.exports = {
 			},
 			filePattern: 'B*.js',
 			campaignConfig: campaigns.getConfigForPages()
+		} ),
+		new WrapperPlugin( {
+			test: /B\d{2}WPDE.*.js$/,
+			header: function ( pageName ) {
+				const trackingData = campaigns.getCampaignTracking( pageName.replace( '.js', '' ) );
+				return `var BannerName = '${trackingData.bannerTracking}'; var CampaignName = '${trackingData.campaignTracking}';`;
+			}
 		} )
 	]
 };

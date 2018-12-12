@@ -52,7 +52,8 @@
     "url": "^0.11.0",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.2",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "wrapper-webpack-plugin": "1.0.0"
   },
   "browserslist": [
     "ie 10",

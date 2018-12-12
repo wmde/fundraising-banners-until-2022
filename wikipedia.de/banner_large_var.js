@@ -3,6 +3,9 @@ require( './css/styles_var_large.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
+/* global CampaignName */
+/* global BannerName */
+
 // For A/B testing different styles, load
 // require( './css/styles_fulltop_var.pcss' );
 
@@ -57,8 +60,6 @@ const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
-const CampaignName = $bannerContainer.data( 'campaign-tracking' );
-const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection );
 
