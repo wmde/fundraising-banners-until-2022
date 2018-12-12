@@ -63,7 +63,26 @@ CampaignConfig.prototype.getWrapperTemplates = function ( loadTemplate ) {
 		}.bind( this ) );
 	}.bind( this ) );
 	return wrapperTemplates;
+};
 
+CampaignConfig.prototype.getCampaignTracking = function ( pageName ) {
+	let trackingData;
+
+	Object.keys( this.config ).forEach( function ( campaign ) {
+		Object.keys( this.config[ campaign ].banners ).forEach( function ( banner ) {
+			if ( this.config[ campaign ].banners[ banner ].pagename === pageName ) {
+				trackingData = {
+					bannerTracking: this.config[ campaign ].banners[ banner ].tracking,
+					campaignTracking: this.config[ campaign ].campaign_tracking
+				};
+			}
+		}.bind( this ) );
+	}.bind( this ) );
+
+	if ( trackingData === undefined ) {
+		throw Error( 'No tracking data found for page name ' + pageName );
+	}
+	return trackingData;
 };
 
 module.exports = CampaignConfig;

@@ -32,19 +32,19 @@ tracking = "org-desktop-de-171114"
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob06-ba-181204-2"
+campaign_tracking = "mob07-ba-181212"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B18WMDE_mob06_181204_2_ctrl"
-tracking = "org-mob06-181204-2-ctrl"
+pagename = "B18WMDE_mob07_181212_ctrl"
+tracking = "org-mob07-181212-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B18WMDE_mob05_181126_2_var"
-tracking = "org-mob05-181204-2-var"
+pagename = "B18WMDE_mob07_181212_var"
+tracking = "org-mob07-181212-var"
 
 
 # Mobile English Campaign
@@ -111,22 +111,22 @@ wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_large_ctrl.js"
-pagename = "B18WPDE_03_181206-fixed_large_ctrl"
+pagename = "B18WPDE_03_181206_fixed_large_ctrl"
 tracking = "wpde-03-181206-fixed-large-ctrl"
 
 [wikipediade.banners.top-ctrl]
 filename = "./wikipedia.de/banner_small_ctrl.js"
-pagename = "B18WPDE_03_181206-fixed_small_ctrl"
+pagename = "B18WPDE_03_181206_fixed_small_ctrl"
 tracking = "wpde-03-181206-fixed-small-ctrl"
 
 [wikipediade.banners.fulltop-var]
 filename = "./wikipedia.de/banner_large_var.js"
-pagename = "B18WPDE_03_181206-fixed_large_var"
+pagename = "B18WPDE_03_181206_fixed_large_var"
 tracking = "wpde-03-181206-fixed-large-var"
 
 [wikipediade.banners.top-var]
 filename = "./wikipedia.de/banner_small_var.js"
-pagename = "B18WPDE_03_181206-fixed_small_var"
+pagename = "B18WPDE_03_181206_fixed_small_var"
 tracking = "wpde-03-181206-fixed-small-var"
 
 # Wikipedia.de Featurebox development
