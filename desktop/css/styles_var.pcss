@@ -58,7 +58,7 @@
 	.infobox__text {
 		color: #000000;
 		font-size: 1.05em;
-		line-height: 1.2em;
+		line-height: 1.3em;
 		text-align: left;
 		margin: 0 0 0.5em 2em;
 	}
@@ -405,10 +405,17 @@
 		display: none;
 	}
 
+	/* Add whitespace to the progress bar to make the banner height similar to CTRL */
+	.progress_bar {
+		margin: 8px 0;
+	}
+	/* END whitespace adjustment */
+
 	@media ( max-width: 1399px ) {
 		.progress_bar {
 			align-content: flex-start;
-			margin: 0 var( --smallscreen-right-pad ) 0 var( --smallscreen-left-pad );
+			margin-right: var( --smallscreen-right-pad );
+			margin-left: var( --smallscreen-left-pad );
 		}
 
 		.progress_bar__wrapper {
