@@ -18,6 +18,11 @@ import DayName from '../shared/day_name';
 import Translations from '../shared/messages/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 
+const Handlebars = require( 'handlebars/runtime' );
+Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+} );
+
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
 const campaignDays = new CampaignDays(
@@ -69,6 +74,7 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
@@ -137,6 +143,10 @@ function setupAmountEventHandling() {
 		input.addClass( 'select-group__custom-input--value-entered' );
 		banner.trigger( 'validation:amount:ok' );
 		appendEuroSign( input );
+	} );
+
+	banner.on( 'paymenttype:selected', null, function () {
+		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
 }
 
@@ -291,11 +301,16 @@ $( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
 
+	$( 'body' ).prepend( $( '#centralNotice' ) );
+
 	if ( BannerFunctions.onMediaWiki() && window.mw.config.get( 'wgAction' ) !== 'view' ) {
 		return;
 	}
 
-	$( 'body' ).prepend( $( '#centralNotice' ) );
+	trackingEvents.trackViewPortDimensions(
+		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
+		sizeIssueTrackRatio
+	);
 
 	if ( sizeIssueIndicator.hasSizeIssues( $bannerElement ) ) {
 		if ( BannerFunctions.onMediaWiki() ) {
