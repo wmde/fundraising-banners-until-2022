@@ -1,0 +1,123 @@
+:root {
+	--smallscreen-left-pad: 1.2em;
+	--smallscreen-right-pad: 1em;
+}
+
+#WMDE_Banner {
+	@media ( max-width: 1299px ) {
+		.banner {
+			display: block;
+		}
+
+		.infobox__text {
+			margin: 0 var( --smallscreen-right-pad ) 0.5em var( --smallscreen-left-pad );
+		}
+
+		.form {
+			width: 100%;
+			padding: 0;
+			margin: 0.5em;
+		}
+
+		form {
+			width: 100%;
+			display: flex;
+			flex-wrap: nowrap;
+		}
+		.close__link {
+			padding: 2em 1.25em 1.5em 0;
+		}
+		.select-group {
+			padding: 0 0.8em 0.3em 0;
+			flex-wrap: nowrap;
+		}
+
+		.form-field-group {
+			display: flex;
+			flex-wrap: nowrap;
+			flex-direction: row;
+			flex: 1 1 100%;
+			padding-right: 0;
+			&:first-child {
+				padding-right: 0;
+			}
+		}
+
+		.select-group.WMDE-Banner-frequency {
+			flex-basis: 60%;
+			padding-left: 0;
+		}
+
+		.select-group__option--fullwidth {
+			width: 100%;
+		}
+
+		.select-group__option--halfwidth {
+			width: 50%;
+		}
+
+		.select-group__option--quarterwidth {
+			width: 100%;
+		}
+
+		.WMDE-Banner-amounts {
+			.select-group__option {
+				flex: 1 1 16%;
+			}
+			.select-group__option--custom {
+				flex: 1 1 8em;
+			}
+		}
+
+		.button-group {
+			display: block;
+			flex: 0 0 190px;
+			margin: 0;
+		}
+
+		.button-group__button {
+			margin: 0;
+		}
+
+		.button-group__label {
+			padding: 0;
+			line-height: 3em;
+		}
+
+		.close {
+			width: 20px;
+			margin: 0.25em 0.25em 0.25em 0;
+			top: 10px;
+			right: 10px;
+			position: absolute;
+		}
+
+		.progress_bar {
+			align-content: flex-start;
+			margin: 0 var( --smallscreen-right-pad ) 0 var( --smallscreen-left-pad );
+		}
+
+		.progress_bar__wrapper {
+			margin: 4px 0;
+		}
+	}
+
+	@media ( max-width: 1111px ) {
+		form {
+			flex-wrap: wrap;
+		}
+
+		.form-field-group:first-child {
+			padding-right: 0.8em;
+		}
+		.select-group-container {
+			display: flex;
+			flex-direction: row;
+			flex-grow: inherit;
+		}
+		/*In this viewport, the container wraps and the payment type is the 1st element in the row */
+		.select-group.WMDE-Banner-payment-type {
+			padding-left: 0;
+		}
+	}
+}
