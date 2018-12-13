@@ -7,6 +7,8 @@
 	@media ( max-width: 1399px ) {
 		.banner {
 			display: block;
+			margin-top: -7px;
+			padding-top: 7px;
 		}
 
 		.infobox {
@@ -18,9 +20,10 @@
 		}
 
 		.form {
-			width: 100%;
+			width: 98%;
 			padding: 0;
-			margin: 0.8em;
+			margin: 0.8em auto;
+			box-sizing: border-box;
 		}
 
 		form {
@@ -33,11 +36,6 @@
 			display: flex;
 			flex-direction: row;
 			flex: 1 1 100%;
-			padding-right: 0.8em;
-		}
-
-		.form__container:first-child {
-			padding-right: 0;
 		}
 
 		.select-group {
@@ -102,15 +100,18 @@
 		.progress_bar__wrapper {
 			margin: 4px 0;
 		}
+
+		#langInfo {
+			position: fixed;
+			width: 100%;
+			right: 0;
+			margin: -15px 0 0 0;
+		}
 	}
 
 	@media ( max-width: 1139px ) {
 		form {
 			flex-wrap: wrap;
-		}
-
-		.form__container:first-child {
-			padding-right: 0.8em;
 		}
 
 		/* In this viewport, the container wraps and the payment type is the 1st element in the row */
