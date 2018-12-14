@@ -1,13 +1,9 @@
-require( './css/styles_var.pcss' );
-require( './css/styles_var_large.pcss' );
+require( './css/styles_fulltop.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
 /* global CampaignName */
 /* global BannerName */
-
-// For A/B testing different styles, load
-// require( './css/styles_fulltop_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -54,7 +50,9 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+// const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
+// For A/B testing different text or markup, load
+const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -130,10 +128,6 @@ function setupAmountEventHandling() {
 		BannerFunctions.hideAmountError();
 		appendEuroSign( input );
 	} );
-
-	banner.on( 'paymenttype:selected', null, function () {
-		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-	} );
 }
 
 function validateAndSetPeriod() {
@@ -169,10 +163,6 @@ $( '#amount-other-input' ).change( function () {
 
 $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 	BannerFunctions.hideFrequencyError();
-} );
-
-$( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
-	$( this ).trigger( 'paymenttype:selected' );
 } );
 
 BannerFunctions.initializeBannerEvents();
