@@ -27,7 +27,8 @@
 
 	.infobox {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		flex: 0 1 100%;
 
@@ -36,6 +37,10 @@
 		background-color: #f8f9fa;
 		padding: 0.25em 0.5em 0.25em 0;
 		margin: 0.2em 0 0.2em 0.2em;
+
+		> div {
+			width: 100%;
+		}
 	}
 
 	.infobox__text {
