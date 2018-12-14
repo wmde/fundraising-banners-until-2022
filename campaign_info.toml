@@ -106,7 +106,7 @@ tracking = "org-pad-de-181113"
 # Wikipedia.de Campaign
 [wikipediade]
 campaign_tracking = "wpde-02-181120"
-preview_link = "/wikipedia.de?bannertest=Banner/B17WMDE_webpack_prototype_for_raw_mode&devbanner={{banner}}"
+preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
