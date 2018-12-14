@@ -52,7 +52,7 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 
 // const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
 // For A/B testing different text or markup, load
-const bannerTemplate = require( './templates/banner_html_fulltop.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
