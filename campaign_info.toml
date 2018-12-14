@@ -19,16 +19,6 @@ filename = "./desktop/banner_var.js"
 pagename = "B18WMDE_24_181212_var"
 tracking = "org-24-181212-var"
 
-[dewiki-default]
-campaign_tracking = "ca17-default"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org_js_banner_values"
-
-[dewiki-default.banners.default]
-filename = "./desktop/banner_ctrl.js"
-pagename = "B17WMDE_dewiki_desktop_default"
-tracking = "org-desktop-de-171114"
-
 
 # Mobile Campaign
 [mobile]
@@ -63,17 +53,6 @@ filename = "./mobile_english/banner_var.js"
 pagename = "B18WMDE_mob_en02_181205_var"
 tracking = "org-mob_en02-181205-var"
 
-# Default mobile campaign
-[mobile-default]
-campaign_tracking = "ca17-default"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[mobile-default.banners.default]
-filename = "./mobile/banner_ctrl.js"
-pagename = "B17WMDE_dewiki_mobile_default"
-tracking = "org-mob-de-171121"
-
 
 # iPad campaign
 [pad]
@@ -90,17 +69,6 @@ tracking = "org-pad04-181213-ctrl"
 filename = "./pad/banner_var.js"
 pagename = "B18WMDE_pad_04_181213_var"
 tracking = "org-pad04-181213-var"
-
-# Default iPad campaign
-[pad-default]
-campaign_tracking = "ca17-default"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org_js_banner_values"
-
-[pad-default.banners.default]
-filename = "./pad/banner_ctrl.js"
-pagename = "B17WMDE_dewiki_ipad_default"
-tracking = "org-pad-de-181113"
 
 
 # Wikipedia.de Campaign
@@ -129,16 +97,6 @@ filename = "./wikipedia.de/banner_small_var.js"
 pagename = "B18WPDE_03_181206_fixed_small_var"
 tracking = "wpde-03-181206-fixed-small-var"
 
-# Wikipedia.de Featurebox development
-[wikipediade_featurebox]
-campaign_tracking = "B18WPDE_01_180901"
-preview_link = "/wikipedia.de?featuretest=FeatureDev&devbanner={{banner}}"
-wrapper_template = "wikipedia_de"
-
-[wikipediade_featurebox.banners.feature]
-filename = "./wikipedia.de_featurebox/banner.js"
-pagename = "B18WPDE_01_180901"
-tracking = "B18WPDE_01_180901"
 
 # English Campaign
 [english]
@@ -156,13 +114,3 @@ filename = "./english/banner_var.js"
 pagename = "B18WMDE_en05_181212_var"
 tracking = "org-en05-181212-var"
 
-# English fallback campaign
-[enwiki-default]
-campaign_tracking = "ca17-default"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[enwiki-default.banners.default]
-filename = "./english/banner_ctrl.js"
-pagename = "B17WMDE_enwiki_desktop_default"
-tracking = "org-desktop-en-171121"
