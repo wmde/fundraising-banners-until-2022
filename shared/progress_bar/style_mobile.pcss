@@ -1,10 +1,32 @@
 .progress_bar__text__above {
 	font-size: 14px;
 	font-weight: bold;
-	line-height: 28px;
+	line-height: 18px;
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	padding: 0 20px;
+
+	@media ( max-width: 350px ) {
+		font-size: 13px;
+	}
+
+	> div {
+		white-space: nowrap;
+	}
+
+	&_left {
+		color: #990000;
+		flex: 1 1 25%;
+		text-align: left;
+	}
+
+	&_right {
+		flex: 1 1 75%;
+		text-align: right;
+
+		@media ( max-width: 450px ) {
+			text-align: left;
+			flex: 1 1 100%;
+		}
+	}
 }
