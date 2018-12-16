@@ -61,7 +61,7 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const ProgressBar = require( '../shared/progress_bar/progress_bar_mobile' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
