@@ -69,6 +69,7 @@ const progressBarTextInnerLeft = [
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
