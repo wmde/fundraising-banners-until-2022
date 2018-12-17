@@ -202,15 +202,24 @@ function addSpace() {
 }
 
 function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+	var $bannerElement = $( 'div#WMDE_Banner' );
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
 }
 
 function removeBannerSpace() {
 	BannerFunctions.getSkin().removeSpace();
+}
+
+function hideFormIfEmpty() {
+	if ( !BannerFunctions.getAmount() &&
+		!$( '#WMDE_Banner-frequency input[type=radio]:checked' ).length &&
+		!$( 'input[name=zahlweise]:checked' ).length ) {
+		$( '#WMDE_Banner .form' ).addClass( 'form-hidden' );
+	}
 }
 
 function displayBanner() {
@@ -225,18 +234,23 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () { progressBar.animate(); }, 1000 );
+	setTimeout( function () {
+		progressBar.animate();
+	}, 1000 );
+
+	$( '#WMDE_Banner-continue' ).mouseover( function () {
+		$( '.form' ).removeClass( 'form-hidden' );
+		addSpaceInstantly();
+	} );
+	$( '.banner__content' ).mouseenter( hideFormIfEmpty );
+	$( 'body' ).click( function ( evt ) {
+		if ( $( '#WMDE_Banner .form' ).has( evt.target ).length === 0 ) {
+			hideFormIfEmpty();
+		}
+	} );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
-		calculateLightboxPosition();
-	} );
-}
-
-function calculateLightboxPosition() {
-	$( '#wlightbox' ).css( {
-		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
-		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 
