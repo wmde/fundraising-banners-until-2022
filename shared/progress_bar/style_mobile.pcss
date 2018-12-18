@@ -1,13 +1,13 @@
 .progress_bar__text__above {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: bold;
-	line-height: 18px;
+	line-height: 28px;
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	padding: 0 20px;
 
 	@media ( max-width: 350px ) {
-		font-size: 13px;
+		font-size: 12px;
 	}
 
 	> div {
@@ -23,10 +23,5 @@
 	&_right {
 		flex: 1 1 75%;
 		text-align: right;
-
-		@media ( max-width: 450px ) {
-			text-align: left;
-			flex: 1 1 100%;
-		}
 	}
 }
