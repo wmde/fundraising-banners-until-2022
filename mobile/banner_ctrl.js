@@ -64,9 +64,9 @@ const BannerName = $bannerContainer.data( 'tracking' );
 const ProgressBar = require( '../shared/progress_bar/progress_bar_mobile' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
+	'noch',
 	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
 	Translations[ 'suffix-days-left' ]
 ].join( ' ' );
 
