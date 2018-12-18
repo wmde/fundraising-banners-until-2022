@@ -1,20 +1,14 @@
 <div id="frbanner" class="frbanner">
 	<div id="frbanner-window" class="frbanner-window">
-		<div class="frbanner-headline">
-			<div class="banner-headline">
-				<div>
-					<span>Die Wikimedia-Spendenkampagne</span>
-				</div>
-			</div>
-			<div id="frbanner-close" class="banner-close-button"></div>
-		</div>
-
 		<div id="modal-signup" class="cf">
 			<div class="infobox">
 				<div class="infobox__text">
 					{{> banner_text }}
 				</div>
-				{{{ progressBar }}}
+                {{{ progressBar }}}
+				<div class="call-to-action">
+					Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+				</div>
 			</div>
 
 			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&da=0">
@@ -27,11 +21,10 @@
 				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
 				<input type="hidden" id="betrag" name="betrag" value="" />
 
-				<hr class="frbanner-separator">
-
 				<fieldset class="from__section cf">
+					<legend class="form__section-head">Häufigkeit wählen</legend>
 					<div class="select-group-container">
-						<ol class="select-group select-group--tablet-3cols interval-selection" >
+						<ol class="select-group select-group--mobile-3cols interval-selection">
 							<li class="select-group__option">
 								<input class="select-group__input" type="radio" id="interval_onetime" name="interval" value="0"/>
 								<label class="select-group__label" for="interval_onetime">einmalig</label>
@@ -48,10 +41,10 @@
 					</div>
 				</fieldset>
 
-				<hr class="frbanner-separator">
-
 				<fieldset class="form__section cf">
-					<ol class="select-group select-group--tablet-2cols amount-selection" >
+					<legend class="form__section-head">Betrag wählen</legend>
+
+					<ol class="select-group select-group--tablet-3cols amount-selection">
 						<li class="select-group__option" id="amount_total_1">
 							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount1" value="5" />
 							<label class="select-group__label" id="amount_label_1" for="amount1">5 €</label>
@@ -80,9 +73,9 @@
 						</li>
 					</ol>
 				</fieldset>
-
-				<hr class="frbanner-separator">
 				<fieldset class="form__section cf">
+					<legend class="form__section-head">Zahlweise wählen</legend>
+
 					<ol class="button-group button-group--tablet-2cols payment-selection">
 						<li class="button-group__container">
 							<button class="button-group__button" data-payment-type="PPL">
@@ -120,7 +113,9 @@
 					</ol>
 					<ol class="button-group button-group--tablet-1col">
 						<li class="button-group__container-submit">
-							<button class="button-group__button button-group__button-submit" id="banner-form-submit">Weiter, um Spende abzuschließen</button>
+		                    <button class="button-group__button button-group__button-submit" id="banner-form-submit">
+								Weiter, um Spende abzuschließen
+							</button>
 						</li>
 					</ol>
 				</fieldset>

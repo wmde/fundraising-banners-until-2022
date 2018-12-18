@@ -1,6 +1,7 @@
 /* eslint no-alert: 1 */
 
 require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/styles_mini.pcss' );
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
