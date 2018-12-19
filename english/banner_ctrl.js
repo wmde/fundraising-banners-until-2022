@@ -267,8 +267,10 @@ function showLanguageInfoBox() {
 
 function positionLanguageInfoBox() {
 	var langInfoElement = $( '#langInfo' ),
+		formWidth = $( '#WMDE_Banner-form' ).width() - 120,
 		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
 	langInfoElement.css( 'top', bannerHeight );
+	langInfoElement.css( 'width', formWidth );
 }
 
 var impCount = BannerFunctions.increaseImpCount();
