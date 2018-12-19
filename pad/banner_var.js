@@ -269,25 +269,6 @@ $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
-// BEGIN Banner close functions
-$( '#WMDE_Banner .close__link' ).click( function () {
-	$( '#WMDE_Banner' ).hide();
-	if ( BannerFunctions.onMediaWiki() ) {
-		mw.centralNotice.hideBanner();
-	}
-	removeBannerSpace();
-
-	return false;
-} );
-
-// hide banner when the visual editor is initialized
-$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
-	$( '#WMDE_Banner' ).hide();
-	removeBannerSpace();
-} );
-
-// END Banner close functions
-
 // Display banner on load
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
@@ -327,4 +308,25 @@ $( function () {
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
 	} );
+
+	// BEGIN Banner close functions
+	// NOTE: These functions need to stay at the end for the correct order of click events
+
+	$( '#WMDE_Banner .close__link' ).click( function () {
+		$( '#WMDE_Banner' ).hide();
+		if ( BannerFunctions.onMediaWiki() ) {
+			mw.centralNotice.hideBanner();
+		}
+		removeBannerSpace();
+
+		return false;
+	} );
+
+	// hide banner when the visual editor is initialized
+	$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
+		$( '#WMDE_Banner' ).hide();
+		removeBannerSpace();
+	} );
+
+	// END Banner close functions
 } );
