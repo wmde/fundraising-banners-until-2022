@@ -45,8 +45,6 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-// const bannerTemplate = require('./banner_html.hbs');
-// For A/B testing different text or markup, load
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
@@ -283,6 +281,7 @@ $( '#bImpCount' ).val( bannerImpCount );
 // Display banner on load
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
+	var closeLink = $( '#WMDE_Banner .close__link' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -292,7 +291,7 @@ $( function () {
 
 	// track lightbox link clicking and banner closing
 	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
-	trackingEvents.trackCloseEventViewPortDimensions( $( '#WMDE_Banner .close__link' ),
+	trackingEvents.trackCloseEventViewPortDimensions( closeLink,
 		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
 		0,
 		0,
