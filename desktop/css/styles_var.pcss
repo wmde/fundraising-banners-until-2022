@@ -1,95 +1,230 @@
 @import 'styles.pcss';
 
+:root {
+	--banner-color-gray: #808080;
+	--banner-color-white: #ffffff;
+	--banner-color-black: #000000;
+	--banner-color-green: #97b313;
+	--banner-color-green-light: #dbe5e7;
+	--banner-color-blue: #0166a5;
+	--banner-color-blue-light: #dce4e8;
+	--banner-color-yellow: #ffdd5b;
+	--banner-color-red: #990000;
+
+	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
+}
+
 #WMDE_Banner {
-	@media ( max-width: 1149px ) {
-		.infobox {
-			&:before {
-				display: none;
-			}
-			&__text {
-				font-size: 1.1em;
-				font-family: var( --banner-main-font-family );
-			}
-			margin: 0.2em 0.5em;
+	.WMDE-Banner-continue {
+		@media ( max-width: 1400px ) {
+			width: 240px;
+			margin: 5px auto 0;
+			z-index: 20;
+			position: relative;
 		}
-		.close {
-			&__link {
-				color: var( --banner-color-white );
+		.button-group {
+			&__button {
+				padding: 0;
+				.button-group__label {
+					height: 45px;
+					padding: 1em;
+				}
 			}
 		}
-		.form {
-			margin: 0;
+	}
+
+	@media ( min-width: 1400px ) {
+		.footer__item {
+			&--leftflex {
+				padding: 0 0 5px 0;
+				margin-left: 2.2em;
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
+			}
 		}
+		.banner__content {
+			align-items: center;
+		}
+	}
+
+	@media ( max-width: 1400px ) {
 		.banner__footer {
-			padding: 0 0.5em;
+			position: absolute;
+			bottom: 15px;
+			width: 100%;
+			z-index: 10;
+			padding: 0 70px;
+			pointer-events: none;
 		}
-	}
 
-	@media ( max-width: 1023px ) {
-		.infobox {
-			&__text {
-				font-size: 1em;
+		.footer__item {
+			&--leftflex {
+				display: flex;
+				flex-flow: row wrap;
+				flex: 1;
+				max-width: 30%;
+			}
+			&--rightflex {
+				margin-right: 100px;
 			}
 		}
 	}
 
-	.text {
-		&__headline,
-		&__paragraph {
-			display: inline;
+	@media ( min-width: 1400px ) {
+		.banner__footer {
+			padding: 0.5em 0 0 2.8em;
+		}
+	}
 
-			@media ( min-width: 1152px ) {
-				display: block;
+	.infobox {
+		z-index: 50;
+		&:before {
+			display: none;
+		}
+		&:after {
+			position: absolute;
+			bottom: 43%;
+			content: ' ';
+			margin-left: 100%;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 20px 0 20px 10px;
+			border-color: transparent var( --banner-color-blue ) transparent var( --banner-color-blue );
+			clear: both;
+			z-index: 50;
+
+			@media ( max-width: 1400px ) {
+				left: 49%;
+				left: calc( 50% - 35px );
+				top: 100%;
+				margin-left: 0;
+				border-style: hidden;
+				width: 0;
+				height: 0;
+				border-left: 35px solid transparent;
+				border-right: 35px solid transparent;
+				border-top: 10px solid var( --banner-color-blue );
+				clear: both;
 			}
 		}
 	}
 
-	.optional-text {
-		display: none;
-		&.text-max-xl {
-			display: inline;
-		}
-
-		@media ( min-width: 1152px ) {
-			&.text-l {
-				display: inline;
-			}
-		}
+	.form {
+		background-color: #d9e9f2;
+		position: absolute;
+		width: 100%;
+		margin: 0;
+		height: 70px;
+		bottom: 0;
+		z-index: 30;
+		right: 0;
+		transition: right 0.5s ease-out, top 0.5s ease-out, opacity 0.3s ease-out;
+		opacity: 1;
 
 		@media ( min-width: 1400px ) {
-			&.text-xl {
-				display: inline;
+			border-radius: 5px;
+			bottom: auto;
+			height: auto;
+			top: 15%;
+			margin: 0 0.75em 0 0.25em;
+			width: 18.5em;
+			padding-left: 0;
+			justify-content: center;
+		}
+
+		@media ( max-width: 1200px ) { /* 1200px is roughly the point where the form flexbox wraps */
+			height: 95px;
+		}
+
+		&.form-hidden {
+			right: 100%;
+			opacity: 0;
+
+			@media ( min-width: 1400px ) {
+				top: -100%;
+				right: 0;
+				bottom: auto;
 			}
-			&.text-max-xl {
+		}
+		&-continue {
+			height: 50px;
+			padding: 10px 0;
+
+			@media ( min-width: 1400px ) {
+				margin: 0 1.5em 0 2em;
+				width: 18em;
+				display: flex;
+				align-items: center;
+				height: 100%;
+				padding: 0;
+			}
+
+			@media ( max-width: 1200px ) {
+				height: 75px;
+			}
+		}
+		.banner__footer {
+			position: relative;
+			bottom: 0;
+			padding: 0 70px;
+
+			@media ( min-width: 1400px ) {
 				display: none;
 			}
 		}
+		.footer__item--leftflex {
+			max-width: 100%;
+			flex: 1 1 auto;
+			padding: 0 0 5px 0;
+		}
 
-		@media ( min-width: 1900px ) {
-			&.text-xxl {
-				display: inline;
+		form {
+			@media ( max-width: 1400px ) {
+				padding: 0 5em;
 			}
 		}
 	}
 
-	.button-group {
-		&__label {
-			@media ( min-width: 1400px ) {
-				line-height: 3em;
-			}
+	#WMDE_Banner-form {
+		background: none;
+
+		@media ( min-width: 1400px ) {
+			padding: 0 1.5em;
 		}
 	}
 
-	.select-group {
-		&__state {
-			@media ( min-width: 1400px ) {
-				height: 35px;
+	/* Move bank data to bottom to avoid having it overlapped by button */
+	@media ( max-width: 900px ) {
+		.footer__item {
+			&--leftflex {
+				flex-wrap: nowrap;
+				max-width: 100%;
+				justify-content: center;
+			}
+			&--rightflex {
+				display: none;
 			}
 		}
-		&__custom-input {
-			@media ( min-width: 1400px ) {
-				height: 35px;
-			}
+		.form-continue {
+			height: 65px;
+		}
+		.banner__footer {
+			bottom: 5px;
+			padding: 0;
+			font-size: 14px;
 		}
 	}
+
+	.select-group__state,
+	.select-group__custom-input {
+		background: var( --banner-color-white );
+	}
+
 }
+
