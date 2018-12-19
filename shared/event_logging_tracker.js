@@ -51,7 +51,7 @@ export default class EventLoggingTracker {
 		$trackedElement.click( function () {
 			if ( this.trackBannerEvent( 'banner-closed', slidesShown, finalSlide, trackingRatio ) ) {
 				// 10% chance to also track viewport dimensions on top of recording the banner closed event.
-				this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER + '-' + this.bannerName, dimensionCallback(), 0.1 );
+				this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER + '-' + this.bannerName, dimensionCallback(), 1 );
 			}
 		}.bind( this ) );
 	}
