@@ -4,307 +4,119 @@
 }
 
 #WMDE_Banner {
+	@media ( max-width: 1399px ) {
+		.banner {
+			display: block;
+			margin-top: -7px;
+			padding-top: 7px;
+		}
 
-	/**
-	 * GLOBAL RESET
-	 */
-	img {
-		border: 0 none;
-	}
+		.infobox {
+			margin: 0.5em 4em;
+		}
 
-	/**
-	 * CUSTOM
-	 */
+		.infobox__text {
+			margin: 0 var( --smallscreen-right-pad ) 0.5em var( --smallscreen-left-pad );
+		}
 
-	display: none;
-	width: 100%;
-	position: fixed;
-	z-index: 10000;
-	font-size: 16px;
+		.form {
+			width: 98%;
+			padding: 0;
+			margin: 0.8em auto;
+			box-sizing: border-box;
+		}
 
-	.banner {
-		display: flex;
+		form {
+			width: 100%;
+			display: flex;
+			flex-wrap: nowrap;
+		}
 
-		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
-		background-color: #ffffff;
-	}
+		.form__container {
+			display: flex;
+			flex-direction: row;
+			flex: 1 1 100%;
+		}
 
-	.infobox {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		flex: 0 1 100%;
+		.select-group {
+			padding: 0 0 0.3em 0.8em;
+			flex-wrap: nowrap;
+		}
 
-		border: 5px solid #990000;
-		border-radius: 9px;
-		background-color: #f8f9fa;
-		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.5em 0 1em 1em;
+		.select-group.WMDE-Banner-frequency {
+			flex-basis: 60%;
+			padding-left: 0;
+		}
 
-		> div {
+		.select-group__option--fullwidth {
 			width: 100%;
 		}
-	}
 
-	.infobox__text {
-		color: #000000;
-		font-size: 1.2em;
-		line-height: 1.2em;
-		text-align: left;
-		margin: 0 0 0.5em 2em;
-		font-weight: bold;
-	}
-
-	.text__headline {
-		margin: 0.2em 0;
-	}
-
-	.text__paragraph {
-		margin: 0;
-	}
-
-	.text__headline--bold,
-	.text__paragraph--bold {
-		font-weight: bold;
-	}
-
-	.text__headline--italic,
-	.text__paragraph--italic {
-		font-style: italic;
-	}
-
-	.text__paragraph .text__highlight {
-		color: #ffffff;
-		background-color: #900000;
-		padding: 0 0.5em;
-	}
-
-	/* This is for keeping the same banner size when testing different banner texts.
-	The placeholder text element should contain the text that was removed.
-	*/
-	.text__hidden-placeholder {
-		visibility: hidden;
-	}
-
-	.infobox__footer {
-		padding: 0.025em 0 0 2em;
-		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.1em/18px 18px;
-	}
-
-	.footer {
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-
-		font-size: 1em;
-		line-height: 1.6em;
-	}
-
-	.footer__info {
-		text-transform: uppercase;
-	}
-
-	.footer__item span {
-		margin-right: 0.5em;
-	}
-
-	.footer__importantinfo {
-		font-weight: bold;
-	}
-
-	.footer__item {
-		white-space: nowrap;
-	}
-
-	.footer__item--rightflex {
-		flex-grow: 1;
-		text-align: right;
-	}
-
-	.application-of-funds-link {
-		color: #000000;
-	}
-
-	/* Form styling */
-
-	.form {
-		display: flex;
-		width: 16em;
-		min-width: 12em;
-		flex-shrink: 0;
-		padding: 1em 0 0 0.5em;
-		margin: 0.5em 0 0.5em 0.25em;
-	}
-
-	.select-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em 0.5em 0.5em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 1 100%;
-		font-size: 0.9em;
-		font-weight: bold;
-	}
-
-	.select-group--with-error {
-		background: #990000;
-	}
-
-	.select-group__errormessage {
-		display: none; /* Message will be shown by JS code */
-		color: #ffffff;
-		font-weight: bold;
-		text-align: center;
-		width: 100%;
-		margin-bottom: 0.2em;
-		font-size: 0.74em;
-	}
-
-	.select-group__input {
-		display: none;
-	}
-
-	.select-group__custom-input {
-		padding: 0.4em;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		font-size: 0.74em;
-		text-align: center;
-		border: 1px solid #9aa0a7;
-		border-radius: 4px;
-		box-sizing: border-box;
-	}
-
-	.select-group__option {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0;
-		box-sizing: border-box;
-		display: block;
-	}
-
-	.select-group__option--fullwidth {
-		width: 100%;
-	}
-
-	.select-group__option--halfwidth {
-		width: 50%;
-	}
-
-	.select-group__option--quarterwidth {
-		width: 25%;
-	}
-
-	.select-group__option--biggertext {
-		font-size: 1em;
-	}
-
-	.select-group__state {
-		display: block;
-		background: #f8f9fa;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.2em 0;
-		line-height: 2em;
-		cursor: pointer;
-		text-align: center;
-		font-size: 0.8em;
-		box-sizing: border-box;
-		white-space: nowrap;
-	}
-
-	.select-group__input:checked + .select-group__state {
-		color: #000000;
-		background: #f8f9fa;
-		border: 1px solid #2a4b8d;
-		outline: 2px solid #2a4b8d;
-		border-radius: 0;
-	}
-
-	.button-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 1 100%;
-	}
-
-	.button-group__button {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0 -1px 0 -1px;
-		box-sizing: border-box;
-		display: block;
-		cursor: pointer;
-		/* Override browser defaults */
-		border: 0 none;
-		background: transparent;
-		font-size: inherit;
-	}
-
-	.button-group__label {
-		display: block;
-		color: #ffffff;
-		background: #2a4b8d;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.1em 0;
-		line-height: 2em;
-		font-size: 0.7em;
-		font-weight: bold;
-		text-align: center;
-		box-sizing: border-box;
-	}
-
-	.close {
-		width: 18px;
-		margin: 0.25em 0.25em 0.25em 0;
-		top: auto;
-		right: auto;
-		flex: 0 0 18px;
-	}
-
-	.click-tracking {
-		display: none;
-	}
-
-	.click-tracking__pixel {
-		height: 0;
-		width: 0;
-		border: 0 none;
-	}
-
-	.progress_bar {
-		&__days_left {
-			line-height: 28px;
+		.select-group__option--halfwidth {
+			width: 100%;
 		}
-		&__donation_remaining {
-			font-size: 1em;
+
+		.select-group__option--quarterwidth {
+			width: 100%;
+		}
+
+		.WMDE-Banner-amounts {
+			.select-group__option {
+				flex: 1 1 16%;
+			}
+			.select-group__option--custom {
+				flex: 1 1 8em;
+			}
+		}
+
+		.button-group {
+			display: block;
+			flex: 0 0 170px;
+			padding-right: 0;
+		}
+
+		.button-group__button {
+			padding: 0;
+			margin: 0;
+		}
+
+		.button-group__label {
+			padding: 0.1em 0.8em;
+		}
+
+		.close {
+			width: 18px;
+			margin: 0.25em 0.25em 0.25em 0;
+			top: 10px;
+			right: 10px;
+			position: absolute;
+		}
+
+		.progress_bar {
+			align-content: flex-start;
+			margin: 0 var( --smallscreen-right-pad ) 0 var( --smallscreen-left-pad );
+		}
+
+		.progress_bar__wrapper {
+			margin: 4px 0;
+		}
+
+		#langInfo {
+			position: fixed;
+			width: 100%;
+			right: 0;
+			margin: -15px 0 0 0;
 		}
 	}
 
-	#langInfo {
-		display: none;
-		right: 2em;
-		background: #f2f4ff;
-		position: absolute;
-		border: 1px solid #c2cedb;
-		font-size: 0.8em;
-		width: 20em;
-	}
+	@media ( max-width: 1139px ) {
+		form {
+			flex-wrap: wrap;
+		}
 
-	#langInfo p {
-		padding: 2px 4px;
-		text-align: center;
+		/* In this viewport, the container wraps and the payment type is the 1st element in the row */
+		.select-group.WMDE-Banner-payment-type {
+			padding-left: 0;
+		}
 	}
 }
