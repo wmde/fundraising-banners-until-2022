@@ -10,7 +10,7 @@ const SENTENCES = {
 		before_campaign: 'Today we ask for your support.',
 		first_day: 'Today our fundraising campaign starts.',
 		nth_day: 'This is the {{days}} day of our campaign.',
-		only_n_days: 'Only {{days}} left until our fundraising campaign ends.',
+		only_n_days: 'Only {{days}} days left to donate for Wikipedia this year.',
 		last_day: 'Today is the final day of our donation campaign.'
 	}
 };

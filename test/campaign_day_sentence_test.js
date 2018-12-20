@@ -100,7 +100,7 @@ describe( 'CampaignDaySentence', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );
 			sandbox.stub( campaignDays, 'getSecondsUntilCampaignEnds' ).returns( 1123200 );
 			const sentence = new CampaignDaySentence( campaignDays, 'en', 22 );
-			assert.equal( 'Only 13 left until our fundraising campaign ends.', sentence.getSentence() );
+			assert.equal( 'Only 13 days left to donate for Wikipedia this year.', sentence.getSentence() );
 		} );
 
 		it( 'returns a sentence on the last day of the campaign', function () {

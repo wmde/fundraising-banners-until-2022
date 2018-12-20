@@ -29,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
 	endOfDay( CampaignParameters.endDate )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 20 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -267,7 +267,7 @@ function showLanguageInfoBox() {
 
 function positionLanguageInfoBox() {
 	var langInfoElement = $( '#langInfo' ),
-		formWidth = $( '#WMDE_Banner-form' ).width() - 120,
+		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
 		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
 	langInfoElement.css( 'top', bannerHeight );
 	langInfoElement.css( 'width', formWidth );
