@@ -126,3 +126,13 @@ filename = "./english/banner_var.js"
 pagename = "B18WMDE_en06_181221_var"
 tracking = "org-en06-181221-var"
 
+# Thank You Campaign
+[thank_you]
+campaign_tracking = "ty01-ba-190101"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[thank_you.banners.ctrl]
+filename = "./thank_you/banner.js"
+pagename = "B18WMDE_ty01_190101"
+tracking = "org-ty01-190101"
