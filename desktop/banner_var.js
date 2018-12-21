@@ -1,4 +1,4 @@
-require( './css/styles_var.pcss' );
+require( './css/styles.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -168,10 +168,8 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-continue button' ).click( function () {
-	if ( validateForm() ) {
-		$( '#WMDE_Banner-form' ).submit();
-	}
+$( '.WMDE-Banner-submit button' ).click( function () {
+	return validateForm();
 } );
 
 /* Convert browser events to custom events */
@@ -205,24 +203,15 @@ function addSpace() {
 }
 
 function addSpaceInstantly() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
-	if ( !$bannerElement.is( ':visible' ) ) {
+	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
 }
 
 function removeBannerSpace() {
 	BannerFunctions.getSkin().removeSpace();
-}
-
-function hideFormIfEmpty() {
-	if ( !BannerFunctions.getAmount() &&
-		!$( '#WMDE_Banner-frequency input[type=radio]:checked' ).length &&
-		!$( 'input[name=zahlweise]:checked' ).length ) {
-		$( '#WMDE_Banner .form' ).addClass( 'form-hidden' );
-	}
 }
 
 function displayBanner() {
@@ -237,23 +226,18 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
-	setTimeout( function () {
-		progressBar.animate();
-	}, 1000 );
-
-	$( '#WMDE_Banner-continue' ).mouseover( function () {
-		$( '.form' ).removeClass( 'form-hidden' );
-		addSpaceInstantly();
-	} );
-
-	$( '.banner__content' ).mouseleave( hideFormIfEmpty );
-
-	$( '.infobox__text, .progress_bar' ).mouseenter( function () {
-		hideFormIfEmpty();
-	} );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
+		calculateLightboxPosition();
+	} );
+}
+
+function calculateLightboxPosition() {
+	$( '#wlightbox' ).css( {
+		right: ( $( 'body' ).width() - 750 ) / 2 + 'px',
+		top: ( $( '#WMDE_Banner' ).height() + 20 ) + 'px'
 	} );
 }
 
@@ -280,7 +264,6 @@ $( function () {
 		0,
 		bannerCloseTrackRatio
 	);
-
 	trackingEvents.trackViewPortDimensions(
 		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
 		sizeIssueTrackRatio
