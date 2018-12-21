@@ -279,11 +279,23 @@
 		border: 0 none;
 	}
 
-	.progress_bar__donation_remaining {
-		font-size: 1em;
-	}
-	.progress_bar__days_left {
-		line-height: 28px;
+	.progress_bar {
+		&__donation_remaining {
+			font-size: 0.9em;
+			margin-left: -10px;
+		}
+
+		&__pointer_tip {
+			margin-top: 18px;
+		}
+
+		&__pointer_line {
+			margin-top: 20px;
+		}
+
+		&__days_left {
+			line-height: 28px;
+		}
 	}
 
 	@media ( max-width: 1399px ) {

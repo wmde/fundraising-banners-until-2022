@@ -73,7 +73,8 @@ const progressBar = new ProgressBar(
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
 		decimalSeparator: '.',
-		textInnerLeft: progressBarTextInnerLeft
+		textInnerLeft: progressBarTextInnerLeft,
+		modifier: 'progress_bar--lateprogress'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
