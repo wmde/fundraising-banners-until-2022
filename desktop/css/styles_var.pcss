@@ -1,5 +1,3 @@
-@import 'styles.pcss';
-
 :root {
 	--banner-color-gray: #808080;
 	--banner-color-white: #ffffff;
@@ -16,215 +14,533 @@
 }
 
 #WMDE_Banner {
-	.WMDE-Banner-continue {
-		@media ( max-width: 1400px ) {
-			width: 240px;
-			margin: 5px auto 0;
-			z-index: 20;
-			position: relative;
-		}
-		.button-group {
-			&__button {
-				padding: 0;
-				.button-group__label {
-					height: 45px;
-					padding: 1em;
-				}
-			}
-		}
+	display: none;
+	width: 100%;
+	position: fixed;
+	z-index: 10000;
+	font-size: 16px;
+
+	.invisible-text {
+		opacity: 0;
+		cursor: default;
 	}
 
-	@media ( min-width: 1400px ) {
-		.footer__item {
-			&--leftflex {
-				padding: 0 0 5px 0;
-				margin-left: 2.2em;
-				display: flex;
-				flex-direction: row;
-				flex-wrap: wrap;
-				justify-content: flex-start;
-				align-items: center;
-				align-content: center;
-			}
-		}
-		.banner__content {
+	img {
+		border: 0 none;
+	}
+
+	.banner {
+		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+		font-family: var( --banner-main-font-family );
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+		background-color: var( --banner-color-white );
+		&__content {
+			position: relative;
+			margin-top: 0.5em;
+			display: flex;
+			flex-direction: row;
+			order: 1;
 			align-items: center;
 		}
-	}
-
-	@media ( max-width: 1400px ) {
-		.banner__footer {
-			position: absolute;
-			bottom: 15px;
-			width: 100%;
-			z-index: 10;
-			padding: 0 70px;
-			pointer-events: none;
-		}
-
-		.footer__item {
-			&--leftflex {
-				display: flex;
-				flex-flow: row wrap;
-				flex: 1;
-				max-width: 30%;
-			}
-			&--rightflex {
-				margin-right: 100px;
-			}
-		}
-	}
-
-	@media ( min-width: 1400px ) {
-		.banner__footer {
-			padding: 0.5em 0 0 2.8em;
+		&__footer {
+			padding: 0.3em 1.8em 0.3em 1.8em;
+			order: 2;
+			font-size: 0.9em;
+			color: var( --banner-color-black );
 		}
 	}
 
 	.infobox {
-		z-index: 50;
-		&:before {
-			display: none;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		flex: 0 1 100%;
+		border: 0 none;
+		border-radius: 0.4em;
+		background-color: var( --banner-color-blue );
+		padding: 0;
+		margin: 0.5em 2em;
+		min-height: 250px;
+		position: relative;
+		> div {
+			width: 100%;
 		}
-		&:after {
-			position: absolute;
-			bottom: 43%;
-			content: ' ';
-			margin-left: 100%;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 20px 0 20px 10px;
-			border-color: transparent var( --banner-color-blue ) transparent var( --banner-color-blue );
-			clear: both;
-			z-index: 50;
+		&__action {
+			display: flex;
+			flex-wrap: nowrap;
 
 			@media ( max-width: 1400px ) {
-				left: 49%;
-				left: calc( 50% - 35px );
-				top: 100%;
-				margin-left: 0;
-				border-style: hidden;
-				width: 0;
-				height: 0;
-				border-left: 35px solid transparent;
-				border-right: 35px solid transparent;
-				border-top: 10px solid var( --banner-color-blue );
-				clear: both;
+				flex-wrap: wrap;
+			}
+		}
+		&__text {
+			color: var( --banner-color-white );
+			font-family: var( --banner-text-font-family );
+			font-size: 1.3em;
+			line-height: 1.3em;
+			text-align: left;
+			margin: 0.5em 1.2em;
+		}
+		&__footer {
+			padding: 0.025em 0 0 2em;
+			background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/37/Information-icon-yellow.png' ) no-repeat left 0.5em top 0.1em/18px 18px;
+		}
+	}
+
+	.text {
+		&__headline {
+			margin: 0.2em 0;
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+		}
+		&__paragraph {
+			margin: 0;
+			padding: 0;
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+			&--sans-serif {
+				font-family: var( --banner-main-font-family );
+				font-size: 0.9em;
+			}
+			&.text__highlight {
+				border: 0 none;
+				padding: 0 0.1em;
+				background: var( --banner-color-yellow );
+				font-weight: bold;
+				color: var( --banner-color-black );
+			}
+		}
+		/*  This is for keeping the same banner size when testing different banner texts.
+			The placeholder text element should contain the text that was removed
+		 */
+		&__hidden-placeholder {
+			visibility: hidden;
+		}
+	}
+
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		font-size: 1em;
+		line-height: 2em;
+		color: var( --banner-color-black );
+		justify-content: flex-start;
+		&__info {
+			text-transform: uppercase;
+		}
+		&__importantinfo {
+			font-weight: bolder;
+		}
+		&__item {
+			white-space: nowrap;
+			&--rightflex {
+				flex: 1 1 auto;
+				text-align: right;
+			}
+			span {
+				margin-right: 1.2em;
 			}
 		}
 	}
 
-	.form {
-		background-color: #d9e9f2;
+	.application-of-funds-link {
+		color: var( --banner-color-black );
+	}
+
+	/* Form styling */
+
+	#WMDE_Banner-form {
 		position: absolute;
-		width: 100%;
-		margin: 0;
-		height: 70px;
-		bottom: 0;
-		z-index: 30;
-		right: 0;
-		transition: right 0.5s ease-out, top 0.5s ease-out, opacity 0.3s ease-out;
+		width: 240px;
+		background-color: var( --banner-color-white );
+		bottom: 50px;
+		right: 20px;
+	}
+
+	.form {
+		background-color: var( --banner-color-white );
+		position: absolute;
+		z-index: 100;
+		right: 52px;
+		transition: height 0.5s ease-out, width 0.5s ease-out, margin 0.5s ease-out, opacity 0.3s ease-out;
 		opacity: 1;
+		border-radius: 5px;
+		height: 220px;
+		margin: 0;
+		width: 20em;
+		justify-content: center;
+		bottom: 15px;
+		overflow: hidden;
+		padding: 0;
+		align-items: center;
+		display: flex;
 
-		@media ( min-width: 1400px ) {
-			border-radius: 5px;
-			bottom: auto;
-			height: auto;
-			top: 15%;
-			margin: 0 0.75em 0 0.25em;
-			width: 18.5em;
-			padding-left: 0;
-			justify-content: center;
-		}
-
-		@media ( max-width: 1200px ) { /* 1200px is roughly the point where the form flexbox wraps */
-			height: 95px;
+		@media ( max-width: 1400px ) {
+			right: 39%;
+			right: calc( 50% - 135px );
 		}
 
 		&.form-hidden {
-			right: 100%;
 			opacity: 0;
+			height: 0;
+			width: 0;
+			margin: 0 140px;
+		}
 
-			@media ( min-width: 1400px ) {
-				top: -100%;
-				right: 0;
-				bottom: auto;
-			}
+		&__header > p {
+			width: 100%;
+		}
+		&__header > .banner__footer {
+			display: none;
+		}
+		& > div {
+			width: 100%;
+		}
+		&__header {
+			text-align: center;
+			display: flex;
+			justify-content: space-between;
+			color: var( --banner-color-green );
+			width: 100%;
+			font-weight: bold;
+		}
+		&-field-group {
+			display: block;
+			flex-wrap: nowrap;
+			flex: 1 1 auto;
 		}
 		&-continue {
-			height: 50px;
+			margin: 0;
+			width: 18em;
+			display: flex;
+			align-items: center;
+			height: auto;
 			padding: 10px 0;
+			flex: 0 0 300px;
+			z-index: 200;
 
-			@media ( min-width: 1400px ) {
-				margin: 0 1.5em 0 2em;
-				width: 18em;
-				display: flex;
-				align-items: center;
-				height: 100%;
-				padding: 0;
-			}
+			@media ( max-width: 1400px ) {
+				flex: 0 0 100%;
+				justify-content: center;
 
-			@media ( max-width: 1200px ) {
-				height: 75px;
+				.button-group {
+					margin-right: 0.6em;
+				}
 			}
 		}
 		.banner__footer {
 			position: relative;
-			bottom: 0;
-			padding: 0 70px;
-
-			@media ( min-width: 1400px ) {
-				display: none;
-			}
-		}
-		.footer__item--leftflex {
-			max-width: 100%;
-			flex: 1 1 auto;
-			padding: 0 0 5px 0;
-		}
-
-		form {
-			@media ( max-width: 1400px ) {
-				padding: 0 5em;
-			}
-		}
-	}
-
-	#WMDE_Banner-form {
-		background: none;
-
-		@media ( min-width: 1400px ) {
-			padding: 0 1.5em;
-		}
-	}
-
-	/* Move bank data to bottom to avoid having it overlapped by button */
-	@media ( max-width: 900px ) {
-		.footer__item {
-			&--leftflex {
-				flex-wrap: nowrap;
-				max-width: 100%;
-				justify-content: center;
-			}
-			&--rightflex {
-				display: none;
-			}
-		}
-		.form-continue {
-			height: 65px;
-		}
-		.banner__footer {
 			bottom: 5px;
 			padding: 0;
 			font-size: 14px;
 		}
 	}
 
-	.select-group__state,
-	.select-group__custom-input {
-		background: var( --banner-color-white );
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0.4em 0.5em 0 0.5em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+		font-size: 0.9em;
+		font-weight: bold;
+		width: 100%;
+		&-container {
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			margin-right: 0.5em;
+		}
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+		&__errormessage {
+			display: none; /* Message will be shown by JS code */
+			color: var( --banner-color-black );
+			font-weight: bold;
+			text-align: center;
+			width: 100%;
+			margin-bottom: 0.2em;
+			font-size: 0.74em;
+		}
+		&-container--with-error .select-group__errormessage {
+			background: var( --banner-color-red );
+			color: var( --banner-color-white );
+			margin-left: 0.5em;
+		}
+		&__state {
+			display: flex;
+			background: var( --banner-color-green-light );
+			color: var( --banner-color-black );
+			border: 0 none;
+			height: 25px;
+			cursor: pointer;
+			text-align: center;
+			font-size: 0.95em;
+			box-sizing: border-box;
+			white-space: nowrap;
+			align-content: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 5px;
+		}
+		&__custom-input + .select-group__state {
+			position: absolute;
+			top: 0;
+			right: 1em;
+			border-color: transparent;
+			background: transparent;
+		}
+		&__custom-input {
+			background: var( --banner-color-green-light );
+			color: var( --banner-color-black );
+			padding: 0.4em;
+			width: 100%;
+			min-height: 25px;
+			height: 25px;
+			margin: 0;
+			font-size: 0.9em;
+			font-weight: bold;
+			text-align: center;
+			border: 0 none;
+			box-sizing: border-box;
+			border-radius: 0 0 0.4em 0;
+			&:focus,
+			&:active {
+				border: 1px solid var( --banner-color-green );
+			}
+			&--value-entered {
+				color: var( --banner-color-white );
+				background-color: var( --banner-color-green );
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+		&__input {
+			display: none;
+			&:checked + .select-group__state {
+				color: var( --banner-color-white );
+				background-color: var( --banner-color-green );
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+		&__option {
+			flex: 1 1 auto;
+			padding: 0 0.2em 0.2em 0;
+			margin: 0;
+			box-sizing: border-box;
+			display: block;
+			position: relative;
+			&--fullwidth {
+				width: 100%;
+			}
+			&--halfwidth {
+				width: 50%;
+			}
+			&--thirdwidth {
+				width: 33%;
+			}
+			&--quarterwidth {
+				width: 25%;
+			}
+			&--biggertext {
+				font-size: 1em;
+			}
+			&:first-child .select-group__state {
+				border-radius: 0.4em 0 0 0;
+			}
+			&:nth-child( 4 ) .select-group__state {
+				border-radius: 0 0.4em 0 0;
+			}
+			&:nth-child( 5 ) .select-group__state {
+				border-radius: 0 0 0 0.4em;
+			}
+			&:last-child .select-group__state {
+				border-radius: 0 0.4em 0.4em 0;
+			}
+			&-amount-other-input {
+				min-width: 100px;
+			}
+		}
+		&:first-child,
+		&:last-child {
+			padding-left: 0.5em;
+		}
 	}
 
-}
+	.button-group {
+		display: block;
+		border: 0;
+		margin: 0;
+		padding: 0;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		&__button {
+			flex: 1 1 auto;
+			box-sizing: border-box;
+			display: block;
+			cursor: pointer;
+			/* Override browser defaults */
+			border: 0 none;
+			background: transparent;
+			font-size: inherit;
+			width: 100%;
+			&--halfwidth {
+				width: 50%;
+			}
+		}
+		&__label {
+			display: block;
+			color: var( --banner-color-white );
+			background-color: var( --banner-color-green );
+			border-radius: 0.4em;
+			font-weight: bold;
+			text-align: center;
+			box-sizing: border-box;
+			white-space: nowrap;
+			height: 30px;
+			padding: 0 2em;
+			border: 4px var( --banner-color-white ) solid;
+			font-size: 0.9em;
+			line-height: 1.8em;
+			width: 260px;
+		}
+	}
 
+	.close {
+		position: absolute;
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 0;
+		right: 0;
+		opacity: 0.8;
+		z-index: 500;
+
+		&-tracking {
+			display: none;
+			&__pixel {
+				height: 0;
+				width: 0;
+				border: 0 none;
+			}
+		}
+		&__link {
+			font-size: 25px;
+			color: var( --banner-color-gray );
+			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
+	.iban-block > span {
+		margin-right: 4px;
+	}
+
+	.progress_bar {
+		flex: 1 1 100%;
+		width: 100%;
+		align-items: center;
+
+		@media ( max-width: 1400px ) {
+			padding-top: 25px;
+		}
+
+		&__days_left {
+			display: block;
+			color: var( --banner-color-white );
+			line-height: 1.9em;
+		}
+		&__wrapper {
+			border-color: var( --banner-color-blue-light );
+			background-color: var( --banner-color-white );
+			border-radius: 0.55em;
+			margin: 0.5em 1em;
+			height: 23px;
+		}
+		&__donation_fill {
+			background: var( --banner-color-green );
+			height: 1.6em;
+			border-radius: 0.4em;
+		}
+		&__donation_text {
+			color: var( --banner-color-white );
+			line-height: 1.8em;
+			white-space: nowrap;
+		}
+		&__donation_remaining {
+			color: var( --banner-color-white );
+			line-height: 1.6em;
+			margin: 0 0 0 -35px;
+
+			@media ( max-width: 1400px ) {
+				margin: -80px 40px 0 -175px;
+			}
+		}
+
+		@media ( max-width: 1400px ) {
+			&__pointer_line {
+				width: 1px;
+				height: 20px;
+				position: absolute;
+				right: 15px;
+				bottom: -20px;
+			}
+
+			&__pointer_tip {
+				position: absolute;
+				right: 15px;
+				bottom: -25px;
+			}
+		}
+	}
+
+	.WMDE-Banner-frequency {
+		.select-group__option {
+			&:nth-child( 1 ) .select-group__state {
+				border-radius: 0.4em 0 0 0.4em;
+			}
+		}
+	}
+
+	.WMDE-Banner-payment {
+		.select-group__option {
+			&:nth-child( 1 ) .select-group__state {
+				border-radius: 0.4em 0 0 0;
+			}
+			&:nth-child( 2 ) .select-group__state {
+				border-radius: 0 0.4em 0 0;
+			}
+			&:nth-child( 3 ) .select-group__state {
+				border-radius: 0 0 0 0.4em;
+			}
+			&:nth-child( 4 ) .select-group__state {
+				border-radius: 0 0 0.4em 0;
+			}
+		}
+	}
+}

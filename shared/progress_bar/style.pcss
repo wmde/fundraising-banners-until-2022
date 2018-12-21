@@ -59,14 +59,14 @@
 	background: #000000;
 	float: left;
 	border-radius: 100%;
-	margin-top: 20px;
+	margin-top: 7px;
 }
 
 .progress_bar__pointer_line {
 	float: left;
 	width: 25px;
 	background: #000000;
-	margin: 22px 2px 0 0;
+	margin: 9px 2px 0 0;
 }
 
 .progress_bar__days_left {
@@ -91,5 +91,23 @@
 	.progress_bar__days_left,
 	.progress_bar--finished .progress_bar__days_left {
 		display: none;
+	}
+}
+
+.progress_bar--lateprogress {
+	.progress_bar__donation_remaining--inner {
+		display: none;
+	}
+
+	.progress_bar__donation_remaining--outer {
+		display: block;
+	}
+
+	.progress_bar__wrapper {
+		margin-right: -16px;
+	}
+
+	.progress_bar__donation_fill {
+		margin-right: 16px;
 	}
 }
