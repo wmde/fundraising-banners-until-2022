@@ -67,7 +67,8 @@ const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textInnerLeft: progressBarTextInnerLeft
+		textInnerLeft: progressBarTextInnerLeft,
+		modifier: 'progress_bar--lateprogress'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
@@ -167,8 +168,10 @@ function validateForm() {
 		BannerFunctions.validatePaymentType();
 }
 
-$( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+$( '.WMDE-Banner-continue button' ).click( function () {
+	if ( validateForm() ) {
+		$( '#WMDE_Banner-form' ).submit();
+	}
 } );
 
 /* Convert browser events to custom events */
@@ -242,11 +245,11 @@ function displayBanner() {
 		$( '.form' ).removeClass( 'form-hidden' );
 		addSpaceInstantly();
 	} );
-	$( '.banner__content' ).mouseenter( hideFormIfEmpty );
-	$( 'body' ).click( function ( evt ) {
-		if ( $( '#WMDE_Banner .form' ).has( evt.target ).length === 0 ) {
-			hideFormIfEmpty();
-		}
+
+	$( '.banner__content' ).mouseleave( hideFormIfEmpty );
+
+	$( '.infobox__text, .progress_bar' ).mouseenter( function () {
+		hideFormIfEmpty();
 	} );
 
 	$( window ).resize( function () {
