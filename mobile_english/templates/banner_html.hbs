@@ -17,7 +17,7 @@
 				{{{ progressBar }}}
 			</div>
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&dsn=0">
 				<input type="hidden" id="periode" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" name="intervalType" id="intervalType" value="0" />
@@ -127,9 +127,9 @@
 			</form>
 			<div class="smallprint" id="frbanner-smallprint">
 				<div class="smallprint">
-					<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0">Legal Details</a> |
-					<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0">Privacy Policy</a> |
-					<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0">Where does my donation go?</a>
+					<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0&dsn=0">Legal Details</a> |
+					<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0&dsn=0">Privacy Policy</a> |
+					<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}-link&skin=0&dsn=0">Where does my donation go?</a>
 				</div>
 			</div>
 			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
