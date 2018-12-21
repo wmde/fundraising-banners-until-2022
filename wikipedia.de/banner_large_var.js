@@ -58,8 +58,19 @@ const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+
 const ProgressBar = require( '../shared/progress_bar/progress_bar' );
-const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection );
+const progressBar = new ProgressBar( GlobalBannerSettings, campaignProjection, {
+	textInnerLeft: progressBarTextInnerLeft,
+	modifier: 'progress_bar--lateprogress'
+} );
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],

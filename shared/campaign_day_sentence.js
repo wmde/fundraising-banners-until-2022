@@ -29,7 +29,7 @@ export default class CampaignDaySentence {
 	 * @param {string} language
 	 * @param {int} urgencyThreshold
 	 */
-	constructor( campaignDays, language = 'de', urgencyThreshold = 7 ) {
+	constructor( campaignDays, language = 'de', urgencyThreshold = 10 ) {
 		this.campaignDays = campaignDays;
 		this.language = language;
 		this.urgencyThreshold = urgencyThreshold;

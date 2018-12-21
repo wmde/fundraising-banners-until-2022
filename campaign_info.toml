@@ -79,22 +79,22 @@ wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.fulltop-ctrl]
 filename = "./wikipedia.de/banner_large_ctrl.js"
-pagename = "B18WPDE_04-181214_fixed_large_ctrl"
+pagename = "B18WPDE_04_181214_large_ctrl"
 tracking = "wpde-04-181214-fixed-large-ctrl"
 
 [wikipediade.banners.top-ctrl]
 filename = "./wikipedia.de/banner_small_ctrl.js"
-pagename = "B18WPDE_04-181214_fixed_small_ctrl"
+pagename = "B18WPDE_04_181214_small_ctrl"
 tracking = "wpde-04-181214-fixed-small-ctrl"
 
 [wikipediade.banners.fulltop-var]
 filename = "./wikipedia.de/banner_large_var.js"
-pagename = "B18WPDE_04-181214_fixed_large_var"
+pagename = "B18WPDE_04_181214_large_var"
 tracking = "wpde-04-181214-fixed-large-var"
 
 [wikipediade.banners.top-var]
 filename = "./wikipedia.de/banner_small_var.js"
-pagename = "B18WPDE_04-181214_fixed_small_var"
+pagename = "B18WPDE_04_181214_small_var"
 tracking = "wpde-04-181214-fixed-small-var"
 
 

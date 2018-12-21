@@ -19,39 +19,24 @@
 						<span>IBAN</span>
 						<span class="footer__importantinfo">DE33&nbsp;1002&nbsp;0500&nbsp;0001&nbsp;1947&nbsp;00</span>
 					</div>
-
-					<div class="footer__item footer__item--rightflex">
-						<a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
-						   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0">
-							Wohin geht meine Spende?</a>
-					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="form">
 			<form id="WMDE_Banner-form" method="post" name="donationForm"
-				  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
+				  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=1">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 					<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">{{no-interval-message}}</span>
-					<label class="select-group__option select-group__option--fullwidth">
+					<label class="select-group__option select-group__option--thirdwidth">
 						<input type="radio" id="interval_onetime" name="interval" value="0" class="select-group__input">
 						<span class="select-group__state">einmalig</span>
 					</label>
-					<label class="select-group__option select-group__option--halfwidth  donation-frequency-monthly">
+					<label class="select-group__option select-group__option--thirdwidth  donation-frequency-monthly">
 						<input type="radio" id="interval1" name="interval" value="1" class="select-group__input">
 						<span class="select-group__state">monatlich</span>
 					</label>
-					<label class="select-group__option select-group__option--halfwidth donation-frequency-quarterly">
-						<input type="radio" id="interval3" name="interval" value="3" class="select-group__input">
-						<span class="select-group__state">vierteljährlich</span>
-					</label>
-
-					<label class="select-group__option select-group__option--halfwidth donation-frequency-biannual">
-						<input type="radio" id="interval6" name="interval" value="6" class="select-group__input">
-						<span class="select-group__state">halbjährlich</span>
-					</label>
-					<label class="select-group__option select-group__option--halfwidth donation-frequency-yearly">
+					<label class="select-group__option select-group__option--thirdwidth donation-frequency-yearly">
 						<input type="radio" id="interval12" name="interval" value="12" class="select-group__input">
 						<span class="select-group__state">jährlich</span>
 					</label>
@@ -139,6 +124,11 @@
 				<input type="hidden" id="impCount" name="impCount" value=""/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
 			</form>
+			<div class="use-of-funds">
+				<a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
+				   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0">
+					Wohin geht meine Spende?</a>
+			</div>
 		</div>
 
 		<div class="close">

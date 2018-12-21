@@ -119,11 +119,15 @@
 	/* Form styling */
 
 	.form {
+		position: relative;
 		width: 16em;
 		min-width: 12em;
 		flex-shrink: 0;
 		padding: 0 0 0 0.5em;
 		margin: 0.5em 0 0.5em 0.25em; /* Same as infobox, but not to the right */
+		form {
+			padding: 0 0 25px 0;
+		}
 	}
 	.select-group--with-error {
 		background: #990000;
@@ -335,4 +339,19 @@
 		border: 0;
 	}
 
+	.progress_bar__donation_remaining {
+		display: block;
+		margin: 0 0 0 -53px;
+		&--inner {
+			display: none;
+		}
+	}
+
+	.use-of-funds {
+		text-align: center;
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+		font-size: 13px;
+	}
 }
