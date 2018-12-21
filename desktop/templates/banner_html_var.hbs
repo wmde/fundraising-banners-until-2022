@@ -5,21 +5,12 @@
 				<div class="infobox__text">
 					{{> banner_text }}
 				</div>
-				<div class="infobox__action">
-					{{{ progressBar }}}
-					<div class="form-continue">
-						<div id="WMDE_Banner-continue" class="WMDE-Banner-continue button-group">
-							<button class="button-group__button">
-								<span class="button-group__label">Weiter, um Spende abzuschließen</span>
-							</button>
-						</div>
-					</div>
-				</div>
+				{{{ progressBar }}}
 			</div>
 
-			<div class="form form-hidden">
+			<div class="form">
 				<form id="WMDE_Banner-form" method="post" name="donationForm"
-					  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0">
+					  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&dsn=1">
 
 					<div class="form-field-group">
 						<div class="select-group-container">
@@ -125,6 +116,12 @@
 							<span id="WMDE_Banner-payment-type-error-text"
 								  class="select-group__errormessage">{{ no-payment-type-message }}</span>
 						</div>
+
+						<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
+							<button class="button-group__button">
+								<span class="button-group__label">Weiter, um Spende abzuschließen</span>
+							</button>
+						</div>
 					</div>
 
 					<input type="hidden" id="periode" name="periode" value="0"/>
@@ -133,7 +130,6 @@
 					<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
 				</form>
 			</div>
-
 		</div>
 
 		<div class="banner__footer">
@@ -149,15 +145,15 @@
 					<span>IBAN</span>
 					<span class="footer__importantinfo"><span class="iban-block"><span>DE33</span><span>1002</span><span>0500</span><span>0001</span><span>1947</span><span>00</span></span></span>
 				</div>
+
 				<div class="footer__item footer__item--rightflex">
 					<a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
-					   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0"
+					   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&dsn=1"
 					   data-href="#info-application-of-funds">Wohin geht meine Spende?
 					</a>
 				</div>
 			</div>
 		</div>
-	</div>
 
 		<div class="close">
 			<a href="#" class="close__link">
