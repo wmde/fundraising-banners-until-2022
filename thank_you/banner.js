@@ -184,6 +184,13 @@ $( function () {
 		return false;
 	} );
 
+	$( '.expand_button' ).click( function () {
+		$( '.banner__expanded' ).css( 'display', 'flex' );
+	} );
+	$( '.collapse_button' ).click( function () {
+		$( '.banner__expanded' ).css( 'display', 'none' );
+	} );
+
 	// hide banner when the visual editor is initialized
 	$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function () {
 		$( '#WMDE_Banner' ).hide();
