@@ -1,5 +1,7 @@
 :root {
 	--banner-color-white: #ffffff;
+	--banner-color-black: #000000;
+
 	--banner-color-purple: #2a0064;
 
 	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
@@ -25,16 +27,99 @@
 
 	.banner {
 		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
-		background: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
-		background-size: cover;
+		&__expanded {
+			background-color: var( --banner-color-purple );
+			color: var( --banner-color-white );
+			display: none;
+			flex-direction: column;
+			justify-content: space-around;
+			.collapse_button {
+				cursor: pointer;
+				float: right;
+				margin: 10px 10px 0 0;
+				font-size: 15px;
+				@media ( max-width: 900px ) {
+					font-size: 11px;
+				}
+				@media ( max-width: 600px ) {
+					font-size: 9px;
+				}
+			}
+			div.content {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-top: 5px;
+				@media ( max-width: 420px ) {
+					flex-direction: column;
+				}
+				> div {
+					margin: 5px 20px;
+					flex: 1;
+					font-size: 15px;
+					div.btn {
+						background: url( 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Btn_white_orange-outline_1200.svg' );
+						background-size: 100% 100%;
+						width: 75%;
+						padding: 5px;
+						text-align: center;
+						a {
+							color: var( --banner-color-purple );
+							text-decoration: none;
+						}
+						&:hover {
+							box-shadow: 2px 2px 0 #7c6a95;
+							font-style: normal;
+						}
+
+						@media ( max-width: 900px ) {
+							font-size: 11px;
+							background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Btn_white_orange-outline_900.svg' );
+							background-size: 100% 100%;
+						}
+						@media ( max-width: 600px ) {
+							font-size: 9px;
+							background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/50/Btn_white_orange-outline_600.svg' );
+							background-size: 100% 100%;
+						}
+						@media ( max-width: 420px ) {
+							font-size: 9px;
+							background: url( 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Btn_white_orange-outline_320.svg' );
+							background-size: 100% 100%;
+							width: 50%;
+						}
+					}
+					@media ( max-width: 900px ) {
+						font-size: 11px;
+					}
+					@media ( max-width: 600px ) {
+						font-size: 9px;
+					}
+					@media ( max-width: 420px ) {
+						font-size: 9px;
+					}
+				}
+
+			}
+			.text {
+				&__headline {
+					font-weight: bold;
+					text-align: left;
+				}
+				&__paragraph {
+					text-align: justify;
+				}
+			}
+		}
 	}
 	.close {
 		margin: 0.25em 0.5em 0.25em 0;
 		top: 0;
 		right: 0;
 		position: absolute;
+		text-decoration: none;
 		&__link {
-			color: #ffffff;
+			color: var( --banner-color-white );
 			font-size: 28px;
 
 			@media ( max-width: 900px ) {
@@ -64,6 +149,8 @@
 		flex-direction: column;
 		justify-content: space-between;
 		flex: 0 1 100%;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/4/46/Thank-you-2017-background-600.svg' );
+		background-size: cover;
 	}
 
 	.infobox__text {
@@ -169,6 +256,9 @@
 		cursor: pointer;
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/30/CTA_1200.svg' );
 		background-size: 100% 100%;
+		&:hover {
+			box-shadow: 2px 2px 0 #00466d;
+		}
 		@media ( max-width: 900px ) {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/4/4a/CTA_900.svg' );
 			background-size: 100% 100%;
