@@ -1,0 +1,35 @@
+<div id="WMDE_Banner">
+	<div class="banner">
+		<div class="infobox">
+			<div class="infobox__text">
+				{{> banner_text }}
+			</div>
+			<div class="row">
+				<div class="progress_bar">
+					<div class="progress_bar__border">
+						<div class="progress_bar__fill">
+							<span class="progress_bar__text_left">Geschafft!</span>
+							<span class="progress_bar__text_right">8,1 Mio. €</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="expand_button">
+					<span>&#x25BC; </span><span>Lesen Sie, warum wir so dankbar sind und wie wir mit Ihnen die Welt verbessen</span>
+				</div>
+			</div>
+		</div>
+		<div class="banner__expanded" style="display: none">
+			{{> banner_expanded_text_var }}
+		</div>
+		<div class="close">
+			<a href="#" class="close__link">
+				&#x2715;
+			</a>
+		</div>
+	</div>
+
+	<div class="click-tracking">
+		<img class="click-tracking__pixel" src="" />
+	</div>
+</div>

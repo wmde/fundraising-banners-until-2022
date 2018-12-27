@@ -121,6 +121,11 @@ preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devb
 wrapper_template = "wikipedia_org"
 
 [thank_you.banners.ctrl]
-filename = "./thank_you/banner.js"
-pagename = "B18WMDE_ty01_190101"
-tracking = "org-ty01-190101"
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B18WMDE_ty01_190101_ctrl"
+tracking = "org-ty01-190101-ctrl"
+
+[thank_you.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B18WMDE_ty01_190101_var"
+tracking = "org-ty01-190101-var"
