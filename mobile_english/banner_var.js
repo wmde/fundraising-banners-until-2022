@@ -58,7 +58,7 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
+const ProgressBar = require( '../shared/progress_bar/progress_bar_mobile' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
@@ -66,7 +66,7 @@ const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
 	numberOfDaysUntilCampaignEnd,
 	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
+	Translations[ 'suffix-days-left' ] + '.'
 ].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
@@ -242,7 +242,6 @@ function displayFullBanner() {
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
 			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
-			setTimeout( function () { progressBar.animate(); }, 1000 );
 		} );
 
 	} );
