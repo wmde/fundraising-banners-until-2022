@@ -4,9 +4,9 @@ require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 180;
+const sizeIssueThreshold = 160;
 const sizeIssueTrackRatio = 0.01;
-const LANGUAGE = 'de';
+const LANGUAGE = 'en';
 // END Banner-Specific configuration
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
@@ -15,7 +15,7 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import Translations from '../shared/messages/de';
+import Translations from '../shared/messages/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 
 const Handlebars = require( 'handlebars/runtime' );
@@ -29,7 +29,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
 	endOfDay( CampaignParameters.endDate )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 20 );
 const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -59,13 +59,19 @@ const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEn
 const progressBarTextInnerLeft = [
 	Translations[ 'prefix-days-left' ],
 	numberOfDaysUntilCampaignEnd,
-	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
-	Translations[ 'suffix-days-left' ]
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ] + '.'
 ].join( ' ' );
+
+const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span>M';
+const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
+		textRight: progressBarTextRight,
+		textInnerRight: progressBarTextInnerRight,
+		decimalSeparator: '.',
 		textInnerLeft: progressBarTextInnerLeft
 	}
 );
@@ -83,8 +89,6 @@ $bannerContainer.html( bannerTemplate( {
 	progressBar: progressBar.render()
 } ) );
 
-const $bannerForm = $( '#WMDE_Banner-form' );
-
 // BEGIN form init code
 
 const trackingEvents = new EventLoggingTracker( BannerName );
@@ -93,94 +97,75 @@ function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
 		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
 		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
 		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
 		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
 		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
 		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
+		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
 		addSpaceInstantly();
 	} );
 }
+
 function appendEuroSign( field ) {
 	if ( $( field ).val() !== '' &&
 		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
-	}
-}
-
-function getPaymentType() {
-	return $( 'input[name=zahlweise]:checked', document.donationForm ).val();
-}
-
-function updateFormattedAmount() {
-	const amount = BannerFunctions.getAmount();
-	if ( getPaymentType() === 'BEZ' ) {
-		$( '#betrag' ).val( amount );
-	} else if ( amount ) {
-		$( '#betrag' ).val( ( Number( amount ) ).toFixed( 2 ).replace( '.', ',' ) );
+		$( field ).val( '€ ' + $( field ).val() );
 	}
 }
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+	// using delegated events with empty selector to be markup-independent and still have current value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		updateFormattedAmount();
-		BannerFunctions.hideAmountError();
+		banner.trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		var input = $( '.select-group__custom-input' );
+		var input = $( '#WMDE_Banner-amounts .select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
-		BannerFunctions.hideAmountError();
-		updateFormattedAmount();
+		banner.trigger( 'validation:amount:ok' );
 		appendEuroSign( input );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
-		let bannerAction = $bannerForm.data( 'main-action' );
-		if ( getPaymentType() === 'BEZ' ) {
-			bannerAction = $bannerForm.data( 'fallback-action' );
-		}
-		$bannerForm.attr( 'action', bannerAction );
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-		updateFormattedAmount();
 	} );
 }
 
 function validateAndSetPeriod() {
-	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val();
+	var selectedInterval = $( '#WMDE_Banner-frequency input[type=radio]:checked' ).val(),
+		banner = $( '#WMDE_Banner' );
 	if ( typeof selectedInterval === 'undefined' ) {
-		BannerFunctions.showFrequencyError( Translations[ 'no-interval-message' ] );
+		banner.trigger( 'validation:period:error', Translations[ 'no-interval-message' ] );
 		return false;
 	}
 	$( '#intervalType' ).val( selectedInterval > 0 ? '1' : '0' );
 	$( '#periode' ).val( selectedInterval );
-	BannerFunctions.hideFrequencyError();
+	banner.trigger( 'validation:period:ok' );
 	return true;
 }
 
@@ -216,20 +201,31 @@ BannerFunctions.initializeBannerEvents();
 // END form init code
 
 function addSpace() {
-	var $bannerElement = $( 'div#WMDE_Banner' );
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
 	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function addSpaceInstantly() {
-	if ( !$( '#WMDE_Banner' ).is( ':visible' ) ) {
+	var $bannerElement = $( '#WMDE_Banner' ),
+		$languageInfoElement = $( '#langInfo' );
+
+	if ( !$bannerElement.is( ':visible' ) ) {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpaceInstantly( $( 'div#WMDE_Banner' ).height() );
+	BannerFunctions.getSkin().addSpaceInstantly(
+		$bannerElement.height() +
+		( $languageInfoElement.is( ':visible' ) ? $languageInfoElement.height() : 0 )
+	);
 }
 
 function removeBannerSpace() {
@@ -251,6 +247,7 @@ function displayBanner() {
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
+		positionLanguageInfoBox();
 		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
@@ -263,14 +260,30 @@ function calculateLightboxPosition() {
 	} );
 }
 
+function showLanguageInfoBox() {
+	positionLanguageInfoBox();
+	$( '#langInfo' ).show();
+}
+
+function positionLanguageInfoBox() {
+	var langInfoElement = $( '#langInfo' ),
+		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
+		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
+	langInfoElement.css( 'top', bannerHeight );
+	langInfoElement.css( 'width', formWidth );
+}
+
 var impCount = BannerFunctions.increaseImpCount();
 $( '#impCount' ).val( impCount );
 var bannerImpCount = BannerFunctions.increaseBannerImpCount( BannerName );
 $( '#bImpCount' ).val( bannerImpCount );
 
+// END Banner close functions
+
 // Display banner on load
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
+	var closeLink = $( '#WMDE_Banner .close__link' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -280,7 +293,7 @@ $( function () {
 
 	// track lightbox link clicking and banner closing
 	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
-	trackingEvents.trackCloseEventViewPortDimensions( $( '#WMDE_Banner .close__link' ),
+	trackingEvents.trackCloseEventViewPortDimensions( closeLink,
 		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
 		0,
 		0,
@@ -306,6 +319,11 @@ $( function () {
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
+	} );
+
+	$( '.select-group__option, .button-group__button' ).click( function () {
+		showLanguageInfoBox();
+		addSpaceInstantly();
 	} );
 
 	// BEGIN Banner close functions
