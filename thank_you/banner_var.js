@@ -57,6 +57,7 @@ $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
 	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
+	goalDonationSum: CampaignParameters.donationProjection.goalDonationSum / 1000000,
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
@@ -111,6 +112,8 @@ function displayBanner() {
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'display', 'block' );
+	// banner doesn't stick to the top
+	bannerElement.css( 'position', 'absolute' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 
@@ -138,7 +141,6 @@ $( function () {
 	}
 
 	// track lightbox link clicking and banner closing
-	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 	trackingEvents.trackCloseEventViewPortDimensions( closeLink,
 		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
 		0,
@@ -160,7 +162,7 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
+		bannerDisplayTimeout.run( displayBanner, 0 );
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {

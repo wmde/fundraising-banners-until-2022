@@ -8,6 +8,15 @@
 	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
 }
 
+@keyframes change{
+	0%, {transform:translateY(0);}
+	20% {transform:translateY(40px);}
+	40% {transform:translateY(80px)}
+	60% {transform:translateY(120px)}
+	80% {transform:translateY(160px)}
+	100% {transform:translateY(200px)}
+}
+
 #WMDE_Banner {
 	/**
 	 * GLOBAL RESET
@@ -57,19 +66,23 @@
 					margin: 5px 20px;
 					flex: 1;
 					font-size: 15px;
-					div.btn {
+					button.btn {
 						background: url( 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Btn_white_orange-outline_1200.svg' );
 						background-size: 100% 100%;
-						width: 75%;
-						padding: 5px;
+						border: 0;
+						width: auto;
+						padding: 10px;
 						text-align: center;
 						a {
 							color: var( --banner-color-purple );
 							text-decoration: none;
 						}
 						&:hover {
-							box-shadow: 2px 3px 5px #7c6a95;
+							box-shadow: 3px 3px 3px 0 #7c6a95;
 							font-style: normal;
+							position: relative;
+							top: -2px;
+							right: -2px;
 						}
 
 						@media ( max-width: 900px ) {
@@ -107,7 +120,7 @@
 					text-align: left;
 				}
 				&__paragraph {
-					text-align: justify;
+					text-align: left;
 				}
 			}
 		}
@@ -160,6 +173,20 @@
 		text-align: left;
 		font-size: 28px;
 		margin: 28px;
+		overflow: hidden;
+		div {
+			display: inline-block;
+		}
+		ul.list{
+			overflow: hidden;
+			list-style: none;
+			margin: 0;
+			animation-name: change;
+			animation-duration: 18s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			animation-timing-function: cubic-bezier( 1, 0, 0, 1 );
+		}
 		@media ( max-width: 900px ) {
 			font-size: 18px;
 			margin: 18px;
@@ -177,7 +204,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		margin: 0 1em;
+		margin: 0 1em 1em 1em;
 		@media ( max-width: 480px ) {
 			flex-direction: column;
 			justify-content: space-between;
@@ -186,22 +213,22 @@
 	.progress_bar {
 		flex: 1;
 		&__border {
-			padding: 5px;
+			padding: 5px 3px 4px 3px;
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/36/Bar-outline_1200.svg' );
-			background-size: 100% 100%;
+			background-size: 100%;
 
 			@media ( max-width: 900px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Bar-outline_900.svg' );
-				background-size: 100% 100%;
+				background-size: cover;
 			}
 			@media ( max-width: 600px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/33/Bar-outline_600.svg' );
-				background-size: 100% 100%;
+				background-size: cover;
 				padding: 2px;
 			}
 			@media ( max-width: 480px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/38/Bar-outline_320.svg' );
-				background-size: 100% 100%;
+				background-size: cover;
 			}
 		}
 		&__fill {
@@ -209,10 +236,10 @@
 			flex-direction: row;
 			justify-content: space-between;
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Bar-fill_1200.svg' );
-			background-size: 100% 100%;
+			background-size: cover;
 			@media ( max-width: 900px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Bar-fill_900.svg' );
-				background-size: 100% 100%;
+				background-size: cover;
 			}
 			@media ( max-width: 600px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/04/Bar-fill_600.svg' );
@@ -220,7 +247,7 @@
 			}
 			@media ( max-width: 480px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/01/Bar-fill_320.svg' );
-				background-size: 100% 100%;
+				background-size: cover;
 			}
 		}
 		&__text_left,
@@ -228,6 +255,7 @@
 			color: var( --banner-color-white );
 			font-weight: bold;
 			margin: 5px;
+			padding: 0 5px;
 			font-size: 18px;
 			@media ( max-width: 900px ) {
 				font-size: 13px;
@@ -242,11 +270,11 @@
 	}
 
 	.expand_button {
-		font-size: 13px;
+		font-size: 15px;
 		font-weight: bold;
 		color: var( --banner-color-purple );
 		line-height: 1.5em;
-		flex: 0.4;
+		flex: 0.3;
 		text-align: left;
 		display: flex;
 		flex-direction: row;
@@ -255,20 +283,23 @@
 		padding: 5px;
 		cursor: pointer;
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/30/CTA_1200.svg' );
-		background-size: 100% 100%;
+		background-size: cover;
 		&:hover {
-			box-shadow: 2px 3px 5px #00466d;
+			box-shadow: 3px 3px 3px 0 #00466d;
+			position: relative;
+			top: -2px;
+			right: -2px;
 		}
 		@media ( max-width: 900px ) {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/4/4a/CTA_900.svg' );
-			background-size: 100% 100%;
-			font-size: 11px;
+			background-size: cover;
+			font-size: 13px;
 			flex: 0.3;
 		}
 		@media ( max-width: 600px ) {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/c/cd/CTA_600.svg' );
-			background-size: 100% 100%;
-			font-size: 9px;
+			background-size: cover;
+			font-size: 11px;
 			line-height: 1em;
 			padding: 3px;
 			height: 45px;
@@ -276,7 +307,7 @@
 		}
 		@media ( max-width: 480px ) {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/1/1c/CTA_320.svg' );
-			background-size: 100% 100%;
+			background-size: cover;
 			font-size: 9px;
 			align-self: flex-end;
 			width: 165px;
