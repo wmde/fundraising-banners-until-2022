@@ -29,6 +29,66 @@
 		border: 0 none;
 	}
 
+	@media ( max-width: 1149px ) {
+		.infobox {
+			&:before {
+				display: none;
+			}
+			&__text {
+				font-size: 1.1em;
+				font-family: var( --banner-main-font-family );
+			}
+			margin: 0.2em 0.5em;
+		}
+		.close {
+			&__link {
+				color: var( --banner-color-white );
+			}
+		}
+		.form {
+			margin: 0;
+		}
+		.banner__footer {
+			padding: 0 0.5em;
+		}
+	}
+
+	@media ( max-width: 1023px ) {
+		.infobox {
+			&__text {
+				font-size: 1em;
+			}
+		}
+	}
+
+	.optional-text {
+		display: none;
+		&.text-max-xl {
+			display: inline;
+		}
+
+		@media ( min-width: 1152px ) {
+			&.text-l {
+				display: inline;
+			}
+		}
+
+		@media ( min-width: 1400px ) {
+			&.text-xl {
+				display: inline;
+			}
+			&.text-max-xl {
+				display: none;
+			}
+		}
+
+		@media ( min-width: 1900px ) {
+			&.text-xxl {
+				display: inline;
+			}
+		}
+	}
+
 	.banner {
 		display: flex;
 		flex-direction: column;
@@ -45,10 +105,6 @@
 			padding: 0 2.6em;
 			font-size: 1.1em;
 			color: var( --banner-color-gray );
-
-			@media ( max-width: 1400px ) {
-				padding: 0 70px;
-			}
 		}
 	}
 
@@ -63,10 +119,18 @@
 		background-color: var( --banner-color-blue );
 		padding: 0.25em 0.5em 0.25em 0;
 		margin: 0.2em 5em 0.2em 5em;
-		min-height: 250px;
 		position: relative;
 		> div {
 			width: 100%;
+		}
+		&:before {
+			position: absolute;
+			bottom: 1.5em;
+			content: ' ';
+			margin-left: -25px;
+			border-style: solid;
+			border-width: 0 0 25px 25px;
+			border-color: transparent transparent var( --banner-color-blue ) transparent;
 		}
 		&__text {
 			color: var( --banner-color-white );
@@ -84,6 +148,7 @@
 
 	.text {
 		&__headline {
+			display: inline;
 			margin: 0.2em 0;
 			&--bold {
 				font-weight: bold;
@@ -91,10 +156,14 @@
 			&--italic {
 				font-style: italic;
 			}
+			@media ( min-width: 1152px ) {
+				display: block;
+			}
 		}
 		&__paragraph {
 			margin: 0;
 			padding: 0;
+			display: inline;
 			&--bold {
 				font-weight: bold;
 			}
@@ -111,6 +180,9 @@
 				background: var( --banner-color-yellow );
 				font-weight: bold;
 				color: var( --banner-color-black );
+			}
+			@media ( min-width: 1152px ) {
+				display: block;
 			}
 		}
 		/*  This is for keeping the same banner size when testing different banner texts.
@@ -247,6 +319,9 @@
 			justify-content: center;
 			flex-direction: column;
 			padding: 0 5px;
+			@media ( min-width: 1400px ) {
+				height: 35px;
+			}
 		}
 		&__custom-input + .select-group__state {
 			position: absolute;
@@ -275,6 +350,9 @@
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
+			}
+			@media ( min-width: 1400px ) {
+				height: 35px;
 			}
 		}
 		&__input {
@@ -358,7 +436,9 @@
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
-			height: 25px;
+			@media ( min-width: 1400px ) {
+				line-height: 3em;
+			}
 		}
 	}
 
@@ -436,7 +516,7 @@
 			}
 			&__footer {
 				order: 2;
-				padding: 0.5em 0 0 4.5em;
+				padding: 0.5em 0 0 5.8em;
 			}
 		}
 
