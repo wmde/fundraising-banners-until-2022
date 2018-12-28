@@ -114,7 +114,7 @@ function initializeDonorCounter() {
 		},
 		0,
 		CampaignParameters.donationProjection.donorsBase,
-		1000
+		3000
 	);
 	donorCounter.start();
 }
