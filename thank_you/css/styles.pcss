@@ -9,12 +9,12 @@
 }
 
 @keyframes change{
-	0%, {transform:translateY(0);}
-	20% {transform:translateY(40px);}
-	40% {transform:translateY(80px)}
-	60% {transform:translateY(120px)}
-	80% {transform:translateY(160px)}
-	100% {transform:translateY(200px)}
+	0%,	{ transform: translateY( 0 ) }
+	20% { transform: translateY( 0 ) }
+	40% { transform: translateY( -1.2em ) }
+	60% { transform: translateY( -2.4em ) }
+	80% { transform: translateY( -3.6em ) }
+	100% { transform: translateY( -4.8em ) }
 }
 
 #WMDE_Banner {
@@ -138,9 +138,11 @@
 			@media ( max-width: 900px ) {
 				font-size: 18px;
 			}
+
 			@media ( max-width: 600px ) {
 				font-size: 14px;
 			}
+
 			@media ( max-width: 480px ) {
 				font-size: 9px;
 			}
@@ -152,6 +154,7 @@
 		@media ( max-width: 900px ) {
 			height: 58px;
 		}
+
 		@media ( max-width: 600px ) {
 			height: 35px;
 		}
@@ -173,28 +176,42 @@
 		text-align: left;
 		font-size: 28px;
 		margin: 28px;
-		overflow: hidden;
-		div {
-			display: inline-block;
+		display: flex;
+		align-items: flex-end;
+
+		.text-part {
+			margin-right: 0.5em;
 		}
-		ul.list{
+
+		.thankyou-items {
+			height: 1.2em;
 			overflow: hidden;
+		}
+
+		.thankyou-items--list {
 			list-style: none;
 			margin: 0;
 			animation-name: change;
-			animation-duration: 18s;
+			animation-duration: 10s;
 			animation-iteration-count: infinite;
 			animation-direction: alternate;
-			animation-timing-function: cubic-bezier( 1, 0, 0, 1 );
+
+			li {
+				margin: 0;
+				padding: 0;
+			}
 		}
+
 		@media ( max-width: 900px ) {
 			font-size: 18px;
 			margin: 18px;
 		}
+
 		@media ( max-width: 600px ) {
 			font-size: 14px;
 			margin: 14px;
 		}
+
 		@media ( max-width: 480px ) {
 			font-size: 9px;
 			margin: 9px 9px 9px 17px;
