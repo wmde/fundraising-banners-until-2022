@@ -15,6 +15,7 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+import AnimatedCounter from '../shared/animated_counter';
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -55,7 +56,7 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	numberOfDonors: donorFormatter( CampaignParameters.donationProjection.donorsBase ),
 	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	goalDonationSum: CampaignParameters.donationProjection.goalDonationSum / 1000000,
 	currentDayName: currentDayName,
@@ -105,6 +106,19 @@ function removeBannerSpace() {
 	BannerFunctions.getSkin().removeSpace();
 }
 
+function initializeDonorCounter() {
+	const donorElement = document.getElementById( 'wmde-number-of-donors' );
+	const donorCounter = new AnimatedCounter(
+		function ( numDonors ) {
+			donorElement.textContent = donorFormatter( numDonors );
+		},
+		0,
+		CampaignParameters.donationProjection.donorsBase,
+		1000
+	);
+	donorCounter.start();
+}
+
 function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
@@ -116,6 +130,7 @@ function displayBanner() {
 	bannerElement.css( 'position', 'absolute' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	window.setTimeout( initializeDonorCounter, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
