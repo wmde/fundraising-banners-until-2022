@@ -10,10 +10,14 @@
 
 @keyframes change{
 	0%,	{ transform: translateY( 0 ) }
-	20% { transform: translateY( 0 ) }
+	15% { transform: translateY( 0 ) }
+	20% { transform: translateY( -1.2em ) }
 	40% { transform: translateY( -1.2em ) }
+	45% { transform: translateY( -2.4em ) }
 	60% { transform: translateY( -2.4em ) }
+	65% { transform: translateY( -3.6em ) }
 	80% { transform: translateY( -3.6em ) }
+	85% { transform: translateY( -4.8em ) }
 	100% { transform: translateY( -4.8em ) }
 }
 
@@ -42,6 +46,7 @@
 			display: none;
 			flex-direction: column;
 			justify-content: space-around;
+			line-height: 1.4em;
 			.collapse_button {
 				cursor: pointer;
 				float: right;
