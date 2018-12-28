@@ -9,7 +9,7 @@
 }
 
 @keyframes change{
-	0%,	{ transform: translateY( 0 ) }
+	0%	{ transform: translateY( 0 ) }
 	15% { transform: translateY( 0 ) }
 	20% { transform: translateY( -1.2em ) }
 	40% { transform: translateY( -1.2em ) }
@@ -19,6 +19,12 @@
 	80% { transform: translateY( -3.6em ) }
 	85% { transform: translateY( -4.8em ) }
 	100% { transform: translateY( -4.8em ) }
+}
+
+@keyframes progress-bar-inner {
+	0%   { background-size: 0 100%; }
+	50%   { background-size: 0 100%; } /* This "Offset" is for waiting until the banner has loaded. Make sure the 50% is about 1s (see animation-time), the animation speed of the banner */
+	100% { background-size: 100% 100%; }
 }
 
 #WMDE_Banner {
@@ -258,19 +264,22 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
-			background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Bar-fill_1200.svg' );
-			background-size: cover;
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Bar-fill_1200.svg' );
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			animation-name: progress-bar-inner;
+			animation-duration: 2s;
+
 			@media ( max-width: 900px ) {
-				background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Bar-fill_900.svg' );
-				background-size: cover;
+				background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Bar-fill_900.svg' );
+
 			}
 			@media ( max-width: 600px ) {
-				background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/04/Bar-fill_600.svg' );
-				background-size: 100% 17px;
+				background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/0/04/Bar-fill_600.svg' );
+
 			}
 			@media ( max-width: 480px ) {
-				background: url( 'https://upload.wikimedia.org/wikipedia/commons/0/01/Bar-fill_320.svg' );
-				background-size: cover;
+				background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/0/01/Bar-fill_320.svg' );
 			}
 		}
 		&__text_left,
