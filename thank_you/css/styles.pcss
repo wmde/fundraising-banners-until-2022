@@ -24,7 +24,7 @@
 
 @keyframes progress-bar-inner {
 	0%   { background-size: 0 100%; }
-	50%   { background-size: 0 100%; } /* This "Offset" is for waiting until the banner has loaded. Make sure the 50% is about 1s (see animation-time), the animation speed of the banner */
+	25%   { background-size: 0 100%; } /* This "Offset" is for waiting until the banner has loaded. Make sure the percentage is about 1s (see animation-time), the animation speed of the banner */
 	100% { background-size: 100% 100%; }
 } /* stylelint-enable */
 
@@ -200,6 +200,12 @@
 		display: flex;
 		align-items: flex-end;
 
+		.donor-number {
+			min-width: 3.5em;
+			display: inline-block;
+			text-align: right;
+		}
+
 		.text-part {
 			margin-right: 0.5em;
 		}
@@ -280,7 +286,7 @@
 			background-repeat: no-repeat;
 			background-size: 100% 100%;
 			animation-name: progress-bar-inner;
-			animation-duration: 2s;
+			animation-duration: 4s; /* The 1st second is the delay while the banner is shown, remember to adapt the keyframe */
 
 			@media ( max-width: 900px ) {
 				background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Bar-fill_900.svg' );
