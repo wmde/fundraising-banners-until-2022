@@ -23,9 +23,9 @@
 }
 
 @keyframes progress-bar-inner {
-	0%   { background-size: 0 100%; }
-	25%   { background-size: 0 100%; } /* This "Offset" is for waiting until the banner has loaded. Make sure the percentage is about 1s (see animation-time), the animation speed of the banner */
-	100% { background-size: 100% 100%; }
+	0%   { transform: translateX( -100% ) }
+	25%   { transform: translateX( -100% ) } /* This "Offset" is for waiting until the banner has loaded. Make sure the percentage is about 1s (see animation-time), the animation speed of the banner */
+	100% { transform: translateX( 0 ) }
 } /* stylelint-enable */
 
 #WMDE_Banner {
@@ -263,6 +263,7 @@
 			padding: 5px 3px 4px 3px;
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/3/36/Bar-outline_1200.svg' );
 			background-size: 100%;
+			overflow: hidden;
 
 			@media ( max-width: 900px ) {
 				background: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Bar-outline_900.svg' );
@@ -286,7 +287,7 @@
 			justify-content: space-between;
 			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Bar-fill_1200.svg' );
 			background-repeat: no-repeat;
-			background-size: 100% 100%;
+			background-size: cover;
 			animation-name: progress-bar-inner;
 			animation-duration: 4s; /* The 1st second is the delay while the banner is shown, remember to adapt the keyframe */
 
