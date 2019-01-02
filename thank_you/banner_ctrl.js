@@ -39,6 +39,7 @@ const campaignProjection = new CampaignProjection(
 );
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
+const donationFormatter = formatNumber( { round: 1, decimal: ',' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -115,6 +116,19 @@ function initializeDonorCounter() {
 	donorCounter.start();
 }
 
+function initializeDonationCounter() {
+	const donationElement = document.getElementById( 'progress_bar__sum' );
+	const donationCounter = new AnimatedCounter(
+		function ( numDonors ) {
+			donationElement.textContent = donationFormatter( numDonors / 1000000 );
+		},
+		0,
+		CampaignParameters.donationProjection.goalDonationSum,
+		3000
+	);
+	donationCounter.start();
+}
+
 function displayBanner() {
 	var bannerElement = $( '#WMDE_Banner' ),
 		bannerHeight;
@@ -127,6 +141,7 @@ function displayBanner() {
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
 	window.setTimeout( initializeDonorCounter, 1000 );
+	window.setTimeout( initializeDonationCounter, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
@@ -202,6 +217,7 @@ $( function () {
 	} );
 	$( '.collapse_button' ).click( function () {
 		$( '.banner__expanded' ).css( 'display', 'none' );
+		addSpaceInstantly();
 	} );
 
 	// hide banner when the visual editor is initialized
