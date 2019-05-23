@@ -1,27 +1,35 @@
-.call-to-action {
-	font-size: 13px;
-	&-error {
-		color: #f44842;
+.poll {
+	text-align: left;
+	position: relative;
+	border: 2px solid #3366cc;
+	padding: 10px 25px 10px 10px;
+	margin: 3em 0;
+	font-size: 12px;
+	& > p {
+		margin: 0;
 	}
-	form {
-		margin-top: 2px;
-		button {
+	&-close {
+		font-size: 15px;
+		font-weight: bold;
+		text-align: right;
+		position: absolute;
+		right: 10px;
+		top: 5px;
+		display: block;
+		width: 15px;
+		height: 15px;
+	}
+	&-button {
+		border: 1px solid #3366cc;
+		padding: 5px 20px;
+		margin: 5px 0;
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		box-shadow: 1px 0 1px #3366cc;
+		&-wrapper {
+			display: block;
 			height: 30px;
 		}
 	}
-	a {
-		float: left;
-	}
-	input {
-		box-sizing: border-box;
-		background-color: #eeeeee;
-		border: 1px solid #cccccc;
-		height: 30px;
-		width: 18em;
-		padding: 5px 5px 5px 10px;
-	}
-}
-
-.feature-wrapper {
-	width: 48em;
 }

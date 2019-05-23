@@ -109,6 +109,10 @@ filename = "./wikipedia.de/banner_small_var.js"
 pagename = "B18WPDE_04-181214_fixed_small_var"
 tracking = "wpde-04-181214-fixed-small-var"
 
+[wikipediade.banners.featurebox]
+filename = "./wikipedia.de_featurebox/banner.js"
+pagename = "B19WPDE_00-190523_featurebox"
+tracking = "wpde-00-190523_featurebox"
 
 # English Campaign
 [english]
