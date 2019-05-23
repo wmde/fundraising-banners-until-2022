@@ -2,22 +2,27 @@
 	text-align: left;
 	position: relative;
 	border: 2px solid #3366cc;
-	padding: 10px 25px 10px 10px;
+	padding: 14px 25px 14px 14px;
 	margin: 3em 0;
-	font-size: 12px;
+	font-size: 14px;
+	line-height: 135%;
 	& > p {
 		margin: 0;
+		&.poll-headline {
+			margin-bottom: 10px;
+		}
 	}
 	&-close {
-		font-size: 15px;
+		cursor: pointer;
+		font-size: 30px;
 		font-weight: bold;
 		text-align: right;
 		position: absolute;
 		right: 10px;
-		top: 5px;
+		top: 10px;
 		display: block;
-		width: 15px;
-		height: 15px;
+		width: 20px;
+		height: 20px;
 	}
 	&-button {
 		border: 1px solid #3366cc;
@@ -30,6 +35,9 @@
 		&-wrapper {
 			display: block;
 			height: 30px;
+			a {
+				color: #000000;
+			}
 		}
 	}
 }
