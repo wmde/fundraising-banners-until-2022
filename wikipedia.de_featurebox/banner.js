@@ -11,5 +11,6 @@ $( document ).ready( function () {
 	if ( !$.cookie( 'hideSurvey' ) ) {
 		$( '#wmde-banner-featurebox' ).html( bannerTemplate() );
 		$( '.poll-close' ).click( hidePoll );
+		$( '.poll-button' ).click( hidePoll );
 	}
 } );
