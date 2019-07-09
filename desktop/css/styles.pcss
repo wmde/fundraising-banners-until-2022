@@ -29,7 +29,7 @@
 		border: 0 none;
 	}
 
-	@media ( max-width: 1149px ) {
+	@media ( max-width: 1151px ) {
 		.infobox {
 			&:before {
 				display: none;
@@ -57,34 +57,6 @@
 		.infobox {
 			&__text {
 				font-size: 1em;
-			}
-		}
-	}
-
-	.optional-text {
-		display: none;
-		&.text-max-xl {
-			display: inline;
-		}
-
-		@media ( min-width: 1152px ) {
-			&.text-l {
-				display: inline;
-			}
-		}
-
-		@media ( min-width: 1400px ) {
-			&.text-xl {
-				display: inline;
-			}
-			&.text-max-xl {
-				display: none;
-			}
-		}
-
-		@media ( min-width: 1900px ) {
-			&.text-xxl {
-				display: inline;
 			}
 		}
 	}
@@ -454,7 +426,7 @@
 		right: 0;
 		opacity: 0.5;
 
-		@media ( max-width: 1149px ) {
+		@media ( max-width: 1151px ) {
 			top: 0.5em;
 			right: 1em;
 			opacity: 0.8;
@@ -479,36 +451,6 @@
 
 	.iban-block > span {
 		margin-right: 4px;
-	}
-
-	.progress_bar {
-		&__days_left {
-			display: block;
-			color: var( --banner-color-white );
-			line-height: 1.9em;
-		}
-		&__wrapper {
-			border-color: var( --banner-color-blue-light );
-			background-color: var( --banner-color-white );
-			border-radius: 0.55em;
-			margin: 0.5em 1em;
-			height: 23px;
-		}
-		&__donation_fill {
-			background: var( --banner-color-green );
-			height: 1.6em;
-			border-radius: 0.4em;
-		}
-		&__donation_text {
-			color: var( --banner-color-white );
-			line-height: 1.8em;
-			white-space: nowrap;
-		}
-		&__donation_remaining {
-			color: var( --banner-color-white );
-			line-height: 1.6em;
-			margin: 11px 0 0 -35px;
-		}
 	}
 
 	@media ( min-width: 1400px ) {
