@@ -1,0 +1,82 @@
+:root {
+	--banner-color-gray: #808080;
+	--banner-color-white: #ffffff;
+	--banner-color-black: #000000;
+	--banner-color-green: #97b313;
+	--banner-color-green-light: #dbe5e7;
+	--banner-color-blue: #0166a5;
+	--banner-color-blue-light: #dce4e8;
+	--banner-color-yellow: #ffdd5b;
+	--banner-color-red: #990000;
+
+	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
+}
+
+#WMDE_Banner {
+	@media ( min-width: 1400px ) {
+		.form {
+			width: 20em;
+		}
+
+		.select-group-container {
+			max-width: 20em;
+			margin: 0;
+		}
+
+		.select-group {
+			border: 0;
+
+			&__option {
+				height: 35px; /* 35px is the height of select-group__state in CTRL */
+			}
+		}
+	}
+
+	.select-group-container {
+		margin: 0 1em 0.4em 0;
+	}
+
+	.select-group {
+		border: solid 1px var( --banner-color-blue );
+		border-radius: 2px;
+
+		&__option {
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+			/* 25px is the height of select-group__state in CTRL, subtracting the border from .select-group */
+			height: 23px;
+		}
+
+		&__input {
+			display: inline-block;
+		}
+		&__state {
+			display: inline-block;
+			height: auto;
+			background: none;
+			padding: 4px 0 0 4px;
+		}
+		&__input:checked + .select-group__state {
+			background: none;
+			color: var( --banner-color-black );
+		}
+		&__custom-input {
+			text-align: left;
+			text-decoration: underline;
+			background: none;
+			min-width: 9em;
+			height: auto;
+			font-size: 11px;
+		}
+		&__custom-input--value-entered {
+			text-decoration: none;
+			color: var( --banner-color-black );
+		}
+	}
+
+	.WMDE-Banner-submit {
+		padding-right: 0;
+	}
+}

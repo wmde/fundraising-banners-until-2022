@@ -6,6 +6,7 @@ require( './css/wlightbox.css' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 160;
 const sizeIssueTrackRatio = 0.01;
+const submitTrackingRatio = 1;
 const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
@@ -152,7 +153,15 @@ function validateForm() {
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
-	return validateForm();
+	if ( validateForm() ) {
+		trackingEvents.trackViewPortDimensionsOnEvent(
+			sizeIssueIndicator.getDimensions( $( '#WMDE_Banner' ).height() ),
+			'submit',
+			submitTrackingRatio
+		);
+		return true;
+	}
+	return false;
 } );
 
 /* Convert browser events to custom events */
