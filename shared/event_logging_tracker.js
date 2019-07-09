@@ -39,6 +39,15 @@ export default class EventLoggingTracker {
 	}
 
 	/**
+	 * @param {Object} dimensionData
+	 * @param {string} eventName
+	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
+	 */
+	trackViewPortDimensionsOnEvent( dimensionData, eventName, trackingRatio = 1 ) {
+		this.trackViewportData( eventName + '-' + this.bannerName, dimensionData, trackingRatio );
+	}
+
+	/**
 	 * Track the dimensions of the user viewport at the time of the banner closing for statistical purposes
 	 *
 	 * @param {jQuery} $trackedElement
@@ -50,8 +59,8 @@ export default class EventLoggingTracker {
 	trackCloseEventViewPortDimensions( $trackedElement, dimensionCallback, slidesShown, finalSlide, trackingRatio = 0.01 ) {
 		$trackedElement.click( function () {
 			if ( this.trackBannerEvent( 'banner-closed', slidesShown, finalSlide, trackingRatio ) ) {
-				// 10% chance to also track viewport dimensions on top of recording the banner closed event.
-				this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER + '-' + this.bannerName, dimensionCallback(), 1 );
+				// also track viewport dimensions on top of recording the banner closed event.
+				this.trackViewPortDimensionsOnEvent( dimensionCallback(), VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, 1 );
 			}
 		}.bind( this ) );
 	}
