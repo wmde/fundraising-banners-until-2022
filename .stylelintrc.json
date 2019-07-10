@@ -1,10 +1,13 @@
 {
 	"extends": "stylelint-config-wikimedia",
 	"rules": {
-		"selector-no-id": null,
 		"selector-max-id": 2,
 		"declaration-no-important": null,
-		"function-url-quotes": [ "always" ],
-		"color-hex-length": [ "long" ]
+		"function-url-quotes": "always",
+		"color-hex-length": "long",
+		"rule-empty-line-before": null,
+		"declaration-block-no-redundant-longhand-properties": null,
+		"at-rule-empty-line-before": null,
+		"declaration-empty-line-before": null
 	}
 }
