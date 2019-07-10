@@ -5,6 +5,7 @@ const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 
 module.exports = Merge( CommonConfig, {
+	mode: 'development',
 	entry: {
 		loader: './webpack/loader.js'
 	},
