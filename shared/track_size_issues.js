@@ -9,7 +9,7 @@ export default class SizeIssueIndicator {
 	/**
 	 * Get banner height and screen/window dimensions as a concatenated string
 	 * @param {number} bannerHeight
-	 * @return {object} screen, window and banner dimensions
+	 * @return {Object} screen, window and banner dimensions
 	 */
 	getDimensions( bannerHeight ) {
 		return {

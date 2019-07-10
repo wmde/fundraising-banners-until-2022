@@ -40,8 +40,8 @@ CampaignConfig.prototype.getConfigForPages = function () {
 /**
  * Load wrapper template for each campaign, based on config
  *
- * @param {function} loadTemplate callback function to load the template from the file system, must return a template string
- * @return {object}
+ * @param {Function} loadTemplate callback function to load the template from the file system, must return a template string
+ * @return {Object}
  */
 CampaignConfig.prototype.getWrapperTemplates = function ( loadTemplate ) {
 	let wrapperTemplates = {};

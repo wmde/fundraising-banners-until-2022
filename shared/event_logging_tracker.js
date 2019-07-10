@@ -21,7 +21,7 @@ export default class EventLoggingTracker {
 	/**
 	 * Track the event of a banner being too large for a user's viewport
 	 *
-	 * @param {object} dimensionData
+	 * @param {Object} dimensionData
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
@@ -31,7 +31,7 @@ export default class EventLoggingTracker {
 	/**
 	 * Track the dimensions of the user viewport for statistical purposes
 	 *
-	 * @param {object} dimensionData
+	 * @param {Object} dimensionData
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackViewPortDimensions( dimensionData, trackingRatio = 1 ) {
@@ -42,7 +42,7 @@ export default class EventLoggingTracker {
 	 * Track the dimensions of the user viewport at the time of the banner closing for statistical purposes
 	 *
 	 * @param {jQuery} $trackedElement
-	 * @param {function} dimensionCallback
+	 * @param {Function} dimensionCallback
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
@@ -60,7 +60,7 @@ export default class EventLoggingTracker {
 	 * Track dimension data depending on tracking ratio
 	 *
 	 * @param {string} bannerName
-	 * @param {object} dimensionData
+	 * @param {Object} dimensionData
 	 * @param {number} trackingRatio
 	 * @private
 	 */
@@ -81,7 +81,7 @@ export default class EventLoggingTracker {
 	 *
 	 * @param {string} actionName Name of the action to be tracked
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
-	 * @return {function}
+	 * @return {Function}
 	 */
 	createTrackHandler( actionName, trackingRatio = 0.01 ) {
 		return () => {

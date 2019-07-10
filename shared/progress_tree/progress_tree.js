@@ -9,9 +9,9 @@ require( './style.pcss' );
  * - Use campaign_days.js from https://github.com/wmde/fundraising-banners/pull/27 to calculate remaining days
  * - Convert to ES2015 class
  *
- * @param {object} GlobalBannerSettings
+ * @param {Object} GlobalBannerSettings
  * @param {CampaignProjection} campaignProjection
- * @param {object} options
+ * @param {Object} options
  * @constructor
  */
 function ProgressTree( GlobalBannerSettings, campaignProjection, options ) {
@@ -62,9 +62,9 @@ ProgressTree.prototype.animate = function () {
 
 /**
  *
- * @param {Number} donationsCollected
- * @param {Number} donationsTarget
- * @param {Number} containerSpace
+ * @param {number} donationsCollected
+ * @param {number} donationsTarget
+ * @param {number} containerSpace
  * @return {string} Min space in pixel or fill space in percent
  */
 ProgressTree.prototype.getSpaceToFill = function ( donationsCollected, donationsTarget, containerSpace ) {
