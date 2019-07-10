@@ -10,9 +10,9 @@ require( './style_mobile.pcss' );
  * - Use campaign_days.js from https://github.com/wmde/fundraising-banners/pull/27 to calculate remaining days
  * - Convert to ES2015 class
  *
- * @param {object} GlobalBannerSettings
+ * @param {Object} GlobalBannerSettings
  * @param {CampaignProjection} campaignProjection
- * @param {object} options
+ * @param {Object} options
  * @constructor
  */
 function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
@@ -69,9 +69,9 @@ ProgressBar.prototype.animate = function () {
 
 /**
  *
- * @param {Number} donationsCollected
- * @param {Number} donationsTarget
- * @param {Number} containerWidth
+ * @param {number} donationsCollected
+ * @param {number} donationsTarget
+ * @param {number} containerWidth
  * @return {string} Min width in pixel or fill width in percent
  */
 ProgressBar.prototype.getWidthToFill = function ( donationsCollected, donationsTarget, containerWidth ) {

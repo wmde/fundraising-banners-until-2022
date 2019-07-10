@@ -1,14 +1,10 @@
-/* jshint latedef: nofunc */
-/* jshint unused: false */
-/* globals mw, alert */
-
 var $ = require( 'jquery' );
 
 /**
  *
- * @param {object} GlobalBannerSettings deprecated, don't use!!
- * @param {object} Translations
- * @return {{onMediaWiki: (function(): boolean), getSkin: (function(): *), validateForm: validateForm, validateAndSetPeriod: validateAndSetPeriod, validateAmount: validateAmount, validatePaymentType: validatePaymentType, getAmount: getAmount, increaseImpCount: (function(): *), increaseBannerImpCount: (function(*=): *), getCurrentGermanDay: getCurrentGermanDay, initializeBannerEvents: initializeBannerEvents, showFrequencyError: showFrequencyError, hideFrequencyError: hideFrequencyError, showAmountError: showAmountError, hideAmountError: hideAmountError, showPaymentTypeError: showPaymentTypeError, hidePaymentTypeError: hidePaymentTypeError, removeBannerSpace: removeBannerSpace, getDigitGroupingCharacter: getDigitGroupingCharacter}}
+ * @param {Object} GlobalBannerSettings deprecated, don't use!!
+ * @param {Object} Translations
+ * @return {Object}
  */
 module.exports = function ( GlobalBannerSettings, Translations ) {
 
@@ -257,7 +253,7 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 			if ( onMediaWiki() ) {
 				skinName = window.mw.config.get( 'skin' );
 				if ( [ 'minerva', 'monobook', 'vector' ].indexOf( skinName ) === -1 ) {
-					skinName = 'vector';	// when in doubt, fall back to vector
+					skinName = 'vector'; // when in doubt, fall back to vector
 				}
 			} else {
 				skinName = 'wpde';

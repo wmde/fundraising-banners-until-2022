@@ -13,7 +13,7 @@ export class Slider {
 	 * Creates slider object if it has not been instantiated previously
 	 */
 	initialize() {
-		if ( this.hasOwnProperty( 'slider' ) === false ) {
+		if ( Object.prototype.hasOwnProperty.call( this, 'slider' ) === false ) {
 			this.slider = new Flickity( document.querySelector( '.mini-banner-carousel' ), {
 				wrapAround: true,
 				autoPlay: this.sliderAutoPlaySpeed,

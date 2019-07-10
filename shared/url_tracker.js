@@ -44,7 +44,7 @@ export default class UrlTracker {
 	/**
 	 * Track the event of a banner being too large for a user's viewport
 	 *
-	 * @param {object} dimensionData
+	 * @param {Object} dimensionData
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
 	 */
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
@@ -67,7 +67,7 @@ export default class UrlTracker {
 	 *
 	 * @param {string} actionName Name of the action to be tracked
 	 * @param {number} trackRatio The probability of the event being tracked (between 0 and 1)
-	 * @return {function}
+	 * @return {Function}
 	 */
 	createTrackHandler( actionName, trackRatio ) {
 		const self = this;

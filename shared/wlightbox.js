@@ -11,7 +11,7 @@
 			},
 			d, optionName;
 		for ( d in arrowDirections ) {
-			if ( arrowDirections.hasOwnProperty( d ) ) {
+			if ( Object.prototype.hasOwnProperty.call( arrowDirections, d ) ) {
 				optionName = 'arrow' + d;
 				if ( elementOptions[ optionName ] ) {
 					return { direction: d.toLowerCase(), cssProperty: arrowDirections[ d ], optionName: optionName };
