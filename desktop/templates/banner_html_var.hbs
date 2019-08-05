@@ -3,7 +3,7 @@
         <div class="banner__content">
             <div class="infobox">
                 <div class="infobox__text">
-                    {{> banner_text }}
+                    {{> banner_text_var }}
                 </div>
             </div>
 
@@ -78,10 +78,7 @@
                                     <span class="select-group__state">100 €</span>
                                 </label>
 
-                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input"
-									   for="amount_total_custom">
-									<input type="radio" name="betrag_auswahl" id="field-amount_total_custom"
-										   class="select-group__input" value="">
+                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input">
                                     <input type="text" name="amountGiven" id="amount-other-input" size="3"
                                            autocomplete="off" value="" placeholder="Wunschbetrag"
                                            class="select-group__custom-input">
