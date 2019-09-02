@@ -9,7 +9,7 @@
 
             <div class="form">
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
-                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&dsn=0">
+                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=2&dsn=0">
 
                     <div class="form-field-group">
                         <div class="select-group-container">
@@ -78,7 +78,10 @@
                                     <span class="select-group__state">100 €</span>
                                 </label>
 
-                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input">
+                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input"
+									   for="amount_total_custom">
+									<input type="radio" name="betrag_auswahl" id="field-amount_total_custom"
+										   class="select-group__input" value="">
                                     <input type="text" name="amountGiven" id="amount-other-input" size="3"
                                            autocomplete="off" value="" placeholder="Wunschbetrag"
                                            class="select-group__custom-input">
@@ -147,7 +150,7 @@
 
                 <div class="footer__item footer__item--rightflex">
                     <a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
-                       href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&dsn=0"
+                       href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=2&dsn=0"
                        data-href="#info-application-of-funds">Wohin geht meine Spende?
                     </a>
                 </div>

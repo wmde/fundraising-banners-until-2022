@@ -1,4 +1,5 @@
 require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -46,7 +47,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_10h16.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -115,16 +116,26 @@ function appendEuroSign( field ) {
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
-	banner.on( 'amount:selected', null, function () {
+	banner.on( 'amount:selected', null, function ( evt ) {
+		const label = $( evt.target );
+		if ( label.hasClass( 'select-group__option-amount-other-input' ) ) {
+
+			label.find( '#field-amount_total_custom' ).prop( 'checked', true );
+			label.find( '.select-group__custom-input' ).focus();
+			return;
+		}
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
+		// put input field value in radio button because otherwise
+		// the FundraisingFrontend will prefer the empty radio value over the custom value
+		// In the CTRL banner, the code would unset the radio buttons
+		$( '#field-amount_total_custom' ).val( input.val().replace( ',', '.' ) );
 		BannerFunctions.hideAmountError();
 		appendEuroSign( input );
 	} );
@@ -132,6 +143,8 @@ function setupAmountEventHandling() {
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
+
+	banner.trigger( 'validation:init', banner.data( 'validation-event-handling' ) );
 }
 
 function validateAndSetPeriod() {
