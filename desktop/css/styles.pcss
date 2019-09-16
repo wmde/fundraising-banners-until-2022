@@ -237,7 +237,8 @@
 	}
 
 	.select-group {
-		border: 0;
+		border: solid 1px var( --banner-color-blue );
+		border-radius: 2px;
 		margin: 0 auto;
 		padding: 0.4em 0.5em 0 0.5em;
 		display: flex;
@@ -252,10 +253,11 @@
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
-			margin-right: 0.5em;
+			margin: 0 1em 0.4em 0;
 
 			@media ( min-width: 1400px ) {
 				max-width: 20em;
+				margin: 0;
 			}
 		}
 		&:first-child {
@@ -278,24 +280,21 @@
 			color: var( --banner-color-white );
 		}
 		&__state {
-			display: flex;
-			background: var( --banner-color-green-light );
+			display: inline-block;
+			height: auto;
+			background: none;
+			padding: 4px 0 0 4px;
 			color: var( --banner-color-black );
 			border: 0 none;
-			height: 25px;
 			cursor: pointer;
 			text-align: center;
 			font-size: 0.95em;
 			box-sizing: border-box;
 			white-space: nowrap;
-			align-content: center;
-			justify-content: center;
-			flex-direction: column;
-			/* 14px instead of 5px padding to roughly compensate for the space of the radio button in VAR */
-			padding: 0 14px;
 
 			@media ( min-width: 1400px ) {
 				height: 35px;
+				padding: 11px 0 0 4px;
 			}
 		}
 		&__custom-input + .select-group__state {
@@ -306,48 +305,48 @@
 			background: transparent;
 		}
 		&__custom-input {
-			background: var( --banner-color-green-light );
+			text-align: left;
+			text-decoration: underline;
+			background: none;
+			min-width: 9em;
+			height: auto;
+			font-size: 11px;
 			color: var( --banner-color-black );
 			padding: 0.4em;
 			width: 100%;
-			min-height: 25px;
-			height: 25px;
 			margin: 0;
-			font-size: 0.9em;
 			font-weight: bold;
-			text-align: center;
 			border: 0 none;
 			border-radius: 0 0.4em 0.4em 0;
 			box-sizing: border-box;
 			&--value-entered {
-				color: var( --banner-color-white );
+				text-decoration: none;
+				color: var( --banner-color-black );
 				background-color: var( --banner-color-green );
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
 			}
-
-			@media ( min-width: 1400px ) {
-				height: 35px;
-			}
 		}
 		&__input {
-			display: none;
+			display: inline-block;
 			&:checked + .select-group__state {
-				color: var( --banner-color-white );
-				background-color: var( --banner-color-green );
+				background: none;
+				color: var( --banner-color-black );
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
 			}
 		}
 		&__option {
+			display: flex;
+			flex-wrap: nowrap;
 			flex: 1 1 auto;
+			align-items: center;
+			box-sizing: border-box;
 			padding: 0 0.2em 0.2em 0;
 			margin: 0;
-			box-sizing: border-box;
-			display: block;
-			position: relative;
+			height: 23px;
 			&--fullwidth {
 				width: 100%;
 			}
@@ -502,6 +501,7 @@
 
 		.select-group {
 			flex-wrap: wrap;
+			border: 0;
 			&:first-child,
 			&:last-child {
 				padding-left: 0.5em;
@@ -510,6 +510,7 @@
 				margin-left: 0.5em;
 			}
 			&__option {
+				height: 35px;
 				&:nth-child( 1 ) .select-group__state {
 					border-radius: 0.4em 0 0 0;
 				}
@@ -561,6 +562,10 @@
 		.footer__item--rightflex {
 			margin-right: 5em;
 		}
+	}
+
+	.WMDE-Banner-submit {
+		padding-right: 0;
 	}
 }
 
