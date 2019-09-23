@@ -65,6 +65,7 @@ module.exports = {
 				bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
 				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2018}}'
 			},
+			test: /^(?!.*(hot)).*/,
 			filePattern: 'B*.js',
 			campaignConfig: campaigns.getConfigForPages()
 		} ),
