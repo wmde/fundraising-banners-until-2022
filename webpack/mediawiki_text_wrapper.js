@@ -23,7 +23,7 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 		const wrappedFiles = {};
 
 		for ( let filename in compilation.assets ) {
-			if ( !mm.match( filename ) ) {
+			if ( !mm.match( filename ) || filename.indexOf( 'hot-update' ) > -1 ) {
 				continue;
 			}
 
