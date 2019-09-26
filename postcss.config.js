@@ -3,10 +3,10 @@ module.exports = {
 		'postcss-import': {},
 		'autoprefixer': {},
 		'postcss-nested': {},
+		'postcss-simple-vars': {},
 		'postcss-custom-properties': {
 			preserve: false
 		},
-		'css-mqpacker': {},
 		'postcss-combine-duplicated-selectors': {}
 	}
 };
