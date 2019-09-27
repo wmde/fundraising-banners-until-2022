@@ -1,9 +1,9 @@
 const Translations = {
-	'no-interval-message': 'Wie häufig möchten Sie spenden?',
-	'amount-empty-message': 'Wie viel wollen Sie spenden?',
+	'no-interval-message': 'Bitte wählen Sie die Spendenhäufigkeit aus.',
+	'amount-empty-message': 'Bitte wählen Sie einen Betrag aus.',
 	'amount-too-low-message': '1 € muss es mindestens sein.',
 	'amount-too-high-message': 'Es darf nicht mehr als 99999 € sein.',
-	'no-payment-type-message': 'Wie wollen Sie Ihre Spende bezahlen?',
+	'no-payment-type-message': 'Bitte wählen Sie eine Zahlungsweise aus.',
 	'prefix-days-left': 'Nur noch',
 	'suffix-days-left': '',
 	'day-singular': 'Tag',

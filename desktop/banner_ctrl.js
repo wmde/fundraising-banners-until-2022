@@ -1,5 +1,4 @@
 require( './css/styles.pcss' );
-require( './css/styles_var.pcss' );
 require( './css/icons.css' );
 require( './css/wlightbox.css' );
 
@@ -47,7 +46,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_cat17.hbs' );
+const bannerTemplate = require( './templates/banner_html_ctrl.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -77,32 +76,35 @@ const trackingEvents = new EventLoggingTracker( BannerName );
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
+		$( '#WMDE_Banner-amounts-error-wrapper' ).hide();
 		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-amounts-error-text' ).text( text );
+		$( '#WMDE_Banner-amounts-error-wrapper' ).show();
 		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
+		$( '#WMDE_Banner-frequency-error-wrapper' ).hide();
 		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-frequency-error-text' ).text( text );
+		$( '#WMDE_Banner-frequency-error-wrapper' ).show();
 		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
+		$( '#WMDE_Banner-payment-type-error-wrapper' ).hide();
 		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text );
+		$( '#WMDE_Banner-payment-type-error-wrapper' ).show();
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
@@ -259,7 +261,7 @@ $( function () {
 	}
 
 	// track lightbox link clicking and banner closing
-	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
+	trackingEvents.trackClickEvent( $( '.application-of-funds-link' ), 'application-of-funds-shown', 1 );
 	trackingEvents.trackCloseEventViewPortDimensions( $( '#WMDE_Banner .close__link' ),
 		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
 		0,
