@@ -71,6 +71,9 @@ module.exports = {
 		new WrapperPlugin( {
 			test: /B\d{2}WPDE.*.js$/,
 			header: function ( pageName ) {
+				if ( pageName.indexOf( 'hot-update' ) !== -1 ) {
+					return '';
+				}
 				const trackingData = campaigns.getCampaignTracking( pageName.replace( '.js', '' ) );
 				return `var BannerName = '${trackingData.bannerTracking}'; var CampaignName = '${trackingData.campaignTracking}';`;
 			}
