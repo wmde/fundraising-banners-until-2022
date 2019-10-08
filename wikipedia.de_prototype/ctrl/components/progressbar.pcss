@@ -1,0 +1,30 @@
+@import '../variables_ctrl.pcss';
+
+.progress_bar {
+	&__days_left {
+		display: block;
+		color: $color-white;
+		line-height: 1.9em;
+	}
+	&__wrapper {
+		border-color: $color-light;
+		background-color: $color-white;
+		border-radius: 0.55em;
+		margin: 0.5em 1em;
+		height: 23px;
+	}
+	&__donation_fill {
+		background: $color-primary;
+		height: 1.6em;
+		border-radius: $banner-border-radius;
+	}
+	&__donation_text {
+		color: $color-white;
+		line-height: 1.8em;
+		white-space: nowrap;
+	}
+	&__donation_remaining {
+		color: $color-dark;
+		line-height: 1.6em;
+	}
+}

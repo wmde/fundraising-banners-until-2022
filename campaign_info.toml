@@ -113,6 +113,17 @@ filename = "./wikipedia.de_featurebox/banner.js"
 pagename = "B19WPDE_00-190523_featurebox"
 tracking = "wpde-00-190523_featurebox"
 
+# Wikipedia.de Campaign
+[wikipediade_prototype]
+campaign_tracking = "wpde-01-191101"
+preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
+wrapper_template = "wikipedia_de"
+
+[wikipediade_prototype.banners.ctrl]
+filename = "./wikipedia.de_prototype/banner_ctrl.js"
+pagename = "B18WPDE_01-191101_ctrl"
+tracking = "wpde-01-191101-ctrl"
+
 # English Campaign
 [english]
 campaign_tracking = "en06-ba-181221"
