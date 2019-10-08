@@ -1,4 +1,4 @@
-<div id="WMDE_Banner">
+<div id="WMDE_Banner" class:is-hidden={isHidden}>
 	<div class="banner">
 		<div class="banner__content">
 			<div class="infobox">
@@ -11,12 +11,11 @@
 			</div>
 			<Form campaignName="{campaignName}" bannerName={bannerName} />
 		</div>
-		<div class="close"><button class="close__link">&#x2715;</button></div>
+		<div class="close"><button class="close__link" on:click={closeBanner}>&#x2715;</button></div>
 		<Footer campaignName="{campaignName}" bannerName={bannerName} />
 	</div>
+	<Funds/>
 </div>
-
-<Funds/>
 
 <script>
 	import Text from '../components/text.svelte';
@@ -33,6 +32,11 @@
 	export let amountBannerImpressionsInMillion;
 	export let numberOfDonors;
 	export let progressBar;
+	export let isHidden = false;
+
+	function closeBanner(  ) {
+		isHidden = true;
+	}
 </script>
 
 <style lang="postcss" global>

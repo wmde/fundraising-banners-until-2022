@@ -39,6 +39,12 @@
 							<span class="select-group__state">{label}</span>
 						</label>
 					{/each}
+					<div class="sms-box">
+						<label class="select-group__option select-group__option--halfwidth">
+							<a href="sms:81190" class="select-group__state">5 € per SMS</a>
+						</label>
+						<span>SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.</span>
+					</div>
 				</div>
 				<span id="WMDE_Banner-payment-type-error-text"
 					  class="select-group__errormessage">TODOno-payment-type-message</span>

@@ -6,6 +6,7 @@ const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 // TODO const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const GlobalBannerSettings = DevGlobalBannerSettings;
 const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
+const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
 
 const LANGUAGE = 'de';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
