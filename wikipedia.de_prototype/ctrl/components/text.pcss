@@ -7,13 +7,16 @@
 	justify-content: space-between;
 	flex: 0 1 100%;
 	border: 8px solid $color-primary;
-	border-radius: $banner-border-radius;
+	border-radius: 15px;
 	background-color: $color-bright;
 	padding: 0.25em 0.5em 0.25em 0;
 	margin: 0.2em 0.5em;
 	position: relative;
 	@media ( min-width: $breakpoint-m ) {
 		margin: 0.2em 5em 0.2em 5em;
+	}
+	@media ( min-width: $breakpoint-l ) {
+		margin: 0.2em 0 0.2em 5em;
 	}
 	> div {
 		width: 100%;

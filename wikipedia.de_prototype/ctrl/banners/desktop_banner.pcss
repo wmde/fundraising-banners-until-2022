@@ -1,7 +1,10 @@
 @import '../variables_ctrl.pcss';
 
 #WMDE_Banner {
-	display: block;
+	display: none;
+	@media ( min-width: $breakpoint-xs ) {
+		display: block;
+	}
 	width: 100%;
 	position: relative;
 	z-index: 10000;
