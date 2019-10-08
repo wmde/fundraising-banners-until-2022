@@ -4,7 +4,7 @@
   "description": "Building WMDE fundraising banners with webpack",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "mocha --require babel-core/register",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
