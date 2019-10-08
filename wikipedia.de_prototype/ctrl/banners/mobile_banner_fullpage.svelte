@@ -2,6 +2,7 @@
 	<div id="frbanner-window" class="frbanner-window">
 		<div id="modal-signup" class="cf">
 			<div class="infobox">
+				<div class="close"><button class="close__link" on:click={closeBanner}>&#x2715;</button></div>
 				<Text	amountBannerImpressionsInMillion="{amountBannerImpressionsInMillion}"
 						 numberOfDonors="{numberOfDonors}"
 						 campaignDaySentence="{campaignDaySentence}"
@@ -38,6 +39,10 @@
 	export let numberOfDonors;
 	export let progressBar;
 	export let isFullPageVisible;
+
+	function closeBanner(  ) {
+		isFullPageVisible = false;
+	}
 </script>
 
 <style lang="postcss" global>

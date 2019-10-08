@@ -57,18 +57,7 @@ module.exports = {
 					loader: 'svelte-loader',
 					options: {
 						preprocess: require( 'svelte-preprocess' )( {
-							postcss: {
-								plugins: [
-									require( 'postcss-import' ),
-									require( 'autoprefixer' ),
-									require( 'postcss-nested' ),
-									require( 'postcss-simple-vars' ),
-									require( 'postcss-custom-properties' )( {
-										preserve: false
-									} ),
-									require( 'postcss-combine-duplicated-selectors' )
-								]
-							}
+							postcss: true
 						} )
 					}
 				}
