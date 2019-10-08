@@ -49,8 +49,38 @@ module.exports = {
 				use: [
 					{ loader: 'handlebars-loader' }
 				]
+			},
+			{
+				test: /\.(html|svelte)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'svelte-loader',
+					options: {
+						preprocess: require( 'svelte-preprocess' )( {
+							postcss: {
+								plugins: [
+									require( 'postcss-import' ),
+									require( 'autoprefixer' ),
+									require( 'postcss-nested' ),
+									require( 'postcss-simple-vars' ),
+									require( 'postcss-custom-properties' )( {
+										preserve: false
+									} ),
+									require( 'postcss-combine-duplicated-selectors' )
+								]
+							}
+						} )
+					}
+				}
 			}
 		]
+	},
+	resolve: {
+		alias: {
+			svelte: path.resolve( 'node_modules', 'svelte' )
+		},
+		extensions: [ '.mjs', '.js', '.svelte' ],
+		mainFields: [ 'svelte', 'browser', 'module', 'main' ]
 	},
 	externals: {
 		jquery: 'jQuery'
