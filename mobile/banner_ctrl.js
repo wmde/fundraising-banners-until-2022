@@ -9,7 +9,7 @@ import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
-import { Slider } from './banner_slider';
+import { Slider } from '../shared/banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
