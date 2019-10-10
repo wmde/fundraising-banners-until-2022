@@ -47,8 +47,10 @@
 	export let numberOfDonors;
 	export let progressBar;
 	export let isFullPageVisible;
+	export let trackingData;
 
-	function closeBanner(  ) {
+	function closeBanner() {
+		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isFullPageVisible = false;
 	}
 </script>

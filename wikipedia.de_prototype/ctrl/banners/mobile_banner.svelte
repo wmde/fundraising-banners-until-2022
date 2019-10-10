@@ -46,7 +46,8 @@
 		amountBannerImpressionsInMillion="{amountBannerImpressionsInMillion}"
 		numberOfDonors="{numberOfDonors}"
 		progressBar="{progressBar}"
-		isFullPageVisible="{isFullPageVisible}"/>
+		isFullPageVisible="{isFullPageVisible}"
+		trackingData="{trackingData}"/>
 
 <script>
 	import { Slider } from '../../../shared/banner_slider';
@@ -63,6 +64,7 @@
 	export let progressBar;
 	export let isFullPageVisible = false;
 	export let isHidden = false;
+	export let trackingData;
 
 	const sliderAutoPlaySpeed = 5000;
 	const fullscreenBannerSlideInSpeed = 1250;
@@ -73,17 +75,19 @@
 	 */
 	const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
-	onMount(async () => {
+	onMount( async () => {
 		bannerSlider.initialize();
 		bannerSlider.enableAutoplay();
-	});
+	} );
 
 	function showForm() {
 		isHidden = true;
 		isFullPageVisible = true;
+		trackingData.eventTracker.trackEvent( 'mobile-mini-banner-expanded', trackingData.bannerCloseTrackRatio );
 	}
 
-	function closeBanner(  ) {
+	function closeBanner() {
+		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isHidden = true;
 	}
 </script>

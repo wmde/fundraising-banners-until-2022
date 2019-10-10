@@ -33,8 +33,10 @@
 	export let numberOfDonors;
 	export let progressBar;
 	export let isHidden = false;
+	export let trackingData;
 
-	function closeBanner(  ) {
+	function closeBanner() {
+		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isHidden = true;
 	}
 </script>

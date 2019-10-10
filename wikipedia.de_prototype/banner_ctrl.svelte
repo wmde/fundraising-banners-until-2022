@@ -6,7 +6,8 @@
 		bannerName="{bannerName}"
 		amountBannerImpressionsInMillion="{amountBannerImpressionsInMillion}"
 		numberOfDonors="{numberOfDonors}"
-		progressBar="{progressBar}"/>
+		progressBar="{progressBar}"
+		trackingData="{trackingData}"/>
 
 <MobileBanner
 		weekdayPrepPhrase="{weekdayPrepPhrase}"
@@ -16,11 +17,13 @@
 		bannerName="{bannerName}"
 		amountBannerImpressionsInMillion="{amountBannerImpressionsInMillion}"
 		numberOfDonors="{numberOfDonors}"
-		progressBar="{progressBar}"/>
+		progressBar="{progressBar}"
+		trackingData="{trackingData}"/>
 
 <script>
 	import DesktopBanner from './ctrl/banners/desktop_banner.svelte';
 	import MobileBanner from './ctrl/banners/mobile_banner.svelte';
+	import { onMount } from 'svelte';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -30,5 +33,10 @@
 	export let amountBannerImpressionsInMillion;
 	export let numberOfDonors;
 	export let progressBar;
+	export let trackingData;
+
+	onMount( async () => {
+		trackingData.eventTracker.recordBannerImpression();
+	} );
 </script>
 

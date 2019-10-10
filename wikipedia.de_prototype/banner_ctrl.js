@@ -1,17 +1,35 @@
 import Banner from './banner_ctrl.svelte';
 import Translations from '../shared/messages/de';
 import DayName from '../shared/day_name';
-
-const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
-// TODO const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const GlobalBannerSettings = DevGlobalBannerSettings;
-const BannerFunctions = require( '../shared/banner_functions' )( GlobalBannerSettings, Translations );
-const trackingBaseUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=https://spenden.wikimedia.de';
-
-const LANGUAGE = 'de';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+import MatomoTracker from '../shared/matomo_tracker';
+import NullTracker from '../shared/null_tracker';
+
+/* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
+/* global CampaignName */
+/* global BannerName */
+/* global _paq */
+
+const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
+// TODO FOR TESTING const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
+const GlobalBannerSettings = DevGlobalBannerSettings;
+const bannerClickTrackRatio = 1; // TODO FOR TESTING
+const bannerCloseTrackRatio = 1; // TODO FOR TESTING
+let eventTracker;
+if ( typeof _paq === 'undefined' ) {
+	eventTracker = new NullTracker( BannerName );
+} else {
+	eventTracker = new MatomoTracker( _paq, BannerName );
+}
+const trackingData = {
+	eventTracker: eventTracker,
+	bannerClickTrackRatio: bannerClickTrackRatio,
+	bannerCloseTrackRatio: bannerCloseTrackRatio
+};
+
+const LANGUAGE = 'de';
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
@@ -45,10 +63,6 @@ const progressBar = new ProgressBar(
 	{}
 );
 
-/* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
-/* global CampaignName */
-/* global BannerName */
-
 // eslint-disable-next-line no-new
 new Banner( {
 	target: document.getElementById( 'WMDE-Banner-Container' ),
@@ -60,7 +74,8 @@ new Banner( {
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		campaignName: CampaignName,
 		bannerName: BannerName,
-		progressBar: progressBar.render()
+		progressBar: progressBar.render(),
+		trackingData: trackingData
 	}
 } );
 
