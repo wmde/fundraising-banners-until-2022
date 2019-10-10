@@ -15,9 +15,17 @@
 				<Form campaignName="{campaignName}" bannerName={bannerName} />
 				<div class="smallprint" id="frbanner-smallprint">
 					<div class="smallprint">
-						<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Impressum</a> |
-						<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Datenschutz</a> |
-						<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Wohin geht meine Spende?</a>
+						<span>
+							<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Impressum</a>
+						</span>
+						<span class="separator"> | </span>
+						<span>
+							<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Datenschutz</a>
+						</span>
+						<span class="separator"> | </span>
+						<span>
+							<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={campaignName}&piwik_kwd={bannerName}_link&skin=0&da=0&dsn=0" target="_blank">Wohin geht meine Spende?</a>
+						</span>
 					</div>
 				</div>
 			</div>

@@ -215,6 +215,10 @@
 		.text__paragraph {
 			display: block;
 			margin-top: 1em;
+			&--bold {
+				font-weight: normal;
+				background-color: $color-text-highlight;
+			}
 		}
 	}
 	.form {
@@ -223,6 +227,22 @@
 	}
 	.smallprint {
 		order: 3;
-		padding: 0 0.5em;
+		padding: 0 0.3em;
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+		width: 100%;
+		> span {
+			width: 100%;
+			@media ( min-width: $breakpoint-xxs ) {
+				width: auto;
+			}
+		}
+		.separator {
+			display: none;
+			@media ( min-width: $breakpoint-xxs ) {
+				display: block;
+			}
+		}
 	}
 }
