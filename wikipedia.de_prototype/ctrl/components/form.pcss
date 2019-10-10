@@ -152,6 +152,27 @@
 		box-sizing: border-box;
 		display: block;
 		position: relative;
+		@media ( min-width: $breakpoint-xs ) {
+			border-right: 0;
+			border-radius: 0;
+			&:first-child {
+				border-radius: $banner-border-radius 0 0 $banner-border-radius;
+			}
+			&:last-of-type {
+				border-radius: 0 $banner-border-radius $banner-border-radius 0;
+				border-right: 1px solid $color-light-dark;
+			}
+		}
+		@media ( min-width: $breakpoint-l ) {
+			border: 1px solid $color-light-dark;
+			border-radius: $banner-border-radius;
+			&:first-child {
+				border-radius: $banner-border-radius;
+			}
+			&:last-of-type {
+				border-radius: $banner-border-radius;
+			}
+		}
 		&--fullwidth {
 			width: 100%;
 			flex-basis: 100%;
@@ -163,6 +184,14 @@
 		&--thirdwidth {
 			width: 32%;
 			flex-basis: 32%;
+			@media ( min-width: $breakpoint-xs ) {
+				width: 34%;
+				flex-basis: 34%;
+			}
+			@media ( min-width: $breakpoint-l ) {
+				width: 32%;
+				flex-basis: 32%;
+			}
 		}
 		&--quarterwidth {
 			width: 24%;
