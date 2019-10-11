@@ -1,7 +1,5 @@
 :root {
-	--banner-color-dark: #222222;
 	--banner-color-gray: #808080;
-	--banner-color-gray-light: #eaecf0;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
 	--banner-color-green: #97b313;
@@ -14,18 +12,6 @@
 	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
 	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
 }
-
-$errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
-
-/**
- * Develop mobile-first
- * Never use "@media ( max-width: $breakpoint_x )"
- * Always use "@media ( min-width: $breakpoint_x )"
- */
-$breakpoint_s: 900px;
-$breakpoint_m: 1150px;
-$breakpoint_m_max: 1149px; /** DEPRECATED **/
-$breakpoint_l: 1400px;
 
 #WMDE_Banner {
 	display: none;
@@ -43,35 +29,12 @@ $breakpoint_l: 1400px;
 		border: 0 none;
 	}
 
-	@media ( max-width: $breakpoint_m_max ) {
-		.infobox {
-			&:before {
-				display: none;
-			}
-			&__text {
-				font-size: 1em;
-				font-family: var( --banner-main-font-family );
-			}
-			margin: 0.2em 0.5em;
-		}
-		.close {
-			&__link {
-				color: var( --banner-color-white );
-			}
-		}
-		.form {
-			margin: 5px;
-		}
-		.banner__footer {
-			padding: 0 0.5em;
-		}
-	}
-
 	.banner {
 		display: flex;
 		flex-direction: column;
 		font-size: 14px;
 		padding-bottom: 0.75em;
+
 		font-family: var( --banner-main-font-family );
 		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 		background-color: var( --banner-color-white );
@@ -79,19 +42,15 @@ $breakpoint_l: 1400px;
 			margin-top: 0.5em;
 		}
 		&__footer {
-			padding: 0;
+			padding: 0 2.6em 0 2.6em;
 			font-size: 1.1em;
 			color: var( --banner-color-gray );
-		}
-		&__footer-2 {
-			display: none;
 		}
 	}
 
 	.infobox {
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		flex-direction: column;
 		justify-content: space-between;
 		flex: 0 1 100%;
 		border: 0 none;
@@ -100,9 +59,6 @@ $breakpoint_l: 1400px;
 		padding: 0.25em 0.5em 0.25em 0;
 		margin: 0.2em 5em 0.2em 5em;
 		position: relative;
-		> div {
-			width: 100%;
-		}
 		&:before {
 			position: absolute;
 			bottom: 1.5em;
@@ -115,14 +71,10 @@ $breakpoint_l: 1400px;
 		&__text {
 			color: var( --banner-color-white );
 			font-family: var( --banner-text-font-family );
-			font-size: 1em;
+			font-size: 1.3em;
 			line-height: 1.3em;
-			@media ( min-width: $breakpoint_s ) {
-				font-size: 1.3em;
-				line-height: 1.3em;
-			}
 			text-align: left;
-			margin: 0.5em 1.5em;
+			margin: 0.5em 1.2em;
 		}
 		&__footer {
 			padding: 0.025em 0 0 2em;
@@ -132,7 +84,6 @@ $breakpoint_l: 1400px;
 
 	.text {
 		&__headline {
-			display: inline;
 			margin: 0.2em 0;
 			&--bold {
 				font-weight: bold;
@@ -140,15 +91,10 @@ $breakpoint_l: 1400px;
 			&--italic {
 				font-style: italic;
 			}
-
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
-			}
 		}
 		&__paragraph {
 			margin: 0;
 			padding: 0;
-			display: inline;
 			&--bold {
 				font-weight: bold;
 			}
@@ -166,10 +112,6 @@ $breakpoint_l: 1400px;
 				font-weight: bold;
 				color: var( --banner-color-black );
 			}
-
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
-			}
 		}
 		/*  This is for keeping the same banner size when testing different banner texts.
 			The placeholder text element should contain the text that was removed
@@ -182,10 +124,10 @@ $breakpoint_l: 1400px;
 	.footer {
 		display: flex;
 		flex-wrap: wrap;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 13px;
+		font-size: 0.8em;
 		line-height: 1.6em;
 		color: var( --banner-color-black );
 		&__info {
@@ -196,15 +138,12 @@ $breakpoint_l: 1400px;
 		}
 		&__item {
 			white-space: nowrap;
-			margin: 5px 0;
-			> span {
-				margin-right: 1em;
-			}
-			.iban-block {
-				margin-right: 0.8em;
-			}
 			&--rightflex {
 				flex-grow: 1;
+				text-align: right;
+			}
+			span {
+				margin-right: 1.2em;
 			}
 		}
 	}
@@ -217,16 +156,8 @@ $breakpoint_l: 1400px;
 
 	#WMDE_Banner-form {
 		display: flex;
-		flex-direction: column;
-		padding: 5px 10px;
-		flex-wrap: nowrap;
-		flex: 0 0 auto;
-		background-color: var( --banner-color-gray-light );
-		border-radius: 8px;
-		@media ( min-width: $breakpoint_s ) {
-			flex-direction: row;
-			flex: 1 1 100%;
-		}
+		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
 	.form {
@@ -234,17 +165,11 @@ $breakpoint_l: 1400px;
 		width: auto;
 		min-width: inherit;
 		flex-shrink: 0;
-		padding: 0;
-		flex-direction: column-reverse;
-		display: flex;
-		flex-wrap: nowrap;
-		justify-content: flex-start;
-		margin: 0.2em 5em 0.2em 5em;
+		padding: 0.2em 0 0 0.5em;
+		margin: 0.2em 2.5em 0;
 
-		@media ( min-width: $breakpoint_s ) {
-			padding: 0.2em 0 0 0.5em;
-			margin: 0.2em 5em 0;
-			flex-direction: row;
+		@media ( max-width: 640px ) {
+			margin: 0.2em 0 0;
 		}
 
 		&__header {
@@ -256,33 +181,35 @@ $breakpoint_l: 1400px;
 		}
 		&-field-group {
 			display: flex;
-			flex-wrap: wrap;
-			flex: 0 0 auto;
+			flex-wrap: nowrap;
+			flex: 1 1 auto;
 
-			@media ( min-width: $breakpoint_s ) {
-				flex-wrap: nowrap;
-				flex: 1 1 33%;
+			@media ( max-width: 640px ) {
+				flex-wrap: wrap;
 			}
 		}
 	}
 
 	.select-group {
+		border: 0;
 		margin: 0 auto;
 		padding: 0.4em 0.5em 0 0.5em;
 		display: flex;
 		flex-wrap: nowrap;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: flex-start;
+		flex: 1 0 auto;
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
 		&-container {
 			display: flex;
+			flex: 1 1 auto;
 			flex-direction: column;
-			width: 100%;
-			@media ( min-width: $breakpoint_l ) {
-				max-width: 20em;
-				margin: 0;
+			margin-right: 0.5em;
+
+			@media ( min-width: 1400px ) {
+				max-width: 18em;
 			}
 		}
 		&:first-child {
@@ -298,37 +225,27 @@ $breakpoint_l: 1400px;
 			text-align: center;
 			width: 100%;
 			margin-bottom: 0.2em;
-			font-size: 0.95em;
+			font-size: 0.74em;
 		}
-		&-container--with-error {
-			.select-group__erroricon {
-				display: inline-block;
-				background: $errorIcon;
-				background-size: 13px;
-				width: 13px;
-				height: 13px;
-			}
-			.select-group__errormessage {
-				color: var( --banner-color-red );
-			}
+		&-container--with-error .select-group__errormessage {
+			background: var( --banner-color-red );
+			color: var( --banner-color-white );
 		}
 		&__state {
-			display: inline-block;
-			height: auto;
-			background: none;
-			padding: 4px 0 0 4px;
+			display: flex;
+			background: var( --banner-color-green-light );
 			color: var( --banner-color-black );
 			border: 0 none;
+			height: 25px;
 			cursor: pointer;
 			text-align: center;
 			font-size: 0.95em;
 			box-sizing: border-box;
 			white-space: nowrap;
-
-			@media ( min-width: $breakpoint_l ) {
-				height: 35px;
-				padding: 11px 0 0 4px;
-			}
+			align-content: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 5px;
 		}
 		&__custom-input + .select-group__state {
 			position: absolute;
@@ -338,22 +255,21 @@ $breakpoint_l: 1400px;
 			background: transparent;
 		}
 		&__custom-input {
-			text-align: left;
-			text-decoration: underline;
-			background: none;
-			height: auto;
-			font-size: 11px;
+			background: var( --banner-color-green-light );
 			color: var( --banner-color-black );
 			padding: 0.4em;
 			width: 100%;
+			min-height: 25px;
+			height: 25px;
 			margin: 0;
+			font-size: 0.9em;
 			font-weight: bold;
+			text-align: center;
 			border: 0 none;
 			border-radius: 0 0.4em 0.4em 0;
 			box-sizing: border-box;
 			&--value-entered {
-				text-decoration: none;
-				color: var( --banner-color-black );
+				color: var( --banner-color-white );
 				background-color: var( --banner-color-green );
 				border: 0 none;
 				outline: 0 none;
@@ -361,25 +277,22 @@ $breakpoint_l: 1400px;
 			}
 		}
 		&__input {
-			display: inline-block;
-			margin: 3px 5px 0 0;
+			display: none;
 			&:checked + .select-group__state {
-				background: none;
-				color: var( --banner-color-black );
+				color: var( --banner-color-white );
+				background-color: var( --banner-color-green );
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
 			}
 		}
 		&__option {
-			display: flex;
-			flex-wrap: nowrap;
 			flex: 1 1 auto;
-			align-items: center;
-			box-sizing: border-box;
 			padding: 0 0.2em 0.2em 0;
 			margin: 0;
-			height: 23px;
+			box-sizing: border-box;
+			display: block;
+			position: relative;
 			&--fullwidth {
 				width: 100%;
 			}
@@ -402,7 +315,7 @@ $breakpoint_l: 1400px;
 				border-radius: 0 0.4em 0.4em 0;
 			}
 			&-amount-other-input {
-				min-width: 125px;
+				min-width: 100px;
 			}
 		}
 	}
@@ -411,10 +324,7 @@ $breakpoint_l: 1400px;
 		display: block;
 		border: 0;
 		margin: 0;
-		padding: 2em 0.5em 0 0;
-		@media ( min-width: $breakpoint_l ) {
-			padding: 0.3em 0.5em 0.3em 0;
-		}
+		padding: 0.3em 0.5em 0.3em 0;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -447,10 +357,6 @@ $breakpoint_l: 1400px;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
-
-			@media ( min-width: $breakpoint_l ) {
-				line-height: 3em;
-			}
 		}
 	}
 
@@ -458,14 +364,14 @@ $breakpoint_l: 1400px;
 		position: absolute;
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
-		top: 0.5em;
-		right: 1em;
-		opacity: 0.8;
+		top: 0;
+		right: 0;
+		opacity: 0.5;
 
-		@media ( min-width: $breakpoint_m ) {
-			top: 0;
-			right: 0;
-			opacity: 0.5;
+		@media ( max-width: 1149px ) {
+			top: 0.5em;
+			right: 1em;
+			opacity: 0.8;
 		}
 		&-tracking {
 			display: none;
@@ -489,7 +395,36 @@ $breakpoint_l: 1400px;
 		margin-right: 4px;
 	}
 
-	@media ( min-width: $breakpoint_l ) {
+	.progress_bar {
+		&__days_left {
+			display: block;
+			color: var( --banner-color-white );
+			line-height: 1.9em;
+		}
+		&__wrapper {
+			border-color: var( --banner-color-blue-light );
+			background-color: var( --banner-color-white );
+			margin: 0.5em 1em;
+			border-radius: 0.55em;
+		}
+		&__donation_fill {
+			background: var( --banner-color-green );
+			height: 1.6em;
+			border-radius: 0.4em;
+		}
+		&__donation_text {
+			color: var( --banner-color-white );
+			line-height: 1.8em;
+			white-space: nowrap;
+		}
+		&__donation_remaining {
+			color: var( --banner-color-green );
+			line-height: 1.6em;
+			margin-left: -30px;
+		}
+	}
+
+	@media ( min-width: 1400px ) {
 		.banner {
 			&__content {
 				display: flex;
@@ -497,30 +432,8 @@ $breakpoint_l: 1400px;
 				order: 1;
 			}
 			&__footer {
-				display: none;
-			}
-			&__footer-2 {
-				display: flex;
 				order: 2;
 				padding: 0.5em 0 0 5.8em;
-				.footer__item {
-					white-space: nowrap;
-					> span {
-						margin-right: 1em;
-					}
-					.iban-block {
-						margin-right: 0.8em;
-					}
-					&--rightflex {
-						flex-grow: 1;
-						text-align: right;
-						padding-right: 85px;
-					}
-				}
-				.footer {
-					flex-direction: row;
-					width: 100%;
-				}
 			}
 		}
 
@@ -531,10 +444,9 @@ $breakpoint_l: 1400px;
 		.form {
 			align-items: center;
 			display: flex;
-			flex-wrap: wrap;
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
-			width: 20em;
+			width: 18em;
 			&__header > p {
 				width: 100%;
 			}
@@ -560,11 +472,6 @@ $breakpoint_l: 1400px;
 
 		.select-group {
 			flex-wrap: wrap;
-			flex-direction: row;
-			border: 0;
-			@media ( min-width: $breakpoint_s ) {
-				flex-direction: row;
-			}
 			&:first-child,
 			&:last-child {
 				padding-left: 0.5em;
@@ -573,7 +480,6 @@ $breakpoint_l: 1400px;
 				margin-left: 0.5em;
 			}
 			&__option {
-				height: 35px;
 				&:nth-child( 1 ) .select-group__state {
 					border-radius: 0.4em 0 0 0;
 				}
@@ -620,43 +526,11 @@ $breakpoint_l: 1400px;
 
 		#WMDE_Banner-form {
 			display: block;
-			background-color: var( --banner-color-white );
-			border-radius: 0;
 		}
-	}
-	.section-title {
-		padding: 0.4em 0.5em 0 0.5em;
-		color: var( --banner-color-gray-dark );
-	}
-	.WMDE-Banner-submit {
-		padding-right: 0;
-	}
-	#WMDE_Banner-amounts {
-		flex-wrap: wrap;
-		flex-direction: row;
-		> label {
-			flex: 0 48%;
-			@media ( min-width: $breakpoint_l ) {
-				flex: auto;
-				flex: 0 32%;
-			}
+
+		.footer__item--rightflex {
+			margin-right: 5em;
 		}
-	}
-	#WMDE_Banner-payment-type {
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-	#WMDE_Banner-frequency {
-		flex-direction: row;
-		@media ( min-width: $breakpoint_s ) {
-			flex-direction: column;
-		}
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: row;
-		}
-	}
-	.hidden-title {
-		visibility: hidden;
 	}
 }
 
