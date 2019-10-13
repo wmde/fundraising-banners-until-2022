@@ -61,14 +61,14 @@
 		</div>
 
 		<input type="hidden" id="amount" name="betrag" value="{amount}"/>
-		<!-- TODO read impression counts from cookie -->
-		<input type="hidden" id="impCount" name="impCount" value=""/>
-		<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
+		<input type="hidden" id="impCount" name="impCount" value="{impCount.overallCount}"/>
+		<input type="hidden" id="bImpCount" name="bImpCount" value="{impCount.bannerCount}"/>
 	</form>
 </div>
 
 <script>
 	import { formatAmount } from '../../../shared/format_amount.js'
+	import { LocalImpressionCount } from '../../../shared/local_impression_count';
 
 	export let campaignName;
 	export let bannerName;
@@ -82,6 +82,7 @@
 	let paymentIntervalIsValid = true;
 	let amountIsValid = true;
 	let paymentMethodIsValid = true;
+	let impCount = new LocalImpressionCount( bannerName );
 
 	const intervals = [
 		{ value: '0', label: 'einmalig' },
