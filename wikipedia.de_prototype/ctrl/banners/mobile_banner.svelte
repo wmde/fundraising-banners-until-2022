@@ -53,6 +53,8 @@
 	import { Slider } from '../../../shared/banner_slider';
 	import { onMount } from 'svelte';
 	import MobileFullPageBanner from './mobile_banner_fullpage.svelte';
+	// eslint-disable-next-line no-unused
+	import { isMobileFullpageVisible } from '../stores.js';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -84,6 +86,7 @@
 		isHidden = true;
 		isFullPageVisible = true;
 		trackingData.eventTracker.trackEvent( 'mobile-mini-banner-expanded', trackingData.bannerCloseTrackRatio );
+		$isMobileFullpageVisible = true;
 	}
 
 	function closeBanner() {

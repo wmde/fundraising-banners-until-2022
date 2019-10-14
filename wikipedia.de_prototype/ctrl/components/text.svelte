@@ -9,7 +9,9 @@
 	<p class="text__paragraph">
 		{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 21,48&nbsp;€ finanziert, aber 99&nbsp;% der Leserinnen und Leser spenden nicht.
 
-		<span class="text__paragraph--bold">Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.</span>
+		<TextHighlight>
+			Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.
+		</TextHighlight>
 
 		Schon der Preis einer Tasse Kaffee würde genügen.
 		Über {amountBannerImpressionsInMillion} Millionen Mal wird unser Spendenaufruf täglich angezeigt,
@@ -32,6 +34,8 @@
 </div>
 
 <script>
+	import TextHighlight from '../components/text_highlight.svelte';
+
 	export let weekdayPrepPhrase;
 	export let currentDayName;
 	export let campaignDaySentence;
