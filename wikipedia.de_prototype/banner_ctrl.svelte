@@ -24,6 +24,7 @@
 	import DesktopBanner from './ctrl/banners/desktop_banner.svelte';
 	import MobileBanner from './ctrl/banners/mobile_banner.svelte';
 	import { onMount } from 'svelte';
+	import { LocalImpressionCount } from '../shared/local_impression_count';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -37,6 +38,8 @@
 
 	onMount( async () => {
 		trackingData.eventTracker.recordBannerImpression();
+		const impCount = new LocalImpressionCount( bannerName );
+		impCount.incrementImpressionCounts();
 	} );
 </script>
 

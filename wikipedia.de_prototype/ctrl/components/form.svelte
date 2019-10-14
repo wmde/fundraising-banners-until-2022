@@ -2,11 +2,11 @@
 	<form id="WMDE_Banner-form" method="post" name="donationForm"
 			action="https://spenden.wikimedia.de/donation/new?piwik_campaign={campaignName}&piwik_kwd={bannerName}&skin=0&dsn=0">
 		<div class="form-field-group">
-			<div class="select-group-container">
+			<div class="{ 'select-group-container' + (paymentIntervalIsValid ? '' : ' select-group-container--with-error') }">
 				<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 				{#each intervals as { value, label }}
 					<label class="select-group__option select-group__option--thirdwidth">
-						<input type="radio" id="interval_{value}" name="interval" value="{value}" class="select-group__input">
+						<input type="radio" bind:group="{paymentInterval}" on:change="{intervalSelected}" name="periode" value="{value}" class="select-group__input">
 						<span class="select-group__state">{label}</span>
 					</label>
 				{/each}
@@ -14,16 +14,16 @@
 			<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">TODO no-interval-message</span>
 		</div>
 
-		<div class="select-group-container">
+		<div class="{ 'select-group-container' + ( amountIsValid ? '' : ' select-group-container--with-error' ) }">
 			<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
 			{#each amounts as { value }, i}
 				<label id="amount_label_{i}" class="select-group__option select-group__option--quarterwidth">
-					<input type="radio" name="betrag_auswahl" id="field-amount_total_{i}" class="select-group__input" value="{value}">
+					<input type="radio" name="betrag_auswahl" bind:group="{selectedAmount}" on:change="{amountSelected}" class="select-group__input" value="{value}">
 					<span class="select-group__state">{value} €</span>
 				</label>
 			{/each}
 			<label class="select-group__option select-group__option--halfwidth">
-				<input type="text" name="amountGiven" id="amount-other-input" size="3"
+				<input type="text" name="amountGiven" bind:value="{customAmount}" on:change="{amountTyped}" size="3"
 					   autocomplete="off" value="" placeholder="Wunschbetrag" class="select-group__custom-input">
 			</label>
 			</div>
@@ -31,12 +31,15 @@
 		</div>
 
 		<div class="form-field-group">
-			<div class="select-group-container">
+			<div class="{ 'select-group-container' + ( paymentMethodIsValid ? '' : ' select-group-container--with-error' ) }">
 				<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
 					{#each paymentMethods as { value, label }}
 						<label class="select-group__option select-group__option--halfwidth">
-							<input type="radio" name="zahlweise" value="{value}" class="select-group__input">
-							<span class="select-group__state">{label}</span>
+							<input type="radio" bind:group="{paymentMethod}"
+								on:change="{paymentMethodSelected}"
+								name="zahlweise" value="{value}"
+								class="select-group__input">
+								<span class="select-group__state">{label}</span>
 						</label>
 					{/each}
 					<div class="sms-box">
@@ -51,22 +54,35 @@
 			</div>
 
 			<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
-				<button class="button-group__button">
+				<button class="button-group__button" on:click="{validateForm}">
 					<span class="button-group__label">Weiter, um Spende abzuschließen</span>
 				</button>
 			</div>
 		</div>
 
-		<input type="hidden" id="periode" name="periode" value="0"/>
-		<input type="hidden" id="intervalType" name="intervalType" value="0"/>
-		<input type="hidden" id="impCount" name="impCount" value=""/>
-		<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
+		<input type="hidden" id="amount" name="betrag" value="{amount}"/>
+		<input type="hidden" id="impCount" name="impCount" value="{impCount.overallCount}"/>
+		<input type="hidden" id="bImpCount" name="bImpCount" value="{impCount.bannerCount}"/>
 	</form>
 </div>
 
 <script>
+	import { formatAmount } from '../../../shared/format_amount.js'
+	import { LocalImpressionCount } from '../../../shared/local_impression_count';
+
 	export let campaignName;
 	export let bannerName;
+
+	let paymentInterval = null;
+	let selectedAmount = null;
+	let customAmount = null;
+	let amount = 0;
+	let paymentMethod = null;
+
+	let paymentIntervalIsValid = true;
+	let amountIsValid = true;
+	let paymentMethodIsValid = true;
+	let impCount = new LocalImpressionCount( bannerName );
 
 	const intervals = [
 		{ value: '0', label: 'einmalig' },
@@ -89,6 +105,46 @@
 		{ value: 'MCP', label: 'Kreditkarte' },
 		{ value: 'PPL', label: 'PayPal' },
 	];
+
+	function validateForm( event ) {
+		if ( paymentInterval === null ) {
+			paymentIntervalIsValid = false;
+		}
+		if ( Number( amount ) <= 0 ) {
+			amountIsValid = false;
+		}
+		if ( paymentMethod === null ) {
+			paymentMethodIsValid = false;
+		}
+
+		if ( !paymentIntervalIsValid || !amountIsValid || !paymentMethodIsValid ) {
+            event.preventDefault();
+		}
+	}
+
+	function intervalSelected() {
+		paymentIntervalIsValid = true;
+	}
+
+function amountSelected(evt) {
+		amount = amountSelected;
+		amountIsValid = true;
+		customAmount = null;
+	}
+
+	function amountTyped(  ) {
+		const germanAmount = formatAmount( customAmount ).replace( '.', ',' );
+		amount = germanAmount;
+		customAmount = germanAmount + ' €';
+		selectedAmount = null;
+		if ( Number( amount ) > 0 ) {
+			amountIsValid = true;
+		}
+	}
+
+	function paymentMethodSelected() {
+		paymentMethodIsValid = true;
+	}
 </script>
 
 <style lang="postcss" global>
