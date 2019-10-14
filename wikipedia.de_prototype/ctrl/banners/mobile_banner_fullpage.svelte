@@ -1,4 +1,4 @@
-<div id="frbanner" class="frbanner" class:visible={isFullPageVisible} >
+<div id="frbanner" class="frbanner" class:visible={ ( isFullPageVisible && !$isClosed ) } >
 	<div id="frbanner-window" class="frbanner-window">
 		<div id="modal-signup" class="cf">
 			<div class="infobox">
@@ -37,6 +37,8 @@
 	import Text from '../components/text.svelte';
 	import Form from '../components/form.svelte';
 	import ProgressBar from '../components/progressbar.svelte';
+	// eslint-disable-next-line no-unused
+	import { isClosed } from '../stores.js';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -52,6 +54,7 @@
 	function closeBanner() {
 		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isFullPageVisible = false;
+		$isClosed = true;
 	}
 </script>
 

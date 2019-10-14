@@ -1,4 +1,4 @@
-<div id="WMDE_Banner" class:is-hidden={isHidden}>
+<div id="WMDE_Banner" class:is-hidden={ ( isHidden || $isClosed ) }>
 	<div class="banner">
 		<div class="banner__content">
 			<div class="infobox">
@@ -23,6 +23,8 @@
 	import ProgressBar from '../components/progressbar.svelte';
 	import Footer from '../components/footer.svelte';
 	import Funds from '../components/funds.svelte';
+	// eslint-disable-next-line no-unused
+	import { isClosed } from '../stores.js';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -38,6 +40,7 @@
 	function closeBanner() {
 		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isHidden = true;
+		$isClosed = true;
 	}
 </script>
 

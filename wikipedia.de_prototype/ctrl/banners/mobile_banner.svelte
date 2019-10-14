@@ -1,4 +1,4 @@
-<div class="mini-banner" class:is-hidden={isHidden}>
+<div class="mini-banner" class:is-hidden={ ( isHidden || $isClosed ) }>
 	<div class="mini-banner-box">
 		<div class="mini-banner-content">
 			<div class="mini-banner-headline">
@@ -54,7 +54,7 @@
 	import { onMount } from 'svelte';
 	import MobileFullPageBanner from './mobile_banner_fullpage.svelte';
 	// eslint-disable-next-line no-unused
-	import { isMobileFullpageVisible } from '../stores.js';
+	import { isMobileFullpageVisible, isClosed } from '../stores.js';
 
 	export let weekdayPrepPhrase;
 	export let campaignDaySentence;
@@ -92,6 +92,7 @@
 	function closeBanner() {
 		trackingData.eventTracker.trackEvent( 'banner-closed', trackingData.bannerCloseTrackRatio );
 		isHidden = true;
+		$isClosed = true;
 	}
 </script>
 
