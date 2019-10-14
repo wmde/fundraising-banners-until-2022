@@ -13,8 +13,7 @@ import NullTracker from '../shared/null_tracker';
 /* global _paq */
 
 const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
-// TODO FOR TESTING const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const GlobalBannerSettings = DevGlobalBannerSettings;
+const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const bannerClickTrackRatio = 1; // TODO FOR TESTING
 const bannerCloseTrackRatio = 1; // TODO FOR TESTING
 let eventTracker;

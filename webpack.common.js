@@ -13,6 +13,7 @@ function readWrapperTemplate( name ) {
 }
 
 module.exports = {
+	devtool: 'source-map',
 	entry: campaigns.getEntryPoints(),
 	output: {
 		filename: '[name].js',
@@ -53,14 +54,17 @@ module.exports = {
 			{
 				test: /\.(html|svelte)$/,
 				exclude: /node_modules/,
-				use: {
-					loader: 'svelte-loader',
-					options: {
-						preprocess: require( 'svelte-preprocess' )( {
-							postcss: true
-						} )
+				use: [
+					'babel-loader',
+					{
+						loader: 'svelte-loader',
+						options: {
+							preprocess: require( 'svelte-preprocess' )( {
+								postcss: true
+							} )
+						}
 					}
-				}
+				]
 			}
 		]
 	},

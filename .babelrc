@@ -1,6 +1,9 @@
 {
   "presets": [
-    ["env"]
+    ["@babel/env"]
   ],
-  "plugins": ["transform-object-assign"]
+  "plugins": [
+    [ "@babel/transform-object-assign" ],
+    [ "@babel/plugin-transform-arrow-functions", { "spec": true } ]
+  ]
 }
