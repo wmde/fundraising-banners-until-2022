@@ -162,14 +162,17 @@ $( '.payment-selection button' ).click( function ( event ) {
 
 $( '#banner-form-submit' ).click( function () {
 	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
+		// eslint-disable-next-line no-alert
 		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
 		return false;
 	}
 	if ( !$( '#betrag' ).val() ) {
+		// eslint-disable-next-line no-alert
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
 		return false;
 	}
 	if ( !$( '#zahlweise' ).val() ) {
+		// eslint-disable-next-line no-alert
 		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
 		return false;
 	}

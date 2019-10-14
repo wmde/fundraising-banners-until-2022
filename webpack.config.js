@@ -3,7 +3,6 @@ const toml = require( 'toml' );
 const Merge = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
-const path = require( 'path' );
 
 module.exports = Merge( CommonConfig, {
 	mode: 'development',
