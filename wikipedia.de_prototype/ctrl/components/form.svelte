@@ -11,7 +11,7 @@
 					</label>
 				{/each}
 			</div>
-			<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">TODO no-interval-message</span>
+			<span id="WMDE_Banner-frequency-error-text" class="select-group__errormessage">Bitte wählen Sie zuerst ein Zahlungsintervall.</span>
 		</div>
 
 		<div class="{ 'select-group-container' + ( amountIsValid ? '' : ' select-group-container--with-error' ) }">
@@ -27,7 +27,7 @@
 					   autocomplete="off" value="" placeholder="Wunschbetrag" class="select-group__custom-input">
 			</label>
 			</div>
-			<span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>TODOamount-empty-message</span>
+			<span id="WMDE_Banner-amounts-error-text" class='select-group__errormessage'>Bitte geben Sie einen Spendenbetrag von min. 1€ ein.</span>
 		</div>
 
 		<div class="form-field-group">
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<span id="WMDE_Banner-payment-type-error-text"
-					  class="select-group__errormessage">TODOno-payment-type-message</span>
+					  class="select-group__errormessage">Bitte wählen Sie eine Zahlmethode aus.</span>
 			</div>
 
 			<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
