@@ -22,9 +22,20 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
+				test: /\.(js|mjs|svelte)$/,
+				exclude: /node_modules\/(?!svelte)/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [['@babel/preset-env', {
+							debug: true,
+							useBuiltIns: 'usage',
+							corejs: 3,
+
+							targets: 'ie >= 11'
+						}]]
+					}
+				},
 			},
 			{
 				test: /\.html$/,
@@ -55,7 +66,6 @@ module.exports = {
 				test: /\.(html|svelte)$/,
 				exclude: /node_modules/,
 				use: [
-					'babel-loader',
 					{
 						loader: 'svelte-loader',
 						options: {
