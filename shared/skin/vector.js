@@ -1,9 +1,7 @@
-'use strict';
+import Skin from './Skin';
+import $ from 'jquery';
 
-const Skin = require( './Skin' );
-const $ = require( 'jquery' );
-
-module.exports = class Vector extends Skin {
+export default class Vector extends Skin {
 	constructor() {
 		super();
 
@@ -34,4 +32,4 @@ module.exports = class Vector extends Skin {
 	addSearchObserver( onSearchFocus ) {
 		this.searchField.one( 'focus', onSearchFocus );
 	}
-};
+}

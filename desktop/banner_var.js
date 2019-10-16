@@ -18,6 +18,8 @@ import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
+import { CampaignProjection } from '../shared/campaign_projection';
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -25,13 +27,12 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 } );
 
 const CampaignParameters = createCampaignParameters();
-const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
+const BannerFunctions = BannerFunctionsFactory( null, Translations );
 const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
 	endOfDay( CampaignParameters.endDate )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
-const CampaignProjection = require( '../shared/campaign_projection' );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
 		startOfDay( CampaignParameters.donationProjection.baseDate ),

@@ -14,7 +14,7 @@ function calculateProjection( campaignDays, base, increasePerMinute ) {
 	return base + ( campaignDays.getSecondsSinceCampaignStart() / 60 ) * increasePerMinute;
 }
 
-function CampaignProjection( campaignDays, options ) {
+export function CampaignProjection( campaignDays, options ) {
 	this.campaignDays = campaignDays;
 	this.baseDonationSum = options.baseDonationSum || 0;
 	this.donationAmountPerMinute = options.donationAmountPerMinute || 0;
@@ -35,5 +35,3 @@ CampaignProjection.prototype.getProjectedRemainingDonationSum = function () {
 CampaignProjection.prototype.getProjectedNumberOfDonors = function () {
 	return calculateProjection( this.campaignDays, this.donorsBase, this.donorsPerMinute );
 };
-
-module.exports = CampaignProjection;

@@ -8,15 +8,17 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
+import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/en';
 import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
+import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
+import { CampaignProjection } from '../shared/campaign_projection';
 
 const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
-const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
+const BannerFunctions = BannerFunctionsFactory( null, Translations );
 const formatNumber = require( 'format-number' );
-const CampaignProjection = require( '../shared/campaign_projection' );
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 // BEGIN Banner-Specific configuration
@@ -58,7 +60,6 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const ProgressBar = require( '../shared/progress_bar/progress_bar_mobile' );
 const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';

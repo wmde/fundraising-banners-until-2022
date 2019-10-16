@@ -2,19 +2,19 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 const toml = require( 'toml' );
 const webpack = require( 'webpack' );
-//const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
-//const CampaignConfig = require( './webpack/campaign_config' );
-// const WrapperPlugin = require( 'wrapper-webpack-plugin' );
+const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
+const CampaignConfig = require( './webpack/campaign_config' );
+const WrapperPlugin = require( 'wrapper-webpack-plugin' );
 
-// const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
+const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
 
 function readWrapperTemplate( name ) {
 	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' );
 }
 
 module.exports = {
-	devtool: "sourcemap",
-	entry: {B18WMDE_en06_181221_ctrl: path.resolve(__dirname, 'wikipedia.de_prototype/banner_ctrl.jsx')}, // campaigns.getEntryPoints(),
+	devtool: 'sourcemap',
+	entry: campaigns.getEntryPoints(),
 	output: {
 		filename: '[name].js',
 		path: path.resolve( __dirname, 'dist' )
@@ -55,7 +55,7 @@ module.exports = {
 				use: [
 					{ loader: 'handlebars-loader' }
 				]
-			},
+			}
 		]
 	},
 	resolve: {
@@ -65,7 +65,7 @@ module.exports = {
 		jquery: 'jQuery'
 	},
 	plugins: [
-/*		new webpack.ProvidePlugin( {
+		new webpack.ProvidePlugin( {
 			jQuery: 'jquery'
 		} ),
 		new MediaWikiTextWrapper( {
@@ -86,6 +86,6 @@ module.exports = {
 				const trackingData = campaigns.getCampaignTracking( pageName.replace( '.js', '' ) );
 				return `var BannerName = '${trackingData.bannerTracking}'; var CampaignName = '${trackingData.campaignTracking}';`;
 			}
-		} )*/
+		} )
 	]
 };

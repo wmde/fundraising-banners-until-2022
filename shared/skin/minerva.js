@@ -1,9 +1,7 @@
-'use strict';
+import Skin from './Skin';
+import $ from 'jquery';
 
-const Skin = require( './Skin' );
-const $ = require( 'jquery' );
-
-module.exports = class Minerva extends Skin {
+export default class Minerva extends Skin {
 	constructor() {
 		super();
 
@@ -31,4 +29,4 @@ module.exports = class Minerva extends Skin {
 			this.searchField.one( 'focus', onSearchFocus );
 		}
 	}
-};
+}

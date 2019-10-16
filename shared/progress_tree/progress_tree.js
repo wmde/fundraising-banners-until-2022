@@ -14,7 +14,7 @@ require( './style.pcss' );
  * @param {Object} options
  * @constructor
  */
-function ProgressTree( GlobalBannerSettings, campaignProjection, options ) {
+export default function ProgressTree( GlobalBannerSettings, campaignProjection, options ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
 	this.options = Object.assign( {
@@ -96,5 +96,3 @@ ProgressTree.prototype.render = function () {
 		missing: '<span class="js-value_remaining">1,2</span> Mio. €'
 	} );
 };
-
-module.exports = ProgressTree;

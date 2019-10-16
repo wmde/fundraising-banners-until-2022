@@ -14,5 +14,6 @@ module.exports = {
 			pragma: 'h',
 			pragmaFrag: 'Fragment'
 		} ]
-	]
+	],
+	exclude: /webpack/
 };

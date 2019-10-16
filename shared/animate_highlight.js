@@ -34,11 +34,10 @@ function doHighlightStep( step, $elem, highlightClass, numSteps, stepDuration ) 
 		);
 	}
 }
-function animateHighlight( $elem, highlightClass, stepDuration, startCharacter, endCharacter ) {
+export default function animateHighlight( $elem, highlightClass, stepDuration, startCharacter, endCharacter ) {
 	startCharacter = startCharacter || 0;
 	endCharacter = endCharacter || getNumberOfCharacters( $elem );
 	addCharacterSpans( $elem, startCharacter, endCharacter );
 	doHighlightStep( 0, $elem, highlightClass, $elem.children( 'span' ).length, stepDuration );
 }
 
-module.exports = animateHighlight;
