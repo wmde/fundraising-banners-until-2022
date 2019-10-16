@@ -89,7 +89,7 @@ preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.ctrl]
-filename = "./wikipedia.de_prototype/banner_ctrl.jsx"
+filename = "./wikipedia.de_prototype/banner_ctrl.js"
 pagename = "B18WPDE_04-181214_fixed_large_ctrl"
 tracking = "wpde-04-181214-fixed-large-ctrl"
 
