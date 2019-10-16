@@ -14,7 +14,7 @@ require( './style.pcss' );
  * @param {Object} options
  * @constructor
  */
-function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
+export default function ProgressBar( GlobalBannerSettings, campaignProjection, options ) {
 	this.GlobalBannerSettings = GlobalBannerSettings;
 	this.campaignProjection = campaignProjection;
 	this.options = Object.assign( {
@@ -93,5 +93,3 @@ ProgressBar.prototype.render = function () {
 		'modifier': this.options.modifier
 	} );
 };
-
-module.exports = ProgressBar;

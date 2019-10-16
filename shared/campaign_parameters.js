@@ -1,4 +1,4 @@
-import * as DevGlobalBannerSettings from './global_banner_settings';
+import { DevGlobalBannerSettings } from './global_banner_settings';
 
 export class HtmlDataCampaignParameters {
 	constructor( element ) {

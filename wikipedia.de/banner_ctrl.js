@@ -6,13 +6,15 @@ import CampaignDaySentence from '../shared/campaign_day_sentence';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import MatomoTracker from '../shared/matomo_tracker';
 import NullTracker from '../shared/null_tracker';
+import { CampaignProjection } from '../shared/campaign_projection';
+import * as DevGlobalBannerSettings from '../shared/global_banner_settings'
+import ProgressBar from '../shared/progress_bar/progress_bar';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */
 /* global BannerName */
 /* global _paq */
 
-const DevGlobalBannerSettings = require( '../shared/global_banner_settings' );
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const bannerClickTrackRatio = 1; // TODO FOR TESTING
 const bannerCloseTrackRatio = 1; // TODO FOR TESTING
@@ -38,7 +40,7 @@ const campaignDays = new CampaignDays(
 	endOfDay( CampaignParameters.endDate )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
-const CampaignProjection = require( '../shared/campaign_projection' );
+
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
 		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
@@ -53,8 +55,6 @@ const campaignProjection = new CampaignProjection(
 );
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
-
-const ProgressBar = require( '../shared/progress_bar/progress_bar' );
 
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },

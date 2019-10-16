@@ -1,5 +1,5 @@
 // TODO When all banners use `createCampaignParameters`, rename the properties and use this object directly.
-module.exports = {
+export const DevGlobalBannerSettings = {
 	'goalDonationSum': 8200000,
 	'donations-date-base': '2019-10-08',
 	'donations-collected-base': 10000,

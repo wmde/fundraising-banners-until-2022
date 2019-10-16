@@ -26,6 +26,7 @@ module.exports = {
 				exclude: /node_modules\/(?!svelte)/,
 				use: {
 					loader: 'babel-loader',
+					// TODO: use babel.config.js instead
 					options: {
 						presets: [['@babel/preset-env', {
 							debug: true,
@@ -33,7 +34,9 @@ module.exports = {
 							corejs: 3,
 
 							targets: 'ie >= 11'
-						}]]
+						}]],
+						// avoid module format conflicts in loader.js
+						exclude: /webpack/
 					}
 				},
 			},
