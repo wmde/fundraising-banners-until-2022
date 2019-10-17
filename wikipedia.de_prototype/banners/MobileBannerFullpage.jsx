@@ -18,7 +18,9 @@ export default function MobileBannerFullpage( props ) {
 						  numberOfDonors={props.numberOfDonors}
 						  campaignDaySentence={props.campaignDaySentence}
 						  weekdayPrepPhrase={props.weekdayPrepPhrase}
-						  currentDayName={props.currentDayName}/>
+						  currentDayName={props.currentDayName}
+						  animateHighlightTrigger={props.animateHighlightTrigger}
+					/>
 					<div className="call-to-action">
 						Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
 					</div>

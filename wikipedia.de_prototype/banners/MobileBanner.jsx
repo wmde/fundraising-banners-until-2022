@@ -8,7 +8,8 @@ import MobileBannerFullpage from './MobileBannerFullpage';
 export default class MobileBanner extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { isFullPageVisible: false }
+		this.state = { isFullPageVisible: false };
+		this.animateHighLight = null;
 	}
 
 	componentDidMount() {
@@ -19,8 +20,13 @@ export default class MobileBanner extends Component {
 
 	showForm = e => {
 		this.props.trackingData.eventTracker.trackEvent( 'mobile-mini-banner-expanded', this.props.trackingData.bannerClickTrackRatio );
-		this.setState( { isFullPageVisible: true } )
+		this.setState( { isFullPageVisible: true } );
+		if ( this.animateHighLight ) {
+			this.animateHighLight();
+		}
 	};
+
+	animateHighlightTrigger = cb => { this.animateHighLight = cb };
 
 	render( props, state, context ) {
 		return <Fragment>
@@ -67,7 +73,7 @@ export default class MobileBanner extends Component {
 					</div>
 				</div>
 			</div>
-			<MobileBannerFullpage {...props} isFullPageVisible={this.state.isFullPageVisible}/>
+			<MobileBannerFullpage {...props} isFullPageVisible={this.state.isFullPageVisible} animateHighlightTrigger={ this.animateHighlightTrigger }/>
 		</Fragment>
 	}
 

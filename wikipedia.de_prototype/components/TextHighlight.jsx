@@ -6,8 +6,14 @@ export default class TextHighlight extends Component {
 	componentDidMount() {
 		const plainText = toChildArray( this.props.children ).reduce( ( t, child ) => typeof child === 'string' ? t + child : t, '' );
 		this.setState( { highlightedText: '', plainText } );
+		if ( this.props.animateHighlightTrigger ) {
+			this.props.animateHighlightTrigger( this.animateHighlight.bind(this) );
+		}
+	}
 
-		// TODO watch bannerIsVisible property and start animation when banner is visible (instead of when it's mounted)
+	animateHighlight() {
+		const plainText = this.state.plainText;
+		const initialDelay = 1000; // should be synchronized with the CSS animation that drops down the banner
 		const duration = 1500;
 		const millisecondsPerChar = Math.max( 10, duration / plainText.length );
 		// TODO When duration / plainTextlength < 10, find slice size based on millisecondsPerChar
@@ -19,8 +25,8 @@ export default class TextHighlight extends Component {
 			if ( plainText ) {
 				this.highlightAnimation = setTimeout( animateSlice, millisecondsPerChar );
 			}
-		}
-		this.highlightAnimation = setTimeout( animateSlice, millisecondsPerChar )
+		};
+		this.highlightAnimation = setTimeout( animateSlice, initialDelay )
 	}
 
 	componentWillUnmount() {

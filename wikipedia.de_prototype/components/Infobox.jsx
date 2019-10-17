@@ -6,7 +6,8 @@ function capitalizeFirstLetter( message ) {
 	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
 }
 
-export default function Infobox( { weekdayPrepPhrase, currentDayName, amountBannerImpressionsInMillion, numberOfDonors, campaignDaySentence } ) {
+export default function Infobox( props ) {
+	const { weekdayPrepPhrase, currentDayName, amountBannerImpressionsInMillion, numberOfDonors, campaignDaySentence, animateHighlightTrigger } = props;
 	return <div className="infobox__text">
 		<p className="text__headline">
 			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
@@ -19,7 +20,9 @@ export default function Infobox( { weekdayPrepPhrase, currentDayName, amountBann
 			{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 21,48&nbsp;€ finanziert, aber
 			99&nbsp;% der Leserinnen und Leser spenden nicht.
 
-			<TextHighlight>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.</TextHighlight>
+			<TextHighlight animateHighlightTrigger={animateHighlightTrigger}>
+				{' '}Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.{' '}
+			</TextHighlight>
 
 			Schon der Preis einer Tasse Kaffee würde genügen.
 			Über {amountBannerImpressionsInMillion} Millionen Mal wird unser Spendenaufruf täglich angezeigt,
