@@ -1,6 +1,7 @@
 import { h } from 'preact'
 import style from './DesktopBanner.pcss'
 
+import DonationForm from '../components/DonationForm';
 import Footer from '../components/Footer';
 import Funds from '../components/Funds';
 import Infobox from '../components/Infobox';
@@ -14,7 +15,7 @@ export default function DesktopBanner( props ) {
 						 campaignDaySentence={props.campaignDaySentence}
 						 weekdayPrepPhrase={props.weekdayPrepPhrase}
 						 currentDayName={props.currentDayName}/>
-				<div>Form goes here</div>
+				<DonationForm bannerName={props.bannerName} campaignName={props.campaignName} />
 			</div>
 			<div className="close">
 				<button className="close__link" onclick={props.closeBanner}>&#x2715;</button>
