@@ -1,5 +1,8 @@
 import { h } from 'preact'
 import style from './DesktopBanner.pcss'
+
+import Footer from '../components/Footer';
+import Funds from '../components/Funds';
 import Infobox from '../components/Infobox';
 
 export default function DesktopBanner( props ) {
@@ -16,8 +19,8 @@ export default function DesktopBanner( props ) {
 			<div className="close">
 				<button className="close__link" onclick={props.closeBanner}>&#x2715;</button>
 			</div>
-
+			<Footer bannerName={props.bannerName} campaignName={props.campaignName} />
 		</div>
-
+		<Funds/>
 	</div>
 }
