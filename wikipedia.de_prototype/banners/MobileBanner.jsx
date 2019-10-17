@@ -1,8 +1,15 @@
 import { Component, Fragment, h } from 'preact';
+import classNames from 'classnames'
+
 import style from './MobileBanner.pcss';
 import { Slider } from '../../mobile/banner_slider';
+import MobileBannerFullpage from './MobileBannerFullpage';
 
 export default class MobileBanner extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { isFullPageVisible: false }
+	}
 
 	componentDidMount() {
 		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
@@ -11,12 +18,13 @@ export default class MobileBanner extends Component {
 	}
 
 	showForm = e => {
-		console.log("TODO: Show form");
+		this.props.trackingData.eventTracker.trackEvent( 'mobile-mini-banner-expanded', this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFullPageVisible: true } )
 	};
 
 	render( props, state, context ) {
 		return <Fragment>
-			<div className="mini-banner">
+			<div className={ classNames('mini-banner', { 'is-hidden': this.state.isFullPageVisible || !props.bannerVisible } ) }>
 				<div className="mini-banner-box">
 					<div className="mini-banner-content">
 						<div className="mini-banner-headline">
@@ -59,6 +67,7 @@ export default class MobileBanner extends Component {
 					</div>
 				</div>
 			</div>
+			<MobileBannerFullpage {...props} isFullPageVisible={this.state.isFullPageVisible}/>
 		</Fragment>
 	}
 
