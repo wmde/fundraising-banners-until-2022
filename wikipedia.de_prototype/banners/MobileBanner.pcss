@@ -1,0 +1,215 @@
+@import '../variables_ctrl.pcss';
+
+.mini-banner {
+	width: 100%;
+	position: relative;
+	left: 0;
+	cursor: pointer;
+	text-align: center;
+	box-sizing: border-box;
+	z-index: 1000;
+	margin: 0 auto;
+	display: block;
+	padding: 0 0 20px 0;
+	@media ( min-width: $breakpoint-xs ) {
+		display: none;
+	}
+	&.is-hidden {
+		display: none;
+	}
+	&-box {
+		display: inline-block;
+		position: relative;
+		left: 0;
+		text-align: center;
+		box-sizing: border-box;
+		z-index: 1000;
+		background: $color-bright;
+		border: 8px solid $color-primary;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		border-radius: 15px;
+		padding: 5px;
+		margin: 5px 0 0;
+		width: 98%;
+	}
+	&-carousel {
+		margin: 4px;
+		width: 100%;
+		flex: 0 0 100%;
+	}
+	.carousel-cell {
+		width: 100%;
+		height: auto;
+		margin-right: 10px;
+		padding: 0 5px 15px;
+		box-sizing: border-box;
+		p {
+			font-weight: bold;
+			font-family: $banner-main-font-family;
+		}
+		.goal-headline {
+			margin: 0 0 5px 0;
+		}
+	}
+	&-content {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	&-tab {
+		display: block;
+		position: absolute;
+		left: 50%;
+		/* Solving border aliasing issue on some Webkit mobile devices by moving up the element 1px and applying 2px white top border on inner element */
+		top: 100%;
+		top: calc( 100% - 1px );
+		font-size: 0.9em;
+		color: $color-primary-dark;
+		z-index: 1000;
+		text-transform: uppercase;
+		&-inner {
+			box-sizing: border-box;
+			cursor: pointer;
+			position: relative;
+			left: -50%;
+			background: $color-bright;
+			border: 8px solid $color-primary;
+			border-radius: 8px;
+			border-top: 2px solid $color-bright;
+			font-weight: bold;
+			width: 170px;
+			margin: 0 auto;
+			padding: 5px 15px 4px 15px;
+			transform: translate3d( 0, 0, 0 );
+		}
+	}
+	&-close-button {
+		position: relative;
+		padding: 0 5px;
+		flex: 0 0 auto;
+		right: 0;
+		font-size: 25px;
+		&:before {
+			top: 0;
+			position: relative;
+			content: '\00d7'; /* TODO */
+			color: $color-primary-light;
+		}
+	}
+	&-headline {
+		cursor: default;
+		width: 85%;
+		flex: 1 1 85%;
+		margin-left: 5px;
+		& > div {
+			position: relative;
+			&:before {
+				content: '';
+				display: block;
+				border-top: solid 1px $color-primary-light;
+				width: 100%;
+				height: 1px;
+				position: absolute;
+				top: 46%;
+				z-index: -1;
+			}
+		}
+		span {
+			font-weight: bold;
+			font-family: $banner-main-font-family;
+			font-size: 2.8vw;
+			color: $color-primary-light;
+			display: inline-block;
+			letter-spacing: 1px;
+			margin-left: 6%;
+			line-height: 32px;
+			text-transform: uppercase;
+			padding: 0 5px;
+			background-color: $color-bright;
+		}
+	}
+}
+
+/* Mini-banner slider */
+
+.flickity {
+	&-viewport {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
+	&-enabled {
+		position: relative;
+		&:focus {
+			outline: transparent;
+		}
+		&.is-draggable {
+			-webkit-tap-highlight-color: transparent;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			.flickity-viewport {
+				cursor: grab;
+				&.is-pointer-down {
+					cursor: grabbing;
+				}
+			}
+		}
+	}
+	&-slider {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	&-button {
+		position: absolute;
+		background: $color-bright;
+		border: 0;
+		color: #333333;
+		&-icon {
+			fill: #333333;
+		}
+
+		&:hover {
+			background: $color-bright;
+			cursor: pointer;
+		}
+		&:focus {
+			outline: 0;
+			box-shadow: 0 0 0 5px $color-primary;
+		}
+		&:active {
+			opacity: 0.6;
+		}
+		&:disabled {
+			opacity: 0.3;
+			cursor: auto;
+			pointer-events: none;
+		}
+	}
+	&-page-dots {
+		position: relative;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		text-align: center;
+		line-height: 1;
+		.dot {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 8px;
+			background: $color-primary;
+			border-radius: 50%;
+			opacity: 0.25;
+			cursor: pointer;
+			&.is-selected {
+				opacity: 1;
+			}
+		}
+	}
+	&-rtl .flickity-page-dots {
+		direction: rtl;
+	}
+}

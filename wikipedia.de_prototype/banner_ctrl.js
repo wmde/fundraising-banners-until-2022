@@ -1,6 +1,5 @@
 import { render, createElement } from 'preact';
 import Banner from './banners/Banner';
-import DesktopBanner from './banners/DesktopBanner';
 import Translations from '../shared/messages/de';
 import DayName from '../shared/day_name';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -44,10 +43,7 @@ const campaignDays = new CampaignDays(
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
 
 const campaignProjection = new CampaignProjection(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
+	campaignDays,
 	{
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
@@ -68,7 +64,7 @@ const progressBar = new ProgressBar(
 */
 
 render(
-	createElement( DesktopBanner, {
+	createElement( Banner, {
 		amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 		numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 		currentDayName: currentDayName,
@@ -76,11 +72,10 @@ render(
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		campaignName: CampaignName,
 		bannerName: BannerName,
-		// TODO research how to embed HTML in react component
+		// TODO research how to embed HTML in react component or rewrite progress bar as component
 		// progressBar: progressBar.render(),
 		trackingData: trackingData,
 		showBanner: '', // TODO use state to generate empty string or 'is-hidden'
-		closeBanner: () => { console.log('TODO: set closed state') }
 	}),
 	document.getElementById('WMDE-Banner-Container'));
 

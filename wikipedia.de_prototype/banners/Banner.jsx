@@ -1,7 +1,19 @@
-import { h } from 'preact';
+import {Component, h, Fragment } from 'preact';
+import DesktopBanner from './DesktopBanner';
+import MobileBanner from './MobileBanner';
 
-// TODO add desktop and mobile banner
-export default function Banner(props) {
-	return <div class="banner">I am a Banner! {props.name}.</div>;
+export default class Banner extends Component {
+
+	closeBanner = () => {
+		console.log('TODO: set closed state')
+	};
+
+	render( props, state, context ) {
+		return <Fragment>
+			<DesktopBanner { ...props} closeBanner={this.closeBanner} />
+			<MobileBanner {...props} sliderAutoPlaySpeed={5000} closeBanner={this.closeBanner} />
+		</Fragment>
+	}
+
 }
 
