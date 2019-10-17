@@ -61,20 +61,21 @@ export default class DonationForm extends Component {
 	};
 
 	validateForm = ( evt ) => {
+		const validationState = {};
 		if ( this.state.paymentInterval === null ) {
-			this.setState( { paymentIntervalIsValid: false } );
-			evt.preventDefault();
+			validationState.paymentIntervalIsValid = false;
 		}
 		if ( this.state.paymentMethod === null ) {
-			this.setState( { paymentMethodIsValid: false } );
-			evt.preventDefault();
+			validationState.paymentMethodIsValid = false;
 		}
 		if ( this.state.selectedAmount === null && !this.state.customAmount ) {
-			this.setState( { amountIsValid: false } );
+			validationState.amountIsValid = false;
+		}
+		if ( Object.keys( validationState ).length > 0 ) {
+			this.setState( validationState );
 			evt.preventDefault();
 		}
 	};
-
 
 	render( props, state, context ) {
 		const intervals = [
