@@ -1,8 +1,7 @@
 /* eslint no-alert: 1 */
 
-require( './css/styles.pcss' );
 require( './css/styles_var.pcss' );
-require( './css/styles_mini.pcss' );
+require( './css/styles_mini_var.pcss' );
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -12,7 +11,6 @@ import DayName from '../shared/day_name';
 import animateHighlight from '../shared/animate_highlight';
 import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/de';
-import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
@@ -31,16 +29,9 @@ const bannerTemplate = require( './templates/banner_html_var.hbs' );
 const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
-const LANGUAGE = 'de';
-const sliderAutoPlaySpeed = 5000;
 const fullscreenBannerSlideInSpeed = 1250;
+const LANGUAGE = 'de';
 // END Banner-Specific configuration
-
-/**
- * Slider wrapper object holding a Flickity-based slider
- * @type {Slider}
- */
-const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
 const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
@@ -64,20 +55,11 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	'noch',
-	numberOfDaysUntilCampaignEnd,
-	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
 
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{
-		textInnerLeft: progressBarTextInnerLeft
-	}
+	{}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -93,7 +75,8 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingEvents = new EventLoggingTracker( BannerName );
-trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
+trackingEvents.trackClickEvent( $( '.mini-banner' ), 'mobile-mini-banner-expanded' );
+trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 
@@ -114,6 +97,39 @@ $( 'input[name=interval]' ).click( function () {
 		subPaymentButton.attr( 'disabled', false );
 	}
 } );
+
+$( '#banner-form-submit' ).click( function () {
+	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
+		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
+		return false;
+	}
+	if ( !$( '#betrag' ).val() ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return false;
+	}
+	if ( !$( '#zahlweise' ).val() ) {
+		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
+		return false;
+	}
+	return true;
+} );
+// END form initialization
+
+function displayMiniBanner() {
+	const miniBanner = $( '.mini-banner' );
+	const bannerHeight = miniBanner.height();
+	miniBanner.css( 'top', 0 - bannerHeight ).show();
+
+	miniBanner.animate( {
+		top: 0
+	}, 1000 );
+
+	$( '#mw-mf-viewport' ).animate( {
+		marginTop: bannerHeight
+	}, 1000 );
+
+	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
+}
 
 function appendEuroSign( field ) {
 	if ( $( field ).val() !== '' &&
@@ -178,26 +194,6 @@ $( '#banner-form-submit' ).click( function () {
 	}
 	return true;
 } );
-
-// END form initialization
-
-function displayMiniBanner() {
-
-	const miniBanner = $( '.mini-banner' );
-	const bannerHeight = miniBanner.outerHeight() + 40;
-
-	// Banner starts in far off screen and needs to be reset, workaround to get sliders to work
-	miniBanner.css( 'top', -bannerHeight );
-	miniBanner.animate( { top: 0 }, 1000 );
-
-	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
-
-	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
-	// Making sure automatic sliding only starts after slider is shown to the user
-	bannerSlider.enableAutoplay();
-	progressBar.animate();
-}
-
 /**
  * Hides mini banner and slides down full-screen banner
  * Animation is split into two parts:
@@ -206,8 +202,8 @@ function displayMiniBanner() {
 function displayFullBanner() {
 	trackingEvents.trackBannerEvent(
 		'mobile-mini-banner-expanded',
-		bannerSlider.getViewedSlides(),
-		bannerSlider.getCurrentSlide(),
+		0,
+		0,
 		bannerClickTrackRatio
 	);
 
@@ -242,7 +238,9 @@ function displayFullBanner() {
 		fullscreenBanner.dequeue();
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
-			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
+			setTimeout( function () {
+				animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+			}, 500 );
 		} );
 
 	} );
@@ -256,7 +254,7 @@ $( document ).ready( function () {
 		$( '#frbanner' ).hide();
 	} );
 
-	$( '#mini-banner-close-button' ).click( function () {
+	$( '.mini-banner__close-button' ).click( function () {
 		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
 		if ( BannerFunctions.onMediaWiki() ) {
@@ -264,8 +262,6 @@ $( document ).ready( function () {
 		}
 		return false;
 	} );
-
-	bannerSlider.initialize();
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
@@ -277,7 +273,6 @@ $( document ).ready( function () {
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
-	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
-
-	clickableBannerArea.click( displayFullBanner );
+	$( '.mini-banner' ).click( displayFullBanner );
+	progressBar.animate();
 } );

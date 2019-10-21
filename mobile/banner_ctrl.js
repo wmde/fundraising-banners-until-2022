@@ -63,20 +63,10 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	'noch',
-	numberOfDaysUntilCampaignEnd,
-	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
-
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{
-		textInnerLeft: progressBarTextInnerLeft
-	}
+	{}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -92,7 +82,7 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingEvents = new EventLoggingTracker( BannerName );
-trackingEvents.trackClickEvent( $( '#mini-banner-close-button' ), 'banner-closed', bannerCloseTrackRatio );
+trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
 
@@ -255,7 +245,7 @@ $( document ).ready( function () {
 		$( '#frbanner' ).hide();
 	} );
 
-	$( '#mini-banner-close-button' ).click( function () {
+	$( '.mini-banner__close-button' ).click( function () {
 		$( '.mini-banner' ).hide();
 		BannerFunctions.removeBannerSpace();
 		if ( BannerFunctions.onMediaWiki() ) {
