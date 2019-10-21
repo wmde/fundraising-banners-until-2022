@@ -8,8 +8,7 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import MatomoTracker from '../shared/matomo_tracker';
 import NullTracker from '../shared/null_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
-import * as DevGlobalBannerSettings from '../shared/global_banner_settings'
-import ProgressBar from '../shared/progress_bar/progress_bar';
+import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */
@@ -53,15 +52,6 @@ const campaignProjection = new CampaignProjection(
 );
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
-/*
-// TODO integrate into banner
-const progressBar = new ProgressBar(
-	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
-	campaignProjection,
-	{}
-);
-
-*/
 
 render(
 	createElement( Banner, {
@@ -72,12 +62,10 @@ render(
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		campaignName: CampaignName,
 		bannerName: BannerName,
-		// TODO research how to embed HTML in react component or rewrite progress bar as component
-		// progressBar: progressBar.render(),
 		trackingData: trackingData,
-		showBanner: '', // TODO use state to generate empty string or 'is-hidden'
-	}),
-	document.getElementById('WMDE-Banner-Container'));
+		showBanner: '' // TODO use state to generate empty string or 'is-hidden'
+	} ),
+	document.getElementById( 'WMDE-Banner-Container' ) );
 
 /*
 // TODO use when we have a progress bar

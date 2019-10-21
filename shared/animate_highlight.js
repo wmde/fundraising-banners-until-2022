@@ -40,4 +40,3 @@ export default function animateHighlight( $elem, highlightClass, stepDuration, s
 	addCharacterSpans( $elem, startCharacter, endCharacter );
 	doHighlightStep( 0, $elem, highlightClass, $elem.children( 'span' ).length, stepDuration );
 }
-

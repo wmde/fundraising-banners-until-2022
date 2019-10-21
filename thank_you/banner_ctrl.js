@@ -4,7 +4,6 @@ require( './css/styles.pcss' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 160;
 const sizeIssueTrackRatio = 0.01;
-const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
