@@ -1,7 +1,7 @@
 const assert = require( 'assert' );
-const CampaignProjection = require( '../shared/campaign_projection' );
 const sinon = require( 'sinon' );
 
+import { CampaignProjection } from '../shared/campaign_projection';
 import CampaignDays from '../shared/campaign_days';
 
 describe( 'CampaignProjection', function () {
