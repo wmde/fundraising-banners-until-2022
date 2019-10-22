@@ -42,20 +42,16 @@ export default class MobileBanner extends Component {
 							 onclick={props.closeBanner}></div>
 						<div className="mini-banner-carousel">
 							<div className="carousel-cell">
-								<p>Liebe Leserinnen und Leser, an diesem {props.currentDayName} sind Sie in Deutschland
-									gefragt:</p>
+								<p>Liebe Leserinnen und Leser, <br /> Millionen von Menschen nutzen Wikipedia, aber nur
+									ein Bruchteil spendet. Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,
+									wäre unsere Spendenkampagne am heutigen {props.currentDayName} vorbei.</p>
 							</div>
 							<div className="carousel-cell">
-								<p>Über {props.amountBannerImpressionsInMillion} Millionen Mal wird unser Spendenaufruf
-									täglich angezeigt, aber nur {props.numberOfDonors} Menschen haben bisher gespendet. Schon
-									der Preis einer Tasse Kaffee würde genügen.</p>
+								<p>An diesem {props.currentDayName} sind Sie in Deutschland gefragt. Schon der Preis
+									einer Tasse Kaffee würde genügen.</p>
 							</div>
 							<div className="carousel-cell">
 								<p className="goal-headline">Unser Spendenziel: 8,1&nbsp;Millionen&nbsp;Euro</p>
-							</div>
-							<div className="carousel-cell">
-								<p>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel
-									bereits am heutigen {props.currentDayName} erreicht.</p>
 							</div>
 							<div className="carousel-cell">
 								<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
