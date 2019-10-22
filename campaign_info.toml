@@ -84,14 +84,14 @@ tracking = "org-en-ipad-181221-ipad"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-04-181214"
+campaign_tracking = "wpde-01-191111"
 preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.ctrl]
-filename = "./wikipedia.de_prototype/banner_ctrl.js"
-pagename = "B18WPDE_04-181214_fixed_large_ctrl"
-tracking = "wpde-04-181214-fixed-large-ctrl"
+filename = "./wikipedia.de/banner_ctrl.js"
+pagename = "B19WPDE_01-191111_ctrl"
+tracking = "wpde-01-191111-ctrl"
 
 
 # English Campaign

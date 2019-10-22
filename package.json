@@ -8,7 +8,7 @@
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
-    "clean": "rimraf dist/*.js dist/*.wikitext",
+    "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint:js": "eslint --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:css": "stylelint --syntax scss '**/*.pcss'"
   },
