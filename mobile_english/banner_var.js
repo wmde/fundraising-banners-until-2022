@@ -2,6 +2,7 @@
 
 require( './css/styles.pcss' );
 require( './css/styles_mini.pcss' );
+require( './css/styles_mini_var.pcss' );
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -19,7 +20,7 @@ const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = BannerFunctionsFactory( null, Translations );
 const formatNumber = require( 'format-number' );
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 // BEGIN Banner-Specific configuration
 const bannerClickTrackRatio = 0.01;
@@ -27,7 +28,7 @@ const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
 const LANGUAGE = 'en';
 const fullscreenBannerSlideInSpeed = 1250;
-const sliderAutoPlaySpeed = 2000;
+const sliderAutoPlaySpeed = 5000;
 // END Banner-Specific configuration
 
 /**
@@ -60,20 +61,12 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ] + '.'
-].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textInnerLeft: progressBarTextInnerLeft,
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
 		decimalSeparator: '.'
