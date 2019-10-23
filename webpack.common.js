@@ -72,7 +72,7 @@ module.exports = {
 			templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 			context: {
 				bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
-				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2018}}'
+				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2019}}'
 			},
 			filePattern: 'B*.js',
 			campaignConfig: campaigns.getConfigForPages()
