@@ -4,18 +4,17 @@ require( './css/styles.pcss' );
 const bannerCloseTrackRatio = 0.01;
 const sizeIssueThreshold = 160;
 const sizeIssueTrackRatio = 0.01;
-const LANGUAGE = 'de';
 // END Banner-Specific configuration
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
-import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
-import DayName from '../shared/day_name';
 import Translations from '../shared/messages/en';
-import { createCampaignParameters } from '../shared/campaign_parameters';
 import AnimatedCounter from '../shared/animated_counter';
+import { createCampaignParameters } from '../shared/campaign_parameters';
+import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
+import { CampaignProjection } from '../shared/campaign_projection';
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -23,13 +22,7 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 } );
 
 const CampaignParameters = createCampaignParameters();
-const BannerFunctions = require( '../shared/banner_functions' )( null, Translations );
-const campaignDays = new CampaignDays(
-	startOfDay( CampaignParameters.startDate ),
-	endOfDay( CampaignParameters.endDate )
-);
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE, 20 );
-const CampaignProjection = require( '../shared/campaign_projection' );
+const BannerFunctions = BannerFunctionsFactory( null, Translations );
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
 		startOfDay( CampaignParameters.donationProjection.baseDate ),
@@ -40,10 +33,6 @@ const campaignProjection = new CampaignProjection(
 const formatNumber = require( 'format-number' );
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 const donationFormatter = formatNumber( { round: 1, decimal: ',' } );
-
-const dayName = new DayName( new Date() );
-const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
-const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
@@ -60,9 +49,6 @@ $bannerContainer.html( bannerTemplate( {
 	numberOfDonors: donorFormatter( CampaignParameters.donationProjection.donorsBase ),
 	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	goalDonationSum: CampaignParameters.donationProjection.goalDonationSum / 1000000,
-	currentDayName: currentDayName,
-	weekdayPrepPhrase: weekdayPrepPhrase,
-	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
 	BannerName: BannerName
 } ) );

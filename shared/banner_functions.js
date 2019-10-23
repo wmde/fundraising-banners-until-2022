@@ -1,4 +1,5 @@
-var $ = require( 'jquery' );
+import $ from 'jquery';
+import * as Skin from './skin';
 
 /**
  *
@@ -6,7 +7,7 @@ var $ = require( 'jquery' );
  * @param {Object} Translations
  * @return {Object}
  */
-module.exports = function ( GlobalBannerSettings, Translations ) {
+export function BannerFunctions( GlobalBannerSettings, Translations ) {
 
 	var noIntervalSelectedMessage = Translations[ 'no-interval-message' ] || 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 		amountEmptyMessage = Translations[ 'amount-empty-message' ] || 'Bitte wählen Sie zuerst einen Betrag.',
@@ -16,8 +17,6 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
 		BannerEventHandlers = {};
-
-	let skin;
 
 	BannerEventHandlers.handleAmountSelected = function () {
 		$( '#amount_other' ).prop( 'checked', false );
@@ -242,30 +241,26 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		getSkin().removeSpace();
 	}
 
+	const capitalize = ( s ) => {
+		if ( typeof s !== 'string' ) { return ''; }
+		return s.charAt( 0 ).toUpperCase() + s.slice( 1 );
+	};
+
 	/**
 	 * @return {Skin}
 	 */
 	function getSkin() {
-		var skinName,
-			skinClass;
-
-		if ( !skin ) {
-			if ( onMediaWiki() ) {
-				skinName = window.mw.config.get( 'skin' );
-				if ( [ 'minerva', 'monobook', 'vector' ].indexOf( skinName ) === -1 ) {
-					skinName = 'vector'; // when in doubt, fall back to vector
-				}
-			} else {
-				skinName = 'wpde';
-			}
-
-			/* eslint new-cap: [ "error", { "newIsCapExceptions": [ "skinClass" ] } ] */
-
-			skinClass = require( './skin/' + skinName );
-			skin = new skinClass();
+		if ( !onMediaWiki() ) {
+			return new Skin.Wpde();
 		}
 
-		return skin;
+		const skinName = window.mw.config.get( 'skin' );
+		if ( [ 'minerva', 'monobook', 'vector' ].indexOf( skinName ) > -1 ) {
+			return new Skin[ capitalize( skinName ) ]();
+		}
+
+		// when in doubt, fall back to vector
+		return new Skin.Vector();
 	}
 
 	function onMediaWiki() {
@@ -294,4 +289,4 @@ module.exports = function ( GlobalBannerSettings, Translations ) {
 		getDigitGroupingCharacter: getDigitGroupingCharacter
 	};
 
-};
+}

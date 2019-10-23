@@ -1,0 +1,249 @@
+@import '../variables_ctrl.pcss';
+
+@keyframes slide-down {
+	0% {
+		transform: translateY( -100% );
+	}
+	100% {
+		transform: translateY( 0 );
+	}
+}
+
+#frbanner {
+	display: none;
+	position: relative;
+	transition: transform 1.5s linear;
+	z-index: 99999;
+	&.visible {
+		animation: slide-down 1s linear;
+		display: block;
+	}
+	@media ( min-width: $breakpoint-xs ) {
+		display: none !important;
+	}
+	#WMDE_Banner-form {
+		background-color: $color-bright;
+	}
+	&-window {
+		border: 0;
+
+		.infobox {
+			border: 5px solid $color-primary;
+			border-radius: 0;
+
+			&__text {
+				margin: 0.5em 1em;
+			}
+		}
+
+		.call-to-action {
+			text-align: center;
+			background: $color-primary;
+			color: $color-bright;
+			padding: 10px 0;
+			font-weight: normal;
+			font-size: 5vw;
+			display: block;
+			margin: 20px auto 0 auto;
+			width: 100%;
+			position: relative;
+			&:after {
+				position: absolute;
+				left: 50%;
+				top: 100%;
+				height: 0;
+				width: 0;
+				margin-left: -10px;
+				content: ' ';
+				border: solid transparent;
+				border-top-color: $color-primary;
+				border-width: 10px;
+				pointer-events: none;
+			}
+		}
+
+		.select-group {
+			flex-wrap: wrap;
+			font-weight: normal;
+			&-container {
+				width: 100%;
+				flex-basis: 100%;
+				margin: 0 0.5em;
+			}
+			&__input {
+				position: absolute;
+				overflow: hidden;
+				height: 1px;
+				width: 1px;
+				clip: rect( 0 0 0 0 );
+				border: 0;
+				margin: -1px;
+				padding: 0;
+			}
+			&__state {
+				padding: 20px 5px;
+				font-size: 5vw;
+			}
+			&__custom-input {
+				height: 40px;
+				&::placeholder {
+					font-size: 5vw;
+				}
+			}
+			&__label,
+			&__custom-input {
+				display: block;
+				background-color: $color-bright;
+				color: $color-dark;
+				border: 1px solid $color-light-dark;
+				border-radius: 2px;
+				outline: 0;
+				text-align: center;
+				line-height: 1;
+				cursor: pointer;
+				font-family: inherit;
+				font-weight: 500;
+				font-size: 20px;
+				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+				&:active {
+					background-color: $color-light-dark;
+					color: $color-dark;
+					border-color: $color-light-dark;
+				}
+			}
+			&__option {
+				&--fullwidth {
+					width: 100%;
+					flex-basis: 100%;
+				}
+				&--halfwidth {
+					width: 100%;
+					flex-basis: 100%;
+				}
+				&--thirdwidth {
+					width: 100%;
+					flex-basis: 100%;
+				}
+				&-amount-other-input {
+					min-width: 100px;
+				}
+			}
+		}
+
+		.WMDE-Banner-amounts .select-group__option--halfwidth {
+			width: 50%;
+			flex-basis: 50%;
+		}
+
+		.select-group__input:checked + .select-group__label,
+		.select-group__label.checked {
+			background-color: $color-secondary;
+			color: $color-light;
+			border-color: $color-light-dark;
+		}
+
+		.button-group {
+			padding: 1em 0.5em;
+			width: 100%;
+			&__label {
+				white-space: normal;
+			}
+			&__container {
+				display: block;
+				width: 100%;
+				clear: none;
+				float: left;
+				margin-bottom: 6px;
+			}
+			&__button {
+				display: inline-block;
+				width: 100%;
+				background-color: $color-bright;
+				color: $color-light-dark;
+				border: 1px solid $color-light-dark;
+				border-radius: 2px;
+				padding: 0;
+				outline: 0;
+				text-align: center;
+				line-height: 1;
+				cursor: pointer;
+				font-family: inherit;
+				font-weight: 500;
+				font-size: 24px;
+				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+				&-submit {
+					background-color: $color-secondary;
+					color: $color-white;
+					border-color: $color-light-dark;
+				}
+
+				&.disabled {
+					background-color: $color-white;
+					color: $color-light-dark;
+					border: 1px solid $color-light-dark;
+				}
+
+				&:focus,
+				&.selected-option {
+					background-color: $color-secondary;
+					color: $color-white;
+					border-color: $color-light-dark;
+				}
+			}
+			&__hint {
+				font-size: 9pt;
+				line-height: 12pt;
+				margin-right: 0;
+				width: 100%;
+				text-align: right;
+			}
+		}
+	}
+	.infobox {
+		margin: 0.2em;
+		padding: 0.25em 0;
+		background-color: $color-bright;
+		.close {
+			width: 18px;
+			right: 5px;
+			top: -5px;
+		}
+		&__text {
+			font-size: 20px;
+		}
+		.text__paragraph {
+			display: block;
+			margin-top: 1em;
+			&--highlight {
+				.marked {
+					background-color: $color-text-highlight;
+				}
+			}
+		}
+	}
+	.form {
+		padding: 0;
+		margin: 10px 0 0;
+	}
+	.smallprint {
+		order: 3;
+		padding: 0 0.3em;
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+		width: 100%;
+		> span {
+			width: 100%;
+			@media ( min-width: $breakpoint-xxs ) {
+				width: auto;
+			}
+		}
+		.separator {
+			display: none;
+			@media ( min-width: $breakpoint-xxs ) {
+				display: block;
+			}
+		}
+	}
+}

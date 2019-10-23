@@ -1,0 +1,42 @@
+@import '../variables_ctrl.pcss';
+
+.footer {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+
+	font-size: 0.8em;
+	line-height: 1.6em;
+	color: $color-dark;
+	padding: 0 0.5em;
+
+	@media ( min-width: $breakpoint-m ) {
+		padding: 0;
+	}
+
+	&__info {
+		text-transform: uppercase;
+	}
+	&__importantinfo {
+		font-weight: bolder;
+	}
+	&__item {
+		margin-right: 1em;
+		&:last-child {
+			margin-right: 0;
+		}
+		white-space: nowrap;
+		&--rightflex {
+			flex-grow: 1;
+			text-align: right;
+		}
+		.iban-block > span {
+			margin-right: 0.2em;
+		}
+	}
+}
+
+.application-of-funds-link {
+	color: $color-dark;
+}

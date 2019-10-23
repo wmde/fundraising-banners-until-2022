@@ -13,6 +13,7 @@ function readWrapperTemplate( name ) {
 }
 
 module.exports = {
+	devtool: 'sourcemap',
 	entry: campaigns.getEntryPoints(),
 	output: {
 		filename: '[name].js',
@@ -20,6 +21,11 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				use: 'babel-loader'
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -51,6 +57,9 @@ module.exports = {
 				]
 			}
 		]
+	},
+	resolve: {
+		extensions: [ '.mjs', '.js', '.jsx' ]
 	},
 	externals: {
 		jquery: 'jQuery'

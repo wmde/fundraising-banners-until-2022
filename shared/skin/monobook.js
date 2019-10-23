@@ -1,9 +1,7 @@
-'use strict';
+import Skin from './Skin';
+import $ from 'jquery';
 
-const Skin = require( './Skin' );
-const $ = require( 'jquery' );
-
-module.exports = class Monobook extends Skin {
+export default class Monobook extends Skin {
 	constructor() {
 		super();
 
@@ -21,4 +19,4 @@ module.exports = class Monobook extends Skin {
 	removeSpace() {
 		this.globalWrapper.css( 'top', 0 );
 	}
-};
+}

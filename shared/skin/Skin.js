@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = class Skin {
+export default class Skin {
 	/**
 	 * Children must implement this
 	 *
@@ -33,4 +33,4 @@ module.exports = class Skin {
 	getName() {
 		return this.constructor.name.toLowerCase();
 	}
-};
+}
