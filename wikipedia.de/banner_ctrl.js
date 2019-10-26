@@ -9,6 +9,7 @@ import MatomoTracker from '../shared/matomo_tracker';
 import NullTracker from '../shared/null_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
+import formatNumber from 'format-number';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */
@@ -47,27 +48,25 @@ const campaignProjection = new CampaignProjection(
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
 		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ]
+		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
+		goalDonationSum: GlobalBannerSettings.goalDonationSum
 	}
 );
-const formatNumber = require( 'format-number' );
+
 const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 render(
 	createElement( Banner, {
 		amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 		numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-		currentDayName: currentDayName,
-		weekdayPrepPhrase: weekdayPrepPhrase,
-		campaignDaySentence: campaignDaySentence.getSentence(),
+		currentDayName: currentDayName, // TODO Move to Infobox
+		weekdayPrepPhrase: weekdayPrepPhrase, // TODO Move to Infobox
+		campaignDaySentence: campaignDaySentence.getSentence(), // TODO replace with campaignDays, move campaignDaySentence to Infobox
 		campaignName: CampaignName,
 		bannerName: BannerName,
 		trackingData: trackingData,
-		showBanner: '' // TODO use state to generate empty string or 'is-hidden'
+		translations: Translations,
+		locale: LOCALE,
+		campaignProjection
 	} ),
 	document.getElementById( 'WMDE-Banner-Container' ) );
-
-/*
-// TODO use when we have a progress bar
-setTimeout( function () { progressBar.animate(); }, 1000 );
- */
