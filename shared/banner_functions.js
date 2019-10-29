@@ -14,6 +14,7 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 		amountTooLowMessage = Translations[ 'amount-too-low-message' ] || 'Bitte geben Sie einen Spendenbetrag von min. 1€ ein.',
 		noPaymentTypeSelectedMessage = Translations[ 'no-payment-type-message' ] || 'Bitte wählen Sie eine Zahlmethode aus.',
 		amountTooHighMessage = Translations[ 'amount-too-high-message' ] || 'Der Spendenbetrag ist zu hoch.',
+		noAddressTypeMessage = Translations[ 'no-address-type-message' ],
 		allBannersImpCookie = 'centralnotice_banner_impression_count',
 		singleBannerImpCookie = 'centralnotice_single_banner_impression_count',
 		BannerEventHandlers = {};
@@ -125,6 +126,10 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 		if ( !validatePaymentType() ) {
 			return false;
 		}
+
+		if ( !validateAddressType() ) {
+			return false;
+		}
 	}
 
 	function showAmountError( text ) {
@@ -149,6 +154,22 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 
 	function hidePaymentTypeError() {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+	}
+
+	function showAddressTypeError( text ) {
+		$( '#WMDE_Banner' ).trigger( 'validation:addresstype:error', text );
+	}
+
+	function hideAddressTypeError() {
+		$( '#WMDE_Banner' ).trigger( 'validation:addresstype:ok' );
+	}
+
+	function showAddressTypeInfo( text ) {
+		$( '#WMDE_Banner' ).trigger( 'addresstype:info:show', text );
+	}
+
+	function hideAddressTypeInfo() {
+		$( '#WMDE_Banner' ).trigger( 'addresstype:info:hide' );
 	}
 
 	function validateAmount( amount ) {
@@ -208,6 +229,16 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 		}
 
 		hidePaymentTypeError();
+		return true;
+	}
+
+	function validateAddressType() {
+		if ( $( 'input[name=addressType]:checked', document.donationForm ).length !== 1 ) {
+			showAddressTypeError( noAddressTypeMessage );
+			return false;
+		}
+
+		hideAddressTypeError();
 		return true;
 	}
 
@@ -274,6 +305,7 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 		validateAndSetPeriod: validateAndSetPeriod,
 		validateAmount: validateAmount,
 		validatePaymentType: validatePaymentType,
+		validateAddressType: validateAddressType,
 		getAmount: getAmount,
 		increaseImpCount: increaseImpCount,
 		increaseBannerImpCount: increaseBannerImpCount,
@@ -285,6 +317,10 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 		hideAmountError: hideAmountError,
 		showPaymentTypeError: showPaymentTypeError,
 		hidePaymentTypeError: hidePaymentTypeError,
+		showAddressTypeError: showAddressTypeError,
+		showAddressTypeInfo: showAddressTypeInfo,
+		hideAddressTypeInfo: hideAddressTypeInfo,
+		hideAddressTypeError: hideAddressTypeError,
 		removeBannerSpace: removeBannerSpace,
 		getDigitGroupingCharacter: getDigitGroupingCharacter
 	};
