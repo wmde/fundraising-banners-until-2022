@@ -31,7 +31,7 @@ const trackingData = {
 	bannerCloseTrackRatio: bannerCloseTrackRatio
 };
 
-const LANGUAGE = 'de';
+const LOCALE = 'de';
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
@@ -40,7 +40,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
 	endOfDay( CampaignParameters.endDate )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LANGUAGE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, LOCALE );
 
 const campaignProjection = new CampaignProjection(
 	campaignDays,

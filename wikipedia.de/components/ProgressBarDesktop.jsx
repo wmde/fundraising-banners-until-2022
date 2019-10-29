@@ -3,6 +3,7 @@ import { Component, h } from 'preact';
 import { useContext } from 'preact/hooks';
 import formatNumber from 'format-number'
 import TranslationContext from './TranslationContext';
+import PropTypes from 'prop-types';
 import style from './ProgressBarDesktop.pcss';
 
 const NOT_STARTED = 0;
@@ -10,22 +11,45 @@ const STARTED = 1;
 const ENDED = 2;
 
 export default class ProgressBarDesktop extends Component {
+	static propTypes = {
+		/** Locale 'EN' or 'DE', defaults to 'EN' */
+		locale: PropTypes.string,
+
+		/** How many days are left in the campaign */
+		daysLeft: PropTypes.number.isRequired,
+
+		/** How many donations have been collected up to this point in time */
+		donationAmount: PropTypes.number.isRequired,
+
+		/** overall donation goal */
+		goalDonationSum: PropTypes.number.isRequired,
+
+		/** Remaining donation goal (could be calculated from sum-amount) */
+		missingAmount: PropTypes.number.isRequired,
+
+		/**
+		 * Function that receives the animation start function as a callback,
+		 * to expose the startAnimation method from this component to parent components.
+		 * See https://stackoverflow.com/a/45582558/130121
+		 */
+		setStartAnimation: PropTypes.func.isRequired,
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			width: 1,
 			animation: NOT_STARTED
 		};
-		this.millionFormatter = formatNumber( { round: 1, prefix:'€ ', suffix: 'M', padRight: 1 } );
-		if ( props.locale && this.props.locale === 'de' ) {
+		PropTypes.checkPropTypes( ProgressBarDesktop.propTypes, props, 'constructor', 'ProgressBarDesktop' );
+		this.millionFormatter = formatNumber( { round: 1, prefix: '€ ', suffix: 'M', padRight: 1 } );
+		if ( this.props.locale === 'de' ) {
 			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: 'M €', padRight: 1 } );
 		}
 	}
 
 	componentDidMount() {
-		if ( this.props.setStartAnimation ) {
-			this.props.setStartAnimation( this.startAnimation.bind( this ) );
-		}
+		this.props.setStartAnimation( this.startAnimation.bind( this ) );
 	}
 
 	progressAnimationEnded = (e) => {

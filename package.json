@@ -20,7 +20,8 @@
     "classnames": "^2.2.6",
     "flickity": "^2.2.1",
     "format-number": "^3.0.0",
-    "preact": "^10.0.0"
+    "preact": "^10.0.0",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -30,6 +31,7 @@
     "@babel/register": "^7.6.2",
     "autoprefixer": "^7.2.6",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "core-js": "^3.3.2",
     "css-loader": "^3.0.0",
     "eslint": "^6.0.1",
