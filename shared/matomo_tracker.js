@@ -1,8 +1,54 @@
+function scheduleRetryWithBackoff( tracker ) {
+	const RETRY_INTERVAL = 100;
+	setTimeout(
+		tracker.waitForTrackerToInit.bind( tracker ),
+		Math.max( RETRY_INTERVAL, RETRY_INTERVAL * tracker.trackerFindCounter )
+	);
+}
+
 export default class MatomoTracker {
 
-	constructor( tracker, bannerName ) {
-		this.tracker = tracker;
+	constructor( trackerName, bannerName, scheduleRetry = scheduleRetryWithBackoff ) {
 		this.bannerName = bannerName;
+		this.scheduleRetry = scheduleRetry;
+		this.accumulatedTracking = [];
+		this.tracker = null;
+		this.trackerName = trackerName;
+		this.trackerFindCounter = 0;
+		if ( !this.trackerLibrayIsLoaded( trackerName ) ) {
+			scheduleRetry( this );
+			return;
+		}
+		this.tracker = window[ trackerName ];
+	}
+
+	/**
+	 * @private
+	 * @param {Function} trackFn
+	 */
+	trackOrStore( trackFn ) {
+		if ( !this.tracker ) {
+			this.accumulatedTracking.push( trackFn );
+			return;
+		}
+		trackFn( this.tracker );
+	}
+
+	trackerLibrayIsLoaded( trackerName ) {
+		return typeof window[ trackerName ] !== 'undefined' && window[ trackerName ] !== null;
+	}
+
+	waitForTrackerToInit() {
+		if ( !this.trackerLibrayIsLoaded( this.trackerName ) ) {
+			this.trackerFindCounter++;
+			if ( this.trackerFindCounter < 10 ) {
+				this.scheduleRetry( this );
+			}
+			return;
+		}
+		this.tracker = window[ this.trackerName ];
+		this.accumulatedTracking.forEach( trackFn => trackFn( this.tracker ) );
+		this.accumulatedTracking = [];
 	}
 
 	/**
@@ -16,12 +62,12 @@ export default class MatomoTracker {
 			trackRatio = 1;
 		}
 		if ( Math.random() < trackRatio ) {
-			this.tracker.trackEvent( 'Banners', actionName, this.bannerName );
+			this.trackOrStore( tracker => tracker.trackEvent( 'Banners', actionName, this.bannerName ) );
 		}
 	}
 
 	recordBannerImpression() {
-		this.tracker.trackContentImpression( 'Banners', 'banner-shown', this.bannerName );
+		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', 'banner-shown', this.bannerName ) );
 	}
 
 }
