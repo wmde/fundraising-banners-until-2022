@@ -1,6 +1,5 @@
 # TODOs
 
-- [ ] Lightbox for Application of Funds (on Desktop)
 - [ ] Adjust mobile slides accoring to the criteria for CTRL in https://phabricator.wikimedia.org/T235728
 - [ ] ESLint settings for JSX files.  
 
