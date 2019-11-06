@@ -23,7 +23,8 @@ const Translations = {
 	'day-name-st-nicholas-day': 'Nikolaustag',
 	'day-name-christmas-eve': 'Weihnachtsfeiertag',
 	'day-name-christmas-day': '1. Weihnachtsfeiertag',
-	'day-name-2nd-christmas-day': '2. Weihnachtsfeiertag'
+	'day-name-2nd-christmas-day': '2. Weihnachtsfeiertag',
+	'amount-missing': 'Es fehlen'
 };
 
 export default Translations;

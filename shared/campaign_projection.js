@@ -35,3 +35,7 @@ CampaignProjection.prototype.getProjectedRemainingDonationSum = function () {
 CampaignProjection.prototype.getProjectedNumberOfDonors = function () {
 	return calculateProjection( this.campaignDays, this.donorsBase, this.donorsPerMinute );
 };
+
+CampaignProjection.prototype.getRemainingDays = function () {
+	return this.campaignDays.getNumberOfDaysUntilCampaignEnd();
+};
