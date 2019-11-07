@@ -16,7 +16,7 @@ tracking = "org-09-191111-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B19WMDE_09-191111_var"
+pagename = "B19WMDE_09_191111_var"
 tracking = "org-09-191111-var"
 
 # Mobile Campaign
