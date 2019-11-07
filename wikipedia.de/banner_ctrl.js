@@ -6,7 +6,6 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import MatomoTracker from '../shared/matomo_tracker';
-import NullTracker from '../shared/null_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 import formatNumber from 'format-number';
@@ -14,17 +13,12 @@ import formatNumber from 'format-number';
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */
 /* global BannerName */
-/* global _paq */
 
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
 const bannerClickTrackRatio = 1; // TODO FOR TESTING
 const bannerCloseTrackRatio = 1; // TODO FOR TESTING
-let eventTracker;
-if ( typeof _paq === 'undefined' ) {
-	eventTracker = new NullTracker( BannerName );
-} else {
-	eventTracker = new MatomoTracker( _paq, BannerName );
-}
+const eventTracker = new MatomoTracker( 'FundraisingTracker', BannerName );
+
 const trackingData = {
 	eventTracker: eventTracker,
 	bannerClickTrackRatio: bannerClickTrackRatio,
