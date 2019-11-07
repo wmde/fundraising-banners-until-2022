@@ -64,3 +64,4 @@ render(
 		campaignProjection
 	} ),
 	document.getElementById( 'WMDE-Banner-Container' ) );
+eventTracker.recordBannerImpression();

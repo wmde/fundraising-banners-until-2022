@@ -15,7 +15,7 @@ export default class MatomoTracker {
 		this.tracker = null;
 		this.trackerName = trackerName;
 		this.trackerFindCounter = 0;
-		if ( !this.trackerLibrayIsLoaded( trackerName ) ) {
+		if ( !this.trackerLibraryIsLoaded( trackerName ) ) {
 			scheduleRetry( this );
 			return;
 		}
@@ -34,12 +34,12 @@ export default class MatomoTracker {
 		trackFn( this.tracker );
 	}
 
-	trackerLibrayIsLoaded( trackerName ) {
+	trackerLibraryIsLoaded( trackerName ) {
 		return typeof window[ trackerName ] !== 'undefined' && window[ trackerName ] !== null;
 	}
 
 	waitForTrackerToInit() {
-		if ( !this.trackerLibrayIsLoaded( this.trackerName ) ) {
+		if ( !this.trackerLibraryIsLoaded( this.trackerName ) ) {
 			this.trackerFindCounter++;
 			if ( this.trackerFindCounter < 10 ) {
 				this.scheduleRetry( this );
