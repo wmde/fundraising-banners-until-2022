@@ -36,7 +36,7 @@ export default class TextHighlight extends Component {
 	}
 
 	render( props, state, context ) {
-		return <span className="text__paragraph text__paragraph--highlight">
+		return <span className="text__paragraph--highlight">
 			<span className="marked">{state.highlightedText}</span>{state.plainText}
 		</span>
 	}

@@ -1,4 +1,4 @@
-@import '../variables_ctrl.pcss';
+@import '../variables_var.pcss';
 
 #WMDE_Banner-form {
 	display: flex;
@@ -60,7 +60,7 @@
 		flex-direction: column;
 		margin-right: 0.5em;
 
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			max-width: 19em;
 		}
 	}
@@ -98,7 +98,7 @@
 		justify-content: center;
 		flex-direction: column;
 		padding: 0 5px;
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			height: 35px;
 		}
 	}
@@ -131,7 +131,7 @@
 			outline: 0 none;
 			border-radius: 0;
 		}
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			height: 35px;
 		}
 	}
@@ -165,7 +165,7 @@
 				border-right: 1px solid $color-light-dark;
 			}
 		}
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			border: 1px solid $color-light-dark;
 			border-radius: $banner-border-radius;
 			&:first-child {
@@ -190,7 +190,7 @@
 				width: 34%;
 				flex-basis: 34%;
 			}
-			@media ( min-width: $breakpoint-l ) {
+			@media ( min-width: $breakpoint-m ) {
 				width: 32%;
 				flex-basis: 32%;
 			}
@@ -213,7 +213,7 @@
 	border: 0;
 	margin: 0;
 	padding: 0.6em 0.5em 0 0;
-	@media ( min-width: $breakpoint-l ) {
+	@media ( min-width: $breakpoint-m ) {
 		padding: 0.3em 0.5em 0.3em 0;
 	}
 	flex-wrap: wrap;
@@ -247,37 +247,8 @@
 		text-align: center;
 		box-sizing: border-box;
 		white-space: nowrap;
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			line-height: 3em;
-		}
-	}
-
-	/*
-	Make button centered when it's the only button in the last row.
-	This is only an approximation, because the flex wraps are independent from the breakpoints
-	*/
-	@media ( min-width: $breakpoint-s ) {
-		&.WMDE-Banner-submit {
-			display: flex;
-			flex-grow: 1;
-			justify-content: center;
-
-			.button-group__button {
-				flex: 0 1 auto;
-				width: auto;
-			}
-		}
-	}
-
-	@media ( min-width: $breakpoint-l ) {
-		&.WMDE-Banner-submit {
-			display: block;
-			flex-grow: 0;
-			justify-content: center;
-
-			.button-group__button {
-				width: 100%;
-			}
 		}
 	}
 }
@@ -319,7 +290,7 @@
 	margin-right: 4px;
 }
 
-@media ( min-width: $breakpoint-l ) {
+@media ( min-width: $breakpoint-m ) {
 	.banner {
 		&__content {
 			display: flex;

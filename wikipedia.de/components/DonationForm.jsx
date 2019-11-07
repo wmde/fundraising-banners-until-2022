@@ -1,5 +1,4 @@
 import { Component, h} from 'preact';
-import style from './DonationForm.pcss';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { parseAmount } from '../../shared/parse_amount';
 

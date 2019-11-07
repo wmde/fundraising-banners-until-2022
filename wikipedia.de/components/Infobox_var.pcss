@@ -1,4 +1,4 @@
-@import '../variables_ctrl.pcss';
+@import '../variables_var.pcss';
 
 .infobox {
 	display: flex;
@@ -12,9 +12,6 @@
 	padding: 0.25em 0.5em 0.25em 0;
 	margin: 0.2em 0.5em;
 	position: relative;
-	@media ( min-width: $breakpoint-m ) {
-		margin: 0.2em 5em 0.2em 5em;
-	}
 	@media ( min-width: $breakpoint-l ) {
 		margin: 0.2em 0 0.2em 1em;
 	}
@@ -37,7 +34,7 @@
 		@media ( min-width: $breakpoint-s ) {
 			font-size: 1.1em;
 		}
-		@media ( min-width: $breakpoint-m ) {
+		@media ( min-width: $breakpoint-l ) {
 			font-size: 1.3em;
 		}
 		.optional-text {
