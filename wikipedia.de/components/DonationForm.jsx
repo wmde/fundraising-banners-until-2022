@@ -1,5 +1,6 @@
 import { Component, h} from 'preact';
-import style from './DonationForm.pcss';
+// TODO: Re-activate when breakpoints are no longer A/B tested
+// import style from './DonationForm.pcss';
 import { formatAmount } from '../../shared/format_amount';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 

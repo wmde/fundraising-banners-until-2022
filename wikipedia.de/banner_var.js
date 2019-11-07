@@ -9,8 +9,8 @@ import MatomoTracker from '../shared/matomo_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 import formatNumber from 'format-number';
-import FormStyles from './components/DonationForm.pcss';
-import InfoboxStyles from './components/Infobox.pcss';
+import style from './components/DonationForm_var.pcss';
+import InfoboxStyles from './components/Infobox_var.pcss';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */

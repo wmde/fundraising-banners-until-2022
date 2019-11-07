@@ -93,6 +93,11 @@ filename = "./wikipedia.de/banner_ctrl.js"
 pagename = "B19WPDE_01-191111_ctrl"
 tracking = "wpde-01-191111-ctrl"
 
+[wikipediade.banners.var]
+filename = "./wikipedia.de/banner_var.js"
+pagename = "B19WPDE_01-191111_var"
+tracking = "wpde-01-191111-var"
+
 
 # English Campaign
 [english]

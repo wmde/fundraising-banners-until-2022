@@ -73,9 +73,6 @@ export default class ProgressBarDesktop extends Component {
 			<div className="progress_bar__wrapper">
 				<div className="progress_bar__donation_fill" style={ `width:${state.width}%` } onTransitionEnd={this.progressAnimationEnded}>
 					<div className="progress_bar__days_left">
-						{Translations['prefix-days-left']}{ ' ' }
-						{ props.daysLeft } { ' ' }
-						{ props.daysLeft === 1 ? Translations['days-singular'] : Translations['days-plural'] }
 					</div>
 					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
 				</div>
