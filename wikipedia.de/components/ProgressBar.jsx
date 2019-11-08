@@ -6,11 +6,11 @@ import TranslationContext from './TranslationContext';
 import PropTypes from 'prop-types';
 import style from './ProgressBarDesktop.pcss';
 
-const NOT_STARTED = 0;
+const PENDING = 0;
 const STARTED = 1;
 const ENDED = 2;
 
-export default class ProgressBarDesktop extends Component {
+export default class ProgressBar extends Component {
 	static propTypes = {
 		/** Locale 'EN' or 'DE', defaults to 'EN' */
 		locale: PropTypes.string,
@@ -33,15 +33,28 @@ export default class ProgressBarDesktop extends Component {
 		 * See https://stackoverflow.com/a/45582558/130121
 		 */
 		setStartAnimation: PropTypes.func.isRequired,
+
+		/**
+		 * If the progress bar should be animated. Default: true
+		 * If it's not animated you can set setStartAnimation to an empty function like this: () => {}
+		 */
+		animate: PropTypes.bool,
 	};
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			width: 1,
-			animation: NOT_STARTED
+			animation: PENDING
 		};
-		PropTypes.checkPropTypes( ProgressBarDesktop.propTypes, props, 'constructor', 'ProgressBarDesktop' );
+		if ( typeof props.animate === 'undefined' || props.animate === false ) {
+			this.state = {
+				width: this.calculateWidth(),
+				animation: ENDED
+			}
+		}
+
+		PropTypes.checkPropTypes( ProgressBar.propTypes, props, 'constructor', 'ProgressBar' );
 		this.millionFormatter = formatNumber( { round: 1, prefix: '€ ', suffix: 'M', padRight: 1 } );
 		if ( this.props.locale === 'de' ) {
 			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: 'M €', padRight: 1 } );
@@ -57,10 +70,17 @@ export default class ProgressBarDesktop extends Component {
 	};
 
 	startAnimation() {
+		if ( this.state.animation !== PENDING ) {
+			return;
+		}
 		this.setState( {
-			width: ( this.props.donationAmount * 100 ) / this.props.goalDonationSum,
+			width: this.calculateWidth(),
 			animation: STARTED
 		} );
+	}
+
+	calculateWidth() {
+		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum
 	}
 
 	render( props, state) {
