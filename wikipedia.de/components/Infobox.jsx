@@ -18,7 +18,7 @@ export default function Infobox( props ) {
 		</p>
 
 		<p className="text__paragraph">
-			{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 21,48&nbsp;€ finanziert, aber
+			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 21,48&nbsp;€ finanziert, aber
 			99&nbsp;% der Leserinnen und Leser spenden nicht.
 
 			<TextHighlight animateHighlightTrigger={animateHighlightTrigger}>
@@ -34,15 +34,15 @@ export default function Infobox( props ) {
 			<span>Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir
 				könnten ihr nicht vertrauen. </span>
 
-			<span className="optional-text text-xxl">Wikipedia bringt uns alle, die Wissen lieben, zusammen: Beitragende, Lesende und die Spendenden, die uns finanzieren.</span>
+			<span className="optional-text text-xxl">Wikipedia bringt uns alle, die Wissen lieben, zusammen: Beitragende, Lesende und die Spendenden, die uns finanzieren. </span>
 			<span className="optional-text text-xxl">Das Herzstück von Wikipedia ist die Gemeinschaft von Menschen, die uns unbegrenzten Zugang zu verlässlichen und neutralen Informationen geben. </span>
 
 			<span>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. </span>
 
 			<span
-				className="optional-text text-max-xl"> Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {weekdayPrepPhrase} {currentDayName} bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.</span>
+				className="optional-text text-max-xl"> Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {weekdayPrepPhrase} {currentDayName} bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück. </span>
 			<span
-				className="optional-text text-xxl"> Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {weekdayPrepPhrase} {currentDayName} bitte eine Minute Zeit. Geben Sie mit Ihrer Spende etwas zurück, damit Wikipedia weiter wachsen kann.</span>
+				className="optional-text text-xxl"> Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {weekdayPrepPhrase} {currentDayName} bitte eine Minute Zeit. Geben Sie mit Ihrer Spende etwas zurück, damit Wikipedia weiter wachsen kann. </span>
 
 			<span className="text__paragraph--italic">Vielen Dank!</span>
 		</p>
