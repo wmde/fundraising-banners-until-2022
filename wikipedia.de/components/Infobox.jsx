@@ -18,7 +18,7 @@ export default function Infobox( props ) {
 		</p>
 
 		<p className="text__paragraph">
-			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 21,48&nbsp;€ finanziert, aber
+			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
 			99&nbsp;% der Leserinnen und Leser spenden nicht.
 
 			<TextHighlight animateHighlightTrigger={animateHighlightTrigger}>
