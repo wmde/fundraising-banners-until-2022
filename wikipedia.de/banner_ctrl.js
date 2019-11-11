@@ -9,7 +9,9 @@ import MatomoTracker from '../shared/matomo_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 import formatNumber from 'format-number';
+// eslint-disable-next-line no-unused-vars
 import FormStyles from './components/DonationForm.pcss';
+// eslint-disable-next-line no-unused-vars
 import InfoboxStyles from './components/Infobox.pcss';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
@@ -17,8 +19,8 @@ import InfoboxStyles from './components/Infobox.pcss';
 /* global BannerName */
 
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const bannerClickTrackRatio = 1; // TODO FOR TESTING
-const bannerCloseTrackRatio = 1; // TODO FOR TESTING
+const bannerClickTrackRatio = 0.01;
+const bannerCloseTrackRatio = 0.01;
 const eventTracker = new MatomoTracker( 'FundraisingTracker', BannerName );
 
 const trackingData = {

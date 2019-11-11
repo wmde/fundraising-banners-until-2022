@@ -118,7 +118,7 @@ export default class DonationForm extends Component {
 					</div>
 				</div>
 
-				<div className={ 'select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
+				<div className={ 'form-field-group select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
 					<div id="WMDE_Banner-amounts" className="WMDE-Banner-amounts select-group">
 						{amounts.map( ( { value }, idx ) => (
 							<label id="amount_label_{i}"
