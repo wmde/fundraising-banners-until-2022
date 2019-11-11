@@ -67,7 +67,7 @@ export default class MatomoTracker {
 	}
 
 	recordBannerImpression() {
-		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', 'banner-shown', this.bannerName ) );
+		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
 	}
 
 }
