@@ -6,6 +6,7 @@
 	flex-wrap: wrap;
 	justify-content: flex-end;
 	background-color: $color-white;
+	width: 100%;
 }
 
 .form {
@@ -35,9 +36,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		flex: 1 1 auto;
+		min-width: 19em;
 
 		@media ( min-width: $breakpoint-m ) {
 			flex-wrap: nowrap;
+			min-width: auto;
 		}
 	}
 }
