@@ -4,7 +4,6 @@ import Translations from '../shared/messages/de';
 import DayName from '../shared/day_name';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
-import { createCampaignParameters } from '../shared/campaign_parameters';
 import MatomoTracker from '../shared/matomo_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
@@ -33,10 +32,9 @@ const LOCALE = 'de';
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
-const CampaignParameters = createCampaignParameters();
 const campaignDays = new CampaignDays(
-	startOfDay( CampaignParameters.startDate ),
-	endOfDay( CampaignParameters.endDate )
+	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
+	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
 );
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LOCALE );
 
