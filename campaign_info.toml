@@ -90,13 +90,13 @@ wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/banner_ctrl.js"
-pagename = "B19WPDE_01-191111_ctrl"
-tracking = "wpde-01-191111-ctrl"
+pagename = "B19WPDE_01-191111_2_ctrl"
+tracking = "wpde-01-191111-2-ctrl"
 
 [wikipediade.banners.var]
 filename = "./wikipedia.de/banner_var.js"
-pagename = "B19WPDE_01-191111_var"
-tracking = "wpde-01-191111-var"
+pagename = "B19WPDE_01-191111_2_var"
+tracking = "wpde-01-191111-2-var"
 
 
 # English Campaign
