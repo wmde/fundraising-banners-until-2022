@@ -15,6 +15,14 @@
 
 $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
 
+/**
+ * Develop mobile-first
+ * Never use "@media ( max-width: $breakpoint_x )"
+ * Always use "@media ( min-width: $breakpoint_x )"
+ */
+$breakpoint_s: 1024px;
+$breakpoint_l: 1400px;
+
 #WMDE_Banner {
 	display: none;
 	width: 100%;
@@ -186,7 +194,11 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
 		&-field-group {
 			display: flex;
 			flex: 1 1 auto;
-			flex-wrap: nowrap;
+			flex-wrap: wrap;
+
+			@media ( min-width: $breakpoint_s ) {
+				flex-wrap: nowrap;
+			}
 		}
 	}
 
@@ -203,12 +215,15 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
 		font-weight: bold;
 		width: 100%;
 		&-container {
+			border: 1px solid var( --banner-color-blue );
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
 			margin: 0 1em 0.4em 0;
-			border: 0;
-			max-width: 20em;
+			@media ( min-width: $breakpoint_l ) {
+				border: 0;
+				max-width: 20em;
+			}
 		}
 		&:first-child {
 			padding-left: 0;
@@ -420,75 +435,85 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
 		}
 	}
 
-	.banner {
-		&__content {
-			display: flex;
-			flex-direction: row;
-			flex-direction: row;
-			order: 1;
-		}
-		&__footer {
-			order: 2;
-			padding: 0.5em 0 0 5.8em;
-		}
-	}
+	@media ( min-width: $breakpoint_l ) {
+		.banner {
+			&__content {
+				display: flex;
+				flex-direction: row;
+				order: 1;
+			}
 
-	.infobox {
-		margin: 0.2em 0 0.2em 5em;
-	}
-
-	.form {
-		align-items: center;
-		display: flex;
-		margin: 0 1.5em 0 0.25em;
-		padding-top: 0;
-		width: 20em;
-		&__header > p {
-			width: 100%;
-		}
-		&__header > .banner__footer {
-			display: none;
-		}
-		& > div {
-			width: 100%;
-		}
-		&__header {
-			text-align: center;
-		}
-		&-field-group {
-			display: block;
-		}
-	}
-
-	.button-group {
-		flex-wrap: wrap;
-		margin-left: 0.5em;
-		margin-right: -0.5em;
-	}
-
-	.select-group {
-		flex-wrap: wrap;
-		&:first-child,
-		&:last-child {
-			padding-left: 0.5em;
-		}
-		&-container--with-error .select-group__errormessage {
-			margin-left: 0.5em;
-		}
-		&__custom-input {
-			&:focus,
-			&:active {
-				border: 1px solid var( --banner-color-green );
+			&__footer {
+				order: 2;
+				padding: 0.5em 0 0 5.8em;
 			}
 		}
-	}
 
-	#WMDE_Banner-form {
-		display: block;
-	}
+		.infobox {
+			margin: 0.2em 0 0.2em 5em;
+		}
 
-	.footer__item--rightflex {
-		margin-right: 5em;
+		.form {
+			align-items: center;
+			display: flex;
+			margin: 0 1.5em 0 0.25em;
+			padding-top: 0;
+			width: 20em;
+
+			&__header > p {
+				width: 100%;
+			}
+
+			&__header > .banner__footer {
+				display: none;
+			}
+
+			& > div {
+				width: 100%;
+			}
+
+			&__header {
+				text-align: center;
+			}
+
+			&-field-group {
+				display: block;
+			}
+		}
+
+		.button-group {
+			flex-wrap: wrap;
+			margin-left: 0.5em;
+			margin-right: -0.5em;
+		}
+
+		.select-group {
+			flex-wrap: wrap;
+
+			&:first-child,
+			&:last-child {
+				padding-left: 0.5em;
+			}
+
+			&-container--with-error .select-group__errormessage {
+				margin-left: 0.5em;
+			}
+
+			&__custom-input {
+				&:focus,
+				&:active {
+					border: 1px solid var( --banner-color-green );
+				}
+			}
+		}
+
+		#WMDE_Banner-form {
+			display: block;
+		}
+
+		.footer__item--rightflex {
+			margin-right: 5em;
+		}
 	}
 }
 
