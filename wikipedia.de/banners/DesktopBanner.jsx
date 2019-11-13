@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import style from './DesktopBanner.pcss';
 import DonationForm from '../components/DonationForm';
 import Footer from '../components/Footer';
 import Funds from '../components/Funds';
@@ -22,31 +21,44 @@ export default class DesktopBanner extends Component {
 
 	render( props ) {
 		const campaignProjection = props.campaignProjection;
-		return <div id="WMDE_Banner" className={classNames( { 'is-hidden': !props.bannerVisible } )}>
-			<div className="banner">
-				<div className="banner__content">
-					<div className="infobox">
+		return <div className={classNames(
+				props.Styles.DesktopBanner.banner,
+				props.Styles.Colors.backgroundWhite,
+				{ [props.Styles.DesktopBanner.bannerIsHidden]: !props.bannerVisible }
+				)}>
+			<div className={props.Styles.DesktopBanner.banner__wrapper}>
+				<div className={props.Styles.DesktopBanner.banner__content}>
+					<div className={props.Styles.DesktopBanner.infobox}>
 						<Infobox amountBannerImpressionsInMillion={props.amountBannerImpressionsInMillion}
 								 numberOfDonors={props.numberOfDonors}
 								 campaignDaySentence={props.campaignDaySentence}
 								 weekdayPrepPhrase={props.weekdayPrepPhrase}
-								 currentDayName={props.currentDayName}/>
+								 currentDayName={props.currentDayName}
+								 Styles={props.Styles}
+						/>
 						<ProgressBar
 							locale={props.locale}
 							daysLeft={campaignProjection.getRemainingDays()}
 							donationAmount={campaignProjection.getProjectedDonationSum()}
 							goalDonationSum={campaignProjection.goalDonationSum}
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={this.setStartAnimation}/>
+							setStartAnimation={this.setStartAnimation}
+							Styles={props.Styles}
+						/>
 					</div>
-					<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
+					<DonationForm bannerName={props.bannerName} campaignName={props.campaignName} Styles={props.Styles}/>
 				</div>
-				<div className="close">
-					<button className="close__link" onClick={props.closeBanner}>&#x2715;</button>
+				<div className={ props.Styles.CloseButton.close }>
+					<button
+						className={classNames(
+						props.Styles.CloseButton.close__link,
+						props.Styles.Colors.dark,
+						props.Styles.Colors.backgroundTransparent)}
+							onClick={props.closeBanner}>&#x2715;</button>
 				</div>
-				<Footer bannerName={props.bannerName} campaignName={props.campaignName}/>
+				<Footer bannerName={props.bannerName} campaignName={props.campaignName} Styles={props.Styles}/>
 			</div>
-			<Funds/>
+			<Funds Styles={props.Styles}/>
 		</div>
 	}
 }

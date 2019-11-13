@@ -1,6 +1,6 @@
 @import '../variables_ctrl.pcss';
 
-#WMDE_Banner {
+.banner {
 	display: none;
 	width: 100%;
 	position: relative;
@@ -10,60 +10,61 @@
 
 	@media ( min-width: $breakpoint-xs ) {
 		display: block;
-		&.is-hidden {
-			display: none;
-		}
-	}
-
-	.invisible-text {
-		opacity: 0;
-		cursor: default;
-	}
-
-	img {
-		border: 0 none;
-	}
-
-	.banner {
-		display: flex;
-		flex-direction: column;
-		font-size: 14px;
-		padding-bottom: 0.75em;
-
-		font-family: $banner-main-font-family;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background-color: $color-white;
-		&__content {
-			margin-top: 0.5em;
-		}
-		&__footer {
-			padding: 0;
-			font-size: 1.1em;
-			color: $color-dark;
-			@media ( min-width: $breakpoint-m ) {
-				padding: 0 40px;
-			}
-			@media ( min-width: $breakpoint-l ) {
-				padding: 0 60px 0 40px;
-			}
-		}
-	}
-
-	.progress_bar__wrapper {
-		max-height: 30px;
-		margin-right: 1.2em;
-		margin-left: 1.2em;
-		@media ( min-width: $breakpoint-l ) {
-			margin-right: 1.5em;
-			margin-left: 1.5em;
-		}
-	}
-
-	.progress_bar__donation_fill {
-		border-top-right-radius: 8px;
-		border-bottom-right-radius: 8px;
-		@media ( min-width: $breakpoint-l ) {
-			height: 32px;
-		}
 	}
 }
+
+.banner--is-hidden {
+	display: none;
+}
+
+/* TODO move to infobox */
+.invisible-text {
+	opacity: 0;
+	cursor: default;
+}
+
+.banner__layout {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	padding-bottom: 0.75em;
+
+	font-family: $banner-main-font-family;
+	box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+}
+
+.banner__content {
+	margin-top: 0.5em;
+}
+.banner__footer {
+	padding: 0;
+	font-size: 1.1em;
+	color: $color-dark;
+	@media ( min-width: $breakpoint-m ) {
+		padding: 0 40px;
+	}
+	@media ( min-width: $breakpoint-l ) {
+		padding: 0 60px 0 40px;
+	}
+}
+
+
+/* TODO find clever mechanism for context-specific overrides */
+.progress_bar__wrapper {
+	max-height: 30px;
+	margin-right: 1.2em;
+	margin-left: 1.2em;
+	@media ( min-width: $breakpoint-l ) {
+		margin-right: 1.5em;
+		margin-left: 1.5em;
+	}
+}
+
+.progress_bar__donation_fill {
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	@media ( min-width: $breakpoint-l ) {
+		height: 32px;
+	}
+}
+

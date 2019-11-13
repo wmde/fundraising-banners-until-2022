@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import style from './Funds.pcss';
+import style from './Funds.pcss'; // TODO use props.Styles
 
-export default function Funds() {
+export default function Funds(props) {
 	return <div className="wlightbox-contents">
 		<div id="info-application-of-funds">
 			<div className="wlightbox-title clearfix">
@@ -11,11 +11,15 @@ export default function Funds() {
 			</div>
 			<p>
 				<img alt="Mittelverwendung"
-					 src="//upload.wikimedia.org/wikipedia/commons/b/ba/WMDE-application-of-funds-diagram-2018.png"/>
+					 src="//upload.wikimedia.org/wikipedia/commons/b/ba/WMDE-application-of-funds-diagram-2018.png"
+					 className={props.Styles.Borders.noBorder}
+				/>
 			</p>
 			<div>
 				<img alt="Mittelverwendung"
-					 src="//upload.wikimedia.org/wikipedia/commons/2/25/WMDE-application-of-funds-2018.png"/>
+					 src="//upload.wikimedia.org/wikipedia/commons/2/25/WMDE-application-of-funds-2018.png"
+					 className={props.Styles.Borders.noBorder}
+				/>
 			</div>
 			<hr/>
 			<div id="info-application-of-funds-footer">

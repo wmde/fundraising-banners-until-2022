@@ -12,6 +12,7 @@ import formatNumber from 'format-number';
 import FormStyles from './components/DonationForm.pcss';
 // eslint-disable-next-line no-unused-vars
 import InfoboxStyles from './components/Infobox.pcss';
+import Styles from "./styles_ctrl";
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */
@@ -63,7 +64,8 @@ render(
 		trackingData: trackingData,
 		translations: Translations,
 		locale: LOCALE,
-		campaignProjection
+		campaignProjection,
+		Styles
 	} ),
 	document.getElementById( 'WMDE-Banner-Container' )
 );
