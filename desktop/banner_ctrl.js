@@ -16,6 +16,7 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
+import ProgressBar from '../shared/progress_bar/progress_bar';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
@@ -57,6 +58,17 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
+const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span>M €';
+const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span>M €';
+const progressBar = new ProgressBar(
+	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
+	campaignProjection,
+	{
+		textRight: progressBarTextRight,
+		textInnerRight: progressBarTextInnerRight,
+		decimalSeparator: '.'
+	}
+);
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -67,7 +79,8 @@ $bannerContainer.html( bannerTemplate( {
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -232,6 +245,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();
