@@ -66,8 +66,10 @@ export default class MatomoTracker {
 		}
 	}
 
-	recordBannerImpression() {
-		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
+	recordBannerImpression( trackRatio = 0.01 ) {
+		if ( Math.random() < trackRatio ) {
+			this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
+		}
 	}
 
 }
