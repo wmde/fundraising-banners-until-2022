@@ -76,6 +76,7 @@ The changes to the code depend on which kind of test you are running.
 
 ## Notes on possible Banner code improvements
 * Refactor old CSS to remove ID selectors and ensure that no new CSS uses ID selectors by setting "selector-max-id" in .stylelintrc.json to 0. The current legacy CSS often makes use of two-chained ID selectors (like `#elementOne #elementTwo { color: blah; }`) which is unnecessary and is something we should get rid of in the future.
+* Rename `CampaignDays` to `DateRange`, since we're using it for more than the range of the campaign, but also for the campaign projection with a different start date. Use the proper method names in the Campaign projection.
 * Change banner JS code to improve reusability of markup, for A/B testing text changes: Load the `banner_text.hbs` template and render it as an unescaped variable into the markup in `banner_html.hbs`.
 * Move translatable strings from `banner_functions.js` and `campaign_day_sentence.js` into a central `messages.js` file and add a `Translations` object that can receive keys (and placeholder values) and returns translated strings.
 * Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).

@@ -47,7 +47,7 @@ export default class ProgressBar extends Component {
 			width: 1,
 			animation: PENDING
 		};
-		if ( typeof props.animate === 'undefined' || props.animate === false ) {
+		if ( props.animate === false ) {
 			this.state = {
 				width: this.calculateWidth(),
 				animation: ENDED

@@ -39,7 +39,10 @@ const campaignDays = new CampaignDays(
 const campaignDaySentence = new CampaignDaySentence( campaignDays, LOCALE );
 
 const campaignProjection = new CampaignProjection(
-	campaignDays,
+	new CampaignDays(
+		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
+		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+	),
 	{
 		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
 		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
