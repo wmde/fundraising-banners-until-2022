@@ -16,7 +16,7 @@ describe( 'MatomoTracker', function () {
 		};
 		const tracker = new MatomoTracker( 'TestTracker', 'TestBanner05' );
 
-		tracker.recordBannerImpression( TRACK_RATIO_ALWAYS );
+		tracker.recordBannerImpression();
 
 		assert.ok( window.TestTracker.trackContentImpression.calledWith( 'Banners', 'TestBanner05' ) );
 	} );
@@ -39,7 +39,7 @@ describe( 'MatomoTracker', function () {
 			setTimeout( tracker.waitForTrackerToInit.bind( tracker ), retryInterval );
 		};
 		const tracker = new MatomoTracker( 'TestTracker', 'TestBanner05', scheduleRetry );
-		tracker.recordBannerImpression( TRACK_RATIO_ALWAYS );
+		tracker.recordBannerImpression();
 		tracker.trackEvent( 'some-action', TRACK_RATIO_ALWAYS );
 
 		setTimeout( () => {
