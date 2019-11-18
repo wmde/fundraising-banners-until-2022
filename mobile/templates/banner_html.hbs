@@ -1,35 +1,31 @@
 <div id="frbanner" class="frbanner">
 	<div id="frbanner-window" class="frbanner-window">
-		<div class="frbanner-headline">
-			<div class="banner-headline">
-				<div>
-					<span>Die Wikimedia-Spendenkampagne</span>
-				</div>
-			</div>
-			<div id="frbanner-close" class="banner-close-button"></div>
-		</div>
+		<div id="frbanner-close"></div>
 
-		<div id="modal-signup" class="cf">
-			<div class="infobox">
-				<div class="infobox__text">
-					{{> banner_text }}
-				</div>
-				{{{ progressBar }}}
-			</div>
+        <div id="modal-signup" class="cf">
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&da=0&dsn=0">
+            <div class="infobox">
+                <div class="infobox__text">
+                    {{> banner_text }}
+                </div>
+                {{{ progressBar }}}
+                <div class="call-to-action">
+                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+                </div>
+            </div>
+
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&da=0">
 				<input type="hidden" id="periode" name="periode" value="0">
 				<input type="hidden" id="address_type" name="addressType" value="person">
-				<input type="hidden" name="intervalType" id="intervalType" value="0" />
+				<input type="hidden" id="intervalType" name="intervalType" value="0" />
 				<input type="hidden" id="impCount" name="impCount" value="" />
 				<input type="hidden" id="bImpCount" name="bImpCount" value="" />
 				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
 				<input type="hidden" id="betrag" name="betrag" value="" />
 
-				<hr class="frbanner-separator">
-
 				<fieldset class="from__section cf">
+					<legend class="form__section-head">Häufigkeit wählen</legend>
 					<div class="select-group-container">
 						<ol class="select-group select-group--tablet-3cols interval-selection" >
 							<li class="select-group__option">
@@ -48,9 +44,8 @@
 					</div>
 				</fieldset>
 
-				<hr class="frbanner-separator">
-
 				<fieldset class="form__section cf">
+					<legend class="form__section-head">Betrag wählen</legend>
 					<ol class="select-group select-group--tablet-2cols amount-selection" >
 						<li class="select-group__option" id="amount_total_1">
 							<input class="select-group__input" name="betrag_auswahl" type="radio" id="amount1" value="5" />
@@ -81,8 +76,8 @@
 					</ol>
 				</fieldset>
 
-				<hr class="frbanner-separator">
 				<fieldset class="form__section cf">
+					<legend class="form__section-head">Zahlweise wählen</legend>
 					<ol class="button-group button-group--tablet-2cols payment-selection">
 						<li class="button-group__container">
 							<button class="button-group__button" data-payment-type="PPL">
@@ -127,9 +122,9 @@
 			</form>
 			<div class="smallprint" id="frbanner-smallprint">
 				<div class="smallprint">
-					<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&dsn=0" target="_blank">Impressum</a> |
-					<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&dsn=0" target="_blank">Datenschutz</a> |
-					<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&dsn=0" target="_blank">Wohin geht meine Spende?</a>
+					<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Impressum</a> |
+					<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Datenschutz</a> |
+					<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Wohin geht meine Spende?</a>
 				</div>
 			</div>
 			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />

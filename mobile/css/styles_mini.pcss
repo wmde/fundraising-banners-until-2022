@@ -90,17 +90,21 @@
 			transform: translate3d( 0, 0, 0 );
 		}
 	}
-	&-close-button {
+	&__close-button {
 		position: relative;
 		padding: 0 5px;
 		flex: 0 0 auto;
 		right: 0;
-		font-size: 25px;
+		top: -3px;
+		line-height: 39px;
+		font-size: 40px;
+		font-weight: bold;
 		&:before {
-			top: 0;
 			position: relative;
 			content: var( --banner-symbol-close );
 			color: var( --banner-color-red-light );
+			float: left;
+			height: 100%;
 		}
 	}
 }
