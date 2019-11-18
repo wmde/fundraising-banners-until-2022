@@ -59,20 +59,13 @@ const animateHighlight = require( '../shared/animate_highlight' );
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ] + '.'
-].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
-		textInnerLeft: progressBarTextInnerLeft,
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
 		decimalSeparator: '.'
