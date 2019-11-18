@@ -124,17 +124,22 @@ export default class DonationForm extends Component {
 							<label id="amount_label_{i}"
 								   className="select-group__option select-group__option--quarterwidth">
 								<input type="radio" name="betrag_auswahl"
-									   onClick={this.amountSelected} className="select-group__input"
+									   onClick={this.amountSelected}
+									   className="select-group__input"
 									   checked={ value === state.selectedAmount }
 									   value={ value }/>
 								<span className="select-group__state">{value} €</span>
 							</label>
 						) ) }
 						<label className="select-group__option select-group__option--halfwidth">
-							<input type="text" name="amountGiven" value={ state.customAmount } onInput={ this.amountTyped } size="3"
-								   onBlur={this.finishedTypingAmount}
-									autocomplete="off" placeholder="Wunschbetrag"
-								   className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '') } />
+							<input type="text"
+									value={ state.customAmount }
+									onInput={ this.amountTyped }
+									size="3"
+									onBlur={this.finishedTypingAmount}
+									autocomplete="off"
+									placeholder="Wunschbetrag"
+									className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '') } />
 						</label>
 					</div>
 					<span className='select-group__errormessage'>Bitte geben Sie einen Spendenbetrag von min. 1€ ein.</span>
