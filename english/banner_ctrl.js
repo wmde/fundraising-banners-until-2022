@@ -56,13 +56,6 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
 
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
@@ -72,9 +65,7 @@ const progressBar = new ProgressBar(
 	{
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
-		decimalSeparator: '.',
-		textInnerLeft: progressBarTextInnerLeft,
-		modifier: 'progress_bar--lateprogress'
+		decimalSeparator: '.'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
@@ -98,33 +89,36 @@ const trackingEvents = new EventLoggingTracker( BannerName );
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	banner.on( 'validation:amount:ok', function () {
-		$( '#WMDE_Banner-amounts-error-text' ).hide();
-		$( '#WMDE_Banner-amounts' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts-error-wrapper' ).hide();
+		$( '#WMDE_Banner-amounts' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:amount:error', function ( evt, text ) {
-		$( '#WMDE_Banner-amounts-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-amounts' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-amounts-error-text' ).text( text );
+		$( '#WMDE_Banner-amounts-error-wrapper' ).show();
+		$( '#WMDE_Banner-amounts' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:ok', function () {
-		$( '#WMDE_Banner-frequency-error-text' ).hide();
-		$( '#WMDE_Banner-frequency' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency-error-wrapper' ).hide();
+		$( '#WMDE_Banner-frequency' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:period:error', function ( evt, text ) {
-		$( '#WMDE_Banner-frequency-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-frequency' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-frequency-error-text' ).text( text );
+		$( '#WMDE_Banner-frequency-error-wrapper' ).show();
+		$( '#WMDE_Banner-frequency' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:ok', function () {
-		$( '#WMDE_Banner-payment-type-error-text' ).hide();
-		$( '#WMDE_Banner-payment-type' ).removeClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-payment-type-error-wrapper' ).hide();
+		$( '#WMDE_Banner-payment-type' ).parent().removeClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 	banner.on( 'validation:paymenttype:error', function ( evt, text ) {
-		$( '#WMDE_Banner-payment-type-error-text' ).text( text ).show();
-		$( '#WMDE_Banner-payment-type' ).addClass( 'select-group--with-error' );
+		$( '#WMDE_Banner-payment-type-error-text' ).text( text );
+		$( '#WMDE_Banner-payment-type-error-wrapper' ).show();
+		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
 }
@@ -132,23 +126,30 @@ function setupValidationEventHandling() {
 function appendEuroSign( field ) {
 	if ( $( field ).val() !== '' &&
 		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( '€ ' + $( field ).val() );
+		$( field ).val( '€' + $( field ).val() );
 	}
 }
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have current value for event.target
-	banner.on( 'amount:selected', null, function () {
+	banner.on( 'amount:selected', null, function ( evt ) {
+		const label = $( evt.target );
+		if ( label.hasClass( 'select-group__option-amount-other-input' ) ) {
+
+			label.find( '#field-amount_total_custom' ).prop( 'checked', true );
+			label.find( '.select-group__custom-input' ).focus();
+			return;
+		}
 		$( '#amount-other-input' ).val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
 		banner.trigger( 'validation:amount:ok' );
 	} );
 
 	banner.on( 'amount:custom', null, function () {
-		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
-		var input = $( '#WMDE_Banner-amounts .select-group__custom-input' );
+		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
+		$( '#field-amount_total_custom' ).val( input.val().replace( ',', '.' ) );
 		banner.trigger( 'validation:amount:ok' );
 		appendEuroSign( input );
 	} );
@@ -156,6 +157,8 @@ function setupAmountEventHandling() {
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
 	} );
+
+	banner.trigger( 'validation:init', banner.data( 'validation-event-handling' ) );
 }
 
 function validateAndSetPeriod() {
@@ -197,8 +200,6 @@ $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 $( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
 	$( this ).trigger( 'paymenttype:selected' );
 } );
-
-BannerFunctions.initializeBannerEvents();
 
 // END form init code
 
@@ -269,10 +270,8 @@ function showLanguageInfoBox() {
 
 function positionLanguageInfoBox() {
 	var langInfoElement = $( '#langInfo' ),
-		formWidth = $( '#WMDE_Banner-form' ).width() - 20,
 		bannerHeight = $( '#WMDE_Banner' ).outerHeight();
 	langInfoElement.css( 'top', bannerHeight );
-	langInfoElement.css( 'width', formWidth );
 }
 
 var impCount = BannerFunctions.increaseImpCount();

@@ -31,8 +31,12 @@
                                     <span class="select-group__state">yearly</span>
                                 </label>
                             </div>
-                            <span id="WMDE_Banner-frequency-error-text"
-                                  class="select-group__errormessage">{{ no-interval-message }}</span>
+
+                            <span class="select-group__errormessage" id="WMDE_Banner-frequency-error-wrapper">
+                                <span class="select-group__erroricon" id="WMDE_Banner-frequency-error-text">
+                                    {{ no-interval-message }}
+                                </span>
+                            </span>
                         </div>
 
                         <div class="select-group-container">
@@ -41,52 +45,59 @@
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_1"
                                            class="select-group__input" value="5">
-                                    <span class="select-group__state">5 €</span>
+                                    <span class="select-group__state">€5</span>
                                 </label>
 
                                 <label id="amount_label_2"
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_2"
                                            class="select-group__input" value="10">
-                                    <span class="select-group__state">10 €</span>
+                                    <span class="select-group__state">€10</span>
                                 </label>
 
                                 <label id="amount_label_3"
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_3"
                                            class="select-group__input" value="20">
-                                    <span class="select-group__state">20 €</span>
+                                    <span class="select-group__state">€20</span>
                                 </label>
 
                                 <label id="amount_label_4"
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_4"
                                            class="select-group__input" value="25">
-                                    <span class="select-group__state">25 €</span>
+                                    <span class="select-group__state">€25</span>
                                 </label>
 
                                 <label id="amount_label_5"
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_5"
                                            class="select-group__input" value="50">
-                                    <span class="select-group__state">50 €</span>
+                                    <span class="select-group__state">€50</span>
                                 </label>
 
                                 <label id="amount_label_6"
                                        class="select-group__option select-group__option--quarterwidth">
                                     <input type="radio" name="betrag_auswahl" id="field-amount_total_6"
                                            class="select-group__input" value="100">
-                                    <span class="select-group__state">100 €</span>
+                                    <span class="select-group__state">€100</span>
                                 </label>
 
-                                <label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input">
+                                <label class="select-group__option select-group__option--quarterwidth select-group__option-amount-other-input"
+                                       for="amount-other-input">
+                                    <input type="radio" name="betrag_auswahl" id="field-amount_total_custom"
+                                           class="select-group__input" value="">
                                     <input type="text" name="amountGiven" id="amount-other-input" size="3"
                                            autocomplete="off" value="" placeholder="Other amount"
                                            class="select-group__custom-input">
                                 </label>
                             </div>
-                            <span id="WMDE_Banner-amounts-error-text"
-                                  class="select-group__errormessage">{{ amount-empty-message }}</span>
+
+                            <span class="select-group__errormessage" id="WMDE_Banner-amounts-error-wrapper">
+                                <span class="select-group__erroricon" id="WMDE_Banner-amounts-error-text">
+                                    {{ amount-empty-message }}
+                                </span>
+                            </span>
                         </div>
                     </div>
 
@@ -113,8 +124,12 @@
                                     <span class="select-group__state">PayPal</span>
                                 </label>
                             </div>
-                            <span id="WMDE_Banner-payment-type-error-text"
-                                  class="select-group__errormessage">{{ no-payment-type-message }}</span>
+
+                            <span class="select-group__errormessage" id="WMDE_Banner-payment-type-error-wrapper">
+                                <span class="select-group__erroricon" id="WMDE_Banner-payment-type-error-text">
+                                    {{ no-payment-type-message }}
+                                </span>
+                            </span>
                         </div>
 
                         <div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">

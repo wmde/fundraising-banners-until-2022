@@ -1,91 +1,153 @@
 :root {
-	--smallscreen-left-pad: 1.2em;
-	--smallscreen-right-pad: 1em;
+	--banner-color-gray: #808080;
+	--banner-color-white: #ffffff;
+	--banner-color-black: #000000;
+	--banner-color-green: #97b313;
+	--banner-color-green-light: #dbe5e7;
+	--banner-color-blue: #0166a5;
+	--banner-color-blue-light: #dce4e8;
+	--banner-color-yellow: #ffdd5b;
+	--banner-color-red: #990000;
+
+	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
 }
 
+$errorIcon: url( "data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
+
+/**
+ * Develop mobile-first
+ * Never use "@media ( max-width: $breakpoint_x )"
+ * Always use "@media ( min-width: $breakpoint_x )"
+ */
+$breakpoint_s: 900px;
+$breakpoint_m: 1150px;
+$breakpoint_m_max: 1149px; /** DEPRECATED **/
+$breakpoint_l: 1400px;
+
 #WMDE_Banner {
-
-	/**
-	 * GLOBAL RESET
-	 */
-	img {
-		border: 0 none;
-	}
-
-	/**
-	 * CUSTOM
-	 */
-
 	display: none;
 	width: 100%;
 	position: fixed;
 	z-index: 10000;
 	font-size: 16px;
 
+	.invisible-text {
+		opacity: 0;
+		cursor: default;
+	}
+
+	img {
+		border: 0 none;
+	}
+
 	.banner {
 		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+		padding-bottom: 0.75em;
 
-		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
-		background-color: #ffffff;
+		font-family: var( --banner-main-font-family );
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+		background-color: var( --banner-color-white );
+		&__content {
+			display: flex;
+			flex-direction: column;
+			margin-top: 0.5em;
+		}
+		&__footer {
+			padding: 0 2.6em 0 2.6em;
+			font-size: 1.1em;
+			color: var( --banner-color-gray );
+		}
 	}
 
 	.infobox {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-between;
-		flex: 0 1 100%;
-
-		border: 5px solid #990000;
-		border-radius: 9px;
-		background-color: #f8f9fa;
+		flex: 0 1 auto;
+		border: 0 none;
+		border-radius: 0.4em;
+		background-color: var( --banner-color-blue );
 		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.5em 0 1em 1em;
+		margin: 0.2em 5em 0.2em 5em;
+		position: relative;
+		> div {
+			width: 100%;
+		}
+		&:before {
+			position: absolute;
+			bottom: 1.5em;
+			content: ' ';
+			margin-left: -25px;
+			border-style: solid;
+			border-width: 0 0 25px 25px;
+			border-color: transparent transparent var( --banner-color-blue ) transparent;
+		}
+		&__text {
+			color: var( --banner-color-white );
+			font-family: var( --banner-text-font-family );
+			font-size: 1em;
+			line-height: 1.3em;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 1.3em;
+				line-height: 1.3em;
+			}
+			text-align: left;
+			margin: 0.5em 1.2em;
+			font-weight: normal;
+		}
+		&__footer {
+			padding: 0.025em 0 0 2em;
+			background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/37/Information-icon-yellow.png' ) no-repeat left 0.5em top 0.1em/18px 18px;
+		}
 	}
 
-	.infobox__text {
-		color: #000000;
-		font-size: 1.2em;
-		line-height: 1.2em;
-		text-align: left;
-		margin: 0 0 0.5em 2em;
-		font-weight: bold;
-	}
-
-	.text__headline {
-		margin: 0.2em 0;
-	}
-
-	.text__paragraph {
-		margin: 0;
-	}
-
-	.text__headline--bold,
-	.text__paragraph--bold {
-		font-weight: bold;
-	}
-
-	.text__headline--italic,
-	.text__paragraph--italic {
-		font-style: italic;
-	}
-
-	.text__paragraph .text__highlight {
-		color: #ffffff;
-		background-color: #900000;
-		padding: 0 0.5em;
-	}
-
-	/* This is for keeping the same banner size when testing different banner texts.
-	The placeholder text element should contain the text that was removed.
-	*/
-	.text__hidden-placeholder {
-		visibility: hidden;
-	}
-
-	.infobox__footer {
-		padding: 0.025em 0 0 2em;
-		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.1em/18px 18px;
+	.text {
+		&__headline {
+			display: inline;
+			margin: 0.2em 0;
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+			@media ( min-width: $breakpoint_m ) {
+				display: block;
+			}
+		}
+		&__paragraph {
+			margin: 0;
+			padding: 0;
+			display: inline;
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+			&--sans-serif {
+				font-family: var( --banner-main-font-family );
+				font-size: 0.8em;
+			}
+			.text__highlight {
+				border: 0 none;
+				padding: 0 0.1em;
+				background: none;
+			}
+			@media ( min-width: $breakpoint_m ) {
+				display: block;
+			}
+		}
+		/*  This is for keeping the same banner size when testing different banner texts.
+			The placeholder text element should contain the text that was removed
+		 */
+		&__hidden-placeholder {
+			visibility: hidden;
+		}
 	}
 
 	.footer {
@@ -94,197 +156,298 @@
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 1em;
+		font-size: 0.8em;
 		line-height: 1.6em;
-	}
-
-	.footer__info {
-		text-transform: uppercase;
-	}
-
-	.footer__item span {
-		margin-right: 0.5em;
-	}
-
-	.footer__importantinfo {
-		font-weight: bold;
-	}
-
-	.footer__item {
-		white-space: nowrap;
-	}
-
-	.footer__item--rightflex {
-		flex-grow: 1;
-		text-align: right;
+		color: var( --banner-color-black );
+		&__info {
+			text-transform: uppercase;
+		}
+		&__importantinfo {
+			font-weight: bolder;
+		}
+		&__item {
+			white-space: nowrap;
+			&--rightflex {
+				flex-grow: 1;
+				text-align: right;
+			}
+			span {
+				margin-right: 1.2em;
+			}
+		}
 	}
 
 	.application-of-funds-link {
-		color: #000000;
+		color: var( --banner-color-black );
 	}
 
 	/* Form styling */
 
-	.form {
+	#WMDE_Banner-form {
 		display: flex;
-		width: 16em;
-		min-width: 12em;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.form {
+		order: 2;
+		width: auto;
+		min-width: inherit;
 		flex-shrink: 0;
-		padding: 1em 0 0 0.5em;
-		margin: 0.5em 0 0.5em 0.25em;
+		padding: 0.2em 0 0 0.5em;
+		margin: 0.2em 2.5em 0;
+
+		@media ( max-width: 640px ) {
+			margin: 0.2em 0 0;
+		}
+
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			color: var( --banner-color-green );
+			width: 100%;
+			font-weight: bold;
+		}
+		&-field-group {
+			display: flex;
+			flex-wrap: wrap;
+			flex: 1 1 auto;
+
+			@media ( max-width: 640px ) {
+				flex-wrap: wrap;
+			}
+		}
 	}
 
 	.select-group {
-		border: 0;
 		margin: 0 auto;
-		padding: 0 0.5em 0.5em 0.5em;
+		padding: 0.4em 0.5em 0.5em 0.5em;
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		flex-direction: row;
 		justify-content: flex-start;
-		flex: 1 1 100%;
+		flex: 1 0 auto;
 		font-size: 0.9em;
 		font-weight: bold;
-	}
-
-	.select-group--with-error {
-		background: #990000;
-	}
-
-	.select-group__errormessage {
-		display: none; /* Message will be shown by JS code */
-		color: #ffffff;
-		font-weight: bold;
-		text-align: center;
 		width: 100%;
-		margin-bottom: 0.2em;
-		font-size: 0.74em;
-	}
+		&-container {
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			margin: 0.3em;
+			border: 1px solid var( --banner-color-blue );
+			border-radius: 0.1em;
 
-	.select-group__input {
-		display: none;
-	}
-
-	.select-group__custom-input {
-		padding: 0.4em;
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		font-size: 0.74em;
-		text-align: center;
-		border: 1px solid #9aa0a7;
-		border-radius: 4px;
-		box-sizing: border-box;
-	}
-
-	.select-group__option {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0;
-		box-sizing: border-box;
-		display: block;
-	}
-
-	.select-group__option--fullwidth {
-		width: 100%;
-	}
-
-	.select-group__option--halfwidth {
-		width: 50%;
-	}
-
-	.select-group__option--quarterwidth {
-		width: 25%;
-	}
-
-	.select-group__option--biggertext {
-		font-size: 1em;
-	}
-
-	.select-group__state {
-		display: block;
-		background: #f8f9fa;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.2em 0;
-		line-height: 2em;
-		cursor: pointer;
-		text-align: center;
-		font-size: 0.8em;
-		box-sizing: border-box;
-		white-space: nowrap;
-	}
-
-	.select-group__input:checked + .select-group__state {
-		color: #000000;
-		background: #f8f9fa;
-		border: 1px solid #2a4b8d;
-		outline: 2px solid #2a4b8d;
-		border-radius: 0;
+			@media ( min-width: $breakpoint_l ) {
+				max-width: 18em;
+			}
+		}
+		/* &:first-child {
+			padding-left: 0;
+		} */
+		&:last-child {
+			padding-right: 0;
+		}
+		&__errormessage {
+			display: none; /* Message will be shown by JS code */
+			font-weight: bold;
+			text-align: left;
+			width: 100%;
+			margin-bottom: 0.2em;
+			font-size: 0.74em;
+			color: var( --banner-color-red );
+			margin-left: 6px;
+			@media ( min-width: $breakpoint_l ) {
+				margin-left: 0;
+			}
+		}
+		&-container--with-error {
+			.select-group__erroricon {
+				position: relative;
+				padding-left: 20px;
+				display: block;
+				&:before {
+					content: $errorIcon;
+					width: 13px;
+					height: 13px;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+		}
+		&__state {
+			display: inline-block;
+			height: auto;
+			background: none;
+			padding: 4px 0 0 4px;
+			color: var( --banner-color-black );
+			border: 0 none;
+			cursor: pointer;
+			text-align: center;
+			font-size: 0.95em;
+			box-sizing: border-box;
+			white-space: nowrap;
+		}
+		&__custom-input + .select-group__state {
+			position: absolute;
+			top: 0;
+			right: 1em;
+			border-color: transparent;
+			background: transparent;
+		}
+		&__custom-input {
+			text-align: left;
+			text-decoration: underline;
+			background: none;
+			height: auto;
+			font-size: 11px;
+			color: var( --banner-color-black );
+			padding: 0.4em;
+			width: 100%;
+			margin: 0;
+			margin-right: 1em;
+			margin-top: 0.3em;
+			font-weight: bold;
+			border: 0 none;
+			box-sizing: border-box;
+			border-radius: 0;
+			&:focus,
+			&:active {
+				border: 1px solid var( --banner-color-green );
+			}
+			&--value-entered {
+				text-decoration: none;
+				color: var( --banner-color-black );
+				background-color: var( --banner-color-green );
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+		&__input {
+			display: inline-block;
+			margin: 3px 5px 0 0;
+			&:checked + .select-group__state {
+				background: none;
+				color: var( --banner-color-black );
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+		&__option {
+			display: flex;
+			flex-wrap: nowrap;
+			flex: 1 1 auto;
+			align-items: center;
+			box-sizing: border-box;
+			padding: 0 0.2em 0.2em 0;
+			margin: 0;
+			height: 23px;
+			&--fullwidth {
+				width: 100%;
+			}
+			&--halfwidth {
+				width: 50%;
+			}
+			&--thirdwidth {
+				width: 33%;
+			}
+			&--quarterwidth {
+				width: 24%;
+			}
+			&--biggertext {
+				font-size: 1em;
+			}
+			&:first-child .select-group__state {
+				border-radius: 0.4em 0 0 0.4em;
+			}
+			&:last-child .select-group__state {
+				border-radius: 0 0.4em 0.4em 0;
+			}
+			&-amount-other-input {
+				min-width: 121px;
+			}
+		}
 	}
 
 	.button-group {
+		display: block;
 		border: 0;
-		margin: 0 auto;
-		padding: 0 0.5em;
-		display: flex;
+		margin: 0;
+		padding: 0.4em 0 0 0;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-		flex: 1 1 100%;
-	}
-
-	.button-group__button {
-		flex: 1 1 auto;
-		padding: 0 0.3em 0.3em 0;
-		margin: 0 -1px 0 -1px;
-		box-sizing: border-box;
-		display: block;
-		cursor: pointer;
-		/* Override browser defaults */
-		border: 0 none;
-		background: transparent;
-		font-size: inherit;
-	}
-
-	.button-group__label {
-		display: block;
-		color: #ffffff;
-		background: #2a4b8d;
-		border: 1px solid #9aa0a7;
-		border-radius: 2px;
-		padding: 0.1em 0;
-		line-height: 2em;
-		font-size: 0.7em;
-		font-weight: bold;
-		text-align: center;
-		box-sizing: border-box;
+		flex: 0 1 auto;
+		&__button {
+			flex: 1 1 auto;
+			padding: 0 0.3em 0.3em 0;
+			box-sizing: border-box;
+			display: block;
+			cursor: pointer;
+			/* Override browser defaults */
+			border: 0 none;
+			background: transparent;
+			font-size: inherit;
+			width: 100%;
+			&--halfwidth {
+				width: 50%;
+			}
+		}
+		&__label {
+			display: block;
+			color: var( --banner-color-white );
+			background-color: var( --banner-color-green );
+			border: 0 none;
+			border-radius: 0.4em;
+			padding: 0.4em 0.4em;
+			line-height: 2em;
+			font-size: 0.85em;
+			font-weight: bold;
+			text-align: center;
+			box-sizing: border-box;
+			white-space: nowrap;
+		}
 	}
 
 	.close {
+		position: absolute;
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
-		top: auto;
-		right: auto;
-		flex: 0 0 18px;
+		top: 0;
+		right: 0;
+		opacity: 0.5;
+
+		@media ( max-width: 1149px ) {
+			top: 0.5em;
+			right: 1em;
+			opacity: 0.8;
+		}
+		&-tracking {
+			display: none;
+			&__pixel {
+				height: 0;
+				width: 0;
+				border: 0 none;
+			}
+		}
+		&__link {
+			font-size: 25px;
+			color: var( --banner-color-gray );
+			text-decoration: none;
+			&:hover {
+				text-decoration: none;
+			}
+		}
 	}
 
-	.click-tracking {
-		display: none;
-	}
-
-	.click-tracking__pixel {
-		height: 0;
-		width: 0;
-		border: 0 none;
+	.iban-block > span {
+		margin-right: 4px;
 	}
 
 	.progress_bar {
-		&__donation_remaining {
-			font-size: 0.9em;
-			margin-left: -10px;
-		}
-
 		&__pointer_tip {
 			margin-top: 18px;
 		}
@@ -294,127 +457,139 @@
 		}
 
 		&__days_left {
-			line-height: 28px;
+			display: block;
+			color: var( --banner-color-white );
+			line-height: 1.9em;
+		}
+		&__wrapper {
+			border-color: var( --banner-color-blue-light );
+			background-color: var( --banner-color-white );
+			border-radius: 0.55em;
+			margin: 0.5em 1em;
+			height: 20px;
+		}
+		&__donation_fill {
+			background: var( --banner-color-green );
+			height: 1.6em;
+			border-radius: 0.4em;
+		}
+		&__donation_text {
+			color: var( --banner-color-white );
+			line-height: 1.8em;
+			white-space: nowrap;
+		}
+		&__donation_remaining {
+			font-size: 0.9em;
+			color: var( --banner-color-green );
+			line-height: 23px;
+			margin-left: -35px;
 		}
 	}
 
-	@media ( max-width: 1399px ) {
+	@media ( min-width: $breakpoint_l ) {
 		.banner {
-			display: block;
+			&__content {
+				display: flex;
+				flex-direction: row;
+				order: 1;
+			}
+			&__footer {
+				order: 2;
+				padding: 0.5em 0 0 5.8em;
+			}
 		}
 
 		.infobox {
-			margin: 0.5em 4em;
-		}
-
-		.infobox__text {
-			margin: 0 var( --smallscreen-right-pad ) 0.5em var( --smallscreen-left-pad );
+			margin: 0.2em 0 0.2em 5em;
 		}
 
 		.form {
-			width: 100%;
-			padding: 0;
-			margin: 0.8em;
-		}
-
-		form {
-			width: 100%;
+			align-items: center;
 			display: flex;
-			flex-wrap: nowrap;
-		}
-
-		.form__container {
-			display: flex;
-			flex-direction: row;
-			flex: 1 1 100%;
-			padding-right: 0.8em;
-		}
-
-		.form__container:first-child {
-			padding-right: 0;
-		}
-
-		.select-group {
-			padding: 0 0 0.3em 0.8em;
-			flex-wrap: nowrap;
-		}
-
-		.select-group.WMDE-Banner-frequency {
-			flex-basis: 60%;
-			padding-left: 0;
-		}
-
-		.select-group__option--fullwidth {
-			width: 100%;
-		}
-
-		.select-group__option--halfwidth {
-			width: 100%;
-		}
-
-		.select-group__option--quarterwidth {
-			width: 100%;
-		}
-
-		.WMDE-Banner-amounts {
-			.select-group__option {
-				flex: 1 1 16%;
+			margin: 0 1.5em 0 0.25em;
+			padding-top: 0;
+			width: 18em;
+			&__header > p {
+				width: 100%;
 			}
-			.select-group__option--custom {
-				flex: 1 1 8em;
+			&__header > .banner__footer {
+				display: none;
+			}
+			& > div {
+				width: 100%;
+			}
+			&__header {
+				text-align: center;
+			}
+			&-field-group {
+				display: block;
 			}
 		}
 
 		.button-group {
-			display: block;
-			flex: 0 0 170px;
-			padding-right: 0;
-		}
-
-		.button-group__button {
-			padding: 0;
-			margin: 0;
-		}
-
-		.button-group__label {
-			padding: 0.1em 0.8em;
-		}
-
-		.close {
-			width: 18px;
-			margin: 0.25em 0.25em 0.25em 0;
-			top: 10px;
-			right: 10px;
-			position: absolute;
-		}
-
-		.progress_bar {
-			align-content: flex-start;
-			margin: 0 var( --smallscreen-right-pad ) 0 var( --smallscreen-left-pad );
-		}
-
-		.progress_bar__wrapper {
-			margin: 4px 0;
-		}
-	}
-
-	@media ( max-width: 1139px ) {
-		form {
 			flex-wrap: wrap;
+			margin-left: 0.5em;
+			margin-right: -0.5em;
 		}
 
-		.form__container:first-child {
-			padding-right: 0.8em;
+		.select-group {
+			flex-wrap: wrap;
+			&:first-child,
+			&:last-child {
+				padding-left: 0.5em;
+			}
+			&-container--with-error .select-group__errormessage {
+				margin-left: 0.5em;
+			}
+			&__option {
+				&:nth-child( 1 ) .select-group__state {
+					border-radius: 0.4em 0 0 0;
+				}
+				&:nth-child( 4 ) .select-group__state {
+					border-radius: 0 0.4em 0 0;
+				}
+				&:nth-child( 5 ) .select-group__state {
+					border-radius: 0 0 0 0.4em;
+				}
+			}
 		}
 
-		/* In this viewport, the container wraps and the payment type is the 1st element in the row */
-		.select-group.WMDE-Banner-payment-type {
-			padding-left: 0;
+		.WMDE-Banner-frequency {
+			.select-group__option {
+				&:nth-child( 1 ) .select-group__state {
+					border-radius: 0.4em 0 0 0.4em;
+				}
+			}
+		}
+
+		.WMDE-Banner-payment {
+			.select-group__option {
+				&:nth-child( 1 ) .select-group__state {
+					border-radius: 0.4em 0 0 0;
+				}
+				&:nth-child( 2 ) .select-group__state {
+					border-radius: 0 0.4em 0 0;
+				}
+				&:nth-child( 3 ) .select-group__state {
+					border-radius: 0 0 0 0.4em;
+				}
+				&:nth-child( 4 ) .select-group__state {
+					border-radius: 0 0 0.4em 0;
+				}
+			}
+		}
+
+		#WMDE_Banner-form {
+			display: block;
+		}
+
+		.footer__item--rightflex {
+			margin-right: 5em;
 		}
 	}
 	#langInfo {
 		display: none;
-		right: 2.5em;
+		right: 0;
 		background: #f2f4ff;
 		position: absolute;
 		border: 1px solid #c2cedb;
@@ -424,5 +599,18 @@
 	#langInfo p {
 		padding: 2px 4px;
 		text-align: center;
+	}
+}
+
+#wlightbox {
+	.info-application-of-funds {
+		&-footer {
+			display: flex;
+			padding: 0 20px;
+			> div {
+				flex: 1 1 auto;
+				padding: 10px 20px;
+			}
+		}
 	}
 }
