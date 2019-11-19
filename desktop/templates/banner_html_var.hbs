@@ -3,14 +3,14 @@
         <div class="banner__content">
             <div class="infobox">
                 <div class="infobox__text">
-                    {{> banner_text_var }}
+                    {{> banner_text }}
                 </div>
                 {{{ progressBar }}}
             </div>
 
             <div class="form">
                 <form id="WMDE_Banner-form" method="post" name="donationForm"
-                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&fd=0&compact=0">
+                      action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&fd=2">
 
                 <div class="form-field-group">
                     <div class="select-group-container">
