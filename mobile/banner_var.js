@@ -103,38 +103,28 @@ $( 'input[name=interval]' ).click( function () {
 	}
 } );
 
-$( '#banner-form-submit' ).click( function () {
-	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
-		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
-		return false;
+// Disable address option 'Nein' if chosen payment type is 'Lastschrift'
+$( 'button[name=zahlweise]' ).click( function () {
+	const addressNoButton = $( 'button[data-address-option=anonym]' );
+	const addressYesButton = $( 'button[data-address-option=person]' );
+	if ( $( this ).attr( 'data-payment-type' ) === 'BEZ' ) {
+		// Reset address switch selection when 'Lastschrift' was previously selected
+		if ( addressNoButton.hasClass( 'selected-option' ) ) {
+			$( '#address_type' ).val( '' );
+		}
+		addressNoButton.removeClass( 'selected-option' );
+		addressNoButton.attr( 'disabled', true );
+		addressYesButton.addClass( 'selected-option' );
+		$( '#address_type' ).val( $( 'button[data-address-option=person]' ).data( 'address-option' ) );
+		$( '.BEZ-hint' ).show();
+		$( '.address-hint' ).hide();
+	} else {
+		addressNoButton.attr( 'disabled', false );
+		$( '.BEZ-hint' ).hide();
+		$( '.address-hint' ).show();
 	}
-	if ( !$( '#betrag' ).val() ) {
-		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
-		return false;
-	}
-	if ( !$( '#zahlweise' ).val() ) {
-		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
-		return false;
-	}
-	return true;
 } );
 // END form initialization
-
-function displayMiniBanner() {
-	const miniBanner = $( '.mini-banner' );
-	const bannerHeight = miniBanner.height();
-	miniBanner.css( 'top', 0 - bannerHeight ).show();
-
-	miniBanner.animate( {
-		top: 0
-	}, 1000 );
-
-	$( '#mw-mf-viewport' ).animate( {
-		marginTop: bannerHeight
-	}, 1000 );
-
-	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
-}
 
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
@@ -173,6 +163,23 @@ $( '.payment-selection button' ).click( function ( event ) {
 	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 } );
 
+$( '.address-selection button' ).click( function ( event ) {
+	event.preventDefault();
+	$( '.address-selection .selected-option' ).removeClass( 'selected-option' );
+	$( event.target ).addClass( 'selected-option' );
+	$( '#address_type' ).val( $( event.target ).data( 'address-option' ) );
+} );
+
+function adjustFormAction() {
+	let bannerAction = $( '#frbanner-form' ).data( 'main-action' );
+	if ( $( 'input[name=addressType]' ).val() === 'anonym' ) {
+		bannerAction = $( '#frbanner-form' ).data( 'fallback-action' );
+		const serverAmount = $( '#betrag' );
+		$( '#betrag' ).val( amountForServerFormatter( parseAmount( serverAmount.val() ), 'add' ) );
+	}
+	$( '#frbanner-form' ).attr( 'action', bannerAction );
+}
+
 $( '#banner-form-submit' ).click( function () {
 	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
 		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
@@ -182,10 +189,20 @@ $( '#banner-form-submit' ).click( function () {
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
 		return false;
 	}
+	if ( !BannerFunctions.validateAmount( BannerFunctions.getAmount( $( '#betrag' ).val() ) ) ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag zwischen 1 und 99999 € aus.' );
+		return false;
+	}
 	if ( !$( '#zahlweise' ).val() ) {
 		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
 		return false;
 	}
+	if ( !$( '#address_type' ).val() ) {
+		alert( 'Bitte wählen Sie eine Adressoption aus.' );
+		return false;
+	}
+
+	adjustFormAction();
 	return true;
 } );
 
