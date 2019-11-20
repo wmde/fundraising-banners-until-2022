@@ -5,6 +5,7 @@
 				<div class="infobox__text">
 					{{> banner_text }}
 				</div>
+				{{{ progressBar }}}
 			</div>
 
 			<div class="form">
@@ -144,6 +145,8 @@
 									</span>
 								</div>
 
+								<div class="ab-test-height"></div>
+
 								<div class="select-group__continue">
 									<div id="WMDE_Banner-next" class="WMDE-Banner-submit button-group">
 										<a class="button-group__button">
@@ -167,7 +170,7 @@
 										<span class="section-title">4. Möchten Sie Ihre Kontaktdaten angeben?</span>
 										<div id="WMDE_Banner-addressType" class="WMDE-Banner-address select-group">
 											<label class="select-group__option select-group__option--halfwidth">
-												<input type="radio" name="addressType" id="address-yes" value="person"
+												<input checked="checked" type="radio" name="addressType" id="address-yes" value="person"
 													   class="select-group__input">
 												<span class="select-group__state">Ja</span>
 											</label>
@@ -184,14 +187,14 @@
 
 									<div class="select-group-container">
 										<div>
-											<span class="select-group__infomessage" id="WMDE_Banner-addressType-info-wrapper">
-												<span class="select-group__infoicon" id="WMDE_Banner-addressType-BEZ-info-text">
+											<div class="select-group__infomessage" id="WMDE_Banner-addressType-info-wrapper">
+												<div class="select-group__infoicon" id="WMDE_Banner-addressType-BEZ-info-text">
 													Für Lastschriften ist die Angabe einer Adresse erforderlich.
-												</span>
-												<span class="select-group__infoicon" id="WMDE_Banner-addressType-info-text">
+												</div>
+												<div class="select-group__infoicon" id="WMDE_Banner-addressType-info-text">
 													Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.
-												</span>
-											</span>
+												</div>
+											</div>
 										</div>
 										<div>
 											<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">

@@ -4,6 +4,7 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
+import ProgressBar from '../shared/progress_bar/progress_bar';
 import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
@@ -55,6 +56,18 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
+const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span>M €';
+const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span>M €';
+const progressBar = new ProgressBar(
+	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
+	campaignProjection,
+	{
+		textRight: progressBarTextRight,
+		textInnerRight: progressBarTextInnerRight,
+		decimalSeparator: '.'
+	}
+);
+
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -65,7 +78,8 @@ $bannerContainer.html( bannerTemplate( {
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
 	CampaignName: CampaignName,
-	BannerName: BannerName
+	BannerName: BannerName,
+	progressBar: progressBar.render()
 } ) );
 
 // BEGIN form init code
@@ -150,14 +164,20 @@ function setupAmountEventHandling() {
 
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+		var infoTextBezElem = $( '#WMDE_Banner-addressType-BEZ-info-text' );
+		var infoTextElem = $( '#WMDE_Banner-addressType-info-text' );
 
 		$( '#address-no' ).prop( 'disabled', false );
-		BannerFunctions.hideAddressTypeInfo();
+
+		infoTextBezElem.hide();
+		infoTextElem.show();
 		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
 
 			$( '#address-no' ).prop( 'disabled', true );
 			$( '#address-yes' ).prop( 'checked', true ).trigger( 'change' );
 			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+			infoTextBezElem.show();
+			infoTextElem.hide();
 		}
 		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
 			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
@@ -169,19 +189,15 @@ function setupAmountEventHandling() {
 
 function setupAddressTypeEventHandling() {
 	var banner = $( '#WMDE_Banner' );
-	banner.on( 'addresstype:info:show', function ( evt, text ) {
-		$( '#WMDE_Banner-addressType-info-text' ).text( text );
+	banner.on( 'addresstype:info:show', function () {
 		$( '#WMDE_Banner-addressType-info-wrapper' ).show();
-		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-info' );
 		addSpaceInstantly();
 	} );
 
 	banner.on( 'addresstype:info:hide', function () {
 		$( '#WMDE_Banner-addressType-info-wrapper' ).hide();
-		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-info' );
 		addSpaceInstantly();
 	} );
-
 }
 
 function validateAndSetPeriod() {
@@ -246,13 +262,11 @@ $( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
 $( "input[name='addressType']" ).change( function () {
 	BannerFunctions.hideAddressTypeError();
 	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
-
+		BannerFunctions.showAddressTypeInfo();
 		$( '#WMDE_Banner-form' ).prop(
 			'action',
 			'https://spenden.wikimedia.de/donation/add?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName + '&mbt=1'
 		);
-
-		BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
 	} else if ( $( "input[name='addressType']:checked" ).val() === 'person' ) {
 
 		$( '#WMDE_Banner-form' ).prop(
@@ -304,6 +318,7 @@ function displayBanner() {
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
+	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
 		addSpaceInstantly();

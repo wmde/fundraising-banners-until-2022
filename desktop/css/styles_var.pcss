@@ -142,7 +142,6 @@ $breakpoint_l: 1400px;
 		position: relative;
 		> div {
 			width: 100%;
-			height: 100%;
 		}
 		&:before {
 			position: absolute;
@@ -163,7 +162,7 @@ $breakpoint_l: 1400px;
 				line-height: 1.3em;
 			}
 			text-align: left;
-			margin: 0.5em 1.5em;
+			padding: 0.5em 1.5em;
 		}
 		&__footer {
 			padding: 0.025em 0 0 2em;
@@ -360,9 +359,14 @@ $breakpoint_l: 1400px;
 				position: relative;
 			}
 			&--horizontal {
-				flex-direction: row;
+				flex-direction: column;
+				@media ( min-width: $breakpoint_s ) {
+					flex-direction: row;
+				}
 				> div {
-					flex-basis: 50%;
+					@media ( min-width: $breakpoint_s ) {
+						flex-basis: 50%;
+					}
 				}
 			}
 			@media ( min-width: $breakpoint_l ) {
@@ -499,7 +503,7 @@ $breakpoint_l: 1400px;
 				height: 16px;
 				position: absolute;
 				top: 10px;
-				left: 5px;
+				left: 7px;
 			}
 		}
 		&__option {
@@ -577,7 +581,10 @@ $breakpoint_l: 1400px;
 			border: 0 none;
 			border-radius: 0.4em;
 			padding: 0 0.4em;
-			line-height: 3em;
+			line-height: 2em;
+			@media ( min-width: $breakpoint_m ) {
+				line-height: 3em;
+			}
 			font-size: 13px;
 			font-weight: bold;
 			text-align: center;
@@ -626,7 +633,7 @@ $breakpoint_l: 1400px;
 		top: 0;
 		left: 5px;
 		@media ( min-width: $breakpoint_l ) {
-			top: -30px;
+			top: -50px;
 		}
 		&__link {
 			&:before {
@@ -646,6 +653,36 @@ $breakpoint_l: 1400px;
 
 	.iban-block > span {
 		margin-right: 4px;
+	}
+
+	.progress_bar {
+		display: block;
+		&__days_left {
+			display: block;
+			color: var( --banner-color-white );
+			line-height: 1.9em;
+		}
+		&__wrapper {
+			border-color: var( --banner-color-blue-light );
+			background-color: var( --banner-color-white );
+			margin: 0.5em 1em;
+			border-radius: 0.55em;
+		}
+		&__donation_fill {
+			background: var( --banner-color-green );
+			height: 1.6em;
+			border-radius: 0.4em;
+		}
+		&__donation_text {
+			color: var( --banner-color-white );
+			line-height: 1.8em;
+			white-space: nowrap;
+		}
+		&__donation_remaining {
+			color: var( --banner-color-green );
+			line-height: 1.6em;
+			margin-left: -30px;
+		}
 	}
 
 	@media ( min-width: $breakpoint_l ) {
@@ -763,6 +800,7 @@ $breakpoint_l: 1400px;
 	}
 	.WMDE-Banner-submit {
 		padding-right: 0;
+		width: 100%;
 		> a {
 			text-decoration: none;
 			&:hover {
@@ -816,5 +854,17 @@ $breakpoint_l: 1400px;
 	}
 	.hidden-title {
 		visibility: hidden;
+	}
+}
+
+#WMDE_Banner-addressType-info-wrapper {
+	display: none;
+}
+
+.ab-test-height {
+	display: none;
+	@media ( min-width: $breakpoint_l ) {
+		display: block;
+		height: 60px;
 	}
 }
