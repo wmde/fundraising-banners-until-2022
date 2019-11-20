@@ -3,6 +3,7 @@
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
 	--banner-color-green: #97b313;
+	--banner-color-green-dark: #8ba511;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
@@ -195,10 +196,10 @@ $breakpoint_l: 1400px;
 		min-width: inherit;
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
-		margin: 0.2em 2.5em 0;
+		margin: 0.2em 0 0;
 
-		@media ( max-width: 640px ) {
-			margin: 0.2em 0 0;
+		@media ( min-width: $breakpoint_s ) {
+			margin: 0.2em 2.5em 0;
 		}
 
 		&__header {
@@ -212,15 +213,14 @@ $breakpoint_l: 1400px;
 			display: flex;
 			flex-wrap: wrap;
 			flex: 1 1 auto;
-
-			@media ( max-width: 640px ) {
-				flex-wrap: wrap;
-			}
 		}
 	}
 
 	.select-group {
-		margin: 0 auto;
+		margin: 5px auto;
+		@media ( min-width: $breakpoint_l ) {
+			margin: 0 auto;
+		}
 		padding: 0.4em 0.5em 0.5em 0.5em;
 		display: flex;
 		flex-wrap: nowrap;
@@ -239,6 +239,7 @@ $breakpoint_l: 1400px;
 			border-radius: 0.1em;
 
 			@media ( min-width: $breakpoint_l ) {
+				border: 0;
 				max-width: 18em;
 			}
 		}
@@ -409,6 +410,9 @@ $breakpoint_l: 1400px;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
+			&:hover {
+				background-color: var( --banner-color-green-dark );
+			}
 		}
 	}
 

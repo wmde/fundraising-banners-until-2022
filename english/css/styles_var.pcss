@@ -3,6 +3,7 @@
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
 	--banner-color-green: #97b313;
+	--banner-color-green-dark: #8ba511;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
@@ -20,6 +21,7 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='11' height='11' viewBox='0 0 
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
+$breakpoint_xs: 640px;
 $breakpoint_s: 900px;
 $breakpoint_m: 1150px;
 $breakpoint_m_max: 1149px; /** DEPRECATED **/
@@ -186,7 +188,10 @@ $breakpoint_l: 1400px;
 	#WMDE_Banner-form {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
+		@media ( min-width: $breakpoint_l ) {
+			flex-wrap: wrap;
+		}
 	}
 
 	.form {
@@ -195,10 +200,10 @@ $breakpoint_l: 1400px;
 		min-width: inherit;
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
-		margin: 0.2em 2.5em 0;
+		margin: 0.2em 0 0;
 
-		@media ( max-width: 640px ) {
-			margin: 0.2em 0 0;
+		@media ( min-width: $breakpoint_s ) {
+			margin: 0.2em 2.5em 0;
 		}
 
 		&__header {
@@ -210,12 +215,11 @@ $breakpoint_l: 1400px;
 		}
 		&-field-group {
 			display: flex;
-			flex-wrap: wrap;
-			flex: 1 1 auto;
-
-			@media ( max-width: 640px ) {
+			flex-wrap: nowrap;
+			@media ( min-width: $breakpoint_l ) {
 				flex-wrap: wrap;
 			}
+			flex: 1 1 auto;
 		}
 	}
 
@@ -223,22 +227,32 @@ $breakpoint_l: 1400px;
 		margin: 0 auto;
 		padding: 0.4em 0.5em 0.5em 0.5em;
 		display: flex;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
+		@media ( min-width: $breakpoint_l ) {
+			flex-wrap: nowrap;
+		}
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 1 0 auto;
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
+		max-width: 20vw;
 		&-container {
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
 			margin: 0.3em;
-			border: 1px solid transparent;
+			@media ( min-width: $breakpoint_xs ) {
+				margin: 0.3em 1em;
+			}
+			border: 1px solid var( --banner-color-blue );
+			border-radius: 0.1em;
 
 			@media ( min-width: $breakpoint_l ) {
+				border: 0;
 				max-width: 18em;
+				margin: 0.3em;
 			}
 		}
 		/* &:first-child {
@@ -348,13 +362,22 @@ $breakpoint_l: 1400px;
 				width: 100%;
 			}
 			&--halfwidth {
-				width: 50%;
+				width: 100%;
+				@media ( min-width: $breakpoint_l ) {
+					width: 50%;
+				}
 			}
 			&--thirdwidth {
-				width: 33%;
+				width: 100%;
+				@media ( min-width: $breakpoint_l ) {
+					width: 33%;
+				}
 			}
 			&--quarterwidth {
-				width: 24%;
+				width: 50%;
+				@media ( min-width: $breakpoint_l ) {
+					width: 24%;
+				}
 			}
 			&--biggertext {
 				font-size: 1em;
@@ -372,10 +395,13 @@ $breakpoint_l: 1400px;
 	}
 
 	.button-group {
-		display: block;
+		display: flex;
 		border: 0;
 		margin: 0;
 		padding: 0.4em 0 0 0;
+		@media ( min-width: $breakpoint_l ) {
+			padding: 0.4em 0 0 0;
+		}
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -390,10 +416,6 @@ $breakpoint_l: 1400px;
 			border: 0 none;
 			background: transparent;
 			font-size: inherit;
-			width: 100%;
-			&--halfwidth {
-				width: 50%;
-			}
 		}
 		&__label {
 			display: block;
@@ -408,6 +430,10 @@ $breakpoint_l: 1400px;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
+			width: 100%;
+			&:hover {
+				background-color: var( --banner-color-green-dark );
+			}
 		}
 	}
 
@@ -562,6 +588,7 @@ $breakpoint_l: 1400px;
 		}
 
 		.WMDE-Banner-payment {
+			max-width: 280px;
 			.select-group__option {
 				&:nth-child( 1 ) .select-group__state {
 					border-radius: 0.4em 0 0 0;

@@ -1,6 +1,4 @@
 require( './css/styles.pcss' );
-require( './css/icons.css' );
-require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
