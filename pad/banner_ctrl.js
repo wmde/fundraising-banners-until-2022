@@ -1,14 +1,3 @@
-require( './css/styles.pcss' );
-require( './css/icons.css' );
-require( './css/wlightbox.css' );
-
-// BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 180;
-const sizeIssueTrackRatio = 0.01;
-const LANGUAGE = 'de';
-// END Banner-Specific configuration
-
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -20,6 +9,20 @@ import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
+import { amountForServerFormatter, amountInputFormatter, donorFormatter } from '../shared/number_formatter/de';
+import { parseAmount } from '../shared/parse_amount';
+
+require( './css/styles.pcss' );
+require( './css/styles_var.pcss' );
+require( './css/icons.css' );
+require( './css/wlightbox.css' );
+
+// BEGIN Banner-Specific configuration
+const bannerCloseTrackRatio = 0.01;
+const sizeIssueThreshold = 180;
+const sizeIssueTrackRatio = 0.01;
+const LANGUAGE = 'de';
+// END Banner-Specific configuration
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -40,8 +43,6 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
-const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -74,8 +75,6 @@ $bannerContainer.html( bannerTemplate( {
 	BannerName: BannerName,
 	progressBar: progressBar.render()
 } ) );
-
-const $bannerForm = $( '#WMDE_Banner-form' );
 
 // BEGIN form init code
 
@@ -114,53 +113,30 @@ function setupValidationEventHandling() {
 		addSpaceInstantly();
 	} );
 }
-function appendEuroSign( field ) {
-	if ( $( field ).val() !== '' &&
-		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
-	}
-}
-
-function getPaymentType() {
-	return $( 'input[name=zahlweise]:checked', document.donationForm ).val();
-}
-
-function updateFormattedAmount() {
-	const amount = BannerFunctions.getAmount();
-	if ( getPaymentType() === 'BEZ' ) {
-		$( '#betrag' ).val( amount );
-	} else if ( amount ) {
-		$( '#betrag' ).val( ( Number( amount ) ).toFixed( 2 ).replace( '.', ',' ) );
-	}
-}
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
+	var customAmountForServer = $( '#betrag' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
+		customAmountForServer.val( '' );
 		$( '.select-group__custom-input' ).removeClass( 'select-group__custom-input--value-entered' );
-		updateFormattedAmount();
 		BannerFunctions.hideAmountError();
 	} );
 
 	banner.on( 'amount:custom', null, function () {
 		$( '#WMDE_Banner-amounts .select-group__input' ).prop( 'checked', false );
 		var input = $( '.select-group__custom-input' );
+		const customAmount = parseAmount( input.val() );
 		input.addClass( 'select-group__custom-input--value-entered' );
 		BannerFunctions.hideAmountError();
-		updateFormattedAmount();
-		appendEuroSign( input );
+		customAmountForServer.val( amountForServerFormatter( customAmount ) );
+		input.val( amountInputFormatter( customAmount ) );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
-		let bannerAction = $bannerForm.data( 'main-action' );
-		if ( getPaymentType() === 'BEZ' ) {
-			bannerAction = $bannerForm.data( 'fallback-action' );
-		}
-		$bannerForm.attr( 'action', bannerAction );
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
-		updateFormattedAmount();
 	} );
 }
 
