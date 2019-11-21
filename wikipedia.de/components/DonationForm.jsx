@@ -1,7 +1,10 @@
 import { Component, h} from 'preact';
 import style from './DonationForm.pcss';
-import { formatAmount } from '../../shared/format_amount';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { parseAmount } from '../../shared/parse_amount';
+
+// TODO pass in formatter as a dependency to be able to localize this component
+import {amountForServerFormatter, amountInputFormatter} from '../../shared/number_formatter/de';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
@@ -31,25 +34,24 @@ export default class DonationForm extends Component {
 		this.setState( {
 			selectedAmount: evt.target.value,
 			customAmount: '',
-			amount: formatAmount( evt.target.value ),
+			amount: amountForServerFormatter( evt.target.value ),
 			amountIsValid: true
 		} );
 	};
 
 	amountTyped = ( evt ) => {
-		const formattedAmount = formatAmount( evt.target.value );
 		this.setState( {
 			selectedAmount: null,
 			customAmount: evt.target.value,
-			amount: formattedAmount
+			amount: amountForServerFormatter( parseAmount( evt.target.value ) )
 		} );
 	};
 
 	finishedTypingAmount = ( evt ) => {
-		const formattedAmount = formatAmount( evt.target.value );
+		const customAmount = parseAmount( evt.target.value );
 		this.setState( {
-			customAmount: formattedAmount + ' €',
-			amountIsValid: Number( formattedAmount.replace( ',', '.' ) ) >= 1
+			customAmount: amountInputFormatter( customAmount ),
+			amountIsValid: customAmount >= 1.0
 		} );
 	};
 
