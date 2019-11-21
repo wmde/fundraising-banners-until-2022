@@ -19,10 +19,16 @@
 
 	.banner {
 		display: flex;
-
+		flex-direction: column;
 		font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
 		box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.5 );
 		background-color: #ffffff;
+
+		&__content {
+			display: flex;
+			flex-direction: row;
+			order: 1;
+		}
 	}
 
 	.infobox {
@@ -49,6 +55,14 @@
 		line-height: 1.2em;
 		text-align: left;
 		margin: 0 0 0.5em 2em;
+	}
+
+	.form__text {
+		color: #000000;
+		font-size: 0.8em;
+		line-height: 1.6em;
+		text-align: center;
+		margin: 0.5em 0 0.5em 0;
 	}
 
 	.text__headline {
@@ -84,8 +98,10 @@
 	}
 
 	.infobox__footer {
-		padding: 0.025em 0 0 2em;
-		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.25em/18px 18px;
+		display: flex;
+		order: 2;
+		padding: 0.5em 0 0.5em 2em;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.55em/18px 18px;
 	}
 
 	.footer {
@@ -93,7 +109,7 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-
+		width: 100%;
 		font-size: 0.8em;
 		line-height: 1.6em;
 	}
@@ -117,10 +133,24 @@
 	.footer__item--rightflex {
 		flex-grow: 1;
 		text-align: right;
+		padding-right: 75px;
 	}
 
 	.application-of-funds-link {
 		color: #000000;
+	}
+
+	.iban-info {
+		display: flex;
+		flex-wrap: nowrap;
+	}
+
+	.bank-info {
+		display: flex;
+		flex-direction: column;
+		@media ( orientation: landscape ) {
+			flex-direction: row;
+		}
 	}
 
 	/* Form styling */
@@ -332,6 +362,15 @@
 
 	.progress_bar__wrapper {
 		height: 28px;
+		@media ( orientation: landscape ) {
+			margin: 3.75em 35px;
+			@media ( min-width: 1365px ) {
+				margin: 5.6em 35px;
+			}
+		}
+		@media ( min-height: 1365px ) {
+			margin: 3em 35px;
+		}
 	}
 
 	.progress_bar--lateprogress .progress_bar__wrapper {

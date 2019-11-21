@@ -117,7 +117,8 @@ function setupValidationEventHandling() {
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	var customAmountForServer = $( '#betrag' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+
+	// using delegated events with empty selector to be markup-independent and still have current value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		customAmountForServer.val( '' );
