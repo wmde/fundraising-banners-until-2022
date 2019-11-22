@@ -1,15 +1,3 @@
-require( './css/styles.pcss' );
-require( './css/icons.css' );
-require( './css/wlightbox.css' );
-
-// BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 160;
-const sizeIssueTrackRatio = 0.01;
-const submitTrackingRatio = 1;
-const LANGUAGE = 'de';
-// END Banner-Specific configuration
-
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -21,6 +9,20 @@ import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
+import { parseAmount } from '../shared/parse_amount';
+import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
+
+require( './css/styles.pcss' );
+require( './css/icons.css' );
+require( './css/wlightbox.css' );
+
+// BEGIN Banner-Specific configuration
+const bannerCloseTrackRatio = 0.01;
+const sizeIssueThreshold = 160;
+const sizeIssueTrackRatio = 0.01;
+const submitTrackingRatio = 1;
+const LANGUAGE = 'de';
+// END Banner-Specific configuration
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -41,8 +43,6 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
-const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -123,12 +123,7 @@ function setupValidationEventHandling() {
 		addSpaceInstantly();
 	} );
 }
-function appendEuroSign( field ) {
-	if ( $( field ).val() !== '' &&
-		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
-	}
-}
+
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
@@ -148,12 +143,13 @@ function setupAmountEventHandling() {
 	banner.on( 'amount:custom', null, function () {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
+		const customAmountValue = parseAmount( input.val() );
 		// put input field value in radio button because otherwise
 		// the FundraisingFrontend will prefer the empty radio value over the custom value
 		// In the CTRL banner, the code would unset the radio buttons
-		$( '#field-amount_total_custom' ).val( input.val().replace( ',', '.' ) );
+		$( '#field-amount_total_custom' ).val( amountForServerFormatter( customAmountValue ) );
 		BannerFunctions.hideAmountError();
-		appendEuroSign( input );
+		input.val( amountInputFormatter( customAmountValue ) );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {

@@ -1,8 +1,4 @@
-/* eslint no-alert: 1 */
-
-require( './css/styles.pcss' );
-require( './css/styles_mini.pcss' );
-require( './css/styles_mini_var.pcss' );
+/* eslint no-alert: 0 */
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -15,11 +11,17 @@ import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
+import { amountForServerFormatter, amountInputFormatter, donorFormatter } from '../shared/number_formatter/en';
+import { parseAmount } from '../shared/parse_amount';
+
+require( './css/styles.pcss' );
+require( './css/styles_mini.pcss' );
+require( './css/styles_mini_var.pcss' );
 
 const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = BannerFunctionsFactory( null, Translations );
-const formatNumber = require( 'format-number' );
+
 const bannerTemplate = require( './templates/banner_html.hbs' );
 
 // BEGIN Banner-Specific configuration
@@ -49,8 +51,6 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
-
-const donorFormatter = formatNumber( { round: 0, integerSeparator: ',' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -108,12 +108,6 @@ $( 'input[name=interval]' ).click( function () {
 	}
 } );
 
-function appendEuroSign( field ) {
-	if ( $( field ).val() !== '' &&
-		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
-	}
-}
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
 	$( '.amount-selection .select-group__option' ).click( function ( event ) {
@@ -126,13 +120,9 @@ function setupAmountEventHandling() {
 	otherInput.change( function () {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered' );
-		var amount = BannerFunctions.getAmount();
-		if ( amount === false ) {
-			$( '#betrag' ).val( '' );
-		} else {
-			$( '#betrag' ).val( amount );
-		}
-		appendEuroSign( input );
+		const customAmountValue = parseAmount( input.val() );
+		$( '#betrag' ).val( amountForServerFormatter( customAmountValue ) );
+		input.val( amountInputFormatter( customAmountValue ) );
 	} );
 
 	otherInput.click( function () {

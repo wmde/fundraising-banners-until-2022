@@ -1,7 +1,4 @@
-/* eslint no-alert: 1 */
-
-require( './css/styles_var.pcss' );
-require( './css/styles_mini_var.pcss' );
+/* eslint no-alert: 0 */
 
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -14,6 +11,11 @@ import Translations from '../shared/messages/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
+import { parseAmount } from '../shared/parse_amount';
+import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
+
+require( './css/styles_var.pcss' );
+require( './css/styles_mini_var.pcss' );
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -22,7 +24,6 @@ Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
 const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = BannerFunctionsFactory( null, Translations );
-const formatNumber = require( 'format-number' );
 const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 // BEGIN Banner-Specific configuration
@@ -45,8 +46,6 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
-
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -131,13 +130,6 @@ function displayMiniBanner() {
 	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
 }
 
-function appendEuroSign( field ) {
-	if ( $( field ).val() !== '' &&
-		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( $( field ).val() + ' €' );
-	}
-}
-
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
 	$( '.amount-selection .select-group__option' ).click( function ( event ) {
@@ -150,13 +142,9 @@ function setupAmountEventHandling() {
 	otherInput.change( function () {
 		var input = $( '.select-group__custom-input' );
 		input.addClass( 'select-group__custom-input--value-entered selected-option' );
-		var amount = BannerFunctions.getAmount();
-		if ( amount === false ) {
-			$( '#betrag' ).val( '' );
-		} else {
-			$( '#betrag' ).val( amount );
-		}
-		appendEuroSign( input );
+		const customAmountValue = parseAmount( input.val() );
+		$( '#betrag' ).val( amountForServerFormatter( customAmountValue ) );
+		input.val( amountInputFormatter( customAmountValue ) );
 	} );
 
 	otherInput.click( function () {

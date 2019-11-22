@@ -1,12 +1,3 @@
-require( './css/styles_var.pcss' );
-
-// BEGIN Banner-Specific configuration
-const bannerCloseTrackRatio = 0.01;
-const sizeIssueThreshold = 160;
-const sizeIssueTrackRatio = 0.01;
-const LANGUAGE = 'en';
-// END Banner-Specific configuration
-
 import EventLoggingTracker from '../shared/event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
@@ -18,6 +9,17 @@ import Translations from '../shared/messages/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
+import { parseAmount } from '../shared/parse_amount';
+import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/en';
+
+require( './css/styles_var.pcss' );
+
+// BEGIN Banner-Specific configuration
+const bannerCloseTrackRatio = 0.01;
+const sizeIssueThreshold = 160;
+const sizeIssueTrackRatio = 0.01;
+const LANGUAGE = 'en';
+// END Banner-Specific configuration
 
 const Handlebars = require( 'handlebars/runtime' );
 Handlebars.registerHelper( 'capitalizeFirstLetter', function ( message ) {
@@ -38,8 +40,6 @@ const campaignProjection = new CampaignProjection(
 	),
 	CampaignParameters.donationProjection
 );
-const formatNumber = require( 'format-number' );
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
 
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
@@ -121,13 +121,6 @@ function setupValidationEventHandling() {
 	} );
 }
 
-function appendEuroSign( field ) {
-	if ( $( field ).val() !== '' &&
-		!/^.*(€)$/.test( $( field ).val() ) ) {
-		$( field ).val( '€' + $( field ).val() );
-	}
-}
-
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	// using delegated events with empty selector to be markup-independent and still have current value for event.target
@@ -145,11 +138,12 @@ function setupAmountEventHandling() {
 	} );
 
 	banner.on( 'amount:custom', null, function () {
-		var input = $( '.select-group__custom-input' );
+		const input = $( '.select-group__custom-input' );
+		const customAmountValue = parseAmount( input.val() );
 		input.addClass( 'select-group__custom-input--value-entered' );
-		$( '#field-amount_total_custom' ).val( input.val().replace( ',', '.' ) );
+		$( '#field-amount_total_custom' ).val( amountForServerFormatter( customAmountValue ) );
 		banner.trigger( 'validation:amount:ok' );
-		appendEuroSign( input );
+		input.val( amountInputFormatter( customAmountValue ) );
 	} );
 
 	banner.on( 'paymenttype:selected', null, function () {
