@@ -15,7 +15,7 @@ export function amountForServerFormatter( amount, route = 'new' ) {
 		case 'new':
 			return formatter( { round: 2 } )( amount );
 		case 'add':
-			return formatter( { round: 2, decimal: ',' } )( amount );
+			return formatter( { round: 2, decimal: ',', integerSeparator: '' } )( amount );
 		default:
 			throw new Error( 'Unknown target route: ' + route );
 	}
