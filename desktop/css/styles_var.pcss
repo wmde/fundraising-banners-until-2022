@@ -1,10 +1,12 @@
 :root {
 	--banner-color-dark: #222222;
 	--banner-color-gray: #808080;
+	--banner-color-gray-medium-dark: #747474;
 	--banner-color-gray-light: #eaecf0;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
-	--banner-color-green: #97b313;
+	--banner-color-green: #849d0e;
+	--banner-color-green-medium-light: #97b313;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
@@ -80,7 +82,6 @@ $breakpoint_l: 1400px;
 		}
 		&__footer {
 			padding: 0;
-			font-size: 1.1em;
 			color: var( --banner-color-gray );
 		}
 		&__footer-2 {
@@ -118,7 +119,7 @@ $breakpoint_l: 1400px;
 			font-size: 1em;
 			line-height: 1.3em;
 			@media ( min-width: $breakpoint_m ) {
-				font-size: 1.3em;
+				font-size: 18px;
 				line-height: 1.3em;
 			}
 			text-align: left;
@@ -194,7 +195,7 @@ $breakpoint_l: 1400px;
 		flex-direction: column;
 		justify-content: flex-start;
 
-		font-size: 12.3px;
+		font-size: 13px;
 		line-height: 1.2em;
 		color: var( --banner-color-black );
 		&__info {
@@ -282,7 +283,7 @@ $breakpoint_l: 1400px;
 		flex-wrap: nowrap;
 		flex-direction: column;
 		justify-content: flex-start;
-		font-size: 0.9em;
+		font-size: 13px;
 		font-weight: bold;
 		width: 100%;
 		&-container {
@@ -307,7 +308,7 @@ $breakpoint_l: 1400px;
 			text-align: center;
 			width: 100%;
 			margin-bottom: 0.2em;
-			font-size: 0.95em;
+			font-size: 13px;
 		}
 		&-container--with-error {
 			.select-group__erroricon {
@@ -330,7 +331,7 @@ $breakpoint_l: 1400px;
 			border: 0 none;
 			cursor: pointer;
 			text-align: center;
-			font-size: 0.95em;
+			font-size: 13px;
 			box-sizing: border-box;
 			white-space: nowrap;
 
@@ -351,7 +352,7 @@ $breakpoint_l: 1400px;
 			text-decoration: underline;
 			background: none;
 			height: auto;
-			font-size: 0.9em;
+			font-size: 12px;
 			color: var( --banner-color-black );
 			width: 100%;
 			margin: 0;
@@ -446,6 +447,9 @@ $breakpoint_l: 1400px;
 			display: block;
 			color: var( --banner-color-white );
 			background-color: var( --banner-color-green );
+			&:hover {
+				background-color: var( --banner-color-green-medium-light );
+			}
 			border: 0 none;
 			border-radius: 0.4em;
 			padding: 0 0.4em;
@@ -489,6 +493,7 @@ $breakpoint_l: 1400px;
 			text-decoration: none;
 			&:hover {
 				text-decoration: none;
+				color: var( --banner-color-gray-medium-dark );
 			}
 		}
 	}
@@ -502,6 +507,7 @@ $breakpoint_l: 1400px;
 			display: block;
 			color: var( --banner-color-white );
 			line-height: 1.9em;
+			font-size: 13px;
 		}
 		&__wrapper {
 			border-color: var( --banner-color-blue-light );
@@ -518,11 +524,13 @@ $breakpoint_l: 1400px;
 			color: var( --banner-color-white );
 			line-height: 1.8em;
 			white-space: nowrap;
+			font-size: 13px;
 		}
 		&__donation_remaining {
 			color: var( --banner-color-green );
 			line-height: 1.6em;
 			margin-left: -30px;
+			font-size: 13px;
 		}
 	}
 
