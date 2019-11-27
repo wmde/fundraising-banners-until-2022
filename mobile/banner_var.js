@@ -8,7 +8,6 @@ import DayName from '../shared/day_name';
 import animateHighlight from '../shared/animate_highlight';
 import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/de';
-import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
@@ -31,16 +30,9 @@ const bannerTemplate = require( './templates/banner_html_var.hbs' );
 const bannerClickTrackRatio = 0.01;
 const bannerCloseTrackRatio = 0.01;
 const searchBoxTrackRatio = 0.01;
-const LANGUAGE = 'de';
-const sliderAutoPlaySpeed = 5000;
 const fullscreenBannerSlideInSpeed = 1250;
+const LANGUAGE = 'de';
 // END Banner-Specific configuration
-
-/**
- * Slider wrapper object holding a Flickity-based slider
- * @type {Slider}
- */
-const bannerSlider = new Slider( sliderAutoPlaySpeed );
 
 const campaignDays = new CampaignDays(
 	startOfDay( CampaignParameters.startDate ),
@@ -62,6 +54,7 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
@@ -81,6 +74,7 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 const trackingEvents = new EventLoggingTracker( BannerName );
+trackingEvents.trackClickEvent( $( '.mini-banner' ), 'mobile-mini-banner-expanded' );
 trackingEvents.trackClickEvent( $( '.mini-banner__close-button' ), 'banner-closed', bannerCloseTrackRatio );
 
 // BEGIN form initialization
@@ -103,28 +97,38 @@ $( 'input[name=interval]' ).click( function () {
 	}
 } );
 
-// Disable address option 'Nein' if chosen payment type is 'Lastschrift'
-$( 'button[name=zahlweise]' ).click( function () {
-	const addressNoButton = $( 'button[data-address-option=anonym]' );
-	const addressYesButton = $( 'button[data-address-option=person]' );
-	if ( $( this ).attr( 'data-payment-type' ) === 'BEZ' ) {
-		// Reset address switch selection when 'Lastschrift' was previously selected
-		if ( addressNoButton.hasClass( 'selected-option' ) ) {
-			$( '#address_type' ).val( '' );
-		}
-		addressNoButton.removeClass( 'selected-option' );
-		addressNoButton.attr( 'disabled', true );
-		addressYesButton.addClass( 'selected-option' );
-		$( '#address_type' ).val( $( 'button[data-address-option=person]' ).data( 'address-option' ) );
-		$( '.BEZ-hint' ).show();
-		$( '.address-hint' ).hide();
-	} else {
-		addressNoButton.attr( 'disabled', false );
-		$( '.BEZ-hint' ).hide();
-		$( '.address-hint' ).show();
+$( '#banner-form-submit' ).click( function () {
+	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
+		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
+		return false;
 	}
+	if ( !$( '#betrag' ).val() ) {
+		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
+		return false;
+	}
+	if ( !$( '#zahlweise' ).val() ) {
+		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
+		return false;
+	}
+	return true;
 } );
 // END form initialization
+
+function displayMiniBanner() {
+	const miniBanner = $( '.mini-banner' );
+	const bannerHeight = miniBanner.height();
+	miniBanner.css( 'top', 0 - bannerHeight ).show();
+
+	miniBanner.animate( {
+		top: 0
+	}, 1000 );
+
+	$( '#mw-mf-viewport' ).animate( {
+		marginTop: bannerHeight
+	}, 1000 );
+
+	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
+}
 
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
@@ -163,23 +167,6 @@ $( '.payment-selection button' ).click( function ( event ) {
 	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 } );
 
-$( '.address-selection button' ).click( function ( event ) {
-	event.preventDefault();
-	$( '.address-selection .selected-option' ).removeClass( 'selected-option' );
-	$( event.target ).addClass( 'selected-option' );
-	$( '#address_type' ).val( $( event.target ).data( 'address-option' ) );
-} );
-
-function adjustFormAction() {
-	let bannerAction = $( '#frbanner-form' ).data( 'main-action' );
-	if ( $( 'input[name=addressType]' ).val() === 'anonym' ) {
-		bannerAction = $( '#frbanner-form' ).data( 'fallback-action' );
-		const serverAmount = $( '#betrag' );
-		$( '#betrag' ).val( amountForServerFormatter( parseAmount( serverAmount.val() ), 'add' ) );
-	}
-	$( '#frbanner-form' ).attr( 'action', bannerAction );
-}
-
 $( '#banner-form-submit' ).click( function () {
 	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
 		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
@@ -189,42 +176,12 @@ $( '#banner-form-submit' ).click( function () {
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
 		return false;
 	}
-	if ( !BannerFunctions.validateAmount( BannerFunctions.getAmount( $( '#betrag' ).val() ) ) ) {
-		alert( 'Bitte wählen Sie einen Spendenbetrag zwischen 1 und 99999 € aus.' );
-		return false;
-	}
 	if ( !$( '#zahlweise' ).val() ) {
 		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
 		return false;
 	}
-	if ( !$( '#address_type' ).val() ) {
-		alert( 'Bitte wählen Sie eine Adressoption aus.' );
-		return false;
-	}
-
-	adjustFormAction();
 	return true;
 } );
-
-// END form initialization
-
-function displayMiniBanner() {
-
-	const miniBanner = $( '.mini-banner' );
-	const bannerHeight = miniBanner.outerHeight() + 40;
-
-	// Banner starts in far off screen and needs to be reset, workaround to get sliders to work
-	miniBanner.css( 'top', -bannerHeight );
-	miniBanner.animate( { top: 0 }, 1000 );
-
-	$( '#mw-mf-viewport' ).animate( { marginTop: bannerHeight }, 1000 );
-
-	$( 'head' ).append( '<style>#mw-mf-viewport .overlay.media-viewer { margin-top: ' + ( 0 - bannerHeight ) + 'px }</style>' );
-	// Making sure automatic sliding only starts after slider is shown to the user
-	bannerSlider.enableAutoplay();
-	progressBar.animate();
-}
-
 /**
  * Hides mini banner and slides down full-screen banner
  * Animation is split into two parts:
@@ -233,8 +190,8 @@ function displayMiniBanner() {
 function displayFullBanner() {
 	trackingEvents.trackBannerEvent(
 		'mobile-mini-banner-expanded',
-		bannerSlider.getViewedSlides(),
-		bannerSlider.getCurrentSlide(),
+		0,
+		0,
 		bannerClickTrackRatio
 	);
 
@@ -269,7 +226,9 @@ function displayFullBanner() {
 		fullscreenBanner.dequeue();
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
-			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
+			setTimeout( function () {
+				animateHighlight( $( '#to-highlight' ), 'highlight', 10 );
+			}, 500 );
 		} );
 
 	} );
@@ -292,8 +251,6 @@ $( document ).ready( function () {
 		return false;
 	} );
 
-	bannerSlider.initialize();
-
 	BannerFunctions.getSkin().addSearchObserver( function () {
 		bannerDisplayTimeout.cancel();
 		$( '.mini-banner' ).hide();
@@ -304,7 +261,6 @@ $( document ).ready( function () {
 	const bannerDelay = $( '#WMDE-Banner-Container' ).data( 'delay' ) || 5000;
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
-	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
-
-	clickableBannerArea.click( displayFullBanner );
+	$( '.mini-banner' ).click( displayFullBanner );
+	progressBar.animate();
 } );
