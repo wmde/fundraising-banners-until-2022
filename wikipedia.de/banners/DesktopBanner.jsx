@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import style from './DesktopBanner.pcss';
 import DonationForm from '../components/DonationForm';
 import Footer from '../components/Footer';
 import Funds from '../components/Funds';

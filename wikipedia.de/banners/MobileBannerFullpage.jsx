@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import style from './MobileBannerFullpage.pcss'
 import DonationForm from '../components/DonationForm';
 import Infobox from '../components/Infobox';
 import ProgressBar from '../components/ProgressBar';

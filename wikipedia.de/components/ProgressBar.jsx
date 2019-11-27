@@ -4,7 +4,6 @@ import { useContext } from 'preact/hooks';
 import formatNumber from 'format-number'
 import TranslationContext from './TranslationContext';
 import PropTypes from 'prop-types';
-import style from './ProgressBarDesktop.pcss';
 
 const PENDING = 0;
 const STARTED = 1;

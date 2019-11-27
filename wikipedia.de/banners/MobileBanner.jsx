@@ -1,7 +1,6 @@
 import { Component, Fragment, h } from 'preact';
 import classNames from 'classnames'
 
-import style from './MobileBanner.pcss';
 import { Slider } from '../../mobile/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
 import ProgressBar from '../components/ProgressBar';

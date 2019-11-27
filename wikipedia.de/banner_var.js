@@ -9,9 +9,7 @@ import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 import formatNumber from 'format-number';
 // eslint-disable-next-line no-unused-vars
-import FormStyles from './components/DonationForm_var.pcss';
-// eslint-disable-next-line no-unused-vars
-import InfoboxStyles from './components/Infobox_var.pcss';
+import style from './styles/banner_var.pcss';
 
 /* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
 /* global CampaignName */

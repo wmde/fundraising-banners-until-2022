@@ -1,6 +1,4 @@
 import { h } from 'preact';
-// TODO: Re-activate when breakpoints are no longer A/B tested
-// import style from './Infobox.pcss';
 import TextHighlight from "./TextHighlight";
 
 function capitalizeFirstLetter( message ) {
