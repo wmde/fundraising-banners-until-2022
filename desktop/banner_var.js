@@ -12,9 +12,7 @@ import { CampaignProjection } from '../shared/campaign_projection';
 import { parseAmount } from '../shared/parse_amount';
 import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
 
-require( './css/styles.pcss' );
-require( './css/icons.css' );
-require( './css/wlightbox.css' );
+require( './css/styles_var.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -69,6 +67,7 @@ const progressBar = new ProgressBar(
 		decimalSeparator: '.'
 	}
 );
+
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -122,6 +121,17 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:addresstype:ok', function () {
+		$( '#WMDE_Banner-addressType-error-wrapper' ).hide();
+		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:addresstype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-addressType-error-text' ).text( text );
+		$( '#WMDE_Banner-addressType-error-wrapper' ).show();
+		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -154,9 +164,40 @@ function setupAmountEventHandling() {
 
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+		var infoTextBezElem = $( '#WMDE_Banner-addressType-BEZ-info-text' );
+		var infoTextElem = $( '#WMDE_Banner-addressType-info-text' );
+
+		$( '#address-no' ).prop( 'disabled', false );
+
+		infoTextBezElem.hide();
+		infoTextElem.show();
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+
+			$( '#address-no' ).prop( 'disabled', true );
+			$( '#address-yes' ).prop( 'checked', true ).trigger( 'change' );
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+			infoTextBezElem.show();
+			infoTextElem.hide();
+		}
+		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
+		}
 	} );
 
 	banner.trigger( 'validation:init', banner.data( 'validation-event-handling' ) );
+}
+
+function setupAddressTypeEventHandling() {
+	var banner = $( '#WMDE_Banner' );
+	banner.on( 'addresstype:info:show', function () {
+		$( '#WMDE_Banner-addressType-info-wrapper' ).show();
+		addSpaceInstantly();
+	} );
+
+	banner.on( 'addresstype:info:hide', function () {
+		$( '#WMDE_Banner-addressType-info-wrapper' ).hide();
+		addSpaceInstantly();
+	} );
 }
 
 function validateAndSetPeriod() {
@@ -174,7 +215,16 @@ function validateAndSetPeriod() {
 function validateForm() {
 	return validateAndSetPeriod() &&
 		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
+		BannerFunctions.validatePaymentType() &&
+		BannerFunctions.validateAddressType();
+}
+
+function appendHiddenFieldsToForm() {
+	$( '<input>' )
+		.prop( 'type', 'hidden' )
+		.prop( 'name', 'betrag' )
+		.prop( 'value', BannerFunctions.getAmount().toFixed( 2 ).replace( '.', ',' ) )
+		.appendTo( '#WMDE_Banner-form' );
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
@@ -184,6 +234,9 @@ $( '.WMDE-Banner-submit button' ).click( function () {
 			'submit',
 			submitTrackingRatio
 		);
+		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+			appendHiddenFieldsToForm();
+		}
 		return true;
 	}
 	return false;
@@ -204,6 +257,29 @@ $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 
 $( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
 	$( this ).trigger( 'paymenttype:selected' );
+} );
+
+$( "input[name='addressType']" ).change( function () {
+	BannerFunctions.hideAddressTypeError();
+	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+		BannerFunctions.showAddressTypeInfo();
+		$( '#WMDE_Banner-form' ).prop(
+			'action',
+			'https://spenden.wikimedia.de/donation/add?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName + '&mbt=1'
+		);
+	} else if ( $( "input[name='addressType']:checked" ).val() === 'person' ) {
+
+		$( '#WMDE_Banner-form' ).prop(
+			'action',
+			'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
+		);
+
+		BannerFunctions.hideAddressTypeInfo();
+
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+		}
+	}
 } );
 
 // END form init code
@@ -235,6 +311,7 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
+	setupAddressTypeEventHandling();
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
@@ -302,6 +379,19 @@ $( function () {
 
 	// BEGIN Banner close functions
 	// NOTE: These functions need to stay at the end for the correct order of click events
+
+	$( '#WMDE_Banner-next' ).click( function () {
+		if ( validateAndSetPeriod() &&
+			BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
+			BannerFunctions.validatePaymentType() ) {
+			$( '#form-page-second' ).addClass( 'visible' );
+		}
+	} );
+
+	$( '#WMDE_Banner .back__link' ).click( function ( event ) {
+		event.preventDefault();
+		$( '#form-page-second' ).removeClass( 'visible' );
+	} );
 
 	$( '#WMDE_Banner .close__link' ).click( function () {
 		$( '#WMDE_Banner' ).hide();
