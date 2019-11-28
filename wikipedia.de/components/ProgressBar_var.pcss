@@ -11,6 +11,10 @@
 	justify-content: space-between;
 	flex: 1;
 	max-height: 30px;
+
+	@media ( min-width: $breakpoint-xxl ) {
+		max-height: 36px;
+	}
 }
 
 .progress_bar__donation_fill {
@@ -35,6 +39,10 @@
 	padding-right: 16px;
 	flex: 1;
 	visibility: hidden;
+	@media ( min-width: $breakpoint-xxl ) {
+		line-height: 34px;
+		font-size: 1.2em;
+	}
 }
 
 .progress_bar__donation_remaining {
@@ -46,6 +54,10 @@
 	line-height: 28px;
 	visibility: hidden;
 	white-space: nowrap;
+	@media ( min-width: $breakpoint-xxl ) {
+		line-height: 34px;
+		font-size: 1.2em;
+	}
 }
 
 .progress_bar__donation_remaining--outer {

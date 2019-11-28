@@ -35,6 +35,9 @@
 		@media ( min-width: $breakpoint-m ) {
 			font-size: 1.3em;
 		}
+		@media ( min-width: $breakpoint-xxl ) {
+			font-size: 1.5em;
+		}
 		.optional-text {
 			display: none;
 			&.text-max-xl {
@@ -45,11 +48,16 @@
 					display: inline;
 				}
 			}
-			/* TODO If CTRL banner of 2019 Test 02 wins, harmonize breakpoint name and class name
-					The class name diverges from the breakpoint because VAR shows the text at xl size, not at xxl
-			*/
-			@media ( min-width: $breakpoint-xxl ) {
+			@media ( min-width: $breakpoint-xl ) {
 				&.text-xl {
+					display: inline;
+				}
+				&.text-max-xl {
+					display: none;
+				}
+			}
+			@media ( min-width: $breakpoint-xxl ) {
+				&.text-xxl {
 					display: inline;
 				}
 			}

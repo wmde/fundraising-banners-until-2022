@@ -1,0 +1,56 @@
+.footer {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+
+	font-size: 0.8em;
+	line-height: 1.6em;
+	color: $color-dark;
+	padding: 0 0.5em;
+
+	@media ( min-width: $breakpoint-m ) {
+		padding: 0;
+	}
+
+	@media ( min-width: $breakpoint-xl ) {
+		font-size: 0.9em;
+	}
+
+	&__info {
+		text-transform: uppercase;
+	}
+	&__importantinfo {
+		font-weight: bolder;
+	}
+	&__item {
+		margin-right: 1em;
+		> span {
+			margin-right: 0.5em;
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+		white-space: nowrap;
+		&--rightflex {
+			flex-grow: 1;
+			text-align: right;
+			@media ( min-width: $breakpoint-form-right ) {
+				& a {
+					display: inline-block;
+					text-align: center;
+					/* use same width and margin as .form to center the text */
+					width: 19em;
+					margin: 0 1.5em 0 0.25em;
+				}
+			}
+		}
+		.iban-block > span {
+			margin-right: 0.2em;
+		}
+	}
+}
+
+.application-of-funds-link {
+	color: $color-dark;
+}
