@@ -16,8 +16,8 @@ import style from './styles/banner_ctrl.pcss';
 /* global BannerName */
 
 const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const bannerClickTrackRatio = 0.01;
-const bannerCloseTrackRatio = 0.01;
+const bannerClickTrackRatio = 1;
+const bannerCloseTrackRatio = 1;
 const eventTracker = new MatomoTracker( 'FundraisingTracker', BannerName );
 
 const trackingData = {

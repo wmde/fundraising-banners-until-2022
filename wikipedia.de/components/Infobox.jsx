@@ -12,7 +12,7 @@ export default function Infobox( props ) {
 			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
 			<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
 			{capitalizeFirstLetter( weekdayPrepPhrase )} {currentDayName} sind Sie in Deutschland
-			gefragt<span className="optional-text text-xxl">, um Wikipedias Unabhängigkeit zu sichern</span>:
+			gefragt<span className="optional-text text-l">, um Wikipedias Unabhängigkeit zu sichern</span>:
 		</p>
 
 		<p className="text__paragraph">
@@ -27,7 +27,7 @@ export default function Infobox( props ) {
 			Über {amountBannerImpressionsInMillion} Millionen Mal wird unser Spendenaufruf täglich angezeigt,
 				aber nur {numberOfDonors} Menschen haben bisher gespendet. </span>
 
-			<span className="optional-text text-xxl">Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. Wikipedia ist ein Ort des Lernens – Werbung hat darin keinen Platz. </span>
+			<span className="optional-text text-l">Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. Wikipedia ist ein Ort des Lernens – Werbung hat darin keinen Platz. </span>
 
 			<span>Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir
 				könnten ihr nicht vertrauen. </span>

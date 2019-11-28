@@ -43,17 +43,17 @@ export default class MobileBannerFullpage extends Component {
 						<div className="smallprint" id="frbanner-smallprint">
 							<div className="smallprint">
 							<span>
-								<a href={`https://spenden.wikimedia.de/spenden/Impressum?${trackingParams}&skin=2&da=0`}
+								<a href={`https://spenden.wikimedia.de/spenden/Impressum?${trackingParams}`}
 								   target="_blank">Impressum</a>
 							</span>
 								<span className="separator"> | </span>
 								<span>
-								<a href={`https://spenden.wikimedia.de/spenden/Datenschutz?${trackingParams}&skin=2&da=0`}
+								<a href={`https://spenden.wikimedia.de/spenden/Datenschutz?${trackingParams}`}
 								   target="_blank">Datenschutz</a>
 							</span>
 								<span className="separator"> | </span>
 								<span>
-								<a href={`https://spenden.wikimedia.de/use-of-funds?${trackingParams}&skin=0&da=0&dsn=0`}
+								<a href={`https://spenden.wikimedia.de/use-of-funds?${trackingParams}`}
 								   target="_blank">Wohin geht meine Spende?</a>
 							</span>
 							</div>

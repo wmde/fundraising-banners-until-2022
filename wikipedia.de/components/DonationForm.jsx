@@ -100,7 +100,7 @@ export default class DonationForm extends Component {
 		];
 
 		return <div className="form">
-			<form id="WMDE_Banner-form" method="post" name="donationForm"
+			<form method="post" name="donationForm" className="form__element"
 				  action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName +'&skin=0'}>
 				<div className="form-field-group">
 					<div

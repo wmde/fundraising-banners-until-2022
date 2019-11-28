@@ -18,7 +18,7 @@ export default function Footer( { campaignName, bannerName} ) {
 
 			<div className="footer__item footer__item--rightflex">
 				<a id="application-of-funds-link" className="application-of-funds-link" target="_blank"
-				   href={'https://spenden.wikimedia.de/use-of-funds?piwik_campaign=' + campaignName + '&piwik_kwd=' + bannerName + '_link&skin=0&dsn=0'}
+				   href={'https://spenden.wikimedia.de/use-of-funds?piwik_campaign=' + campaignName + '&piwik_kwd=' + bannerName + '_link'}
 				   data-href="#info-application-of-funds">Wohin geht meine Spende?
 				</a>
 			</div>

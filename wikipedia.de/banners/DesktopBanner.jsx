@@ -22,7 +22,7 @@ export default class DesktopBanner extends Component {
 	render( props ) {
 		const campaignProjection = props.campaignProjection;
 		return <div id="WMDE_Banner" className={classNames( { 'is-hidden': !props.bannerVisible } )}>
-			<div className="banner">
+			<div className="banner banner--desktop">
 				<div className="banner__content">
 					<div className="infobox">
 						<Infobox amountBannerImpressionsInMillion={props.amountBannerImpressionsInMillion}

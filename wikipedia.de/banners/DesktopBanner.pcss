@@ -33,16 +33,26 @@
 		background-color: $color-white;
 		&__content {
 			margin-top: 0.5em;
+
+			@media ( min-width: $breakpoint-form-right ) {
+				display: flex;
+				flex-direction: row;
+				order: 1;
+			}
 		}
 		&__footer {
 			padding: 0;
 			font-size: 1.1em;
 			color: $color-dark;
+			@media ( min-width: $breakpoint-form-right ) {
+				padding-right: 1.5em;
+				order: 2;
+			}
 			@media ( min-width: $breakpoint-m ) {
-				padding: 0 40px;
+				padding-left: 40px;
 			}
 			@media ( min-width: $breakpoint-l ) {
-				padding: 0 60px 0 40px;
+				padding-left: 60px;
 			}
 		}
 	}
