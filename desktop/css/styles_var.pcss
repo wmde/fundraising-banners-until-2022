@@ -20,10 +20,10 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
-$breakpoint_s: 1024px;
-$breakpoint_m: 1150px;
-$breakpoint_l: 1400px;
-$breakpoint_xl: 1900px;
+$breakpoint_s: 1025px;
+$breakpoint_m: 1090px;
+$breakpoint_l: 1300px;
+$breakpoint_xl: 1580px;
 
 #WMDE_Banner {
 	display: none;
@@ -91,7 +91,7 @@ $breakpoint_xl: 1900px;
 			text-align: left;
 			margin: 0.5em 2em 0.5em 1.2em;
 			@media ( min-width: $breakpoint_s ) {
-				font-size: 1.1em;
+				font-size: 1.3em;
 			}
 			@media ( min-width: $breakpoint_m ) {
 				font-family: var( --banner-text-font-family );
@@ -154,12 +154,10 @@ $breakpoint_xl: 1900px;
 
 	.optional-text {
 		display: none;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint_l ) {
 			&.text-m {
 				display: inline;
 			}
-		}
-		@media ( min-width: $breakpoint_l ) {
 			&.text-l {
 				display: inline;
 			}
