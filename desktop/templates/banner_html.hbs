@@ -9,12 +9,11 @@
 			</div>
 
 			<div class="form">
-
 				<form id="WMDE_Banner-form" method="post" name="donationForm"
 					  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+
 					<div class="form-field-group">
 						<div class="select-group-container">
-							<span class="section-title">1. Wie häufig möchten Sie spenden?</span>
 							<div id="WMDE_Banner-frequency" class="WMDE-Banner-frequency select-group">
 								<label class="select-group__option select-group__option--thirdwidth">
 									<input type="radio" id="interval_onetime" name="interval" value="0"
@@ -31,24 +30,15 @@
 										   class="select-group__input">
 									<span class="select-group__state">jährlich</span>
 								</label>
-								<label class="select-group__option select-group__option--thirdwidth select-group__option--pseudo">
-									<!-- This empty element is used to align intervals on the 4 columns form design on lower resolutions -->
-								</label>
 							</div>
-
 							<span class="select-group__errormessage" id="WMDE_Banner-frequency-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-frequency-error-text">
-                                    {{ no-interval-message }}
-                                </span>
+									{{ no-interval-message }}
+								</span>
                             </span>
 						</div>
-					</div>
 
-					<div class="form-field-group">
 						<div class="select-group-container">
-
-							<span class="section-title">2. Wie viel möchten Sie spenden?</span>
-
 							<div id="WMDE_Banner-amounts" class="WMDE-Banner-amounts select-group">
 								<label id="amount_label_1"
 									   class="select-group__option select-group__option--quarterwidth">
@@ -92,8 +82,8 @@
 									<span class="select-group__state">100 €</span>
 								</label>
 
-								<label class="select-group__option select-group__option--quarterwidth select-group__option-amount-other-input"
-									   for="amount-other-input">
+								<label class="select-group__option select-group__option--halfwidth select-group__option-amount-other-input"
+									   for="field-amount_total_custom">
 									<input type="radio" name="betrag_auswahl" id="field-amount_total_custom"
 										   class="select-group__input" value="">
 									<input type="text" name="amountGiven" id="amount-other-input" size="3"
@@ -101,20 +91,16 @@
 										   class="select-group__custom-input">
 								</label>
 							</div>
-
 							<span class="select-group__errormessage" id="WMDE_Banner-amounts-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-amounts-error-text">
-                                    {{ amount-empty-message }}
-                                </span>
+									{{ amount-empty-message }}
+								</span>
                             </span>
 						</div>
 					</div>
 
 					<div class="form-field-group">
 						<div class="select-group-container">
-
-							<span class="section-title">3. Wie möchten Sie bezahlen?</span>
-
 							<div id="WMDE_Banner-payment-type" class="WMDE-Banner-payment select-group">
 								<label class="select-group__option select-group__option--halfwidth">
 									<input type="radio" name="zahlweise" value="BEZ" class="select-group__input">
@@ -136,51 +122,17 @@
 									<span class="select-group__state">PayPal</span>
 								</label>
 							</div>
-
 							<span class="select-group__errormessage" id="WMDE_Banner-payment-type-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-payment-type-error-text">
-                                    {{ no-payment-type-message }}
-                                </span>
+									{{ no-payment-type-message }}
+								</span>
                             </span>
-
 						</div>
-					</div>
 
-					<div class="form-field-group">
-						<div class="select-group-container">
-
-							<span class="section-title">4. Möchten Sie Ihre Kontaktdaten angeben?</span>
-
-							<div id="WMDE_Banner-addressType" class="WMDE-Banner-address select-group">
-								<label class="select-group__option select-group__option--halfwidth">
-									<input type="radio" name="addressType" id="address-yes" value="person"
-										   class="select-group__input">
-									<span class="select-group__state">Ja</span>
-								</label>
-								<label class="select-group__option select-group__option--halfwidth">
-									<input type="radio" name="addressType" id="address-no" value="anonym"
-										   class="select-group__input">
-									<span class="select-group__state">Nein</span>
-								</label>
-							</div>
-
-							<span class="select-group__errormessage" id="WMDE_Banner-addressType-error-wrapper">
-								<span class="select-group__erroricon" id="WMDE_Banner-addressType-error-text">
-									{{ no-addressType-message }}
-								</span>
-							</span>
-							<span class="select-group__infomessage" id="WMDE_Banner-addressType-info-wrapper">
-								<span class="select-group__infoicon" id="WMDE_Banner-addressType-info-text">
-									{{ addressType-info-message }}
-								</span>
-							</span>
-
-							<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
-								<button class="button-group__button">
-									<span class="button-group__label">Weiter, um Spende abzuschließen</span>
-								</button>
-							</div>
-
+						<div id="WMDE_Banner-submit" class="WMDE-Banner-submit button-group">
+							<button class="button-group__button">
+								<span class="button-group__label">Weiter, um Spende abzuschließen</span>
+							</button>
 						</div>
 					</div>
 
@@ -189,33 +141,10 @@
 					<input type="hidden" id="impCount" name="impCount" value=""/>
 					<input type="hidden" id="bImpCount" name="bImpCount" value=""/>
 				</form>
-				<div class="banner__footer">
-					<div class="footer">
-						<div class="footer__item">
-							<span>Spendenkonto Wikimedia Foerdergesellschaft</span>
-						</div>
-						<div class="footer__item">
-							<span>BIC</span>
-							<span class="footer__importantinfo">BFSWDE33BER</span>
-						</div>
-						<div class="footer__item">
-							<span>IBAN</span>
-							<span class="footer__importantinfo"><span class="iban-block"><span>DE33</span><span>1002</span><span>0500</span><span>0001</span><span>1947</span><span>00</span></span></span>
-						</div>
-
-						<div class="footer__item footer__item--rightflex">
-							<a class="application-of-funds-link" target="_blank"
-							   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link"
-							   data-href="#info-application-of-funds">Wohin geht meine Spende?
-							</a>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
-		<!-- Duplicate footer shown in a row only when screen size > 1400 -->
-		<div class="banner__footer-2">
+
+		<div class="banner__footer">
 			<div class="footer">
 				<div class="footer__item">
 					<span>Spendenkonto Wikimedia Foerdergesellschaft</span>
@@ -230,13 +159,14 @@
 				</div>
 
 				<div class="footer__item footer__item--rightflex">
-					<a class="application-of-funds-link" target="_blank"
+					<a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
 					   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link"
 					   data-href="#info-application-of-funds">Wohin geht meine Spende?
 					</a>
 				</div>
 			</div>
 		</div>
+
 		<div class="close">
 			<a href="#" class="close__link">
 				&#x2715;
