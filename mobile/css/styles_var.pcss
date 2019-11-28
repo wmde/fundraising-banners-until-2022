@@ -5,6 +5,7 @@
 	--banner-color-red-dark: #6c0000;
 	--banner-color-offblack: #333333;
 	--banner-color-gray: #e0e5e9;
+	--banner-color-gray-darker: #666666;
 	--banner-color-gray-dark: #989a9a;
 	--banner-color-green: #6e9e00;
 	--banner-color-green-light: #88b81a;
@@ -364,7 +365,7 @@
 					margin-right: 0;
 					width: 100%;
 					padding: 0 0 15px 0;
-					color: var( --banner-color-gray-dark );
+					list-style-type: none;
 				}
 			}
 		}
@@ -585,7 +586,11 @@
 		line-height: 12pt;
 		margin-right: 0;
 		width: 100%;
-		text-align: right;
+		text-align: center;
+		color: var( --banner-color-gray-darker );
+	}
+	.BEZ-hint {
+		display: none;
 	}
 }
 
