@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import style from './Footer.pcss';
 
 export default function Footer( { campaignName, bannerName} ) {
 	return <div className="banner__footer">

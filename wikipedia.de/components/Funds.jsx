@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import style from './Funds.pcss';
 
 export default function Funds() {
 	return <div className="wlightbox-contents">

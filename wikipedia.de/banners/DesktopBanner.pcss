@@ -1,5 +1,3 @@
-@import '../variables_ctrl.pcss';
-
 #WMDE_Banner {
 	display: none;
 	width: 100%;
@@ -46,6 +44,24 @@
 			@media ( min-width: $breakpoint-l ) {
 				padding: 0 60px 0 40px;
 			}
+		}
+	}
+
+	.progress_bar__wrapper {
+		max-height: 30px;
+		margin-right: 1.2em;
+		margin-left: 1.2em;
+		@media ( min-width: $breakpoint-l ) {
+			margin-right: 1.5em;
+			margin-left: 1.5em;
+		}
+	}
+
+	.progress_bar__donation_fill {
+		border-top-right-radius: 8px;
+		border-bottom-right-radius: 8px;
+		@media ( min-width: $breakpoint-l ) {
+			height: 32px;
 		}
 	}
 }

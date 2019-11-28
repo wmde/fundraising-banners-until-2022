@@ -1,9 +1,9 @@
 import { Component, Fragment, h } from 'preact';
 import classNames from 'classnames'
 
-import style from './MobileBanner.pcss';
 import { Slider } from '../../mobile/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
+import ProgressBar from '../components/ProgressBar';
 
 export default class MobileBanner extends Component {
 	constructor(props) {
@@ -26,9 +26,10 @@ export default class MobileBanner extends Component {
 		}
 	};
 
-	animateHighlightTrigger = cb => { this.animateHighLight = cb };
+	setAnimateHighlight = cb => { this.animateHighLight = cb };
 
 	render( props, state, context ) {
+		const campaignProjection = props.campaignProjection;
 		return <Fragment>
 			<div className={ classNames('mini-banner', { 'is-hidden': this.state.isFullPageVisible || !props.bannerVisible } ) }>
 				<div className="mini-banner-box">
@@ -52,6 +53,15 @@ export default class MobileBanner extends Component {
 							</div>
 							<div className="carousel-cell">
 								<p className="goal-headline">Unser Spendenziel: 8,1&nbsp;Millionen&nbsp;Euro</p>
+								<ProgressBar
+									locale={props.locale}
+									daysLeft={campaignProjection.getRemainingDays()}
+									donationAmount={campaignProjection.getProjectedDonationSum()}
+									goalDonationSum={campaignProjection.goalDonationSum}
+									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+									setStartAnimation={()=>{}}
+									animate={false}
+								/>
 							</div>
 							<div className="carousel-cell">
 								<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
@@ -69,7 +79,7 @@ export default class MobileBanner extends Component {
 					</div>
 				</div>
 			</div>
-			<MobileBannerFullpage {...props} isFullPageVisible={this.state.isFullPageVisible} animateHighlightTrigger={ this.animateHighlightTrigger }/>
+			<MobileBannerFullpage {...props} isFullPageVisible={this.state.isFullPageVisible} animateHighlightTrigger={ this.setAnimateHighlight }/>
 		</Fragment>
 	}
 
