@@ -3,14 +3,14 @@
 		<div class="banner__content">
 			<div class="infobox">
 				<div class="infobox__text">
-					{{> banner_text }}
+					{{> banner_text_var }}
 				</div>
 				{{{ progressBar }}}
 			</div>
 
 			<div class="form">
 				<form id="WMDE_Banner-form" method="post" name="donationForm"
-					  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
+					  action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&fd=0&compact=0">
 
 					<div class="form-field-group">
 						<div class="select-group-container">
@@ -33,8 +33,8 @@
 							</div>
 							<span class="select-group__errormessage" id="WMDE_Banner-frequency-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-frequency-error-text">
-									{{ no-interval-message }}
-								</span>
+                                    {{ no-interval-message }}
+                                </span>
                             </span>
 						</div>
 
@@ -93,8 +93,8 @@
 							</div>
 							<span class="select-group__errormessage" id="WMDE_Banner-amounts-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-amounts-error-text">
-									{{ amount-empty-message }}
-								</span>
+                                    {{ amount-empty-message }}
+                                </span>
                             </span>
 						</div>
 					</div>
@@ -124,8 +124,8 @@
 							</div>
 							<span class="select-group__errormessage" id="WMDE_Banner-payment-type-error-wrapper">
                                 <span class="select-group__erroricon" id="WMDE_Banner-payment-type-error-text">
-									{{ no-payment-type-message }}
-								</span>
+                                    {{ no-payment-type-message }}
+                                </span>
                             </span>
 						</div>
 
@@ -160,7 +160,7 @@
 
 				<div class="footer__item footer__item--rightflex">
 					<a id="application-of-funds-link" class="application-of-funds-link" target="_blank"
-					   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link"
+					   href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0&fd=0&compact=0"
 					   data-href="#info-application-of-funds">Wohin geht meine Spende?
 					</a>
 				</div>

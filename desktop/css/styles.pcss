@@ -1,15 +1,14 @@
 :root {
 	--banner-color-gray: #808080;
-	--banner-color-gray-medium-dark: #747474;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
-	--banner-color-green: #849d0e;
-	--banner-color-green-medium-light: #97b313;
+	--banner-color-green: #97b313;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
 	--banner-color-yellow: #ffdd5b;
 	--banner-color-red: #990000;
+
 	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
 	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
 }
@@ -21,10 +20,10 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
-$breakpoint_s: 900px;
+$breakpoint_s: 1024px;
 $breakpoint_m: 1150px;
-$breakpoint_m_max: 1149px; /** DEPRECATED **/
 $breakpoint_l: 1400px;
+$breakpoint_xl: 1900px;
 
 #WMDE_Banner {
 	display: none;
@@ -70,30 +69,35 @@ $breakpoint_l: 1400px;
 		border-radius: 0.4em;
 		background-color: var( --banner-color-blue );
 		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.2em 5em 0.2em 5em;
+		margin: 0 0.8em 0 0.5em;
 		position: relative;
-		&:before {
-			position: absolute;
-			bottom: 1.5em;
-			content: ' ';
-			margin-left: -25px;
-			border-style: solid;
-			border-width: 0 0 25px 25px;
-			border-color: transparent transparent var( --banner-color-blue ) transparent;
-			@media ( max-width: $breakpoint_m_max ) {
-				display: none;
+		@media ( min-width: $breakpoint_m ) {
+			margin: 0.2em 5em 0.2em 5em;
+			&:before {
+				position: absolute;
+				bottom: 1.5em;
+				content: ' ';
+				margin-left: -25px;
+				border-style: solid;
+				border-width: 0 0 25px 25px;
+				border-color: transparent transparent var( --banner-color-blue ) transparent;
 			}
 		}
 		&__text {
 			color: var( --banner-color-white );
-			font-family: var( --banner-text-font-family );
+			font-family: var( --banner-main-font-family );
 			font-size: 1em;
-			@media ( min-width: $breakpoint_m ) {
-				font-size: 18px;
-			}
 			line-height: 1.3em;
 			text-align: left;
-			margin: 0.5em 1.2em;
+			margin: 0.5em 2em 0.5em 1.2em;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 1.1em;
+			}
+			@media ( min-width: $breakpoint_m ) {
+				font-family: var( --banner-text-font-family );
+				font-size: 1.3em;
+				margin: 0.5em 1.2em;
+			}
 		}
 		&__footer {
 			padding: 0.025em 0 0 2em;
@@ -150,8 +154,18 @@ $breakpoint_l: 1400px;
 
 	.optional-text {
 		display: none;
+		@media ( min-width: $breakpoint_m ) {
+			&.text-m {
+				display: inline;
+			}
+		}
 		@media ( min-width: $breakpoint_l ) {
 			&.text-l {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			&.text-xl {
 				display: inline;
 			}
 		}
@@ -163,7 +177,7 @@ $breakpoint_l: 1400px;
 		flex-direction: row;
 		justify-content: flex-start;
 
-		font-size: 13px;
+		font-size: 0.8em;
 		line-height: 1.6em;
 		color: var( --banner-color-black );
 		&__info {
@@ -202,9 +216,9 @@ $breakpoint_l: 1400px;
 		min-width: inherit;
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
-		margin: 0.2em 0 0;
+		margin: 0;
 
-		@media ( min-width: $breakpoint_s ) {
+		@media ( min-width: $breakpoint_m ) {
 			margin: 0.2em 2.5em 0;
 		}
 
@@ -235,7 +249,7 @@ $breakpoint_l: 1400px;
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 1 0 auto;
-		font-size: 13px;
+		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
 		&-container {
@@ -293,7 +307,7 @@ $breakpoint_l: 1400px;
 			height: 25px;
 			cursor: pointer;
 			text-align: center;
-			font-size: 13px;
+			font-size: 0.95em;
 			box-sizing: border-box;
 			white-space: nowrap;
 			align-content: center;
@@ -316,7 +330,7 @@ $breakpoint_l: 1400px;
 			min-height: 25px;
 			height: 25px;
 			margin: 0;
-			font-size: 12px;
+			font-size: 0.9em;
 			font-weight: bold;
 			border: 0 none;
 			box-sizing: border-box;
@@ -392,9 +406,6 @@ $breakpoint_l: 1400px;
 			display: block;
 			color: var( --banner-color-white );
 			background-color: var( --banner-color-green );
-			&:hover {
-				background-color: var( --banner-color-green-medium-light );
-			}
 			border: 0 none;
 			border-radius: 0.4em;
 			padding: 0 0.4em;
@@ -412,7 +423,7 @@ $breakpoint_l: 1400px;
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
 		top: 0.5em;
-		right: 1em;
+		right: 1.3em;
 		opacity: 0.8;
 
 		@media ( min-width: $breakpoint_m ) {
@@ -430,11 +441,13 @@ $breakpoint_l: 1400px;
 		}
 		&__link {
 			font-size: 25px;
-			color: var( --banner-color-gray );
+			color: var( --banner-color-white );
+			@media ( min-width: $breakpoint_m ) {
+				color: var( --banner-color-gray );
+			}
 			text-decoration: none;
 			&:hover {
 				text-decoration: none;
-				color: var( --banner-color-gray-medium-dark );
 			}
 		}
 	}
@@ -448,7 +461,6 @@ $breakpoint_l: 1400px;
 			display: block;
 			color: var( --banner-color-white );
 			line-height: 1.9em;
-			font-size: 13px;
 		}
 		&__wrapper {
 			border-color: var( --banner-color-blue-light );
@@ -465,13 +477,11 @@ $breakpoint_l: 1400px;
 			color: var( --banner-color-white );
 			line-height: 1.8em;
 			white-space: nowrap;
-			font-size: 13px;
 		}
 		&__donation_remaining {
 			color: var( --banner-color-green );
 			line-height: 1.6em;
 			margin-left: -30px;
-			font-size: 13px;
 		}
 	}
 
@@ -479,7 +489,6 @@ $breakpoint_l: 1400px;
 		.banner {
 			&__content {
 				display: flex;
-				flex-direction: row;
 				flex-direction: row;
 				order: 1;
 			}
