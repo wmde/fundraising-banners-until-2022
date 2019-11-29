@@ -5,7 +5,6 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import animateHighlight from '../shared/animate_highlight';
 import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/de';
 import { Slider } from './banner_slider';
@@ -191,6 +190,7 @@ function displayFullBanner() {
 	$( '.mini-banner' ).hide();
 	window.scrollTo( 0, 0 );
 
+	progressBar.reset();
 	const viewport = $( '#mw-mf-viewport' );
 	const viewportOffset = viewport.css( 'margin-top' ).slice( 0, -2 );
 	const fullscreenBanner = $( '.frbanner-window' );
@@ -219,7 +219,7 @@ function displayFullBanner() {
 		fullscreenBanner.dequeue();
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
-			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
+			setTimeout( function () { progressBar.animate(); }, 500 );
 		} );
 
 	} );
@@ -255,6 +255,7 @@ $( document ).ready( function () {
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
 	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
+	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 
 	clickableBannerArea.click( displayFullBanner );
 } );

@@ -27,13 +27,13 @@ wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B19WMDE_mob03_191129_ctrl"
-tracking = "org-mob03-191129-ctrl"
+pagename = "B19WMDE_mob03_2_191129_ctrl"
+tracking = "org-mob03-2-191129-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B19WMDE_mob03_191129_var"
-tracking = "org-mob03-191129-var"
+pagename = "B19WMDE_mob03_2_191129_var"
+tracking = "org-mob03-2-191129-var"
 
 
 # Mobile English Campaign
