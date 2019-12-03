@@ -315,6 +315,7 @@ function displayBanner() {
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
+	bannerElement.css( 'left', 0 );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );

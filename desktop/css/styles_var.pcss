@@ -29,6 +29,7 @@ $breakpoint_s: 900px;
 $breakpoint_m: 1150px;
 $breakpoint_m_max: 1149px; /** DEPRECATED **/
 $breakpoint_l: 1400px;
+$breakpoint_xl: 1900px;
 
 #address-section {
 	visibility: hidden;
@@ -138,7 +139,9 @@ $breakpoint_l: 1400px;
 		border-radius: 0.4em;
 		background-color: var( --banner-color-blue );
 		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0.2em 5em 0.2em 5em;
+		@media ( min-width: $breakpoint_m ) {
+			margin: 0.2em 5em 0.2em 5em;
+		}
 		position: relative;
 		> div {
 			width: 100%;
@@ -154,15 +157,19 @@ $breakpoint_l: 1400px;
 		}
 		&__text {
 			color: var( --banner-color-white );
-			font-family: var( --banner-text-font-family );
+			font-family: var( --banner-main-font-family );
 			font-size: 1em;
 			line-height: 1.3em;
-			@media ( min-width: $breakpoint_s ) {
-				font-size: 1.3em;
-				line-height: 1.3em;
-			}
 			text-align: left;
-			padding: 0.5em 1.5em;
+			margin: 0.5em 2em 0.5em 1.2em;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 1.1em;
+			}
+			@media ( min-width: $breakpoint_m ) {
+				font-family: var( --banner-text-font-family );
+				font-size: 1.3em;
+				margin: 0.5em 1.2em;
+			}
 		}
 		&__footer {
 			padding: 0.025em 0 0 2em;
@@ -216,6 +223,25 @@ $breakpoint_l: 1400px;
 		 */
 		&__hidden-placeholder {
 			visibility: hidden;
+		}
+	}
+
+	.optional-text {
+		display: none;
+		@media ( min-width: $breakpoint_m ) {
+			&.text-m {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_l ) {
+			&.text-l {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			&.text-xl {
+				display: inline;
+			}
 		}
 	}
 
@@ -278,14 +304,14 @@ $breakpoint_l: 1400px;
 		padding: 0;
 		flex-wrap: nowrap;
 		justify-content: flex-start;
-		margin: 0.2em 5em 0.2em 5em;
-
 		@media ( min-width: $breakpoint_s ) {
 			display: block;
 			padding: 0.2em 0 0 0;
-			margin: 0.2em 5em 0;
 		}
 
+		@media ( min-width: $breakpoint_m ) {
+			margin: 0.2em 5em 0.2em 5em;
+		}
 		&__header {
 			display: flex;
 			justify-content: space-between;
@@ -619,10 +645,16 @@ $breakpoint_l: 1400px;
 		}
 		&__link {
 			font-size: 25px;
-			color: var( --banner-color-gray );
+			color: var( --banner-color-white );
+			@media ( min-width: $breakpoint_m ) {
+				color: var( --banner-color-gray );
+			}
 			text-decoration: none;
 			&:hover {
-				color: var( --banner-color-dark-light );
+				color: var( --banner-color-gray-light );
+				@media ( min-width: $breakpoint_m ) {
+					color: var( --banner-color-dark-light );
+				}
 				text-decoration: none;
 			}
 		}
@@ -859,12 +891,4 @@ $breakpoint_l: 1400px;
 
 #WMDE_Banner-addressType-info-wrapper {
 	display: none;
-}
-
-.ab-test-height {
-	display: none;
-	@media ( min-width: $breakpoint_l ) {
-		display: block;
-		height: 60px;
-	}
 }
