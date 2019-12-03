@@ -46,7 +46,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_var.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -236,6 +236,7 @@ function displayBanner() {
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
+	bannerElement.css( 'left', 0 );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
