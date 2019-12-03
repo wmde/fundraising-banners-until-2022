@@ -67,6 +67,7 @@ const progressBar = new ProgressBar(
 		decimalSeparator: '.'
 	}
 );
+
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
@@ -120,6 +121,17 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:addresstype:ok', function () {
+		$( '#WMDE_Banner-addressType-error-wrapper' ).hide();
+		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:addresstype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-addressType-error-text' ).text( text );
+		$( '#WMDE_Banner-addressType-error-wrapper' ).show();
+		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
@@ -152,9 +164,38 @@ function setupAmountEventHandling() {
 
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+
+		$( '#address-no' ).prop( 'disabled', false );
+		BannerFunctions.hideAddressTypeInfo();
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+
+			$( '#address-no' ).prop( 'disabled', true );
+			$( '#address-yes' ).prop( 'checked', true ).trigger( 'change' );
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+		}
+		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
+		}
 	} );
 
 	banner.trigger( 'validation:init', banner.data( 'validation-event-handling' ) );
+}
+
+function setupAddressTypeEventHandling() {
+	var banner = $( '#WMDE_Banner' );
+	banner.on( 'addresstype:info:show', function ( evt, text ) {
+		$( '#WMDE_Banner-addressType-info-text' ).text( text );
+		$( '#WMDE_Banner-addressType-info-wrapper' ).show();
+		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-info' );
+		addSpaceInstantly();
+	} );
+
+	banner.on( 'addresstype:info:hide', function () {
+		$( '#WMDE_Banner-addressType-info-wrapper' ).hide();
+		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-info' );
+		addSpaceInstantly();
+	} );
+
 }
 
 function validateAndSetPeriod() {
@@ -172,7 +213,16 @@ function validateAndSetPeriod() {
 function validateForm() {
 	return validateAndSetPeriod() &&
 		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
+		BannerFunctions.validatePaymentType() &&
+		BannerFunctions.validateAddressType();
+}
+
+function appendHiddenFieldsToForm() {
+	$( '<input>' )
+		.prop( 'type', 'hidden' )
+		.prop( 'name', 'betrag' )
+		.prop( 'value', BannerFunctions.getAmount().toFixed( 2 ).replace( '.', ',' ) )
+		.appendTo( '#WMDE_Banner-form' );
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
@@ -182,6 +232,9 @@ $( '.WMDE-Banner-submit button' ).click( function () {
 			'submit',
 			submitTrackingRatio
 		);
+		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+			appendHiddenFieldsToForm();
+		}
 		return true;
 	}
 	return false;
@@ -202,6 +255,31 @@ $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 
 $( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
 	$( this ).trigger( 'paymenttype:selected' );
+} );
+
+$( "input[name='addressType']" ).change( function () {
+	BannerFunctions.hideAddressTypeError();
+	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+
+		$( '#WMDE_Banner-form' ).prop(
+			'action',
+			'https://spenden.wikimedia.de/donation/add?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName + '&mbt=1'
+		);
+
+		BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
+	} else if ( $( "input[name='addressType']:checked" ).val() === 'person' ) {
+
+		$( '#WMDE_Banner-form' ).prop(
+			'action',
+			'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + CampaignName + '&piwik_kwd=' + BannerName
+		);
+
+		BannerFunctions.hideAddressTypeInfo();
+
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+		}
+	}
 } );
 
 // END form init code
@@ -233,10 +311,10 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
+	setupAddressTypeEventHandling();
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
-	bannerElement.css( 'left', 0 );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );
