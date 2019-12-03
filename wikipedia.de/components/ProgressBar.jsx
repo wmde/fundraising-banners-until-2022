@@ -1,7 +1,8 @@
-import classNames from 'classnames';
+// eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
+import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
-import formatNumber from 'format-number'
+import formatNumber from 'format-number';
 import TranslationContext from './TranslationContext';
 import PropTypes from 'prop-types';
 
@@ -37,11 +38,11 @@ export default class ProgressBar extends Component {
 		 * If the progress bar should be animated. Default: true
 		 * If it's not animated you can set setStartAnimation to an empty function like this: () => {}
 		 */
-		animate: PropTypes.bool,
+		animate: PropTypes.bool
 	};
 
-	constructor(props) {
-		super(props);
+	constructor( props ) {
+		super( props );
 		this.state = {
 			width: 1,
 			animation: PENDING
@@ -50,7 +51,7 @@ export default class ProgressBar extends Component {
 			this.state = {
 				width: this.calculateWidth(),
 				animation: ENDED
-			}
+			};
 		}
 
 		PropTypes.checkPropTypes( ProgressBar.propTypes, props, 'constructor', 'ProgressBar' );
@@ -64,8 +65,9 @@ export default class ProgressBar extends Component {
 		this.props.setStartAnimation( this.startAnimation.bind( this ) );
 	}
 
-	progressAnimationEnded = (e) => {
-		this.setState( { animation: ENDED } )
+	// eslint-disable-next-line no-unused-vars
+	progressAnimationEnded = ( e ) => {
+		this.setState( { animation: ENDED } );
 	};
 
 	startAnimation() {
@@ -79,25 +81,25 @@ export default class ProgressBar extends Component {
 	}
 
 	calculateWidth() {
-		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum
+		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum;
 	}
 
-	render( props, state) {
+	render( props, state ) {
 		const getMillion = n => this.millionFormatter( n / 1000000 );
-		const Translations = useContext(TranslationContext);
-		return <div className={classNames( 'progress_bar', {
+		const Translations = useContext( TranslationContext );
+		return <div className={ classNames( 'progress_bar', {
 			'progress_bar--finished': state.animation === ENDED,
-			'progress_bar--animating': state.animation === STARTED,
-		})}>
+			'progress_bar--animating': state.animation === STARTED
+		} ) }>
 			<div className="progress_bar__wrapper">
-				<div className="progress_bar__donation_fill" style={ `width:${state.width}%` } onTransitionEnd={this.progressAnimationEnded}>
+				<div className="progress_bar__donation_fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
 					<div className="progress_bar__days_left">
 					</div>
 					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
 				</div>
 				<div
 					className="progress_bar__donation_remaining progress_bar__donation_remaining--inner">
-					{ Translations['amount-missing'] }{ ' ' }
+					{ Translations[ 'amount-missing' ] }{ ' ' }
 					{ getMillion( props.missingAmount ) }
 				</div>
 			</div>
@@ -106,6 +108,6 @@ export default class ProgressBar extends Component {
 				<hr className="progress_bar__pointer_line" />
 					Es fehlen { props.missingAmount }M €
 			</div>
-		</div>
+		</div>;
 	}
 }
