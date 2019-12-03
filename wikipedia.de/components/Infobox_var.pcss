@@ -32,20 +32,23 @@
 		@media ( min-width: $breakpoint-s ) {
 			font-size: 1.1em;
 		}
-		@media ( min-width: $breakpoint-l ) {
+		@media ( min-width: $breakpoint-m ) {
 			font-size: 1.3em;
+		}
+		@media ( min-width: $breakpoint-xxl ) {
+			font-size: 1.5em;
 		}
 		.optional-text {
 			display: none;
 			&.text-max-xl {
 				display: inline;
 			}
-			@media ( min-width: $breakpoint-m ) {
+			@media ( min-width: $breakpoint-l ) {
 				&.text-l {
 					display: inline;
 				}
 			}
-			@media ( min-width: $breakpoint-l ) {
+			@media ( min-width: $breakpoint-xl ) {
 				&.text-xl {
 					display: inline;
 				}
@@ -53,7 +56,7 @@
 					display: none;
 				}
 			}
-			@media ( min-width: $breakpoint-xl ) {
+			@media ( min-width: $breakpoint-xxl ) {
 				&.text-xxl {
 					display: inline;
 				}

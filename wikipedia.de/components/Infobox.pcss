@@ -10,9 +10,6 @@
 	padding: 0.25em 0.5em 0.25em 0;
 	margin: 0.2em 0.5em;
 	position: relative;
-	@media ( min-width: $breakpoint-m ) {
-		margin: 0.2em 5em 0.2em 5em;
-	}
 	@media ( min-width: $breakpoint-l ) {
 		margin: 0.2em 0 0.2em 1em;
 	}
@@ -43,21 +40,16 @@
 			&.text-max-xl {
 				display: inline;
 			}
-			@media ( min-width: $breakpoint-m ) {
+			@media ( min-width: $breakpoint-l ) {
 				&.text-l {
 					display: inline;
 				}
 			}
-			@media ( min-width: $breakpoint-l ) {
+			/* TODO If CTRL banner of 2019 Test 02 wins, harmonize breakpoint name and class name
+					The class name diverges from the breakpoint because VAR shows the text at xl size, not at xxl
+			*/
+			@media ( min-width: $breakpoint-xxl ) {
 				&.text-xl {
-					display: inline;
-				}
-				&.text-max-xl {
-					display: none;
-				}
-			}
-			@media ( min-width: $breakpoint-xl ) {
-				&.text-xxl {
 					display: inline;
 				}
 			}
