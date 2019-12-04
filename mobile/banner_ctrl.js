@@ -255,6 +255,7 @@ $( document ).ready( function () {
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
 	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
+	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 
 	clickableBannerArea.click( displayFullBanner );
 } );

@@ -5,7 +5,6 @@ import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
 import DayName from '../shared/day_name';
-import animateHighlight from '../shared/animate_highlight';
 import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/de';
 import { Slider } from './banner_slider';
@@ -103,29 +102,6 @@ $( 'input[name=interval]' ).click( function () {
 	}
 } );
 
-// Disable address option 'Nein' if chosen payment type is 'Lastschrift'
-$( 'button[name=zahlweise]' ).click( function () {
-	const addressNoButton = $( 'button[data-address-option=anonym]' );
-	const addressYesButton = $( 'button[data-address-option=person]' );
-	if ( $( this ).attr( 'data-payment-type' ) === 'BEZ' ) {
-		// Reset address switch selection when 'Lastschrift' was previously selected
-		if ( addressNoButton.hasClass( 'selected-option' ) ) {
-			$( '#address_type' ).val( '' );
-		}
-		addressNoButton.removeClass( 'selected-option' );
-		addressNoButton.attr( 'disabled', true );
-		addressYesButton.addClass( 'selected-option' );
-		$( '#address_type' ).val( $( 'button[data-address-option=person]' ).data( 'address-option' ) );
-		$( '.BEZ-hint' ).show();
-		$( '.address-hint' ).hide();
-	} else {
-		addressNoButton.attr( 'disabled', false );
-		$( '.BEZ-hint' ).hide();
-		$( '.address-hint' ).show();
-	}
-} );
-// END form initialization
-
 function setupAmountEventHandling() {
 	var otherInput = $( '#amount-other-input' );
 	$( '.amount-selection .select-group__option' ).click( function ( event ) {
@@ -163,23 +139,6 @@ $( '.payment-selection button' ).click( function ( event ) {
 	$( '#zahlweise' ).val( $( event.target ).data( 'payment-type' ) );
 } );
 
-$( '.address-selection button' ).click( function ( event ) {
-	event.preventDefault();
-	$( '.address-selection .selected-option' ).removeClass( 'selected-option' );
-	$( event.target ).addClass( 'selected-option' );
-	$( '#address_type' ).val( $( event.target ).data( 'address-option' ) );
-} );
-
-function adjustFormAction() {
-	let bannerAction = $( '#frbanner-form' ).data( 'main-action' );
-	if ( $( 'input[name=addressType]' ).val() === 'anonym' ) {
-		bannerAction = $( '#frbanner-form' ).data( 'fallback-action' );
-		const serverAmount = $( '#betrag' );
-		$( '#betrag' ).val( amountForServerFormatter( parseAmount( serverAmount.val() ), 'add' ) );
-	}
-	$( '#frbanner-form' ).attr( 'action', bannerAction );
-}
-
 $( '#banner-form-submit' ).click( function () {
 	if ( !$( '#periode' ).val() || $( '.interval-selection .selected-option' ).length === 0 ) {
 		alert( 'Bitte wählen Sie ein Zahlungsinterval aus.' );
@@ -189,20 +148,10 @@ $( '#banner-form-submit' ).click( function () {
 		alert( 'Bitte wählen Sie einen Spendenbetrag aus.' );
 		return false;
 	}
-	if ( !BannerFunctions.validateAmount( BannerFunctions.getAmount( $( '#betrag' ).val() ) ) ) {
-		alert( 'Bitte wählen Sie einen Spendenbetrag zwischen 1 und 99999 € aus.' );
-		return false;
-	}
 	if ( !$( '#zahlweise' ).val() ) {
 		alert( 'Bitte wählen Sie ein Zahlungsmittel aus.' );
 		return false;
 	}
-	if ( !$( '#address_type' ).val() ) {
-		alert( 'Bitte wählen Sie eine Adressoption aus.' );
-		return false;
-	}
-
-	adjustFormAction();
 	return true;
 } );
 
@@ -241,6 +190,7 @@ function displayFullBanner() {
 	$( '.mini-banner' ).hide();
 	window.scrollTo( 0, 0 );
 
+	progressBar.reset();
 	const viewport = $( '#mw-mf-viewport' );
 	const viewportOffset = viewport.css( 'margin-top' ).slice( 0, -2 );
 	const fullscreenBanner = $( '.frbanner-window' );
@@ -269,7 +219,7 @@ function displayFullBanner() {
 		fullscreenBanner.dequeue();
 		fullscreenBanner.animate( { top: 0 }, remainingSlideTime, 'linear' ).queue( function () {
 			// Once fullscreen banner is fully shown, the contents are animated
-			setTimeout( function () { animateHighlight( $( '#to-highlight' ), 'highlight', 10 ); }, 500 );
+			setTimeout( function () { progressBar.animate(); }, 500 );
 		} );
 
 	} );
@@ -305,6 +255,7 @@ $( document ).ready( function () {
 	bannerDisplayTimeout.run( displayMiniBanner, bannerDelay );
 
 	const clickableBannerArea = $( '.mini-banner-tab, .mini-banner .banner-headline' );
+	trackingEvents.trackClickEvent( $( '#application-of-funds-link' ), 'application-of-funds-shown', 1 );
 
 	clickableBannerArea.click( displayFullBanner );
 } );

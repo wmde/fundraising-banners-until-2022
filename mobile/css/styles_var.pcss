@@ -385,6 +385,18 @@
 			}
 		}
 	}
+
+	.progress_bar {
+		&__text__above {
+			margin-left: 40px;
+			margin-right: 40px;
+			padding: 0;
+		}
+		&__wrapper {
+			margin-left: 40px;
+			margin-right: 40px;
+		}
+	}
 }
 
 /* Accomodating for larger devices like tablets and desktops */
@@ -417,6 +429,7 @@
 	.infobox {
 		border: 5px solid #990a00;
 		border-radius: 0;
+		padding-top: 20px;
 		&__text {
 			padding: 20px 20px 0;
 		}
@@ -589,9 +602,6 @@
 		text-align: center;
 		color: var( --banner-color-gray-darker );
 	}
-	.BEZ-hint {
-		display: none;
-	}
 }
 
 /* Close button styling */
@@ -605,14 +615,13 @@
 	opacity: 0.6;
 	text-indent: -99999px;
 	z-index: 999;
-	padding: 36px;
+	padding: 16px;
 	background-size: 15px;
 }
 
 @media ( min-width: 400px ) {
 	#frbanner-close {
 		background-size: 20px;
-		padding: 36px;
 	}
 }
 

@@ -67,6 +67,10 @@ ProgressBar.prototype.animate = function () {
 	);
 };
 
+ProgressBar.prototype.reset = function () {
+	$( '.progress_bar__donation_fill' ).css( { width: this.options.minWidth } );
+};
+
 /**
  *
  * @param {number} donationsCollected
