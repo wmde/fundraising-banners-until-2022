@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
@@ -26,10 +27,10 @@ export default class DesktopBanner extends Component {
 				<div className="banner__content">
 					<div className="infobox">
 						<Infobox amountBannerImpressionsInMillion={props.amountBannerImpressionsInMillion}
-								 numberOfDonors={props.numberOfDonors}
-								 campaignDaySentence={props.campaignDaySentence}
-								 weekdayPrepPhrase={props.weekdayPrepPhrase}
-								 currentDayName={props.currentDayName}/>
+							numberOfDonors={props.numberOfDonors}
+							campaignDaySentence={props.campaignDaySentence}
+							weekdayPrepPhrase={props.weekdayPrepPhrase}
+							currentDayName={props.currentDayName}/>
 						<ProgressBar
 							locale={props.locale}
 							daysLeft={campaignProjection.getRemainingDays()}
@@ -46,6 +47,6 @@ export default class DesktopBanner extends Component {
 				<Footer bannerName={props.bannerName} campaignName={props.campaignName}/>
 			</div>
 			<Funds/>
-		</div>
+		</div>;
 	}
 }
