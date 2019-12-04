@@ -13,16 +13,16 @@ import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_func
 import { CampaignProjection } from '../shared/campaign_projection';
 import { amountForServerFormatter, amountInputFormatter, donorFormatter } from '../shared/number_formatter/en';
 import { parseAmount } from '../shared/parse_amount';
+import animateHighlight from '../shared/animate_highlight';
 
 require( './css/styles.pcss' );
 require( './css/styles_mini.pcss' );
-require( './css/styles_mini_var.pcss' );
 
 const $ = require( 'jquery' );
 const CampaignParameters = createCampaignParameters();
 const BannerFunctions = BannerFunctionsFactory( null, Translations );
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 // BEGIN Banner-Specific configuration
 const bannerClickTrackRatio = 0.01;
@@ -55,8 +55,6 @@ const campaignProjection = new CampaignProjection(
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
-
-const animateHighlight = require( '../shared/animate_highlight' );
 
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
