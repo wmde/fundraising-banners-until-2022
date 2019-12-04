@@ -2,17 +2,17 @@
 	<div id="frbanner-window" class="frbanner-window">
 		<div id="frbanner-close"></div>
 
-        <div id="modal-signup" class="cf">
+		<div id="modal-signup" class="cf">
 
-            <div class="infobox">
-                <div class="infobox__text">
-                    {{> banner_text }}
-                </div>
-                {{{ progressBar }}}
-                <div class="call-to-action">
-                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
-                </div>
-            </div>
+			<div class="infobox">
+				<div class="infobox__text">
+					{{> banner_text }}
+				</div>
+				{{{ progressBar }}}
+				<div class="call-to-action">
+					Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+				</div>
+			</div>
 
 			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" id="periode" name="periode" value="0">
@@ -124,7 +124,7 @@
 				<div class="smallprint">
 					<a href="https://spenden.wikimedia.de/spenden/Impressum?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Impressum</a> |
 					<a href="https://spenden.wikimedia.de/spenden/Datenschutz?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Datenschutz</a> |
-					<a id="application-of-funds-link" href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Wohin geht meine Spende?</a>
+					<a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}_link&skin=0" target="_blank">Wohin geht meine Spende?</a>
 				</div>
 			</div>
 			<img class="banner-tracking" src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif" border="0" height="0" width="0" />
