@@ -1,8 +1,10 @@
 :root {
 	--banner-color-gray: #808080;
+	--banner-color-gray-medium: #747474;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
-	--banner-color-green: #97b313;
+	--banner-color-green: #849d0e;
+	--banner-color-green-hover: #97b313;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
@@ -20,9 +22,11 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
+$breakpoint_s: 1024px;
 $breakpoint_m: 1090px;
 $breakpoint_l: 1300px;
 $breakpoint_xl: 1580px;
+$breakpoint_xxl: 1900px;
 
 #WMDE_Banner {
 	display: none;
@@ -82,6 +86,12 @@ $breakpoint_xl: 1580px;
 				border-color: transparent transparent var( --banner-color-blue ) transparent;
 			}
 		}
+		@media ( min-width: $breakpoint_xl ) {
+			padding: 1.2em;
+			&:before {
+				margin-left: -40px;
+			}
+		}
 		&__text {
 			color: var( --banner-color-white );
 			font-family: var( --banner-main-font-family );
@@ -89,10 +99,16 @@ $breakpoint_xl: 1580px;
 			line-height: 1.3em;
 			text-align: left;
 			margin: 0.5em 2em 0.5em 1.2em;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 1.1em;
+			}
 			@media ( min-width: $breakpoint_m ) {
 				font-family: var( --banner-text-font-family );
 				font-size: 1.3em;
 				margin: 0.5em 1.2em;
+			}
+			@media ( min-width: $breakpoint_xl ) {
+				line-height: 1.5em;
 			}
 		}
 		&__footer {
@@ -110,6 +126,9 @@ $breakpoint_xl: 1580px;
 			}
 			&--bold {
 				font-weight: bold;
+				@media ( min-width: $breakpoint_xl ) {
+					display: block;
+				}
 			}
 			&--italic {
 				font-style: italic;
@@ -158,7 +177,7 @@ $breakpoint_xl: 1580px;
 				display: inline;
 			}
 		}
-		@media ( min-width: $breakpoint_xl ) {
+		@media ( min-width: $breakpoint_xxl ) {
 			&.text-xl {
 				display: inline;
 			}
@@ -170,10 +189,12 @@ $breakpoint_xl: 1580px;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-
-		font-size: 0.8em;
+		font-size: 13px;
 		line-height: 1.6em;
 		color: var( --banner-color-black );
+		@media ( min-width: $breakpoint_xl ) {
+			font-size: 1em;
+		}
 		&__info {
 			text-transform: uppercase;
 		}
@@ -238,6 +259,9 @@ $breakpoint_xl: 1580px;
 		border: 0;
 		margin: 0 auto;
 		padding: 0.4em 0.5em 0 0.5em;
+		@media ( min-width: $breakpoint_xl ) {
+			padding: 1em 0.5em 0 0.5em;
+		}
 		display: flex;
 		flex-wrap: nowrap;
 		flex-direction: row;
@@ -255,6 +279,9 @@ $breakpoint_xl: 1580px;
 			@media ( min-width: $breakpoint_l ) {
 				border: 0;
 				max-width: 20em;
+			}
+			@media ( min-width: $breakpoint_l ) {
+				max-width: 24em;
 			}
 		}
 		&:first-child {
@@ -308,6 +335,10 @@ $breakpoint_xl: 1580px;
 			justify-content: center;
 			flex-direction: column;
 			padding: 0 5px;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+				height: 35px;
+			}
 		}
 		&__custom-input + .select-group__state {
 			position: absolute;
@@ -330,6 +361,11 @@ $breakpoint_xl: 1580px;
 			box-sizing: border-box;
 			text-decoration: underline;
 			text-align: left;
+			@media ( min-width: $breakpoint_xl ) {
+				min-height: 35px;
+				height: 35px;
+				font-size: 1.1em;
+			}
 			&--value-entered {
 				border: 0 none;
 				outline: 0 none;
@@ -338,6 +374,10 @@ $breakpoint_xl: 1580px;
 		}
 		&__input {
 			display: inline;
+			@media ( min-width: $breakpoint_xl ) {
+				display: flex;
+				height: 100%;
+			}
 			&:checked + .select-group__state {
 				border: 0 none;
 				outline: 0 none;
@@ -351,6 +391,9 @@ $breakpoint_xl: 1580px;
 			box-sizing: border-box;
 			display: flex;
 			position: relative;
+			@media ( min-width: $breakpoint_xl ) {
+				height: 35px;
+			}
 			&--fullwidth {
 				width: 100%;
 			}
@@ -409,6 +452,13 @@ $breakpoint_xl: 1580px;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
+			&:hover {
+				background-color: var( --banner-color-green-hover );
+			}
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1em;
+				padding: 0.4em;
+			}
 		}
 	}
 
@@ -425,6 +475,9 @@ $breakpoint_xl: 1580px;
 			right: 0;
 			opacity: 0.5;
 		}
+		@media ( min-width: $breakpoint_xl ) {
+			right: 15px;
+		}
 		&-tracking {
 			display: none;
 			&__pixel {
@@ -436,12 +489,16 @@ $breakpoint_xl: 1580px;
 		&__link {
 			font-size: 25px;
 			color: var( --banner-color-white );
+			text-decoration: none;
 			@media ( min-width: $breakpoint_m ) {
 				color: var( --banner-color-gray );
 			}
-			text-decoration: none;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 35px;
+			}
 			&:hover {
 				text-decoration: none;
+				color: var( --banner-color-gray-medium );
 			}
 		}
 	}
@@ -465,17 +522,27 @@ $breakpoint_xl: 1580px;
 		&__donation_fill {
 			background: var( --banner-color-green );
 			height: 1.6em;
+			@media ( min-width: $breakpoint_xl ) {
+				height: 2.2em;
+			}
 			border-radius: 0.4em;
 		}
 		&__donation_text {
 			color: var( --banner-color-white );
 			line-height: 1.8em;
 			white-space: nowrap;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+			}
 		}
 		&__donation_remaining {
 			color: var( --banner-color-green );
 			line-height: 1.6em;
 			margin-left: -30px;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+				line-height: 1.8em;
+			}
 		}
 	}
 
@@ -502,6 +569,9 @@ $breakpoint_xl: 1580px;
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
 			width: 20em;
+			@media ( min-width: $breakpoint_xl ) {
+				width: 24em;
+			}
 			&__header > p {
 				width: 100%;
 			}

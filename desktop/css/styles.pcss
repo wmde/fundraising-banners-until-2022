@@ -1,8 +1,10 @@
 :root {
 	--banner-color-gray: #808080;
+	--banner-color-gray-medium: #747474;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
-	--banner-color-green: #97b313;
+	--banner-color-green: #849d0e;
+	--banner-color-green-hover: #97b313;
 	--banner-color-green-light: #dbe5e7;
 	--banner-color-blue: #0166a5;
 	--banner-color-blue-light: #dce4e8;
@@ -20,6 +22,7 @@ $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
+$breakpoint_s: 1024px;
 $breakpoint_m: 1090px;
 $breakpoint_l: 1300px;
 $breakpoint_xl: 1580px;
@@ -89,6 +92,9 @@ $breakpoint_xl: 1580px;
 			line-height: 1.3em;
 			text-align: left;
 			margin: 0.5em 2em 0.5em 1.2em;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 18px;
+			}
 			@media ( min-width: $breakpoint_m ) {
 				font-family: var( --banner-text-font-family );
 				font-size: 1.3em;
@@ -409,6 +415,9 @@ $breakpoint_xl: 1580px;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
+			&:hover {
+				background-color: var( --banner-color-green-hover );
+			}
 		}
 	}
 
@@ -442,6 +451,7 @@ $breakpoint_xl: 1580px;
 			text-decoration: none;
 			&:hover {
 				text-decoration: none;
+				color: var( --banner-color-gray-medium );
 			}
 		}
 	}
