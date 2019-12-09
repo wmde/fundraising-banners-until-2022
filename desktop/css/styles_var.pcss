@@ -1,8 +1,6 @@
 :root {
-	--banner-color-dark: #222222;
-	--banner-color-dark-light: #444444;
 	--banner-color-gray: #808080;
-	--banner-color-gray-light: #eaecf0;
+	--banner-color-gray-medium: #747474;
 	--banner-color-white: #ffffff;
 	--banner-color-black: #000000;
 	--banner-color-green: #849d0e;
@@ -18,22 +16,17 @@
 }
 
 $errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
-$infoIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' fill-rule='evenodd' clip-rule='evenodd' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM7.20052 7.20003V12H8.80052V7.20003H7.20052ZM8.80052 4.8C8.80052 5.24183 8.44235 5.6 8.00052 5.6C7.55869 5.6 7.20052 5.24183 7.20052 4.8C7.20052 4.35817 7.55869 4 8.00052 4C8.44235 4 8.80052 4.35817 8.80052 4.8Z' fill='black'/%3E%3C/svg%3E%0A" );
-$leftArrow: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z'/%3E%3C/svg%3E%3C!--%0AFont Awesome Free 5.2.0 by @fontawesome - https://fontawesome.com%0ALicense - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)%0A--%3E" );
+
 /**
  * Develop mobile-first
  * Never use "@media ( max-width: $breakpoint_x )"
  * Always use "@media ( min-width: $breakpoint_x )"
  */
-$breakpoint_s: 900px;
-$breakpoint_m: 1150px;
-$breakpoint_m_max: 1149px; /** DEPRECATED **/
-$breakpoint_l: 1400px;
-$breakpoint_xl: 1900px;
-
-#address-section {
-	visibility: hidden;
-}
+$breakpoint_s: 1024px;
+$breakpoint_m: 1090px;
+$breakpoint_l: 1300px;
+$breakpoint_xl: 1580px;
+$breakpoint_xxl: 1900px;
 
 #WMDE_Banner {
 	display: none;
@@ -51,68 +44,12 @@ $breakpoint_xl: 1900px;
 		border: 0 none;
 	}
 
-	.form-page {
-		&-first {
-			z-index: 100;
-			width: 100%;
-			display: flex;
-			flex-direction: column;
-			@media ( min-width: $breakpoint_s ) {
-				flex-direction: row;
-			}
-			@media ( min-width: $breakpoint_l ) {
-				flex-direction: column;
-			}
-		}
-		&-second {
-			z-index: 200;
-			position: absolute;
-			left: 150em;
-			@media ( min-width: $breakpoint_l ) {
-				left: 40em;
-			}
-			top: 0;
-			background: var( --banner-color-white );
-			height: 100%;
-			width: 100%;
-			display: flex;
-			align-items: center;
-			transition: left 0.5s ease-out;
-			&.visible {
-				left: 0;
-			}
-		}
-	}
-
-	@media ( max-width: $breakpoint_m_max ) {
-		.infobox {
-			&:before {
-				display: none;
-			}
-			&__text {
-				font-size: 1em;
-				font-family: var( --banner-main-font-family );
-			}
-			margin: 0.2em 0.5em;
-		}
-		.close {
-			&__link {
-				color: var( --banner-color-white );
-			}
-		}
-		.form {
-			margin: 5px;
-		}
-		.banner__footer {
-			padding: 0 0.5em;
-		}
-	}
-
 	.banner {
 		display: flex;
 		flex-direction: column;
 		font-size: 14px;
 		padding-bottom: 0.75em;
+
 		font-family: var( --banner-main-font-family );
 		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 		background-color: var( --banner-color-white );
@@ -120,40 +57,40 @@ $breakpoint_xl: 1900px;
 			margin-top: 0.5em;
 		}
 		&__footer {
-			padding: 0;
+			padding: 0 2.6em 0 2.6em;
 			font-size: 1.1em;
 			color: var( --banner-color-gray );
-		}
-		&__footer-2 {
-			display: none;
 		}
 	}
 
 	.infobox {
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		flex-direction: column;
 		justify-content: space-between;
 		flex: 0 1 100%;
 		border: 0 none;
 		border-radius: 0.4em;
 		background-color: var( --banner-color-blue );
 		padding: 0.25em 0.5em 0.25em 0;
+		margin: 0 0.8em 0 0.5em;
+		position: relative;
 		@media ( min-width: $breakpoint_m ) {
 			margin: 0.2em 5em 0.2em 5em;
+			&:before {
+				position: absolute;
+				bottom: 1.5em;
+				content: ' ';
+				margin-left: -25px;
+				border-style: solid;
+				border-width: 0 0 25px 25px;
+				border-color: transparent transparent var( --banner-color-blue ) transparent;
+			}
 		}
-		position: relative;
-		> div {
-			width: 100%;
-		}
-		&:before {
-			position: absolute;
-			bottom: 1.5em;
-			content: ' ';
-			margin-left: -25px;
-			border-style: solid;
-			border-width: 0 0 25px 25px;
-			border-color: transparent transparent var( --banner-color-blue ) transparent;
+		@media ( min-width: $breakpoint_xl ) {
+			padding: 1.2em;
+			&:before {
+				margin-left: -40px;
+			}
 		}
 		&__text {
 			color: var( --banner-color-white );
@@ -170,6 +107,9 @@ $breakpoint_xl: 1900px;
 				font-size: 1.3em;
 				margin: 0.5em 1.2em;
 			}
+			@media ( min-width: $breakpoint_xl ) {
+				line-height: 1.5em;
+			}
 		}
 		&__footer {
 			padding: 0.025em 0 0 2em;
@@ -179,23 +119,28 @@ $breakpoint_xl: 1900px;
 
 	.text {
 		&__headline {
-			display: inline;
 			margin: 0.2em 0;
+			display: inline;
+			@media ( min-width: $breakpoint_m ) {
+				display: block;
+			}
 			&--bold {
 				font-weight: bold;
+				@media ( min-width: $breakpoint_xl ) {
+					display: block;
+				}
 			}
 			&--italic {
 				font-style: italic;
-			}
-
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
 			}
 		}
 		&__paragraph {
 			margin: 0;
 			padding: 0;
 			display: inline;
+			@media ( min-width: $breakpoint_m ) {
+				display: block;
+			}
 			&--bold {
 				font-weight: bold;
 			}
@@ -213,10 +158,6 @@ $breakpoint_xl: 1900px;
 				font-weight: bold;
 				color: var( --banner-color-black );
 			}
-
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
-			}
 		}
 		/*  This is for keeping the same banner size when testing different banner texts.
 			The placeholder text element should contain the text that was removed
@@ -228,17 +169,15 @@ $breakpoint_xl: 1900px;
 
 	.optional-text {
 		display: none;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint_l ) {
 			&.text-m {
 				display: inline;
 			}
-		}
-		@media ( min-width: $breakpoint_l ) {
 			&.text-l {
 				display: inline;
 			}
 		}
-		@media ( min-width: $breakpoint_xl ) {
+		@media ( min-width: $breakpoint_xxl ) {
 			&.text-xl {
 				display: inline;
 			}
@@ -249,13 +188,13 @@ $breakpoint_xl: 1900px;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: column;
-		}
 		justify-content: flex-start;
 		font-size: 13px;
 		line-height: 1.6em;
 		color: var( --banner-color-black );
+		@media ( min-width: $breakpoint_xl ) {
+			font-size: 1em;
+		}
 		&__info {
 			text-transform: uppercase;
 		}
@@ -264,15 +203,12 @@ $breakpoint_xl: 1900px;
 		}
 		&__item {
 			white-space: nowrap;
-			margin: 0;
-			> span {
-				margin-right: 1em;
-			}
-			.iban-block {
-				margin-right: 0.8em;
-			}
 			&--rightflex {
 				flex-grow: 1;
+				text-align: right;
+			}
+			span {
+				margin-right: 1.2em;
 			}
 		}
 	}
@@ -284,34 +220,23 @@ $breakpoint_xl: 1900px;
 	/* Form styling */
 
 	#WMDE_Banner-form {
-		position: relative;
 		display: flex;
-		flex-direction: column;
-		padding: 5px 10px;
-		flex-wrap: nowrap;
-		flex: 0 0 auto;
-		background-color: var( --banner-color-gray-light );
-		border-radius: 8px;
-		@media ( min-width: $breakpoint_s ) {
-			flex-direction: row;
-			flex: 1 1 100%;
-		}
+		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
 	.form {
 		order: 2;
+		width: auto;
+		min-width: inherit;
 		flex-shrink: 0;
-		padding: 0;
-		flex-wrap: nowrap;
-		justify-content: flex-start;
-		@media ( min-width: $breakpoint_s ) {
-			display: block;
-			padding: 0.2em 0 0 0;
-		}
+		padding: 0.2em 0 0 0.5em;
+		margin: 0;
 
 		@media ( min-width: $breakpoint_m ) {
-			margin: 0.2em 5em 0.2em 5em;
+			margin: 0.2em 2.5em 0;
 		}
+
 		&__header {
 			display: flex;
 			justify-content: space-between;
@@ -321,100 +246,42 @@ $breakpoint_xl: 1900px;
 		}
 		&-field-group {
 			display: flex;
+			flex: 1 1 auto;
 			flex-wrap: wrap;
-			flex: 0 0 auto;
-			@media ( min-width: $breakpoint_s ) {
+
+			@media ( min-width: $breakpoint_m ) {
 				flex-wrap: nowrap;
-				flex: 1 1 auto;
-			}
-			&--amount {
-				@media ( min-width: $breakpoint_s ) {
-					flex-basis: 300px;
-				}
-				@media ( min-width: $breakpoint_l ) {
-					flex-basis: auto;
-				}
-			}
-			&--method {
-				@media ( min-width: $breakpoint_s ) {
-					flex-basis: 500px;
-				}
-				@media ( min-width: $breakpoint_l ) {
-					flex-basis: auto;
-				}
-			}
-			&--submit {
-				height: 100%;
-				justify-content: center;
-				width: 100%;
-				@media ( min-width: $breakpoint_s ) {
-					justify-content: flex-end;
-				}
 			}
 		}
 	}
 
 	.select-group {
+		border: 0;
 		margin: 0 auto;
 		padding: 0.4em 0.5em 0 0.5em;
+		@media ( min-width: $breakpoint_xl ) {
+			padding: 1em 0.5em 0 0.5em;
+		}
 		display: flex;
 		flex-wrap: nowrap;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: flex-start;
+		flex: 1 0 auto;
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
 		&-container {
+			border: 1px solid var( --banner-color-blue );
 			display: flex;
+			flex: 1 1 auto;
 			flex-direction: column;
-			width: 100%;
-			&--submit {
-				min-width: 67%;
-				background-color: var( --banner-color-gray-light );
-				padding: 5px 10px 0 35px;
-				box-sizing: border-box;
-				border-radius: 8px;
-				@media ( min-width: $breakpoint_l ) {
-					width: 100%;
-					min-width: auto;
-					background-color: transparent;
-					padding: 0;
-					box-sizing: border-box;
-					border-radius: 0;
-				}
-				position: relative;
-			}
-			&--horizontal {
-				flex-direction: column;
-				@media ( min-width: $breakpoint_s ) {
-					flex-direction: row;
-				}
-				> div {
-					@media ( min-width: $breakpoint_s ) {
-						flex-basis: 50%;
-					}
-				}
+			margin: 0 1em 0.4em 0;
+			@media ( min-width: $breakpoint_l ) {
+				border: 0;
+				max-width: 20em;
 			}
 			@media ( min-width: $breakpoint_l ) {
-				max-width: 21em;
-				margin: 0;
-				&--horizontal {
-					display: block;
-				}
-			}
-		}
-		&__submit {
-			display: flex;
-			flex-direction: row;
-			@media ( min-width: $breakpoint_l ) {
-				flex-direction: column;
-			}
-		}
-		&__continue {
-			display: flex;
-			align-items: flex-end;
-			@media ( min-width: $breakpoint_l ) {
-				display: block;
+				max-width: 24em;
 			}
 		}
 		&:first-child {
@@ -430,15 +297,7 @@ $breakpoint_xl: 1900px;
 			text-align: left;
 			width: 100%;
 			margin-bottom: 0.2em;
-			font-size: 0.95em;
-		}
-		&__infomessage {
-			color: var( --banner-color-black );
-			font-weight: bold;
-			text-align: left;
-			width: 100%;
-			font-size: 0.95em;
-			hyphens: auto;
+			font-size: 0.8em;
 		}
 		&-container--with-error {
 			.select-group__erroricon {
@@ -463,21 +322,22 @@ $breakpoint_xl: 1900px;
 			}
 		}
 		&__state {
-			display: inline-block;
-			height: auto;
-			background: none;
-			padding: 4px 0 0 0;
+			display: flex;
 			color: var( --banner-color-black );
 			border: 0 none;
+			height: 25px;
 			cursor: pointer;
 			text-align: center;
-			font-size: 13px;
+			font-size: 0.95em;
 			box-sizing: border-box;
 			white-space: nowrap;
-
-			@media ( min-width: $breakpoint_l ) {
+			align-content: center;
+			justify-content: center;
+			flex-direction: column;
+			padding: 0 5px;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
 				height: 35px;
-				padding: 11px 0 0 0;
 			}
 		}
 		&__custom-input + .select-group__state {
@@ -488,59 +348,52 @@ $breakpoint_xl: 1900px;
 			background: transparent;
 		}
 		&__custom-input {
-			text-align: left;
-			text-decoration: underline;
-			background: none;
-			height: auto;
-			font-size: 12px;
 			color: var( --banner-color-black );
+			background-color: var( --banner-color-white );
 			padding: 0.4em;
 			width: 100%;
+			min-height: 25px;
+			height: 25px;
 			margin: 0;
+			font-size: 0.9em;
 			font-weight: bold;
 			border: 0 none;
 			box-sizing: border-box;
+			text-decoration: underline;
+			text-align: left;
+			@media ( min-width: $breakpoint_xl ) {
+				min-height: 35px;
+				height: 35px;
+				font-size: 1.1em;
+			}
 			&--value-entered {
-				text-decoration: underline;
-				padding-left: 0;
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
 			}
 		}
 		&__input {
-			display: inline-block;
-			margin: 3px 5px 0 0;
+			display: inline;
+			@media ( min-width: $breakpoint_xl ) {
+				display: flex;
+				height: 100%;
+			}
 			&:checked + .select-group__state {
-				background: none;
-				color: var( --banner-color-black );
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
 			}
 		}
-		&__infoicon {
-			position: relative;
-			padding: 10px 20px 10px 25px;
-			display: block;
-			&:before {
-				content: $infoIcon;
-				width: 16px;
-				height: 16px;
-				position: absolute;
-				top: 10px;
-				left: 7px;
-			}
-		}
 		&__option {
-			display: flex;
-			flex-wrap: nowrap;
 			flex: 1 1 auto;
-			align-items: center;
-			box-sizing: border-box;
 			padding: 0 0.2em 0.2em 0;
 			margin: 0;
-			height: 23px;
+			box-sizing: border-box;
+			display: flex;
+			position: relative;
+			@media ( min-width: $breakpoint_xl ) {
+				height: 35px;
+			}
 			&--fullwidth {
 				width: 100%;
 			}
@@ -556,18 +409,8 @@ $breakpoint_xl: 1900px;
 			&--biggertext {
 				font-size: 1em;
 			}
-			&:first-child .select-group__state {
-				border-radius: 0.4em 0 0 0.4em;
-			}
-			&:last-child .select-group__state {
-				border-radius: 0 0.4em 0.4em 0;
-			}
 			&-amount-other-input {
-				min-width: 125px;
-			}
-			&--pseudo {
-				/* We want to absolutely prevent this element from ever getting a height */
-				height: 0 !important;
+				min-width: 100px;
 			}
 		}
 	}
@@ -576,10 +419,7 @@ $breakpoint_xl: 1900px;
 		display: block;
 		border: 0;
 		margin: 0;
-		padding: 0.5em 0.5em 0 0;
-		@media ( min-width: $breakpoint_l ) {
-			padding: 1.3em 0.5em 0.3em 0;
-		}
+		padding: 0.3em 0.5em 0.3em 0;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -595,7 +435,6 @@ $breakpoint_xl: 1900px;
 			background: transparent;
 			font-size: inherit;
 			width: 100%;
-			min-width: 14em;
 			&--halfwidth {
 				width: 50%;
 			}
@@ -608,16 +447,17 @@ $breakpoint_xl: 1900px;
 			border-radius: 0.4em;
 			padding: 0 0.4em;
 			line-height: 2em;
-			@media ( min-width: $breakpoint_m ) {
-				line-height: 3em;
-			}
-			font-size: 13px;
+			font-size: 0.85em;
 			font-weight: bold;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
 			&:hover {
 				background-color: var( --banner-color-green-hover );
+			}
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1em;
+				padding: 0.4em;
 			}
 		}
 	}
@@ -627,13 +467,16 @@ $breakpoint_xl: 1900px;
 		width: 18px;
 		margin: 0.25em 0.25em 0.25em 0;
 		top: 0.5em;
-		right: 1em;
+		right: 1.3em;
 		opacity: 0.8;
 
 		@media ( min-width: $breakpoint_m ) {
 			top: 0;
 			right: 0;
 			opacity: 0.5;
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			right: 15px;
 		}
 		&-tracking {
 			display: none;
@@ -646,39 +489,16 @@ $breakpoint_xl: 1900px;
 		&__link {
 			font-size: 25px;
 			color: var( --banner-color-white );
+			text-decoration: none;
 			@media ( min-width: $breakpoint_m ) {
 				color: var( --banner-color-gray );
 			}
-			text-decoration: none;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 35px;
+			}
 			&:hover {
-				color: var( --banner-color-gray-light );
-				@media ( min-width: $breakpoint_m ) {
-					color: var( --banner-color-dark-light );
-				}
 				text-decoration: none;
-			}
-		}
-	}
-
-	.back {
-		position: absolute;
-		top: 0;
-		left: 5px;
-		@media ( min-width: $breakpoint_l ) {
-			top: -50px;
-		}
-		&__link {
-			&:before {
-				content: $leftArrow;
-				width: 20px;
-				height: 20px;
-				position: absolute;
-				display: block;
-				top: 5px;
-				left: 0;
-			}
-			&:hover {
-				opacity: 0.5;
+				color: var( --banner-color-gray-medium );
 			}
 		}
 	}
@@ -688,7 +508,6 @@ $breakpoint_xl: 1900px;
 	}
 
 	.progress_bar {
-		display: block;
 		&__days_left {
 			display: block;
 			color: var( --banner-color-white );
@@ -703,17 +522,27 @@ $breakpoint_xl: 1900px;
 		&__donation_fill {
 			background: var( --banner-color-green );
 			height: 1.6em;
+			@media ( min-width: $breakpoint_xl ) {
+				height: 2.2em;
+			}
 			border-radius: 0.4em;
 		}
 		&__donation_text {
 			color: var( --banner-color-white );
 			line-height: 1.8em;
 			white-space: nowrap;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+			}
 		}
 		&__donation_remaining {
 			color: var( --banner-color-green );
 			line-height: 1.6em;
 			margin-left: -30px;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+				line-height: 1.8em;
+			}
 		}
 	}
 
@@ -725,30 +554,8 @@ $breakpoint_xl: 1900px;
 				order: 1;
 			}
 			&__footer {
-				display: none;
-			}
-			&__footer-2 {
-				display: flex;
 				order: 2;
 				padding: 0.5em 0 0 5.8em;
-				.footer__item {
-					white-space: nowrap;
-					> span {
-						margin-right: 1em;
-					}
-					.iban-block {
-						margin-right: 0.8em;
-					}
-					&--rightflex {
-						flex-grow: 1;
-						text-align: right;
-						padding-right: 85px;
-					}
-				}
-				.footer {
-					flex-direction: row;
-					width: 100%;
-				}
 			}
 		}
 
@@ -757,9 +564,14 @@ $breakpoint_xl: 1900px;
 		}
 
 		.form {
+			align-items: center;
+			display: flex;
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
-			width: 21em;
+			width: 20em;
+			@media ( min-width: $breakpoint_xl ) {
+				width: 24em;
+			}
 			&__header > p {
 				width: 100%;
 			}
@@ -773,8 +585,7 @@ $breakpoint_xl: 1900px;
 				text-align: center;
 			}
 			&-field-group {
-				display: flex;
-				align-items: center;
+				display: block;
 			}
 		}
 
@@ -786,30 +597,12 @@ $breakpoint_xl: 1900px;
 
 		.select-group {
 			flex-wrap: wrap;
-			flex-direction: row;
-			border: 0;
-			@media ( min-width: $breakpoint_s ) {
-				flex-direction: row;
-			}
 			&:first-child,
 			&:last-child {
 				padding-left: 0.5em;
 			}
-			&-container--with-error .select-group__errormessage,
-			&-container--with-info .select-group__infomessage {
+			&-container--with-error .select-group__errormessage {
 				margin-left: 0.5em;
-			}
-			&__option {
-				height: 35px;
-				&:nth-child( 1 ) .select-group__state {
-					border-radius: 0.4em 0 0 0;
-				}
-				&:nth-child( 4 ) .select-group__state {
-					border-radius: 0 0.4em 0 0;
-				}
-				&:nth-child( 5 ) .select-group__state {
-					border-radius: 0 0 0 0.4em;
-				}
 			}
 			&__custom-input {
 				&:focus,
@@ -821,74 +614,23 @@ $breakpoint_xl: 1900px;
 
 		#WMDE_Banner-form {
 			display: block;
-			background-color: var( --banner-color-white );
-			border-radius: 0;
 		}
-	}
-	.section-title {
-		padding: 0.4em 0.5em 0 0.5em;
-		color: var( --banner-color-gray-dark );
-		font-size: 13px;
-	}
-	.WMDE-Banner-submit {
-		padding-right: 0;
-		width: 100%;
-		> a {
-			text-decoration: none;
-			&:hover {
-				text-decoration: none;
-			}
+
+		.footer__item--rightflex {
+			margin-right: 5em;
 		}
-	}
-	#WMDE_Banner-amounts {
-		flex-wrap: wrap;
-		flex-direction: row;
-		> label {
-			flex: 0 25%;
-			@media ( min-width: $breakpoint_s ) {
-				flex: auto;
-				flex: 1 49%;
-			}
-			@media ( min-width: $breakpoint_l ) {
-				flex: auto;
-				flex: 0 24%;
-			}
-		}
-	}
-	#WMDE_Banner-payment-type {
-		flex-direction: row;
-		flex-wrap: wrap;
-		@media ( min-width: $breakpoint_s ) {
-			flex-direction: column;
-		}
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: row;
-		}
-	}
-	#WMDE_Banner-frequency {
-		flex-direction: row;
-		@media ( min-width: $breakpoint_s ) {
-			flex-direction: column;
-		}
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: row;
-		}
-	}
-	#WMDE_Banner-addressType {
-		flex-direction: column;
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: row;
-		}
-		flex-wrap: wrap;
-	}
-	#WMDE_Banner-addressType-BEZ-info-text {
-		display: none;
-	}
-	.hidden-title {
-		visibility: hidden;
 	}
 }
 
-#WMDE_Banner-addressType-info-wrapper {
-	display: none;
+#wlightbox {
+	.info-application-of-funds {
+		&-footer {
+			display: flex;
+			padding: 0 20px;
+			> div {
+				flex: 1 1 auto;
+				padding: 10px 20px;
+			}
+		}
+	}
 }
