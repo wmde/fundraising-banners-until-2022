@@ -32,6 +32,9 @@ $breakpoint_xxl: 1900px;
 	display: none;
 	width: 100%;
 	position: fixed;
+	@media ( min-width: $breakpoint_xl ) {
+		position: absolute;
+	}
 	z-index: 10000;
 	font-size: 16px;
 
@@ -512,6 +515,10 @@ $breakpoint_xxl: 1900px;
 			display: block;
 			color: var( --banner-color-white );
 			line-height: 1.9em;
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: 1.2em;
+				line-height: 1.8em;
+			}
 		}
 		&__wrapper {
 			border-color: var( --banner-color-blue-light );
@@ -536,13 +543,30 @@ $breakpoint_xxl: 1900px;
 			}
 		}
 		&__donation_remaining {
-			color: var( --banner-color-green );
+			color: var( --banner-color-white );
 			line-height: 1.6em;
-			margin-left: -30px;
+			margin-left: -40px;
+			margin-left: -40px;
 			@media ( min-width: $breakpoint_xl ) {
 				font-size: 1.2em;
 				line-height: 1.8em;
 			}
+		}
+		&__pointer_tip {
+			margin-top: 9px;
+			@media ( min-width: $breakpoint_xl ) {
+				margin-top: 13px;
+			}
+		}
+
+		&__pointer_line {
+			margin-top: 11px;
+			@media ( min-width: $breakpoint_xl ) {
+				margin-top: 15px;
+			}
+		}
+		&__donation_remaining--outer {
+			padding-top: 9px;
 		}
 	}
 
@@ -568,7 +592,7 @@ $breakpoint_xxl: 1900px;
 			display: flex;
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
-			width: 20em;
+			min-width: 20em;
 			@media ( min-width: $breakpoint_xl ) {
 				width: 24em;
 			}
