@@ -39,6 +39,18 @@ $breakpoint_l: 1400px;
 		cursor: default;
 	}
 
+	.ctrl-text--invisible {
+		visibility: hidden;
+	}
+
+	.var-text {
+		display: none;
+	}
+
+	.no-wrap {
+		white-space: nowrap;
+	}
+
 	img {
 		border: 0 none;
 	}
@@ -204,6 +216,18 @@ $breakpoint_l: 1400px;
 
 		@media ( min-width: $breakpoint_s ) {
 			margin: 0.2em 2.5em 0;
+			.WMDE-Banner-payment {
+				.select-group__option--halfwidth {
+					width: 100%;
+				}
+			}
+		}
+		@media ( min-width: 965px ) {
+			.WMDE-Banner-payment {
+				.select-group__option--halfwidth {
+					width: 50%;
+				}
+			}
 		}
 
 		&__header {
@@ -363,7 +387,7 @@ $breakpoint_l: 1400px;
 			}
 			&--halfwidth {
 				width: 100%;
-				@media ( min-width: $breakpoint_l ) {
+				@media ( min-width: $breakpoint_s ) {
 					width: 50%;
 				}
 			}
@@ -474,11 +498,11 @@ $breakpoint_l: 1400px;
 
 	.progress_bar {
 		&__pointer_tip {
-			margin-top: 18px;
+			margin-top: 11px;
 		}
 
 		&__pointer_line {
-			margin-top: 20px;
+			margin-top: 13px;
 		}
 
 		&__days_left {
@@ -505,9 +529,10 @@ $breakpoint_l: 1400px;
 		}
 		&__donation_remaining {
 			font-size: 0.9em;
-			color: var( --banner-color-green );
+			color: var( --banner-color-white );
 			line-height: 23px;
 			margin-left: -35px;
+			margin-top: 0.5em;
 		}
 	}
 
