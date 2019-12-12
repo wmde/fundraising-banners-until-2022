@@ -89,19 +89,19 @@ tracking = "org-en-ipad-191113-var"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-02-191129"
+campaign_tracking = "wpde-03-191213"
 preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/banner_ctrl.js"
-pagename = "B19WPDE_02-191129_ctrl"
-tracking = "wpde-02-191129-ctrl"
+pagename = "B19WPDE_03-191213_ctrl"
+tracking = "wpde-03-191213-ctrl"
 
 [wikipediade.banners.var]
 filename = "./wikipedia.de/banner_var.js"
-pagename = "B19WPDE_02-191129_var"
-tracking = "wpde-02-191129-var"
+pagename = "B19WPDE_03-191213_var"
+tracking = "wpde-03-191213-var"
 
 
 # English Campaign

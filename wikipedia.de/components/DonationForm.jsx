@@ -82,8 +82,10 @@ export default class DonationForm extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const intervals = [
-			{ value: '0', label: 'einmalig' },
+			{ value: '0', label: 'einmalig', width: 'fullwidth' },
 			{ value: '1', label: 'monatlich' },
+			{ value: '3', label: 'vierteljährlich' },
+			{ value: '6', label: 'halbjährlich' },
 			{ value: '12', label: 'jährlich' }
 		];
 		const amounts = [
@@ -108,8 +110,8 @@ export default class DonationForm extends Component {
 					<div
 						className={ 'select-group-container' + ( state.paymentIntervalIsValid ? '' : ' select-group-container--with-error' ) }>
 						<div id="WMDE_Banner-frequency" className="WMDE-Banner-frequency select-group">
-							{intervals.map( ( { value, label } ) => (
-								<label className="select-group__option select-group__option--thirdwidth" key={value}>
+							{intervals.map( ( { value, label, width } ) => (
+								<label className={ 'select-group__option select-group__option--' + ( width || 'halfwidth' ) } key={value}>
 									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
 										name="periode" value={value} className="select-group__input"/>
 									<span className="select-group__state">{label}</span>
