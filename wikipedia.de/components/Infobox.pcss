@@ -107,11 +107,12 @@
 			display: block;
 		}
 	}
-	/*
-		This is for keeping the same banner size when testing different banner texts.
-		The placeholder text element should contain the text that was removed
-	*/
-	&__hidden-placeholder {
+}
+
+.ab-test-text {
+	display: none;
+	&.hidden {
+		display: block;
 		visibility: hidden;
 	}
 }
