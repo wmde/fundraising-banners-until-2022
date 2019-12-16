@@ -4,11 +4,18 @@ import classNames from 'classnames';
 
 import DonationForm from '../components/DonationForm';
 import Footer from '../components/Footer';
-import Funds from '../components/Funds';
 import Infobox from '../components/Infobox';
 import ProgressBar from '../components/ProgressBar';
+import FundsModal from '../../shared/components/FundsModal';
 
 export default class DesktopBanner extends Component {
+
+	constructor( props ) {
+		super( props );
+		this.state = {
+			isFundsModalVisible: false
+		};
+	}
 
 	componentDidMount() {
 		if ( this.startAnimation ) {
@@ -18,6 +25,11 @@ export default class DesktopBanner extends Component {
 
 	setStartAnimation = ( startAnimation ) => {
 		this.startAnimation = startAnimation;
+	};
+
+	setToggleFundsModal = () => {
+		this.props.trackingData.eventTracker.trackEvent( 'application-of-funds-shown', this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	render( props ) {
@@ -44,9 +56,12 @@ export default class DesktopBanner extends Component {
 				<div className="close">
 					<button className="close__link" onClick={props.closeBanner}>&#x2715;</button>
 				</div>
-				<Footer bannerName={props.bannerName} campaignName={props.campaignName}/>
+				<Footer setToggleFundsModal={this.setToggleFundsModal}/>
 			</div>
-			<Funds/>
+			<FundsModal fundsModalData={props.fundsModalData}
+				setToggleFundsModal={this.setToggleFundsModal}
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale={ props.locale }/>
 		</div>;
 	}
 }
