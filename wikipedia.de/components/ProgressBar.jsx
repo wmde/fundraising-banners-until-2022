@@ -10,6 +10,12 @@ const PENDING = 0;
 const STARTED = 1;
 const ENDED = 2;
 
+/**
+ * When set to true, the "late progress" design will be used
+ * @type {boolean}
+ */
+const IS_LATE_PROGRESS = true;
+
 export default class ProgressBar extends Component {
 	static propTypes = {
 		/** Locale 'EN' or 'DE', defaults to 'EN' */
@@ -57,7 +63,7 @@ export default class ProgressBar extends Component {
 		PropTypes.checkPropTypes( ProgressBar.propTypes, props, 'constructor', 'ProgressBar' );
 		this.millionFormatter = formatNumber( { round: 1, prefix: '€ ', suffix: 'M', padRight: 1 } );
 		if ( this.props.locale === 'de' ) {
-			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: 'M €', padRight: 1 } );
+			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
 		}
 	}
 
@@ -85,15 +91,23 @@ export default class ProgressBar extends Component {
 	}
 
 	render( props, state ) {
-		const getMillion = n => this.millionFormatter( n / 1000000 );
 		const Translations = useContext( TranslationContext );
+		const getMillion = n => this.millionFormatter( n / 1000000 );
+		const getDaysLeft = daysLeft => {
+			return Translations[ 'prefix-days-left' ] +
+				' ' + daysLeft + ' ' +
+				( daysLeft > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ' ' +
+				Translations[ 'suffix-days-left' ];
+		};
 		return <div className={ classNames( 'progress_bar', {
 			'progress_bar--finished': state.animation === ENDED,
-			'progress_bar--animating': state.animation === STARTED
+			'progress_bar--animating': state.animation === STARTED,
+			'progress_bar--lateprogress': IS_LATE_PROGRESS
 		} ) }>
 			<div className="progress_bar__wrapper">
 				<div className="progress_bar__donation_fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
 					<div className="progress_bar__days_left">
+						{ getDaysLeft( props.daysLeft ) }
 					</div>
 					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
 				</div>
@@ -106,7 +120,8 @@ export default class ProgressBar extends Component {
 			<div className="progress_bar__donation_remaining progress_bar__donation_remaining--outer">
 				<div className="progress_bar__pointer_tip"></div>
 				<hr className="progress_bar__pointer_line" />
-					Es fehlen { props.missingAmount }M €
+				{ Translations[ 'amount-missing' ] }{ ' ' }
+				{ getMillion( props.missingAmount ) }
 			</div>
 		</div>;
 	}

@@ -35,9 +35,6 @@
 		@media ( min-width: $breakpoint-m ) {
 			font-size: 1.3em;
 		}
-		@media ( min-width: $breakpoint-xxl ) {
-			font-size: 1.5em;
-		}
 		.optional-text {
 			display: none;
 			&.text-max-xl {
@@ -48,16 +45,11 @@
 					display: inline;
 				}
 			}
-			@media ( min-width: $breakpoint-xl ) {
-				&.text-xl {
-					display: inline;
-				}
-				&.text-max-xl {
-					display: none;
-				}
-			}
+			/* TODO If CTRL banner of 2019 Test 02 wins, harmonize breakpoint name and class name
+					The class name diverges from the breakpoint because VAR shows the text at xl size, not at xxl
+			*/
 			@media ( min-width: $breakpoint-xxl ) {
-				&.text-xxl {
+				&.text-xl {
 					display: inline;
 				}
 			}
@@ -115,11 +107,10 @@
 			display: block;
 		}
 	}
-	/*
-		This is for keeping the same banner size when testing different banner texts.
-		The placeholder text element should contain the text that was removed
-	*/
-	&__hidden-placeholder {
-		visibility: hidden;
+}
+
+.ab-test-text {
+	&.hidden {
+		display: none;
 	}
 }

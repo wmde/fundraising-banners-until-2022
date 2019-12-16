@@ -203,8 +203,12 @@
 			}
 		}
 		&--fullwidth {
-			width: 100%;
-			flex-basis: 100%;
+			flex-basis: 49%;
+			width: 49%;
+			@media ( min-width: $breakpoint-s ) {
+				width: 100%;
+				flex-basis: 100%;
+			}
 		}
 		&--halfwidth {
 			width: 49%;
@@ -281,6 +285,9 @@
 		@media ( min-width: $breakpoint-form-right ) {
 			line-height: 3em;
 		}
+		&:hover {
+			background-color: $color-secondary-light;
+		}
 	}
 
 	@media ( min-width: $breakpoint-form-right ) {
@@ -300,11 +307,11 @@
 	position: absolute;
 	width: 18px;
 	margin: 0.25em 0.25em 0.25em 0;
-	top: 10px;
+	top: 15px;
 	right: 20px;
 	opacity: 0.5;
-	@media ( min-width: $breakpoint-m ) {
-		top: 0;
+	@media ( min-width: $breakpoint-s ) {
+		top: -10px;
 		right: 0;
 	}
 	&-tracking {
