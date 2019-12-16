@@ -1,12 +1,36 @@
-<div class="mini-banner">
-	<div class="mini-banner__close-button"></div>
-	<div class="mini-banner__text">
-		<strong>
-			Liebe Leserinnen und Leser:<br />
-			Über {{ amountBannerImpressionsInMillion }} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {{ numberOfDonors }} Menschen haben bisher gespendet. <span class="text__highlight">Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am heutigen {{ currentDayName }} vorbei.</span>
-		</strong>
-	</div>
-	<div class="mini-banner__tab" style="color: #0645ad;">
-		<img src="//upload.wikimedia.org/wikipedia/donate/d/da/Arrow-up-1.png" /> Jetzt spenden
+<div class="mini-banner" style="top: -10000px;">
+	<div class="mini-banner-box">
+		<div class="mini-banner-content">
+			<div class="banner-headline">
+				<div>
+					<span>Die Wikimedia-Spendenkampagne</span>
+				</div>
+			</div>
+			<div class="mini-banner__close-button"></div>
+			<div class="mini-banner-carousel">
+				<div class="carousel-cell">
+					<p>Liebe Leserinnen und Leser:</p>
+					<p>Über {{ amountBannerImpressionsInMillion }} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {{ numberOfDonors }} Menschen haben bisher gespendet. Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am heutigen {{ currentDayName }} vorbei.</p>
+				</div>
+				<div class="carousel-cell">
+					<p>{{ capitalizeFirstLetter weekdayPrepPhrase }} {{ currentDayName }} sind Sie in Deutschland gefragt. Schon der Preis einer Tasse Kaffee würde genügen.</p>
+				</div>
+				<div class="carousel-cell">
+					<p>Unser Spendenziel: 8,7 Millionen Euro</p>
+					{{{ progressBar }}}
+				</div>
+				<div class="carousel-cell">
+					<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
+				</div>
+				<div class="carousel-cell">
+					<p>Wenn Sie Wikipedia nützlich finden, nehmen Sie sich an diesem {{ currentDayName }} bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.</p>
+				</div>
+			</div>
+			<div class="mini-banner-tab">
+				<div class="mini-banner-tab-inner">
+					Jetzt spenden
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
