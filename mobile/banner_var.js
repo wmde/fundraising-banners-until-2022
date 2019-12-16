@@ -62,10 +62,20 @@ const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-p
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
+
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	'noch',
+	numberOfDaysUntilCampaignEnd,
+	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{}
+	{
+		textInnerLeft: progressBarTextInnerLeft
+	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
