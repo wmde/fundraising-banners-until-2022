@@ -56,10 +56,11 @@ export default class EventLoggingTracker {
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
+	 * @param {string} bannerEvent
 	 */
-	trackCloseEventViewPortDimensions( $trackedElement, dimensionCallback, slidesShown, finalSlide, trackingRatio = 0.01 ) {
+	trackCloseEventViewPortDimensions( $trackedElement, dimensionCallback, slidesShown, finalSlide, trackingRatio = 0.01, bannerEvent = 'banner-closed' ) {
 		$trackedElement.click( function () {
-			if ( this.trackBannerEvent( 'banner-closed', slidesShown, finalSlide, trackingRatio ) ) {
+			if ( this.trackBannerEvent( bannerEvent, slidesShown, finalSlide, trackingRatio ) ) {
 				// also track viewport dimensions on top of recording the banner closed event.
 				this.trackViewPortDimensionsOnEvent( dimensionCallback(), VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, 1 );
 			}
