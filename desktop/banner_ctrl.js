@@ -56,24 +56,15 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
-const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span> Mio. €';
-const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span> Mio. €';
-const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
-const progressBarTextInnerLeft = [
-	Translations[ 'prefix-days-left' ],
-	numberOfDaysUntilCampaignEnd,
-	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
-	Translations[ 'suffix-days-left' ]
-].join( ' ' );
+const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span>M €';
+const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span>M €';
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
-		textInnerLeft: progressBarTextInnerLeft,
-		decimalSeparator: ',',
-		modifier: 'progress_bar--lateprogress'
+		decimalSeparator: '.'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
