@@ -13,7 +13,6 @@ import { parseAmount } from '../shared/parse_amount';
 import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
 
 require( './css/styles_var.pcss' );
-require( './css/styles_mini.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -197,37 +196,6 @@ $( '.WMDE-Banner-submit button' ).click( function () {
 	return false;
 } );
 
-function setupScrollEventHandling() {
-	window.addEventListener( 'scroll', function () {
-		var bigbannerPosition = $( '#WMDE_Banner' )[ 0 ].getBoundingClientRect();
-		var minibannerPosition = $( '#mini-banner' )[ 0 ].getBoundingClientRect();
-
-		if ( bigbannerPosition.bottom < minibannerPosition.height && $( window ).width() > 1580 ) {
-			$( '#mini-banner' ).show();
-		} else {
-			$( '#mini-banner' ).hide();
-		}
-	}
-	);
-}
-
-$( '#mini-banner .close__link' ).click( function () {
-	$( '#mini-banner' ).hide();
-
-	if ( BannerFunctions.onMediaWiki() ) {
-		mw.centralNotice.hideBanner();
-	}
-	removeBannerSpace();
-
-	return false;
-} );
-
-$( '#mini-banner-donate-button button' ).click( function () {
-	$( '#WMDE_Banner' ).show();
-	$( '#WMDE_Banner' ).css( 'position', 'fixed' );
-	$( '#mini-banner' ).hide();
-} );
-
 /* Convert browser events to custom events */
 $( '#WMDE_Banner-amounts' ).find( 'label' ).click( function () {
 	$( this ).trigger( 'amount:selected' );
@@ -274,20 +242,13 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
-	setupScrollEventHandling();
 
 	bannerHeight = bannerElement.height();
+	bannerElement.css( 'top', -bannerHeight );
 	bannerElement.css( 'left', 0 );
 	bannerElement.css( 'display', 'block' );
-	if ( $( window ).width() < 1580 ) {
-		bannerElement.css( 'top', -bannerHeight );
-		bannerElement.animate( { top: 0 }, 1000 );
-		addSpace();
-	} else {
-		bannerElement.css( 'top', 0 );
-		addSpaceInstantly();
-	}
-
+	addSpace();
+	bannerElement.animate( { top: 0 }, 1000 );
 	setTimeout( function () { progressBar.animate(); }, 1000 );
 
 	$( window ).resize( function () {
@@ -311,7 +272,6 @@ $( '#bImpCount' ).val( bannerImpCount );
 // Display banner on load
 $( function () {
 	var $bannerElement = $( '#WMDE_Banner' );
-	var $minibannerElement = $( '#mini-banner' );
 
 	$( 'body' ).prepend( $( '#centralNotice' ) );
 
@@ -321,19 +281,11 @@ $( function () {
 
 	// track lightbox link clicking and banner closing
 	trackingEvents.trackClickEvent( $( '.application-of-funds-link' ), 'application-of-funds-shown', 1 );
-	trackingEvents.trackCloseEventViewPortDimensions( $( '#mini-banner .close__link' ),
-		function () { return sizeIssueIndicator.getDimensions( $minibannerElement.height() ); },
-		0,
-		0,
-		1,
-		'mini-banner-closed'
-	);
 	trackingEvents.trackCloseEventViewPortDimensions( $( '#WMDE_Banner .close__link' ),
 		function () { return sizeIssueIndicator.getDimensions( $bannerElement.height() ); },
 		0,
 		0,
-		bannerCloseTrackRatio,
-		'banner-closed'
+		bannerCloseTrackRatio
 	);
 	trackingEvents.trackViewPortDimensions(
 		sizeIssueIndicator.getDimensions( $bannerElement.height() ),
@@ -349,11 +301,7 @@ $( function () {
 			sizeIssueTrackRatio
 		);
 	} else {
-		if ( $( window ).width() < 1580 ) {
-			bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
-		} else {
-			bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 0 );
-		}
+		bannerDisplayTimeout.run( displayBanner, $( '#WMDE-Banner-Container' ).data( 'delay' ) || 7500 );
 	}
 
 	BannerFunctions.getSkin().addSearchObserver( function () {
