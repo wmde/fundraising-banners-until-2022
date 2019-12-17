@@ -17,10 +17,11 @@
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
+    "fundraising-frontend-content": "wmde/fundraising-frontend-content#production",
     "classnames": "^2.2.6",
     "flickity": "^2.2.1",
     "format-number": "^3.0.0",
-    "preact": "^10.0.0",
+    "preact": "^10.1.0",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {

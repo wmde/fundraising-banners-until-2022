@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Footer( { campaignName, bannerName } ) {
+export default function Footer( { setToggleFundsModal } ) {
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__item">
@@ -19,9 +19,8 @@ export default function Footer( { campaignName, bannerName } ) {
 			</div>
 
 			<div className="footer__item footer__item--rightflex">
-				<a id="application-of-funds-link" className="application-of-funds-link" target="_blank"
-					href={'https://spenden.wikimedia.de/use-of-funds?piwik_campaign=' + campaignName + '&piwik_kwd=' + bannerName + '_link'}
-					data-href="#info-application-of-funds">Wohin geht meine Spende?
+				<a id="application-of-funds-link" className="application-of-funds-link"
+					onClick={ setToggleFundsModal }>Wohin geht meine Spende?
 				</a>
 			</div>
 		</div>

@@ -8,6 +8,8 @@ import MatomoTracker from '../shared/matomo_tracker';
 import { CampaignProjection } from '../shared/campaign_projection';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 import formatNumber from 'format-number';
+import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+
 // eslint-disable-next-line no-unused-vars
 import style from './styles/banner_ctrl.pcss';
 
@@ -64,7 +66,8 @@ render(
 		trackingData: trackingData,
 		translations: Translations,
 		locale: LOCALE,
-		campaignProjection
+		campaignProjection,
+		fundsModalData: fundsModalData
 	} ),
 	document.getElementById( 'WMDE-Banner-Container' )
 );
