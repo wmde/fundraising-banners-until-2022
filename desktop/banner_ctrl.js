@@ -13,8 +13,6 @@ import { parseAmount } from '../shared/parse_amount';
 import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
 
 require( './css/styles.pcss' );
-require( './css/icons.css' );
-require( './css/wlightbox.css' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -48,7 +46,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html_ctrl.hbs' );
+const bannerTemplate = require( './templates/banner_html.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -58,15 +56,24 @@ const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
-const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span>M €';
-const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span>M €';
+const progressBarTextRight = 'Es fehlen: <span class="js-value_remaining">1.2</span> Mio. €';
+const progressBarTextInnerRight = '<span class="js-donation_value">1.2</span> Mio. €';
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
-		decimalSeparator: '.'
+		textInnerLeft: progressBarTextInnerLeft,
+		decimalSeparator: ',',
+		modifier: 'progress_bar--lateprogress'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
@@ -238,6 +245,7 @@ function displayBanner() {
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
+	bannerElement.css( 'left', 0 );
 	bannerElement.css( 'display', 'block' );
 	addSpace();
 	bannerElement.animate( { top: 0 }, 1000 );

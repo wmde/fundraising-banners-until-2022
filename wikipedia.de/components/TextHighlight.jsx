@@ -1,4 +1,5 @@
-import { Component, toChildArray, h } from "preact";
+// eslint-disable-next-line no-unused-vars
+import { Component, toChildArray, h } from 'preact';
 
 export default class TextHighlight extends Component {
 	state = { highlightedText: '', plainText: '' };
@@ -7,7 +8,7 @@ export default class TextHighlight extends Component {
 		const plainText = toChildArray( this.props.children ).reduce( ( t, child ) => typeof child === 'string' ? t + child : t, '' );
 		this.setState( { highlightedText: '', plainText } );
 		if ( this.props.animateHighlightTrigger ) {
-			this.props.animateHighlightTrigger( this.animateHighlight.bind(this) );
+			this.props.animateHighlightTrigger( this.animateHighlight.bind( this ) );
 		}
 	}
 
@@ -26,7 +27,7 @@ export default class TextHighlight extends Component {
 				this.highlightAnimation = setTimeout( animateSlice, millisecondsPerChar );
 			}
 		};
-		this.highlightAnimation = setTimeout( animateSlice, initialDelay )
+		this.highlightAnimation = setTimeout( animateSlice, initialDelay );
 	}
 
 	componentWillUnmount() {
@@ -35,9 +36,10 @@ export default class TextHighlight extends Component {
 		}
 	}
 
+	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		return <span className="text__paragraph text__paragraph--highlight">
+		return <span className="text__paragraph--highlight">
 			<span className="marked">{state.highlightedText}</span>{state.plainText}
-		</span>
+		</span>;
 	}
 }

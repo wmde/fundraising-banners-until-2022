@@ -4,36 +4,36 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "11-ba-191119"
+campaign_tracking = "19-ba-191216"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B19WMDE_11_191119_ctrl"
-tracking = "org-11-191119-ctrl"
+pagename = "B19WMDE_19_191216_ctrl"
+tracking = "org-19-191216-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B19WMDE_11_191119_var"
-tracking = "org-11-191119-var"
+pagename = "B19WMDE_19_191216_var"
+tracking = "org-19-191216-var"
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob02-ba-191120"
+campaign_tracking = "mob04-ba-191209"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B19WMDE_mob02_191120_2_ctrl"
-tracking = "org-mob02-191120-2-ctrl"
+pagename = "B19WMDE_mob04_191209_ctrl"
+tracking = "org-mob04-191209-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B19WMDE_mob02_191120_2_var"
-tracking = "org-mob02-191120-2-var"
+pagename = "B19WMDE_mob04_191209_var"
+tracking = "org-mob04-191209-var"
 
 
 # Mobile English Campaign
@@ -89,14 +89,19 @@ tracking = "org-en-ipad-191113-var"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-01-191111"
+campaign_tracking = "wpde-03-191213"
 preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/banner_ctrl.js"
-pagename = "B19WPDE_01-191111_ctrl"
-tracking = "wpde-01-191111-ctrl"
+pagename = "B19WPDE_03-191213_ctrl"
+tracking = "wpde-03-191213-ctrl"
+
+[wikipediade.banners.var]
+filename = "./wikipedia.de/banner_var.js"
+pagename = "B19WPDE_03-191213_var"
+tracking = "wpde-03-191213-var"
 
 
 # English Campaign

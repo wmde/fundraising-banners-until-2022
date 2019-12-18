@@ -1,16 +1,22 @@
-import classNames from 'classnames';
+// eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
+import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
-import formatNumber from 'format-number'
+import formatNumber from 'format-number';
 import TranslationContext from './TranslationContext';
 import PropTypes from 'prop-types';
-import style from './ProgressBarDesktop.pcss';
 
-const NOT_STARTED = 0;
+const PENDING = 0;
 const STARTED = 1;
 const ENDED = 2;
 
-export default class ProgressBarDesktop extends Component {
+/**
+ * When set to true, the "late progress" design will be used
+ * @type {boolean}
+ */
+const IS_LATE_PROGRESS = true;
+
+export default class ProgressBar extends Component {
 	static propTypes = {
 		/** Locale 'EN' or 'DE', defaults to 'EN' */
 		locale: PropTypes.string,
@@ -33,18 +39,31 @@ export default class ProgressBarDesktop extends Component {
 		 * See https://stackoverflow.com/a/45582558/130121
 		 */
 		setStartAnimation: PropTypes.func.isRequired,
+
+		/**
+		 * If the progress bar should be animated. Default: true
+		 * If it's not animated you can set setStartAnimation to an empty function like this: () => {}
+		 */
+		animate: PropTypes.bool
 	};
 
-	constructor(props) {
-		super(props);
+	constructor( props ) {
+		super( props );
 		this.state = {
 			width: 1,
-			animation: NOT_STARTED
+			animation: PENDING
 		};
-		PropTypes.checkPropTypes( ProgressBarDesktop.propTypes, props, 'constructor', 'ProgressBarDesktop' );
+		if ( props.animate === false ) {
+			this.state = {
+				width: this.calculateWidth(),
+				animation: ENDED
+			};
+		}
+
+		PropTypes.checkPropTypes( ProgressBar.propTypes, props, 'constructor', 'ProgressBar' );
 		this.millionFormatter = formatNumber( { round: 1, prefix: '€ ', suffix: 'M', padRight: 1 } );
 		if ( this.props.locale === 'de' ) {
-			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: 'M €', padRight: 1 } );
+			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
 		}
 	}
 
@@ -52,44 +71,58 @@ export default class ProgressBarDesktop extends Component {
 		this.props.setStartAnimation( this.startAnimation.bind( this ) );
 	}
 
-	progressAnimationEnded = (e) => {
-		this.setState( { animation: ENDED } )
+	// eslint-disable-next-line no-unused-vars
+	progressAnimationEnded = ( e ) => {
+		this.setState( { animation: ENDED } );
 	};
 
 	startAnimation() {
+		if ( this.state.animation !== PENDING ) {
+			return;
+		}
 		this.setState( {
-			width: ( this.props.donationAmount * 100 ) / this.props.goalDonationSum,
+			width: this.calculateWidth(),
 			animation: STARTED
 		} );
 	}
 
-	render( props, state) {
+	calculateWidth() {
+		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum;
+	}
+
+	render( props, state ) {
+		const Translations = useContext( TranslationContext );
 		const getMillion = n => this.millionFormatter( n / 1000000 );
-		const Translations = useContext(TranslationContext);
-		return <div className={classNames( 'progress_bar', {
+		const getDaysLeft = daysLeft => {
+			return Translations[ 'prefix-days-left' ] +
+				' ' + daysLeft + ' ' +
+				( daysLeft > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ' ' +
+				Translations[ 'suffix-days-left' ];
+		};
+		return <div className={ classNames( 'progress_bar', {
 			'progress_bar--finished': state.animation === ENDED,
 			'progress_bar--animating': state.animation === STARTED,
-		})}>
+			'progress_bar--lateprogress': IS_LATE_PROGRESS
+		} ) }>
 			<div className="progress_bar__wrapper">
-				<div className="progress_bar__donation_fill" style={ `width:${state.width}%` } onTransitionEnd={this.progressAnimationEnded}>
+				<div className="progress_bar__donation_fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
 					<div className="progress_bar__days_left">
-						{Translations['prefix-days-left']}{ ' ' }
-						{ props.daysLeft } { ' ' }
-						{ props.daysLeft === 1 ? Translations['days-singular'] : Translations['days-plural'] }
+						{ getDaysLeft( props.daysLeft ) }
 					</div>
 					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
 				</div>
 				<div
 					className="progress_bar__donation_remaining progress_bar__donation_remaining--inner">
-					{ Translations['amount-missing'] }{ ' ' }
+					{ Translations[ 'amount-missing' ] }{ ' ' }
 					{ getMillion( props.missingAmount ) }
 				</div>
 			</div>
 			<div className="progress_bar__donation_remaining progress_bar__donation_remaining--outer">
 				<div className="progress_bar__pointer_tip"></div>
 				<hr className="progress_bar__pointer_line" />
-					Es fehlen { props.missingAmount }M €
+				{ Translations[ 'amount-missing' ] }{ ' ' }
+				{ getMillion( props.missingAmount ) }
 			</div>
-		</div>
+		</div>;
 	}
 }

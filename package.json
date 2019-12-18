@@ -9,7 +9,7 @@
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
-    "lint:js": "eslint --cache --cache-location .eslintcache --ignore-path .gitignore .",
+    "lint:js": "eslint --ext .jsx --ext .js --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:css": "stylelint --syntax scss '**/*.pcss'"
   },
   "keywords": [],
@@ -17,10 +17,11 @@
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
+    "fundraising-frontend-content": "wmde/fundraising-frontend-content#production",
     "classnames": "^2.2.6",
     "flickity": "^2.2.1",
     "format-number": "^3.0.0",
-    "preact": "^10.0.0",
+    "preact": "^10.1.0",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
@@ -30,12 +31,14 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
     "autoprefixer": "^7.2.6",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "core-js": "^3.3.2",
     "css-loader": "^3.0.0",
-    "eslint": "^6.0.1",
-    "eslint-config-wikimedia": "^0.14.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-config-wikimedia": "^0.15.0",
     "handlebars": "^4.4.0",
     "handlebars-loader": "^1.7.1",
     "html-loader": "^0.5.5",

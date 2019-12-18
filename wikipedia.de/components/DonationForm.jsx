@@ -1,23 +1,23 @@
-import { Component, h} from 'preact';
-import style from './DonationForm.pcss';
+// eslint-disable-next-line no-unused-vars
+import { Component, h } from 'preact';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { parseAmount } from '../../shared/parse_amount';
 
 // TODO pass in formatter as a dependency to be able to localize this component
-import {amountForServerFormatter, amountInputFormatter} from '../../shared/number_formatter/de';
+import { amountForServerFormatter, amountInputFormatter } from '../../shared/number_formatter/de';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
-		super(props);
+		super( props );
 		this.state = {
-			paymentInterval : null,
-			selectedAmount : null,
-			customAmount : '',
-			amount : 0,
-			paymentMethod : null,
-			paymentIntervalIsValid : true,
-			amountIsValid : true,
-			paymentMethodIsValid : true,
+			paymentInterval: null,
+			selectedAmount: null,
+			customAmount: '',
+			amount: 0,
+			paymentMethod: null,
+			paymentIntervalIsValid: true,
+			amountIsValid: true,
+			paymentMethodIsValid: true
 		};
 
 		this.impCount = new LocalImpressionCount( props.bannerName );
@@ -59,7 +59,7 @@ export default class DonationForm extends Component {
 		this.setState( {
 			paymentMethod: evt.target.value,
 			paymentMethodIsValid: true
-		} )
+		} );
 	};
 
 	validateForm = ( evt ) => {
@@ -79,11 +79,14 @@ export default class DonationForm extends Component {
 		}
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const intervals = [
-			{ value: '0', label: 'einmalig' },
+			{ value: '0', label: 'einmalig', width: 'fullwidth' },
 			{ value: '1', label: 'monatlich' },
-			{ value: '12', label: 'jährlich' },
+			{ value: '3', label: 'vierteljährlich' },
+			{ value: '6', label: 'halbjährlich' },
+			{ value: '12', label: 'jährlich' }
 		];
 		const amounts = [
 			{ value: '5' },
@@ -91,51 +94,55 @@ export default class DonationForm extends Component {
 			{ value: '20' },
 			{ value: '25' },
 			{ value: '50' },
-			{ value: '100' },
+			{ value: '100' }
 		];
 		const paymentMethods = [
 			{ value: 'BEZ', label: 'Lastschrift' },
 			{ value: 'UEB', label: 'Überweisung' },
 			{ value: 'MCP', label: 'Kreditkarte' },
-			{ value: 'PPL', label: 'PayPal' },
+			{ value: 'PPL', label: 'PayPal' }
 		];
 
 		return <div className="form">
-			<form id="WMDE_Banner-form" method="post" name="donationForm"
-				  action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName +'&skin=0'}>
+			<form method="post" name="donationForm" className="form__element"
+				action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
 				<div className="form-field-group">
 					<div
-						className={ 'select-group-container' + (state.paymentIntervalIsValid ? '' : ' select-group-container--with-error') }>
+						className={ 'select-group-container' + ( state.paymentIntervalIsValid ? '' : ' select-group-container--with-error' ) }>
 						<div id="WMDE_Banner-frequency" className="WMDE-Banner-frequency select-group">
-							{intervals.map( ( {value, label}, idx) => (
-								<label className="select-group__option select-group__option--thirdwidth">
+							{intervals.map( ( { value, label, width } ) => (
+								<label className={ 'select-group__option select-group__option--' + ( width || 'halfwidth' ) } key={value}>
 									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
-										   name="periode" value={value} className="select-group__input"/>
+										name="periode" value={value} className="select-group__input"/>
 									<span className="select-group__state">{label}</span>
-								</label>) )
+								</label> ) )
 							}
 						</div>
 						<span className="select-group__errormessage">Bitte wählen Sie zuerst ein Zahlungsintervall.</span>
 					</div>
 				</div>
 
-				<div className={ 'select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
+				<div className={ 'form-field-group select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
 					<div id="WMDE_Banner-amounts" className="WMDE-Banner-amounts select-group">
-						{amounts.map( ( { value }, idx ) => (
-							<label id="amount_label_{i}"
-								   className="select-group__option select-group__option--quarterwidth">
+						{amounts.map( ( { value } ) => (
+							<label className="select-group__option select-group__option--quarterwidth" key={value}>
 								<input type="radio" name="betrag_auswahl"
-									   onClick={this.amountSelected} className="select-group__input"
-									   checked={ value === state.selectedAmount }
-									   value={ value }/>
+									onClick={this.amountSelected}
+									className="select-group__input"
+									checked={ value === state.selectedAmount }
+									value={ value }/>
 								<span className="select-group__state">{value} €</span>
 							</label>
 						) ) }
 						<label className="select-group__option select-group__option--halfwidth">
-							<input type="text" name="amountGiven" value={ state.customAmount } onInput={ this.amountTyped } size="3"
-								   onBlur={this.finishedTypingAmount}
-									autocomplete="off" placeholder="Wunschbetrag"
-								   className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '') } />
+							<input type="text"
+								value={ state.customAmount }
+								onInput={ this.amountTyped }
+								size="3"
+								onBlur={ this.finishedTypingAmount }
+								autoComplete="off"
+								placeholder="Wunschbetrag"
+								className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '' ) } />
 						</label>
 					</div>
 					<span className='select-group__errormessage'>Bitte geben Sie einen Spendenbetrag von min. 1€ ein.</span>
@@ -144,13 +151,13 @@ export default class DonationForm extends Component {
 				<div className="form-field-group">
 					<div className={ 'select-group-container' + ( state.paymentMethodIsValid ? '' : ' select-group-container--with-error' ) }>
 						<div id="WMDE_Banner-payment-type" className="WMDE-Banner-payment select-group">
-							{paymentMethods.map( ( { value, label }, idx ) => (
-								<label className="select-group__option select-group__option--halfwidth">
+							{paymentMethods.map( ( { value, label } ) => (
+								<label className="select-group__option select-group__option--halfwidth" key={value}>
 									<input type="radio" checked={value === state.paymentMethod }
-										   onClick={this.paymentMethodSelected}
-										   name="zahlweise" value={value}
-										   className="select-group__input" />
-										   <span className="select-group__state">{label}</span>
+										onClick={this.paymentMethodSelected}
+										name="zahlweise" value={value}
+										className="select-group__input" />
+									<span className="select-group__state">{label}</span>
 								</label>
 							) ) }
 							<div className="sms-box">
@@ -174,6 +181,6 @@ export default class DonationForm extends Component {
 				<input type="hidden" id="impCount" name="impCount" value={this.impCount.overallCount}/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value={this.impCount.bannerCount}/>
 			</form>
-		</div>
+		</div>;
 	}
 }

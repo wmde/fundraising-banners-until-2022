@@ -1,5 +1,3 @@
-@import '../variables_ctrl.pcss';
-
 @keyframes slide-down {
 	0% {
 		transform: translateY( -100% );
@@ -21,7 +19,7 @@
 	@media ( min-width: $breakpoint-xs ) {
 		display: none !important;
 	}
-	#WMDE_Banner-form {
+	.form__element {
 		background-color: $color-bright;
 	}
 	&-window {
@@ -83,6 +81,7 @@
 			&__state {
 				padding: 20px 5px;
 				font-size: 5vw;
+				line-height: 0;
 			}
 			&__custom-input {
 				height: 40px;
@@ -245,5 +244,11 @@
 				display: block;
 			}
 		}
+	}
+
+	.progress_bar__wrapper {
+		max-height: 30px;
+		margin-left: 1em;
+		margin-right: 1em;
 	}
 }

@@ -2,17 +2,17 @@
 	<div id="frbanner-window" class="frbanner-window">
 		<div id="frbanner-close"></div>
 
-        <div id="modal-signup" class="cf">
+		<div id="modal-signup" class="cf">
 
-            <div class="infobox">
-                <div class="infobox__text">
-                    {{> banner_text }}
-                </div>
-                {{{ progressBar }}}
-                <div class="call-to-action">
-                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
-                </div>
-            </div>
+			<div class="infobox">
+				<div class="infobox__text">
+					{{> banner_text }}
+				</div>
+				{{{ progressBar }}}
+				<div class="call-to-action">
+					Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+				</div>
+			</div>
 
 			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}">
 				<input type="hidden" id="periode" name="periode" value="0">

@@ -1,8 +1,12 @@
 {
 	"extends": "wikimedia",
+	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaVersion": 6,
-		"sourceType": "module"
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
 	},
 	"env": {
 		"browser": true,
@@ -14,6 +18,9 @@
 	"globals": {
 		"mw": false
 	},
+	"plugins": [
+		"react"
+	],
 	"rules": {
 		"dot-notation": [ "error", { "allowKeywords": true } ],
 		"one-var": [ "off" ],
@@ -22,8 +29,14 @@
 		"no-use-before-define": [ "error", { "functions": false } ],
 		"quote-props": [ "error", "consistent-as-needed", { "keywords": true } ],
 		"max-len": [ "error", {
-			"code": 150
+			"code": 180
 		}],
-		"max-statements-per-line": [ "error", { "max": 2 } ]
+		"max-statements-per-line": [ "error", { "max": 2 } ],
+		"react/jsx-uses-react": "error",
+		"react/jsx-uses-vars": "error",
+		"react/jsx-pascal-case": "error",
+		"react/jsx-no-undef": "error",
+		"react/jsx-key": "error",
+		"react/no-unknown-property": "error"
 	}
 }

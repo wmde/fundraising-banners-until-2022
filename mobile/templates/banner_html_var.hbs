@@ -2,29 +2,26 @@
 	<div id="frbanner-window" class="frbanner-window">
 		<div id="frbanner-close"></div>
 
-        <div id="modal-signup" class="cf">
+		<div id="modal-signup" class="cf">
 
-            <div class="infobox">
-                <div class="infobox__text">
-                    {{> banner_text }}
-                </div>
-                {{{ progressBar }}}
-                <div class="call-to-action">
-                    Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
-                </div>
-            </div>
+			<div class="infobox">
+				<div class="infobox__text">
+					{{> banner_text }}
+				</div>
+				{{{ progressBar }}}
+				<div class="call-to-action">
+					Jetzt sind Sie <span class="call-to-action__optional-text">in Deutschland</span> gefragt.
+				</div>
+			</div>
 
-			<form id="frbanner-form" class="form" method="post" name="donationForm" action=""
-                data-main-action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}"
-                data-fallback-action="https://spenden.wikimedia.de/donation/add?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&mbt=1"
-            >
-                <input type="hidden" id="periode" name="periode" value="0">
+			<form id="frbanner-form" class="form" method="post" name="donationForm" action="https://spenden.wikimedia.de/donation/new?piwik_campaign={{ CampaignName }}&piwik_kwd={{ BannerName }}&skin=0&da=0">
+				<input type="hidden" id="periode" name="periode" value="0">
+				<input type="hidden" id="address_type" name="addressType" value="person">
 				<input type="hidden" id="intervalType" name="intervalType" value="0" />
 				<input type="hidden" id="impCount" name="impCount" value="" />
 				<input type="hidden" id="bImpCount" name="bImpCount" value="" />
 				<input type="hidden" id="tracking" name="tracking" value="{{ CampaignName }}/{{ BannerName }}">
 				<input type="hidden" id="zahlweise" name="zahlweise" value="" />
-                <input type="hidden" id="address_type" name="addressType" value="" />
 				<input type="hidden" id="betrag" name="betrag" value="" />
 
 				<fieldset class="from__section cf">
@@ -83,29 +80,29 @@
 					<legend class="form__section-head">Zahlweise wählen</legend>
 					<ol class="button-group button-group--tablet-2cols payment-selection">
 						<li class="button-group__container">
-							<button class="button-group__button" data-payment-type="PPL" name="zahlweise">
+							<button class="button-group__button" data-payment-type="PPL">
 								PayPal
 							</button>
 						</li>
 						<li class="button-group__container">
-							<button class="button-group__button" data-payment-type="MCP" name="zahlweise">
+							<button class="button-group__button" data-payment-type="MCP">
 								Kreditkarte
 							</button>
 						</li>
 						<li class="button-group__container">
-							<button class="button-group__button" data-payment-type="UEB" name="zahlweise">
+							<button class="button-group__button" data-payment-type="UEB">
 								Überweisung
 							</button>
 						</li>
 						<li class="button-group__container">
-							<button class="button-group__button" data-payment-type="BEZ" name="zahlweise">
+							<button class="button-group__button" data-payment-type="BEZ">
 								Lastschrift
 							</button>
 						</li>
 					</ol>
 					<ol class="button-group button-group--tablet-1col payment-selection">
 						<li class="button-group__container">
-							<button class="button-group__button" data-payment-type="SUB" name="zahlweise">
+							<button class="button-group__button" data-payment-type="SUB">
 								Sofort-Überweisung
 							</button>
 						</li>
@@ -116,37 +113,12 @@
 							SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.
 						</li>
 					</ol>
+					<ol class="button-group button-group--tablet-1col">
+						<li class="button-group__container-submit">
+							<button class="button-group__button button-group__button-submit" id="banner-form-submit">Weiter, um Spende abzuschließen</button>
+						</li>
+					</ol>
 				</fieldset>
-
-            <fieldset class="form__section cf">
-                <legend class="form__section-head">Wollen Sie Ihre Kontaktdaten angeben?</legend>
-                <ol class="button-group button-group--tablet-2cols address-selection">
-                    <li class="button-group__container">
-                        <button class="button-group__button" data-address-option="person" name="addressOption" id="addressYesOption">
-                            Ja
-                        </button>
-                    </li>
-                    <li class="button-group__container">
-                        <button class="button-group__button" data-address-option="anonym" name="addressOption" id="addressNoOption">
-                            Nein
-                        </button>
-                    </li>
-                    <li class="button-group__hint address-hint">
-                        Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung.
-                        Zudem können wir Sie informieren, wenn Wikipedia in Zukunft ihre Hilfe benötigt.
-                    </li>
-                    <li class="button-group__hint BEZ-hint">
-                        Für Lastschriften ist die Angabe einer Adresse erforderlich.
-                    </li>
-                </ol>
-
-                <ol class="button-group button-group--tablet-1col">
-                    <li class="button-group__container-submit">
-                        <button class="button-group__button button-group__button-submit" id="banner-form-submit">Weiter, um Spende abzuschließen</button>
-                    </li>
-                </ol>
-            </fieldset>
-
 			</form>
 			<div class="smallprint" id="frbanner-smallprint">
 				<div class="smallprint">

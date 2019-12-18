@@ -1,5 +1,3 @@
-@import '../variables_ctrl.pcss';
-
 .footer {
 	display: flex;
 	flex-wrap: wrap;
@@ -33,6 +31,18 @@
 		&--rightflex {
 			flex-grow: 1;
 			text-align: right;
+			@media ( min-width: $breakpoint-form-right ) {
+				& a {
+					display: inline-block;
+					text-align: center;
+					/* use same width and margin as .form to center the text */
+					width: 19em;
+					margin: 0 1.5em 0 0.25em;
+					&:hover {
+						color: $color-dark-light;
+					}
+				}
+			}
 		}
 		.iban-block > span {
 			margin-right: 0.2em;
@@ -42,4 +52,8 @@
 
 .application-of-funds-link {
 	color: $color-dark;
+	cursor: pointer;
+	&:hover {
+		color: $color-dark-light;
+	}
 }

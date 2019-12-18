@@ -18,7 +18,7 @@ describe( 'MatomoTracker', function () {
 
 		tracker.recordBannerImpression();
 
-		assert.ok( window.TestTracker.trackContentImpression.calledWith( 'Banners', 'banner-shown', 'TestBanner05' ) );
+		assert.ok( window.TestTracker.trackContentImpression.calledWith( 'Banners', 'TestBanner05' ) );
 	} );
 
 	it( 'tracks events', () => {
@@ -50,7 +50,7 @@ describe( 'MatomoTracker', function () {
 		}, simulatedLoadTime );
 
 		setTimeout( () => {
-			assert.ok( window.TestTracker.trackContentImpression.calledWith( 'Banners', 'banner-shown', 'TestBanner05' ) );
+			assert.ok( window.TestTracker.trackContentImpression.calledWith( 'Banners', 'TestBanner05' ) );
 			assert.ok( window.TestTracker.trackEvent.calledWith( 'Banners', 'some-action', 'TestBanner05' ) );
 			done();
 		}, retryInterval + simulatedLoadTime + 1 );
