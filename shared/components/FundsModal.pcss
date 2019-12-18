@@ -45,13 +45,16 @@
 	&_url {
 		margin: 10px 0;
 		padding: 10px 0;
-		border-bottom: 1px solid rgba( 0, 0, 0, 0.6 );
+		border-bottom: 1px solid #9f9f9f;
 		> a {
 			display: inline-block;
 			width: 100%;
 			height: 100%;
-			color: #000000;
+			color: #8f8f8f;
 			text-decoration: none;
+			&:hover {
+				color: #000000;
+			}
 		}
 	}
 	&_close {
@@ -86,10 +89,10 @@
 			content: '\25be';
 			position: absolute;
 			right: 5px;
-			top: 28px;
-			font-size: 20px;
+			top: 22px;
+			font-size: 30px;
 			/* stylelint-disable-next-line function-parentheses-space-inside */
-			transform: scaleY(0.7);
+			transform: scaleY(0.6);
 		}
 		&.is-active {
 			&:after {
