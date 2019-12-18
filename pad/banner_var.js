@@ -169,7 +169,7 @@ function setupAmountEventHandling() {
 			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
 		}
 		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
-			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message2' ] );
+			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
 		}
 	} );
 }
@@ -245,7 +245,7 @@ $( "input[name='addressType']" ).change( function () {
 	BannerFunctions.hideAddressTypeError();
 	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
 
-		BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message2' ] );
+		BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
 	} else if ( $( "input[name='addressType']:checked" ).val() === 'person' ) {
 		BannerFunctions.hideAddressTypeInfo();
 

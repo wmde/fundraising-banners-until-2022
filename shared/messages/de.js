@@ -4,10 +4,9 @@ const Translations = {
 	'amount-too-low-message': '1 € muss es mindestens sein.',
 	'amount-too-high-message': 'Es darf nicht mehr als 99999 € sein.',
 	'no-payment-type-message': 'Bitte wählen Sie eine Zahlungsweise aus.',
-	'address-type-info-message': 'Bitte beachten Sie, dass wir Ihnen ohne Adressdaten keine Zuwendungsbescheinigung ausstellen können.',
-	'address-type-info-message2': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre ' +
-		'Zuwendungsbescheinigung. Zudem können wir Sie informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
 	'no-address-type-message': 'Bitte wählen Sie aus, ob Sie eine Adresse angeben wollen.',
+	// eslint-disable-next-line max-len
+	'address-type-info-message': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt. ',
 	'anonymous-BEZ-info-message': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
 	'prefix-days-left': 'Nur noch',
 	'suffix-days-left': '',
