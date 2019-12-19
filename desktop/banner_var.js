@@ -11,8 +11,12 @@ import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_func
 import { CampaignProjection } from '../shared/campaign_projection';
 import { parseAmount } from '../shared/parse_amount';
 import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
+import { render, createElement } from 'preact';
+import FundsModal from '../shared/components/FundsModal';
+import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 
-require( './css/styles_var.pcss' );
+require( './css/styles.pcss' );
+require( '../shared/components/FundsModal.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;
@@ -91,6 +95,24 @@ $bannerContainer.html( bannerTemplate( {
 } ) );
 
 // BEGIN form init code
+
+let isUseOfFundsModalVisible = false;
+
+let fundsModal = createElement( FundsModal, {
+	locale: LANGUAGE,
+	fundsModalData: fundsModalData,
+	isFundsModalVisible: isUseOfFundsModalVisible,
+	setToggleFundsModal: toggleUseOfFundsVisibility
+} );
+
+function toggleUseOfFundsVisibility() {
+	fundsModal.props.isFundsModalVisible = !fundsModal.props.isFundsModalVisible;
+	render(
+		fundsModal,
+		document.getElementById( 'modal_wrapper' )
+	);
+
+}
 
 const trackingEvents = new EventLoggingTracker( BannerName );
 
@@ -255,6 +277,7 @@ function displayBanner() {
 		addSpaceInstantly();
 		calculateLightboxPosition();
 	} );
+	$( '#application-of-funds-link' ).click( toggleUseOfFundsVisibility );
 }
 
 function calculateLightboxPosition() {
