@@ -29,4 +29,8 @@ export default class Minerva extends Skin {
 			this.searchField.one( 'focus', onSearchFocus );
 		}
 	}
+
+	moveBannerContainerToTopOfDom() {
+		$( 'body' ).prepend( $( '#centralNotice' ) );
+	}
 }

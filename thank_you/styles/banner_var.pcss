@@ -1,0 +1,84 @@
+.small-banner {
+	background: $color-secondary;
+	box-sizing: border-box;
+	padding: 16px;
+}
+
+.small-banner__inner {
+	background-color: $color-primary;
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_s;
+	background-position: left top, right top;
+	background-repeat: no-repeat, no-repeat;
+	background-size: contain;
+	box-sizing: border-box;
+	border-radius: 6px;
+	padding: 14px;
+	@media ( min-width: $breakpoint_m ) {
+		padding: 32px 64px;
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_m;
+	}
+	@media ( min-width: $breakpoint_l ) {
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_l;
+	}
+}
+
+.small-banner__content {
+	@media ( min-width: $breakpoint_m ) {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.thankyou-message {
+	font-size: 20px;
+	margin-top: 24px;
+	visibility: hidden;
+	@media ( min-width: $breakpoint_m ) {
+		font-size: 26px;
+		margin-top: 0;
+	}
+	@media ( min-width: $breakpoint_l ) {
+		font-size: 42px;
+	}
+}
+
+.thankyou-image {
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Thank-you-white.svg' );
+	background-repeat: no-repeat;
+	background-position: center center;
+	box-sizing: border-box;
+	width: 100%;
+	height: 85px;
+	@media ( min-width: $breakpoint_m ) {
+		width: 203px;
+		background-position: left top;
+	}
+}
+
+.info-icon {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	top: 16px;
+	left: 16px;
+	width: 24px;
+	height: 24px;
+	border-radius: 16px;
+	font-size: 16px;
+	background: $color-accent;
+	color: $color-white;
+	font-weight: bold;
+	@media ( min-width: $breakpoint_m ) {
+		top: 24px;
+		left: 32px;
+		width: 32px;
+		height: 32px;
+		font-size: 22px;
+	}
+}
+
+.info-icon__i {
+	padding-top: 3px;
+}

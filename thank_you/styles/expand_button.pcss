@@ -1,0 +1,24 @@
+.expand-button {
+	display: inline-block;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	background-color: $color-secondary;
+	color: $color-secondary-contrast;
+	padding: 14px 48px 14px 14px;
+	font-size: 18px;
+	background-repeat: no-repeat;
+	background-position: right 14px center;
+	cursor: pointer;
+}
+
+.expand-button:hover {
+	text-decoration: underline;
+}
+
+.expand-button--collapsed {
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Chevron-down.svg' );
+}
+
+.expand-button--expanded {
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Chevron-up.svg' );
+}

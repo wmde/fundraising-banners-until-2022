@@ -32,4 +32,8 @@ export default class Vector extends Skin {
 	addSearchObserver( onSearchFocus ) {
 		this.searchField.one( 'focus', onSearchFocus );
 	}
+
+	moveBannerContainerToTopOfDom() {
+		$( 'body' ).prepend( $( '#centralNotice' ) );
+	}
 }

@@ -1,15 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles_authors.pcss';
 
 import { donorFormatter, millionFormatter } from './src/formatters';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { showBanner } from './src/show_banner';
 import { getTrackingData } from './src/tracking_data';
+import { getTrackingIds } from './src/tracking_ids';
 import { getSkin } from '../shared/skin';
 
-import { getTrackingIds } from './src/tracking_ids';
 import Banner from './banners/Banner';
-import MembershipMoreInfo from './components/MembershipMoreInfo';
+import AuthorsMoreInfo from './components/AuthorsMoreInfo';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 
@@ -22,11 +22,11 @@ showBanner(
 	{
 		...trackingIds,
 		numberOfDonors: donorFormatter( CampaignParameters.donationProjection.donorsBase ),
-		numberOfMembers: donorFormatter( CampaignParameters.numberOfMembers ),
 		goalDonationSum: millionFormatter( CampaignParameters.donationProjection.goalDonationSum / 1000000 ),
 		trackingData: getTrackingData( trackingIds.bannerName ),
-		expandText: 'Lesen Sie unsere Dankesbotschaft',
-		moreInfo: MembershipMoreInfo,
+		expandText: 'Dankestext lesen',
+		showSteps: false,
+		moreInfo: AuthorsMoreInfo,
 		skinFunctions: getSkin()
 	}
 );

@@ -30,6 +30,10 @@ if ( !currentUrl.query.devbanner ) {
 	const currentBanner = currentUrl.query.devbanner;
 	const container = $( '#WMDE-Banner-Container' );
 	if ( pages[ currentBanner ] ) {
+		// set data attribute for non-jQuery banners
+		container.attr( 'data-tracking', pages[ currentBanner ].tracking );
+		container.attr( 'data-campaign-tracking', pages[ currentBanner ].campaign_tracking );
+		// set data for jQuery banners
 		container.data( 'tracking', pages[ currentBanner ].tracking );
 		container.data( 'campaign-tracking', pages[ currentBanner ].campaign_tracking );
 	}

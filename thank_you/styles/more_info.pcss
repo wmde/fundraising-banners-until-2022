@@ -1,0 +1,152 @@
+.more-info {
+	color: $color-secondary-contrast;
+	background-color: $color-secondary;
+	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Background-bubbles-expanded.svg' );
+	background-repeat: no-repeat;
+	padding: 14px 0;
+}
+
+.more-info__wrapper {
+	font-size: 16px;
+	line-height: 20px;
+	margin: 11px;
+
+	@media ( min-width: $breakpoint_m ) {
+		text-align: justify;
+		font-size: 18px;
+		line-height: 23px;
+		width: 880px;
+		margin: 0 auto;
+	}
+}
+
+.more-info__intro {
+	font-weight: bold;
+}
+
+.more-info__intro p {
+	margin: 0 0 1em 0;
+}
+
+.more-info p {
+	margin: 0 0 1em 0;
+}
+
+.more-info__list {
+	margin: 0 0 1em 0;
+}
+
+.more-info__list li {
+	list-style-type: none;
+}
+
+.more-info__list li:before {
+	content: '\2022';
+	color: $color-secondary-contrast;
+	display: inline-block;
+	width: 1em;
+}
+
+a.more-info__link,
+a.more-info__link:visited {
+	text-decoration: underline;
+	color: $color-secondary-contrast;
+}
+
+a.more-info__link:hover {
+	text-decoration: none;
+}
+
+.more-info--collapsed {
+	display: none;
+}
+
+.more-info--expanded {
+	display: block;
+}
+
+.image-wrapper {
+	float: right;
+	margin-left: 16px;
+	margin-bottom: 16px;
+	position: relative;
+	padding-right: 8px;
+}
+
+.image-wrapper__image {
+	padding-bottom: 8px;
+}
+
+.image-wrapper__legend {
+	font-size: 12px;
+	line-height: 16px;
+	text-align: center;
+}
+
+.image-wrapper__copyright {
+	transform: rotate( 270deg );
+	transform-origin: 100% 0;
+	font-size: 6px;
+	position: absolute;
+	width: 210px;
+	height: 200px;
+	right: 10px;
+	top: -10px;
+	overflow: hidden;
+}
+
+.image-wrapper__copyright a {
+	color: $color-white;
+}
+
+.image-wrapper__copyright a:hover {
+	text-decoration: underline;
+}
+
+.call-to-action {
+	border-top: dashed 1px $color-primary;
+	border-bottom: dashed 1px $color-primary;
+	padding: 16px 0;
+	margin: 16px 0;
+	@media ( min-width: $breakpoint_m ) {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.call-to-action__item {
+	@media ( min-width: $breakpoint_m ) {
+		width: 50%;
+		flex: 1 1 49%;
+		margin: 0;
+	}
+}
+
+a.call-to-action__button, a.call-to-action__button:visited {
+	display: inline-block;
+	padding: 14px 32px;
+	font-size: 24px;
+	font-weight: bold;
+	background-color: $color-accent;
+	color: $color-accent-contrast;
+	border-radius: 6px;
+	text-decoration: none;
+	margin-bottom: 0.5em;
+	@media ( min-width: $breakpoint_m ) {
+		margin-bottom: 0;
+	}
+}
+
+.call-to-action__button:hover {
+	opacity: 0.75;
+	text-decoration: none;
+	box-shadow: 0 0 16px #000000;
+}
+
+.call-to-action li {
+	margin-left: 1em;
+	list-style-image: url( 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Checkmark-circle.svg' );
+	@media ( min-width: $breakpoint_m ) {
+		margin-left: 0;
+	}
+}
