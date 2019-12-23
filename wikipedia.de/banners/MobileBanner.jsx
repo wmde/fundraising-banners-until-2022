@@ -1,10 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, Fragment, h } from 'preact';
 import classNames from 'classnames';
+import formatNumber from 'format-number';
 
 import { Slider } from '../../mobile/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
 import ProgressBar from '../components/ProgressBar';
+
+const millionFormatter = formatNumber({
+	decimal: ',',
+	round: 1
+});
 
 export default class MobileBanner extends Component {
 	constructor( props ) {
@@ -54,7 +60,7 @@ export default class MobileBanner extends Component {
 									einer Tasse Kaffee würde genügen.</p>
 							</div>
 							<div className="carousel-cell">
-								<p className="goal-headline">Unser Spendenziel: 8,1&nbsp;Millionen&nbsp;Euro</p>
+								<p className="goal-headline">Unser Spendenziel: { millionFormatter( campaignProjection.goalDonationSum / 1000000 ) }&nbsp;Millionen&nbsp;Euro</p>
 								<ProgressBar
 									locale={ props.locale }
 									daysLeft={ campaignProjection.getRemainingDays() }
