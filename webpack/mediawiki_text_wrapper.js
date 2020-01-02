@@ -18,7 +18,7 @@ function MediaWikiTextWrapper( options ) {
 
 MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 	const self = this;
-	compiler.plugin( 'emit', function ( compilation, callback ) {
+	compiler.hooks.emit.tapAsync( 'MediaWikiTextWrapper', function ( compilation, callback ) {
 		const mm = new Minimatch( self.filePattern, { matchBase: true } );
 		const wrappedFiles = {};
 
