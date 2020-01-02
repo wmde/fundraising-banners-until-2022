@@ -92,6 +92,7 @@ tracking = "org-en-ipad-191113-var"
 campaign_tracking = "wpde-03-191213"
 preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
 wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/banner_ctrl.js"
