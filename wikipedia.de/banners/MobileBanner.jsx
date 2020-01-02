@@ -7,10 +7,10 @@ import { Slider } from '../../mobile/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
 import ProgressBar from '../components/ProgressBar';
 
-const millionFormatter = formatNumber({
+const millionFormatter = formatNumber( {
 	decimal: ',',
 	round: 1
-});
+} );
 
 export default class MobileBanner extends Component {
 	constructor( props ) {
