@@ -24,7 +24,7 @@ export default class Banner extends Component {
 		e.preventDefault();
 		this.setState( { bannerVisible: false } );
 		if ( onMediaWiki() ) {
-			mw.centralNotice.hideBanner();
+			mw.centralNotice.customHideBanner( 'close', 1814400 );
 		}
 		this.props.onClose();
 	};
