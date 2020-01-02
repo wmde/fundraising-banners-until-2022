@@ -17,6 +17,7 @@ export default class Banner extends Component {
 			donationSkinId: '1'
 		};
 		this.infoVisibleChanged = false;
+		this.numExpansions = 0;
 	}
 
 	closeBanner = e => {
@@ -58,7 +59,10 @@ export default class Banner extends Component {
 
 	expandBanner = e => {
 		const infoVisible = !this.state.infoVisible;
-		this.props.trackingData.eventTracker.trackBannerEvent( 'mini-banner-expanded', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		if ( this.numExpansions === 0 ) {
+			this.props.trackingData.eventTracker.trackBannerEvent( 'mini-banner-expanded', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		}
+		this.numExpansions++;
 		e.preventDefault();
 		this.setState( { infoVisible } );
 	};
