@@ -121,4 +121,9 @@ export default class EventLoggingTracker {
 		}
 		return false;
 	}
+
+	/**
+	 * This is emulating the MatomoTracker interface and does nothing, because the impressions are recorded with CentralNotice
+	 */
+	recordBannerImpression() {}
 }

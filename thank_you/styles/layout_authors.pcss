@@ -1,0 +1,45 @@
+.wmde-banner {
+	width: 100%;
+	font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
+}
+
+.mediawiki .wmde-banner {
+	position: absolute;
+}
+
+.wmde-banner--hidden {
+	display: none;
+}
+
+.expand-wrapper,
+.secondary-expand-wrapper {
+	text-align: center;
+}
+
+.expand-wrapper--expanded {
+	background-color: $color-secondary;
+}
+
+.secondary-expand-wrapper--collapsed {
+	display: none;
+}
+
+.close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-align: right;
+	padding: 14px 24px;
+}
+
+.close__icon {
+	font-size: 36px;
+	text-decoration: none;
+	color: $color-primary-contrast;
+	z-index: 1001;
+}
+
+.close__icon:hover {
+	text-decoration: none;
+	opacity: 0.75;
+}

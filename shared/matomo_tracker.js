@@ -66,6 +66,19 @@ export default class MatomoTracker {
 		}
 	}
 
+	/**
+	 * Emulate EventTracker interface
+	 * @param {string} actionName
+	 * @param {number} slidesShown
+	 * @param {number} finalSlide
+	 * @param {number} trackingRatio
+	 * @return {boolean} Returns true if client was tracked
+	 */
+	trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio = 0.01 ) {
+		this.trackEvent( actionName, trackingRatio );
+		return true;
+	}
+
 	recordBannerImpression() {
 		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
 	}

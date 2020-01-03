@@ -1,5 +1,8 @@
 import * as DevGlobalBannerSettings from './global_banner_settings';
 
+// TODO make banners smaller by splitting this in a version for wp.de and wp.org,
+//   injecting the right code via webpack
+
 export class HtmlDataCampaignParameters {
 	constructor( element ) {
 		this.element = element;
@@ -20,7 +23,31 @@ export class HtmlDataCampaignParameters {
 			},
 			millionImpressionsPerDay: data.millionImpressionsPerDay,
 			startDate: data.campaignStartDate,
-			endDate: data.campaignEndDate
+			endDate: data.campaignEndDate,
+			numberOfMembers: Number( data.numberOfMembers )
+		};
+	}
+}
+
+export class WindowCampaignParameters {
+	canProvideParameters() {
+		return typeof window.GlobalBannerSettings !== 'undefined';
+	}
+
+	getParameters() {
+		return {
+			donationProjection: {
+				goalDonationSum: window.GlobalBannerSettings.goalDonationSum,
+				baseDate: window.GlobalBannerSettings[ 'donations-date-base' ],
+				baseDonationSum: window.GlobalBannerSettings[ 'donations-collected-base' ],
+				donorsBase: window.GlobalBannerSettings[ 'donators-base' ],
+				donationAmountPerMinute: window.GlobalBannerSettings[ 'appr-donations-per-minute' ],
+				donorsPerMinute: window.GlobalBannerSettings[ 'appr-donators-per-minute' ]
+			},
+			millionImpressionsPerDay: window.GlobalBannerSettings[ 'impressions-per-day-in-million' ],
+			startDate: window.GlobalBannerSettings[ 'campaign-start-date' ],
+			endDate: window.GlobalBannerSettings[ 'campaign-end-date' ],
+			numberOfMembers: window.GlobalBannerSettings.numberOfMembers
 		};
 	}
 }
@@ -44,7 +71,8 @@ export class DevCampaignParameters {
 			},
 			millionImpressionsPerDay: DevGlobalBannerSettings[ 'impressions-per-day-in-million' ],
 			startDate: DevGlobalBannerSettings[ 'campaign-start-date' ],
-			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ]
+			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ],
+			numberOfMembers: DevGlobalBannerSettings.numberOfMembers
 		};
 	}
 }
@@ -52,6 +80,7 @@ export class DevCampaignParameters {
 export function createCampaignParameters( paramSources ) {
 	const paramCandidates = paramSources || [
 		new HtmlDataCampaignParameters( document.getElementById( 'wmde-campaign-parameters' ) ),
+		new WindowCampaignParameters(),
 		new DevCampaignParameters()
 	];
 	while ( paramCandidates.length > 0 ) {

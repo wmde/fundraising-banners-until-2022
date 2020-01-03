@@ -74,7 +74,7 @@ module.exports = {
 				bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
 				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2019}}'
 			},
-			filePattern: 'B*.js',
+			filePattern: '{B,WMDE}*.js',
 			campaignConfig: campaigns.getConfigForPages()
 		} ),
 		new WrapperPlugin( {

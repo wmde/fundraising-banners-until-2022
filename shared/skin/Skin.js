@@ -18,9 +18,15 @@ export default class Skin {
 	}
 
 	/**
-	 * Children must implement this
+	 * Children might implement this
 	 */
 	removeSpace() {
+	}
+
+	/**
+	 * Children might implement this
+	 */
+	moveBannerContainerToTopOfDom() {
 	}
 
 	/**
