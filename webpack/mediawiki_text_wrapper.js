@@ -18,7 +18,7 @@ function MediaWikiTextWrapper( options ) {
 
 MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 	const self = this;
-	compiler.plugin( 'emit', function ( compilation, callback ) {
+	compiler.hooks.emit.tapAsync( 'MediaWikiTextWrapper', function ( compilation, callback ) {
 		const mm = new Minimatch( self.filePattern, { matchBase: true } );
 		const wrappedFiles = {};
 
@@ -28,15 +28,24 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 			}
 
 			let pagename = filename.replace( /\.js$/, '' );
+
+			if ( !self.campaignConfig[ pagename ] ) {
+				throw new Error( 'Unconfigured JavaScript output: ' + filename );
+			}
+
+			if ( self.campaignConfig[ pagename ].wrap_in_wikitext === false ) {
+				continue;
+			}
+
 			let template = self.templates[ pagename ];
-			wrappedFiles[ filename + '.wikitext' ] = template( Object.assign( {
+			wrappedFiles[ filename ] = template( Object.assign( {
 				banner: compilation.assets[ filename ].source(),
 				campaignConfig: self.campaignConfig[ pagename ] || {}
 			}, self.context ) );
 		}
 
 		for ( let filename in wrappedFiles ) {
-			compilation.assets[ filename ] = {
+			compilation.assets[ filename + '.wikitext' ] = {
 				source: function () {
 					return wrappedFiles[ filename ];
 				},
@@ -44,6 +53,7 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 					return wrappedFiles[ filename ].length;
 				}
 			};
+			delete compilation.assets[ filename ];
 		}
 
 		callback();
