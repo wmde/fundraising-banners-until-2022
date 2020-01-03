@@ -57,10 +57,22 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{}
+	{
+		textInnerLeft: progressBarTextInnerLeft,
+		modifier: 'progress_bar--lateprogress'
+	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -117,7 +129,8 @@ function setupValidationEventHandling() {
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	var customAmountForServer = $( '#betrag' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+
+	// using delegated events with empty selector to be markup-independent and still have current value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		customAmountForServer.val( '' );

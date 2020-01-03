@@ -47,7 +47,7 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const bannerTemplate = require( './templates/banner_html.hbs' );
+const bannerTemplate = require( './templates/banner_html_var.hbs' );
 
 const $ = require( 'jquery' );
 require( '../shared/wlightbox.js' );
@@ -56,10 +56,20 @@ const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	( numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ':',
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
-	{}
+	{
+		textInnerLeft: progressBarTextInnerLeft,
+		modifier: 'progress_bar--lateprogress'
+	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
@@ -78,6 +88,7 @@ $bannerContainer.html( bannerTemplate( {
 // BEGIN form init code
 
 const trackingEvents = new EventLoggingTracker( BannerName );
+const $bannerForm = $( '#WMDE_Banner-form' );
 
 function setupValidationEventHandling() {
 	var banner = $( '#WMDE_Banner' );
@@ -111,12 +122,23 @@ function setupValidationEventHandling() {
 		$( '#WMDE_Banner-payment-type' ).parent().addClass( 'select-group-container--with-error' );
 		addSpaceInstantly();
 	} );
+	banner.on( 'validation:addresstype:ok', function () {
+		$( '#WMDE_Banner-addressType-error-text' ).hide();
+		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
+	banner.on( 'validation:addresstype:error', function ( evt, text ) {
+		$( '#WMDE_Banner-addressType-error-text' ).text( text ).show();
+		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-error' );
+		addSpaceInstantly();
+	} );
 }
 
 function setupAmountEventHandling() {
 	var banner = $( '#WMDE_Banner' );
 	var customAmountForServer = $( '#betrag' );
-	// using delegated events with empty selector to be markup-independent and still have corrent value for event.target
+
+	// using delegated events with empty selector to be markup-independent and still have current value for event.target
 	banner.on( 'amount:selected', null, function () {
 		$( '#amount-other-input' ).val( '' );
 		customAmountForServer.val( '' );
@@ -136,7 +158,36 @@ function setupAmountEventHandling() {
 
 	banner.on( 'paymenttype:selected', null, function () {
 		$( '#WMDE_Banner' ).trigger( 'validation:paymenttype:ok' );
+
+		BannerFunctions.hideAddressTypeInfo();
+		$( '#address-no' ).prop( 'disabled', false );
+		BannerFunctions.hideAddressTypeInfo();
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+
+			$( '#address-no' ).prop( 'disabled', true );
+			$( '#address-yes' ).prop( 'checked', true ).trigger( 'change' );
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+		}
+		if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
+		}
 	} );
+}
+
+function setupAddressTypeEventHandling() {
+	var banner = $( '#WMDE_Banner' );
+	banner.on( 'addresstype:info:show', function ( evt, text ) {
+		$( '#WMDE_Banner-addressType-info-text' ).text( text ).show();
+		$( '#WMDE_Banner-addressType' ).parent().addClass( 'select-group-container--with-info' );
+		addSpaceInstantly();
+	} );
+
+	banner.on( 'addresstype:info:hide', function () {
+		$( '#WMDE_Banner-addressType-info-text' ).hide();
+		$( '#WMDE_Banner-addressType' ).parent().removeClass( 'select-group-container--with-info' );
+		addSpaceInstantly();
+	} );
+
 }
 
 function validateAndSetPeriod() {
@@ -154,10 +205,22 @@ function validateAndSetPeriod() {
 function validateForm() {
 	return validateAndSetPeriod() &&
 		BannerFunctions.validateAmount( BannerFunctions.getAmount() ) &&
-		BannerFunctions.validatePaymentType();
+		BannerFunctions.validatePaymentType() &&
+		BannerFunctions.validateAddressType();
+}
+
+function adjustFormAction() {
+	let bannerAction = $bannerForm.data( 'main-action' );
+	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+		const serverAmount = $( '#betrag' );
+		$( '#betrag' ).val( amountForServerFormatter( parseAmount( serverAmount.val() ), 'add' ) );
+		bannerAction = $bannerForm.data( 'fallback-action' );
+	}
+	$bannerForm.attr( 'action', bannerAction );
 }
 
 $( '.WMDE-Banner-submit button' ).click( function () {
+	adjustFormAction();
 	return validateForm();
 } );
 
@@ -176,6 +239,20 @@ $( '#WMDE_Banner-frequency label' ).on( 'click', function () {
 
 $( '#WMDE_Banner-payment-type label' ).on( 'click', function () {
 	$( this ).trigger( 'paymenttype:selected' );
+} );
+
+$( "input[name='addressType']" ).change( function () {
+	BannerFunctions.hideAddressTypeError();
+	if ( $( "input[name='addressType']:checked" ).val() === 'anonym' ) {
+
+		BannerFunctions.showAddressTypeInfo( Translations[ 'address-type-info-message' ] );
+	} else if ( $( "input[name='addressType']:checked" ).val() === 'person' ) {
+		BannerFunctions.hideAddressTypeInfo();
+
+		if ( $( 'input[name=zahlweise]:checked' ).val() === 'BEZ' ) {
+			BannerFunctions.showAddressTypeInfo( Translations[ 'anonymous-BEZ-info-message' ] );
+		}
+	}
 } );
 
 BannerFunctions.initializeBannerEvents();
@@ -209,6 +286,7 @@ function displayBanner() {
 
 	setupValidationEventHandling();
 	setupAmountEventHandling();
+	setupAddressTypeEventHandling();
 
 	bannerHeight = bannerElement.height();
 	bannerElement.css( 'top', -bannerHeight );
