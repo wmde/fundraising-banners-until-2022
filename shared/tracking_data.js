@@ -1,6 +1,6 @@
-import EventLoggingTracker from '../../shared/event_logging_tracker';
-import MatomoTracker from '../../shared/matomo_tracker';
-import { onMediaWiki } from '../../shared/mediawiki_checks';
+import EventLoggingTracker from './event_logging_tracker';
+import MatomoTracker from './matomo_tracker';
+import { onMediaWiki } from './mediawiki_checks';
 
 function getTracker( bannerName ) {
 	if ( onMediaWiki() ) {

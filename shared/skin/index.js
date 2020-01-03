@@ -7,7 +7,7 @@ import { onMediaWiki } from '../mediawiki_checks';
 export { Minerva, Monobook, Vector };
 export { default as Wpde } from './wpde';
 
-export function getSkin() {
+export function getSkinAdjuster() {
 	if ( !onMediaWiki() ) {
 		return new Skin();
 	}

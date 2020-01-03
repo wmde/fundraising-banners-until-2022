@@ -39,4 +39,8 @@ export default class Skin {
 	getName() {
 		return this.constructor.name.toLowerCase();
 	}
+
+	getSizeIssueThreshold() {
+		return 0;
+	}
 }
