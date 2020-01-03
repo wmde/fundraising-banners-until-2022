@@ -57,13 +57,22 @@ const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1.2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ]
+].join( ' ' );
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
-		decimalSeparator: '.'
+		textInnerLeft: progressBarTextInnerLeft,
+		decimalSeparator: '.',
+		modifier: 'progress_bar--lateprogress'
 	}
 );
 const bannerDisplayTimeout = new InterruptibleTimeout();
