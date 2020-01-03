@@ -31,11 +31,11 @@ export default class SizeIssueIndicator {
 
 	/**
 	 * Check if Banner takes too much screen space and track the incident
-	 * @param {jQuery} $bannerElement
+	 * @param {HTMLElement} bannerElement
 	 * @return {boolean} whether or not the remaining viewport height is below the threshold
 	 */
-	hasSizeIssues( $bannerElement ) {
-		return ( $( window ).height() - $bannerElement.height() ) < this.thresholdInPixels;
+	hasSizeIssues( bannerElement ) {
+		return ( $( window ).height() - $( bannerElement ).height() ) < this.thresholdInPixels;
 	}
 
 }

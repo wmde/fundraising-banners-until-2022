@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import style from './styles/styles_var.pcss';
 
-import { donorFormatter, millionFormatter } from './src/formatters';
+import { donorFormatter, millionFormatter } from '../shared/formatters';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { showBanner } from './src/show_banner';
-import { getTrackingData } from './src/tracking_data';
-import { getSkin } from '../shared/skin';
+import { getTrackingData } from '../shared/tracking_data';
+import { getSkinAdjuster } from '../shared/skin';
 
-import { getTrackingIds } from './src/tracking_ids';
+import { getTrackingIds } from '../shared/tracking_ids';
 import Banner from './banners/Banner';
 import MembershipMoreInfo from './components/MembershipMoreInfo';
 
@@ -27,6 +27,6 @@ showBanner(
 		trackingData: getTrackingData( trackingIds.bannerName ),
 		expandText: 'Lesen Sie unsere Dankesbotschaft',
 		moreInfo: MembershipMoreInfo,
-		skinFunctions: getSkin()
+		skinFunctions: getSkinAdjuster()
 	}
 );

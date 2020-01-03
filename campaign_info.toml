@@ -2,107 +2,154 @@
 # Example: "B18WMDE_"
 # See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
 
-# TODO: When thank you campaign is over, restore channel + language setup for regular banners from Git history
+# A Campaign with global settings
+[desktop]
+campaign_tracking = "21-ba-191221"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop.banners.ctrl]
+filename = "./desktop/banner_ctrl.js"
+pagename = "B19WMDE_21_191221_ctrl"
+tracking = "org-21-191221-ctrl"
+
+[desktop.banners.var]
+filename = "./desktop/banner_var.js"
+pagename = "B19WMDE_21_191221_var"
+tracking = "org-21-191221-var"
+
+# A Campaign with global settings
+[desktop_preact]
+campaign_tracking = "21-ba-191221"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_preact.banners.ctrl]
+filename = "./desktop_preact/banner_ctrl.js"
+pagename = "B19WMDE_preact_21_191221_ctrl"
+tracking = "org-21-191221-ctrl"
+
+[desktop_preact.banners.var]
+filename = "./desktop_preact/banner_var.js"
+pagename = "B19WMDE_preact_21_191221_var"
+tracking = "org-21-191221-var"
+
+# Mobile Campaign
+[mobile]
+campaign_tracking = "mob05-ba-191216"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[mobile.banners.ctrl]
+filename = "./mobile/banner_ctrl.js"
+pagename = "B19WMDE_mob05_191216_ctrl"
+tracking = "org-mob05-191216-ctrl"
+
+[mobile.banners.var]
+filename = "./mobile/banner_var.js"
+pagename = "B19WMDE_mob05_191216_var"
+tracking = "org-mob05-191216-var"
+
+
+# Mobile English Campaign
+[mobile_english]
+campaign_tracking = "mob_en02-ba-191206"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[mobile_english.banners.ctrl]
+filename = "./mobile_english/banner_ctrl.js"
+pagename = "B19WMDE_mob_en02_191206_ctrl"
+tracking = "org-mob_en02-191206-ctrl"
+
+[mobile_english.banners.var]
+filename = "./mobile_english/banner_var.js"
+pagename = "B19WMDE_mob_en02_191206_var"
+tracking = "org-mob_en02-191206-var"
+
+
+# iPad campaign
+[pad]
+campaign_tracking = "pad02-ba-191126"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[pad.banners.ctrl]
+filename = "./pad/banner_ctrl.js"
+pagename = "B18WMDE_pad_02_191126_ctrl"
+tracking = "org-pad02-191126-ctrl"
+
+[pad.banners.pad]
+filename = "./pad/banner_var.js"
+pagename = "B18WMDE_pad_02_191126_var"
+tracking = "org-pad02-191126-var"
+
+
+# iPad English campaign
+[pad_en]
+campaign_tracking = "en-ipad-191113"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[pad_en.banners.ctrl]
+filename = "./pad_english/banner_ctrl.js"
+pagename = "B19WMDE_ipad_en_01_ctrl"
+tracking = "org-en-ipad-191113-ctrl"
+
+[pad_en.banners.var]
+filename = "./pad_english/banner_var.js"
+pagename = "B19WMDE_ipad_en_01_var"
+tracking = "org-en-ipad-191113-var"
+
+
+# Wikipedia.de Campaign
+[wikipediade]
+campaign_tracking = "wpde-03-191213"
+preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[wikipediade.banners.ctrl]
+filename = "./wikipedia.de/banner_ctrl.js"
+pagename = "B19WPDE_03-191213_ctrl"
+tracking = "wpde-03-191213-ctrl"
+
+[wikipediade.banners.var]
+filename = "./wikipedia.de/banner_var.js"
+pagename = "B19WPDE_03-191213_var"
+tracking = "wpde-03-191213-var"
+
+
+# English Campaign
+[english]
+campaign_tracking = "en03-ba-191211"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[english.banners.ctrl]
+filename = "./english/banner_ctrl.js"
+pagename = "B19WMDE_en03_2_191211_ctrl"
+tracking = "org-en03-2-191211-ctrl"
+
+[english.banners.var]
+filename = "./english/banner_var.js"
+pagename = "B19WMDE_en03_2_191211_var"
+tracking = "org-en03-2-191211-var"
 
 # Thank You Campaign
 [thank_you]
-campaign_tracking = "ty01-ba-200101"
+campaign_tracking = "ty01-ba-190101"
 preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
 [thank_you.banners.ctrl]
 filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WMDE_ty01_200101_ctrl"
-tracking = "org-ty-200101-ctrl"
+pagename = "B18WMDE_ty01_190101_ctrl"
+tracking = "org-ty01-190101-ctrl"
 
 [thank_you.banners.var]
 filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_ty01_200101_var"
-tracking = "org-ty-200101-var"
-
-[thank_you.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_dskt_ctrl"
-tracking = "WMDE_2019_2020_thx_dskt_ctrl"
-
-[thank_you.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_dskt_var"
-tracking = "WMDE_2019_2020_thx_dskt_var"
-
-# Thank you campaign mobile wp.org
-[thank_you_mobile]
-campaign_tracking = "ty01-mob-ba-200101"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[thank_you_mobile.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WMDE_mob_ty01_200101_ctrl"
-tracking = "org-mob-ty-200101-ctrl"
-
-[thank_you_mobile.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_mob_ty01_200101_var"
-tracking = "org-mob-ty-200101-var"
-
-[thank_you_mobile.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_mob_ctrl"
-tracking = "WMDE_2019_2020_thx_mob_ctrl"
-
-[thank_you_mobile.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_mob_var"
-tracking = "WMDE_2019_2020_thx_mob_var"
-
-[thank_you_ipad]
-campaign_tracking = "ty01-ipad-ba-200101"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
-wrapper_template = "wikipedia_org"
-
-[thank_you_ipad.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WMDE_ipad_ty01_200101_ctrl"
-tracking = "org-ipad-ty-200101-ctrl"
-
-[thank_you_ipad.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WMDE_ipad_ty01_200101_var"
-tracking = "org-ipad-ty-200101-var"
-
-[thank_you_ipad.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "WMDE_2019_2020_thx_ipad_ctrl"
-tracking = "WMDE_2019_2020_thx_ipad_ctrl"
-
-[thank_you_ipad.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "WMDE_2019_2020_thx_ipad_var"
-tracking = "WMDE_2019_2020_thx_ipad_var"
-
-# Thank you campaign wp.de
-[thank_you_wpde]
-campaign_tracking = "ty01-wpde-ba-200101"
-preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
-wrapper_template = "wikipedia_de"
-
-[thank_you_wpde.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B19WPDE_ty01_200101_ctrl"
-tracking = "org-wpde-ty-200101-ctrl"
-
-[thank_you_wpde.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B19WPDE_ty01_200101_var"
-tracking = "org-wpde-ty-200101-var"
-
-[thank_you_wpde.banners.authors_ctrl]
-filename = "./thank_you/banner_authors_ctrl.js"
-pagename = "B19WPDE_ty01_200101_authors_ctrl"
-tracking = "WPDE_2019_2020_thx_dskt_ctrl"
-
-[thank_you_wpde.banners.authors_var]
-filename = "./thank_you/banner_authors_var.js"
-pagename = "B19WPDE_ty01_200101_authors_var"
-tracking = "WPDE_2019_2020_thx_dskt_var"
+pagename = "B18WMDE_ty01_190101_var"
+tracking = "org-ty01-190101-var"

@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import style from './styles/styles_authors.pcss';
 
-import { donorFormatter, millionFormatter } from './src/formatters';
+import { donorFormatter, millionFormatter } from '../shared/formatters';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { showBanner } from './src/show_banner';
-import { getTrackingData } from './src/tracking_data';
-import { getTrackingIds } from './src/tracking_ids';
-import { getSkin } from '../shared/skin';
+import { getTrackingData } from '../shared/tracking_data';
+import { getTrackingIds } from '../shared/tracking_ids';
+import { getSkinAdjuster } from '../shared/skin';
 
 import Banner from './banners/Banner';
 import AuthorsMoreInfo from './components/AuthorsMoreInfo';
@@ -27,6 +27,6 @@ showBanner(
 		expandText: 'Dankestext lesen',
 		showSteps: true,
 		moreInfo: AuthorsMoreInfo,
-		skinFunctions: getSkin()
+		skinFunctions: getSkinAdjuster()
 	}
 );

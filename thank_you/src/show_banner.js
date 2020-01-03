@@ -1,5 +1,5 @@
 import { mediaWikiIsShowingContentPage, onMediaWiki } from '../../shared/mediawiki_checks';
-import { getSkin } from '../../shared/skin';
+import { getSkinAdjuster } from '../../shared/skin';
 import { createElement, render } from 'preact';
 
 function createResizeHandler( bannerContainer, skinFunctions ) {
@@ -14,7 +14,7 @@ export function showBanner( Banner, bannerContainer, props ) {
 		return;
 	}
 
-	const skinFunctions = getSkin();
+	const skinFunctions = getSkinAdjuster();
 	const resizeHandler = createResizeHandler( bannerContainer, skinFunctions );
 	skinFunctions.moveBannerContainerToTopOfDom();
 
