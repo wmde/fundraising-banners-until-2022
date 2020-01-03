@@ -13,6 +13,7 @@ import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_func
 import { CampaignProjection } from '../shared/campaign_projection';
 import { amountForServerFormatter, amountInputFormatter, donorFormatter } from '../shared/number_formatter/en';
 import { parseAmount } from '../shared/parse_amount';
+import animateHighlight from '../shared/animate_highlight';
 
 require( './css/styles.pcss' );
 require( './css/styles_mini.pcss' );
@@ -54,18 +55,25 @@ const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 
-const animateHighlight = require( '../shared/animate_highlight' );
-
 const $bannerContainer = $( '#WMDE-Banner-Container' );
 const CampaignName = $bannerContainer.data( 'campaign-tracking' );
 const BannerName = $bannerContainer.data( 'tracking' );
 const progressBarTextRight = 'Still missing: € <span class="js-value_remaining">1,2</span>M';
 const progressBarTextInnerRight = '€ <span class="js-donation_value">1.2</span>M';
 
+const numberOfDaysUntilCampaignEnd = campaignDays.getNumberOfDaysUntilCampaignEnd();
+const progressBarTextInnerLeft = [
+	Translations[ 'prefix-days-left' ],
+	numberOfDaysUntilCampaignEnd,
+	numberOfDaysUntilCampaignEnd > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ],
+	Translations[ 'suffix-days-left' ] + '.'
+].join( ' ' );
+
 const progressBar = new ProgressBar(
 	{ goalDonationSum: CampaignParameters.donationProjection.goalDonationSum },
 	campaignProjection,
 	{
+		textInnerLeft: progressBarTextInnerLeft,
 		textRight: progressBarTextRight,
 		textInnerRight: progressBarTextInnerRight,
 		decimalSeparator: '.'
