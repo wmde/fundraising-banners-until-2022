@@ -1,9 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
-import { onMediaWiki } from '../shared/mediawiki_checks';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
+import Infobox from '../shared/components/ui/Infobox';
+import ProgressBar from '../shared/components/ui/ProgressBar';
+import DonationForm from '../shared/components/ui/DonationForm';
+import Footer from '../shared/components/ui/Footer';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -49,9 +52,13 @@ export default class Banner extends Component {
 		this.slideInBanner = cb;
 	}
 
+	registerStartProgressbar = ( startPb ) => {
+		this.startProgressbar = startPb;
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-
+		const campaignProjection = props.campaignProjection;
 		return <div
 			className={classNames(
 				'wmde-banner',
@@ -60,10 +67,28 @@ export default class Banner extends Component {
 			)}
 			ref={this.ref}>
 			<BannerTransition registerDisplayBanner={ this.registerBannerTransition } >
-				<div className="banner-wrapper">
-					banner
-					<button onClick={this.closeBanner}>close</button>
+				<div className="banner__content">
+					<div className="infobox">
+						<Infobox
+							amountBannerImpressionsInMillion={props.amountBannerImpressionsInMillion}
+							numberOfDonors={props.numberOfDonors}
+							campaignDaySentence={props.campaignDaySentence}
+							weekdayPrepPhrase={props.weekdayPrepPhrase}
+							currentDayName={props.currentDayName}/>
+						<ProgressBar
+							locale={props.locale}
+							daysLeft={campaignProjection.getRemainingDays()}
+							donationAmount={campaignProjection.getProjectedDonationSum()}
+							goalDonationSum={campaignProjection.goalDonationSum}
+							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+							setStartAnimation={this.registerStartProgressbar}/>
+					</div>
+					<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
 				</div>
+				<div className="close">
+					<button className="close__link" onClick={props.closeBanner}>&#x2715;</button>
+				</div>
+				<Footer setToggleFundsModal={this.setToggleFundsModal}/>
 			</BannerTransition>
 		</div>;
 	}
