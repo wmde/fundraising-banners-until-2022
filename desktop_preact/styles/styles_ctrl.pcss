@@ -1,31 +1,11 @@
-:root {
-	--banner-color-gray: #808080;
-	--banner-color-gray-medium: #747474;
-	--banner-color-white: #ffffff;
-	--banner-color-black: #000000;
-	--banner-color-green: #849d0e;
-	--banner-color-green-hover: #97b313;
-	--banner-color-green-light: #dbe5e7;
-	--banner-color-blue: #0166a5;
-	--banner-color-blue-light: #dce4e8;
-	--banner-color-yellow: #ffdd5b;
-	--banner-color-red: #990000;
+@import 'variables_ctrl.pcss';
 
-	--banner-main-font-family: 'Arial', 'Helvetica', 'Verdana', sans-serif;
-	--banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
-}
+@import '../../shared/components/ui/DonationForm.pcss';
+@import '../../shared/components/ui/Footer.pcss';
+@import '../../shared/components/ui/Infobox.pcss';
+@import '../../shared/components/ui/ProgressBar.pcss';
+@import '../../shared/components/ui/FundsModal.pcss';
 
-$errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
-
-/**
- * Develop mobile-first
- * Never use "@media ( max-width: $breakpoint_x )"
- * Always use "@media ( min-width: $breakpoint_x )"
- */
-$breakpoint_s: 1024px;
-$breakpoint_m: 1090px;
-$breakpoint_l: 1300px;
-$breakpoint_xl: 1580px;
 
 .wmde-banner {
 	visibility: hidden;
@@ -39,12 +19,3 @@ $breakpoint_xl: 1580px;
 	}
 }
 
-.banner-wrapper {
-	background: blue;
-	height: 350px;
-}
-
-.banner-position {
-	position: absolute;
-	width: 100%;
-}

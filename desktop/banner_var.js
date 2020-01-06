@@ -12,11 +12,11 @@ import { CampaignProjection } from '../shared/campaign_projection';
 import { parseAmount } from '../shared/parse_amount';
 import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
 import { render, createElement } from 'preact';
-import FundsModal from '../shared/components/FundsModal';
+import FundsModal from '../shared/components/ui/FundsModal';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 
 require( './css/styles.pcss' );
-require( '../shared/components/FundsModal.pcss' );
+require( '../shared/components/ui/FundsModal.pcss' );
 
 // BEGIN Banner-Specific configuration
 const bannerCloseTrackRatio = 0.01;

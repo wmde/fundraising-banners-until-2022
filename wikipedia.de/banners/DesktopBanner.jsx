@@ -6,7 +6,7 @@ import DonationForm from '../components/DonationForm';
 import Footer from '../components/Footer';
 import Infobox from '../components/Infobox';
 import ProgressBar from '../components/ProgressBar';
-import FundsModal from '../../shared/components/FundsModal';
+import FundsModal from '../../shared/components/ui/FundsModal';
 
 export default class DesktopBanner extends Component {
 
