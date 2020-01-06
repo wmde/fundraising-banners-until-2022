@@ -3,6 +3,7 @@ import { Component, h, createRef } from 'preact';
 import { onMediaWiki } from '../shared/mediawiki_checks';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import BannerTransition from '../shared/components/BannerTransition';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -12,7 +13,9 @@ export default class Banner extends Component {
 
 	static propTypes = {
 		/** callback when banner closes */
-		onClose: PropTypes.func
+		onClose: PropTypes.func,
+		/** */
+		registerDisplayBanner: PropTypes.func.isRequired
 	}
 
 	ref = createRef();
@@ -20,12 +23,19 @@ export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			displayState: PENDING
+			displayState: PENDING,
+			bannerTop: -350
 		};
+		this.slideInBanner = () => {};
 	}
 
 	componentDidMount() {
-		setTimeout(() => this.setState( { displayState: VISIBLE } ), 500 );
+		this.props.registerDisplayBanner(
+			() => {
+				this.setState( { displayState: VISIBLE } );
+				this.slideInBanner();
+			}
+		);
 	}
 
 	closeBanner = e => {
@@ -34,6 +44,10 @@ export default class Banner extends Component {
 		this.setState( { displayState: CLOSED } );
 		this.props.onClose();
 	};
+
+	registerBannerTransition = ( cb ) => {
+		this.slideInBanner = cb;
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -45,10 +59,12 @@ export default class Banner extends Component {
 				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
 			)}
 			ref={this.ref}>
-			<div className="banner-wrapper">
-				banner
-				<button onClick={this.closeBanner}>close</button>
-			</div>
+			<BannerTransition registerDisplayBanner={ this.registerBannerTransition } >
+				<div className="banner-wrapper">
+					banner
+					<button onClick={this.closeBanner}>close</button>
+				</div>
+			</BannerTransition>
 		</div>;
 	}
 

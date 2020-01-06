@@ -10,16 +10,15 @@ export default class Minerva extends Skin {
 	}
 
 	addSpace( bannerHeight ) {
-		this.viewport.animate( { top: bannerHeight }, 1000 );
+		this.viewport.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
 	}
 
 	addSpaceInstantly( bannerHeight ) {
-		this.viewport.css( { top: bannerHeight } );
+		this.viewport.css( { top: bannerHeight, transition: 'unset' } );
 	}
 
 	removeSpace() {
-		this.viewport.css( { top: 0, marginTop: 0 } );
-		$( '#mw-mf-page-center, #mw-mf-page-left' ).css( 'top', 0 );
+		this.viewport.css( { top: 0, marginTop: 0, transition: 'unset' } );
 	}
 
 	addSearchObserver( onSearchFocus ) {
@@ -28,6 +27,10 @@ export default class Minerva extends Skin {
 		} else {
 			this.searchField.one( 'focus', onSearchFocus );
 		}
+	}
+
+	addEditorObserver( onEdit ) {
+		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
 	}
 
 	moveBannerContainerToTopOfDom() {

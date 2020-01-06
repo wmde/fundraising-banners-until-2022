@@ -1,28 +1,21 @@
-//soll entweder banner anzeigen
-// oder sagen nein zu klein, issue (+tracking)
-
-//dependencies:
-// sizeIssueIndicator
-//trackingevents soll injected werden
-
-//sizeIssueThreshold sollte global irgendwo festgelegt und importiert werden
-
 import SizeIssueIndicator from './track_size_issues';
 import { getSkinAdjuster } from './skin';
 import { mediaWikiIsShowingContentPage, onMediaWiki } from './mediawiki_checks';
 import { createElement, render } from 'preact';
+import InterruptibleTimeout from './interruptible_timeout';
 
 function createResizeHandler( bannerContainer, skinAdjuster ) {
 	return function () {
-		const banner = bannerContainer.getElementsByClassName( 'wmde-banner' ).item( 0 );
+		const banner = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
 		skinAdjuster.addSpaceInstantly( banner.offsetHeight );
 	};
 }
 
 export default class BannerPresenter {
-	constructor( trackingEvents, sizeTrackRatio ) {
+	constructor( trackingEvents, sizeTrackRatio, appearanceDelay ) {
 		this.trackingEvents = trackingEvents;
 		this.sizeTrackRatio = sizeTrackRatio;
+		this.appearanceDelay = appearanceDelay;
 	}
 
 	present( Banner, bannerContainer, props ) {
@@ -37,19 +30,25 @@ export default class BannerPresenter {
 		}
 
 		const resizeHandler = createResizeHandler( bannerContainer, skinAdjuster );
-
+		let displayBanner;
 		render(
 			createElement( Banner, {
 				...props,
 				onClose: () => {
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
+					if ( onMediaWiki() ) {
+						mw.centralNotice.hideBanner();
+					}
+				},
+				registerDisplayBanner: ( cb ) => {
+					displayBanner = cb;
 				}
 			} ),
 			bannerContainer
 		);
 
-		const bannerElement = bannerContainer.getElementsByClassName( 'wmde-banner' ).item( 0 );
+		const bannerElement = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
 
 		this.trackingEvents.trackViewPortDimensions(
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
@@ -64,42 +63,34 @@ export default class BannerPresenter {
 				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 				this.sizeTrackRatio
 			);
+			return;
 		}
+		const bannerDisplayTimeout = new InterruptibleTimeout();
+		bannerDisplayTimeout.run(
+			() => {
+				skinAdjuster.addSpace( bannerElement.offsetHeight );
+				displayBanner();
+			},
+			this.appearanceDelay
+		);
 
 		window.addEventListener( 'resize', resizeHandler );
-		resizeHandler(); // call resize handler to trigger adding space
 
-		// TODO cancel display callback
-		/*
+		// cancel the banner when the search bar was entered
 		skinAdjuster.addSearchObserver( function () {
 			bannerDisplayTimeout.cancel();
+			if ( onMediaWiki() ) {
+				mw.centralNotice.setBannerLoadedButHidden();
+			}
 		} );
-		*/
 
-		// TODO muss in eventhandler von close component
-		/*
-		// BEGIN Banner close functions
-		// NOTE: These functions need to stay at the end for the correct order of click events
-
-		$( '#WMDE_Banner .close__link' ).click( function() {
-			$( '#WMDE_Banner' ).hide();
+		// hide banner when the visual editor is initialized
+		skinAdjuster.addEditorObserver( function () {
 			if ( onMediaWiki() ) {
 				mw.centralNotice.hideBanner();
 			}
 			skinAdjuster.removeSpace();
-
-			return false;
 		} );
-		*/
-
-		// TODO cancel display callback
-		/*
-		// hide banner when the visual editor is initialized
-		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( function() {
-			$( '#WMDE_Banner' ).hide();
-			skinAdjuster.removeSpace();
-		} );
-		*/
 	}
 
 }

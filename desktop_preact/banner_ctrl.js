@@ -2,7 +2,6 @@
 import style from './styles/styles_ctrl.pcss';
 
 import { donorFormatter, millionFormatter } from '../shared/formatters';
-console.log("import starts here");
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { getTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
@@ -30,6 +29,7 @@ bannerPresenter.present(
 		goalDonationSum: millionFormatter( CampaignParameters.donationProjection.goalDonationSum / 1000000 ),
 		trackingData: getTrackingData( trackingIds.bannerName ),
 		expandText: 'Dankestext lesen',
-		skinFunctions: getSkinAdjuster()
+		skinFunctions: getSkinAdjuster(),
+		appearanceDelay: bannerContainer.dataset.delay || 7500
 	}
 );

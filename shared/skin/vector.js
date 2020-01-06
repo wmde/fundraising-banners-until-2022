@@ -12,25 +12,29 @@ export default class Vector extends Skin {
 	}
 
 	addSpace( bannerHeight ) {
-		this.panel.animate( { top: bannerHeight }, 1000 );
-		this.head.animate( { top: bannerHeight }, 1000 );
-		this.pageBase.animate( { 'padding-top': bannerHeight }, 1000 );
+		this.panel.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
+		this.head.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
+		this.pageBase.css( { paddingTop: bannerHeight, transition: 'padding-top 1s ease-in-out' } );
 	}
 
 	addSpaceInstantly( bannerHeight ) {
-		this.panel.css( { top: bannerHeight } );
-		this.head.css( { top: bannerHeight } );
-		this.pageBase.css( { paddingTop: bannerHeight } );
+		this.panel.css( { top: bannerHeight, transition: 'unset' } );
+		this.head.css( { top: bannerHeight, transition: 'unset' } );
+		this.pageBase.css( { paddingTop: bannerHeight, transition: 'unset' } );
 	}
 
 	removeSpace() {
-		this.panel.css( 'top', 0 );
-		this.head.css( 'top', 0 );
-		this.pageBase.css( 'padding-top', 0 );
+		this.panel.css( { top: 0, transition: 'unset' } );
+		this.head.css( { top: 0, transition: 'unset' } );
+		this.pageBase.css( { paddingTop: 0, transition: 'unset' } );
 	}
 
 	addSearchObserver( onSearchFocus ) {
 		this.searchField.one( 'focus', onSearchFocus );
+	}
+
+	addEditorObserver( onEdit ) {
+		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
 	}
 
 	moveBannerContainerToTopOfDom() {

@@ -1,5 +1,7 @@
 'use strict';
 
+import $ from 'jquery';
+
 export default class Skin {
 	/**
 	 * Children must implement this
@@ -34,6 +36,13 @@ export default class Skin {
 	 * @param {Function} onSearchFocus
 	 */
 	addSearchObserver( onSearchFocus ) { // eslint-disable-line no-unused-vars
+	}
+
+	/**
+	 * close banner when editor is activated
+	 * @param {Function} onEdit
+	 */
+	addEditorObserver( onEdit ) { // eslint-disable-line no-unused-vars
 	}
 
 	getName() {
