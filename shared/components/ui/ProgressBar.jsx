@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import { Component, h } from 'preact';
+import { Component } from 'preact/compat';
+import { h } from 'preact';
 import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
 import formatNumber from 'format-number';
@@ -74,6 +75,7 @@ export default class ProgressBar extends Component {
 	// eslint-disable-next-line no-unused-vars
 	progressAnimationEnded = ( e ) => {
 		this.setState( { animation: ENDED } );
+
 	};
 
 	startAnimation() {

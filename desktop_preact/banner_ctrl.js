@@ -5,7 +5,6 @@ import { donorFormatter, millionFormatter } from '../shared/formatters';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { getTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
-import { getSkinAdjuster } from '../shared/skin';
 
 import Banner from './Banner';
 import EventLoggingTracker from '../shared/event_logging_tracker';
@@ -21,10 +20,9 @@ const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingEvents = new EventLoggingTracker( trackingIds.bannerName );
-const bannerPresenter = new BannerPresenter( trackingEvents, 1 );
+const bannerPresenter = new BannerPresenter( trackingEvents, 1, bannerContainer.dataset.delay || 7500 );
 
-
-const LOCALE = 'de';
+const locale = 'de';
 const dayName = new DayName( new Date() );
 const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
@@ -32,7 +30,7 @@ const campaignDays = new CampaignDays(
 	startOfDay( campaignParameters.startDate ),
 	endOfDay( campaignParameters.endDate )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LOCALE );
+const campaignDaySentence = new CampaignDaySentence( campaignDays, locale );
 
 const campaignProjection = new CampaignProjection(
 	new CampaignDays(
@@ -48,25 +46,25 @@ const campaignProjection = new CampaignProjection(
 	}
 );
 
-
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
 	{
 		//TODO maybe remove some unused props
 		...trackingIds,
+		campaignParameters,
+
+		//TODO eine zentrale property fuer formatters
+
 		numberOfDonors: donorFormatter( campaignParameters.donationProjection.donorsBase ),
 		numberOfMembers: donorFormatter( campaignParameters.numberOfMembers ),
 		goalDonationSum: millionFormatter( campaignParameters.donationProjection.goalDonationSum / 1000000 ),
 		trackingData: getTrackingData( trackingIds.bannerName ),
-		expandText: 'Dankestext lesen',
-		skinFunctions: getSkinAdjuster(),
-		appearanceDelay: bannerContainer.dataset.delay || 7500,
 		campaignProjection,
 		campaignDays,
 		campaignDaySentence,
 		weekdayPrepPhrase,
-		currentDayName
+		currentDayName,
+		locale
 	}
 );
