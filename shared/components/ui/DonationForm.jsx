@@ -82,7 +82,7 @@ export default class DonationForm extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const intervals = [
-			{ value: '0', label: 'einmalig', width: 'fullwidth' },
+			{ value: '0', label: 'einmalig' },
 			{ value: '1', label: 'monatlich' },
 			{ value: '3', label: 'vierteljährlich' },
 			{ value: '6', label: 'halbjährlich' },
@@ -109,23 +109,27 @@ export default class DonationForm extends Component {
 				<div className="form-field-group">
 					<div
 						className={ 'select-group-container' + ( state.paymentIntervalIsValid ? '' : ' select-group-container--with-error' ) }>
-						<div id="WMDE_Banner-frequency" className="WMDE-Banner-frequency select-group">
-							{intervals.map( ( { value, label, width } ) => (
-								<label className={ 'select-group__option select-group__option--' + ( width || 'halfwidth' ) } key={value}>
+						<div className="interval-section select-group">
+							{intervals.map( ( { value, label } ) => (
+								<label className={ 'select-group__option' } key={value}>
 									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
 										name="periode" value={value} className="select-group__input"/>
 									<span className="select-group__state">{label}</span>
 								</label> ) )
 							}
 						</div>
-						<span className="select-group__errormessage">Bitte wählen Sie zuerst ein Zahlungsintervall.</span>
+						<span className="select-group__errormessage">
+							<span className="select-group__erroricon">
+								Bitte wählen Sie zuerst ein Zahlungsintervall.
+							</span>
+						</span>
 					</div>
 				</div>
 
 				<div className={ 'form-field-group select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
-					<div id="WMDE_Banner-amounts" className="WMDE-Banner-amounts select-group">
+					<div className="amount-section select-group">
 						{amounts.map( ( { value } ) => (
-							<label className="select-group__option select-group__option--quarterwidth" key={value}>
+							<label className="select-group__option" key={value}>
 								<input type="radio" name="betrag_auswahl"
 									onClick={this.amountSelected}
 									className="select-group__input"
@@ -134,25 +138,31 @@ export default class DonationForm extends Component {
 								<span className="select-group__state">{value} €</span>
 							</label>
 						) ) }
-						<label className="select-group__option select-group__option--halfwidth">
+						<label className="select-group__option select-group__option-amount-other-input">
+							<input type="radio" name="betrag_auswahl" className="select-group__input" value=""/>
 							<input type="text"
 								value={ state.customAmount }
 								onInput={ this.amountTyped }
 								size="3"
+								maxLength="8"
 								onBlur={ this.finishedTypingAmount }
 								autoComplete="off"
 								placeholder="Wunschbetrag"
 								className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '' ) } />
 						</label>
 					</div>
-					<span className='select-group__errormessage'>Bitte geben Sie einen Spendenbetrag von min. 1€ ein.</span>
+					<span className='select-group__errormessage'>
+						<span className="select-group__erroricon">
+							Bitte geben Sie einen Spendenbetrag von min. 1€ ein.
+						</span>
+					</span>
 				</div>
 
 				<div className="form-field-group">
 					<div className={ 'select-group-container' + ( state.paymentMethodIsValid ? '' : ' select-group-container--with-error' ) }>
-						<div id="WMDE_Banner-payment-type" className="WMDE-Banner-payment select-group">
+						<div className="payment-section select-group">
 							{paymentMethods.map( ( { value, label } ) => (
-								<label className="select-group__option select-group__option--halfwidth" key={value}>
+								<label className="select-group__option" key={value}>
 									<input type="radio" checked={value === state.paymentMethod }
 										onClick={this.paymentMethodSelected}
 										name="zahlweise" value={value}
@@ -161,17 +171,19 @@ export default class DonationForm extends Component {
 								</label>
 							) ) }
 							<div className="sms-box">
-								<label className="select-group__option select-group__option--halfwidth">
+								<label className="select-group__option">
 									<a href="sms:81190" className="select-group__state">5 € per SMS</a>
 								</label>
 								<span>SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.</span>
 							</div>
 						</div>
-						<span className="select-group__errormessage">Bitte wählen Sie eine Zahlmethode aus.</span>
+						<span className="select-group__errormessage">
+							<span className="select-group__erroricon"> Bitte wählen Sie eine Zahlmethode aus.</span>
+						</span>
 					</div>
 				</div>
 
-				<div id="WMDE_Banner-submit" className="WMDE-Banner-submit button-group">
+				<div className="submit-section button-group">
 					<button className="button-group__button" onClick={this.validateForm}>
 						<span className="button-group__label">Weiter, um Spende abzuschließen</span>
 					</button>

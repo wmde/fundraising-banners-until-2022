@@ -145,7 +145,7 @@
 		font-weight: bold;
 		text-align: center;
 		border: 0 none;
-		border-radius: $banner-border-radius;
+		border-radius: $form-element-border-radius;
 		box-sizing: border-box;
 		&--value-entered {
 			color: $color-white;
@@ -171,7 +171,7 @@
 	&__option {
 		background: $color-bright;
 		border: 1px solid $color-light-dark;
-		border-radius: $banner-border-radius;
+		border-radius: $form-element-border-radius;
 		flex: 0 1 auto;
 		margin: 3px 0 0;
 		box-sizing: border-box;
@@ -185,21 +185,21 @@
 			border-right: 0;
 			border-radius: 0;
 			&:first-child {
-				border-radius: $banner-border-radius 0 0 $banner-border-radius;
+				border-radius: $form-element-border-radius 0 0 $form-element-border-radius;
 			}
 			&:last-of-type {
-				border-radius: 0 $banner-border-radius $banner-border-radius 0;
+				border-radius: 0 $form-element-border-radius $form-element-border-radius 0;
 				border-right: 1px solid $color-light-dark;
 			}
 		}
 		@media ( min-width: $breakpoint-form-right ) {
 			border: 1px solid $color-light-dark;
-			border-radius: $banner-border-radius;
+			border-radius: $form-element-border-radius;
 			&:first-child {
-				border-radius: $banner-border-radius;
+				border-radius: $form-element-border-radius;
 			}
 			&:last-of-type {
-				border-radius: $banner-border-radius;
+				border-radius: $form-element-border-radius;
 			}
 		}
 		&--fullwidth {
@@ -274,7 +274,7 @@
 		color: $color-white;
 		background-color: $color-secondary;
 		border: 0 none;
-		border-radius: $banner-border-radius;
+		border-radius: $form-element-border-radius;
 		padding: 2px 5px;
 		line-height: 2em;
 		font-size: 0.85em;
@@ -303,41 +303,6 @@
 	}
 }
 
-.close {
-	position: absolute;
-	width: 18px;
-	margin: 0.25em 0.25em 0.25em 0;
-	top: 15px;
-	right: 20px;
-	opacity: 0.5;
-	@media ( min-width: $breakpoint-s ) {
-		top: -10px;
-		right: 0;
-	}
-	&-tracking {
-		display: none;
-		&__pixel {
-			height: 0;
-			width: 0;
-			border: 0 none;
-		}
-	}
-	&__link {
-		background-color: transparent;
-		color: $color-dark;
-		font-size: 25px;
-		text-decoration: none;
-		border: 0;
-		padding: 0;
-		&:hover {
-			background-color: transparent;
-			text-decoration: none;
-		}
-	}
-	&:hover {
-		opacity: 0.75;
-	}
-}
 
 .iban-block > span {
 	margin-right: 4px;
