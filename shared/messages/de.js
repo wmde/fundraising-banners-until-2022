@@ -1,4 +1,5 @@
 const Translations = {
+	'LANGUAGE': 'de',
 	'no-interval-message': 'Bitte wählen Sie zuerst ein Zahlungsintervall.',
 	'amount-empty-message': 'Bitte wählen Sie einen Betrag aus.',
 	'amount-too-low-message': '1 € muss es mindestens sein.',
@@ -29,7 +30,12 @@ const Translations = {
 	'day-name-christmas-eve': 'Weihnachtsfeiertag',
 	'day-name-christmas-day': '1. Weihnachtsfeiertag',
 	'day-name-2nd-christmas-day': '2. Weihnachtsfeiertag',
-	'amount-missing': 'Es fehlen'
+	'amount-missing': 'Es fehlen',
+	'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
+	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
+	'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
+	'campaign-day-only-n-days': 'Es bleiben nur noch {{days}} Tage, um Wikipedia in diesem Jahr zu unterstützen.',
+	'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um Wikipedia in diesem Jahr zu unterstützen.'
 };
 
 export default Translations;
