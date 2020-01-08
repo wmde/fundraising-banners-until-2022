@@ -23,11 +23,12 @@ export default class BannerPresenter {
 
 		const sizeIssueIndicator = new SizeIssueIndicator( skinAdjuster.getSizeIssueThreshold() );
 
-		skinAdjuster.moveBannerContainerToTopOfDom();
-
 		if ( onMediaWiki() && !mediaWikiIsShowingContentPage() ) {
+			mw.centralNotice.setBannerLoadedButHidden();
 			return;
 		}
+
+		skinAdjuster.moveBannerContainerToTopOfDom();
 
 		const resizeHandler = createResizeHandler( bannerContainer, skinAdjuster );
 		let displayBanner;
