@@ -8,6 +8,7 @@ import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
+import FundsModal from '../shared/components/ui/FundsModal';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -28,7 +29,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			bannerTop: -350
+			isFundsModalVisible: false
 		};
 		this.slideInBanner = () => {};
 	}
@@ -55,6 +56,11 @@ export default class Banner extends Component {
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
+	};
+
+	toggleFundsModal = () => {
+		this.props.trackingData.eventTracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -92,10 +98,14 @@ export default class Banner extends Component {
 					<div className="close">
 						<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 					</div>
-					{ /* TODO funds modal funktionalitaet implementieren*/}
-					<Footer setToggleFundsModal={this.setToggleFundsModal}/>
+					<Footer showFundsModal={ this.toggleFundsModal }/>
 				</div>
 			</BannerTransition>
+			<FundsModal
+				fundsModalData={props.fundsModalData}
+				toggleFundsModal={ this.toggleFundsModal }
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale='de'/>
 		</div>;
 	}
 

@@ -34,11 +34,11 @@ export default class FundsModal extends Component {
 
 	render( props ) {
 		return <div className={ classNames( 'banner_modal', { 'is-visible': props.isFundsModalVisible } ) }>
-			<div className="banner_modal__background" onClick={ props.setToggleFundsModal }>
+			<div className="banner_modal__background" onClick={ props.toggleFundsModal }>
 			</div>
 			<div className="banner_modal__content">
 				<div className="banner_modal_close">
-					<button className="banner_modal_close__link" onClick={ props.setToggleFundsModal }>&#x2715;</button>
+					<button className="banner_modal_close__link" onClick={ props.toggleFundsModal }>&#x2715;</button>
 				</div>
 				<div>
 					<span className="banner_modal_title">Mittelverwendung</span>
