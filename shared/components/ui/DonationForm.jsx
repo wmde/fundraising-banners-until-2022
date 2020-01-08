@@ -4,6 +4,7 @@ import { LocalImpressionCount } from '../../local_impression_count';
 import { parseAmount } from '../../parse_amount';
 import { useContext } from 'preact/hooks';
 import TranslationContext from '../TranslationContext';
+import SelectGroup from './SelectGroup';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
@@ -83,7 +84,7 @@ export default class DonationForm extends Component {
 
 		const Translations = useContext( TranslationContext );
 
-		//TODO hier stattdessen lookup auf translations machen
+		// TODO hier stattdessen lookup auf translations machen
 		const intervals = [
 			{ value: '0', label: 'einmalig' },
 			{ value: '1', label: 'monatlich' },
@@ -92,12 +93,12 @@ export default class DonationForm extends Component {
 			{ value: '12', label: 'jährlich' }
 		];
 		const amounts = [
-			{ value: '5' },
-			{ value: '10' },
-			{ value: '20' },
-			{ value: '25' },
-			{ value: '50' },
-			{ value: '100' }
+			{ value: '5', label: '5 €' },
+			{ value: '10', label: '10 €' },
+			{ value: '20', label: '20 €' },
+			{ value: '25', label: '25 €' },
+			{ value: '50', label: '50 €' },
+			{ value: '100', label: '100 €' }
 		];
 		const paymentMethods = [
 			{ value: 'BEZ', label: 'Lastschrift' },
@@ -110,37 +111,25 @@ export default class DonationForm extends Component {
 			<form method="post" name="donationForm" className="form__element"
 				action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
 				<div className="form-field-group">
-					<div
-						className={ 'select-group-container' + ( state.paymentIntervalIsValid ? '' : ' select-group-container--with-error' ) }>
-						<div className="interval-section select-group">
-							{intervals.map( ( { value, label } ) => (
-								<label className={ 'select-group__option' } key={value}>
-									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
-										name="periode" value={value} className="select-group__input"/>
-									<span className="select-group__state">{label}</span>
-								</label> ) )
-							}
-						</div>
-						<span className="select-group__errormessage">
-							<span className="select-group__erroricon">
-								{ Translations[ 'no-interval-message' ] }
-							</span>
-						</span>
-					</div>
+					<SelectGroup
+						fieldname="interval"
+						selectionItems={intervals}
+						isValid={state.paymentIntervalIsValid}
+						errorMessage={Translations[ 'no-interval-message' ]}
+						currentValue={state.paymentInterval}
+						onSelected={this.intervalSelected}
+					/>
 				</div>
 
-				<div className={ 'form-field-group select-group-container' + ( state.amountIsValid ? '' : ' select-group-container--with-error' ) }>
-					<div className="amount-section select-group">
-						{amounts.map( ( { value } ) => (
-							<label className="select-group__option" key={value}>
-								<input type="radio" name="betrag_auswahl"
-									onClick={this.amountSelected}
-									className="select-group__input"
-									checked={ value === state.selectedAmount }
-									value={ value }/>
-								<span className="select-group__state">{value} €</span>
-							</label>
-						) ) }
+				<div className={ 'form-field-group' }>
+					<SelectGroup
+						fieldname="amount"
+						selectionItems={amounts}
+						isValid={state.amountIsValid}
+						errorMessage={Translations[ 'amount-too-low-message' ]}
+						currentValue={state.selectedAmount}
+						onSelected={this.amountSelected}
+					>
 						<label className="select-group__option select-group__option-amount-other-input">
 							<input type="radio" name="betrag_auswahl" className="select-group__input" value=""/>
 							<input type="text"
@@ -153,37 +142,26 @@ export default class DonationForm extends Component {
 								placeholder="Wunschbetrag"
 								className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '' ) } />
 						</label>
-					</div>
-					<span className='select-group__errormessage'>
-						<span className="select-group__erroricon">
-							{ Translations[ 'amount-too-low-message' ] }
-						</span>
-					</span>
+					</SelectGroup>
 				</div>
 
+
 				<div className="form-field-group">
-					<div className={ 'select-group-container' + ( state.paymentMethodIsValid ? '' : ' select-group-container--with-error' ) }>
-						<div className="payment-section select-group">
-							{paymentMethods.map( ( { value, label } ) => (
-								<label className="select-group__option" key={value}>
-									<input type="radio" checked={value === state.paymentMethod }
-										onClick={this.paymentMethodSelected}
-										name="zahlweise" value={value}
-										className="select-group__input" />
-									<span className="select-group__state">{label}</span>
-								</label>
-							) ) }
-							<div className="sms-box">
-								<label className="select-group__option">
-									<a href="sms:81190" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
-								</label>
-								<span>{ Translations[ 'sms-info-message' ] }</span>
-							</div>
+					<SelectGroup
+						fieldname="payment-method"
+						selectionItems={paymentMethods}
+						isValid={state.paymentMethodIsValid}
+						errorMessage={Translations[ 'no-payment-type-message' ]}
+						currentValue={state.paymentMethod}
+						onSelected={this.paymentMethodSelected}
+					>
+						<div className="sms-box">
+							<label className="select-group__option">
+								<a href="sms:81190" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
+							</label>
+							<span>{ Translations[ 'sms-info-message' ] }</span>
 						</div>
-						<span className="select-group__errormessage">
-							<span className="select-group__erroricon"> { Translations[ 'no-payment-type-message' ] }</span>
-						</span>
-					</div>
+					</SelectGroup>
 				</div>
 
 				<div className="submit-section button-group">
@@ -192,7 +170,9 @@ export default class DonationForm extends Component {
 					</button>
 				</div>
 
-				<input type="hidden" id="amount" name="betrag" value={ state.amount } />
+				<input type="hidden" name="betrag" value={ state.amount } />
+				<input type="hidden" name="periode" value={ state.paymentInterval } />
+				<input type="hidden" name="zahlweise" value={ state.paymentMethod } />
 				<input type="hidden" id="impCount" name="impCount" value={this.impCount.overallCount}/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value={this.impCount.bannerCount}/>
 			</form>

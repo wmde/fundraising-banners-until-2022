@@ -3,7 +3,6 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import BannerText from './components/BannerText';
 import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/DonationForm';
 import Footer from '../shared/components/ui/Footer';
@@ -22,6 +21,7 @@ export default class Banner extends Component {
 		onClose: PropTypes.func,
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired
+		//TODO weitere proptypes definieren
 	}
 
 	ref = createRef();
