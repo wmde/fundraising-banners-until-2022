@@ -2,7 +2,7 @@
 import { Component, h, Fragment } from 'preact';
 import DesktopBanner from './DesktopBanner';
 import MobileBanner from './MobileBanner';
-import TranslationContext from '../components/TranslationContext';
+import TranslationContext from '../../shared/components/TranslationContext';
 
 export default class Banner extends Component {
 	constructor( props ) {

@@ -9,6 +9,7 @@ import DonationForm from '../shared/components/ui/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
+import TranslationContext from '../shared/components/TranslationContext';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -66,6 +67,7 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
+		console.log( "translations: ", props.translations );
 		return <div
 			className={classNames(
 				'wmde-banner',
@@ -74,32 +76,34 @@ export default class Banner extends Component {
 			)}
 			ref={this.ref}>
 			<BannerTransition registerDisplayBanner={ this.registerBannerTransition } onFinish={ this.startProgressbar }>
-				<div className="banner__wrapper">
-					<div className="banner__content">
-						<div className="banner__infobox">
-							<Infobox>
-								<BannerText
-									campaignParamters={props.campaignParameters}
-									numberOfDonors={props.numberOfDonors}
-									campaignDaySentence={props.campaignDaySentence}
-									weekdayPrepPhrase={props.weekdayPrepPhrase}
-									currentDayName={props.currentDayName}/>
-							</Infobox>
-							<ProgressBar
-								locale={props.locale}
-								daysLeft={campaignProjection.getRemainingDays()}
-								donationAmount={campaignProjection.getProjectedDonationSum()}
-								goalDonationSum={campaignProjection.goalDonationSum}
-								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-								setStartAnimation={this.registerStartProgressbar}/>
+				<TranslationContext.Provider value={props.translations}>
+					<div className="banner__wrapper">
+						<div className="banner__content">
+							<div className="banner__infobox">
+								<Infobox>
+									<BannerText
+										campaignParamters={props.campaignParameters}
+										numberOfDonors={props.numberOfDonors}
+										campaignDaySentence={props.campaignDaySentence}
+										weekdayPrepPhrase={props.weekdayPrepPhrase}
+										currentDayName={props.currentDayName}/>
+								</Infobox>
+								<ProgressBar
+									locale={props.locale}
+									daysLeft={campaignProjection.getRemainingDays()}
+									donationAmount={campaignProjection.getProjectedDonationSum()}
+									goalDonationSum={campaignProjection.goalDonationSum}
+									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+									setStartAnimation={this.registerStartProgressbar}/>
+							</div>
+							<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
 						</div>
-						<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
+						<div className="close">
+							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+						</div>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
-					<div className="close">
-						<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
-					</div>
-					<Footer showFundsModal={ this.toggleFundsModal }/>
-				</div>
+				</TranslationContext.Provider>
 			</BannerTransition>
 			<FundsModal
 				fundsModalData={props.fundsModalData}

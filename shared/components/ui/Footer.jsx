@@ -1,7 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
+import TranslationContext from '../TranslationContext';
+import { useContext } from 'preact/hooks';
 
 export default function Footer( { showFundsModal } ) {
+	const Translations = useContext( TranslationContext );
+
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__item">
@@ -20,7 +24,7 @@ export default function Footer( { showFundsModal } ) {
 
 			<div className="footer__item footer__item--rightflex">
 				<a id="application-of-funds-link" className="application-of-funds-link"
-					onClick={ showFundsModal }>Wohin geht meine Spende?
+					onClick={ showFundsModal }>{ Translations[ 'use-of-funds-link' ] }
 				</a>
 			</div>
 		</div>
