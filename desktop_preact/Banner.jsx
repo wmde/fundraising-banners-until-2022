@@ -80,14 +80,10 @@ export default class Banner extends Component {
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<Infobox
-									formatters={props.formatters}>
-									<BannerText
-										campaignParamters={props.campaignParameters}
-										numberOfDonors={props.numberOfDonors}
-										campaignDaySentence={props.campaignDaySentence}
-										weekdayPrepPhrase={props.weekdayPrepPhrase}
-										currentDayName={props.currentDayName}/>
-								</Infobox>
+									formatters={props.formatters}
+									campaignParameters={props.campaignParameters}
+									campaignProjection={props.campaignProjection}
+									bannerText={props.bannerText}/>
 								<ProgressBar
 									formatters={props.formatters}
 									daysLeft={campaignProjection.getRemainingDays()}

@@ -1,4 +1,5 @@
 const Translations = {
+	'LANGUAGE': 'de',
 	'no-interval-message': 'How often would you like to donate?',
 	'amount-empty-message': 'How much would you like to donate?',
 	'amount-too-low-message': 'The donation needs to be at least 1 Euro.',
@@ -26,7 +27,12 @@ const Translations = {
 	'day-name-st-nicholas-day': 'St Nicholas Day',
 	'day-name-christmas-eve': 'Christmas Day',
 	'day-name-christmas-day': 'Christmas Day',
-	'day-name-2nd-christmas-day': 'Christmas Day'
+	'day-name-2nd-christmas-day': 'Christmas Day',
+	'campaign-day-before-campaign': 'Today we ask for your support.',
+	'campaign-day-first-day': 'Today our fundraising campaign starts.',
+	'campaign-day-nth-day': 'This is the {{days}} day of our campaign.',
+	'campaign-day-only-n-days': 'Only {{days}} days left to donate for Wikipedia this year.',
+	'campaign-day-last-day': 'Today is the final day of our donation campaign.'
 };
 
 export default Translations;
