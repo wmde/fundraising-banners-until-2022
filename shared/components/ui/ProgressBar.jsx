@@ -3,7 +3,6 @@ import { Component } from 'preact/compat';
 import { h } from 'preact';
 import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
-import formatNumber from 'format-number';
 import TranslationContext from '../TranslationContext';
 import PropTypes from 'prop-types';
 
@@ -62,10 +61,6 @@ export default class ProgressBar extends Component {
 		}
 
 		PropTypes.checkPropTypes( ProgressBar.propTypes, props, 'constructor', 'ProgressBar' );
-		this.millionFormatter = formatNumber( { round: 1, prefix: '€ ', suffix: 'M', padRight: 1 } );
-		if ( this.props.locale === 'de' ) {
-			this.millionFormatter = formatNumber( { round: 1, decimal: ',', suffix: ' Mio. €', padRight: 1 } );
-		}
 	}
 
 	componentDidMount() {
@@ -94,7 +89,7 @@ export default class ProgressBar extends Component {
 
 	render( props, state ) {
 		const Translations = useContext( TranslationContext );
-		const getMillion = n => this.millionFormatter( n / 1000000 );
+		const getMillion = n => this.props.formatters.millionFormatter( n / 1000000 );
 		const getDaysLeft = daysLeft => {
 			return Translations[ 'prefix-days-left' ] +
 				' ' + daysLeft + ' ' +

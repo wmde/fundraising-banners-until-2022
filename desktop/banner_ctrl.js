@@ -10,7 +10,7 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
 import { parseAmount } from '../shared/parse_amount';
-import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
+import { amountInputFormatter, amountForServerFormatter, integerFormatter } from '../shared/number_formatter/de';
 import { render, createElement } from 'preact';
 import FundsModal from '../shared/components/ui/FundsModal';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
@@ -84,8 +84,8 @@ const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
 	amountBannerImpressionsInMillion: CampaignParameters.millionImpressionsPerDay,
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-	amountNeeded: donorFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
+	numberOfDonors: integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	amountNeeded: integerFormatter( campaignProjection.getProjectedRemainingDonationSum() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),

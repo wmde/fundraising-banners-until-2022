@@ -11,7 +11,7 @@ import { Slider } from './banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
-import { amountForServerFormatter, amountInputFormatter, donorFormatter } from '../shared/number_formatter/en';
+import { amountForServerFormatter, amountInputFormatter, integerFormatter } from '../shared/number_formatter/en';
 import { parseAmount } from '../shared/parse_amount';
 import animateHighlight from '../shared/animate_highlight';
 
@@ -83,7 +83,7 @@ const progressBar = new ProgressBar(
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	numberOfDonors: integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),

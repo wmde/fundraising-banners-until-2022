@@ -26,7 +26,7 @@ export default class ProgressBar extends Component {
 			<div className={classNames( 'progress_bar', state.animation === ENDED ? 'progress_bar--finished' : '' ) }>
 				<div className="progress_bar__fill" onAnimationEnd={ this.animationFinished }>
 					<div className="progress_bar__days_left">Geschafft!</div>
-					<div className="progress_bar__donation_remaining">{ props.goalDonationSum } Mio. €</div>
+					<div className="progress_bar__donation_remaining">{ props.goalDonationSum }</div>
 				</div>
 			</div>
 		</div>;

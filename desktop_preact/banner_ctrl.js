@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import style from './styles/styles_ctrl.pcss';
 
-import { donorFormatter, millionFormatter } from '../shared/formatters';
+import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { getTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
@@ -57,10 +57,10 @@ bannerPresenter.present(
 		translations: Translations,
 
 		//TODO eine zentrale property fuer formatters
-
-		numberOfDonors: donorFormatter( campaignParameters.donationProjection.donorsBase ),
-		numberOfMembers: donorFormatter( campaignParameters.numberOfMembers ),
-		goalDonationSum: millionFormatter( campaignParameters.donationProjection.goalDonationSum / 1000000 ),
+		formatters,
+		numberOfDonors: formatters.integerFormatter( campaignParameters.donationProjection.donorsBase ),
+		numberOfMembers: formatters.integerFormatter( campaignParameters.numberOfMembers ),
+		goalDonationSum: formatters.millionFormatter( campaignParameters.donationProjection.goalDonationSum / 1000000 ),
 		trackingData: getTrackingData( trackingIds.bannerName ),
 		campaignProjection,
 		campaignDays,

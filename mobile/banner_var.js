@@ -13,7 +13,7 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';
 import { parseAmount } from '../shared/parse_amount';
-import { amountInputFormatter, amountForServerFormatter, donorFormatter } from '../shared/number_formatter/de';
+import { amountInputFormatter, amountForServerFormatter, integerFormatter } from '../shared/number_formatter/de';
 
 require( './css/styles_var.pcss' );
 require( './css/styles_mini_var.pcss' );
@@ -80,7 +80,7 @@ const progressBar = new ProgressBar(
 const bannerDisplayTimeout = new InterruptibleTimeout();
 
 $bannerContainer.html( bannerTemplate( {
-	numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
+	numberOfDonors: integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 	currentDayName: currentDayName,
 	weekdayPrepPhrase: weekdayPrepPhrase,
 	campaignDaySentence: campaignDaySentence.getSentence(),
