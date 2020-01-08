@@ -14,6 +14,7 @@ import Translations from '../shared/messages/de';
 import CampaignDays, { endOfDay, startOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import { CampaignProjection } from '../shared/campaign_projection';
+import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 
@@ -65,6 +66,7 @@ bannerPresenter.present(
 		campaignDaySentence,
 		weekdayPrepPhrase,
 		currentDayName,
-		locale
+		locale,
+		fundsModalData
 	}
 );

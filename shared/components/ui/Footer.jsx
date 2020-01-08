@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Footer( { setToggleFundsModal } ) {
+export default function Footer( { showFundsModal } ) {
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__item">
@@ -20,7 +20,7 @@ export default function Footer( { setToggleFundsModal } ) {
 
 			<div className="footer__item footer__item--rightflex">
 				<a id="application-of-funds-link" className="application-of-funds-link"
-					onClick={ setToggleFundsModal }>Wohin geht meine Spende?
+					onClick={ showFundsModal }>Wohin geht meine Spende?
 				</a>
 			</div>
 		</div>
