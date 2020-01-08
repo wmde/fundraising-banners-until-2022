@@ -2,9 +2,6 @@
 import { Component, h } from 'preact';
 import { LocalImpressionCount } from '../../local_impression_count';
 import { parseAmount } from '../../parse_amount';
-
-// TODO pass in formatter as a dependency to be able to localize this component
-import { amountForServerFormatter, amountInputFormatter } from '../../number_formatter/de';
 import { useContext } from 'preact/hooks';
 import TranslationContext from '../TranslationContext';
 
@@ -36,7 +33,7 @@ export default class DonationForm extends Component {
 		this.setState( {
 			selectedAmount: evt.target.value,
 			customAmount: '',
-			amount: amountForServerFormatter( evt.target.value ),
+			amount: this.props.formatters.amountForServerFormatter( evt.target.value ),
 			amountIsValid: true
 		} );
 	};
@@ -45,14 +42,14 @@ export default class DonationForm extends Component {
 		this.setState( {
 			selectedAmount: null,
 			customAmount: evt.target.value,
-			amount: amountForServerFormatter( parseAmount( evt.target.value ) )
+			amount: this.props.formatters.amountForServerFormatter( parseAmount( evt.target.value ) )
 		} );
 	};
 
 	finishedTypingAmount = ( evt ) => {
 		const customAmount = parseAmount( evt.target.value );
 		this.setState( {
-			customAmount: amountInputFormatter( customAmount ),
+			customAmount: this.props.formatters.amountInputFormatter( customAmount ),
 			amountIsValid: customAmount >= 1.0
 		} );
 	};

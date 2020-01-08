@@ -67,7 +67,6 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
-		console.log( "translations: ", props.translations );
 		return <div
 			className={classNames(
 				'wmde-banner',
@@ -80,7 +79,8 @@ export default class Banner extends Component {
 					<div className="banner__wrapper">
 						<div className="banner__content">
 							<div className="banner__infobox">
-								<Infobox>
+								<Infobox
+									formatters={props.formatters}>
 									<BannerText
 										campaignParamters={props.campaignParameters}
 										numberOfDonors={props.numberOfDonors}
@@ -89,14 +89,17 @@ export default class Banner extends Component {
 										currentDayName={props.currentDayName}/>
 								</Infobox>
 								<ProgressBar
-									locale={props.locale}
+									formatters={props.formatters}
 									daysLeft={campaignProjection.getRemainingDays()}
 									donationAmount={campaignProjection.getProjectedDonationSum()}
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}/>
 							</div>
-							<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
+							<DonationForm
+								bannerName={props.bannerName}
+								campaignName={props.campaignName}
+								formatters={props.formatters}/>
 						</div>
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
