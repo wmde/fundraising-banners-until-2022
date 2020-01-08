@@ -98,7 +98,7 @@ export default class ProgressBar extends Component {
 		const getDaysLeft = daysLeft => {
 			return Translations[ 'prefix-days-left' ] +
 				' ' + daysLeft + ' ' +
-				( daysLeft > 1 ? Translations[ 'day-plural' ] : Translations[ 'day-singular' ] ) + ' ' +
+				( daysLeft === 1 ? Translations[ 'day-singular' ] : Translations[ 'day-plural' ] ) + ' ' +
 				Translations[ 'suffix-days-left' ];
 		};
 		return <div className={ classNames( 'progress_bar', {

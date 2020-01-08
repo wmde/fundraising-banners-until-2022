@@ -5,6 +5,8 @@ import { parseAmount } from '../../parse_amount';
 
 // TODO pass in formatter as a dependency to be able to localize this component
 import { amountForServerFormatter, amountInputFormatter } from '../../number_formatter/de';
+import { useContext } from 'preact/hooks';
+import TranslationContext from '../TranslationContext';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
@@ -81,6 +83,10 @@ export default class DonationForm extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
+
+		const Translations = useContext( TranslationContext );
+
+		//TODO hier stattdessen lookup auf translations machen
 		const intervals = [
 			{ value: '0', label: 'einmalig' },
 			{ value: '1', label: 'monatlich' },
@@ -120,7 +126,7 @@ export default class DonationForm extends Component {
 						</div>
 						<span className="select-group__errormessage">
 							<span className="select-group__erroricon">
-								Bitte wählen Sie zuerst ein Zahlungsintervall.
+								{ Translations[ 'no-interval-message' ] }
 							</span>
 						</span>
 					</div>
@@ -153,7 +159,7 @@ export default class DonationForm extends Component {
 					</div>
 					<span className='select-group__errormessage'>
 						<span className="select-group__erroricon">
-							Bitte geben Sie einen Spendenbetrag von min. 1€ ein.
+							{ Translations[ 'amount-too-low-message' ] }
 						</span>
 					</span>
 				</div>
@@ -172,20 +178,20 @@ export default class DonationForm extends Component {
 							) ) }
 							<div className="sms-box">
 								<label className="select-group__option">
-									<a href="sms:81190" className="select-group__state">5 € per SMS</a>
+									<a href="sms:81190" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
 								</label>
-								<span>SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.</span>
+								<span>{ Translations[ 'sms-info-message' ] }</span>
 							</div>
 						</div>
 						<span className="select-group__errormessage">
-							<span className="select-group__erroricon"> Bitte wählen Sie eine Zahlmethode aus.</span>
+							<span className="select-group__erroricon"> { Translations[ 'no-payment-type-message' ] }</span>
 						</span>
 					</div>
 				</div>
 
 				<div className="submit-section button-group">
 					<button className="button-group__button" onClick={this.validateForm}>
-						<span className="button-group__label">Weiter, um Spende abzuschließen</span>
+						<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
 					</button>
 				</div>
 

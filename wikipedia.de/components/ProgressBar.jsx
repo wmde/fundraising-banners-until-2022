@@ -3,7 +3,7 @@ import { Component, h } from 'preact';
 import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
 import formatNumber from 'format-number';
-import TranslationContext from './TranslationContext';
+import TranslationContext from '../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;

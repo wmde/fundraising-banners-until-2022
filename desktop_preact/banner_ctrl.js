@@ -54,6 +54,7 @@ bannerPresenter.present(
 		//TODO maybe remove some unused props
 		...trackingIds,
 		campaignParameters,
+		translations: Translations,
 
 		//TODO eine zentrale property fuer formatters
 
