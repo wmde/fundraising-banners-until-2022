@@ -3,7 +3,7 @@ import { Component, h, createRef } from 'preact';
 import PropTypes from 'prop-types';
 
 const PAGELOADING = 0;
-const READY = 1
+const READY = 1;
 const SLIDING = 2;
 const FINISHED = 3;
 
@@ -36,6 +36,7 @@ export default class BannerTransition extends Component {
 		}
 	}
 
+	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		let bannerStyle;
 
@@ -53,8 +54,8 @@ export default class BannerTransition extends Component {
 				bannerStyle = { top: 0 };
 		}
 		return <div style={ bannerStyle } ref={this.ref}
-					className='banner-position'
-					onTransitionEnd={ this.onTransitionEnd}>
+			className='banner-position'
+			onTransitionEnd={ this.onTransitionEnd}>
 			{ props.children }
 		</div>;
 	}

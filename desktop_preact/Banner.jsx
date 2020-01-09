@@ -21,7 +21,6 @@ export default class Banner extends Component {
 		onClose: PropTypes.func,
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired
-		//TODO weitere proptypes definieren
 	}
 
 	ref = createRef();

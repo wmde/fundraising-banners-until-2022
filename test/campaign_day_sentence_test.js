@@ -12,14 +12,6 @@ describe( 'CampaignDaySentence', function () {
 		new Date( '2017-10-01' )
 	);
 
-	const testTranslations = {
-		'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
-		'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
-		'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
-		'campaign-day-only-n-days': 'Es bleiben nur noch {{days}} Tage, um Wikipedia in diesem Jahr zu unterstützen.',
-		'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um Wikipedia in diesem Jahr zu unterstützen.'
-	}
-
 	const sandbox = sinon.createSandbox();
 
 	afterEach( function () {
@@ -84,7 +76,7 @@ describe( 'CampaignDaySentence', function () {
 			'campaign-day-nth-day': 'This is the {{days}} day of our campaign.',
 			'campaign-day-only-n-days': 'Only {{days}} days left to donate for Wikipedia this year.',
 			'campaign-day-last-day': 'Today is the final day of our donation campaign.'
-		}
+		};
 
 		it( 'returns the 2nd day sentence on the second day of the campaign', function () {
 			sandbox.stub( campaignDays, 'campaignHasStarted' ).returns( true );

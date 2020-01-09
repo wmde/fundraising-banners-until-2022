@@ -128,7 +128,6 @@ export default class DonationForm extends Component {
 					</SelectGroup>
 				</div>
 
-
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="payment-method"

@@ -1,5 +1,6 @@
 'use strict';
 
+// eslint-disable-next-line no-unused-vars
 import $ from 'jquery';
 
 export default class Skin {
