@@ -32,7 +32,19 @@ const Translations = {
 	'campaign-day-first-day': 'Today our fundraising campaign starts.',
 	'campaign-day-nth-day': 'This is the {{days}} day of our campaign.',
 	'campaign-day-only-n-days': 'Only {{days}} days left to donate for Wikipedia this year.',
-	'campaign-day-last-day': 'Today is the final day of our donation campaign.'
+	'campaign-day-last-day': 'Today is the final day of our donation campaign.',
+
+	'interval-once': 'one-time',
+	'interval-monthly': 'monthly',
+	'interval-quarterly': 'quarterly',
+	'interval-biannual': 'semi-yearly',
+	'interval-yearly': 'yearly',
+
+	'payment-direct-debit': 'Direct Debit',
+	'payment-bank-transfer': 'Bank Transfer',
+	'payment-credit-card': 'Credit Card',
+	'payment-paypal': 'PayPal',
+	'payment-sofort': 'Sofortüberweisung'
 };
 
 export default Translations;
