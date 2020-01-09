@@ -12,9 +12,8 @@ function createResizeHandler( bannerContainer, skinAdjuster ) {
 }
 
 export default class BannerPresenter {
-	constructor( trackingEvents, sizeTrackRatio, appearanceDelay ) {
-		this.trackingEvents = trackingEvents;
-		this.sizeTrackRatio = sizeTrackRatio;
+	constructor( trackingData, appearanceDelay ) {
+		this.trackingData = trackingData;
 		this.appearanceDelay = appearanceDelay;
 	}
 
@@ -35,6 +34,7 @@ export default class BannerPresenter {
 		render(
 			createElement( Banner, {
 				...props,
+				trackingData: this.trackingData,
 				onClose: () => {
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
@@ -51,18 +51,18 @@ export default class BannerPresenter {
 
 		const bannerElement = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
 
-		this.trackingEvents.trackViewPortDimensions(
+		this.trackingData.tracker.trackViewPortDimensions(
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-			this.sizeTrackRatio
+			this.trackingData.sizeTrackRatio
 		);
 
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
 			if ( onMediaWiki() ) {
 				mw.centralNotice.setBannerLoadedButHidden();
 			}
-			this.trackingEvents.trackSizeIssueEvent(
+			this.trackingData.tracker.trackSizeIssueEvent(
 				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-				this.sizeTrackRatio
+				this.trackingData.sizeTrackRatio
 			);
 			return;
 		}

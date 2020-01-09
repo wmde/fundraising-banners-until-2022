@@ -4,7 +4,7 @@ import style from './styles/styles_authors.pcss';
 import { integerFormatter, millionFormatter } from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { showBanner } from './src/show_banner';
-import { getTrackingData } from '../shared/tracking_data';
+import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import { getSkinAdjuster } from '../shared/skin';
 
@@ -23,7 +23,7 @@ showBanner(
 		...trackingIds,
 		numberOfDonors: integerFormatter( CampaignParameters.donationProjection.donorsBase ),
 		goalDonationSum: millionFormatter( CampaignParameters.donationProjection.goalDonationSum / 1000000 ),
-		trackingData: getTrackingData( trackingIds.bannerName ),
+		trackingData: createTrackingData( trackingIds.bannerName ),
 		expandText: 'Dankestext lesen',
 		showSteps: false,
 		moreInfo: AuthorsMoreInfo,

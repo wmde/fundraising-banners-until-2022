@@ -10,11 +10,12 @@ function getTracker( bannerName ) {
 	}
 }
 
-export function getTrackingData( bannerName, bannerClickTrackRatio = 1, bannerCloseTrackRatio = 1 ) {
+export function createTrackingData( bannerName, bannerClickTrackRatio = 1, bannerCloseTrackRatio = 1, sizeTrackRatio = 0.1 ) {
 	return {
-		eventTracker: getTracker( bannerName ),
+		tracker: getTracker( bannerName ),
 		bannerClickTrackRatio: bannerClickTrackRatio,
-		bannerCloseTrackRatio: bannerCloseTrackRatio
+		bannerCloseTrackRatio: bannerCloseTrackRatio,
+		sizeTrackRation: sizeTrackRatio
 	};
 
 }

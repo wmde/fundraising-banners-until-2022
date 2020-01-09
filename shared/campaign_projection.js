@@ -1,3 +1,5 @@
+import CampaignDays, { endOfDay, startOfDay } from './campaign_days';
+
 /**
  * @param {CampaignDays} campaignDays
  * @param {number} base
@@ -39,3 +41,13 @@ CampaignProjection.prototype.getProjectedNumberOfDonors = function () {
 CampaignProjection.prototype.getRemainingDays = function () {
 	return this.campaignDays.getNumberOfDaysUntilCampaignEnd();
 };
+
+export function createCampaignProjection( campaignParameters ) {
+	return new CampaignProjection(
+		new CampaignDays(
+			startOfDay( campaignParameters.donationProjection.baseDate ),
+			endOfDay( campaignParameters.endDate )
+		),
+		campaignParameters.donationProjection
+	);
+}
