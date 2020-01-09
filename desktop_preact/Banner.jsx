@@ -44,7 +44,7 @@ export default class Banner extends Component {
 	}
 
 	closeBanner = e => {
-		this.props.trackingData.eventTracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
+		this.props.trackingData.tracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
 		this.props.onClose();
@@ -59,7 +59,7 @@ export default class Banner extends Component {
 	};
 
 	toggleFundsModal = () => {
-		this.props.trackingData.eventTracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 

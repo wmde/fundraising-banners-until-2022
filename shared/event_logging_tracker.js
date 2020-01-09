@@ -33,7 +33,6 @@ export default class EventLoggingTracker {
 	 *
 	 * @param {Object} dimensionData
 	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
-	 * TODO Remove this.bannerName from trackViewportData() call once pre-campaign ends
 	 */
 	trackViewPortDimensions( dimensionData, trackingRatio = 1 ) {
 		this.trackViewportData( this.bannerName + '-' + VIEWPORT_TRACKING_IDENTIFIER, dimensionData, trackingRatio );

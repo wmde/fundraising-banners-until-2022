@@ -70,21 +70,7 @@ The changes to the code depend on which kind of test you are running.
   * [B17WMDE_webpack_prototype](https://wiki.wikimedia.de/w/index.php?title=Web:Banner/B17WMDE_webpack_prototype) on GS-WIKI
 
 ## Planned Features of the dev environment
-- [ ] Configure webpack to add source maps (esp for JavaScript) to dev preview.
-- [ ] Use `MediaWikiTextWrapper` only in webpack production configuration and don't output the compiled `*.js` files.
 - [ ] Create upload plugin for webpack uses the campaign information from `campaign_info.toml` to upload the generated `.wikitext` file to the appropriate page on meta.wikimedia.org / GS-Wiki.
 
 ## Notes on possible Banner code improvements
-* Refactor old CSS to remove ID selectors and ensure that no new CSS uses ID selectors by setting "selector-max-id" in .stylelintrc.json to 0. The current legacy CSS often makes use of two-chained ID selectors (like `#elementOne #elementTwo { color: blah; }`) which is unnecessary and is something we should get rid of in the future.
-* Rename `CampaignDays` to `DateRange`, since we're using it for more than the range of the campaign, but also for the campaign projection with a different start date. Use the proper method names in the Campaign projection.
-* Change banner JS code to improve reusability of markup, for A/B testing text changes: Load the `banner_text.hbs` template and render it as an unescaped variable into the markup in `banner_html.hbs`.
-* Move translatable strings from `banner_functions.js` and `campaign_day_sentence.js` into a central `messages.js` file and add a `Translations` object that can receive keys (and placeholder values) and returns translated strings.
-* Move `addSpace`, `addSpaceInstantly` and `displayBanner` to module `banner_display`. Move all the different ways of showing banners (overlay or scrollable, instant on, rollo and mini nag banner) into the new module. Add the 7.5 seconds delay for `displayBanner` as default but make delay configurable (for preview).
-* Move form initialization and validation code to module `form_validation`. Form elements (jQuery objects) should be passed in as constructor params. Also move validation functions from `banner_functions.js` into the new module.
-* Implement `impCount` and `bImpCount` as template placeholders instead of setting them with jQuery (they don't change with user interaction). Move the whole impression counting thing (reading and writing the cookie) to its own JavaScript module.
-* Refactor `banner_functions.js` to no longer require parameters after `require`. Use classes with constructor parameters instead.
-* Move calculations in from `progress_bar.s` to `campaign_projection.js`: Add the `goalDonationSum` parameter to `CampaignProjection` class and add `remainingDonations` and `percentReached` methods to `CampaignProjection`.
-* Structure banner initialization into functions, call them one after each other.
-* Select Banner DOM object only once and use its `find` method with all other jQuery selections.
-* Improve A/B testability by moving to the feature toggle/feature factory model we have in FundraisingFrontend. Get rid of `banner_ctrl.js` and `banner_var.js`. This will improve code sharing.
-* Re-Implement/Refactor lightbox module without the need for a global jQuery object and get rid of `ProvidePlugin` in webpack config. Also, for "sticky" Banners, the lightbox should position itself in relation to the banner and the scroll position, so we don't need to scroll to the top of the page to show the lightbox.
+none ♥
