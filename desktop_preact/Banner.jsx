@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
-import DonationForm from '../shared/components/ui/DonationForm';
+import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
@@ -93,6 +93,7 @@ export default class Banner extends Component {
 									setStartAnimation={this.registerStartProgressbar}/>
 							</div>
 							<DonationForm
+								formItems={props.formItems}
 								bannerName={props.bannerName}
 								campaignName={props.campaignName}
 								formatters={props.formatters}/>

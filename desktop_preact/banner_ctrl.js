@@ -14,6 +14,7 @@ import BannerText from './components/BannerText';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 import { CampaignProjection } from '../shared/campaign_projection';
 import CampaignDays, { endOfDay, startOfDay } from '../shared/campaign_days';
+import { createFormItems } from './form_items';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 
@@ -41,6 +42,7 @@ bannerPresenter.present(
 		translations: Translations,
 		formatters,
 		trackingData: getTrackingData( trackingIds.bannerName ),
-		fundsModalData
+		fundsModalData,
+		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	}
 );

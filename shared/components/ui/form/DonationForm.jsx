@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
-import { LocalImpressionCount } from '../../local_impression_count';
-import { parseAmount } from '../../parse_amount';
+import { LocalImpressionCount } from '../../../local_impression_count';
+import { parseAmount } from '../../../parse_amount';
 import { useContext } from 'preact/hooks';
-import TranslationContext from '../TranslationContext';
+import TranslationContext from '../../TranslationContext';
 import SelectGroup from './SelectGroup';
 
 export default class DonationForm extends Component {
@@ -17,7 +17,11 @@ export default class DonationForm extends Component {
 			paymentMethod: null,
 			paymentIntervalIsValid: true,
 			amountIsValid: true,
-			paymentMethodIsValid: true
+			paymentMethodIsValid: true,
+
+			disabledIntervals: [],
+			disabledAmounts: [],
+			disabledPaymentMethods: []
 		};
 
 		this.impCount = new LocalImpressionCount( props.bannerName );
@@ -84,51 +88,30 @@ export default class DonationForm extends Component {
 
 		const Translations = useContext( TranslationContext );
 
-		// TODO hier stattdessen lookup auf translations machen
-		const intervals = [
-			{ value: '0', label: 'einmalig' },
-			{ value: '1', label: 'monatlich' },
-			{ value: '3', label: 'vierteljährlich' },
-			{ value: '6', label: 'halbjährlich' },
-			{ value: '12', label: 'jährlich' }
-		];
-		const amounts = [
-			{ value: '5', label: '5 €' },
-			{ value: '10', label: '10 €' },
-			{ value: '20', label: '20 €' },
-			{ value: '25', label: '25 €' },
-			{ value: '50', label: '50 €' },
-			{ value: '100', label: '100 €' }
-		];
-		const paymentMethods = [
-			{ value: 'BEZ', label: 'Lastschrift' },
-			{ value: 'UEB', label: 'Überweisung' },
-			{ value: 'MCP', label: 'Kreditkarte' },
-			{ value: 'PPL', label: 'PayPal' }
-		];
-
 		return <div className="form">
 			<form method="post" name="donationForm" className="form__element"
 				action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="interval"
-						selectionItems={intervals}
+						selectionItems={props.formItems.intervals}
 						isValid={state.paymentIntervalIsValid}
 						errorMessage={Translations[ 'no-interval-message' ]}
 						currentValue={state.paymentInterval}
 						onSelected={this.intervalSelected}
+						disabledOptions={ state.disabledIntervals }
 					/>
 				</div>
 
 				<div className={ 'form-field-group' }>
 					<SelectGroup
 						fieldname="amount"
-						selectionItems={amounts}
+						selectionItems={props.formItems.amounts}
 						isValid={state.amountIsValid}
 						errorMessage={Translations[ 'amount-too-low-message' ]}
 						currentValue={state.selectedAmount}
 						onSelected={this.amountSelected}
+						disabledOptions={ state.disabledAmounts }
 					>
 						<label className="select-group__option select-group__option-amount-other-input">
 							<input type="radio" name="betrag_auswahl" className="select-group__input" value=""/>
@@ -149,11 +132,12 @@ export default class DonationForm extends Component {
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="payment-method"
-						selectionItems={paymentMethods}
+						selectionItems={props.formItems.paymentMethods}
 						isValid={state.paymentMethodIsValid}
 						errorMessage={Translations[ 'no-payment-type-message' ]}
 						currentValue={state.paymentMethod}
 						onSelected={this.paymentMethodSelected}
+						disabledOptions={ state.disabledPaymentMethods }
 					>
 						<div className="sms-box">
 							<label className="select-group__option">
