@@ -18,10 +18,13 @@ export default class BannerPresenter {
 		this.impressionCounts = impressionCounts;
 	}
 
-	present( Banner, bannerContainer, props ) {
+	present( Banner, bannerContainer, props, sizeIssueThreshold ) {
 		const skinAdjuster = getSkinAdjuster();
 
-		const sizeIssueIndicator = new SizeIssueIndicator( skinAdjuster.getSizeIssueThreshold() );
+		if ( sizeIssueThreshold === undefined ) {
+			sizeIssueThreshold = skinAdjuster.getSizeIssueThreshold();
+		}
+		const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 		if ( onMediaWiki() && !mediaWikiIsShowingContentPage() ) {
 			mw.centralNotice.setBannerLoadedButHidden();

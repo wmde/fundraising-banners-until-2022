@@ -17,7 +17,7 @@ export default class BannerTransition extends Component {
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired,
 
-		fixed: PropTypes.bool,
+		fixed: PropTypes.bool
 	};
 
 	constructor( props ) {
@@ -59,7 +59,7 @@ export default class BannerTransition extends Component {
 		return <div style={ bannerStyle } ref={this.ref}
 			className={ classNames( {
 				'banner-position': true,
-				'banner-position--fixed': props.fixed,
+				'banner-position--fixed': props.fixed
 			} )}
 			onTransitionEnd={ this.onTransitionEnd}>
 			{ props.children }
