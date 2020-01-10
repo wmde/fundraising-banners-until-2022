@@ -12,9 +12,10 @@ function createResizeHandler( bannerContainer, skinAdjuster ) {
 }
 
 export default class BannerPresenter {
-	constructor( trackingData, appearanceDelay ) {
+	constructor( trackingData, appearanceDelay, impressionCounts ) {
 		this.trackingData = trackingData;
 		this.appearanceDelay = appearanceDelay;
+		this.impressionCounts = impressionCounts;
 	}
 
 	present( Banner, bannerContainer, props ) {
@@ -35,6 +36,7 @@ export default class BannerPresenter {
 			createElement( Banner, {
 				...props,
 				trackingData: this.trackingData,
+				impressionCounts: this.impressionCounts,
 				onClose: () => {
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
@@ -70,6 +72,7 @@ export default class BannerPresenter {
 		bannerDisplayTimeout.run(
 			() => {
 				skinAdjuster.addSpace( bannerElement.offsetHeight );
+				this.impressionCounts.incrementImpressionCounts();
 				displayBanner();
 			},
 			this.appearanceDelay

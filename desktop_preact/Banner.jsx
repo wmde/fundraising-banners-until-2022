@@ -95,7 +95,9 @@ export default class Banner extends Component {
 								formItems={props.formItems}
 								bannerName={props.bannerName}
 								campaignName={props.campaignName}
-								formatters={props.formatters}/>
+								formatters={props.formatters}
+								impressionCounts={props.impressionCounts}
+							/>
 						</div>
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>

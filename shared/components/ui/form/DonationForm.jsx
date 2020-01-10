@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
-import { LocalImpressionCount } from '../../../local_impression_count';
 import { parseAmount } from '../../../parse_amount';
 import { useContext } from 'preact/hooks';
 import TranslationContext from '../../TranslationContext';
@@ -23,8 +22,6 @@ export default class DonationForm extends Component {
 			disabledAmounts: [],
 			disabledPaymentMethods: []
 		};
-
-		this.impCount = new LocalImpressionCount( props.bannerName );
 	}
 
 	intervalSelected = ( evt ) => {
@@ -156,8 +153,8 @@ export default class DonationForm extends Component {
 				<input type="hidden" name="betrag" value={ state.amount } />
 				<input type="hidden" name="periode" value={ state.paymentInterval } />
 				<input type="hidden" name="zahlweise" value={ state.paymentMethod } />
-				<input type="hidden" id="impCount" name="impCount" value={this.impCount.overallCount}/>
-				<input type="hidden" id="bImpCount" name="bImpCount" value={this.impCount.bannerCount}/>
+				<input type="hidden" name="impCount" value={ props.impressionCounts.overallCount }/>
+				<input type="hidden" name="bImpCount" value={ props.impressionCounts.bannerCount }/>
 			</form>
 		</div>;
 	}
