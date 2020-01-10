@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const PAGELOADING = 0;
 const READY = 1;
@@ -14,8 +15,10 @@ export default class BannerTransition extends Component {
 		/** callback when transition finishes */
 		onFinish: PropTypes.func,
 		/** */
-		registerDisplayBanner: PropTypes.func.isRequired
-	}
+		registerDisplayBanner: PropTypes.func.isRequired,
+
+		fixed: PropTypes.bool,
+	};
 
 	constructor( props ) {
 		super( props );
@@ -34,7 +37,7 @@ export default class BannerTransition extends Component {
 		if ( this.props.onFinish ) {
 			this.props.onFinish();
 		}
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -54,7 +57,10 @@ export default class BannerTransition extends Component {
 				bannerStyle = { top: 0 };
 		}
 		return <div style={ bannerStyle } ref={this.ref}
-			className='banner-position'
+			className={ classNames( {
+				'banner-position': true,
+				'banner-position--fixed': props.fixed,
+			} )}
 			onTransitionEnd={ this.onTransitionEnd}>
 			{ props.children }
 		</div>;
