@@ -3,7 +3,7 @@ import { Component, Fragment, h } from 'preact';
 import classNames from 'classnames';
 import formatNumber from 'format-number';
 
-import { Slider } from '../../mobile/banner_slider';
+import { Slider } from '../../shared/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
 import ProgressBar from '../components/ProgressBar';
 
