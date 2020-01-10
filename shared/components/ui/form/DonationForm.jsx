@@ -2,8 +2,10 @@
 import { Component, h } from 'preact';
 import { parseAmount } from '../../../parse_amount';
 import { useContext } from 'preact/hooks';
+
 import TranslationContext from '../../TranslationContext';
 import SelectGroup from './SelectGroup';
+import SelectCustomAmount from './SelectCustomAmount';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
@@ -110,18 +112,12 @@ export default class DonationForm extends Component {
 						onSelected={this.amountSelected}
 						disabledOptions={ state.disabledAmounts }
 					>
-						<label className="select-group__option select-group__option-amount-other-input">
-							<input type="radio" name="betrag_auswahl" className="select-group__input" value=""/>
-							<input type="text"
-								value={ state.customAmount }
-								onInput={ this.amountTyped }
-								size="3"
-								maxLength="8"
-								onBlur={ this.finishedTypingAmount }
-								autoComplete="off"
-								placeholder="Wunschbetrag"
-								className={ 'select-group__custom-input' + ( state.customAmount ? ' select-group__custom-input--value-entered' : '' ) } />
-						</label>
+						<SelectCustomAmount
+							value={ state.customAmount }
+							onInput={ this.amountTyped }
+							onBlur={ this.finishedTypingAmount }
+							placeholder={ Translations[ 'custom-amount-placeholder' ] }
+						/>
 					</SelectGroup>
 				</div>
 
