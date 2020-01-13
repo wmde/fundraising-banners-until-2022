@@ -13,13 +13,18 @@ import BannerText from './components/BannerText_var';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
+import { LocalImpressionCount } from '../shared/local_impression_count';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
-const bannerPresenter = new BannerPresenter( trackingData, bannerContainer.dataset.delay || 7500 );
+const bannerPresenter = new BannerPresenter(
+	trackingData,
+	bannerContainer.dataset.delay || 7500,
+	new LocalImpressionCount( trackingIds.bannerName )
+);
 
 bannerPresenter.present(
 	Banner,

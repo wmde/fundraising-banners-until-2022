@@ -10,6 +10,7 @@ const Translations = {
 	'anonymous-BEZ-info-message': 'We need your address for a debit payment.',
 	'sms-info-message': 'Text "WIKI" to 81190. Additional costs for sending text messages may apply.',
 	'sms-payment-message': '5 € by text message',
+	'custom-amount-placeholder': 'Other amount',
 	'submit-label': 'Proceed with the donation',
 	'prefix-days-left': 'Only',
 	'suffix-days-left': 'left',
