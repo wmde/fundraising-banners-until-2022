@@ -139,6 +139,22 @@ filename = "./english/banner_var.js"
 pagename = "B19WMDE_en03_2_191211_var"
 tracking = "org-en03-2-191211-var"
 
+[english_preact]
+campaign_tracking = "en03-ba-191211"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[english_preact.banners.ctrl]
+filename = "./english_preact/banner_ctrl.js"
+pagename = "B19WMDE_preact_en03_2_191211_ctrl"
+tracking = "org-en03-2-191211-ctrl"
+
+[english_preact.banners.var]
+filename = "./english_preact/banner_var.js"
+pagename = "B19WMDE_preact_en03_2_191211_var"
+tracking = "org-en03-2-191211-var"
+
+
 # Thank You Campaign
 [thank_you]
 campaign_tracking = "ty01-ba-190101"
