@@ -36,6 +36,7 @@ bannerPresenter.present(
 		formatters,
 		// bannerText: BannerText,
 		slides: Slides,
+		sliderAutoPlaySpeed: 5000,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	},

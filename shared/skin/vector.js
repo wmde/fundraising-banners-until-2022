@@ -11,10 +11,10 @@ export default class Vector extends Skin {
 		this.searchField = $( '#searchInput' );
 	}
 
-	addSpace( bannerHeight ) {
-		this.panel.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
-		this.head.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
-		this.pageBase.css( { paddingTop: bannerHeight, transition: 'padding-top 1s ease-in-out' } );
+	addSpace( bannerHeight, transition ) {
+		this.panel.css( { top: bannerHeight, transition: transition.getTransition( 'top' ) } );
+		this.head.css( { top: bannerHeight, transition: transition.getTransition( 'top' ) } );
+		this.pageBase.css( { paddingTop: bannerHeight, transition: transition.getTransition( 'padding-top' ) } );
 	}
 
 	addSpaceInstantly( bannerHeight ) {

@@ -11,6 +11,7 @@ import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_func
 import { CampaignProjection } from '../shared/campaign_projection';
 import { amountForServerFormatter, amountInputFormatter, integerFormatter } from '../shared/number_formatter/de';
 import { parseAmount } from '../shared/parse_amount';
+import CssTransition from '../shared/css_transition';
 
 require( './css/styles.pcss' );
 require( './css/styles_var.pcss' );
@@ -202,7 +203,7 @@ function addSpace() {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace( $bannerElement.height(), new CssTransition() );
 }
 
 function addSpaceInstantly() {

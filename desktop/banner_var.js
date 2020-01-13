@@ -14,6 +14,7 @@ import { amountInputFormatter, amountForServerFormatter, integerFormatter } from
 import { render, createElement } from 'preact';
 import FundsModal from '../shared/components/ui/FundsModal';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+import CssTransition from '../shared/css_transition';
 
 require( './css/styles.pcss' );
 require( '../shared/components/ui/FundsModal.pcss' );
@@ -243,7 +244,7 @@ function addSpace() {
 		return;
 	}
 
-	BannerFunctions.getSkin().addSpace( $bannerElement.height() );
+	BannerFunctions.getSkin().addSpace( $bannerElement.height(), new CssTransition() );
 }
 
 function addSpaceInstantly() {

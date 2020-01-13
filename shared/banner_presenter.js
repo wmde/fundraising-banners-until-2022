@@ -38,6 +38,7 @@ export default class BannerPresenter {
 		render(
 			createElement( Banner, {
 				...props,
+				skinAdjuster,
 				trackingData: this.trackingData,
 				impressionCounts: this.impressionCounts,
 				onClose: () => {
@@ -74,7 +75,6 @@ export default class BannerPresenter {
 		const bannerDisplayTimeout = new InterruptibleTimeout();
 		bannerDisplayTimeout.run(
 			() => {
-				skinAdjuster.addSpace( bannerElement.offsetHeight );
 				this.impressionCounts.incrementImpressionCounts();
 				displayBanner();
 			},
