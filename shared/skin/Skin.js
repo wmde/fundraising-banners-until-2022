@@ -8,8 +8,9 @@ export default class Skin {
 	 * Children must implement this
 	 *
 	 * @param {number} bannerHeight
+	 * @param {CssTransition} transition
 	 */
-	addSpace( bannerHeight ) { // eslint-disable-line no-unused-vars
+	addSpace( bannerHeight, transition ) { // eslint-disable-line no-unused-vars
 	}
 
 	/**

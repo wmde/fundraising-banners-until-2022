@@ -83,7 +83,6 @@ export default class BannerPresenter {
 		const bannerDisplayTimeout = new InterruptibleTimeout();
 		bannerDisplayTimeout.run(
 			() => {
-				skinAdjuster.addSpace( bannerElement.offsetHeight );
 				this.impressionCounts.incrementImpressionCounts();
 				displayBanner();
 			},

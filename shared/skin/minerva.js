@@ -9,12 +9,18 @@ export default class Minerva extends Skin {
 		this.searchField = $( '#searchInput, input.search' );
 	}
 
-	addSpace( bannerHeight ) {
-		this.viewport.css( { top: bannerHeight, transition: 'top 1s ease-in-out' } );
+	addSpace( bannerHeight, transition ) {
+		this.viewport.css( {
+			top: bannerHeight,
+			transition: transition.createTransitionValue( 'top' )
+		} );
 	}
 
 	addSpaceInstantly( bannerHeight ) {
-		this.viewport.css( { top: bannerHeight, transition: 'unset' } );
+		this.viewport.css( {
+			top: bannerHeight,
+			transition: 'unset'
+		} );
 	}
 
 	removeSpace() {
