@@ -1,0 +1,63 @@
+.wmde-banner {
+	.text {
+		&__headline {
+			margin: 0.2em 0;
+			display: inline-block;
+			@media ( min-width: $breakpoint_m ) {
+				display: block;
+			}
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+		}
+		&__paragraph {
+			margin: 0;
+			padding: 0;
+			display: inline;
+			&--bold {
+				font-weight: bold;
+			}
+			&--italic {
+				font-style: italic;
+			}
+			&--sans-serif {
+				font-family: $banner-main-font-family;
+				font-size: 0.9em;
+			}
+		}
+
+		&__highlight {
+			border-bottom: solid 3px $color-primary;
+			padding: 0 0.1em;
+			background: transparent;
+			font-weight: bold;
+		}
+
+		/*  This is for keeping the same banner size when testing different banner texts.
+			The placeholder text element should contain the text that was removed
+		 */
+		&__hidden-placeholder {
+			visibility: hidden;
+		}
+	}
+
+	.optional-text {
+		display: none;
+		@media ( min-width: $breakpoint_l ) {
+			&.text-m {
+				display: inline;
+			}
+			&.text-l {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			&.text-xl {
+				display: inline;
+			}
+		}
+	}
+}
