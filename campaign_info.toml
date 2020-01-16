@@ -5,7 +5,7 @@
 # A Campaign with global settings
 [desktop]
 campaign_tracking = "21-ba-191221"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
@@ -22,7 +22,7 @@ tracking = "org-21-191221-var"
 # A Campaign with global settings
 [desktop_preact]
 campaign_tracking = "21-ba-191221"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
@@ -40,7 +40,7 @@ tracking = "org-21-191221-var"
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob05-ba-191216"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
@@ -57,7 +57,7 @@ tracking = "org-mob05-191216-var"
 # Mobile English Campaign
 [mobile_english]
 campaign_tracking = "mob_en02-ba-191206"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
@@ -74,7 +74,7 @@ tracking = "org-mob_en02-191206-var"
 # iPad campaign
 [pad]
 campaign_tracking = "pad02-ba-191126"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
@@ -91,7 +91,7 @@ tracking = "org-pad02-191126-var"
 # iPad English campaign
 [pad_en]
 campaign_tracking = "en-ipad-191113"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad_en.banners.ctrl]
@@ -108,7 +108,7 @@ tracking = "org-en-ipad-191113-var"
 # Wikipedia.de Campaign
 [wikipediade]
 campaign_tracking = "wpde-03-191213"
-preview_link = "/wikipedia.de?banner=dev-mode-wpde&devbanner={{banner}}"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
@@ -126,7 +126,7 @@ tracking = "wpde-03-191213-var"
 # English Campaign
 [english]
 campaign_tracking = "en03-ba-191211"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
@@ -141,7 +141,7 @@ tracking = "org-en03-2-191211-var"
 
 [english_preact]
 campaign_tracking = "en03-ba-191211"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [english_preact.banners.ctrl]
@@ -158,7 +158,7 @@ tracking = "org-en03-2-191211-var"
 # Thank You Campaign
 [thank_you]
 campaign_tracking = "ty01-ba-190101"
-preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [thank_you.banners.ctrl]
