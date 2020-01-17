@@ -6,7 +6,7 @@ function capitalizeFirstLetter( message ) {
 }
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParamters } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
@@ -21,7 +21,7 @@ export default function BannerText( props ) {
 			<span className="text__paragraph--bold">
         Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName }  erreicht. </span>
 
-			<span>Schon der Preis einer Tasse Kaffee würde genügen. Über { campaignParamters.millionImpressionsPerDay } Millionen
+			<span>Schon der Preis einer Tasse Kaffee würde genügen. Über { campaignParameters.millionImpressionsPerDay } Millionen
 			Mal wird unser Spendenaufruf täglich angezeigt,
 			aber nur  { numberOfDonors } Menschen haben bisher gespendet. </span>
 			<span className="optional-text text-m">

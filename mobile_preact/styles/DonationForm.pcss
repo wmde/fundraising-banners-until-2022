@@ -1,96 +1,54 @@
 .wmde-banner {
 	.form {
-		order: 2;
-		width: auto;
-		min-width: inherit;
-		flex-shrink: 0;
-		padding: 0.2em 0 0 0.5em;
-		margin: 0;
-
-		@media ( min-width: $breakpoint_l ) {
-			align-items: center;
-			display: flex;
-			margin: 0 1.5em 0 0.25em;
-			padding-top: 0;
-			width: 20em;
-		}
-
-		&__element {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-
-			@media ( min-width: $breakpoint_m ) {
-				margin: 0.2em 2.5em 0;
-			}
-			@media ( min-width: $breakpoint_l ) {
-				display: block;
-				margin: 0;
-			}
-		}
-		&-field-group {
-			display: flex;
-			flex: 1 1 auto;
-			flex-wrap: wrap;
-
-			@media ( min-width: $breakpoint_m ) {
-				flex-wrap: nowrap;
-			}
-
-			@media ( min-width: $breakpoint_l ) {
-				display: block;
-			}
-		}
+		padding: 0 40px 20px;
+		position: relative;
+		height: 100%;
 	}
 
-	.button-group {
+	.form__section {
+		width: 100%;
+		overflow: auto;
+		zoom: 1;
+		margin: 0 auto;
+		padding: 0;
+		border: 0 none;
+	}
+
+	.form__section-head {
 		display: block;
-		border: 0;
+		width: 100%;
 		margin: 0;
-		padding: 0.3em 0.5em 0.3em 0;
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 0 1 auto;
+		padding: 8px 0;
+		text-align: center;
+		font-size: 16px;
 
-		@media ( min-width: $breakpoint_l ) {
-			flex-wrap: wrap;
-			margin-left: 0.5em;
-			margin-right: -0.5em;
-		}
-
-		&__button {
-			flex: 1 1 auto;
-			padding: 0 0.3em 0.3em 0;
-			box-sizing: border-box;
-			display: block;
-			cursor: pointer;
-			/* Override browser defaults */
-			border: 0 none;
-			background: transparent;
-			font-size: inherit;
-			width: 100%;
-		}
-		&__label {
-			display: block;
-			color: $color-white;
-			background-color: $color-secondary;
-			border: 0 none;
-			border-radius: 0.4em;
-			padding: 0 0.4em;
-			line-height: 2em;
-			font-size: 0.85em;
-			font-weight: bold;
-			text-align: center;
-			box-sizing: border-box;
-			white-space: nowrap;
-			&:hover {
-				background-color: $color-secondary-hover;
-			}
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			font-size: 18px;
 		}
 	}
 
-	.sms-box {
-		display: none;
+	.button-group__container {
+		display: block;
+		width: 100%;
+		margin-bottom: 6px;
+		padding: 3px 0;
+	}
+
+	.button-group__button {
+		box-sizing: border-box;
+		display: inline-block;
+		width: 100%;
+		background-color: $color-secondary;
+		color: $color-white;
+		border-radius: 2px;
+		padding: 24px 10px;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+		font-family: inherit;
+		font-weight: 500;
+		font-size: 24px;
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 	}
 }

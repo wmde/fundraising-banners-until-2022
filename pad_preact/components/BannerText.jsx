@@ -7,7 +7,7 @@ function capitalizeFirstLetter( message ) {
 }
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParamters } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline text__headline--bold">
 			<span className="text__headline--italic">Liebe Leserinnen und Leser, </span>
@@ -22,7 +22,7 @@ export default function BannerText( props ) {
 				unser Spendenziel bereits am heutigen { currentDayName } erreicht.</span>
 
 			<span> Schon der Preis einer Tasse Kaffee würde genügen.
-			Über { campaignParamters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber
+			Über { campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber
 			nur { numberOfDonors } Menschen haben bisher gespendet.
 			Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir
 			könnten ihr nicht vertrauen.
