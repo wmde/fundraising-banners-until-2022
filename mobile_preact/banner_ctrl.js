@@ -5,12 +5,14 @@ import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
-
-import Banner from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
-// import BannerText from './components/BannerText';
+import LocalTranslations from './translations';
+
+import Banner from './Banner';
 import Slides from './components/Slides';
+import BannerText from './components/BannerText';
+
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -34,10 +36,10 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		// bannerText: BannerText,
+		bannerText: BannerText,
 		slides: Slides,
 		sliderAutoPlaySpeed: 5000,
-		translations: Translations,
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	},
 	0

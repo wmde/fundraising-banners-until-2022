@@ -3,11 +3,6 @@
 		display: flex;
 		margin-right: 1.2em;
 		margin-left: 1.2em;
-
-		@media ( min-width: $breakpoint_l ) {
-			margin-right: 1.5em;
-			margin-left: 1.5em;
-		}
 	}
 
 	.progress_bar__wrapper {
@@ -19,9 +14,6 @@
 		flex: 1;
 		max-height: 30px;
 		margin: 25px 0 4px;
-		@media ( min-width: $breakpoint_m ) {
-			margin: 4px 0;
-		}
 	}
 
 	.progress_bar__donation_fill {
@@ -49,13 +41,6 @@
 		top: -30px;
 		left: 0;
 		color: #000000;
-
-		@media ( min-width: $breakpoint_m ) {
-			position: relative;
-			top: auto;
-			left: auto;
-			color: #ffffff;
-		}
 	}
 
 	.progress_bar__donation_remaining {
@@ -70,12 +55,6 @@
 		position: absolute;
 		top: -30px;
 		right: 0;
-
-		@media ( min-width: $breakpoint_m ) {
-			position: relative;
-			top: auto;
-			right: auto;
-		}
 	}
 
 	.progress_bar__donation_remaining--outer {
@@ -118,23 +97,6 @@
 		.progress_bar__donation_text,
 		.progress_bar__donation_remaining {
 			visibility: visible;
-		}
-	}
-
-	@media ( min-width: $breakpoint_m ) {
-		.progress_bar--lateprogress {
-			.progress_bar__donation_remaining--inner {
-				display: none;
-			}
-
-			.progress_bar__donation_remaining--outer {
-				display: block;
-				padding: 0 10px 0 0;
-			}
-
-			.progress_bar__donation_fill {
-				margin-right: 16px;
-			}
 		}
 	}
 }

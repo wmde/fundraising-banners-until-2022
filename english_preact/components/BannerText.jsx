@@ -7,7 +7,7 @@ function capitalizeFirstLetter( message ) {
 }
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParamters } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span className="text__headline--bold">To all our readers in Germany. </span>
@@ -18,7 +18,7 @@ export default function BannerText( props ) {
 			<span> { weekdayPrepPhrase } { currentDayName } we humbly ask you to protect Wikipedia's independence.
 				{ campaignDaySentence } We depend on donations averaging about €&nbsp;23.83, but 99% of our readers
 			don't give.
-			Our fundraising appeal is displayed over { campaignParamters.millionImpressionsPerDay } million times a day,
+			Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
 				but currently only { numberOfDonors } people have donated. </span>
 
 			<span className="text__highlight text__headline--bold">If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come. </span>

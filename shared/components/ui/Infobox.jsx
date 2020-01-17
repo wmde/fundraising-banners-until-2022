@@ -24,7 +24,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 	return <div className="infobox">
 		<BannerText
 			{...additionalProps}
-			campaignParamters={ campaignParameters }
+			campaignParameters={ campaignParameters }
 			numberOfDonors={ formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ) }
 			campaignDaySentence={ campaignDaySentence }
 			weekdayPrepPhrase={ weekdayPrepPhrase }

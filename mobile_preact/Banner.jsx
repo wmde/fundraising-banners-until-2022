@@ -6,7 +6,8 @@ import { Slider } from '../shared/banner_slider';
 import BannerTransition from '../shared/components/BannerTransition';
 import MiniBanner from './components/MiniBanner';
 import TranslationContext from '../shared/components/TranslationContext';
-import FollowupTransition from './FollowupTransition';
+import FollowupTransition from './components/FollowupTransition';
+import FullpageBanner from './components/FullpageBanner';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -19,7 +20,6 @@ export default class Banner extends Component {
 			displayState: PENDING,
 			isFullPageVisible: false
 		};
-		this.animateHighLight = () => {};
 		this.transitionToFullpage = () => {};
 	}
 
@@ -40,18 +40,25 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent( 'mobile-mini-banner-expanded', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.props.trackingData.tracker.trackBannerEvent(
+			'mobile-mini-banner-expanded',
+			this.bannerSlider.getViewedSlides(),
+			this.bannerSlider.getCurrentSlide(),
+			this.props.trackingData.bannerClickTrackRatio
+		);
+		window.scrollTo( 0, 0 );
 		const miniBannerHeight = this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
 		this.transitionToFullpage( miniBannerHeight );
 		this.setState( { isFullPageVisible: true } );
-		// this.animateHighLight();
 	};
 
-	registerAnimateHighlight = cb => { this.animateHighLight = cb; };
-
 	closeBanner = e => {
-		// TODO get flickity slider position
-		this.props.trackingData.tracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
+		this.props.trackingData.tracker.trackBannerEvent(
+			'banner-closed',
+			this.bannerSlider.getViewedSlides(),
+			this.bannerSlider.getCurrentSlide(),
+			this.props.trackingData.bannerCloseTrackRatio
+		);
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
@@ -92,13 +99,11 @@ export default class Banner extends Component {
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					onFinish={() => {}}
-					previousTransition={this.miniBannerTransitionRef}
-					transitionDuration={1250}
-					skinAdjuster={props.skinAdjuster}
+					previousTransition={ this.miniBannerTransitionRef }
+					transitionDuration={ 1250 }
+					skinAdjuster={ props.skinAdjuster }
 				>
-					<div style={{ height: '500px', background: 'green' }}>
-						TODO: Fullpage content here
-					</div>
+					<FullpageBanner {...props} onClose={ this.closeBanner } />
 				</FollowupTransition>
 			</TranslationContext.Provider>
 		</div>;
