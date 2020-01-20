@@ -47,7 +47,11 @@ const Translations = {
 	'payment-bank-transfer': 'Bank Transfer',
 	'payment-credit-card': 'Credit Card',
 	'payment-paypal': 'PayPal',
-	'payment-sofort': 'Sofortüberweisung'
+	'payment-sofort': 'Sofortüberweisung',
+
+	// the following 2 lines are only for the ipad var test, remove if not in use anymore
+	'give-address-statement-positive': 'Yes',
+	'give-address-statement-negative': 'No'
 };
 
 export default Translations;

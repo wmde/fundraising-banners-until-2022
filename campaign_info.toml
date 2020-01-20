@@ -88,6 +88,22 @@ pagename = "B18WMDE_pad_02_191126_var"
 tracking = "org-pad02-191126-var"
 
 
+[pad_preact]
+campaign_tracking = "pad02-ba-191126"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[pad_preact.banners.ctrl]
+filename = "./pad_preact/banner_ctrl.js"
+pagename = "B18WMDE_preact_pad_02_191126_ctrl"
+tracking = "org-pad02-191126-ctrl"
+
+[pad_preact.banners.pad]
+filename = "./pad_preact/banner_var.js"
+pagename = "B18WMDE_preact_pad_02_191126_var"
+tracking = "org-pad02-191126-var"
+
+
 # iPad English campaign
 [pad_en]
 campaign_tracking = "en-ipad-191113"

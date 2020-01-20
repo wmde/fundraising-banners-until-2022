@@ -1,0 +1,57 @@
+.wmde-banner {
+	.footer {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		font-size: 0.8em;
+		line-height: 1.6em;
+		color: $color-black;
+		width: 100%;
+
+		&__info {
+			text-transform: uppercase;
+		}
+
+		&__importantinfo {
+			font-weight: bolder;
+		}
+
+		&__item {
+			white-space: nowrap;
+
+			&--rightflex {
+				flex-grow: 1;
+				text-align: right;
+				padding-right: 6em;
+			}
+
+			span {
+				margin-right: 0.5em;
+			}
+		}
+	}
+
+	.application-of-funds-link {
+		color: $color-black;
+		cursor: pointer;
+	}
+
+	.iban-block > span {
+		margin-right: 4px;
+	}
+
+	.iban-info {
+		display: flex;
+		flex-wrap: nowrap;
+	}
+
+	.bank-info {
+		display: flex;
+		flex-direction: column;
+		@media ( orientation: landscape ) {
+			flex-direction: row;
+		}
+	}
+}

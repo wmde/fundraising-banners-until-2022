@@ -1,0 +1,166 @@
+.wmde-banner {
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		padding: 0 0 0.5em 0;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+		font-size: 0.9em;
+		font-weight: bold;
+		width: 100%;
+
+		&-container {
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			border: 0;
+			max-width: 20em;
+			margin: 0;
+		}
+
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+
+		&__errormessage {
+			display: none;
+			color: $color-black;
+			font-weight: bold;
+			text-align: left;
+			width: 100%;
+			margin-bottom: 0.2em;
+			font-size: 0.8em;
+		}
+
+		&-container--with-error {
+			.select-group__erroricon {
+				position: relative;
+				padding-left: 20px;
+				display: block;
+
+				&:before {
+					content: $errorIcon;
+					width: 16px;
+					height: 16px;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.select-group__errormessage {
+				display: block;
+				color: $color-error;
+				margin-left: 0.5em;
+			}
+		}
+
+		&__infomessage {
+			display: none;
+			font-weight: bold;
+			text-align: left;
+			width: 100%;
+			margin-bottom: 0.2em;
+			font-size: 0.9em;
+		}
+
+		&-container--with-info {
+			.select-group__infomessage {
+				display: block;
+			}
+		}
+
+		&__state {
+			display: block;
+			background: $color-white-off;
+			border: 1px solid $color-gray-medium-light;
+			border-radius: 2px;
+			padding: 0.75em 0;
+			line-height: 2em;
+			cursor: pointer;
+			text-align: center;
+			font-size: 0.8em;
+			box-sizing: border-box;
+		}
+
+		&__custom-input + .select-group__state {
+			position: absolute;
+			top: 0;
+			right: 1em;
+			border-color: transparent;
+			background: transparent;
+		}
+
+		&__custom-input {
+			padding: 0.4em;
+			width: 100%;
+			height: 4em;
+			margin: 0;
+			font-size: 0.74em;
+			text-align: center;
+			border: 1px solid $color-gray-medium-light;
+			border-radius: 4px;
+			box-sizing: border-box;
+
+			&--value-entered {
+				background: $color-secondary;
+				border-color: $color-gray-medium;
+				color: $color-white;
+			}
+		}
+
+		&__input {
+			display: none;
+		}
+
+		&__input:checked + .select-group__state {
+			background: $color-secondary;
+			border-color: $color-gray-medium;
+			color: $color-white;
+		}
+
+		&__option {
+			flex: 1 1 auto;
+			padding: 0 0.4em 0.6em 0;
+			margin: 0;
+			box-sizing: border-box;
+			display: block;
+		}
+	}
+
+	.select-group-container--amount {
+		.select-group__option {
+			width: 25%;
+		}
+
+		.select-group__option-amount-other-input {
+			width: 50%;
+		}
+	}
+
+	.select-group-container--interval {
+		.select-group__option {
+			width: 30%;
+		}
+	}
+
+	.select-group-container--payment-method {
+		.select-group__option {
+			width: 50%;
+		}
+	}
+
+	.select-group-container--address-option {
+		.select-group__option {
+			width: 50%;
+		}
+	}
+}
