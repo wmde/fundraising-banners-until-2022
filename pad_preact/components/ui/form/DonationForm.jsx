@@ -62,8 +62,10 @@ export default function DonationForm( props ) {
 	const formAction = addressOption === GiveAddressOptions.YES.value ?
 		'https://spenden.wikimedia.de/donation/new' : 'https://spenden.wikimedia.de/donation/add';
 
+	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
+
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element"
+		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction }
 			action={ formAction + '?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName + '&mbt=1'}>
 
 			<div className="form-field-group">

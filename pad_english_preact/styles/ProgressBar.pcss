@@ -1,0 +1,129 @@
+.wmde-banner {
+	.progress_bar {
+		display: flex;
+		margin-right: 1.2em;
+		margin-left: 1.2em;
+
+		&__days_left {
+			visibility: hidden;
+			font-size: 0.9em;
+			font-weight: bold;
+			padding-left: 5px;
+
+			display: block;
+			color: $color-white;
+			line-height: 2em;
+		}
+		&__wrapper {
+			position: relative;
+			border: 2px solid $color-primary;
+			border-radius: 8px;
+			display: flex;
+			justify-content: space-between;
+			flex: 1;
+			max-height: 30px;
+			margin: 0.5em 35px 0.5em 16px;
+
+			height: 28px;
+		}
+		&__donation_fill {
+			width: 0;
+
+			background: $color-primary;
+
+			transition-duration: 3000ms;
+			transition-property: width;
+
+			min-width: 5em; /* minimum width for '0,1M €' */
+			height: 28px;
+			border-radius: 5px 16px 16px 5px;
+			display: flex;
+			justify-content: space-between;
+		}
+		&__donation_text {
+			text-align: right;
+			font-size: 0.9em;
+			font-weight: bold;
+			overflow: hidden;
+			padding-right: 16px;
+			flex: 1;
+			visibility: hidden;
+			white-space: nowrap;
+			line-height: 30px;
+
+			position: relative;
+			top: auto;
+			left: auto;
+			color: $color-white;
+		}
+
+		&__donation_remaining {
+			text-align: right;
+			font-size: 0.9em;
+			font-weight: bold;
+			visibility: hidden;
+			white-space: nowrap;
+
+			color: $color-black;
+			line-height: 1.6em;
+			margin-left: -40px;
+		}
+
+		&__pointer_tip {
+			width: 5px;
+			height: 5px;
+			background: $color-black;
+			float: left;
+			border-radius: 100%;
+			margin-top: 18px;
+		}
+
+		&__pointer_line {
+			float: left;
+			width: 25px;
+			background: $color-black;
+			margin: 20px 2px 0 0;
+		}
+		&__donation_remaining--outer {
+			display: none;
+			position: relative;
+			line-height: 40px;
+			font-size: 0.9em;
+			color: $color-black;
+			font-weight: bold;
+			padding-top: 3px;
+		}
+
+		&--finished {
+			.progress_bar__days_left,
+			.progress_bar__donation_text,
+			.progress_bar__donation_remaining {
+				visibility: visible;
+			}
+		}
+
+		@media ( max-width: 600px ) {
+			.progress_bar__days_left,
+			.progress_bar--finished .progress_bar__days_left {
+				display: none;
+			}
+		}
+
+		&--lateprogress {
+			.progress_bar__donation_remaining--inner {
+				display: none;
+			}
+
+			.progress_bar__donation_remaining--outer {
+				display: block;
+			}
+
+			.progress_bar__donation_fill {
+				margin-right: 16px;
+			}
+			.progress_bar__wrapper {
+				margin-right: 25px;
+			}
+		}
+	}
+}

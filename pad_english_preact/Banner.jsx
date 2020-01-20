@@ -9,6 +9,7 @@ import Infobox from '../shared/components/ui/Infobox';
 import TranslationContext from '../shared/components/TranslationContext';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
+import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -48,6 +49,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			showLanguageWarning: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -67,7 +69,9 @@ export default class Banner extends Component {
 
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		const languageWarningElement = document.querySelector( '.wmde-banner .lang-warning' );
+		languageWarningElement.style.top = bannerElement.offsetHeight;
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight + languageWarningElement.offsetHeight );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -124,6 +128,11 @@ export default class Banner extends Component {
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}/>
+								<Footer
+									showFundsModal={() => {}}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+								/>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
@@ -137,9 +146,8 @@ export default class Banner extends Component {
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer
-							bannerName={props.bannerName}
-							campaignName={props.campaignName}
+						<LanguageWarningBox
+							show={state.showLanguageWarning}
 						/>
 					</div>
 				</TranslationContext.Provider>
