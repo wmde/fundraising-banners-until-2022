@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
+import TextHighlight from '../../shared/components/ui/TextHighlight';
 
 function capitalizeFirstLetter( message ) {
 	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
@@ -16,9 +17,11 @@ export default function BannerText( props ) {
 		<p>
 			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
 				99&nbsp;% der Leserinnen und Leser spenden nicht. </span>
-			{ /* TODO Highlight component */}
-			<span id="to-highlight">
-		Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen {{ currentDayName }} erreicht. </span>
+			<TextHighlight registerStartAnimation={ props.registerStartHighlight }>
+				Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,
+				wäre unser Spendenziel bereits am heutigen {{ currentDayName }} erreicht.
+			</TextHighlight>
+
 			Schon der Preis einer Tasse Kaffee würde genügen.
 			Über { campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber
 			nur { numberOfDonors } Menschen haben bisher gespendet.
