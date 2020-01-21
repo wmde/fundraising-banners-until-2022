@@ -21,6 +21,7 @@ export default class Banner extends Component {
 			isFullPageVisible: false
 		};
 		this.transitionToFullpage = () => {};
+		this.startHighlight = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -69,6 +70,7 @@ export default class Banner extends Component {
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
+	registerStartHighlight = cb => { this.startHighlight = cb; };
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -98,12 +100,16 @@ export default class Banner extends Component {
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
-					onFinish={() => {}}
+					onFinish={ () => { this.startHighlight(); } }
 					previousTransition={ this.miniBannerTransitionRef }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 				>
-					<FullpageBanner {...props} onClose={ this.closeBanner } />
+					<FullpageBanner
+						{...props}
+						registerStartHighlight={this.registerStartHighlight}
+						onClose={ this.closeBanner }
+					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>
 		</div>;

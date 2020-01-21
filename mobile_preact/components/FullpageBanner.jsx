@@ -18,11 +18,12 @@ export default class FullpageBanner extends Component {
 					campaignParameters={props.campaignParameters}
 					campaignProjection={props.campaignProjection}
 					bannerText={props.bannerText}
-					animateHighlightTrigger={ props.animateHighlightTrigger }
+					propsForText={ { registerStartHighlight: props.registerStartHighlight } }
 				/>
 
 				<div>
 					<ProgressBar
+						animate={false}
 						formatters={props.formatters}
 						daysLeft={campaignProjection.getRemainingDays()}
 						donationAmount={campaignProjection.getProjectedDonationSum()}
