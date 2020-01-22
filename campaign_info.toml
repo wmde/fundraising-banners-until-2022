@@ -64,6 +64,11 @@ filename = "./mobile_preact/banner_ctrl.js"
 pagename = "B19WMDE_preact_mob05_191216_ctrl"
 tracking = "org-mob05-191216-ctrl"
 
+[mobile_preact.banners.var]
+filename = "./mobile_preact/banner_var.js"
+pagename = "B19WMDE_preact_mob05_191216_var"
+tracking = "org-mob05-191216-var"
+
 # Mobile English Campaign
 [mobile_english]
 campaign_tracking = "mob_en02-ba-191206"
