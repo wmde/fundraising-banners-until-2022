@@ -9,6 +9,9 @@ import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
+import { CampaignProjection } from '../shared/campaign_projection';
+import { LocalImpressionCount } from '../shared/local_impression_count';
+import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -17,9 +20,27 @@ const CLOSED = 2;
 export default class Banner extends Component {
 
 	static propTypes = {
+		bannerName: PropTypes.string,
+		campaignName: PropTypes.string,
+
+		campaignParameters: PropTypes.object,
+		campaignProjection: PropTypes.instanceOf( CampaignProjection ),
+		formatters: PropTypes.object,
+		bannerText: PropTypes.elementType,
+		translations: PropTypes.object,
+		/**
+		 *  Contains items with values and labels for SelectGroup components
+		 *  in the form, e.g. amounts, payment types, intervals, etc
+		 */
+		formItems: PropTypes.object,
+
+		/** object that holds any data needed for tracking purposes */
+		trackingData: PropTypes.object,
+		impressionCounts: PropTypes.instanceOf( LocalImpressionCount ),
+
 		/** callback when banner closes */
 		onClose: PropTypes.func,
-		/** */
+		/** Callback to register a displayBanner function with the BannerPresenter */
 		registerDisplayBanner: PropTypes.func.isRequired
 	}
 
@@ -29,7 +50,10 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			isFundsModalVisible: false
+			showLanguageWarning: false,
+
+			// trigger for banner resize events
+			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
 	}
@@ -41,6 +65,21 @@ export default class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
+		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+	}
+
+	adjustSurroundingSpace() {
+		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		const languageWarningElement = document.querySelector( '.wmde-banner .lang-warning' );
+		languageWarningElement.style.top = bannerElement.offsetHeight;
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight + languageWarningElement.offsetHeight );
+	}
+
+	// eslint-disable-next-line no-unused-vars
+	componentDidUpdate( previousProps, previousState, snapshot ) {
+		if ( previousState.formInteractionSwitcher !== this.state.formInteractionSwitcher ) {
+			this.adjustSurroundingSpace();
+		}
 	}
 
 	closeBanner = e => {
@@ -62,6 +101,10 @@ export default class Banner extends Component {
 		this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
+
+	onFormInteraction = () => {
+		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -97,12 +140,16 @@ export default class Banner extends Component {
 								campaignName={props.campaignName}
 								formatters={props.formatters}
 								impressionCounts={props.impressionCounts}
+								onFormInteraction={this.onFormInteraction}
 							/>
 						</div>
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<LanguageWarningBox
+							show={state.showLanguageWarning}
+						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>

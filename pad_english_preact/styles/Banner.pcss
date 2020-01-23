@@ -1,0 +1,65 @@
+.wmde-banner {
+	visibility: hidden;
+	width: 100%;
+
+	&--visible {
+		visibility: visible;
+	}
+	&--hidden {
+		display: none;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	.banner__wrapper {
+		font-size: 16px;
+
+		font-family: $banner-main-font-family;
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+		background-color: $color-white;
+	}
+
+	.banner__content {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.banner__infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 0 1 auto;
+		border: 5px solid $color-primary;
+		border-radius: 9px;
+		background-color: $color-white-off;
+		padding: 0.25em 0.5em 0.25em 0;
+		position: relative;
+		margin: 0.2em 0 0.2em 0.2em;
+	}
+
+	.banner__footer {
+		order: 2;
+		padding: 0.5em 0 1em 1.8em;
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg' ) no-repeat left 0.5em top 0.55em/18px 18px;
+	}
+
+	.close {
+		position: absolute;
+		width: 18px;
+		margin: 0.3em 0.3em 0.25em 0;
+		top: 0;
+		right: 0;
+		opacity: 0.8;
+
+		&__link {
+			font-size: 27px;
+			color: $color-gray;
+			text-decoration: none;
+			&:hover {
+				color: $color-gray-medium;
+			}
+		}
+	}
+}

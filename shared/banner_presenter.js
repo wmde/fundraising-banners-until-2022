@@ -4,18 +4,23 @@ import { mediaWikiIsShowingContentPage, onMediaWiki } from './mediawiki_checks';
 import { createElement, render } from 'preact';
 import InterruptibleTimeout from './interruptible_timeout';
 
-function createResizeHandler( bannerContainer, skinAdjuster ) {
-	return function () {
-		const banner = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
-		skinAdjuster.addSpaceInstantly( banner.offsetHeight );
-	};
-}
-
 export default class BannerPresenter {
 	constructor( trackingData, appearanceDelay, impressionCounts ) {
 		this.trackingData = trackingData;
 		this.appearanceDelay = appearanceDelay;
 		this.impressionCounts = impressionCounts;
+		this.resizeHandlerOfBanner = null;
+	}
+
+	createResizeHandler( bannerContainer, skinAdjuster ) {
+		return function () {
+			if ( this.resizeHandlerOfBanner ) {
+				this.resizeHandlerOfBanner();
+			} else {
+				const banner = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
+				skinAdjuster.addSpaceInstantly( banner.offsetHeight );
+			}
+		}.bind( this );
 	}
 
 	present( Banner, bannerContainer, props ) {
@@ -30,7 +35,7 @@ export default class BannerPresenter {
 
 		skinAdjuster.moveBannerContainerToTopOfDom();
 
-		const resizeHandler = createResizeHandler( bannerContainer, skinAdjuster );
+		const resizeHandler = this.createResizeHandler( bannerContainer, skinAdjuster ).bind( this );
 		let displayBanner;
 		render(
 			createElement( Banner, {
@@ -44,9 +49,13 @@ export default class BannerPresenter {
 						mw.centralNotice.hideBanner();
 					}
 				},
-				registerDisplayBanner: ( cb ) => {
+				registerDisplayBanner: cb => {
 					displayBanner = cb;
-				}
+				},
+				registerResizeBanner: cb => {
+					this.resizeHandlerOfBanner = cb;
+				},
+				skinAdjuster
 			} ),
 			bannerContainer
 		);

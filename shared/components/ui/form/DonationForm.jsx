@@ -33,9 +33,10 @@ export default function DonationForm( props ) {
 		}
 		e.preventDefault();
 	};
+	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element"
+		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction }
 			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
 
 			<div className="form-field-group">

@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
-import DonationForm from '../shared/components/ui/form/DonationForm';
-import Footer from '../shared/components/ui/Footer';
+import Footer from './components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
+import { LocalImpressionCount } from '../shared/local_impression_count';
+import { CampaignProjection } from '../shared/campaign_projection';
+import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -17,9 +18,28 @@ const CLOSED = 2;
 export default class Banner extends Component {
 
 	static propTypes = {
+		bannerName: PropTypes.string,
+		campaignName: PropTypes.string,
+
+		campaignParameters: PropTypes.object,
+		campaignProjection: PropTypes.instanceOf( CampaignProjection ),
+		formatters: PropTypes.object,
+		bannerText: PropTypes.elementType,
+		donationForm: PropTypes.elementType,
+		translations: PropTypes.object,
+		/**
+		 *  Contains items with values and labels for SelectGroup components
+		 *  in the form, e.g. amounts, payment types, intervals, etc
+		 */
+		formItems: PropTypes.object,
+
+		/** object that holds any data needed for tracking purposes */
+		trackingData: PropTypes.object,
+		impressionCounts: PropTypes.instanceOf( LocalImpressionCount ),
+
 		/** callback when banner closes */
 		onClose: PropTypes.func,
-		/** */
+		/** Callback to register a displayBanner function with the BannerPresenter */
 		registerDisplayBanner: PropTypes.func.isRequired
 	}
 
@@ -29,7 +49,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			isFundsModalVisible: false,
+			showLanguageWarning: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -49,7 +69,9 @@ export default class Banner extends Component {
 
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		const languageWarningElement = document.querySelector( '.wmde-banner .lang-warning' );
+		languageWarningElement.style.top = bannerElement.offsetHeight;
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight + languageWarningElement.offsetHeight );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -74,11 +96,6 @@ export default class Banner extends Component {
 		this.startProgressbar = startPb;
 	};
 
-	toggleFundsModal = () => {
-		this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
-		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
-	};
-
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
@@ -86,6 +103,7 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
+		const DonationForm = props.donationForm;
 		return <div
 			className={classNames(
 				'wmde-banner',
@@ -110,6 +128,11 @@ export default class Banner extends Component {
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}/>
+								<Footer
+									showFundsModal={() => {}}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+								/>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
@@ -123,15 +146,12 @@ export default class Banner extends Component {
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<LanguageWarningBox
+							show={state.showLanguageWarning}
+						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
-			<FundsModal
-				fundsModalData={props.fundsModalData}
-				toggleFundsModal={ this.toggleFundsModal }
-				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
 		</div>;
 	}
 

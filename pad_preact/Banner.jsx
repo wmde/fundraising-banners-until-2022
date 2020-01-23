@@ -47,7 +47,10 @@ export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			displayState: PENDING
+			displayState: PENDING,
+
+			// trigger for banner resize events
+			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
 	}
@@ -59,6 +62,19 @@ export default class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
+		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+	}
+
+	adjustSurroundingSpace() {
+		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+	}
+
+	// eslint-disable-next-line no-unused-vars
+	componentDidUpdate( previousProps, previousState, snapshot ) {
+		if ( previousState.formInteractionSwitcher !== this.state.formInteractionSwitcher ) {
+			this.adjustSurroundingSpace();
+		}
 	}
 
 	closeBanner = e => {
@@ -75,6 +91,10 @@ export default class Banner extends Component {
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
 	};
+
+	onFormInteraction = () => {
+		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -111,12 +131,16 @@ export default class Banner extends Component {
 								campaignName={props.campaignName}
 								formatters={props.formatters}
 								impressionCounts={props.impressionCounts}
+								onFormInteraction={this.onFormInteraction}
 							/>
 						</div>
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer/>
+						<Footer
+							bannerName={props.bannerName}
+							campaignName={props.campaignName}
+						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
