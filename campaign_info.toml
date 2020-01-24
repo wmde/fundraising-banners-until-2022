@@ -90,7 +90,7 @@ tracking = "org-pad02-191126-var"
 
 [pad_preact]
 campaign_tracking = "pad02-ba-191126"
-preview_link = "/wiki/Wikipedia:Hauptseite?useskin=minerva&banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad_preact.banners.ctrl]
