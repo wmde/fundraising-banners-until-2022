@@ -2,17 +2,13 @@
 import { h } from 'preact';
 import TextHighlight from '../../shared/components/ui/TextHighlight';
 
-function capitalizeFirstLetter( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-}
-
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span>Liebe Leserinnen und Leser, bitte verzeihen Sie die Störung. Es ist ein wenig unangenehm, daher kommen wir
 				gleich zur Sache. </span>
-			<span>{ capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt:</span>
+			<span className="text--capitalize-first-letter">{ weekdayPrepPhrase } { currentDayName } sind Sie in Deutschland gefragt:</span>
 		</p>
 		<p>
 			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber

@@ -1,17 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-function capitalizeFirstLetter( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-}
-
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
 			<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
-			<span>{ capitalizeFirstLetter( weekdayPrepPhrase ) }  { currentDayName }  sind Sie in Deutschland gefragt</span><span
+			<span className="text--capitalize-first-letter">{ weekdayPrepPhrase }  { currentDayName }  sind Sie in Deutschland gefragt</span><span
 				className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
 		</p>
 		<p className="text__paragraph">
