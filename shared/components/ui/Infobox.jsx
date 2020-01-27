@@ -6,17 +6,18 @@ import CampaignDays, { endOfDay, startOfDay } from '../../campaign_days';
 import CampaignDaySentence from '../../campaign_day_sentence';
 import { useContext } from 'preact/hooks';
 
-export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText } ) {
+export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText, currentDate } ) {
 
 	const BannerText = bannerText;
 	const Translations = useContext( TranslationContext );
 
-	const dayName = new DayName( new Date() );
+	const dayName = new DayName( currentDate || new Date() );
 	const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
 	const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
 	const campaignDays = new CampaignDays(
 		startOfDay( campaignParameters.startDate ),
-		endOfDay( campaignParameters.endDate )
+		endOfDay( campaignParameters.endDate ),
+		currentDate || new Date()
 	);
 	const campaignDaySentence = new CampaignDaySentence( campaignDays, Translations );
 
@@ -24,7 +25,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 		<BannerText
 			campaignParamters={ campaignParameters }
 			numberOfDonors={ formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ) }
-			campaignDaySentence={ campaignDaySentence }
+			campaignDaySentence={ campaignDaySentence.getSentence() }
 			weekdayPrepPhrase={ weekdayPrepPhrase }
 			currentDayName={ currentDayName }
 		/>

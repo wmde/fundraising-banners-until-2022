@@ -4,7 +4,7 @@
   "description": "Building WMDE fundraising banners with webpack",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register",
+    "test": "mocha --require @babel/register --require test/setup.js",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
     "start": "webpack-dev-server --disable-host-check --host 0.0.0.0",
@@ -36,6 +36,8 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "core-js": "^3.3.2",
     "css-loader": "^3.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-preact-pure": "^2.2.0",
     "eslint": "^6.7.2",
     "eslint-plugin-react": "^7.17.0",
     "eslint-config-wikimedia": "^0.15.0",

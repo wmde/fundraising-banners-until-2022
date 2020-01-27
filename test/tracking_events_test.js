@@ -2,9 +2,7 @@ import UrlTracker from '../shared/url_tracker';
 
 const assert = require( 'assert' );
 
-const { JSDOM } = require( 'jsdom' );
-const { window } = new JSDOM( '<!doctype html><html><body></body></html>' );
-const $ = require( 'jquery' )( window );
+const $ = require( 'jquery' );
 
 describe( 'UrlTracker', function () {
 
