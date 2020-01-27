@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useContext, useState } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
 import SelectGroup from '../../../../shared/components/ui/form/SelectGroup';
@@ -12,6 +12,7 @@ import useAmountWithCustom from '../../../../shared/components/ui/form/hooks/use
 import useInterval from '../../../../shared/components/ui/form/hooks/use_interval';
 import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_payment_method';
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
+import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -21,8 +22,8 @@ export default function DonationFormWithHeaders( props ) {
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( null, props.formatters.amountInputFormatter );
-	const disabledIntervals = [];
-	const disabledPaymentMethods = [];
+	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
+	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 
 	const validate = e => {
 		if ( [
@@ -33,6 +34,29 @@ export default function DonationFormWithHeaders( props ) {
 			return;
 		}
 		e.preventDefault();
+	};
+
+	const onChangeInterval = e => {
+		setInterval( e.target.value );
+		if ( e.target.value !== Intervals.ONCE.value ) {
+			setDisabledPaymentMethods( [ PaymentMethods.SOFORT.value ] );
+		} else {
+			setDisabledPaymentMethods( [] );
+		}
+	};
+
+	const onChangePaymentMethod = e => {
+		setPaymentMethod( e.target.value );
+		if ( e.target.value === PaymentMethods.SOFORT.value ) {
+			setDisabledIntervals(
+				// Exclude all intervals except "once"
+				props.formItems.intervals
+					.map( intervalItem => intervalItem.value )
+					.filter( interval => interval !== Intervals.ONCE.value )
+			);
+		} else {
+			setDisabledIntervals( [] );
+		}
 	};
 
 	return <div className="form">
@@ -48,7 +72,7 @@ export default function DonationFormWithHeaders( props ) {
 						isValid={ isValidOrUnset( intervalValidity ) }
 						errorMessage={ Translations[ 'no-interval-message' ] }
 						currentValue={ paymentInterval }
-						onSelected={ e => setInterval( e.target.value ) }
+						onSelected={ onChangeInterval }
 						disabledOptions={ disabledIntervals }
 					/>
 				</div>
@@ -85,7 +109,7 @@ export default function DonationFormWithHeaders( props ) {
 						isValid={ isValidOrUnset( paymentMethodValidity )}
 						errorMessage={ Translations[ 'no-payment-type-message' ] }
 						currentValue={ paymentMethod }
-						onSelected={ e => setPaymentMethod( e.target.value ) }
+						onSelected={ onChangePaymentMethod }
 						disabledOptions={ disabledPaymentMethods }
 					>
 						<SmsBox/>
