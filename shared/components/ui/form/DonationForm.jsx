@@ -5,6 +5,7 @@ import { useContext } from 'preact/hooks';
 import TranslationContext from '../../TranslationContext';
 import SelectGroup from './SelectGroup';
 import SelectCustomAmount from './SelectCustomAmount';
+import SmsBox from './SmsBox';
 
 import { isValid, isValidOrUnset } from './hooks/validation_states';
 import useAmountWithCustom from './hooks/use_amount';
@@ -80,12 +81,7 @@ export default function DonationForm( props ) {
 					onSelected={ e => setPaymentMethod( e.target.value ) }
 					disabledOptions={ disabledPaymentMethods }
 				>
-					<div className="sms-box">
-						<label className="select-group__option">
-							<a href="sms:81190" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
-						</label>
-						<span>{ Translations[ 'sms-info-message' ] }</span>
-					</div>
+					<SmsBox/>
 				</SelectGroup>
 			</div>
 

@@ -8,7 +8,7 @@ import DayName from '../shared/day_name';
 import animateHighlight from '../shared/animate_highlight';
 import ProgressBar from '../shared/progress_bar/progress_bar_mobile';
 import Translations from '../shared/messages/de';
-import { Slider } from './banner_slider';
+import { Slider } from '../shared/banner_slider';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { BannerFunctions as BannerFunctionsFactory } from '../shared/banner_functions';
 import { CampaignProjection } from '../shared/campaign_projection';

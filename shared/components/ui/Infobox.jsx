@@ -6,7 +6,7 @@ import CampaignDays, { endOfDay, startOfDay } from '../../campaign_days';
 import CampaignDaySentence from '../../campaign_day_sentence';
 import { useContext } from 'preact/hooks';
 
-export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText } ) {
+export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText, propsForText } ) {
 
 	const BannerText = bannerText;
 	const Translations = useContext( TranslationContext );
@@ -19,10 +19,12 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 		endOfDay( campaignParameters.endDate )
 	);
 	const campaignDaySentence = new CampaignDaySentence( campaignDays, Translations );
+	const additionalProps = propsForText || {};
 
 	return <div className="infobox">
 		<BannerText
-			campaignParamters={ campaignParameters }
+			{...additionalProps}
+			campaignParameters={ campaignParameters }
 			numberOfDonors={ formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ) }
 			campaignDaySentence={ campaignDaySentence }
 			weekdayPrepPhrase={ weekdayPrepPhrase }

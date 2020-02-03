@@ -3,7 +3,7 @@ import { h } from 'preact';
 import classNames from 'classnames';
 
 export default function SelectCustomAmount( props ) {
-	return <label className="select-group__option select-group__option-amount-other-input">
+	return <label className="select-group__option select-group__option--amount-other-input">
 		<input type="radio" name="amount" className="select-group__input" value=""/>
 		<input type="text"
 			value={ props.value }

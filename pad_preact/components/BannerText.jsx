@@ -1,17 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-// eslint-disable-next-line no-unused-vars
-function capitalizeFirstLetter( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-}
-
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParamters } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline text__headline--bold">
 			<span className="text__headline--italic">Liebe Leserinnen und Leser, </span>
-			<span>verzeihen Sie die Störung. { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt:</span>
+			<span>verzeihen Sie die Störung. <span className="text--capitalize-first-letter">{ weekdayPrepPhrase } { currentDayName } sind Sie in Deutschland gefragt:</span></span>
 		</p>
 
 		<p className="text__paragraph text__paragraph--bold">
@@ -22,7 +17,7 @@ export default function BannerText( props ) {
 				unser Spendenziel bereits am heutigen { currentDayName } erreicht.</span>
 
 			<span> Schon der Preis einer Tasse Kaffee würde genügen.
-			Über { campaignParamters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber
+			Über { campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber
 			nur { numberOfDonors } Menschen haben bisher gespendet.
 			Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir
 			könnten ihr nicht vertrauen.
