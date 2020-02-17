@@ -38,7 +38,7 @@ function amountReducer( state, action ) {
 			return {
 				...state,
 				customAmount: action.formatter( numericAmount ),
-				numericAmount: numericAmount,
+				numericAmount: numericAmount.toFixed( 2 ),
 				amountValidity: validateAmount( numericAmount )
 			};
 		case 'SET_VALIDITY':

@@ -123,9 +123,9 @@ export default function DonationFormWithHeaders( props ) {
 				</button>
 			</div>
 
-			<input type="hidden" name="betrag" value={ props.formatters.amountForServerFormatter( numericAmount ) } />
-			<input type="hidden" name="periode" value={ paymentInterval } />
-			<input type="hidden" name="zahlweise" value={ paymentMethod } />
+			<input type="hidden" name="amount" value={ numericAmount * 100 } />
+			<input type="hidden" name="interval" value={ paymentInterval } />
+			<input type="hidden" name="paymentType" value={ paymentMethod } />
 			<input type="hidden" name="impCount" value={ props.impressionCounts.overallCount }/>
 			<input type="hidden" name="bImpCount" value={ props.impressionCounts.bannerCount }/>
 		</form>
