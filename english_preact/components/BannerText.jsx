@@ -11,7 +11,7 @@ export default function BannerText( props ) {
 		<p className="text__paragraph">
 			It's a little awkward, so we'll get straight to the point:
 			<span> { weekdayPrepPhrase } { currentDayName } we humbly ask you to protect Wikipedia's independence.
-				{ campaignDaySentence } We depend on donations averaging about €&nbsp;23.83, but 99% of our readers
+				{ campaignDaySentence.getSentence() } We depend on donations averaging about €&nbsp;23.83, but 99% of our readers
 			don't give.
 			Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
 				but currently only { numberOfDonors } people have donated. </span>
