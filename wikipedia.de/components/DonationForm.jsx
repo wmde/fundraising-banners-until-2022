@@ -113,7 +113,7 @@ export default class DonationForm extends Component {
 							{intervals.map( ( { value, label, width } ) => (
 								<label className={ 'select-group__option select-group__option--' + ( width || 'halfwidth' ) } key={value}>
 									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
-										name="periode" value={value} className="select-group__input"/>
+										name="interval" value={value} className="select-group__input"/>
 									<span className="select-group__state">{label}</span>
 								</label> ) )
 							}
@@ -155,7 +155,7 @@ export default class DonationForm extends Component {
 								<label className="select-group__option select-group__option--halfwidth" key={value}>
 									<input type="radio" checked={value === state.paymentMethod }
 										onClick={this.paymentMethodSelected}
-										name="zahlweise" value={value}
+										name="paymentType" value={value}
 										className="select-group__input" />
 									<span className="select-group__state">{label}</span>
 								</label>
@@ -177,7 +177,7 @@ export default class DonationForm extends Component {
 					</button>
 				</div>
 
-				<input type="hidden" id="amount" name="betrag" value={ state.amount } />
+				<input type="hidden" id="amount" name="amount" value={ state.amount } />
 				<input type="hidden" id="impCount" name="impCount" value={this.impCount.overallCount}/>
 				<input type="hidden" id="bImpCount" name="bImpCount" value={this.impCount.bannerCount}/>
 			</form>
