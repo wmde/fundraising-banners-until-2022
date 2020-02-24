@@ -1,16 +1,20 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
+function capitalizeFirstLetter( message ) {
+	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
+}
+
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
 		<p className="text__headline text__headline--bold">
 			<span className="text__headline--italic">Liebe Leserinnen und Leser, </span>
-			<span>verzeihen Sie die Störung. <span className="text--capitalize-first-letter">{ weekdayPrepPhrase } { currentDayName } sind Sie in Deutschland gefragt:</span></span>
+			<span>verzeihen Sie die Störung. <span> { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt:</span></span>
 		</p>
 
 		<p className="text__paragraph text__paragraph--bold">
-			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
+			<span>{ campaignDaySentence.getSentence() } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
 				99&nbsp;% der Leserinnen und Leser spenden nicht. </span>
 
 			<span className="text__highlight">Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre
