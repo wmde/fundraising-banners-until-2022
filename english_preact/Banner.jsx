@@ -117,6 +117,7 @@ export default class Banner extends Component {
 			)}
 			ref={this.ref}>
 			<BannerTransition
+				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
 				onFinish={ this.startProgressbar }
 				skinAdjuster={ props.skinAdjuster }
