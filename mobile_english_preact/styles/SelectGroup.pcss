@@ -1,0 +1,177 @@
+.wmde-banner {
+
+	.select-group {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: 20px 0 20px 0;
+		border-top: 6px solid $color-primary-light-low-opacity;
+		padding-top: 20px;
+	}
+
+	.select-group__state {
+		display: block;
+		box-sizing: border-box;
+		font-family: inherit;
+		font-size: 24px;
+		font-weight: bold;
+
+		color: $color-black-light;
+		background-color: $color-gray-medium-bright;
+		border-radius: $form-element-border-radius;
+
+		min-height: 54px;
+		padding: 15px 2px;
+		height: 54px;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		background-color: $color-primary;
+		color: $color-white;
+		border-color: $color-gray-medium;
+	}
+
+	.select-group__input:disabled + .select-group__state {
+		color: $color-secondary-light;
+		border-color: $color-secondary-light;
+	}
+
+	.select-group__input {
+		position: absolute;
+		overflow: hidden;
+		height: 1px;
+		width: 1px;
+		clip: rect( 0 0 0 0 );
+		border: 0;
+		margin: -1px;
+		padding: 0;
+	}
+
+	.select-group__option {
+		box-sizing: border-box;
+		display: block;
+		margin: 0 0 6px;
+		font-weight: bold;
+		width: 31%;
+	}
+
+	.select-group__custom-input {
+		width: 100%;
+		box-sizing: border-box;
+		font-family: inherit;
+		font-size: 24px;
+
+		border-radius: $form-element-border-radius;
+		min-height: 54px;
+
+		display: block;
+		background-color: $color-gray-medium-bright;
+		color: $color-black-light;
+		padding: 15px 2px;
+		height: 54px;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+		font-weight: bold;
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+		&--value-entered:not( :focus ) {
+			background-color: $color-primary;
+			color: $color-white;
+			border-color: $color-gray-medium;
+		}
+
+		&:active,
+		&:focus,
+		&.selected-option {
+			background-color: $color-primary;
+			color: $color-primary-lighter;
+			border-color: $color-gray-medium;
+			&::placeholder {
+				color: $color-primary-lighter;
+			}
+		}
+	}
+
+	.select-group__errormessage {
+		display: none;
+		color: $color-black;
+		font-weight: bold;
+		text-align: left;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.8em;
+	}
+
+	.select-group-container--with-error {
+		.select-group__erroricon {
+			position: relative;
+			padding-left: 26px;
+			display: block;
+
+			&:before {
+				content: $errorIcon;
+				width: 16px;
+				height: 16px;
+				position: absolute;
+				top: 0;
+				left: 6px;
+			}
+		}
+
+		.select-group__errormessage {
+			display: block;
+			color: $color-error;
+		}
+	}
+
+	/* Individual button sizes for each section */
+
+	.select-group-container--interval {
+		.select-group__option {
+			width: 100%;
+			flex: 1 1 auto;
+			@media ( min-width: $breakpoint_phone_l ) {
+				width: 31%;
+				flex: 0 1 31%;
+			}
+		}
+	}
+
+	.select-group-container--amount {
+		.select-group__option {
+			width: 31%;
+			flex: 0 1 31%;
+		}
+	}
+
+	.select-group-container--payment-method {
+		.select-group__option {
+			width: 100%;
+			flex: 1 1 auto;
+			margin-bottom: 10px;
+			@media ( min-width: $breakpoint_phone_l ) {
+				width: 49%;
+				flex: 0 1 49%;
+			}
+		}
+
+		/* Sofortüberweisung button */
+		.select-group__option:nth-child( 5 ) {
+			width: 100%;
+			flex: 1 1 auto;
+		}
+
+		.sms-box .select-group__option {
+			width: 100%;
+			flex: 1 1 auto;
+		}
+	}
+}

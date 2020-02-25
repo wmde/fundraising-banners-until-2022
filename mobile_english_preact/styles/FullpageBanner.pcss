@@ -1,0 +1,123 @@
+.wmde-banner {
+
+	.frbanner {
+		background: $color-primary-lighter;
+		width: 98%;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+
+		text-align: center;
+		box-sizing: border-box;
+		display: block;
+		margin: 0 auto;
+		border-radius: 15px;
+		border: 8px solid $color-primary;
+		padding-bottom: 15px;
+	}
+
+	.close {
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
+		display: block;
+		cursor: pointer;
+		position: absolute;
+		right: 1%; /* match the 1% gap on the right side of .frbanner */
+		top: 0;
+		opacity: 0.6;
+		text-indent: -99999px;
+		z-index: 999;
+		padding: 36px;
+		background-size: 15px;
+	}
+
+	@media ( min-width: $breakpoint_phone_m ) {
+		.close {
+			background-size: 20px;
+		}
+	}
+
+	.frbanner-window {
+		.headline {
+			cursor: default;
+			width: 85%;
+			flex: 1 1 85%;
+			margin-left: 20px;
+			margin-top: 10px;
+
+			&__container {
+				position: relative;
+
+				/* single line above container */
+
+				&:before {
+					content: '';
+					display: block;
+					border-top: solid 1px $color-primary-light;
+					width: 100%;
+					height: 1px;
+					position: absolute;
+					top: 50%;
+				}
+			}
+
+			&__content {
+				font-weight: bold;
+				font-family: $banner-main-font-family;
+				font-size: 2.8vw;
+				color: $color-primary-light;
+				display: inline-block;
+				letter-spacing: 1px;
+				margin-left: 6%;
+				line-height: 32px;
+				text-transform: uppercase;
+				padding: 0 5px;
+				background-color: $color-primary-lighter;
+				position: relative;
+
+				@media ( min-width: $breakpoint_phone_m ) {
+					font-size: 14px;
+					padding: 0 15px;
+					margin-left: 35px;
+				}
+			}
+		}
+
+		.close-button {
+			position: relative;
+			padding: 0 5px;
+			flex: 0 0 auto;
+			right: 0;
+			top: -3px;
+			line-height: 39px;
+			font-size: 40px;
+			font-weight: bold;
+			@media ( min-width: $breakpoint_phone_m ) {
+				font-size: 50px;
+			}
+			&:before {
+				position: relative;
+				content: $banner-symbol-close;
+				color: $color-primary-light;
+				float: left;
+				height: 100%;
+			}
+		}
+	}
+
+	.close:active {
+		opacity: 1;
+	}
+
+	.smallprint {
+		width: 100%;
+		font-size: 75%;
+		a {
+			font-size: 9pt;
+			line-height: 14pt;
+			color: $color-gray;
+			text-decoration: none;
+			margin: 0 2px;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

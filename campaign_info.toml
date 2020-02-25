@@ -86,6 +86,23 @@ pagename = "B19WMDE_mob_en02_191206_var"
 tracking = "org-mob_en02-191206-var"
 
 
+# Mobile English PREACT Campaign
+[mobile_english_preact]
+campaign_tracking = "mob_en02-ba-191206"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+wrapper_template = "wikipedia_org"
+
+[mobile_english_preact.banners.ctrl]
+filename = "./mobile_english_preact/banner_ctrl.js"
+pagename = "B19WMDE_preact_mob_en02_191206_ctrl"
+tracking = "org-mob_en02-191206-ctrl"
+
+[mobile_english_preact.banners.var]
+filename = "./mobile_english_preact/banner_var.js"
+pagename = "B19WMDE_preact_mob_en02_191206_var"
+tracking = "org-mob_en02-191206-var"
+
+
 # iPad campaign
 [pad]
 campaign_tracking = "pad02-ba-191126"

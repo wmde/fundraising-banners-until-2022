@@ -1,0 +1,32 @@
+.wmde-banner {
+	.banner-text {
+		margin: 20px;
+		padding: 0 50px;
+		font-size: 20px;
+		line-height: 1.3;
+		text-align: left;
+		font-weight: bold;
+
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			font-size: 24px;
+			line-height: 1.4;
+		}
+	}
+	.text__headline {
+		/* Add a margin to the first paragraph to make room for the close button */
+		margin-right: 36px;
+		margin-bottom: 10px;
+	}
+
+	.text {
+		&--capitalize-first-letter:first-letter {
+			text-transform: capitalize;
+		}
+		/*  This is for keeping the same banner size when testing different banner texts.
+			The placeholder text element should contain the text that was removed
+		 */
+		&__hidden-placeholder {
+			visibility: hidden;
+		}
+	}
+}
