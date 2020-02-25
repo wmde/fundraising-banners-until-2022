@@ -111,7 +111,12 @@ export default class Banner extends Component {
 				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
 			)}
 			ref={this.ref}>
-			<BannerTransition registerDisplayBanner={ this.registerBannerTransition } onFinish={ this.startProgressbar }>
+			<BannerTransition
+				fixed={ true }
+				registerDisplayBanner={ this.registerBannerTransition }
+				onFinish={ this.startProgressbar }
+				skinAdjuster={ props.skinAdjuster }
+			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
 						<div className="banner__content">
