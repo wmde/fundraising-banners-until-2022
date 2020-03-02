@@ -12,6 +12,7 @@ import useAmountWithCustom from './hooks/use_amount';
 import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
 import { amountMessage, validateRequired } from './utils';
+import SubmitValues from './SubmitValues';
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -42,7 +43,7 @@ export default function DonationForm( props ) {
 
 			<div className="form-field-group">
 				<SelectGroup
-					fieldname="interval"
+					fieldname="select-interval"
 					selectionItems={ props.formItems.intervals }
 					isValid={ isValidOrUnset( intervalValidity ) }
 					errorMessage={ Translations[ 'no-interval-message' ] }
@@ -54,7 +55,7 @@ export default function DonationForm( props ) {
 
 			<div className={ 'form-field-group' }>
 				<SelectGroup
-					fieldname="amount"
+					fieldname="select-amount"
 					selectionItems={props.formItems.amounts}
 					isValid={ isValidOrUnset( amountValidity ) }
 					errorMessage={ amountMessage( amountValidity, Translations ) }
@@ -73,7 +74,7 @@ export default function DonationForm( props ) {
 
 			<div className="form-field-group">
 				<SelectGroup
-					fieldname="payment-method"
+					fieldname="select-payment-method"
 					selectionItems={ props.formItems.paymentMethods }
 					isValid={ isValidOrUnset( paymentMethodValidity )}
 					errorMessage={ Translations[ 'no-payment-type-message' ] }
@@ -91,11 +92,12 @@ export default function DonationForm( props ) {
 				</button>
 			</div>
 
-			<input type="hidden" name="amount" value={ numericAmount * 100} />
-			<input type="hidden" name="interval" value={ paymentInterval } />
-			<input type="hidden" name="paymentType" value={ paymentMethod } />
-			<input type="hidden" name="impCount" value={ props.impressionCounts.overallCount }/>
-			<input type="hidden" name="bImpCount" value={ props.impressionCounts.bannerCount }/>
+			<SubmitValues
+				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
+				interval={ paymentInterval }
+				paymentType={ paymentMethod }
+				impressionCounts={ props.impressionCounts }
+			/>
 		</form>
 	</div>;
 }

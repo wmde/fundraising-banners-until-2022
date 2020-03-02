@@ -1,9 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-
-function capitalizeFirstLetter( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-}
+import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
 
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
@@ -15,7 +12,7 @@ export default function BannerText( props ) {
 				className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
 		</p>
 		<p className="text__paragraph">
-			<span>{ campaignDaySentence.getSentence() } Wikipedia wird durch Spenden von durchschnittlich 23,83 € finanziert, aber 99 % der Leserinnen und Leser
+			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83 € finanziert, aber 99 % der Leserinnen und Leser
 				spenden nicht. </span>
 
 			<span className="text__paragraph--bold">

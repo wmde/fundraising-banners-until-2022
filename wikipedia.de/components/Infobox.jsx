@@ -1,10 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import TextHighlight from './TextHighlight';
-
-function capitalizeFirstLetter( message ) {
-	return message.charAt( 0 ).toUpperCase() + message.slice( 1 );
-}
+import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
 
 export default function Infobox( props ) {
 	const { weekdayPrepPhrase, currentDayName, amountBannerImpressionsInMillion, numberOfDonors, campaignDaySentence, animateHighlightTrigger } = props;

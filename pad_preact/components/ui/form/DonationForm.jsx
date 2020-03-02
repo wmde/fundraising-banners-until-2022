@@ -5,6 +5,7 @@ import { useContext, useState } from 'preact/hooks';
 import TranslationContext from '../../../../shared/components/TranslationContext';
 import SelectGroup from './SelectGroup';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
+import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
 
 import { isValid, isValidOrUnset } from '../../../../shared/components/ui/form/hooks/validation_states';
 import useAmountWithCustom from '../../../../shared/components/ui/form/hooks/use_amount';
@@ -70,7 +71,7 @@ export default function DonationForm( props ) {
 
 			<div className="form-field-group">
 				<SelectGroup
-					fieldname="interval"
+					fieldname="select-interval"
 					selectionItems={ props.formItems.intervals }
 					isValid={ isValidOrUnset( intervalValidity ) }
 					errorMessage={ Translations[ 'no-interval-message' ] }
@@ -82,7 +83,7 @@ export default function DonationForm( props ) {
 
 			<div className={ 'form-field-group' }>
 				<SelectGroup
-					fieldname="amount"
+					fieldname="select-amount"
 					selectionItems={props.formItems.amounts}
 					isValid={ isValidOrUnset( amountValidity ) }
 					errorMessage={ amountMessage( amountValidity, Translations ) }
@@ -101,7 +102,7 @@ export default function DonationForm( props ) {
 
 			<div className="form-field-group">
 				<SelectGroup
-					fieldname="payment-method"
+					fieldname="select-payment-method"
 					selectionItems={ props.formItems.paymentMethods }
 					isValid={ isValidOrUnset( paymentMethodValidity )}
 					errorMessage={ Translations[ 'no-payment-type-message' ] }
@@ -139,12 +140,14 @@ export default function DonationForm( props ) {
 				</button>
 			</div>
 
-			<input type="hidden" name="addressType" value={ addressOption === GiveAddressOptions.NO.value ? 'anonym' : 'person' } />
-			<input type="hidden" name="amount" value={ numericAmount * 100 } />
-			<input type="hidden" name="interval" value={ paymentInterval } />
-			<input type="hidden" name="paymentType" value={ paymentMethod } />
-			<input type="hidden" name="impCount" value={ props.impressionCounts.overallCount }/>
-			<input type="hidden" name="bImpCount" value={ props.impressionCounts.bannerCount }/>
+			<SubmitValues
+				addressType={ addressOption === GiveAddressOptions.NO.value ? 'anonym' : 'person' }
+				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
+				interval={ paymentInterval }
+				paymentType={ paymentMethod }
+				impressionCounts={ props.impressionCounts }
+			/>
+
 		</form>
 	</div>;
 }
