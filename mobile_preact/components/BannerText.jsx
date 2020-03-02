@@ -15,7 +15,7 @@ export default function BannerText( props ) {
 			<span> { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt:</span>
 		</p>
 		<p>
-			<span>{ campaignDaySentence.getSentence() } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
+			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
 				99&nbsp;% der Leserinnen und Leser spenden nicht. </span>
 			<TextHighlight registerStartAnimation={ props.registerStartHighlight }>
 				Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,

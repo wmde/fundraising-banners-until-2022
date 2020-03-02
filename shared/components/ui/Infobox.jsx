@@ -26,7 +26,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 			{...additionalProps}
 			campaignParameters={ campaignParameters }
 			numberOfDonors={ formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ) }
-			campaignDaySentence={ campaignDaySentence }
+			campaignDaySentence={ campaignDaySentence.getSentence() }
 			weekdayPrepPhrase={ weekdayPrepPhrase }
 			currentDayName={ currentDayName }
 		/>

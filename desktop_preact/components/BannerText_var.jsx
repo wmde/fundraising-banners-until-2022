@@ -15,7 +15,7 @@ export default function BannerText( props ) {
 				className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
 		</p>
 		<p className="text__paragraph">
-			<span>{ campaignDaySentence.getSentence() } Wikipedia wird durch Spenden von durchschnittlich 23,83 € finanziert, aber 99 % der Leserinnen und Leser
+			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83 € finanziert, aber 99 % der Leserinnen und Leser
 				spenden nicht. </span>
 
 			<span className="text__paragraph--bold">
