@@ -5,6 +5,7 @@ import { parseAmount } from '../../shared/parse_amount';
 
 // TODO pass in formatter as a dependency to be able to localize this component
 import { amountForServerFormatter, amountInputFormatter } from '../../shared/number_formatter/de';
+import SubmitValues from '../../shared/components/ui/form/SubmitValues';
 
 export default class DonationForm extends Component {
 	constructor( props ) {
@@ -112,8 +113,14 @@ export default class DonationForm extends Component {
 						<div id="WMDE_Banner-frequency" className="WMDE-Banner-frequency select-group">
 							{intervals.map( ( { value, label, width } ) => (
 								<label className={ 'select-group__option select-group__option--' + ( width || 'halfwidth' ) } key={value}>
-									<input type="radio" onClick={this.intervalSelected} checked={value === state.paymentInterval}
-										name="interval" value={value} className="select-group__input"/>
+									<input
+										name="select-interval"
+										type="radio"
+										onClick={this.intervalSelected}
+										checked={value === state.paymentInterval}
+										value={value}
+										className="select-group__input"
+									/>
 									<span className="select-group__state">{label}</span>
 								</label> ) )
 							}
@@ -126,7 +133,8 @@ export default class DonationForm extends Component {
 					<div id="WMDE_Banner-amounts" className="WMDE-Banner-amounts select-group">
 						{amounts.map( ( { value } ) => (
 							<label className="select-group__option select-group__option--quarterwidth" key={value}>
-								<input type="radio" name="betrag_auswahl"
+								<input type="radio"
+									name="betrag_auswahl"
 									onClick={this.amountSelected}
 									className="select-group__input"
 									checked={ value === state.selectedAmount }
@@ -153,10 +161,13 @@ export default class DonationForm extends Component {
 						<div id="WMDE_Banner-payment-type" className="WMDE-Banner-payment select-group">
 							{paymentMethods.map( ( { value, label } ) => (
 								<label className="select-group__option select-group__option--halfwidth" key={value}>
-									<input type="radio" checked={value === state.paymentMethod }
+									<input type="radio"
+										name="select-payment-method"
+										checked={value === state.paymentMethod }
 										onClick={this.paymentMethodSelected}
-										name="paymentType" value={value}
-										className="select-group__input" />
+										value={value}
+										className="select-group__input"
+									/>
 									<span className="select-group__state">{label}</span>
 								</label>
 							) ) }
@@ -177,9 +188,12 @@ export default class DonationForm extends Component {
 					</button>
 				</div>
 
-				<input type="hidden" id="amount" name="amount" value={ state.amount } />
-				<input type="hidden" id="impCount" name="impCount" value={this.impCount.overallCount}/>
-				<input type="hidden" id="bImpCount" name="bImpCount" value={this.impCount.bannerCount}/>
+				<SubmitValues
+					amount={ state.amount }
+					interval={ state.paymentInterval }
+					paymentType={ state.paymentMethod }
+					impressionCounts={ this.impCount }
+				/>
 			</form>
 		</div>;
 	}
