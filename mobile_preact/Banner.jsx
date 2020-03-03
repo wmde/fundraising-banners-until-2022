@@ -6,7 +6,7 @@ import { Slider } from '../shared/banner_slider';
 import BannerTransition from '../shared/components/BannerTransition';
 import MiniBanner from './components/MiniBanner';
 import TranslationContext from '../shared/components/TranslationContext';
-import FollowupTransition from './components/FollowupTransition';
+import FollowupTransition from '../shared/components/FollowupTransition';
 import FullpageBanner from './components/FullpageBanner';
 
 const PENDING = 0;

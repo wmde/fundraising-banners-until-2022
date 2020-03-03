@@ -2,8 +2,8 @@
 import { Component, createRef, h } from 'preact';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import CssTransition from '../../shared/css_transition';
-import Skin from '../../shared/skin/Skin';
+import CssTransition from '../css_transition';
+import Skin from '../skin/Skin';
 
 const PAGELOADING = 0;
 const READY = 1;
