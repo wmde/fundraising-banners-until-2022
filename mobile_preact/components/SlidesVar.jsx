@@ -2,11 +2,11 @@
 import { h } from 'preact';
 
 export default function Slides( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, formattedGoalDonationSum, campaignParameters, progressBar } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, formattedGoalDonationSumNumeric, campaignParameters, progressBar } = props;
 	return <div className="mini-banner-carousel">
 
 		<div className="carousel-cell">
-			<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSum }</p>
+			<p className="goal-headline">Unser Spendenziel:  { formattedGoalDonationSumNumeric } Millionen Euro</p>
 			{ progressBar }
 		</div>
 
