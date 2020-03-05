@@ -21,7 +21,7 @@ export default function DonationForm( props ) {
 	const [
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
-	] = useAmountWithCustom( null, props.formatters.amountInputFormatter );
+	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const disabledIntervals = [];
 	const disabledPaymentMethods = [];
 
@@ -68,6 +68,10 @@ export default function DonationForm( props ) {
 						onInput={ e => updateCustomAmount( e.target.value ) }
 						onBlur={ e => validateCustomAmount( e.target.value ) }
 						placeholder={ Translations[ 'custom-amount-placeholder' ] }
+						language={
+							/* eslint-disable-next-line dot-notation */
+							Translations[ 'LANGUAGE' ]
+						}
 					/>
 				</SelectGroup>
 			</div>

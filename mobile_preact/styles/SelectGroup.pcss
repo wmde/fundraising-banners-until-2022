@@ -80,13 +80,29 @@
 		color: $color-black-light;
 		border: 1px solid $color-secondary-dark;
 		border-radius: $form-element-border-radius;
-		padding: 18px 2px;
+		padding: 16px 2px;
 		min-height: 54px;
 
-		&--value-entered:not( :focus ) {
+		&--value-entered {
 			background-color: $color-secondary;
 			color: $color-white;
 			border-color: $color-gray-medium;
+		}
+
+		&--euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			right: 0;
+			margin-top: -15px;
+			text-align: center;
+			font-size: 24px;
+
+			&--value-entered {
+				color: $color-white;
+			}
 		}
 	}
 
@@ -139,6 +155,10 @@
 		.select-group__option {
 			width: 49%;
 			flex: 0 1 49%;
+		}
+
+		.select-group__option--amount-other-input {
+			position: relative;
 		}
 	}
 

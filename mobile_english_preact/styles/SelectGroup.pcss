@@ -98,6 +98,19 @@
 				color: $color-primary-lighter;
 			}
 		}
+
+		&--euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			left: 0;
+			margin-top: -15px;
+			text-align: center;
+			font-size: 24px;
+			color: $color-white;
+		}
 	}
 
 	.select-group__errormessage {
@@ -149,6 +162,9 @@
 		.select-group__option {
 			width: 31%;
 			flex: 0 1 31%;
+		}
+		.select-group__option--amount-other-input {
+			position: relative;
 		}
 	}
 
