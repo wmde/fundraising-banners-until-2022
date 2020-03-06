@@ -64,6 +64,7 @@ export default function DonationForm( props ) {
 					disabledOptions={ [] }
 				>
 					<SelectCustomAmount
+						fieldname="select-amount"
 						value={ customAmount }
 						onInput={ e => updateCustomAmount( e.target.value ) }
 						onBlur={ e => validateCustomAmount( e.target.value ) }

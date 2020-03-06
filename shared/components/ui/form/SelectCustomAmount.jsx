@@ -39,7 +39,7 @@ export default class SelectCustomAmount extends Component {
 
 	render( props, state ) {
 		return <label className="select-group__option select-group__option--amount-other-input">
-			<input type="radio" name="select-amount" className="select-group__input" value="" ref={this.radioInput}/>
+			<input type="radio" name={ props.fieldname } className="select-group__input" value="" ref={ this.radioInput }/>
 
 			<div className={ classNames(
 				'select-group__custom-input',
