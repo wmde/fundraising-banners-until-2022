@@ -5,7 +5,7 @@ import formatNumber from 'format-number';
 
 import { Slider } from '../../shared/banner_slider';
 import MobileBannerFullpage from './MobileBannerFullpage';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
 
 const millionFormatter = formatNumber( {
 	decimal: ',',

@@ -2,9 +2,9 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import DonationForm from '../components/DonationForm';
-import Infobox from '../components/Infobox';
-import ProgressBar from '../components/ProgressBar';
+import DonationForm from '../../shared/components/ui/form/DonationForm';
+import Infobox from '../../shared/components/ui/Infobox';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
 
 export default class MobileBannerFullpage extends Component {
 	render( props ) {
@@ -17,12 +17,12 @@ export default class MobileBannerFullpage extends Component {
 						<div className="close">
 							<button className="close__link" onClick={ props.closeBanner }>&#x2715;</button>
 						</div>
-						<Infobox amountBannerImpressionsInMillion={ props.amountBannerImpressionsInMillion }
-							numberOfDonors={ props.numberOfDonors }
-							campaignDaySentence={ props.campaignDaySentence }
-							weekdayPrepPhrase={ props.weekdayPrepPhrase }
-							currentDayName={ props.currentDayName }
-							animateHighlightTrigger={ props.animateHighlightTrigger }
+						<Infobox
+							formatters={props.formatters}
+							campaignParameters={props.campaignParameters}
+							campaignProjection={props.campaignProjection}
+							bannerText={props.bannerText}
+							propsForText={ { registerStartHighlight: props.registerStartHighlight } }
 						/>
 						<div>
 							<ProgressBar
@@ -38,7 +38,13 @@ export default class MobileBannerFullpage extends Component {
 						<div className="call-to-action">
 							Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
 						</div>
-						<DonationForm campaignName={ props.campaignName } bannerName={ props.bannerName }/>
+						<DonationForm
+							formItems={props.formItems}
+							bannerName={props.bannerName}
+							campaignName={props.campaignName}
+							formatters={props.formatters}
+							impressionCounts={props.impressionCounts}
+						/>
 						<div className="smallprint" id="frbanner-smallprint">
 							<div className="smallprint">
 								<span>

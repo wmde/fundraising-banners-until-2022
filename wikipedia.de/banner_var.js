@@ -1,5 +1,5 @@
 import { render, createElement } from 'preact';
-import Banner from './banners/Banner';
+import Banner from './Banner';
 import Translations from '../shared/messages/de';
 import DayName from '../shared/day_name';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
