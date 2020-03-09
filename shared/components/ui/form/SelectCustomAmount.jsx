@@ -1,10 +1,8 @@
-import { Component, createRef } from 'preact/compat';
 // eslint-disable-next-line no-unused-vars
-import { h } from 'preact';
+import { h, Component } from 'preact';
 import classNames from 'classnames';
 
 export default class SelectCustomAmount extends Component {
-	radioInput = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -16,17 +14,9 @@ export default class SelectCustomAmount extends Component {
 
 	onFocus = ( e ) => {
 		this.setState( { showEuro: true, focused: true } );
-		this.radioInput.current.click();
 		if ( this.props.value !== '' ) {
 			e.target.select();
 		}
-	};
-
-	onInput = ( e ) => {
-		if ( !this.radioInput.current.checked ) {
-			this.radioInput.current.click();
-		}
-		this.props.onInput( e );
 	};
 
 	onBlur = ( e ) => {
@@ -39,7 +29,7 @@ export default class SelectCustomAmount extends Component {
 
 	render( props, state ) {
 		return <label className="select-group__option select-group__option--amount-other-input">
-			<input type="radio" name={ props.fieldname } className="select-group__input" value="" ref={ this.radioInput }/>
+			<input type="radio" name={ props.fieldname } className="select-group__input" value="" checked={ state.focused || props.value !== null }/>
 
 			<div className={ classNames(
 				'select-group__custom-input',
@@ -53,7 +43,7 @@ export default class SelectCustomAmount extends Component {
 
 				<input type="text"
 					value={ props.value }
-					onInput={ this.onInput }
+					onInput={ props.onInput }
 					size="3"
 					maxLength="8"
 					onFocus={ this.onFocus }
