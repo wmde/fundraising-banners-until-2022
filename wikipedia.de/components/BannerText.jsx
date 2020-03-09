@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-import TextHighlight from './TextHighlight';
 import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
+import TextHighlight from '../../shared/components/ui/TextHighlight';
 
-export default function Infobox( props ) {
-	const { weekdayPrepPhrase, currentDayName, amountBannerImpressionsInMillion, numberOfDonors, campaignDaySentence, animateHighlightTrigger } = props;
-	return <div className="infobox__text">
+export default function BannerText( props ) {
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
+	return <div className="banner-text">
+
 		<p className="text__headline">
 			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
 			<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
@@ -17,14 +18,14 @@ export default function Infobox( props ) {
 			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
 			99&nbsp;% der Leserinnen und Leser spenden nicht.
 
-			<TextHighlight animateHighlightTrigger={animateHighlightTrigger}>
+			<TextHighlight registerStartAnimation={ props.registerStartHighlight }>
 				{' '}Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.{' '}
 			</TextHighlight>
 
 			<span className='ab-test-text'>Menschen spenden aus einem einfachen Grund – weil Wikipedia nützlich ist. </span>
 
-			<span>Schon der Preis einer Tasse Kaffee würde genügen.
-				Über {amountBannerImpressionsInMillion} Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {numberOfDonors} Menschen haben bisher gespendet. </span>
+			<span>Schon der Preis einer Tasse Kaffee würde genügen. Über { campaignParameters.millionImpressionsPerDay }
+			Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {numberOfDonors} Menschen haben bisher gespendet. </span>
 
 			<span className="optional-text text-l">
 				Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt.

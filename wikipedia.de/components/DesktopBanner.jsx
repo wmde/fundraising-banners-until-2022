@@ -2,10 +2,10 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import DonationForm from '../components/DonationForm';
-import Footer from '../components/Footer';
-import Infobox from '../components/Infobox';
-import ProgressBar from '../components/ProgressBar';
+import DonationForm from '../../shared/components/ui/form/DonationForm';
+import Footer from '../../shared/components/ui/Footer';
+import Infobox from '../../shared/components/ui/Infobox';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
 import FundsModal from '../../shared/components/ui/FundsModal';
 
 export default class DesktopBanner extends Component {
@@ -44,11 +44,13 @@ export default class DesktopBanner extends Component {
 			<div className="banner banner--desktop">
 				<div className="banner__content">
 					<div className="infobox">
-						<Infobox amountBannerImpressionsInMillion={props.amountBannerImpressionsInMillion}
-							numberOfDonors={props.numberOfDonors}
-							campaignDaySentence={props.campaignDaySentence}
-							weekdayPrepPhrase={props.weekdayPrepPhrase}
-							currentDayName={props.currentDayName}/>
+						<Infobox
+							formatters={props.formatters}
+							campaignParameters={props.campaignParameters}
+							campaignProjection={props.campaignProjection}
+							bannerText={props.bannerText}
+							propsForText={ { registerStartHighlight: props.registerStartHighlight } }
+						/>
 						<ProgressBar
 							locale={props.locale}
 							daysLeft={campaignProjection.getRemainingDays()}
@@ -57,7 +59,13 @@ export default class DesktopBanner extends Component {
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 							setStartAnimation={this.setStartAnimation}/>
 					</div>
-					<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
+					<DonationForm
+						formItems={props.formItems}
+						bannerName={props.bannerName}
+						campaignName={props.campaignName}
+						formatters={props.formatters}
+						impressionCounts={props.impressionCounts}
+					/>
 				</div>
 				<div className="close">
 					<button className="close__link" onClick={this.closeBanner}>&#x2715;</button>
