@@ -1,0 +1,125 @@
+.wmde-banner {
+
+	.select-group {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.select-group__state {
+		display: block;
+		box-sizing: border-box;
+		font-family: inherit;
+		font-weight: 500;
+		font-size: 24px;
+
+		background-color: $color-bright;
+		color: $color-black-light;
+		border: 1px solid $color-secondary-dark;
+		border-radius: $form-element-border-radius;
+		padding: 18px 2px;
+		min-height: 54px;
+	}
+
+	.select-group__input:checked + .select-group__state {
+		background-color: $color-secondary;
+		color: $color-white;
+		border-color: $color-gray-medium;
+	}
+
+	.select-group__input:disabled + .select-group__state {
+		color: $color-secondary-light;
+		border-color: $color-secondary-light;
+	}
+
+	.select-group__input {
+		position: absolute;
+		overflow: hidden;
+		height: 1px;
+		width: 1px;
+		clip: rect( 0 0 0 0 );
+		border: 0;
+		margin: -1px;
+		padding: 0;
+	}
+
+	.select-group__option {
+		box-sizing: border-box;
+		display: block;
+		margin: 0 0 6px;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+		&:focus,
+		&:active {
+			.select-group__state {
+				background-color: $color-secondary-light;
+				color: $color-black;
+				border-color: $color-gray-medium;
+			}
+
+			&::placeholder {
+				color: $color-bright;
+			}
+		}
+	}
+
+	.select-group__custom-input {
+		text-align: center;
+		width: 100%;
+		box-sizing: border-box;
+		font-family: inherit;
+		font-weight: 500;
+		font-size: 24px;
+
+		background-color: $color-bright;
+		color: $color-black-light;
+		border: 1px solid $color-secondary-dark;
+		border-radius: $form-element-border-radius;
+		padding: 18px 2px;
+		min-height: 54px;
+
+		&--value-entered:not( :focus ) {
+			background-color: $color-secondary;
+			color: $color-white;
+			border-color: $color-gray-medium;
+		}
+	}
+
+	.select-group__errormessage {
+		display: none;
+		color: $color-black;
+		font-weight: bold;
+		text-align: left;
+		width: 100%;
+		margin-bottom: 0.2em;
+		font-size: 0.8em;
+	}
+
+	.select-group-container--with-error {
+		.select-group__erroricon {
+			position: relative;
+			padding-left: 26px;
+			display: block;
+
+			&:before {
+				content: $errorIcon;
+				width: 16px;
+				height: 16px;
+				position: absolute;
+				top: 0;
+				left: 6px;
+			}
+		}
+
+		.select-group__errormessage {
+			display: block;
+			color: $color-error;
+		}
+	}
+
+}

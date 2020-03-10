@@ -5,6 +5,10 @@ import MobileBanner from './components/MobileBanner';
 import TranslationContext from '../shared/components/TranslationContext';
 import { Slider } from '../shared/banner_slider';
 import classNames from 'classnames';
+import BannerTransition from '../shared/components/BannerTransition';
+import MiniBanner from '../mobile_preact/components/MiniBanner';
+import FollowupTransition from '../shared/components/FollowupTransition';
+import MobileBannerFullpage from './components/MobileBannerFullpage';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -14,6 +18,15 @@ export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = { bannerVisible: true };
+
+
+		//TODO set state pending
+
+
+
+		this.transitionToFullpage = () => {};
+		this.startHighlight = () => {};
+		this.slideInBanner = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -62,6 +75,20 @@ export default class Banner extends Component {
 		this.props.onClose();
 	};
 
+	registerBannerTransition = ( cb ) => {
+		this.slideInBanner = cb;
+	}
+
+	registerStartProgressbar = ( startPb ) => {
+		this.startProgressbar = startPb;
+	};
+
+	registerBannerTransition = cb => { this.slideInBanner = cb; };
+	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
+	registerStartHighlight = cb => { this.startHighlight = cb; };
+
+
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -74,19 +101,58 @@ export default class Banner extends Component {
 				'wmde-banner--full-page': state.isFullPageVisible
 			} )}>
 				<TranslationContext.Provider value={props.translations}>
+					<BannerTransition
+						fixed={ true }
+						registerDisplayBanner={ this.registerBannerTransition }
+						onFinish={ this.startProgressbar }
+						skinAdjuster={ props.skinAdjuster }
+					>
+						<DesktopBanner
+							{ ...props}
+							closeBanner={this.closeBanner}
+							bannerVisible={this.state.bannerVisible}
+						/>
+					</BannerTransition>
 
-					<DesktopBanner
-						{ ...props}
-						closeBanner={this.closeBanner}
-						bannerVisible={this.state.bannerVisible}
-					/>
 
-					<MobileBanner
-						{...props}
-						sliderAutoPlaySpeed={5000}
-						closeBanner={this.closeBanner}
-						bannerVisible={this.state.bannerVisible}
-					/>
+
+
+					<BannerTransition
+						fixed={ true }
+						registerDisplayBanner={ this.registerBannerTransition }
+						onFinish={ () => this.bannerSlider.enableAutoplay() }
+						skinAdjuster={ props.skinAdjuster }
+						ref={this.miniBannerTransitionRef}
+					>
+						<MiniBanner
+							{ ...props }
+							onClose={ this.closeBanner }
+							campaignProjection={ campaignProjection }
+							startAnimation={ () => {} }
+							onExpandFullpage={ this.showFullPageBanner }/>
+
+					</BannerTransition>
+
+					<FollowupTransition
+						registerDisplayBanner={ this.registerFullpageBannerTransition }
+						onFinish={ () => { this.startHighlight(); } }
+						previousTransition={ this.miniBannerTransitionRef }
+						transitionDuration={ 1250 }
+						skinAdjuster={ props.skinAdjuster }
+					>
+						<MobileBannerFullpage
+							{...props}
+							registerStartHighlight={this.registerStartHighlight}
+							onClose={ this.closeBanner }
+							bannerVisible={this.state.bannerVisible}
+						/>
+					</FollowupTransition>
+
+
+
+
+
+
 				</TranslationContext.Provider>
 			</div>
 		</Fragment>;

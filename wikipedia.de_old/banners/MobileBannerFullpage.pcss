@@ -16,6 +16,9 @@
 		animation: slide-down 1s linear;
 		display: block;
 	}
+	@media ( min-width: $breakpoint-xs ) {
+		display: none !important;
+	}
 	.form__element {
 		background-color: $color-bright;
 	}
@@ -56,7 +59,7 @@
 				pointer-events: none;
 			}
 		}
-	/*
+
 		.select-group {
 			flex-wrap: wrap;
 			font-weight: normal;
@@ -90,7 +93,7 @@
 			&__custom-input {
 				display: block;
 				background-color: $color-bright;
-				color: $color-black;
+				color: $color-dark;
 				border: 1px solid $color-light-dark;
 				border-radius: 2px;
 				outline: 0;
@@ -103,7 +106,7 @@
 				transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 				&:active {
 					background-color: $color-light-dark;
-					color: $color-black;
+					color: $color-dark;
 					border-color: $color-light-dark;
 				}
 			}
@@ -124,7 +127,7 @@
 					min-width: 100px;
 				}
 			}
-		} */
+		}
 
 		.WMDE-Banner-amounts .select-group__option--halfwidth {
 			width: 50%;

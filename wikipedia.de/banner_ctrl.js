@@ -4,7 +4,9 @@ import { render, createElement } from 'preact';
 import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
 
 // eslint-disable-next-line no-unused-vars
-import style from './styles/banner_ctrl.pcss';
+// import style from './styles/banner_ctrl.pcss';
+
+import style from './styles/styles_ctrl.pcss';
 
 import FundsModal from '../shared/components/ui/FundsModal';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';

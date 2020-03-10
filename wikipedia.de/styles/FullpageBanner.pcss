@@ -1,0 +1,99 @@
+.wmde-banner {
+
+	.frbanner {
+		background: $color-bright;
+		width: 98%;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+
+		text-align: center;
+		box-sizing: border-box;
+		display: block;
+		margin: 0 auto;
+		border-radius: 15px;
+		padding-bottom: 15px;
+	}
+
+	.frbanner-window {
+		border: 5px solid $color-primary;
+	}
+
+	.close {
+		background: url( 'https://upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png' ) no-repeat center center;
+		display: block;
+		cursor: pointer;
+		position: absolute;
+		right: 1%; /* match the 1% gap on the right side of .frbanner */
+		top: 0;
+		opacity: 0.6;
+		text-indent: -99999px;
+		z-index: 999;
+		padding: 36px;
+		background-size: 15px;
+	}
+
+	@media ( min-width: $breakpoint_phone_m ) {
+		.close {
+			background-size: 20px;
+		}
+	}
+
+	.close:active {
+		opacity: 1;
+	}
+
+	.call-to-action {
+		text-align: center;
+		background: $color-primary;
+		color: $color-white;
+		padding: 10px 0;
+		font-weight: normal;
+		font-size: 24px;
+		display: block;
+		margin: 20px auto 0 auto;
+		width: 100%;
+		position: relative;
+		box-sizing: border-box;
+
+		@media ( min-height: 1000px ) {
+			padding: 27px;
+		}
+
+	}
+
+	.call-to-action:after {
+		position: absolute;
+		left: 50%;
+		top: 105%;
+		height: 0;
+		width: 0;
+		margin-left: -10px;
+		content: ' ';
+		border: solid transparent;
+		border-top-color: $color-primary;
+		border-width: 10px;
+		pointer-events: none;
+	}
+
+	.call-to-action__optional-text {
+		display: none;
+
+		/* @media ( min-width: $breakpoint_tablet_portrait ) {
+			display: inline;
+		} */
+	}
+
+	.smallprint {
+		width: 100%;
+		font-size: 75%;
+		a {
+			font-size: 9pt;
+			line-height: 14pt;
+			color: $color-gray;
+			text-decoration: none;
+			margin: 0 2px;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
