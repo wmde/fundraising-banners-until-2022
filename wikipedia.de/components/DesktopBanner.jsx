@@ -29,7 +29,8 @@ export default class DesktopBanner extends Component {
 	};
 
 	setToggleFundsModal = () => {
-		this.props.trackingData.eventTracker.trackEvent( 'application-of-funds-shown', this.props.trackingData.bannerClickTrackRatio );
+		this.props.trackingData.eventTracker.trackEvent(
+			'application-of-funds-shown', this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
@@ -40,24 +41,22 @@ export default class DesktopBanner extends Component {
 
 	render( props, state ) {
 		const campaignProjection = props.campaignProjection;
-		return <div id="WMDE_Banner" className={classNames( { 'is-hidden': !props.bannerVisible } )}>
+		return <div className={classNames( 'wmde-wrapper', { 'is-hidden': !props.bannerVisible } )}>
 			<div className="banner banner--desktop">
 				<div className="banner__content">
-					<div className="infobox">
+					<div className="banner__infobox">
 						<Infobox
 							formatters={props.formatters}
 							campaignParameters={props.campaignParameters}
 							campaignProjection={props.campaignProjection}
-							bannerText={props.bannerText}
-							propsForText={ { registerStartHighlight: props.registerStartHighlight } }
-						/>
+							bannerText={props.bannerText}/>
 						<ProgressBar
-							locale={props.locale}
+							formatters={props.formatters}
 							daysLeft={campaignProjection.getRemainingDays()}
 							donationAmount={campaignProjection.getProjectedDonationSum()}
 							goalDonationSum={campaignProjection.goalDonationSum}
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={this.setStartAnimation}/>
+							setStartAnimation={this.registerStartProgressbar}/>
 					</div>
 					<DonationForm
 						formItems={props.formItems}

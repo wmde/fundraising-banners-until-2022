@@ -187,6 +187,24 @@ pagename = "B19WPDE_03-191213_var"
 tracking = "wpde-03-191213-var"
 
 
+# Wikipedia.de Campaign
+[wikipediade_OLD]
+campaign_tracking = "wpde-03-191213"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[wikipediade_OLD.banners.ctrl]
+filename = "./wikipedia.de_old/banner_ctrl.js"
+pagename = "B19WPDE_OLD_03-191213_ctrl"
+tracking = "wpde-03-191213-ctrl"
+
+[wikipediade_OLD.banners.var]
+filename = "./wikipedia.de_old/banner_var.js"
+pagename = "B19WPDE_OLD_03-191213_var"
+tracking = "wpde-03-191213-var"
+
+
 # English Campaign
 [english]
 campaign_tracking = "en03-ba-191211"
