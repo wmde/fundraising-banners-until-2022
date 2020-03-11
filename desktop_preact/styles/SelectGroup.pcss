@@ -105,31 +105,58 @@
 		}
 
 		&__custom-input {
-			color: $color-black;
-			background-color: $color-white;
-			padding: 0.4em;
+			position: relative;
+			border: 1px solid $color-gray-light;
+			box-sizing: border-box;
+			padding-right: 10px;
 			width: 100%;
 			min-height: 25px;
-			height: 25px;
-			margin: 0;
-			font-size: 0.9em;
-			font-weight: bold;
-			border: 0 none;
-			box-sizing: border-box;
-			text-decoration: underline;
-			text-align: left;
 
-			@media ( min-width: $breakpoint_l ) {
-				&:focus,
-				&:active {
-					border: 1px solid $color-secondary;
+			&--input {
+				color: $color-black;
+				background-color: transparent;
+				padding: 0.4em;
+				width: 100%;
+				min-height: 25px;
+				height: 25px;
+				margin: 0;
+				font-size: 0.9em;
+				font-weight: bold;
+				border: 0 none;
+				box-sizing: border-box;
+				text-decoration: underline;
+				text-align: left;
+
+				@media ( min-width: $breakpoint_l ) {
+					&:focus,
+					&:active {
+						border: 1px solid $color-secondary;
+					}
 				}
 			}
 
-			&--value-entered {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
+			&--euro-symbol {
+				display: block;
+				position: absolute;
+				box-sizing: border-box;
+				height: 20px;
+				width: 10px;
+				line-height: 20px;
+				text-align: center;
+				top: 50%;
+				right: 0;
+				margin-top: -10px;
+			}
+
+			&--value-entered,
+			&--focused {
+				border: 1px solid $color-secondary;
+
+				.select-group__custom-input--input {
+					border: 0 none;
+					outline: 0 none;
+					border-radius: 0;
+				}
 			}
 		}
 

@@ -64,38 +64,58 @@
 	.select-group__custom-input {
 		width: 100%;
 		box-sizing: border-box;
-		font-family: inherit;
-		font-size: 24px;
 
 		border-radius: $form-element-border-radius;
 		min-height: 54px;
 
 		display: block;
 		background-color: $color-gray-medium-bright;
-		color: $color-black-light;
 		padding: 15px 2px;
 		height: 54px;
 		outline: 0;
-		text-align: center;
-		line-height: 1;
 		cursor: pointer;
-		font-weight: bold;
 		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 
-		&--value-entered:not( :focus ) {
-			background-color: $color-primary;
-			color: $color-white;
-			border-color: $color-gray-medium;
+		&--input {
+			width: 100%;
+			line-height: 1;
+			color: $color-black-light;
+			text-align: center;
+			font-weight: bold;
+			font-family: inherit;
+			font-size: 24px;
+
+			&:active,
+			&:focus,
+			&.selected-option {
+				color: $color-primary-lighter;
+				&::placeholder {
+					color: $color-primary-lighter;
+				}
+			}
 		}
 
-		&:active,
-		&:focus,
-		&.selected-option {
+		&--euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			left: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 24px;
+			color: $color-white;
+		}
+
+		&--value-entered,
+		&--focused {
 			background-color: $color-primary;
-			color: $color-primary-lighter;
 			border-color: $color-gray-medium;
-			&::placeholder {
-				color: $color-primary-lighter;
+			.select-group__custom-input--input,
+			.select-group__custom-input--euro-symbol {
+				color: $color-white;
 			}
 		}
 	}
@@ -149,6 +169,9 @@
 		.select-group__option {
 			width: 31%;
 			flex: 0 1 31%;
+		}
+		.select-group__option--amount-other-input {
+			position: relative;
 		}
 	}
 

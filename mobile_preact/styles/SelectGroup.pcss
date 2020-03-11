@@ -69,24 +69,46 @@
 	}
 
 	.select-group__custom-input {
-		text-align: center;
 		width: 100%;
 		box-sizing: border-box;
-		font-family: inherit;
-		font-weight: 500;
-		font-size: 24px;
 
 		background-color: $color-primary-lighter;
-		color: $color-black-light;
 		border: 1px solid $color-secondary-dark;
 		border-radius: $form-element-border-radius;
-		padding: 18px 2px;
+		padding: 3px 2px;
 		min-height: 54px;
 
-		&--value-entered:not( :focus ) {
+		&--input {
+			font-family: inherit;
+			font-size: 24px;
+			font-weight: 500;
+			text-align: center;
+			color: $color-black-light;
+			width: 100%;
+			min-height: 54px;
+		}
+
+		&--euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			right: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 24px;
+		}
+
+		&--value-entered,
+		&--focused {
 			background-color: $color-secondary;
-			color: $color-white;
 			border-color: $color-gray-medium;
+			.select-group__custom-input--input,
+			.select-group__custom-input--euro-symbol {
+				color: $color-white;
+			}
 		}
 	}
 
@@ -139,6 +161,10 @@
 		.select-group__option {
 			width: 49%;
 			flex: 0 1 49%;
+		}
+
+		.select-group__option--amount-other-input {
+			position: relative;
 		}
 	}
 
