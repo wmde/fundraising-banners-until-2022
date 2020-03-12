@@ -1,73 +1,44 @@
-import { render, createElement } from 'preact';
-import Banner from './Banner';
-import Translations from '../shared/messages/de';
-import DayName from '../shared/day_name';
-import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
-import CampaignDaySentence from '../shared/campaign_day_sentence';
-import MatomoTracker from '../shared/matomo_tracker';
-import { CampaignProjection } from '../shared/campaign_projection';
-import * as DevGlobalBannerSettings from '../shared/global_banner_settings';
-import formatNumber from 'format-number';
-import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 // eslint-disable-next-line no-unused-vars
-import style from './styles/banner_var.pcss';
+import style from './styles/styles_var.pcss';
 
-/* These globals are compiled into the banner through the WrapperPlugin, see webpack.common.js */
-/* global CampaignName */
-/* global BannerName */
+import * as formatters from '../shared/number_formatter/de';
 
-const GlobalBannerSettings = window.GlobalBannerSettings || DevGlobalBannerSettings;
-const bannerClickTrackRatio = 1;
-const bannerCloseTrackRatio = 1;
-const eventTracker = new MatomoTracker( 'FundraisingTracker', BannerName );
+import { createCampaignParameters } from '../shared/campaign_parameters';
+import { getTrackingIds } from '../shared/tracking_ids';
 
-const trackingData = {
-	eventTracker: eventTracker,
-	bannerClickTrackRatio: bannerClickTrackRatio,
-	bannerCloseTrackRatio: bannerCloseTrackRatio
-};
+import Banner from './Banner';
+import BannerPresenter from '../shared/banner_presenter';
+import Translations from '../shared/messages/de';
+import BannerText from './components/BannerText';
+import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+import { createCampaignProjection } from '../shared/campaign_projection';
+import { createFormItems } from './form_items';
+import { LocalImpressionCount } from '../shared/local_impression_count';
+import { createTrackingData } from '../shared/tracking_data';
 
-const LOCALE = 'de';
-const dayName = new DayName( new Date() );
-const currentDayName = Translations[ dayName.getDayNameMessageKey() ];
-const weekdayPrepPhrase = dayName.isSpecialDayName() ? Translations[ 'day-name-prefix-todays' ] : Translations[ 'day-name-prefix-this' ];
-const campaignDays = new CampaignDays(
-	startOfDay( GlobalBannerSettings[ 'campaign-start-date' ] ),
-	endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
+const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
+const campaignParameters = createCampaignParameters();
+const campaignProjection = createCampaignProjection( campaignParameters );
+const trackingIds = getTrackingIds( bannerContainer );
+
+const trackingData = createTrackingData( trackingIds.bannerName );
+const bannerPresenter = new BannerPresenter(
+	trackingData,
+	bannerContainer.dataset.delay || 7500,
+	new LocalImpressionCount( trackingIds.bannerName )
 );
-const campaignDaySentence = new CampaignDaySentence( campaignDays, LOCALE );
 
-const campaignProjection = new CampaignProjection(
-	new CampaignDays(
-		startOfDay( GlobalBannerSettings[ 'donations-date-base' ] ),
-		endOfDay( GlobalBannerSettings[ 'campaign-end-date' ] )
-	),
+bannerPresenter.present(
+	Banner,
+	bannerContainer,
 	{
-		baseDonationSum: GlobalBannerSettings[ 'donations-collected-base' ],
-		donationAmountPerMinute: GlobalBannerSettings[ 'appr-donations-per-minute' ],
-		donorsBase: GlobalBannerSettings[ 'donators-base' ],
-		donorsPerMinute: GlobalBannerSettings[ 'appr-donators-per-minute' ],
-		goalDonationSum: GlobalBannerSettings.goalDonationSum
+		...trackingIds,
+		campaignParameters,
+		campaignProjection,
+		formatters,
+		fundsModalData,
+		bannerText: BannerText,
+		translations: Translations,
+		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	}
 );
-
-const donorFormatter = formatNumber( { round: 0, integerSeparator: '.' } );
-
-render(
-	createElement( Banner, {
-		amountBannerImpressionsInMillion: GlobalBannerSettings[ 'impressions-per-day-in-million' ],
-		numberOfDonors: donorFormatter( campaignProjection.getProjectedNumberOfDonors() ),
-		currentDayName: currentDayName, // TODO Move to Infobox
-		weekdayPrepPhrase: weekdayPrepPhrase, // TODO Move to Infobox
-		campaignDaySentence: campaignDaySentence.getSentence(), // TODO replace with campaignDays, move campaignDaySentence to Infobox
-		campaignName: CampaignName,
-		bannerName: BannerName,
-		trackingData: trackingData,
-		translations: Translations,
-		locale: LOCALE,
-		campaignProjection,
-		fundsModalData: fundsModalData
-	} ),
-	document.getElementById( 'WMDE-Banner-Container' )
-);
-eventTracker.recordBannerImpression();

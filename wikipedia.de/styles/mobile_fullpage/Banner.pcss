@@ -1,9 +1,16 @@
-.wmde-banner {
+.wmde-banner .fullpage-banner {
+
+	/* TODO ONLY FOR DEBUGGING, comment back in */
+	/*     visibility: hidden;    */
 	width: 100%;
 	position: relative;
 	box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 	background-color: $color-white;
+	padding-bottom: 0.75em;
 	font-family: $banner-main-font-family;
+
+	border: 5px solid #990a00;
+	border-radius: 0;
 
 	&--visible {
 		visibility: visible;
@@ -17,6 +24,7 @@
 	}
 
 	.banner__wrapper {
+		font-size: 16px;
 		padding-bottom: 0.75em;
 
 		font-family: $banner-main-font-family;
@@ -27,7 +35,7 @@
 	.banner__content {
 		display: flex;
 		flex-direction: column;
-		@media ( min-width: $breakpoint-s ) {
+		@media ( min-width: 900px ) {
 			flex-direction: row;
 		}
 	}
@@ -37,20 +45,15 @@
 		flex-direction: column;
 		justify-content: space-between;
 		flex: 0 1 auto;
-		border: 8px solid $color-primary;
-		border-radius: 15px;
 		background-color: $color-bright;
 		padding: 0 0.5em 0.25em 0;
 		position: relative;
-		margin: 0.7em 0.5em 0.2em 0.5em;
-		@media ( min-width: $breakpoint-s ) {
-			margin: 0.7em 0.5em 0.2em 0.9em;
-		}
+		margin: 0.5em 0.5em 0.2em 0.5em;
 	}
 
 	.banner__footer {
 		order: 2;
-		@media ( min-width: $breakpoint-m ) {
+		@media ( min-width: 1150px ) {
 			padding: 0 0 0 60px;
 		}
 	}
@@ -62,8 +65,7 @@
 		top: 15px;
 		right: 15px;
 		opacity: 0.5;
-		cursor: pointer;
-		@media ( min-width: $breakpoint-s ) {
+		@media ( min-width: $breakpoint_s ) {
 			top: -10px;
 			right: 0;
 		}

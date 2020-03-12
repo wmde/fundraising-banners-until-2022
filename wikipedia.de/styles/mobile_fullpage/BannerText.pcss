@@ -1,8 +1,20 @@
-.wmde-banner {
+.wmde-banner .fullpage-banner {
+	.banner-text {
+		margin: 20px;
+		font-size: 20px;
+		line-height: 1.3;
+		text-align: left;
+
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			font-size: 24px;
+			line-height: 1.4;
+		}
+	}
+
 	.text {
 		&__headline {
 			display: inline;
-			margin: 0.2em 0;
+			margin-bottom: 10px;
 			&--highlight {
 				font-weight: bold;
 			}
@@ -14,12 +26,6 @@
 			}
 		}
 		&__paragraph {
-			margin: 0;
-			padding: 0;
-			display: inline;
-			@media ( min-width: $breakpoint-m ) {
-				display: block;
-			}
 			&--bold {
 				font-weight: bold;
 			}
@@ -53,37 +59,5 @@
 
 	.optional-text {
 		display: none;
-		@media ( min-width: $breakpoint-xs ) {
-			&.text-xs {
-				display: inline;
-			}
-		}
-		@media ( min-width: $breakpoint-m ) {
-			&.text-m {
-				display: inline;
-			}
-		}
-		@media ( min-width: $breakpoint-l ) {
-			&.text-l {
-				display: inline;
-			}
-		}
-		@media ( min-width: $breakpoint-xl ) {
-			&.text-xl {
-				display: inline;
-			}
-		}
-		@media ( min-width: $breakpoint-xxl ) {
-			&.text-xxl {
-				display: inline;
-			}
-		}
-
-		&-highlight {
-			display: inline;
-			@media ( min-width: $breakpoint-xs ) {
-				display: none;
-			}
-		}
 	}
 }
