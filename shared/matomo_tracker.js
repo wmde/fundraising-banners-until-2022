@@ -83,4 +83,5 @@ export default class MatomoTracker {
 		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
 	}
 
+	trackViewPortDimensions() {}
 }

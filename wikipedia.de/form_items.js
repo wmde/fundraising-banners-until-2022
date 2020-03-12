@@ -9,10 +9,10 @@ export function createFormItems( translations, amountFormatter ) {
 		Intervals.BIANNUAL,
 		Intervals.YEARLY
 	);
-	builder.setAmounts( 5, 15, 20, 25, 50, 100 );
+	builder.setAmounts( 5, 10, 20, 25, 50, 100 );
 	builder.setPaymentMethods(
-		PaymentMethods.BANK_TRANSFER,
 		PaymentMethods.DIRECT_DEBIT,
+		PaymentMethods.BANK_TRANSFER,
 		PaymentMethods.CREDIT_CARD,
 		PaymentMethods.PAYPAL
 	);

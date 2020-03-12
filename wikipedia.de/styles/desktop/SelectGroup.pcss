@@ -3,13 +3,16 @@
 	.select-group {
 		border: 0;
 		margin: 0 auto;
-		padding: 0 0 0.5em 0;
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
+		flex: 1 1 auto;
+		@media ( min-width: $breakpoint-s ) {
+			flex-wrap: wrap;
+			flex: 1 0 auto;
+			padding: 0.4em 0.5em 0 0.5em;
+		}
 		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 0 auto;
-		font-size: 0.9em;
+		justify-content: space-between;
 		font-weight: bold;
 		width: 100%;
 
@@ -18,8 +21,11 @@
 			flex: 1 1 auto;
 			flex-direction: column;
 			border: 0;
-			max-width: 20em;
-			margin: 0;
+			margin-right: 0.5em;
+			@media ( min-width: $breakpoint-s ) {
+				max-width: 18em;
+				margin-left: 6px;
+			}
 		}
 
 		&:first-child {
@@ -34,32 +40,17 @@
 			display: none;
 			color: $color-black;
 			font-weight: bold;
-			text-align: left;
+			text-align: center;
 			width: 100%;
 			margin-bottom: 0.2em;
-			font-size: 0.8em;
+			font-size: 0.74em;
 		}
 
 		&-container--with-error {
-			.select-group__erroricon {
-				position: relative;
-				padding-left: 20px;
-				display: block;
-
-				&:before {
-					content: $errorIcon;
-					width: 16px;
-					height: 16px;
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
-			}
-
 			.select-group__errormessage {
 				display: block;
-				color: $color-error;
-				margin-left: 0.5em;
+				background: $color-error;
+				color: $color-white;
 			}
 		}
 
@@ -79,16 +70,22 @@
 		}
 
 		&__state {
-			display: block;
+			display: flex;
+			white-space: nowrap;
+			padding: 0.2em 5px 0 5px;
+			@media ( min-width: $breakpoint-s ) {
+				display: block;
+				padding: 0.6em 0;
+			}
 			background: $color-bright;
 			border: 0 none;
 			border-radius: 2px;
-			padding: 0.75em 0;
 			line-height: 2em;
 			cursor: pointer;
 			text-align: center;
 			font-size: 0.8em;
 			box-sizing: border-box;
+			justify-content: center;
 		}
 
 		&__custom-input + .select-group__state {
@@ -101,7 +98,6 @@
 
 		&__custom-input {
 			background: $color-bright;
-			color: $color-black;
 			padding: 0.4em;
 			width: 100%;
 			min-width: 100px;
@@ -114,15 +110,43 @@
 			border: 0 none;
 			border-radius: $banner-border-radius;
 			box-sizing: border-box;
+
+			@media ( min-width: $breakpoint-form-right ) {
+				height: 36px;
+				padding-top: 10px;
+			}
+			&--input {
+				border-color: transparent;
+				background: transparent;
+				width: 100px;
+				text-align: center;
+				font-weight: bold;
+				height: 10px;
+				font-size: 0.9em;
+			}
 			&--value-entered {
 				color: $color-white;
 				background-color: $color-secondary;
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
+				input {
+					color: $color-white;
+				}
 			}
-			@media ( min-width: $breakpoint-form-right ) {
-				height: 35px;
+			&--euro-symbol {
+
+				display: block;
+				position: absolute;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				height: 20px;
+				width: 10px;
+				line-height: 20px;
+				text-align: center;
+				top: 50%;
+				right: 3px;
+				margin-top: -10px;
 			}
 		}
 
@@ -137,39 +161,79 @@
 		}
 
 		&__option {
-			flex: 1 1 auto;
-			padding: 0 0.4em 0.6em 0;
-			margin: 0;
+			background: $color-bright;
+			border: 1px solid $color-light-dark;
+			border-radius: $banner-border-radius;
+			flex: 0 1 auto;
+			margin: 8px 0 0;
 			box-sizing: border-box;
 			display: block;
-		}
-	}
-
-	.select-group-container--select-amount {
-		.select-group__option {
-			width: 25%;
-		}
-
-		.select-group__option--amount-other-input {
-			width: 50%;
-		}
-	}
-
-	.select-group-container--select-interval {
-		.select-group__option {
-			width: 30%;
+			position: relative;
+			&:hover {
+				background-color: $color-gray-medium;
+				border-color: $color-gray;
+			}
+			@media ( min-width: $breakpoint-xs ) {
+				border-right: 0;
+				border-radius: 0;
+				&:first-child {
+					border-radius: $banner-border-radius 0 0 $banner-border-radius;
+				}
+				&:last-of-type {
+					border-radius: 0 $banner-border-radius $banner-border-radius 0;
+					border-right: 1px solid $color-light-dark;
+				}
+			}
+			@media ( min-width: $breakpoint-form-right ) {
+				margin: 3px 0 0;
+				border: 1px solid $color-light-dark;
+				border-radius: $banner-border-radius;
+				&:first-child {
+					border-radius: $banner-border-radius;
+				}
+				&:last-of-type {
+					border-radius: $banner-border-radius;
+				}
+			}
 		}
 	}
 
 	.select-group-container--select-payment-method {
 		.select-group__option {
-			width: 50%;
+			width: 49%;
+			flex-basis: 49%;
 		}
 	}
 
 	.select-group-container--address-option {
 		.select-group__option {
-			width: 50%;
+			width: 49%;
+			flex-basis: 49%;
+		}
+	}
+
+	.select-group-container--select-amount {
+		.select-group__option {
+			width: 24%;
+			flex-basis: 24%;
+		}
+
+		.select-group__option--amount-other-input {
+			width: 49%;
+			flex-basis: 49%;
+		}
+	}
+
+	.select-group-container--select-interval {
+		.select-group__option {
+			width: 49%;
+			flex-basis: 49%;
+		}
+		.select-group__option:first-child {
+			width: 100%;
+			@media ( min-width: $breakpoint-s ) {
+				flex-basis: 100%;
+			}
 		}
 	}
 }

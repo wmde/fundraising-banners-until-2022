@@ -1,7 +1,7 @@
 import Minerva from './minerva';
 import Monobook from './monobook';
 import Vector from './vector';
-import Skin from './Skin';
+import Wpde from './wpde';
 import { onMediaWiki } from '../mediawiki_checks';
 
 export { Minerva, Monobook, Vector };
@@ -9,7 +9,7 @@ export { default as Wpde } from './wpde';
 
 export function getSkinAdjuster() {
 	if ( !onMediaWiki() ) {
-		return new Skin();
+		return new Wpde();
 	}
 
 	const skinName = window.mw.config.get( 'skin' );

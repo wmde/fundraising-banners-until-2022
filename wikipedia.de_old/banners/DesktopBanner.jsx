@@ -13,7 +13,8 @@ export default class DesktopBanner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			isFundsModalVisible: false
+			isFundsModalVisible: false,
+			setCookie: false
 		};
 	}
 
@@ -30,9 +31,14 @@ export default class DesktopBanner extends Component {
 	setToggleFundsModal = () => {
 		this.props.trackingData.eventTracker.trackEvent( 'application-of-funds-shown', this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
+	}
+
+	closeBanner = e => {
+		this.setState( { setCookie: true } );
+		this.props.closeBanner( e );
 	};
 
-	render( props ) {
+	render( props, state ) {
 		const campaignProjection = props.campaignProjection;
 		return <div id="WMDE_Banner" className={classNames( { 'is-hidden': !props.bannerVisible } )}>
 			<div className="banner banner--desktop">
@@ -54,7 +60,8 @@ export default class DesktopBanner extends Component {
 					<DonationForm bannerName={props.bannerName} campaignName={props.campaignName}/>
 				</div>
 				<div className="close">
-					<button className="close__link" onClick={props.closeBanner}>&#x2715;</button>
+					<button className="close__link" onClick={ this.closeBanner }>&#x2715;</button>
+					{ state.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
 				</div>
 				<Footer setToggleFundsModal={this.setToggleFundsModal}/>
 			</div>

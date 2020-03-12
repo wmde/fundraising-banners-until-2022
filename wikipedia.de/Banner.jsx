@@ -1,161 +1,132 @@
 // eslint-disable-next-line no-unused-vars
-import { Component, h, Fragment, createRef } from 'preact';
-import DesktopBanner from './components/DesktopBanner';
-import MobileBanner from './components/MobileBanner';
+import { Component, h, createRef } from 'preact';
 import TranslationContext from '../shared/components/TranslationContext';
-import { Slider } from '../shared/banner_slider';
 import classNames from 'classnames';
-import BannerTransition from '../shared/components/BannerTransition';
-import MiniBanner from '../mobile_preact/components/MiniBanner';
-import FollowupTransition from '../shared/components/FollowupTransition';
-import MobileBannerFullpage from './components/MobileBannerFullpage';
+import Infobox from '../shared/components/ui/Infobox';
+import ProgressBar from '../shared/components/ui/ProgressBar';
+import DonationForm from '../shared/components/ui/form/DonationForm';
+import Footer from '../shared/components/ui/Footer';
+import FundsModal from '../shared/components/ui/FundsModal';
+import PropTypes from 'prop-types';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
 export default class Banner extends Component {
-	constructor( props ) {
-		super( props );
-		this.state = { bannerVisible: true };
 
-
-		//TODO set state pending
-
-
-
-		this.transitionToFullpage = () => {};
-		this.startHighlight = () => {};
-		this.slideInBanner = () => {};
+	static propTypes = {
+		/** callback when banner closes */
+		onClose: PropTypes.func,
+		/** */
+		registerDisplayBanner: PropTypes.func.isRequired
 	}
 
-	miniBannerTransitionRef = createRef();
+	ref = createRef();
+
+	constructor( props ) {
+		super( props );
+		this.state = {
+			displayState: PENDING,
+			isFundsModalVisible: false,
+			setCookie: false,
+
+			// trigger for banner resize events
+			formInteractionSwitcher: false
+		};
+	}
 
 	componentDidMount() {
-		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
-		this.bannerSlider.initialize();
-		this.bannerSlider.disableAutoplay();
-
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
-				this.slideInBanner();
 			}
 		);
+		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.startProgressbar();
+	}
+
+	adjustSurroundingSpace() {
+		const bannerElement = document.querySelector( '.wmde-banner banner-position' );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
 	// eslint-disable-next-line no-unused-vars
-	showFullPageBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent(
-			'mobile-mini-banner-expanded',
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
-			this.props.trackingData.bannerClickTrackRatio
-		);
-		window.scrollTo( 0, 0 );
-		const miniBannerHeight = this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
-		this.transitionToFullpage( miniBannerHeight );
-		this.setState( { isFullPageVisible: true } );
-	};
+	componentDidUpdate( previousProps, previousState, snapshot ) {
+		if ( previousState.formInteractionSwitcher !== this.state.formInteractionSwitcher ) {
+			this.adjustSurroundingSpace();
+		}
+	}
 
 	closeBanner = e => {
-		//  TODO what has to be
-		//   tracked on wikipediade? probably more than on mobile, because it combines more channels?
-		this.props.trackingData.tracker.trackBannerEvent(
-			'banner-closed',
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
-			this.props.trackingData.bannerCloseTrackRatio
-		);
+		this.props.trackingData.tracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
 		e.preventDefault();
-		this.setState( {
-			displayState: CLOSED,
-			isFullPageVisible: false
-		} );
+		this.setState( { displayState: CLOSED, setCookie: true } );
 		this.props.onClose();
 	};
-
-	registerBannerTransition = ( cb ) => {
-		this.slideInBanner = cb;
-	}
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
 	};
 
-	registerBannerTransition = cb => { this.slideInBanner = cb; };
-	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
-	registerStartHighlight = cb => { this.startHighlight = cb; };
+	toggleFundsModal = () => {
+		this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
+	};
 
-
+	onFormInteraction = () => {
+		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
-		return <Fragment>
-			<div className={classNames( {
-				'wmde-banner': true,
-				'wmde-banner--hidden': state.displayState === CLOSED,
-				'wmde-banner--visible': state.displayState === VISIBLE,
-				'wmde-banner--mini-banner': !state.isFullPageVisible,
-				'wmde-banner--full-page': state.isFullPageVisible
-			} )}>
-				<TranslationContext.Provider value={props.translations}>
-					<BannerTransition
-						fixed={ true }
-						registerDisplayBanner={ this.registerBannerTransition }
-						onFinish={ this.startProgressbar }
-						skinAdjuster={ props.skinAdjuster }
-					>
-						<DesktopBanner
-							{ ...props}
-							closeBanner={this.closeBanner}
-							bannerVisible={this.state.bannerVisible}
+		return <div
+			className={ classNames(
+				'wmde-banner',
+				'banner-position',
+				state.displayState === CLOSED ? 'wmde-banner--hidden' : '',
+				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
+			) }
+			ref={ this.ref }>
+			<TranslationContext.Provider value={ props.translations }>
+				<div className="banner__wrapper">
+					<div className="banner__content">
+						<div className="banner__infobox">
+							<Infobox
+								formatters={ props.formatters }
+								campaignParameters={ props.campaignParameters }
+								campaignProjection={ props.campaignProjection }
+								bannerText={ props.bannerText }/>
+							<ProgressBar
+								formatters={ props.formatters }
+								daysLeft={ campaignProjection.getRemainingDays() }
+								donationAmount={ campaignProjection.getProjectedDonationSum() }
+								goalDonationSum={ campaignProjection.goalDonationSum }
+								missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+								setStartAnimation={ this.registerStartProgressbar }/>
+						</div>
+						<DonationForm
+							formItems={ props.formItems }
+							bannerName={ props.bannerName }
+							campaignName={ props.campaignName }
+							formatters={ props.formatters }
+							impressionCounts={ props.impressionCounts }
+							onFormInteraction={ this.onFormInteraction }
 						/>
-					</BannerTransition>
-
-
-
-
-					<BannerTransition
-						fixed={ true }
-						registerDisplayBanner={ this.registerBannerTransition }
-						onFinish={ () => this.bannerSlider.enableAutoplay() }
-						skinAdjuster={ props.skinAdjuster }
-						ref={this.miniBannerTransitionRef}
-					>
-						<MiniBanner
-							{ ...props }
-							onClose={ this.closeBanner }
-							campaignProjection={ campaignProjection }
-							startAnimation={ () => {} }
-							onExpandFullpage={ this.showFullPageBanner }/>
-
-					</BannerTransition>
-
-					<FollowupTransition
-						registerDisplayBanner={ this.registerFullpageBannerTransition }
-						onFinish={ () => { this.startHighlight(); } }
-						previousTransition={ this.miniBannerTransitionRef }
-						transitionDuration={ 1250 }
-						skinAdjuster={ props.skinAdjuster }
-					>
-						<MobileBannerFullpage
-							{...props}
-							registerStartHighlight={this.registerStartHighlight}
-							onClose={ this.closeBanner }
-							bannerVisible={this.state.bannerVisible}
-						/>
-					</FollowupTransition>
-
-
-
-
-
-
-				</TranslationContext.Provider>
-			</div>
-		</Fragment>;
+					</div>
+					<div className="close">
+						<a className="close__link" onClick={ this.closeBanner }>&#x2715;</a>
+						{ state.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
+					</div>
+					<Footer showFundsModal={ this.toggleFundsModal }/>
+				</div>
+			</TranslationContext.Provider>
+			<FundsModal
+				fundsModalData={ props.fundsModalData }
+				toggleFundsModal={ this.toggleFundsModal }
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale='de'/>
+		</div>;
 	}
-
 }

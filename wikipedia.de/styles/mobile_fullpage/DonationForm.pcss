@@ -1,6 +1,6 @@
-.wmde-banner {
+.wmde-banner .fullpage-banner {
 	.form {
-		padding: 0 40px 20px;
+		padding: 15px 8px 20px;
 		position: relative;
 		height: 100%;
 	}
@@ -22,9 +22,9 @@
 		text-align: center;
 		font-size: 16px;
 
-		/* @media ( min-width: $breakpoint_tablet_portrait ) {
+		@media ( min-width: $breakpoint_tablet_portrait ) {
 			font-size: 18px;
-		} */
+		}
 	}
 
 	.button-group__container {
@@ -41,14 +41,18 @@
 		background-color: $color-secondary;
 		color: $color-white;
 		border-radius: $form-element-border-radius;
-		padding: 24px 10px;
+		padding: 14px 10px;
 		outline: 0;
 		text-align: center;
 		line-height: 1;
 		cursor: pointer;
 		font-family: inherit;
-		font-weight: 500;
-		font-size: 24px;
+		font-weight: bold;
+		font-size: 21px;
 		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+	}
+
+	.sms-box {
+		display: none;
 	}
 }
