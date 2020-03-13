@@ -40,6 +40,10 @@ export default class BannerTransition extends Component {
 		this.setState( { transitionPhase: READY } );
 	}
 
+	getHeight() {
+		return this.ref.current ? this.ref.current.offsetHeight : 0;
+	}
+
 	displayBanner = () => {
 		this.setState( { transitionPhase: SLIDING } );
 		this.props.skinAdjuster.addSpace( this.ref.current.offsetHeight, this.transition );

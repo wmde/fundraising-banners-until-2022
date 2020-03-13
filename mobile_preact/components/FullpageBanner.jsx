@@ -10,8 +10,8 @@ export default class FullpageBanner extends Component {
 	render( props ) {
 		const campaignProjection = props.campaignProjection;
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
-		return <div className={ classNames( 'frbanner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
-			<div className="frbanner-window">
+		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
+			<div className="fullpage-banner__info">
 				<div className="close" onClick={ props.onClose }/>
 				<Infobox
 					formatters={props.formatters}

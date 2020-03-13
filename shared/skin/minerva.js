@@ -39,10 +39,6 @@ export default class Minerva extends Skin {
 		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
 	}
 
-	moveBannerContainerToTopOfDom() {
-		$( 'body' ).prepend( $( '#centralNotice' ) );
-	}
-
 	getSizeIssueThreshold() {
 		return 180;
 	}
