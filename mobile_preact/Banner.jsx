@@ -22,6 +22,7 @@ export default class Banner extends Component {
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
+		this.adjustFollowupBannerHeight = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -71,6 +72,11 @@ export default class Banner extends Component {
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
 	registerStartHighlight = cb => { this.startHighlight = cb; };
+	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
+	onMiniBannerSlideInFinished = () => {
+		this.bannerSlider.enableAutoplay();
+		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -86,7 +92,7 @@ export default class Banner extends Component {
 				<BannerTransition
 					fixed={ true }
 					registerDisplayBanner={ this.registerBannerTransition }
-					onFinish={ () => this.bannerSlider.enableAutoplay() }
+					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
 				>
@@ -100,10 +106,11 @@ export default class Banner extends Component {
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
+					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					onFinish={ () => { this.startHighlight(); } }
-					previousTransition={ this.miniBannerTransitionRef }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
+					hasStaticParent={ false }
 				>
 					<FullpageBanner
 						{...props}

@@ -30,14 +30,20 @@ export default class BannerTransition extends Component {
 		/** A registration callback to expose this.displayBanner to the parent */
 		registerDisplayBanner: PropTypes.func.isRequired,
 
+		/** A registration callback to signal to this component that the previous banner has rendered  */
+		registerFirstBannerFinished: PropTypes.func,
+
 		/** Transition duration in milliseconds */
 		transitionDuration: PropTypes.number,
 
 		/** Skin Adjuster to move the page content down */
 		skinAdjuster: PropTypes.instanceOf( Skin ),
 
-		/** if the sliding area should be fixed or absolute. Default is "false" (absolute) */
-		fixed: PropTypes.bool
+		/**
+		 * If this transition is inside a parent element chain where all elements have "position: static".
+		 */
+		hasStaticParent: PropTypes.bool.default( true )
+
 	};
 
 	constructor( props ) {
@@ -45,12 +51,16 @@ export default class BannerTransition extends Component {
 		this.state = {
 			transitionPhase: PAGELOADING,
 			twoPhaseSlide: true,
-			previousTransitionHeight: 0
+			previousTransitionHeight: 0,
+			miniBannerHeight: 0
 		};
 	}
 
 	componentDidMount() {
 		this.props.registerDisplayBanner( this.displayBanner );
+		if ( this.props.registerFirstBannerFinished ) {
+			this.props.registerFirstBannerFinished( this.adjustPositionForFirstBanner );
+		}
 		this.setState( { transitionPhase: READY } );
 	}
 
@@ -60,6 +70,13 @@ export default class BannerTransition extends Component {
 			new CssTransition( speed, easing ),
 		);
 	}
+
+	adjustPositionForFirstBanner = ( firstBannerHeight ) => {
+		if ( this.props.hasStaticParent ) {
+			return;
+		}
+		this.setState( { miniBannerHeight: firstBannerHeight } );
+	};
 
 	/**
 	 * Get ratio between the height of the previous (mini) banner and the full page banner.
@@ -72,6 +89,7 @@ export default class BannerTransition extends Component {
 	getPhaseRatio = () => this.state.previousTransitionHeight / this.ref.current.offsetHeight;
 	getFirstPartDuration = () => Math.round( this.props.transitionDuration * this.getPhaseRatio() );
 	getSecondPartDuration = () => Math.round( this.props.transitionDuration * ( 1 - this.getPhaseRatio() ) );
+	getEndPosition = () => this.props.hasStaticParent === false ? this.ref.current.offsetHeight * -1 : 0;
 
 	/**
 	 * Start the transition
@@ -127,7 +145,7 @@ export default class BannerTransition extends Component {
 				bannerStyle = {};
 				break;
 			case READY:
-				bannerStyle = { top: this.ref.current.offsetHeight * -1 };
+				bannerStyle = { top: ( this.ref.current.offsetHeight + state.miniBannerHeight ) * -1 };
 				break;
 			case SLIDING_FIRST_PART:
 				bannerStyle = {
@@ -138,17 +156,17 @@ export default class BannerTransition extends Component {
 			case SLIDING_SECOND_PART:
 				easing = state.twoPhaseSlide ? 'ease-out' : 'ease-in-out';
 				bannerStyle = {
-					top: 0,
+					top: this.getEndPosition(),
 					transition: `top ${this.getSecondPartDuration()}ms ${easing}`
 				};
 				break;
 			case FINISHED:
-				bannerStyle = { top: 0 };
+				bannerStyle = { top: this.getEndPosition() };
 		}
-		return <div style={ bannerStyle } ref={this.ref}
+		return <div style={ bannerStyle }
+			ref={this.ref}
 			className={ classNames( {
-				'banner-position': true,
-				'banner-position--fixed': props.fixed
+				'followup-banner-position': true
 			} ) }
 			onTransitionEnd={ this.onTransitionEnd }
 		>
