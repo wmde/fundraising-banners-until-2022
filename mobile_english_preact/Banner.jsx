@@ -23,9 +23,11 @@ export default class Banner extends Component {
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
 		this.adjustFollowupBannerHeight = () => {};
+		this.fullPageBannerReRender = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
+	fullBannerTransitionRef = createRef();
 
 	componentDidMount() {
 		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
@@ -38,6 +40,22 @@ export default class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
+
+		this.props.registerResizeBanner( this.onPageResize.bind( this ) );
+	}
+
+	onPageResize() {
+		if ( this.state.displayState !== VISIBLE ) {
+			return;
+		}
+
+		if ( this.state.isFullPageVisible ) {
+			this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
+			this.fullPageBannerReRender();
+		} else {
+			this.bannerSlider.resize();
+			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
+		}
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -49,10 +67,17 @@ export default class Banner extends Component {
 			this.props.trackingData.bannerClickTrackRatio
 		);
 		window.scrollTo( 0, 0 );
-		const miniBannerHeight = this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
-		this.transitionToFullpage( miniBannerHeight );
+		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
 	};
+
+	getMiniBannerHeight() {
+		return this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
+	}
+
+	getFullBannerHeight() {
+		return this.fullBannerTransitionRef.current ? this.fullBannerTransitionRef.current.base.offsetHeight : 0;
+	}
 
 	closeBanner = e => {
 		this.props.trackingData.tracker.trackBannerEvent(
@@ -73,6 +98,7 @@ export default class Banner extends Component {
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
 	registerStartHighlight = cb => { this.startHighlight = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
+	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	onMiniBannerSlideInFinished = () => {
 		this.bannerSlider.enableAutoplay();
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
@@ -107,10 +133,12 @@ export default class Banner extends Component {
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
+					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
 					onFinish={ () => { this.startHighlight(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
+					ref={this.fullBannerTransitionRef}
 				>
 					<FullpageBanner
 						{...props}

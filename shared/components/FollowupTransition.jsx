@@ -33,6 +33,9 @@ export default class BannerTransition extends Component {
 		/** A registration callback to signal to this component that the previous banner has rendered  */
 		registerFirstBannerFinished: PropTypes.func,
 
+		/** A registration callback to signal to this component that the page size changed  */
+		registerFullPageBannerReRender: PropTypes.func,
+
 		/** Transition duration in milliseconds */
 		transitionDuration: PropTypes.number,
 
@@ -61,6 +64,9 @@ export default class BannerTransition extends Component {
 		if ( this.props.registerFirstBannerFinished ) {
 			this.props.registerFirstBannerFinished( this.adjustPositionForFirstBanner );
 		}
+		if ( this.props.registerFullPageBannerReRender ) {
+			this.props.registerFullPageBannerReRender( this.reRender );
+		}
 		this.setState( { transitionPhase: READY } );
 	}
 
@@ -76,6 +82,10 @@ export default class BannerTransition extends Component {
 			return;
 		}
 		this.setState( { miniBannerHeight: firstBannerHeight } );
+	};
+
+	reRender = () => {
+		this.forceUpdate();
 	};
 
 	/**
