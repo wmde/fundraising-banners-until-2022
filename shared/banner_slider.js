@@ -61,4 +61,8 @@ export class Slider {
 	getCurrentSlide() {
 		return this.slider.selectedIndex + 1;
 	}
+
+	resize() {
+		this.slider.resize();
+	}
 }
