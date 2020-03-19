@@ -27,7 +27,7 @@ module.exports = Merge( CommonConfig, {
 			{
 				context: [ '/wikipedia.de', '/FundraisingBanners', '/img', '/js', '/style.css', '/suggest.js' ],
 				pathRewrite: { '^/wikipedia.de': '' },
-				target: 'https://wikipedia.de',
+				target: 'https://www.wikipedia.de',
 				changeOrigin: true
 			},
 			{
