@@ -2,6 +2,7 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import { Slider } from '../shared/banner_slider';
+import debounce from '../shared/debounce';
 
 import BannerTransition from '../shared/components/BannerTransition';
 import MiniBanner from './components/MiniBanner';
@@ -41,7 +42,7 @@ export default class Banner extends Component {
 			}
 		);
 
-		this.props.registerResizeBanner( this.onPageResize.bind( this ) );
+		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
 	}
 
 	onPageResize() {
