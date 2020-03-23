@@ -4,37 +4,43 @@
 
 This project is bundling all assets and dependencies of WMDE fundraising banners with webpack.
 
+You need `make` and Docker to run the `make` commands.
+
 ## Installing dependencies
 
 To install all dependencies run
 
-    docker-compose run js-build npm install
+    make setup
 
 ## Starting the preview
 
-The banners can be previewed using a built-in server.
+You can preview the banners by running the built-in server.
 
-    docker-compose up js-serve
+    make server
 
 The preview server is at [http://localhost:8084/](http://localhost:8084/)
 
 It will display a selection of banners to preview in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
 
-Changes to the code base while the preview is running should be reflected via hot reload.
+while the preview is running, you should be able to see changes immediately via hot reload.
 
 ## Check the sources
 
-To verify the code is correct and up to our coding standards. These tests will also be run, and have to pass, in CI.
+To verify the code is correct and up to our coding standards. These tests will also run in CI.
 
-    docker-compose run js-build npm run test
-    docker-compose run js-build npm run lint:js
-    docker-compose run js-build npm run lint:css
+    make test
+    make lint-js
+    make lint-css
+
+To run all three tasks, run
+
+	make ci
 
 ## Building the assets
 
-To build a minified version of the banner in order to use it on CentralNotice run
+To build a minified version of the banner into the `dist` directory run
 
-    docker-compose run js-build npm run build
+    make
 
 ## Using the compiled JavaScript on CentralNotice
 
@@ -64,13 +70,11 @@ The changes to the code depend on which kind of test you are running.
 ## How the preview feature works
 * Initially, the file `webpack/loader.js` will use the banner configuration to present links to a preview page for each banner.  
 * `webpack-dev-server` has the ability to act as a proxy for certain URL paths, meaning that it will fetch the content for that
-  path from a configured URL in the background and serve it transparently from the local host. The server is configured to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org.
-* there exist two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
+  path from a configured URL in the background and serve it transparently from the local host. The configuration tells the web server to relay the paths `/w`, `/wiki` and `/static` to the German Wikipedia at https://de.wikipedia.org. 
+* there are two meta banners that read the `devbanner` parameter from the URL and insert it in a script tag with the same hostname as the webpack server (e.g. `localhost` or `10.0.2.2`).
   * [B17WMDE_webpack_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B17WMDE_webpack_prototype) on CentralNotice
-  * [B17WMDE_webpack_prototype](https://wiki.wikimedia.de/w/index.php?title=Web:Banner/B17WMDE_webpack_prototype) on GS-WIKI
+  * [dev-mode-wpde](https://github.com/wmde/wikipedia.de-banners/blob/master/dev-mode-wpde.js) on the [`wmde/wikipedia.de-banners` repository](https://github.com/wmde/wikipedia.de-banners) on GitHub.
 
 ## Planned Features of the dev environment
 - [ ] Create upload plugin for webpack uses the campaign information from `campaign_info.toml` to upload the generated `.wikitext` file to the appropriate page on meta.wikimedia.org / GS-Wiki.
 
-## Notes on possible Banner code improvements
-none ♥
