@@ -56,6 +56,7 @@ export default class Banner extends Component {
 		} else {
 			this.bannerSlider.resize();
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
+			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		}
 	}
 
