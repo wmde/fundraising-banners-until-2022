@@ -11,6 +11,7 @@ const Translations = {
 	'sms-info-message': 'Text "WIKI" to 81190. Additional costs for sending text messages may apply.',
 	'sms-payment-message': '5 € by text message',
 	'custom-amount-placeholder': 'Other amount',
+	'custom-amount-placeholder-short': 'other',
 	'submit-label': 'Proceed with the donation',
 	'use-of-funds-link': 'Where does my donation go?',
 	'prefix-days-left': 'Only',

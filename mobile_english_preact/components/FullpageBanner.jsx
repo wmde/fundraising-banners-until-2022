@@ -2,7 +2,7 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import DonationFormWithHeaders from '../../shared/components/ui/form/DonationForm';
+import DonationForm from '../../shared/components/ui/form/DonationForm';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Infobox from '../../shared/components/ui/Infobox';
 
@@ -38,14 +38,15 @@ export default class FullpageBanner extends Component {
 					/>
 				</div>
 			</div>
-			<DonationFormWithHeaders
+			<DonationForm
 				formItems={props.formItems}
 				bannerName={props.bannerName}
 				campaignName={props.campaignName}
 				formatters={props.formatters}
 				impressionCounts={props.impressionCounts}
+				customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
 			/>
-			<div className="smallprint">
+			<div className="smallprint language-info">
 				Please note that the next steps of the donation process are in German.
 			</div>
 			<div className="smallprint">

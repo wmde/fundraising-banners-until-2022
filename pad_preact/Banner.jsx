@@ -137,6 +137,7 @@ export default class Banner extends Component {
 								formatters={props.formatters}
 								impressionCounts={props.impressionCounts}
 								onFormInteraction={this.onFormInteraction}
+								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 							/>
 						</div>
 						<div className="close">

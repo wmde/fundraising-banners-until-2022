@@ -42,6 +42,7 @@ export default class FullpageBanner extends Component {
 				campaignName={props.campaignName}
 				formatters={props.formatters}
 				impressionCounts={props.impressionCounts}
+				customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
 			/>
 			<div className="smallprint">
 				<span>
