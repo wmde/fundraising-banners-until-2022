@@ -12,6 +12,7 @@ const Translations = {
 	'sms-info-message': 'SMS mit "WIKI" an die 81190. Kosten zzgl. einer Standard-SMS.',
 	'sms-payment-message': '5 € per SMS',
 	'custom-amount-placeholder': 'Wunschbetrag',
+	'custom-amount-placeholder-short': 'anderer',
 	'submit-label': 'Weiter, um Spende abzuschließen',
 	'use-of-funds-link': 'Wohin geht meine Spende?',
 	'prefix-days-left': 'Nur noch',

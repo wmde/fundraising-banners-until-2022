@@ -96,7 +96,7 @@ export default function DonationFormWithHeaders( props ) {
 							value={ customAmount }
 							onInput={ e => updateCustomAmount( e.target.value ) }
 							onBlur={ e => validateCustomAmount( e.target.value ) }
-							placeholder={ Translations[ 'custom-amount-placeholder' ] }
+							placeholder={ props.customAmountPlaceholder }
 							language={
 								/* eslint-disable-next-line dot-notation */
 								Translations[ 'LANGUAGE' ]
