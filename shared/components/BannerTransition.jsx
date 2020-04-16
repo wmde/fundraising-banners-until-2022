@@ -10,6 +10,13 @@ const READY = 1;
 const SLIDING = 2;
 const FINISHED = 3;
 
+const STATE_NAMES = new Map( [
+	[ PAGELOADING, 'loading' ],
+	[ READY, 'ready' ],
+	[ SLIDING, 'sliding' ],
+	[ FINISHED, 'finished' ]
+] );
+
 export default class BannerTransition extends Component {
 	ref = createRef();
 
@@ -74,10 +81,13 @@ export default class BannerTransition extends Component {
 				bannerStyle = { top: 0 };
 		}
 		return <div style={ bannerStyle } ref={this.ref}
-			className={ classNames( {
-				'banner-position': true,
-				'banner-position--fixed': props.fixed
-			} )}
+			className={ classNames(
+				`banner-position--state-${STATE_NAMES.get( state.transitionPhase ) }`,
+				{
+					'banner-position': true,
+					'banner-position--fixed': props.fixed
+				}
+			)}
 			onTransitionEnd={ this.onTransitionEnd}>
 			{ props.children }
 		</div>;
