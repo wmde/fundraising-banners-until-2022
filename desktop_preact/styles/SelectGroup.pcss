@@ -80,20 +80,31 @@
 			}
 		}
 
-		&__state {
+		&__option {
+			flex: 1 1 auto;
+			padding: 0 0.2em 0.2em 0;
+			margin: 0;
+			height: 25px;
+			box-sizing: border-box;
 			display: flex;
+			position: relative;
+
+			&-amount-other-input {
+				min-width: 100px;
+			}
+		}
+
+		&__state {
+			box-sizing: border-box;
+			display: inline-block;
 			color: $color-black;
 			border: 0 none;
-			height: 25px;
 			cursor: pointer;
 			text-align: center;
 			font-size: 0.95em;
-			box-sizing: border-box;
 			white-space: nowrap;
-			align-content: center;
-			justify-content: center;
-			flex-direction: column;
 			padding: 0 5px;
+			line-height: 25px;
 		}
 
 		&__custom-input + .select-group__state {
@@ -104,23 +115,34 @@
 			background: transparent;
 		}
 
+		&__input {
+			margin-top: 3px;
+
+			&:checked + .select-group__state {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+
 		&__custom-input {
 			position: relative;
 			border: 1px solid $color-gray-light;
 			box-sizing: border-box;
 			padding-right: 10px;
 			width: 100%;
-			min-height: 25px;
+			height: 26px;
+			margin-top: -2px;
 
 			&--input {
+				display: inline-block;
 				color: $color-black;
 				background-color: transparent;
-				padding: 0.4em;
+				padding: 0 0.4em;
 				width: 100%;
-				min-height: 25px;
 				height: 25px;
 				margin: 0;
-				font-size: 0.9em;
+				font-size: 0.95em;
 				font-weight: bold;
 				border: 0 none;
 				box-sizing: border-box;
@@ -141,7 +163,7 @@
 				box-sizing: border-box;
 				height: 20px;
 				width: 10px;
-				line-height: 20px;
+				line-height: 21px;
 				text-align: center;
 				top: 50%;
 				right: 0;
@@ -157,29 +179,6 @@
 					outline: 0 none;
 					border-radius: 0;
 				}
-			}
-		}
-
-		&__input {
-			display: inline;
-
-			&:checked + .select-group__state {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
-			}
-		}
-
-		&__option {
-			flex: 1 1 auto;
-			padding: 0 0.2em 0.2em 0;
-			margin: 0;
-			box-sizing: border-box;
-			display: flex;
-			position: relative;
-
-			&-amount-other-input {
-				min-width: 100px;
 			}
 		}
 	}
