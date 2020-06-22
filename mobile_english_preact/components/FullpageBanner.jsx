@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import DonationForm from '../../shared/components/ui/form/DonationForm';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Infobox from '../../shared/components/ui/Infobox';
+import Footer from '../../shared/components/ui/Footer';
 
 export default class FullpageBanner extends Component {
 	render( props ) {
@@ -49,6 +50,9 @@ export default class FullpageBanner extends Component {
 			<div className="smallprint language-info">
 				Please note that the next steps of the donation process are in German.
 			</div>
+
+			<Footer/>
+
 			<div className="smallprint">
 				<span>
 					<a href={`https://spenden.wikimedia.de/spenden/Impressum?${ trackingParams }`} target="_blank">Legal Details</a>
