@@ -14,6 +14,7 @@ import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_pa
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
+import Footer from '../../../../shared/components/ui/Footer';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -128,6 +129,8 @@ export default function DonationFormWithHeaders( props ) {
 					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
 				</button>
 			</div>
+
+			<Footer/>
 
 			<SubmitValues
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
