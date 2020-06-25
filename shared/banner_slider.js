@@ -44,6 +44,13 @@ export class Slider {
 		}
 	}
 
+	/**
+	 * @param {int} milliseconds - Time to wait before the slider starts
+	 */
+	enableAutoplayAfter( milliseconds = 0 ) {
+		setTimeout( () => this.enableAutoplay(), milliseconds );
+	}
+
 	enableAutoplay() {
 		this.slider.on( 'change', this.onChange.bind( this ) );
 		this.slider.playPlayer();
