@@ -14,6 +14,8 @@ const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
+const SLIDESHOW_START_DELAY = 2000;
+
 export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
@@ -102,7 +104,7 @@ export default class Banner extends Component {
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	onMiniBannerSlideInFinished = () => {
-		this.bannerSlider.enableAutoplay();
+		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 	};
 
