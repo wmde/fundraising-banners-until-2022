@@ -84,18 +84,15 @@ export default class Banner extends Component {
 	}
 
 	closeBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent(
-			'banner-closed',
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
-			this.props.trackingData.bannerCloseTrackRatio
-		);
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
 			isFullPageVisible: false
 		} );
-		this.props.onClose();
+		this.props.onClose(
+			this.bannerSlider.getViewedSlides(),
+			this.bannerSlider.getCurrentSlide()
+		);
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };

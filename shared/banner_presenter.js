@@ -40,12 +40,20 @@ export default class BannerPresenter {
 
 		const resizeHandler = this.createResizeHandler( bannerContainer, skinAdjuster ).bind( this );
 		let displayBanner;
+		let bannerElement;
 		render(
 			createElement( Banner, {
 				...props,
 				trackingData: this.trackingData,
 				impressionCounts: this.impressionCounts,
-				onClose: () => {
+				onClose: ( slidesShown = 0, finalSlide = 0 ) => {
+					this.trackingData.tracker.trackBannerEventWithViewport(
+						'banner-closed',
+						slidesShown,
+						finalSlide,
+						this.trackingData.bannerCloseTrackRatio,
+						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight )
+					);
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
 					if ( onMediaWiki() ) {
@@ -63,7 +71,7 @@ export default class BannerPresenter {
 			bannerContainer
 		);
 
-		const bannerElement = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
+		bannerElement = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
 
 		this.trackingData.tracker.trackViewPortDimensions(
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),

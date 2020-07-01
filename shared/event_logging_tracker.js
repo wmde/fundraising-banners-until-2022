@@ -49,6 +49,7 @@ export default class EventLoggingTracker {
 
 	/**
 	 * Track the dimensions of the user viewport at the time of the banner closing for statistical purposes
+	 * This is only used in the old banners
 	 *
 	 * @param {jQuery} $trackedElement
 	 * @param {Function} dimensionCallback
@@ -119,6 +120,21 @@ export default class EventLoggingTracker {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * This is only used in the Preact based banners
+	 *
+	 * @param {string} actionName
+	 * @param {number} slidesShown
+	 * @param {number} finalSlide
+	 * @param {number} trackingRatio
+	 * @param {Object} dimensionData
+	 */
+	trackBannerEventWithViewport( actionName, slidesShown, finalSlide, trackingRatio = 0.01, dimensionData = {} ) {
+		if ( this.trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio ) ) {
+			this.trackViewPortDimensionsOnEvent( dimensionData, VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, 1 );
+		}
 	}
 
 	/**
