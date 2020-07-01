@@ -79,6 +79,11 @@ export default class MatomoTracker {
 		return true;
 	}
 
+	// eslint-disable-next-line no-unused-vars
+	trackBannerEventWithViewport( actionName, slidesShown, finalSlide, trackingRatio = 0.01, dimensionData = {} ) {
+		this.trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio );
+	}
+
 	recordBannerImpression() {
 		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
 	}

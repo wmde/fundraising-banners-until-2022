@@ -60,7 +60,6 @@ export default class Banner extends Component {
 	}
 
 	closeBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
 		this.props.onClose();

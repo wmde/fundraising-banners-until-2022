@@ -15,7 +15,7 @@ export function createTrackingData( bannerName, bannerClickTrackRatio = 1, banne
 		tracker: getTracker( bannerName ),
 		bannerClickTrackRatio: bannerClickTrackRatio,
 		bannerCloseTrackRatio: bannerCloseTrackRatio,
-		sizeTrackRation: sizeTrackRatio
+		sizeTrackRatio: sizeTrackRatio
 	};
 
 }
