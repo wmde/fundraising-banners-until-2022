@@ -97,7 +97,9 @@ export default class Banner extends Component {
 	};
 
 	toggleFundsModal = () => {
-		this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		if ( !this.state.isFundsModalVisible ) {
+			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		}
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 

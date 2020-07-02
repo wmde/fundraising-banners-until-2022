@@ -89,4 +89,5 @@ export default class MatomoTracker {
 	}
 
 	trackViewPortDimensions() {}
+	trackSizeIssueEvent() {}
 }

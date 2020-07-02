@@ -1,6 +1,6 @@
 /* eslint no-alert: 0 */
 
-import EventLoggingTracker from '../shared/event_logging_tracker';
+import EventLoggingTracker from '../shared/legacy_event_logging_tracker';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';
 import InterruptibleTimeout from '../shared/interruptible_timeout';
