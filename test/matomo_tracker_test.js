@@ -10,6 +10,18 @@ describe( 'MatomoTracker', function () {
 		global.window = { TestTracker: undefined };
 	} );
 
+	it( 'contains all required methods', () => {
+		window.TestTracker = {
+			trackContentImpression: sinon.spy()
+		};
+		const tracker = new MatomoTracker( 'TestTracker', 'TestBanner05' );
+
+		assert.equal( typeof tracker.trackBannerEvent, 'function' );
+		assert.equal( typeof tracker.trackViewPortDimensions, 'function' );
+		assert.equal( typeof tracker.trackBannerEventWithViewport, 'function' );
+		assert.equal( typeof tracker.trackSizeIssueEvent, 'function' );
+	} );
+
 	it( 'records impressions', () => {
 		window.TestTracker = {
 			trackContentImpression: sinon.spy()

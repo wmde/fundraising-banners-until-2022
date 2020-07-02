@@ -29,7 +29,12 @@ export default class DesktopBanner extends Component {
 	};
 
 	setToggleFundsModal = () => {
-		this.props.trackingData.eventTracker.trackEvent( 'application-of-funds-shown', this.props.trackingData.bannerClickTrackRatio );
+		this.props.trackingData.eventTracker.trackBannerEvent(
+			'application-of-funds-shown',
+			0,
+			0,
+			this.props.trackingData.bannerClickTrackRatio
+		);
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	}
 

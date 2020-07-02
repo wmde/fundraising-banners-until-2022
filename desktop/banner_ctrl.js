@@ -1,4 +1,4 @@
-import EventLoggingTracker from '../shared/event_logging_tracker';
+import EventLoggingTracker from '../shared/legacy_event_logging_tracker';
 import SizeIssueIndicator from '../shared/track_size_issues';
 import CampaignDays, { startOfDay, endOfDay } from '../shared/campaign_days';
 import CampaignDaySentence from '../shared/campaign_day_sentence';

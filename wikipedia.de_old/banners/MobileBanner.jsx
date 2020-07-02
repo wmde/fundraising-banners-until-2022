@@ -27,7 +27,12 @@ export default class MobileBanner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	showForm = e => {
-		this.props.trackingData.eventTracker.trackEvent( 'mobile-mini-banner-expanded', this.props.trackingData.bannerClickTrackRatio );
+		this.props.trackingData.eventTracker.trackBannerEvent(
+			'mobile-mini-banner-expanded',
+			0,
+			0,
+			this.props.trackingData.bannerClickTrackRatio
+		);
 		this.setState( { isFullPageVisible: true } );
 		if ( this.animateHighLight ) {
 			this.animateHighLight();
