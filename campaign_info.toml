@@ -28,13 +28,13 @@ wrapper_template = "wikipedia_org"
 # Banners of the campaign, key after "banners" can be anything
 [desktop_preact.banners.ctrl]
 filename = "./desktop_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_21_191221_ctrl"
+pagename = "B20WMDE_desktop_collage"
 tracking = "org-21-191221-ctrl"
 
-[desktop_preact.banners.var]
-filename = "./desktop_preact/banner_var.js"
-pagename = "B19WMDE_preact_21_191221_var"
-tracking = "org-21-191221-var"
+# [desktop_preact.banners.var]
+# filename = "./desktop_preact/banner_var.js"
+# pagename = "B19WMDE_preact_21_191221_var"
+# tracking = "org-21-191221-var"
 
 
 # Mobile Campaign
