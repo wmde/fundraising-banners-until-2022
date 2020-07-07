@@ -3,7 +3,8 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
+import ProgressBar from './components/ProgressBar';
+import AmountToggle from './components/AmountToggle';
 import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
@@ -29,6 +30,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			isAmountToggleOpen: false,
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
@@ -80,6 +82,10 @@ export default class Banner extends Component {
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
+	toggleAmountVisibility = () => {
+		this.setState( { isAmountToggleOpen: !this.state.isAmountToggleOpen } );
+	}
+
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
@@ -87,12 +93,14 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
+
 		return <div
-			className={classNames(
-				'wmde-banner',
-				state.displayState === CLOSED ? 'wmde-banner--hidden' : '',
-				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
-			)}
+			className={ classNames( {
+				'wmde-banner': true,
+				'wmde-banner--hidden': state.displayState === CLOSED,
+				'wmde-banner--visible': state.displayState === VISIBLE,
+				'wmde-banner--amount-toggle-open': state.isAmountToggleOpen
+			} ) }
 			ref={this.ref}>
 			<BannerTransition
 				fixed={ true }
@@ -108,29 +116,37 @@ export default class Banner extends Component {
 									formatters={props.formatters}
 									campaignParameters={props.campaignParameters}
 									campaignProjection={props.campaignProjection}
-									bannerText={props.bannerText}/>
-								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
+									bannerText={props.bannerText}
+									propsForText={ { showFundsModal: this.toggleFundsModal } }/>
 							</div>
-							<DonationForm
-								formItems={props.formItems}
-								bannerName={props.bannerName}
-								campaignName={props.campaignName}
+							<div className="banner__form">
+								<div className="banner__form-header">
+									Jetzt Spenden <a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+								</div>
+								<DonationForm
+									formItems={props.formItems}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+									formatters={props.formatters}
+									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
+									submitLabel={props.translations[ 'submit-label-short' ]}
+									amountToggle={ AmountToggle( { toggleAmount: this.toggleAmountVisibility } ) }
+									errorPosition={ props.errorPosition }
+								/>
+								<Footer/>
+							</div>
+						</div>
+						<div className="banner__progress">
+							<ProgressBar
 								formatters={props.formatters}
-								impressionCounts={props.impressionCounts}
-								onFormInteraction={this.onFormInteraction}
-								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-							/>
+								daysLeft={campaignProjection.getRemainingDays()}
+								donationAmount={campaignProjection.getProjectedDonationSum() * 0.6}
+								goalDonationSum={campaignProjection.goalDonationSum}
+								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+								setStartAnimation={this.registerStartProgressbar}/>
 						</div>
-						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
-						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>

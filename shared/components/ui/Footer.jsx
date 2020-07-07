@@ -6,6 +6,12 @@ import { useContext } from 'preact/hooks';
 export default function Footer( { showFundsModal } ) {
 	const Translations = useContext( TranslationContext );
 
+	let fundsModalLink = showFundsModal ? <div className="footer__item footer__item--rightflex">
+		<a id="application-of-funds-link" className="application-of-funds-link"
+			onClick={ showFundsModal }>{ Translations[ 'use-of-funds-link' ] }
+		</a>
+	</div> : null;
+
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__item">
@@ -22,11 +28,7 @@ export default function Footer( { showFundsModal } ) {
 					<span>DE33</span><span>1002</span><span>0500</span><span>0001</span><span>1947</span><span>00</span></span></span>
 			</div>
 
-			<div className="footer__item footer__item--rightflex">
-				<a id="application-of-funds-link" className="application-of-funds-link"
-					onClick={ showFundsModal }>{ Translations[ 'use-of-funds-link' ] }
-				</a>
-			</div>
+			{ fundsModalLink }
 		</div>
 	</div>;
 }
