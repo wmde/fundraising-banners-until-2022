@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsModal from './components/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
 
 const PENDING = 0;
