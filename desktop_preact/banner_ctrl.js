@@ -14,6 +14,7 @@ import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
+import { ERROR_POSITION_TOP } from '../shared/components/ui/form/SelectGroup';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -37,6 +38,7 @@ bannerPresenter.present(
 		fundsModalData,
 		bannerText: BannerText,
 		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		errorPosition: ERROR_POSITION_TOP
 	}
 );

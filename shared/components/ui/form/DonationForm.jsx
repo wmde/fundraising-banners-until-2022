@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import TranslationContext from '../../TranslationContext';
-import SelectGroup from './SelectGroup';
+import { SelectGroup } from './SelectGroup';
 import SelectCustomAmount from './SelectCustomAmount';
 import SmsBox from './SmsBox';
 
@@ -36,6 +36,8 @@ export default function DonationForm( props ) {
 		e.preventDefault();
 	};
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
+	const submitLabel = this.props.submitLabel ? this.props.submitLabel : Translations[ 'submit-label' ];
+	const amountToggle = this.props.amountToggle ? this.props.amountToggle : null;
 
 	return <div className="form">
 		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction }
@@ -50,6 +52,7 @@ export default function DonationForm( props ) {
 					currentValue={ paymentInterval }
 					onSelected={ e => setInterval( e.target.value ) }
 					disabledOptions={ disabledIntervals }
+					errorPosition={ props.errorPosition }
 				/>
 			</div>
 
@@ -62,6 +65,7 @@ export default function DonationForm( props ) {
 					currentValue={ selectedAmount }
 					onSelected={ e => selectAmount( e.target.value ) }
 					disabledOptions={ [] }
+					errorPosition={ props.errorPosition }
 				>
 					<SelectCustomAmount
 						fieldname="select-amount"
@@ -77,6 +81,8 @@ export default function DonationForm( props ) {
 				</SelectGroup>
 			</div>
 
+			{ amountToggle }
+
 			<div className="form-field-group">
 				<SelectGroup
 					fieldname="select-payment-method"
@@ -86,6 +92,7 @@ export default function DonationForm( props ) {
 					currentValue={ paymentMethod }
 					onSelected={ e => setPaymentMethod( e.target.value ) }
 					disabledOptions={ disabledPaymentMethods }
+					errorPosition={ props.errorPosition }
 				>
 					<SmsBox/>
 				</SelectGroup>
@@ -93,7 +100,7 @@ export default function DonationForm( props ) {
 
 			<div className="submit-section button-group">
 				<button className="button-group__button" onClick={ validate }>
-					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+					<span className="button-group__label">{ submitLabel }</span>
 				</button>
 			</div>
 

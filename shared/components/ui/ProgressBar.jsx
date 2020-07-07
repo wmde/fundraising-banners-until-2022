@@ -106,8 +106,11 @@ export default class ProgressBar extends Component {
 					<div className="progress_bar__days_left">
 						{ getDaysLeft( props.daysLeft ) }
 					</div>
-					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
+					<div className="progress_bar__donation_text">
+						{ getMillion( props.donationAmount ) }
+					</div>
 				</div>
+
 				<div
 					className="progress_bar__donation_remaining progress_bar__donation_remaining--inner">
 					{ Translations[ 'amount-missing' ] }{ ' ' }

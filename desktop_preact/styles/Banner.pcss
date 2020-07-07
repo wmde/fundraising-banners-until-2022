@@ -1,6 +1,14 @@
 .wmde-banner {
 	visibility: hidden;
 	width: 100%;
+	font-family: $banner-font-family;
+	color: $color-black;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 
 	&--visible {
 		visibility: visible;
@@ -13,87 +21,36 @@
 		border: 0 none;
 	}
 
-	.banner__wrapper {
-		font-size: 14px;
-		padding-bottom: 0.75em;
-		padding-top: 1px;
+	.banner__wrapper,
+	.banner__content {
+		transition: height $banner-height-transition-time $banner-easing;
+	}
 
-		font-family: $banner-main-font-family;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background-color: $color-white;
+	.banner__wrapper {
+		display: flex;
+		flex-direction: column;
+		background: $color-white;
+		margin-bottom: 20px;
+		box-shadow: 0 0 20px rgba( 0, 0, 0, 0.4 );
 	}
 
 	.banner__content {
-		margin-top: 0.5em;
 		display: flex;
-		flex-direction: column;
-		@media ( min-width: $breakpoint_l ) {
-			flex-direction: row;
-			order: 1;
-		}
+		flex-direction: row;
+	}
+
+	.banner__progress {
+		height: $banner-progress-height;
 	}
 
 	.banner__infobox {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex: 0 1 100%;
-		border: 0 none;
-		border-radius: 0.4em;
-		background-color: $color-primary;
-		padding: 0.25em 0.5em 0.25em 0;
-		margin: 0 0.8em 0 0.5em;
-		position: relative;
-		@media ( min-width: $breakpoint_m ) {
-			margin: 0.2em 5em 0.2em 5em;
-			&:before {
-				position: absolute;
-				bottom: 1.5em;
-				content: ' ';
-				margin-left: -24px;
-				border-style: solid;
-				border-width: 0 0 25px 25px;
-				border-color: transparent transparent $color-primary transparent;
-			}
-		}
-		@media ( min-width: $breakpoint_l ) {
-			margin: 0.2em 0 0.2em 5em;
-		}
+		flex: 1;
 	}
 
-	.banner__footer {
-		padding: 0 2.6em 0 2.6em;
-		@media ( min-width: $breakpoint_l ) {
-			order: 2;
-			padding: 0.5em 0 0 5.8em;
-		}
-	}
-
-	.close {
-		position: absolute;
-		width: 18px;
-		margin: 0.25em 0.25em 0.25em 0;
-		top: 0.5em;
-		right: 1.3em;
-		opacity: 0.8;
-
-		@media ( min-width: $breakpoint_m ) {
-			top: 0;
-			right: 0;
-			opacity: 0.5;
-		}
-
-		&__link {
-			font-size: 25px;
-			color: $color-white;
-			@media ( min-width: $breakpoint_m ) {
-				color: $color-gray;
-			}
-			text-decoration: none;
-			&:hover {
-				text-decoration: none;
-				color: $color-gray-medium;
-			}
-		}
+	.banner__form {
+		width: $banner-form-width;
+		flex: 0 0 $banner-form-width;
+		padding-right: $banner-padding;
+		padding-top: $banner-padding;
 	}
 }
