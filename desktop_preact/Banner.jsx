@@ -7,7 +7,7 @@ import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsModal from './components/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
 
 const PENDING = 0;

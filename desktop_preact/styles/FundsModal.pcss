@@ -1,0 +1,93 @@
+.banner_modal {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999;
+	&.is-visible {
+		display: flex;
+	}
+	&__background {
+		background-color: #000000;
+		opacity: 0.6;
+		width: 100vw;
+		height: 100vh;
+	}
+	&__container {
+		background-color: #ffffff;
+		width: 1024px; /* TODO add values for breakpoints */
+		height: 80vh;
+		max-width: 1024px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		/* stylelint-disable-next-line function-parentheses-space-inside */
+		transform: translate( -50%, -50% );
+		/* IE11 does not support spaces in CSS function calls, do not add spaces! */
+		padding: 18px;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
+		line-height: 1.5;
+		overflow-y: scroll;
+	}
+	&__content {
+		font-size: 14px;
+	}
+	&__section {
+		margin-bottom: 14px;
+	}
+	&__section_intro {
+		display: table;
+		h2 {
+			display: table-cell;
+			width: 30%;
+			font-size: 24px;
+			/* stylelint-disable-next-line declaration-property-value-blacklist */
+			border: none;
+		}
+		div {
+			display: table-cell;
+			font-size: 18px;
+		}
+	}
+	&_url {
+		margin: 10px 0;
+		padding: 10px 0;
+		border-bottom: 1px solid #9f9f9f;
+		> a {
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			color: #8f8f8f;
+			text-decoration: none;
+			&:hover {
+				color: #000000;
+			}
+		}
+	}
+	&_close {
+		position: absolute;
+		width: 18px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 13px;
+		right: 20px;
+		opacity: 0.5;
+		&__link {
+			background-color: transparent;
+			color: #000000;
+			font-size: 25px;
+			text-decoration: none;
+			border: 0;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				background-color: transparent;
+				text-decoration: none;
+			}
+		}
+		&:hover {
+			opacity: 0.75;
+		}
+	}
+}

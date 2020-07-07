@@ -1,0 +1,96 @@
+.funds_distribution_info {
+	&__graph {
+		display: flex;
+	}
+
+	&__text {
+		display: none;
+		font-size: 14px;
+		margin: 0 auto 14px auto;
+		max-width: 635px;
+	}
+	&__text.active {
+		display: block;
+	}
+}
+
+.funds_distribution_info_item {
+	&__box {
+		position: relative;
+		line-height: 50px;
+		box-sizing: border-box;
+		padding-left: 16px;
+		color: #ffffff;
+		margin-bottom: 24px;
+	}
+
+	/* diamond indicator on the bottom */
+	&.active .funds_distribution_info_item__box:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-bottom: 0;
+		margin-left: -20px;
+		margin-bottom: -18px;
+	}
+
+	&--technology {
+		.funds_distribution_info_item__title {
+			color: #808080;
+		}
+		.funds_distribution_info_item__box {
+			background-color: #808080;
+		}
+		&.active .funds_distribution_info_item__box:after {
+			border-top-color: #808080;
+		}
+	}
+	&--international {
+		.funds_distribution_info_item__title {
+			color: #0ea789;
+		}
+		.funds_distribution_info_item__box {
+			background-color: #0ea789;
+		}
+		&.active .funds_distribution_info_item__box:after {
+			border-top-color: #0ea789;
+		}
+	}
+	&--communities {
+		.funds_distribution_info_item__title {
+			color: #f24825;
+		}
+		.funds_distribution_info_item__box {
+			background-color: #f24825;
+		}
+		&.active .funds_distribution_info_item__box:after {
+			border-top-color: #f24825;
+		}
+	}
+	&--society {
+		.funds_distribution_info_item__title {
+			color: #9410ac;
+		}
+		.funds_distribution_info_item__box {
+			background-color: #9410ac;
+		}
+		&.active .funds_distribution_info_item__box:after {
+			border-top-color: #9410ac;
+		}
+	}
+	&--operative {
+		.funds_distribution_info_item__title {
+			color: #8ed14f;
+		}
+		.funds_distribution_info_item__box {
+			background-color: #8ed14f;
+		}
+		&.active .funds_distribution_info_item__box:after {
+			border-top-color: #8ed14f;
+		}
+	}
+}
