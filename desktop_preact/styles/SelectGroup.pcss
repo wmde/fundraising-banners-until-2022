@@ -1,207 +1,147 @@
+$radio-height: 40px;
+$radio-horizontal-margin: 2.5px;
+$radio-font-size: 14px;
+
+$radio-border-color: #c8ccd1;
+$radio-background: #f8f9fa;
+
+$radio-border-color-hover: #c8ccd1;
+$radio-background-hover: #eaecf0;
+
+$radio-border-color-active: #386d94;
+$radio-background-active: #f8f9fa;
+
+$radio-border-color-checked: #386d94;
+$radio-background-checked: #5d9fd0;
+$radio-color-checked: #ffffff;
+
 .wmde-banner {
-
 	.select-group {
-		border: 0;
-		margin: 0 auto;
-		padding: 0.4em 0.5em 0 0.5em;
-		display: flex;
-		flex-wrap: nowrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		flex: 1 0 auto;
-		font-size: 0.9em;
-		font-weight: bold;
-		width: 100%;
-
-		@media ( min-width: $breakpoint_l ) {
-			flex-wrap: wrap;
-		}
-
-		&-container {
-			border: 1px solid $color-primary;
-			display: flex;
-			flex: 1 1 auto;
-			flex-direction: column;
-			margin: 0 1em 0.4em 0;
-			@media ( min-width: $breakpoint_l ) {
-				border: 0;
-				max-width: 20em;
-			}
-		}
-
-		&:first-child {
-			padding-left: 0;
-		}
-
-		&:last-child {
-			padding-right: 0;
-		}
-
-		@media ( min-width: $breakpoint_l ) {
-			&:first-child,
-			&:last-child {
-				padding-left: 0.5em;
-			}
-		}
-
-		&__errormessage {
-			display: none;
-			color: $color-black;
-			font-weight: bold;
-			text-align: left;
-			width: 100%;
-			margin-bottom: 0.2em;
-			font-size: 0.8em;
-		}
-
-		&-container--with-error {
-			.select-group__erroricon {
-				position: relative;
-				padding-left: 20px;
-				display: block;
-
-				&:before {
-					content: $errorIcon;
-					width: 16px;
-					height: 16px;
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
-			}
-
-			.select-group__errormessage {
-				display: block;
-				color: $color-error;
-				margin-left: 6px;
-				@media ( min-width: $breakpoint_l ) {
-					margin-left: 0.5em;
-				}
-			}
-		}
+		margin-left: -$radio-horizontal-margin;
+		margin-right: -$radio-horizontal-margin;
+		font-size: $radio-font-size;
+		text-align: center;
 
 		&__option {
-			flex: 1 1 auto;
-			padding: 0 0.2em 0.2em 0;
-			margin: 0;
-			height: 25px;
-			box-sizing: border-box;
-			display: flex;
-			position: relative;
-
-			&-amount-other-input {
-				min-width: 100px;
-			}
-		}
-
-		&__state {
-			box-sizing: border-box;
 			display: inline-block;
-			color: $color-black;
-			border: 0 none;
+			width: 25%;
+			line-height: $radio-height;
+			padding-left: $radio-horizontal-margin;
+			padding-right: $radio-horizontal-margin;
+			margin-bottom: $banner-form-padding;
 			cursor: pointer;
-			text-align: center;
-			font-size: 0.95em;
-			white-space: nowrap;
-			padding: 0 5px;
-			line-height: 25px;
-		}
-
-		&__custom-input + .select-group__state {
-			position: absolute;
-			top: 0;
-			right: 1em;
-			border-color: transparent;
-			background: transparent;
 		}
 
 		&__input {
-			margin-top: 3px;
+			display: none;
+		}
 
-			&:checked + .select-group__state {
-				border: 0 none;
-				outline: 0 none;
-				border-radius: 0;
-			}
+		&__state,
+		&__custom-input {
+			display: block;
+			float: left; /* IE11 fix */
+			width: 100%;
+			border: 1px solid $radio-border-color;
+			border-radius: $radio-horizontal-margin;
+			background: $radio-background;
+			height: $radio-height;
 		}
 
 		&__custom-input {
 			position: relative;
-			border: 1px solid $color-gray-light;
-			box-sizing: border-box;
-			padding-right: 10px;
-			width: 100%;
-			height: 26px;
-			margin-top: -2px;
 
 			&--input {
-				display: inline-block;
-				color: $color-black;
-				background-color: transparent;
-				padding: 0 0.4em;
+				display: block;
+				height: $radio-height;
+				background: transparent;
+				border: 0;
 				width: 100%;
-				height: 25px;
-				margin: 0;
-				font-size: 0.95em;
-				font-weight: bold;
-				border: 0 none;
-				box-sizing: border-box;
-				text-decoration: underline;
-				text-align: left;
+				font-size: $radio-font-size;
+				text-align: center;
+				outline: 0;
 
-				@media ( min-width: $breakpoint_l ) {
-					&:focus,
-					&:active {
-						border: 1px solid $color-secondary;
-					}
+				&::placeholder {
+					opacity: 1;
+					color: $color-black;
 				}
 			}
 
 			&--euro-symbol {
-				display: block;
 				position: absolute;
-				box-sizing: border-box;
-				height: 20px;
-				width: 10px;
-				line-height: 21px;
-				text-align: center;
-				top: 50%;
+				top: 0;
 				right: 0;
-				margin-top: -10px;
-			}
-
-			&--value-entered,
-			&--focused {
-				border: 1px solid $color-secondary;
-
-				.select-group__custom-input--input {
-					border: 0 none;
-					outline: 0 none;
-					border-radius: 0;
-				}
+				line-height: 40px;
+				width: 18px;
+				z-index: 10;
 			}
 		}
-	}
 
-	.select-group-container--select-amount {
-		.select-group__option {
-			width: 25%;
+		&__option:hover .select-group__state,
+		&__option:focus .select-group__state,
+		&__option:hover .select-group__custom-input,
+		&__option:focus .select-group__custom-input {
+			color: $color-black;
+			border-color: $radio-border-color-hover;
+			background: $radio-background-hover;
 		}
 
-		.select-group__option--amount-other-input {
-			width: 50%;
+		&__option:active .select-group__state,
+		&__custom-input--focused {
+			color: $color-black;
+			border-color: $radio-border-color-active;
+			background: $radio-background-active;
+		}
+
+		&__option:hover .select-group__custom-input--input,
+		&__option:focus .select-group__custom-input--input {
+			color: $color-black;
+		}
+
+		&__option:hover .select-group__custom-input--input::placeholder,
+		&__option:focus .select-group__custom-input--input::placeholder,
+		&__custom-input--focused .select-group__custom-input--input::placeholder {
+			opacity: 0.5;
+		}
+
+		&__custom-input--value-entered .select-group__custom-input--input {
+			color: $radio-color-checked;
+		}
+
+		&__input:checked + .select-group__state,
+		&__custom-input--value-entered {
+			color: $radio-color-checked;
+			border-color: $radio-border-color-checked;
+			background: $radio-background-checked;
+		}
+
+		.sms-box {
+			display: none;
+		}
+
+		&__errormessage {
+			display: none;
+			font-size: 14px;
+			font-weight: bold;
+			text-align: center;
+			color: $color-error;
+			margin-bottom: $banner-form-padding;
+		}
+
+		&-container--with-error {
+			.select-group__errormessage {
+				display: block;
+			}
 		}
 	}
 
-	.select-group-container--select-interval {
-		.select-group__option {
-			width: 50%;
-		}
+	.select-group-container--select-amount .select-group {
+		overflow-y: hidden;
+		height: 50px;
 	}
 
-	.select-group-container--select-payment-method {
-		.select-group__option {
-			width: 50%;
+	&--amount-toggle-open {
+		.select-group-container--select-amount .select-group {
+			height: 100px;
 		}
 	}
 }
