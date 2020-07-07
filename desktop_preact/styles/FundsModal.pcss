@@ -31,26 +31,83 @@
 		line-height: 1.5;
 		overflow-y: scroll;
 	}
+	h2 {
+		font-size: 24px;
+		/* stylelint-disable-next-line declaration-property-value-blacklist */
+		border: none;
+	}
 	&__content {
 		font-size: 14px;
 	}
-	&__section {
-		margin-bottom: 14px;
+	&__column_info {
+		font-size: 12px;
+	}
+	&__section--two-cols {
+		& > div {
+			display: inline-block;
+			width: 50%;
+			box-sizing: border-box;
+		}
 	}
 	&__section_intro {
 		display: table;
 		h2 {
 			display: table-cell;
 			width: 30%;
-			font-size: 24px;
-			/* stylelint-disable-next-line declaration-property-value-blacklist */
-			border: none;
 		}
 		div {
 			display: table-cell;
 			font-size: 18px;
 		}
 	}
+
+	&__benefits_list {
+		background: #f4f4f4;
+		padding: 34px;
+	}
+
+	&__icon-list {
+		margin: 0;
+		padding: 0;
+
+		li {
+			margin: 0 0 14px 55px;
+			padding: 0;
+			position: relative;
+			list-style: none;
+
+			&:before {
+				content: ' ';
+				position: absolute;
+				left: -55px;
+				width: 46px;
+				height: 52px;
+				background-repeat: no-repeat;
+				background-position-x: center;
+			}
+		}
+
+		&_item--hand:before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Icon_hand_holding_heart.svg' );
+		}
+
+		&_item--smartphone:before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/5/53/Icon_letter_W_on_smartphone.svg' );
+		}
+
+		&_item--world:before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/d/dd/Icon_world.svg' );
+		}
+
+		&_item--megaphone:before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Icon_werbung.svg' );
+		}
+
+		&_item--twentyfourseven:before {
+			background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_24_7.svg' );
+		}
+	}
+
 	&_url {
 		margin: 10px 0;
 		padding: 10px 0;
