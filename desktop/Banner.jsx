@@ -6,7 +6,8 @@ import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
 
 const PENDING = 0;
@@ -162,7 +163,9 @@ export class Banner extends Component {
 				fundsModalData={props.fundsModalData}
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
+				locale='de'>
+				<FundsDistributionInfo/>
+			</FundsModal>
 		</div>;
 	}
 
