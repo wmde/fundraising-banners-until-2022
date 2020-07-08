@@ -5,37 +5,27 @@ import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
 	return <div className="banner-text">
-		<p className="text__headline">
-			<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
-			<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
-			<span> { capitalizeFirstLetter( weekdayPrepPhrase ) }  { currentDayName }  sind Sie in Deutschland gefragt</span><span
-				className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
+
+
+		<p className="banner-text-copy">
+			Die Bevölkerung Bochums schultert, rein zahlenmäßig, mit ihren Spenden den laufenden Betrieb
+			von Wikipedia – stellvertretend für ganz Deutschland. Würden sich die Kosten für Infrastruktur und
+			Weiterentwicklung von Wikipedia jetzt auf noch mehr Schultern verteilen, wäre es für jeden
+			einzelnen leichter.
 		</p>
-		<p className="text__paragraph">
-			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 23,83 € finanziert, aber 99 % der Leserinnen und Leser
-				spenden nicht. </span>
 
-			<span className="text__paragraph--bold">
-        Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName }  erreicht. </span>
 
-			<span>Schon der Preis einer Tasse Kaffee würde genügen. Über { campaignParameters.millionImpressionsPerDay } Millionen
-			Mal wird unser Spendenaufruf täglich angezeigt,
-			aber nur  { numberOfDonors } Menschen haben bisher gespendet. </span>
-			<span className="optional-text text-m">
-				Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. </span>
-			<span> Wikipedia ist ein Ort des Lernens – Werbung hat darin keinen Platz.
-			Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir
-				könnten ihr nicht vertrauen. </span>
 
-			<span className="optional-text text-xl">
-        Das Herzstück von Wikipedia ist die Gemeinschaft von Menschen, die uns unbegrenzten Zugang zu verlässlichen und neutralen Informationen geben. </span>
 
-			<span>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia
-				nützlich finden, nehmen Sie sich { weekdayPrepPhrase } { currentDayName } bitte eine
-				Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück</span>
-			<span className="optional-text text-l">, damit Wikipedia weiter wachsen kann</span>.
-
-			<span className="text__paragraph--italic"> Vielen Dank!</span>
+		<p className="banner-text-copy">
+			<strong> Schon der Preis einer Tasse Kaffee ist ein wirksamer Beitrag, um die Zukunft unseres weltweiten
+				Projekts einer freien, unabhängigen Internet-Enzyklopädie zu sichern.</strong> Finden Sie
+			Wikipedia nützlich? Dann unterstützen Sie uns bitte auch mit einer Spende. Vielen Dank!
 		</p>
+
+		<div className="banner-text-image collage-image">
+		</div>
+
+
 	</div>;
 }

@@ -1,60 +1,44 @@
-.wmde-banner {
-	.text {
-		&__headline {
-			margin: 0.2em 0;
-			display: inline;
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
-			}
-			&--bold {
-				font-weight: bold;
-			}
-			&--italic {
-				font-style: italic;
-			}
-		}
-		&--capitalize-first-letter:first-letter {
-			text-transform: capitalize;
-		}
-		&__paragraph {
-			margin: 0;
-			padding: 0;
-			display: inline;
-			@media ( min-width: $breakpoint_m ) {
-				display: block;
-			}
-			&--bold {
-				font-weight: bold;
-			}
-			&--italic {
-				font-style: italic;
-			}
-			&--sans-serif {
-				font-family: $banner-main-font-family;
-				font-size: 0.9em;
-			}
-		}
-		/*  This is for keeping the same banner size when testing different banner texts.
-			The placeholder text element should contain the text that was removed
-		 */
-		&__hidden-placeholder {
-			visibility: hidden;
-		}
-	}
+$image-font-size: 24px;
+$image-font-weight: bold;
+$copy-font-size: 18px;
 
-	.optional-text {
-		display: none;
-		@media ( min-width: $breakpoint_l ) {
-			&.text-m {
-				display: inline;
-			}
-			&.text-l {
-				display: inline;
+.wmde-banner {
+	.banner-text {
+		display: flex;
+		flex-direction: row;
+		line-height: 1.5;
+
+		&-image {
+			width: 447px;
+			flex: 0 1 130%;
+			min-height: 351px;
+			padding-left: $banner-padding;
+			padding-top: $banner-padding;
+			text-align: center;
+			font-size: $image-font-size;
+			font-weight: bold;
+
+			p {
+				background: $color-highlight;
+				border-radius: 2px;
+				margin: 0;
 			}
 		}
-		@media ( min-width: $breakpoint_xl ) {
-			&.text-xl {
-				display: inline;
+
+		&-copy {
+			flex: 1 1 auto;
+			padding: $banner-padding;
+			font-size: $copy-font-size;
+
+			strong {
+				background: $color-highlight;
+				border-radius: 2px;
+			}
+
+			a {
+				font-weight: bold;
+				color: $color-black;
+				text-decoration: none;
 			}
 		}
 	}
