@@ -4,7 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "21-ba-191221"
+campaign_tracking = "prototype-tests"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
@@ -21,21 +21,20 @@ tracking = "org-21-191221-var"
 
 # A Campaign with global settings
 [desktop_preact]
-campaign_tracking = "21-ba-191221"
+campaign_tracking = "map-banner-prototype"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop_preact.banners.ctrl]
 filename = "./desktop_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_21_191221_ctrl"
-tracking = "org-21-191221-ctrl"
+pagename = "B20WMDE_preact_map_banner_prototype"
+tracking = "org-0-map-banner"
 
-[desktop_preact.banners.var]
-filename = "./desktop_preact/banner_var.js"
-pagename = "B19WMDE_preact_21_191221_var"
-tracking = "org-21-191221-var"
-
+# [desktop_preact.banners.var]
+# filename = "./desktop_preact/banner_var.js"
+# pagename = "B19WMDE_preact_21_191221_var"
+# tracking = "org-21-191221-var"
 
 # Mobile Campaign
 [mobile]
