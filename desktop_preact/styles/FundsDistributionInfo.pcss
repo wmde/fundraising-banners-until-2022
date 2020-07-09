@@ -8,6 +8,7 @@
 		font-size: 14px;
 		margin: 0 auto 14px auto;
 		max-width: 635px;
+		min-height: 130px; /* TODO only needed for responsiveness on desktop */
 	}
 	&__text.active {
 		display: block;
@@ -15,6 +16,10 @@
 }
 
 .funds_distribution_info_item {
+	&__title {
+		font-weight: bold;
+		margin-bottom: 2px;
+	}
 	&__box {
 		position: relative;
 		line-height: 50px;

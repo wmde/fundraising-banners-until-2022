@@ -26,7 +26,9 @@ export default class FundsModal extends Component {
 			</div>
 			<div className="banner_modal__container">
 				<div className="banner_modal_close">
-					<button className="banner_modal_close__link" onClick={props.toggleFundsModal}>&#x2715;</button>
+					<button className="banner_modal_close__link" onClick={props.toggleFundsModal}>
+						<img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Icon_close.svg" />
+					</button>
 				</div>
 				<div className="banner_modal__content">
 					<div className="banner_modal__section">
@@ -109,9 +111,36 @@ export default class FundsModal extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="banner_modal__section">
-						<h2>An wen gehen die Spenden für Wikipedia</h2>
-						<div>TODO</div>
+					<div className="banner_modal__section banner_modal__section--orgchart">
+						<div className="banner_modal__orgchart_text">
+							<h2>An wen gehen die Spenden für Wikipedia?</h2>
+							<div>
+								<p>
+									Spenden aus Deutschland gehen an die {' '}<span
+										className="banner_modal__org banner_modal__org--wmfg"> Wikimedia Fördergesellschaft </span>{' '} in
+									Berlin. Ihr einziger Zweck ist es, Spenden für Wikipedia zu sammeln und an den {' '}<span
+										className="banner_modal__org banner_modal__org--wmde">Verein WikimediaDeutschland </span>{' '} sowie
+									an die {' '}<span className="banner_modal__org banner_modal__org--wmf"> Wikimedia Foundation </span>{' '} weiterzuleiten.
+								</p>
+
+								<p>
+									Die Fördergesellschaft ist eine Tochter von Wikimedia Deutschland. Ein großer
+									Vorteil für Spenderinnen und Spender: Beide sind als gemeinnützig anerkannt und
+									damit berechtigt, steuerabzugsfähige Spendenquittungen auszustellen.</p>
+
+								<p>
+									Die internationale Wikimedia Foundation ist eine gemeinnützige Organisation, die
+									weltweit Wikipedia und damit verbundene Projekte betreibt, voranbringt und
+									entwickelt.
+								</p>
+								<div style={{ textAlign: 'right', paddingTop: '50px' }}>
+									<button className="banner_modal__button" onClick={props.toggleFundsModal}>Jetzt spenden</button>
+								</div>
+							</div>
+						</div>
+						<div className="banner_modal__orgchart_image">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/WMDE-funds-forwarding.gif"/>
+						</div>
 					</div>
 				</div>
 			</div>

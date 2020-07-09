@@ -33,6 +33,7 @@
 	}
 	h2 {
 		font-size: 24px;
+		font-weight: bold;
 		/* stylelint-disable-next-line declaration-property-value-blacklist */
 		border: none;
 		padding-top: 0;
@@ -42,9 +43,15 @@
 	}
 	&__column_info {
 		font-size: 12px;
+		padding-bottom: 12px;
 	}
 	&__section--two-cols {
 		display: flex;
+	}
+	&__section--orgchart {
+		display: flex;
+		padding: 34px;
+		font-size: 18px;
 	}
 	&__column {
 		flex: 1 1 auto;
@@ -54,6 +61,8 @@
 	}
 	&__section_intro {
 		display: table;
+		margin-bottom: 34px;
+		width: 100%;
 		h2 {
 			display: table-cell;
 			width: 30%;
@@ -61,6 +70,7 @@
 		div {
 			display: table-cell;
 			font-size: 18px;
+			padding: 0 72px;
 		}
 	}
 
@@ -115,6 +125,38 @@
 		&_item--twentyfourseven:before {
 			background: url( 'https://upload.wikimedia.org/wikipedia/commons/8/80/Icon_24_7.svg' );
 		}
+	}
+
+	&__orgchart_text {
+		flex: 1 1 auto;
+	}
+	&__orgchart_image img {
+		padding: 0 50px;
+	}
+
+	&__org {
+		display: inline-block;
+	}
+	&__org--wmf {
+		background-color: #b8e986;
+	}
+	&__org--wmfg {
+		background-color: #f8e71c;
+	}
+	&__org--wmde {
+		background-color: #f5a623;
+	}
+
+	&__button {
+		padding: 15px;
+		/* stylelint-disable-next-line declaration-property-value-blacklist */
+		border: none;
+		border-radius: 5px;
+		background: #2c9bf0;
+		color: #ffffff;
+		font-size: 18px;
+		font-weight: bold;
+		cursor: pointer;
 	}
 
 	&_url {
