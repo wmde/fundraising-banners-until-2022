@@ -29,7 +29,6 @@
 	.banner__wrapper {
 		display: flex;
 		flex-direction: column;
-		height: $banner-height;
 		background: $color-white;
 		margin-bottom: 20px;
 		box-shadow: 0 0 20px rgba( 0, 0, 0, 0.4 );
@@ -37,7 +36,7 @@
 
 	.banner__content {
 		display: flex;
-		height: $banner-content-height;
+		flex-direction: row;
 	}
 
 	.banner__progress {
@@ -45,25 +44,14 @@
 	}
 
 	.banner__infobox {
-		flex: auto;
+		flex: 1;
 	}
 
 	.banner__form {
 		width: $banner-form-width;
-		flex-grow: 0;
-		flex-shrink: 0;
-		flex-basis: $banner-form-width;
-		padding-right: $banner-padding;
+		flex: 0 0 $banner-form-width;
 		padding-top: $banner-padding;
-	}
-
-	&--amount-toggle-open {
-		.banner__wrapper {
-			height: $banner-height-amount-open;
-		}
-
-		.banner__content {
-			height: $banner-content-height-amount-open;
-		}
+		padding-right: 16px;
+		padding-left: 16px;
 	}
 }

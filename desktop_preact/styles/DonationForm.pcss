@@ -10,7 +10,7 @@ $close-link-background: #f9f8fa;
 $close-link-background-hover: #eaecf0;
 $close-link-background-focus: #f8f9fa;
 $close-link-background-active: #c8ccd1;
-$close-link-font-size: 14px;
+$close-link-font-size: 29px;
 
 $button-height: 44px;
 $button-font-size: 18px;
@@ -30,24 +30,24 @@ $amount-text-triangle-color: #3366cc;
 			font-weight: $header-font-weight;
 			line-height: $header-height;
 			text-align: center;
-			margin-bottom: $banner-padding;
+			margin-bottom: 16px;
 		}
 
 		.close__link {
 			position: absolute;
-			top: 0;
+			top: -3px;
 			right: 0;
 			display: inline-block;
 			color: $color-black;
 			font-size: $close-link-font-size;
-			height: $header-height;
-			width: $header-height;
+			height: 30px;
+			width: 30px;
 			border: 1px solid $close-link-border-color;
 			border-radius: 5px;
 			background: $close-link-background;
 			text-align: center;
 			text-decoration: none;
-			line-height: 22px;
+			line-height: 30px;
 
 			&:hover {
 				border-color: $close-link-border-color-hover;
@@ -98,6 +98,8 @@ $amount-text-triangle-color: #3366cc;
 		height: 16px;
 		line-height: 16px;
 		font-size: $amount-text-font-size;
+		font-weight: bold;
+		color: $amount-text-triangle-color;
 		padding-right: 12px;
 		text-align: right;
 		margin-bottom: $banner-form-padding;

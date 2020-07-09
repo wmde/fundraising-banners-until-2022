@@ -1,6 +1,7 @@
 $image-font-size: 24px;
 $image-font-weight: bold;
 $copy-font-size: 18px;
+$headline-font-size: 24px;
 
 .wmde-banner {
 	.banner-text {
@@ -9,14 +10,13 @@ $copy-font-size: 18px;
 		line-height: 1.5;
 
 		&-image {
-			width: 447px;
+			width: 226px;
 			flex: 0 1 130%;
-			min-height: 351px;
+			min-height: 301px;
 			padding-left: $banner-padding;
 			padding-top: $banner-padding;
-			text-align: center;
 			font-size: $image-font-size;
-			font-weight: bold;
+			margin-right: $banner-padding;
 
 			p {
 				background: $color-highlight;
@@ -27,8 +27,7 @@ $copy-font-size: 18px;
 
 		&-copy {
 			flex: 1 1 auto;
-			padding: $banner-padding;
-			font-size: $copy-font-size;
+			padding-right: $banner-padding;
 
 			strong {
 				background: $color-highlight;
@@ -40,6 +39,24 @@ $copy-font-size: 18px;
 				color: $color-black;
 				text-decoration: none;
 			}
+		}
+
+		&-wrapper {
+			display: flex;
+			flex-direction: column;
+			padding: $banner-padding;
+			font-size: $copy-font-size;
+		}
+
+		&-content {
+			display: flex;
+			flex-direction: row;
+		}
+
+		&-headline {
+			font-size: $headline-font-size;
+			margin-bottom: 10px;
+			font-weight: bold;
 		}
 	}
 }

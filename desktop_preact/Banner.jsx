@@ -83,7 +83,7 @@ export default class Banner extends Component {
 	};
 
 	toggleAmountVisibility = () => {
-		this.setState( { isAmountToggleOpen: !this.state.isAmountToggleOpen } );
+		this.setState( { isAmountToggleOpen: !this.state.isAmountToggleOpen } )
 	}
 
 	onFormInteraction = () => {
@@ -121,7 +121,7 @@ export default class Banner extends Component {
 
 							<div className="banner__form">
 								<div className="banner__form-header">
-									Jetzt Spenden <a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+									Jetzt spenden <a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 								</div>
 								<DonationForm
 									formItems={props.formItems}
@@ -142,7 +142,7 @@ export default class Banner extends Component {
 							<ProgressBar
 								formatters={props.formatters}
 								daysLeft={campaignProjection.getRemainingDays()}
-								donationAmount={campaignProjection.getProjectedDonationSum() * 0.6}
+								donationAmount={campaignProjection.getProjectedDonationSum()}
 								goalDonationSum={campaignProjection.goalDonationSum}
 								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 								setStartAnimation={this.registerStartProgressbar}/>

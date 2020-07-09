@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import TranslationContext from '../../TranslationContext';
-import SelectGroup from './SelectGroup';
+import { SelectGroup } from './SelectGroup';
 import SelectCustomAmount from './SelectCustomAmount';
 import SmsBox from './SmsBox';
 
@@ -13,6 +13,10 @@ import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
 import { amountMessage, validateRequired } from './utils';
 import SubmitValues from './SubmitValues';
+
+/**
+ * TODO: Document this component's props
+ */
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -56,8 +60,6 @@ export default function DonationForm( props ) {
 				/>
 			</div>
 
-			{ amountToggle }
-
 			<div className={ 'form-field-group' }>
 				<SelectGroup
 					fieldname="select-amount"
@@ -82,6 +84,8 @@ export default function DonationForm( props ) {
 					/>
 				</SelectGroup>
 			</div>
+
+			{ amountToggle }
 
 			<div className="form-field-group">
 				<SelectGroup

@@ -2,12 +2,14 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 
-export const ERROR_POSITION_TOP = 1;
-export const ERROR_POSITION_BOTTOM = 2;
+export const ErrorPosition = Object.freeze( {
+	TOP: Symbol( 'top' ),
+	BOTTOM: Symbol( 'bottom' )
+} );
 
-export default function SelectGroup( props ) {
+export function SelectGroup( props ) {
 
-	const errorPosition = props.errorPosition || ERROR_POSITION_BOTTOM;
+	const errorPosition = props.errorPosition || ErrorPosition.BOTTOM;
 
 	const error = <span className="select-group__errormessage">
 		<span className="select-group__erroricon">
@@ -24,7 +26,7 @@ export default function SelectGroup( props ) {
 			}
 		) }>
 
-		{ errorPosition === ERROR_POSITION_TOP ? error : null }
+		{ errorPosition === ErrorPosition.TOP ? error : null }
 
 		<div className="select-group">
 			{ props.selectionItems.map( ( { value, label } ) => (
@@ -43,6 +45,6 @@ export default function SelectGroup( props ) {
 			{ props.children }
 		</div>
 
-		{ errorPosition === ERROR_POSITION_BOTTOM ? error : null }
+		{ errorPosition === ErrorPosition.BOTTOM ? error : null }
 	</div>;
 }
