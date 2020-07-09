@@ -2,6 +2,7 @@
 import { Component, h } from 'preact';
 import classNames from 'classnames';
 import FundsDistributionInfo from './FundsDistributionInfo';
+import CompanyBudgets from './CompanyBudgets';
 
 export default class FundsModal extends Component {
 	constructor( props ) {
@@ -37,10 +38,10 @@ export default class FundsModal extends Component {
 								Also für Sie – und alle Menschen weltweit.
 							</div>
 						</div>
-						<FundsDistributionInfo />
+						<FundsDistributionInfo/>
 					</div>
 					<div className="banner_modal__section banner_modal__section--two-cols">
-						<div>
+						<div className="banner_modal__column">
 							<div className="banner_modal__column_info">
 								Einen genauen Einblick in die internationalen Aktivitäten finden Sie hier:<br/>
 								<a href="#">Jahresplan Wikimedia Foundation</a>
@@ -77,12 +78,35 @@ export default class FundsModal extends Component {
 								</ul>
 							</div>
 						</div>
-						<div>
+						<div className="banner_modal__column">
 							<div className="banner_modal__column_info">
 								Einen genauen Einblick in die Aktivitäten in Deutschland finden Sie hier:<br/>
 								<a href="#">Jahresplan Wikimedia Deutschland</a>
 							</div>
+							<div className="banner_modal__comparison">
+								<h2>Warum wir nur 9.000.000 € brauchen</h2>
+								<div>
+									<p>
+										Unser Spendenziel von 9 Millionen € ist ein wichtiger Teil unserer für das Jahr
+										2020 geplanten Gesamteinnahmen. Das ist zweifelsohne viel Geld.
+									</p>
 
+									<p>
+										Berücksichtigt man allerdings, dass Wikipedia auf Platz 5 der weltweit
+										meistbesuchten Webseiten steht, so relativieren sich diese Zahlen. Denn im
+										Vergleich zu anderen Top-Webseiten benötigen wir ein außergewöhnlich geringes
+										Budget für den laufenden Betrieb und für Investitionen in die Zukunft.
+									</p>
+
+									<p>
+										Dies ist allein deshalb möglich, weil Wikipedia kein „Geschäftsmodell“ verfolgt,
+										alle Beiträge in Wikipedia ehrenamtlich erstellt werden und wir weltweit nur
+										rund 500 Mitarbeitende haben. Zudem sind wir gemeinnützig, das verpflichtet uns
+										zu einem verantwortungsbewussten und effizienten Umgang mit den Einnahmen.
+									</p>
+								</div>
+								<CompanyBudgets/>
+							</div>
 						</div>
 					</div>
 					<div className="banner_modal__section">
