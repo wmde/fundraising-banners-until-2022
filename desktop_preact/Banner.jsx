@@ -142,7 +142,7 @@ export default class Banner extends Component {
 							<ProgressBar
 								formatters={props.formatters}
 								daysLeft={campaignProjection.getRemainingDays()}
-								donationAmount={campaignProjection.getProjectedDonationSum() * 0.6}
+								donationAmount={campaignProjection.getProjectedDonationSum()}
 								goalDonationSum={campaignProjection.goalDonationSum}
 								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 								setStartAnimation={this.registerStartProgressbar}/>
