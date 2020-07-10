@@ -6,10 +6,10 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './Banner';
+import { Banner } from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
-import BannerText from './components/BannerText_var';
+import BannerText from './components/BannerText';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -37,6 +37,6 @@ bannerPresenter.present(
 		fundsModalData,
 		bannerText: BannerText,
 		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 	}
 );

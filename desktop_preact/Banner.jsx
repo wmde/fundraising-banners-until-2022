@@ -3,7 +3,6 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
@@ -14,7 +13,7 @@ const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
-export default class Banner extends Component {
+export class Banner extends Component {
 
 	static propTypes = {
 		/** callback when banner closes */
@@ -86,13 +85,12 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		const campaignProjection = props.campaignProjection;
 		return <div
-			className={classNames(
-				'wmde-banner',
-				state.displayState === CLOSED ? 'wmde-banner--hidden' : '',
-				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
-			)}
+			className={ classNames( {
+				'wmde-banner': true,
+				'wmde-banner--hidden': state.displayState === CLOSED,
+				'wmde-banner--visible': state.displayState === VISIBLE
+			} ) }
 			ref={this.ref}>
 			<BannerTransition
 				fixed={ true }
@@ -109,13 +107,6 @@ export default class Banner extends Component {
 									campaignParameters={props.campaignParameters}
 									campaignProjection={props.campaignProjection}
 									bannerText={props.bannerText}/>
-								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
