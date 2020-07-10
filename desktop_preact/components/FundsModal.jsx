@@ -44,7 +44,7 @@ export default class FundsModal extends Component {
 					</div>
 					<div className="banner_modal__section banner_modal__section--two-cols">
 						<div className="banner_modal__column">
-							<div className="banner_modal__column_info">
+							<div className="banner_modal__column_info banner_modal__column_info--benefits_list">
 								Einen genauen Einblick in die internationalen Aktivitäten finden Sie hier:<br/>
 								<a href="#">Jahresplan Wikimedia Foundation</a>
 							</div>
@@ -119,7 +119,7 @@ export default class FundsModal extends Component {
 									Spenden aus Deutschland gehen an die {' '}<span
 										className="banner_modal__org banner_modal__org--wmfg"> Wikimedia Fördergesellschaft </span>{' '} in
 									Berlin. Ihr einziger Zweck ist es, Spenden für Wikipedia zu sammeln und an den {' '}<span
-										className="banner_modal__org banner_modal__org--wmde">Verein WikimediaDeutschland </span>{' '} sowie
+										className="banner_modal__org banner_modal__org--wmde">Verein Wikimedia Deutschland </span>{' '} sowie
 									an die {' '}<span className="banner_modal__org banner_modal__org--wmf"> Wikimedia Foundation </span>{' '} weiterzuleiten.
 								</p>
 
@@ -133,14 +133,15 @@ export default class FundsModal extends Component {
 									weltweit Wikipedia und damit verbundene Projekte betreibt, voranbringt und
 									entwickelt.
 								</p>
-								<div style={{ textAlign: 'right', paddingTop: '50px' }}>
-									<button className="banner_modal__button" onClick={props.toggleFundsModal}>Jetzt spenden</button>
-								</div>
+
 							</div>
 						</div>
 						<div className="banner_modal__orgchart_image">
 							<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/WMDE-funds-forwarding.gif"/>
 						</div>
+					</div>
+					<div className="banner_model__section banner_modal__section--call_to_action">
+						<button className="banner_modal__button" onClick={props.toggleFundsModal}>Jetzt spenden</button>
 					</div>
 				</div>
 			</div>
