@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
+import PopUp from './ui/PopUp';
 
 export default function BannerText( props ) {
 	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
@@ -31,6 +32,8 @@ export default function BannerText( props ) {
 		</div>
 
 		<div className="banner-text-image collage-image">
+			<PopUp>
+			</PopUp>
 		</div>
 
 	</div>;
