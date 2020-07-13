@@ -13,6 +13,11 @@ const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
+export const BannerType = Object.freeze( {
+	CTRL: Symbol( 'ctrl ' ),
+	VAR: Symbol( 'var' )
+} );
+
 export class Banner extends Component {
 
 	static propTypes = {
@@ -89,7 +94,9 @@ export class Banner extends Component {
 			className={ classNames( {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.displayState === CLOSED,
-				'wmde-banner--visible': state.displayState === VISIBLE
+				'wmde-banner--visible': state.displayState === VISIBLE,
+				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
+				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
 			ref={this.ref}>
 			<BannerTransition
