@@ -60,6 +60,9 @@ export default class BannerPresenter {
 						mw.centralNotice.hideBanner();
 					}
 				},
+				onFinishedTransitioning() {
+					window.addEventListener( 'resize', resizeHandler );
+				},
 				registerDisplayBanner: cb => {
 					displayBanner = cb;
 				},

@@ -9,23 +9,8 @@ $headline-font-size: 24px;
 		flex-direction: row;
 		line-height: 1.5;
 
-		&-image {
-			width: 226px;
-			flex: 0 1 130%;
-			min-height: 301px;
-			padding-left: $banner-padding;
-			padding-top: $banner-padding;
-			font-size: $image-font-size;
-			margin-right: $banner-padding;
-
-			p {
-				background: $color-highlight;
-				border-radius: 2px;
-				margin: 0;
-			}
-		}
-
 		&-copy {
+			margin: 0;
 			flex: 1 1 auto;
 			padding-right: $banner-padding;
 
@@ -55,8 +40,9 @@ $headline-font-size: 24px;
 
 		&-headline {
 			font-size: $headline-font-size;
-			margin-bottom: 10px;
+			margin-bottom: 32px;
 			font-weight: bold;
+			line-height: 1;
 		}
 	}
 }

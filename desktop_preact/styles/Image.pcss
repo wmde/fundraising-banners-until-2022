@@ -1,10 +1,42 @@
-.collage-image {
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/74/Shape-germany-and-states.png');
+$image-font-size: 24px;
+$headline-font-size: 24px;
 
-	&:hover {
-		background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a8/Shape-germany-and-state-of-berlin.png');
+.wmde-banner {
+	.banner-image {
+		min-width: 226px;
+		width: 226px;
+		flex: 0 1 130%;
+		position: relative;
+		min-height: 301px;
+		height: 301px;
+		font-size: $image-font-size;
+		margin-right: $banner-padding;
+		margin-top: $banner-padding;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/7/74/Shape-germany-and-states.png' );
+
+		&--highlight-visible {
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Shape-germany-and-state-of-berlin.png' );
+		}
+	}
+
+	.hover-area {
+		position: absolute;
+		width: 26px;
+		height: 22px;
+		top: 85px;
+		right: 30px;
+		cursor: pointer;
+	}
+
+	/* preload and hide image content to prevent initial flickering */
+	&:after {
+		position: absolute;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		z-index: -1;
+		content: url( 'https://upload.wikimedia.org/wikipedia/commons/7/74/Shape-germany-and-states.png' ) url( 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Shape-germany-and-state-of-berlin.png' );
 	}
 }

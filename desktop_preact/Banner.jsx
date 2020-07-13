@@ -61,6 +61,10 @@ export default class Banner extends Component {
 		}
 	}
 
+	onFinishedTransitioning = () => {
+		this.props.onFinishedTransitioning();
+	}
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
@@ -83,8 +87,8 @@ export default class Banner extends Component {
 	};
 
 	toggleAmountVisibility = () => {
-		this.setState( { isAmountToggleOpen: !this.state.isAmountToggleOpen } )
-	}
+		this.setState( { isAmountToggleOpen: !this.state.isAmountToggleOpen } );
+	};
 
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
@@ -104,7 +108,7 @@ export default class Banner extends Component {
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.startProgressbar }
+				onFinish={ this.onFinishedTransitioning }
 				skinAdjuster={ props.skinAdjuster }
 			>
 				<TranslationContext.Provider value={props.translations}>
@@ -130,7 +134,7 @@ export default class Banner extends Component {
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
 									submitLabel={ props.translations[ 'submit-label-short' ] }
 									amountToggle={ AmountToggle( { toggleAmount: this.toggleAmountVisibility } ) }
 									errorPosition={ props.errorPosition }

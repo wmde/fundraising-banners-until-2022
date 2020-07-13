@@ -1,11 +1,14 @@
 .wmde-banner {
 	.states-popup {
-		/* visibility: hidden; */
+		visibility: hidden;
+		position: absolute;
+		top: 0;
+		left: 0;
 		font-size: 12px;
 		width: 150px;
 		background-color: #e1e1e1;
 		border-radius: 5px;
-		box-shadow: 0px 0px 5px 1px rgba(184,184,184,1);
+		box-shadow: 0 0 5px 1px rgba( 184, 184, 184, 1 );
 
 		&-headline {
 			font-weight: bold;
@@ -19,6 +22,10 @@
 			padding: 6px 3px;
 			text-align: left;
 			line-height: 1.3em;
+		}
+
+		&--visible {
+			visibility: visible;
 		}
 	}
 }
