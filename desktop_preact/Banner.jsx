@@ -63,6 +63,12 @@ export class Banner extends Component {
 		}
 	}
 
+	onFinishedTransitioning = () => {
+		this.props.onFinishedTransitioning();
+		// Uncomment when we have a progress bar during the campaign again
+		// this.startProgressbar()
+	}
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
@@ -102,7 +108,7 @@ export class Banner extends Component {
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.startProgressbar }
+				onFinish={ this.onFinishedTransitioning }
 				skinAdjuster={ props.skinAdjuster }
 			>
 				<TranslationContext.Provider value={props.translations}>
