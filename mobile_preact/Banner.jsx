@@ -103,6 +103,7 @@ export default class Banner extends Component {
 	onMiniBannerSlideInFinished = () => {
 		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
+		this.props.onFinishedTransitioning();
 	};
 
 	// eslint-disable-next-line no-unused-vars

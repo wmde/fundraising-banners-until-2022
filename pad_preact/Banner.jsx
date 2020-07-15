@@ -77,6 +77,11 @@ export default class Banner extends Component {
 		}
 	}
 
+	onFinishedTransitioning = () => {
+		this.startProgressbar();
+		this.props.onFinishedTransitioning();
+	}
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
@@ -109,7 +114,7 @@ export default class Banner extends Component {
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.startProgressbar }
+				onFinish={ this.onFinishedTransitioning }
 				skinAdjuster={ props.skinAdjuster }
 			>
 				<TranslationContext.Provider value={props.translations}>

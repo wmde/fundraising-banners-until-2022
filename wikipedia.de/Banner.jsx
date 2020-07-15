@@ -44,6 +44,7 @@ export default class Banner extends Component {
 		);
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
 		this.startProgressbar();
+		this.props.onFinishedTransitioning();
 	}
 
 	adjustSurroundingSpace() {
