@@ -75,6 +75,13 @@ export default class FundsDistributionInfo extends Component {
 					und -entwickler in Deutschland und weltweit.
 			</div>
 
+			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'international' ) } ) }>
+				Wikipedia ist ein globales Projekt. Deshalb leisten wir einen substanziellen Beitrag zur Finanzierung
+				der internationalen Aktivitäten für die Weiterentwicklung von Wikipedia. Zudem finanzieren wir auf diese
+				Weise die globale Server-Infrastruktur mit, auf der alle Wikimedia-Projekte – also auch die
+				deutschsprachige Wikipedia – laufen.
+			</div>
+
 			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'communities' ) } ) }>
 					Indem wir die ehrenamtlichen Autorinnen und Autoren bei ihrer Arbeit unterstützen, bestärken wir sie in
 					ihrem Engagement für Wikipedia. Deshalb pflegen wir z. B. eine „technische Wunschliste“ für die stetige
@@ -95,12 +102,6 @@ export default class FundsDistributionInfo extends Component {
 					einschließlich dem Versand der Spendenbescheinigungen.
 			</div>
 
-			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'international' ) } ) }>
-					Wikipedia ist ein globales Projekt. Deshalb leisten wir einen substanziellen Beitrag zur Finanzierung
-					der internationalen Aktivitäten für die Weiterentwicklung von Wikipedia. Zudem finanzieren wir auf diese
-					Weise die globale Server-Infrastruktur mit, auf der alle Wikimedia-Projekte – also auch die
-					deutschsprachige Wikipedia – laufen.
-			</div>
 		</div>;
 	}
 }

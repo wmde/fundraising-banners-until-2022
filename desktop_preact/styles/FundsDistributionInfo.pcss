@@ -6,9 +6,25 @@
 	&__text {
 		display: none;
 		font-size: 14px;
-		margin: 0 auto 14px auto;
+		margin-bottom: 14px;
 		max-width: 635px;
 		min-height: 130px; /* TODO only needed for responsiveness on desktop */
+	}
+	/* 1st child is the graph */
+	&__text:nth-child( 2 ) {
+		margin: 0 auto 14px 0;
+	}
+	&__text:nth-child( 3 ) {
+		margin: 0 auto 14px 60px;
+	}
+	&__text:nth-child( 4 ) {
+		margin: 0 auto 14px auto;
+	}
+	&__text:nth-child( 5 ) {
+		margin: 0 60px 14px auto;
+	}
+	&__text:nth-child( 6 ) {
+		margin: 0 0 14px auto;
 	}
 	&__text.active {
 		display: block;

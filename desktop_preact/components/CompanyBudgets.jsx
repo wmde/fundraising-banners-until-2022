@@ -19,7 +19,9 @@ export default function CompanyBudgets() {
 				</td>
 				<td className="company_budgets__col--budget_number">{ String( company.budget ).replace( '.', ',' ) }</td>
 				<td className="company_budgets__col--unit">Mrd. €</td>
-				<td className="company_budgets__col--citation">{ company.budgetCitation ? ( <a href={company.budgetCitation}>Quelle</a> ) : '\u00A0' }</td>
+				<td className="company_budgets__col--citation">
+					{ company.budgetCitation ? ( <a href={company.budgetCitation} target="_blank">Quelle</a> ) : '\u00A0' }
+				</td>
 			</tr>
 		) )}
 	</table>;

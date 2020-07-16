@@ -46,7 +46,7 @@ export default class FundsModal extends Component {
 						<div className="banner_modal__column">
 							<div className="banner_modal__column_info banner_modal__column_info--benefits_list">
 								Einen genauen Einblick in die internationalen Aktivitäten finden Sie hier:<br/>
-								<a href="#">Jahresplan Wikimedia Foundation</a>
+								<a href="#" target="_blank">Jahresplan Wikimedia Foundation</a>
 							</div>
 							<div className="banner_modal__benefits_list">
 								<h2>Was Ihre Spende bewirkt</h2>
@@ -83,7 +83,7 @@ export default class FundsModal extends Component {
 						<div className="banner_modal__column">
 							<div className="banner_modal__column_info">
 								Einen genauen Einblick in die Aktivitäten in Deutschland finden Sie hier:<br/>
-								<a href="#">Jahresplan Wikimedia Deutschland</a>
+								<a href="#" target="_blank">Jahresplan Wikimedia Deutschland</a>
 							</div>
 							<div className="banner_modal__comparison">
 								<h2>Warum wir nur 9.000.000 € brauchen</h2>
@@ -106,6 +106,7 @@ export default class FundsModal extends Component {
 										rund 500 Mitarbeitende haben. Zudem sind wir gemeinnützig, das verpflichtet uns
 										zu einem verantwortungsbewussten und effizienten Umgang mit den Einnahmen.
 									</p>
+									<p><strong>Vergleich der Jahresbudgets</strong></p>
 								</div>
 								<CompanyBudgets/>
 							</div>
