@@ -18,11 +18,11 @@ export default function Footer( { showFundsModal } ) {
 				<span>Spendenkonto Wikimedia Foerdergesellschaft</span>
 			</div>
 			<div className="footer__item">
-				<span>BIC</span>
+				<span>BIC: </span>
 				<span className="footer__importantinfo">BFSWDE33BER</span>
 			</div>
 			<div className="footer__item">
-				<span>IBAN</span>
+				<span>IBAN: </span>
 				<span className="footer__importantinfo"><span
 					className="iban-block">
 					<span>DE33</span><span>1002</span><span>0500</span><span>0001</span><span>1947</span><span>00</span></span></span>

@@ -121,7 +121,14 @@ export default class Banner extends Component {
 							</div>
 							<div className="banner__form">
 								<div className="banner__form-header">
-									Jetzt Spenden <a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+									Jetzt Spenden
+									<a className="close__link" onClick={this.closeBanner}>
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<rect className="close__link-background" x="0.5" y="0.5" width="23" height="23" rx="4.5"/>
+											<path d="M5.54695 4.13965L19.622 18.2146L18.2147 19.6219L4.13965 5.54695L5.54695 4.13965Z" fill="#202122"/>
+											<path d="M19.6203 5.54499L5.54524 19.62L4.13794 18.2127L18.2129 4.1377L19.6203 5.54499Z" fill="#202122"/>
+										</svg>
+									</a>
 								</div>
 								<DonationForm
 									formItems={props.formItems}
