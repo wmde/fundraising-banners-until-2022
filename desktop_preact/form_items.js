@@ -8,7 +8,7 @@ export function createFormItems( translations, amountFormatter ) {
 		Intervals.QUARTERLY,
 		Intervals.YEARLY
 	);
-	builder.setAmounts( 5, 15, 25, 50, 65, 75, 100 );
+	builder.setAmounts( 5, 10, 20, 25, 50, 75, 100 );
 	builder.setPaymentMethods(
 		PaymentMethods.DIRECT_DEBIT,
 		PaymentMethods.BANK_TRANSFER,

@@ -38,30 +38,38 @@ $amount-text-triangle-color: #3366cc;
 			top: 0;
 			right: 0;
 			display: inline-block;
-			color: $color-black;
 			font-size: $close-link-font-size;
 			height: $header-height;
 			width: $header-height;
-			border: 1px solid $close-link-border-color;
-			border-radius: 5px;
-			background: $close-link-background;
-			text-align: center;
-			text-decoration: none;
-			line-height: 22px;
+
+			&-background {
+				stroke: $close-link-border-color;
+				fill: $close-link-background;
+			}
+
+			&-icon {
+				fill: $color-black;
+			}
 
 			&:hover {
-				border-color: $close-link-border-color-hover;
-				background: $close-link-background-hover;
+				.close__link-background {
+					stroke: $close-link-border-color-hover;
+					fill: $close-link-background-hover;
+				}
 			}
 
 			&:focus {
-				border-color: $close-link-border-color-focus;
-				background: $close-link-background-focus;
+				.close__link-background {
+					stroke: $close-link-border-color-focus;
+					fill: $close-link-background-focus;
+				}
 			}
 
 			&:active {
-				border-color: $close-link-border-color-active;
-				background: $close-link-background-active;
+				.close__link-background {
+					stroke: $close-link-border-color-active;
+					fill: $close-link-background-active;
+				}
 			}
 		}
 	}
