@@ -3,88 +3,88 @@
 # See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
 
 # A Campaign with global settings
-[desktop_preact]
+[desktop]
 campaign_tracking = "01-ba-200716"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
-[desktop_preact.banners.ctrl]
-filename = "./desktop_preact/banner_ctrl.js"
-pagename = "B20WMDE_preact_01_200716_ctrl"
+[desktop.banners.ctrl]
+filename = "./desktop/banner_ctrl.js"
+pagename = "B20WMDE_01_200716_ctrl"
 tracking = "org-01-200716-ctrl"
 
-[desktop_preact.banners.var]
-filename = "./desktop_preact/banner_var.js"
-pagename = "B20WMDE_preact_01_200716_var"
+[desktop.banners.var]
+filename = "./desktop/banner_var.js"
+pagename = "B20WMDE_01_200716_var"
 tracking = "org-01-200716-var"
 
 
 # Mobile Preact Campaign
-[mobile_preact]
+[mobile]
 campaign_tracking = "mob05-ba-191216"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[mobile_preact.banners.ctrl]
-filename = "./mobile_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_mob05_191216_ctrl"
+[mobile.banners.ctrl]
+filename = "./mobile/banner_ctrl.js"
+pagename = "B19WMDE_mob05_191216_ctrl"
 tracking = "org-mob05-191216-ctrl"
 
-[mobile_preact.banners.var]
-filename = "./mobile_preact/banner_var.js"
-pagename = "B19WMDE_preact_mob05_191216_var"
+[mobile.banners.var]
+filename = "./mobile/banner_var.js"
+pagename = "B19WMDE_mob05_191216_var"
 tracking = "org-mob05-191216-var"
 
 
 # Mobile English PREACT Campaign
-[mobile_english_preact]
+[mobile_english]
 campaign_tracking = "mob_en02-ba-191206"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[mobile_english_preact.banners.ctrl]
-filename = "./mobile_english_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_mob_en02_191206_ctrl"
+[mobile_english.banners.ctrl]
+filename = "./mobile_english/banner_ctrl.js"
+pagename = "B19WMDE_mob_en02_191206_ctrl"
 tracking = "org-mob_en02-191206-ctrl"
 
-[mobile_english_preact.banners.var]
-filename = "./mobile_english_preact/banner_var.js"
-pagename = "B19WMDE_preact_mob_en02_191206_var"
+[mobile_english.banners.var]
+filename = "./mobile_english/banner_var.js"
+pagename = "B19WMDE_mob_en02_191206_var"
 tracking = "org-mob_en02-191206-var"
 
 
 # iPad campaign
-[pad_preact]
+[pad]
 campaign_tracking = "pad02-ba-191126"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[pad_preact.banners.ctrl]
-filename = "./pad_preact/banner_ctrl.js"
-pagename = "B18WMDE_preact_pad_02_191126_ctrl"
+[pad.banners.ctrl]
+filename = "./pad/banner_ctrl.js"
+pagename = "B18WMDE_pad_02_191126_ctrl"
 tracking = "org-pad02-191126-ctrl"
 
-[pad_preact.banners.pad]
-filename = "./pad_preact/banner_var.js"
-pagename = "B18WMDE_preact_pad_02_191126_var"
+[pad.banners.pad]
+filename = "./pad/banner_var.js"
+pagename = "B18WMDE_pad_02_191126_var"
 tracking = "org-pad02-191126-var"
 
 
 # iPad English campaign
-[pad_en_preact]
+[pad_en]
 campaign_tracking = "en-ipad-191113"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[pad_en_preact.banners.ctrl]
-filename = "./pad_english_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_ipad_en_01_ctrl"
+[pad_en.banners.ctrl]
+filename = "./pad_english/banner_ctrl.js"
+pagename = "B19WMDE_ipad_en_01_ctrl"
 tracking = "org-en-ipad-191113-ctrl"
 
-[pad_en_preact.banners.var]
-filename = "./pad_english_preact/banner_var.js"
-pagename = "B19WMDE_preact_ipad_en_01_var"
+[pad_en.banners.var]
+filename = "./pad_english/banner_var.js"
+pagename = "B19WMDE_ipad_en_01_var"
 tracking = "org-en-ipad-191113-var"
 
 
@@ -107,19 +107,19 @@ tracking = "wpde-03-191213-var"
 
 
 # English Campaign
-[english_preact]
+[english]
 campaign_tracking = "en03-ba-191211"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[english_preact.banners.ctrl]
-filename = "./english_preact/banner_ctrl.js"
-pagename = "B19WMDE_preact_en03_2_191211_ctrl"
+[english.banners.ctrl]
+filename = "./english/banner_ctrl.js"
+pagename = "B19WMDE_en03_2_191211_ctrl"
 tracking = "org-en03-2-191211-ctrl"
 
-[english_preact.banners.var]
-filename = "./english_preact/banner_var.js"
-pagename = "B19WMDE_preact_en03_2_191211_var"
+[english.banners.var]
+filename = "./english/banner_var.js"
+pagename = "B19WMDE_en03_2_191211_var"
 tracking = "org-en03-2-191211-var"
 
 
