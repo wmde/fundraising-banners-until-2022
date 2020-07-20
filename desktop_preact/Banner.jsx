@@ -8,7 +8,7 @@ import AmountToggle from './components/ui/AmountToggle';
 import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsModal from './components/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
 
 const PENDING = 0;
@@ -61,6 +61,11 @@ export default class Banner extends Component {
 		}
 	}
 
+	onFinishedTransitioning = () => {
+		this.props.onFinishedTransitioning();
+		this.startProgressbar();
+	}
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
@@ -104,7 +109,7 @@ export default class Banner extends Component {
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.startProgressbar }
+				onFinish={ this.onFinishedTransitioning }
 				skinAdjuster={ props.skinAdjuster }
 			>
 				<TranslationContext.Provider value={props.translations}>

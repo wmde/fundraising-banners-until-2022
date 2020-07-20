@@ -100,8 +100,6 @@ export default class BannerPresenter {
 			this.appearanceDelay
 		);
 
-		window.addEventListener( 'resize', resizeHandler );
-
 		// cancel the banner when the search bar was entered
 		skinAdjuster.addSearchObserver( function () {
 			bannerDisplayTimeout.cancel();
