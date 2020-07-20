@@ -60,6 +60,9 @@ export default class BannerPresenter {
 						mw.centralNotice.hideBanner();
 					}
 				},
+				onFinishedTransitioning() {
+					window.addEventListener( 'resize', resizeHandler );
+				},
 				registerDisplayBanner: cb => {
 					displayBanner = cb;
 				},
@@ -96,8 +99,6 @@ export default class BannerPresenter {
 			},
 			this.appearanceDelay
 		);
-
-		window.addEventListener( 'resize', resizeHandler );
 
 		// cancel the banner when the search bar was entered
 		skinAdjuster.addSearchObserver( function () {
