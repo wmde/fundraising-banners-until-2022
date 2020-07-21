@@ -46,6 +46,7 @@ export default class FullpageBanner extends Component {
 				formatters={props.formatters}
 				impressionCounts={props.impressionCounts}
 				customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
+				onSubmit={props.onSubmit}
 			/>
 			<div className="smallprint language-info">
 				Please note that the next steps of the donation process are in German.

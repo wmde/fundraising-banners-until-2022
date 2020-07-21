@@ -1,5 +1,6 @@
-const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
+export const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
 const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
+export const VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER = 'submit';
 
 export const EVENT_SCHEMA = 'event.WMDEBannerEvents';
 export const BANNER_SIZE_SCHEMA = 'event.WMDEBannerSizeIssue';
@@ -17,8 +18,8 @@ export class EventLoggingTracker {
 		this.randomNumber = randomNumber;
 	}
 
-	trackViewPortDimensions( dimensionData, trackingRatio = 1 ) {
-		this.trackViewportData( this.bannerName + '-' + VIEWPORT_TRACKING_IDENTIFIER, dimensionData, trackingRatio );
+	trackViewPortDimensions( trackingIdentifier, dimensionData, trackingRatio = 1 ) {
+		this.trackViewportData( this.bannerName + '-' + trackingIdentifier, dimensionData, trackingRatio );
 	}
 
 	trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio = 0.01 ) {
@@ -37,7 +38,7 @@ export class EventLoggingTracker {
 
 	trackBannerEventWithViewport( actionName, slidesShown, finalSlide, trackingRatio = 0.01, dimensionData = {} ) {
 		if ( this.trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio ) ) {
-			this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, dimensionData, ALWAYS_TRACK );
+			this.trackViewportData( VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER + '-' + this.bannerName, dimensionData, ALWAYS_TRACK );
 		}
 	}
 

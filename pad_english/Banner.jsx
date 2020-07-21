@@ -151,6 +151,7 @@ export default class Banner extends Component {
 								impressionCounts={props.impressionCounts}
 								onFormInteraction={this.onFormInteraction}
 								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+								onSubmit={props.onSubmit}
 							/>
 						</div>
 						<div className="close">

@@ -62,7 +62,7 @@ describe( 'EventLoggingTracker', function () {
 		const eventSpy = { track: sinon.spy() };
 		const tracker = new EventLoggingTracker( BANNER_NAME, eventSpy, RANDOM_ALWAYS_ZERO );
 
-		tracker.trackViewPortDimensions( DIMENSION_DATA, eventData.eventRate );
+		tracker.trackViewPortDimensions( 'viewport_tracking', DIMENSION_DATA, eventData.eventRate );
 
 		assert.deepEqual( eventSpy.track.firstCall.args[ 0 ], BANNER_SIZE_SCHEMA );
 		assert.deepEqual( eventSpy.track.firstCall.args[ 1 ], eventData );
