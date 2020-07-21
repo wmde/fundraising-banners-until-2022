@@ -3,7 +3,6 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
@@ -98,6 +97,8 @@ export class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
+		const DonationForm = props.donationForm;
+
 		return <div
 			className={ classNames( {
 				'wmde-banner': true,
@@ -130,6 +131,7 @@ export class Banner extends Component {
 								formatters={props.formatters}
 								impressionCounts={props.impressionCounts}
 								onFormInteraction={this.onFormInteraction}
+								onSubmit={props.onSubmit}
 								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 								onSubmit={props.onSubmit}
 							/>

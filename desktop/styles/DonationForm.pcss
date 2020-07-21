@@ -1,3 +1,5 @@
+$banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+
 .wmde-banner {
 	.form {
 		order: 2;
@@ -6,6 +8,8 @@
 		flex-shrink: 0;
 		padding: 0.2em 0 0 0.5em;
 		margin: 0;
+		position: relative;
+		overflow: hidden;
 
 		@media ( min-width: $breakpoint_l ) {
 			align-items: center;
@@ -13,6 +17,35 @@
 			margin: 0 1.5em 0 0.25em;
 			padding-top: 0;
 			width: 20em;
+		}
+
+		&-step-2 {
+			display: flex;
+			position: absolute;
+			background: $color-white;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			right: -100%;
+			justify-content: center;
+			align-items: center;
+			transition: right 200ms $banner-easing;
+
+			&-content {
+				padding: 0.4em 0.5em 0 0.5em;
+				width: 100%;
+			}
+
+			&-label {
+				display: block;
+				padding: 0.4em 0.5em 0 0.5em;
+			}
+		}
+
+		&.is-step-2 {
+			.form-step-2 {
+				right: 0;
+			}
 		}
 
 		&__element {
@@ -60,29 +93,19 @@
 		}
 
 		&__button {
-			flex: 1 1 auto;
-			padding: 0 0.3em 0.3em 0;
-			box-sizing: border-box;
-			display: block;
-			cursor: pointer;
-			/* Override browser defaults */
-			border: 0 none;
-			background: transparent;
-			font-size: inherit;
 			width: 100%;
-		}
-		&__label {
 			display: block;
+			box-sizing: border-box;
+			padding: 0 0.3em;
+			cursor: pointer;
 			color: $color-white;
 			background-color: $color-secondary;
 			border: 0 none;
 			border-radius: 0.4em;
-			padding: 0 0.4em;
-			line-height: 2em;
-			font-size: 0.85em;
+			font-size: inherit;
+			line-height: 3em;
 			font-weight: bold;
 			text-align: center;
-			box-sizing: border-box;
 			white-space: nowrap;
 			&:hover {
 				background-color: $color-secondary-hover;
