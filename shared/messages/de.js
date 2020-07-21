@@ -53,9 +53,20 @@ const Translations = {
 
 	'donation-account': 'Spendenkonto',
 
-	// the following 2 lines are only for the ipad var test, remove if not in use anymore
+	// the following lines are only for the ipad & desktop var test, remove if not in use anymore
 	'give-address-statement-positive': 'Ja',
-	'give-address-statement-negative': 'Nein'
+	'give-address-statement-negative': 'Nein',
+
+	// This is for the B20 02 desktop var test
+	'submit-label-short': 'Weiter',
+	'submit-label-default': 'Weiter zur Adresseingabe',
+	'submit-label-paypal': 'Weiter zu PayPal',
+	'submit-label-credit-card': 'Weiter zur Dateneingabe',
+	'submit-label-bank-transfer': 'Weiter zur Kontoverbindung',
+	'address-type-label-default': 'Möchten Sie Ihre Kontaktdaten angeben?',
+	// eslint-disable-next-line max-len
+	'address-type-label-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
+	'address-type-label-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
 };
 
 export default Translations;
