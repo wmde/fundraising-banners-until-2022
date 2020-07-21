@@ -9,6 +9,7 @@ import MiniBanner from './components/MiniBanner';
 import TranslationContext from '../shared/components/TranslationContext';
 import FollowupTransition from '../shared/components/FollowupTransition';
 import FullpageBanner from './components/FullpageBanner';
+import PropTypes from 'prop-types';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -17,6 +18,14 @@ const CLOSED = 2;
 const SLIDESHOW_START_DELAY = 2000;
 
 export default class Banner extends Component {
+
+	static propTypes = {
+		/** callback when banner closes */
+		onClose: PropTypes.func,
+		/** callback when banner gets submitted */
+		onSubmit: PropTypes.func
+	}
+
 	constructor( props ) {
 		super( props );
 		this.state = {
@@ -146,6 +155,7 @@ export default class Banner extends Component {
 						{...props}
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
+						onSubmit={props.onSubmit}
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

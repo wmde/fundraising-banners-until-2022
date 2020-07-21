@@ -31,6 +31,7 @@ export default function DonationForm( props ) {
 			[ amountValidity, setAmountValidity ],
 			[ paymentMethodValidity, setPaymentMethodValidity ]
 		].map( validateRequired ).every( isValid ) ) {
+			props.onSubmit();
 			return;
 		}
 		e.preventDefault();

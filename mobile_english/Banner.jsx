@@ -146,6 +146,7 @@ export default class Banner extends Component {
 						{...props}
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
+						onSubmit={props.onSubmit}
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

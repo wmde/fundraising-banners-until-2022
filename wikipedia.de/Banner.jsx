@@ -48,7 +48,7 @@ export default class Banner extends Component {
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner banner-position' );
+		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
@@ -115,6 +115,7 @@ export default class Banner extends Component {
 							impressionCounts={ props.impressionCounts }
 							onFormInteraction={ this.onFormInteraction }
 							customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+
 						/>
 					</div>
 					<div className="close">

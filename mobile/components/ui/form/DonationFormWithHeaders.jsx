@@ -33,6 +33,7 @@ export default function DonationFormWithHeaders( props ) {
 			[ amountValidity, setAmountValidity ],
 			[ paymentMethodValidity, setPaymentMethodValidity ]
 		].map( validateRequired ).every( isValid ) ) {
+			props.onSubmit();
 			return;
 		}
 		e.preventDefault();

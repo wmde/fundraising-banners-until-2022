@@ -23,6 +23,8 @@ export class Banner extends Component {
 	static propTypes = {
 		/** callback when banner closes */
 		onClose: PropTypes.func,
+		/** callback when banner gets submitted */
+		onSubmit: PropTypes.func,
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired
 	}
@@ -129,6 +131,7 @@ export class Banner extends Component {
 								impressionCounts={props.impressionCounts}
 								onFormInteraction={this.onFormInteraction}
 								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+								onSubmit={props.onSubmit}
 							/>
 						</div>
 						<div className="close">

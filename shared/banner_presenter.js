@@ -3,6 +3,7 @@ import { getSkinAdjuster } from './skin';
 import { mediaWikiIsShowingContentPage, onMediaWiki } from './mediawiki_checks';
 import { createElement, render } from 'preact';
 import InterruptibleTimeout from './interruptible_timeout';
+import { VIEWPORT_TRACKING_IDENTIFIER, VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER } from './event_logging_tracker';
 
 export default class BannerPresenter {
 	constructor( trackingData, appearanceDelay, impressionCounts ) {
@@ -60,6 +61,13 @@ export default class BannerPresenter {
 						mw.centralNotice.hideBanner();
 					}
 				},
+				onSubmit: () => {
+					this.trackingData.tracker.trackViewPortDimensions(
+						VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER,
+						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
+						1
+					);
+				},
 				onFinishedTransitioning() {
 					window.addEventListener( 'resize', resizeHandler );
 				},
@@ -77,6 +85,7 @@ export default class BannerPresenter {
 		bannerElement = bannerContainer.getElementsByClassName( 'banner-position' ).item( 0 );
 
 		this.trackingData.tracker.trackViewPortDimensions(
+			VIEWPORT_TRACKING_IDENTIFIER,
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 			this.trackingData.sizeTrackRatio
 		);

@@ -43,6 +43,7 @@ export default class FullpageBanner extends Component {
 				formatters={props.formatters}
 				impressionCounts={props.impressionCounts}
 				customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
+				onSubmit={props.onSubmit}
 			/>
 			<div className="smallprint">
 				<span>
