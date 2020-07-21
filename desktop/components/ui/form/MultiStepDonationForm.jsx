@@ -16,7 +16,6 @@ import { amountMessage, validateRequired } from '../../../../shared/components/u
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
 import { AddressType } from './FormItemsBuilder';
 import { PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
-import { GiveAddressOptions } from '../../../../pad/components/ui/form/FormItemsBuilder';
 
 const formSteps = Object.freeze( {
 	ONE: Symbol( 'one' ),
@@ -184,7 +183,7 @@ export default function MultiStepDonationForm( props ) {
 			</div>
 
 			<SubmitValues
-				addressType={ addressType === GiveAddressOptions.NO.value ? 'anonym' : 'person' }
+				addressType={ addressType === AddressType.NO.value ? 'anonym' : 'person' }
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
