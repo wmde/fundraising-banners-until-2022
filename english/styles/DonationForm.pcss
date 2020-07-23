@@ -25,12 +25,13 @@
 		&__element {
 			display: flex;
 			flex-direction: row;
-			flex-wrap: nowrap;
+			flex-wrap: wrap;
 
 			@media ( min-width: $breakpoint_m ) {
 				margin: 0.2em 0 0;
 			}
 			@media ( min-width: $breakpoint_l ) {
+				flex-wrap: nowrap;
 				display: block;
 				margin: 0;
 			}

@@ -3,7 +3,7 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import Footer from '../shared/components/ui/Footer';
+import Footer from './components/ui/Footer';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
@@ -114,6 +114,9 @@ export class Banner extends Component {
 			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
+						<div className="close">
+							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+						</div>
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<Infobox
@@ -122,19 +125,18 @@ export class Banner extends Component {
 									campaignProjection={props.campaignProjection}
 									bannerText={props.bannerText}/>
 							</div>
-							<DonationForm
-								formItems={props.formItems}
-								bannerName={props.bannerName}
-								campaignName={props.campaignName}
-								formatters={props.formatters}
-								impressionCounts={props.impressionCounts}
-								onFormInteraction={this.onFormInteraction}
-								onSubmit={props.onSubmit}
-								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-							/>
-						</div>
-						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+							<div className="banner__form">
+								<DonationForm
+									formItems={props.formItems}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+									formatters={props.formatters}
+									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
+									onSubmit={props.onSubmit}
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+								/>
+							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>

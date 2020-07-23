@@ -1,22 +1,42 @@
 .wmde-banner {
 	.infobox {
+		border: 0 none;
+		border-radius: 0.4em;
+		background-color: $color-primary;
+		padding: 1em 2.7em 1em 1em;
+		position: relative;
 		color: $color-white;
 		font-family: $banner-main-font-family;
 		font-size: 1em;
 		line-height: 1.3em;
 		text-align: left;
-		margin: 0.5em 2em 0.5em 1.2em;
 		@media ( min-width: $breakpoint_s ) {
 			font-size: 18px;
+			padding: 1.3em 2.7em 1.3em 1.3em;
 		}
 		@media ( min-width: $breakpoint_m ) {
+			margin-left: 24px;
 			font-family: $banner-text-font-family;
 			font-size: 1.3em;
-			margin: 0.5em 1.2em;
+
+			&:before {
+				position: absolute;
+				bottom: 1.5em;
+				left: 0;
+				content: ' ';
+				margin-left: -24px;
+				border-style: solid;
+				border-width: 0 0 25px 25px;
+				border-color: transparent transparent $color-primary transparent;
+			}
 		}
-		&__footer {
-			padding: 0.025em 0 0 2em;
-			background: url( 'https://upload.wikimedia.org/wikipedia/donate/3/37/Information-icon-yellow.png' ) no-repeat left 0.5em top 0.1em/18px 18px;
+
+		p {
+			margin: 0 0 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 }

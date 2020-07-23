@@ -7,6 +7,8 @@ export function createFormItems( translations, amountFormatter ) {
 	builder.setIntervals(
 		Intervals.ONCE,
 		Intervals.MONTHLY,
+		Intervals.QUARTERLY,
+		Intervals.BIANNUAL,
 		Intervals.YEARLY
 	);
 	builder.setAmounts( 5, 10, 20, 25, 50, 100 );
