@@ -1,24 +1,38 @@
-$leftArrow: url( "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z'/%3E%3C/svg%3E%3C!--%0AFont Awesome Free 5.2.0 by @fontawesome - https://fontawesome.com%0ALicense - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)%0A--%3E" );
+$leftArrow: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Chevron-left.svg' );
 
 .wmde-banner {
 	.back {
+		position: absolute;
+		display: block;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 20px;
+		margin-bottom: 30px;
+
 		@media ( min-width: $breakpoint_l ) {
-			margin-bottom: 30px;
-			margin-left: 0.5em;
+			position: relative;
+			height: 20px;
 		}
 
-		&__link {
-			&:before {
-				content: $leftArrow;
-				width: 20px;
-				height: 20px;
-				display: block;
-				top: 5px;
-				left: 0;
-			}
+		&__arrow {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -10px;
+			margin-left: -6px;
+			background: $leftArrow;
+			width: 12px;
+			height: 20px;
+			display: block;
 
 			&:hover {
 				opacity: 0.5;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				left: 0;
+				margin-left: 0;
 			}
 		}
 	}

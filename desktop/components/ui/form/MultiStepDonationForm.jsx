@@ -52,11 +52,10 @@ export default function MultiStepDonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
 	const changePaymentMethod = e => {
 		setPaymentMethod( e.target.value );
+		setAddressType( AddressType.YES.value );
 		if ( e.target.value === PaymentMethods.DIRECT_DEBIT.value ) {
-			setAddressType( '' );
 			setDisabledAddressTypes( [ AddressType.YES.value, AddressType.NO.value ] );
-		} else if ( addressType === '' ) {
-			setAddressType( AddressType.YES.value );
+		} else {
 			setDisabledAddressTypes( [] );
 		}
 	};
@@ -67,13 +66,13 @@ export default function MultiStepDonationForm( props ) {
 		}
 		return 'https://spenden.wikimedia.de/donation/add' + piwick + '&mbt=1';
 	};
-	const getAddressTypeLabel = () => {
-		if ( addressType === '' ) {
-			return Translations[ 'address-type-label-disabled' ];
+	const getFormNotice = () => {
+		if ( paymentMethod === PaymentMethods.DIRECT_DEBIT.value ) {
+			return Translations[ 'address-type-notice-disabled' ];
 		} else if ( addressType === AddressType.NO.value ) {
-			return Translations[ 'address-type-label-nein' ];
+			return Translations[ 'address-type-notice-nein' ];
 		}
-		return Translations[ 'address-type-label-default' ];
+		return '';
 	};
 	const getButtonText = () => {
 		if ( addressType !== AddressType.NO.value ) {
@@ -156,24 +155,33 @@ export default function MultiStepDonationForm( props ) {
 
 			<div className="form-step-2">
 
-				<div className="form-step-2-content">
-					<div className="back">
-						<a href="#" className="back__link" onClick={ onFormBack }></a>
+				<label className="form-step-2-label">
+					<a href="#" className="back" onClick={ onFormBack }>
+						<i className="back__arrow"></i>
+					</a>
+					<div>
+						{ Translations[ 'address-type-label' ] }
+						<span className="form-step-2-notice"><br/>{ getFormNotice() }</span>
 					</div>
-					<label className="form-step-2-label">{ getAddressTypeLabel() }</label>
-					<div className="form-field-group">
-						<SelectGroup
-							fieldname="address-option"
-							selectionItems={ props.formItems.addressType }
-							isValid={ true }
-							currentValue={ addressType }
-							onSelected={ e => setAddressType( e.target.value ) }
-							disabledOptions={ disabledAddressTypes }
-						>
-						</SelectGroup>
+				</label>
+
+				<div className="form-step-2-content">
+					<div className="form-step-2-field">
+
+						<div className="form-field-group">
+							<SelectGroup
+								fieldname="address-option"
+								selectionItems={ props.formItems.addressType }
+								isValid={ true }
+								currentValue={ addressType }
+								onSelected={ e => setAddressType( e.target.value ) }
+								disabledOptions={ disabledAddressTypes }
+							>
+							</SelectGroup>
+						</div>
 					</div>
 
-					<div className="submit-section button-group">
+					<div className="submit-section button-group form-step-2-button">
 						<button className="button-group__button">
 							{ getButtonText() }
 						</button>

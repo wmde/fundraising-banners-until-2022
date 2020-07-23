@@ -63,10 +63,10 @@ const Translations = {
 	'submit-label-paypal': 'Weiter zu PayPal',
 	'submit-label-credit-card': 'Weiter zur Dateneingabe',
 	'submit-label-bank-transfer': 'Weiter zur Kontoverbindung',
-	'address-type-label-default': 'Möchten Sie Ihre Kontaktdaten angeben?',
+	'address-type-label': 'Möchten Sie Ihre Kontaktdaten angeben?',
 	// eslint-disable-next-line max-len
-	'address-type-label-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
-	'address-type-label-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
+	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
+	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
 };
 
 export default Translations;
