@@ -1,5 +1,5 @@
 export const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
-const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
+export const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
 export const VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER = 'submit';
 
 export const EVENT_SCHEMA = 'event.WMDEBannerEvents';
@@ -19,7 +19,7 @@ export class EventLoggingTracker {
 	}
 
 	trackViewPortDimensions( trackingIdentifier, dimensionData, trackingRatio = 1 ) {
-		this.trackViewportData( this.bannerName + '-' + trackingIdentifier, dimensionData, trackingRatio );
+		this.trackViewportData( trackingIdentifier + '-' + this.bannerName, dimensionData, trackingRatio );
 	}
 
 	trackBannerEvent( actionName, slidesShown, finalSlide, trackingRatio = 0.01 ) {
