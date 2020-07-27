@@ -36,7 +36,7 @@ export default function MultiStepDonationForm( props ) {
 	const disabledPaymentMethods = [];
 	let [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
 
-	const validateStep1 = e => {
+	const onSubmitStep1 = e => {
 		e.preventDefault();
 		if ( [
 			[ intervalValidity, setIntervalValidity ],
@@ -45,6 +45,9 @@ export default function MultiStepDonationForm( props ) {
 		].map( validateRequired ).every( isValid ) ) {
 			setFormStep( formSteps.TWO );
 		}
+	};
+	const onSubmitStep2 = () => {
+		props.onSubmit();
 	};
 	const onFormBack = () => {
 		setFormStep( formSteps.ONE );
@@ -148,7 +151,7 @@ export default function MultiStepDonationForm( props ) {
 			</div>
 
 			<div className="submit-section button-group">
-				<button className="button-group__button" onClick={ validateStep1 }>
+				<button className="button-group__button" onClick={ onSubmitStep1 }>
 					{ Translations[ 'submit-label-short' ] }
 				</button>
 			</div>
@@ -182,7 +185,7 @@ export default function MultiStepDonationForm( props ) {
 					</div>
 
 					<div className="submit-section button-group form-step-2-button">
-						<button className="button-group__button">
+						<button className="button-group__button" onClick={ onSubmitStep2 }>
 							{ getButtonText() }
 						</button>
 					</div>
