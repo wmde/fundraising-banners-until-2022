@@ -4,6 +4,12 @@ import { Component } from 'preact/compat';
 import { useContext } from 'preact/hooks';
 import classNames from 'classnames';
 
+const DAYS = 26;
+const TOTAL = 9000000;
+const DONATED = 6124434;
+const LEFT = TOTAL - DONATED;
+const WIDTH = DONATED / TOTAL * 100;
+
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 
@@ -25,7 +31,7 @@ export default class ProgressBar extends Component {
 
 	startAnimation() {
 		setTimeout( () => {
-			this.setState( { width: 75 } );
+			this.setState( { width: WIDTH } );
 		}, 2000 );
 	}
 
@@ -51,17 +57,17 @@ export default class ProgressBar extends Component {
 				onTransitionEnd={ this.animationEnded }
 			>
 				<div className="progress-donated-days">
-					{ getDaysLeft( props.daysLeft ) }
+					{ getDaysLeft( DAYS ) }
 				</div>
 				<div className="progress-donated-amount">
-					{ getMillion( props.donationAmount ) }
+					{ getMillion( DONATED ) }
 				</div>
 			</div>
 			<div className="progress-remaining"
 				style={ { width: `${ 100 - state.width }%` } }
 			>
 				{ Translations[ 'amount-missing' ] }{ ' ' }
-				{ getMillion( props.missingAmount ) }
+				{ getMillion( LEFT ) }
 			</div>
 		</div>;
 	}
