@@ -137,6 +137,7 @@ export class Banner extends Component {
 									onFormInteraction={this.onFormInteraction}
 									onSubmit={props.onSubmit}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									buttonText={ props.buttonText }
 								/>
 							</div>
 						</div>

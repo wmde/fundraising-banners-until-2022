@@ -65,7 +65,7 @@ const Translations = {
 	'submit-label-bank-transfer': 'Weiter zur Kontoverbindung',
 	'address-type-label': 'Möchten Sie Ihre Kontaktdaten angeben?',
 	// eslint-disable-next-line max-len
-	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Zuwendungsbescheinigung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
+	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
 	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
 };
 

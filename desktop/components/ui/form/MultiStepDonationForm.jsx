@@ -77,21 +77,8 @@ export default function MultiStepDonationForm( props ) {
 		}
 		return '';
 	};
-	const getButtonText = () => {
-		if ( addressType !== AddressType.NO.value ) {
-			return Translations[ 'submit-label-default' ];
-		}
 
-		if ( paymentMethod === PaymentMethods.PAYPAL.value ) {
-			return Translations[ 'submit-label-paypal' ];
-		} else if ( paymentMethod === PaymentMethods.CREDIT_CARD.value ) {
-			return Translations[ 'submit-label-credit-card' ];
-		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
-			return Translations[ 'submit-label-bank-transfer' ];
-		} else {
-			return Translations[ 'submit-label-default' ];
-		}
-	};
+	const ButtonText = props.buttonText;
 
 	return <div className={ classNames( {
 		'form': true,
@@ -186,7 +173,7 @@ export default function MultiStepDonationForm( props ) {
 
 					<div className="submit-section button-group form-step-2-button">
 						<button className="button-group__button" onClick={ onSubmitStep2 }>
-							{ getButtonText() }
+							<ButtonText addressType={ addressType } paymentMethod={ paymentMethod }/>
 						</button>
 					</div>
 				</div>

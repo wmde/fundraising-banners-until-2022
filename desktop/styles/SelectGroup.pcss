@@ -1,3 +1,5 @@
+$select-group-line-height: 46px;
+
 .wmde-banner {
 
 	.select-group {
@@ -11,7 +13,7 @@
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
-		line-height: 46px;
+		line-height: $select-group-line-height;
 
 		@media ( min-width: $breakpoint_l ) {
 			flex-wrap: wrap;
@@ -70,7 +72,7 @@
 		&__option {
 			flex: 1 1 auto;
 			margin: 0;
-			padding-left: 25px;
+			padding: 0 10px 0 25px;
 			box-sizing: border-box;
 			display: flex;
 			position: relative;
@@ -100,7 +102,7 @@
 
 			&:before {
 				box-sizing: border-box;
-				top: 50%;
+				top: calc( $select-group-line-height / 2 );
 				left: 0;
 				content: '';
 				position: absolute;
@@ -110,10 +112,15 @@
 				background: $color-white;
 				border-radius: 50%;
 				border: 1px solid #bbbbbb;
+
+				@media ( min-width: $breakpoint_l ) {
+					top: 50%;
+				}
 			}
 		}
 
 		&__custom-input:before {
+			top: 50%;
 			left: -25px;
 		}
 
