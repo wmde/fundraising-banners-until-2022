@@ -248,7 +248,7 @@ export function BannerFunctions( GlobalBannerSettings, Translations ) {
 
 		if ( otherAmount !== '' ) {
 			// Replace all commas with dots and then remove all dots except for the last one
-			otherAmount = otherAmount.replace( new RegExp( ',', 'g' ), '.' );
+			otherAmount = otherAmount.replace( /,/g, '.' );
 			otherAmount = otherAmount.replace( /[.](?=.*[.])/g, '' );
 
 			otherAmount = otherAmount.replace( /[,.](\d)$/, ':$10' );

@@ -8,7 +8,7 @@
  */
 export function parseAmount( amountStr ) {
 	// Replace all commas with dots and then remove all dots except for the last one
-	amountStr = amountStr.replace( new RegExp( ',', 'g' ), '.' );
+	amountStr = amountStr.replace( /,/g, '.' );
 	amountStr = amountStr.replace( /[.](?=.*[.])/g, '' );
 
 	// Remove all non-numeric chars
