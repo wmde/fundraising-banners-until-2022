@@ -20,24 +20,24 @@ pagename = "B20WMDE_05_200908_var"
 tracking = "org-05-200908-var"
 
 
-# Mobile Preact Campaign
+# Mobile Campaign
 [mobile]
-campaign_tracking = "mob05-ba-191216"
+campaign_tracking = "mob01-ba-200901"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B19WMDE_mob05_191216_ctrl"
-tracking = "org-mob05-191216-ctrl"
+pagename = "B20WMDE_mob01_200901_ctrl"
+tracking = "org-mob01-200901-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B19WMDE_mob05_191216_var"
-tracking = "org-mob05-191216-var"
+pagename = "B20WMDE_mob01_200901_var"
+tracking = "org-mob01-200901-var"
 
 
-# Mobile English PREACT Campaign
+# Mobile English Campaign
 [mobile_english]
 campaign_tracking = "mob_en02-ba-191206"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
