@@ -7,6 +7,7 @@ module.exports = {
 		'postcss-custom-properties': {
 			preserve: false
 		},
-		'postcss-combine-duplicated-selectors': {}
+		'postcss-combine-duplicated-selectors': {},
+		'postcss-calc': {}
 	}
 };
