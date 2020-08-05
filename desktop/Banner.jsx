@@ -3,7 +3,7 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
-import Footer from './components/ui/Footer';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';

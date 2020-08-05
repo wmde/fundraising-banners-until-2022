@@ -143,14 +143,18 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			background-color: $color-secondary;
 			border: 0 none;
 			border-radius: 0.4em;
-			font-size: inherit;
-			line-height: 30px;
-			height: 30px;
+			font-size: 0.85em;
+			line-height: 35px;
+			height: 35px;
 			font-weight: bold;
 			text-align: center;
 			white-space: nowrap;
 			&:hover {
 				background-color: $color-secondary-hover;
+			}
+			@media ( min-width: $breakpoint_l ) {
+				line-height: 24px;
+				height: 24px;
 			}
 		}
 	}

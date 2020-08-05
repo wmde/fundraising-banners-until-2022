@@ -120,7 +120,7 @@ $select-group-line-height: 30px;
 		}
 
 		&__custom-input:before {
-			top: 32%;
+			top: 45%;
 			left: -25px;
 		}
 
@@ -212,23 +212,31 @@ $select-group-line-height: 30px;
 
 	.select-group-container--select-amount {
 		.select-group__option {
-			width: 25%;
+			@media ( min-width: $breakpoint_l ) {
+				width: 25%;
+			}
 		}
 
 		.select-group__option--amount-other-input {
-			width: 50%;
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
 		}
 	}
 
 	.select-group-container--select-interval {
 		.select-group__option {
-			width: 50%;
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
 		}
 	}
 
 	.select-group-container--select-payment-method {
 		.select-group__option {
-			width: 50%;
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
 		}
 	}
 }
