@@ -4,7 +4,7 @@ import TranslationContext from '../../components/TranslationContext';
 import { useContext } from 'preact/hooks';
 import SelectionInput from './form/SelectionInput';
 
-export default function Footer( { showFundsModal } ) {
+export default function EasySelectFooter( { showFundsModal } ) {
 	const Translations = useContext( TranslationContext );
 
 	return <div className="banner__footer">
