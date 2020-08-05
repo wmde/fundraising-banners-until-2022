@@ -10,7 +10,7 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 
 import Banner from './Banner';
-import Slides from './components/SlidesVar';
+import Slides from './components/Slides';
 import BannerText from './components/BannerText';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
@@ -38,7 +38,8 @@ bannerPresenter.present(
 		formatters,
 		bannerText: BannerText,
 		slides: Slides,
-		sliderAutoPlaySpeed: 5000,
+		sliderAutoPlay: false,
+		sliderAutoPlaySpeed: 0,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	},
