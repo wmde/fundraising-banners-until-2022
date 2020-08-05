@@ -1,8 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import { Component, h } from 'preact';
+import { Component, createRef, h } from 'preact';
 import classNames from 'classnames';
 
 export default class SelectionInput extends Component {
+
+	ref = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -12,7 +14,8 @@ export default class SelectionInput extends Component {
 	}
 
 	handleFocus = e => {
-		e.target.select();
+		e.preventDefault();
+		setTimeout( () => this.ref.current.setSelectionRange( 0, 9999 ), 1 );
 		this.setState( { focused: true } );
 	}
 
@@ -31,6 +34,7 @@ export default class SelectionInput extends Component {
 				value={ props.focusedValue || props.value }
 				onFocus={ this.handleFocus }
 				onBlur={ this.handleBlur }
+				ref={ this.ref }
 			/>
 		</div>;
 	}

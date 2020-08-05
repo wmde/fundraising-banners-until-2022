@@ -14,7 +14,7 @@ import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_pa
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
-import Footer from '../../../../shared/components/ui/Footer';
+import Footer from '../../../../shared/components/ui/EasySelectFooter';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );

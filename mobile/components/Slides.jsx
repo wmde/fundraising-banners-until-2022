@@ -1,22 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Slides( { currentDayName, numberOfDonors, formattedGoalDonationSumNumeric, campaignParameters, progressBar } ) {
+export default function Slides( { currentDayName } ) {
 	return <div className="mini-banner-carousel">
 		<div className="carousel-cell">
 			<p>Liebe Leserinnen und Leser:</p>
-			<p>Über { campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser Spendenaufruf täglich angezeigt,
-				aber nur { numberOfDonors } Menschen haben bisher gespendet.
-				Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,
-				wäre unsere Spendenkampagne am heutigen { currentDayName } vorbei.</p>
+			<p>Millionen Menschen nutzen Wikipedia, aber 99 % der Leserinnen und Leser spenden nicht. Wenn alle, die das
+				jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am
+				heutigen { currentDayName } vorbei.</p>
 		</div>
 		<div className="carousel-cell">
 			<p>An diesem { currentDayName } sind Sie in Deutschland gefragt. Schon der Preis
 				einer Tasse Kaffee würde genügen.</p>
-		</div>
-		<div className="carousel-cell">
-			<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSumNumeric } Millionen Euro</p>
-			{ progressBar }
 		</div>
 		<div className="carousel-cell">
 			<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
