@@ -110,7 +110,9 @@ export default class Banner extends Component {
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	onMiniBannerSlideInFinished = () => {
-		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
+		if ( this.props.sliderAutoPlay !== false ) {
+			this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
+		}
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 	};
