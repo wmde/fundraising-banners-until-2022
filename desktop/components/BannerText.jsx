@@ -19,9 +19,7 @@ export default function BannerText( props ) {
 					erreicht.</strong> Millionen Menschen nutzen Wikipedia, aber 99 % der Leserinnen und Leser spenden nicht.{ ' ' }
 					<span className="optional-text text-m">Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. </span>
 					Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders.
-					Wir könnten ihr nicht vertrauen.
-					<span> Das Herzstück von Wikipedia ist die Gemeinschaft von Menschen,
-				die uns unbegrenzten Zugang zu verlässlichen und neutralen Informationen geben. </span>
+					Wir könnten ihr nicht vertrauen.{ ' ' }
 					Es ist leicht, diese Nachricht zu ignorieren und die meisten werden
 					das wohl tun. Schon der Preis einer Tasse Kaffee würde genügen. Wenn Sie Wikipedia nützlich finden,
 					nehmen Sie sich an diesem { currentDayName } bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende
