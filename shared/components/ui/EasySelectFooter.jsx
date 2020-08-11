@@ -10,7 +10,7 @@ export default function Footer( { showFundsModal } ) {
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__bank">
-				<label className="footer__bank-item">Spendenkonto:
+				<label className="footer__bank-item account">Spendenkonto:
 					<SelectionInput value={ 'Wikimedia' }/>
 				</label>
 				<label className="footer__bank-item">BIC:
