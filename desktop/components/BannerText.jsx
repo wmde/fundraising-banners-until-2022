@@ -9,7 +9,8 @@ export default function BannerText( props ) {
 
 			<div className="banner-text-ctrl">
 				<p>
-					<strong>Liebe Leserinnen und Leser,</strong> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher
+					<img className="info-icon" height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
+					<strong> Liebe Leserinnen und Leser,</strong> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher
 					kommen wir gleich zur Sache. { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt
 					<span className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
 				</p>
@@ -28,12 +29,13 @@ export default function BannerText( props ) {
 
 			<div className="banner-text-var">
 				<p>
-					<strong>Liebe Leserinnen und Leser,</strong> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher
+					<img className="info-icon" height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
+					<strong> Liebe Leserinnen und Leser,</strong> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher
 					kommen wir gleich zur Sache. { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt
 					<span className="optional-text text-m">, um Wikipedias Unabhängigkeit zu sichern</span>:
 				</p>
 				<p>
-					{ campaignDaySentence + ' ' } Wikipedia wird durch Spenden von durchschnittlich 22,81 € finanziert. <strong>Wenn alle, die das jetzt
+					{ campaignDaySentence + ' ' } Wikipedia wird durch Spenden finanziert. <strong>Wenn alle, die das jetzt
 					lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits am heutigen { currentDayName + ' ' }
 					erreicht.</strong> Millionen Menschen nutzen Wikipedia, aber 99 % der Leserinnen und Leser spenden nicht.{ ' ' }
 					<span className="optional-text text-m">Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. </span>

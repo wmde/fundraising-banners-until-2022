@@ -27,8 +27,11 @@ $select-group-line-height: 30px;
 			flex-direction: column;
 			padding: 0 10px;
 
+			margin-top: 16px;
+
 			@media ( min-width: $breakpoint_l ) {
 				margin-bottom: 0;
+				margin-top: 0;
 				line-height: inherit;
 				border: 0;
 				padding: 0;
@@ -173,7 +176,6 @@ $select-group-line-height: 30px;
 				font-weight: bold;
 				border: 0 none;
 				box-sizing: border-box;
-				text-decoration: underline;
 				text-align: left;
 
 				@media ( min-width: $breakpoint_l ) {
@@ -221,6 +223,9 @@ $select-group-line-height: 30px;
 			@media ( min-width: $breakpoint_l ) {
 				width: 50%;
 			}
+		}
+		@media ( min-width: $breakpoint_l ) {
+			margin-top: 0;
 		}
 	}
 
