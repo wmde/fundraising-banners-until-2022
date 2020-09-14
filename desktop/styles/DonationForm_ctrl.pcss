@@ -94,6 +94,7 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
+			justify-content: flex-end;
 
 			@media ( min-width: $breakpoint_l ) {
 				display: block;
@@ -116,21 +117,37 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 				padding: 0 0 10px;
 			}
 		}
+		&__section-head {
+			visibility: hidden;
+			font-family: 'Montserrat', sans-serif;
+			width: 100%;
+			font-size: 12px;
+			line-height: 13px;
+			color: $color-black-light;
+			position: fixed;
+			padding: 0 0 0 10px;
+			@media ( min-width: $breakpoint_l ) {
+				position: relative;
+				padding-left: 0;
+			}
+		}
 	}
 
 	.button-group {
 		display: block;
 		border: 0;
-		margin: 0;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 0 1 auto;
 		padding: 0 5px 10px;
 
+		margin: 13px 0 0;
+
 		@media ( min-width: $breakpoint_l ) {
 			flex-wrap: wrap;
 			padding: 0;
+			margin: 0;
 		}
 
 		&__button {
