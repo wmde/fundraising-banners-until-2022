@@ -1,0 +1,160 @@
+$image-font-size: 24px;
+$image-font-weight: bold;
+$copy-font-size-small: 14px;
+$copy-font-size: 16px;
+$copy-font-size-large: 18px;
+$copy-font-size-extra-large: 20px;
+
+.wmde-banner {
+	.infobox {
+		display: flex;
+		align-items: stretch;
+		height: 100%;
+		margin-bottom: 8px;
+
+		@media ( min-width: $breakpoint_l ) {
+			margin-bottom: 0;
+		}
+	}
+	.banner-text {
+		line-height: 1.5;
+		position: relative;
+		width: 100%;
+
+		@media ( min-width: $breakpoint_s ) {
+			display: flex;
+			flex-direction: row;
+			padding: 44px 0 0;
+		}
+
+		@media ( min-width: $breakpoint_l ) {
+			padding: 0;
+		}
+
+		&-title-image {
+			display: flex;
+			flex-direction: column;
+			flex: 0 0 auto;
+			text-align: center;
+			font-weight: bold;
+			font-size: $image-font-size;
+
+			@media ( min-width: $breakpoint_s ) {
+				width: auto;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				font-size: $image-font-size;
+			}
+		}
+
+		&-title {
+
+			@media ( min-width: $breakpoint_s ) {
+				top: 0;
+				left: 0;
+				position: absolute;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				position: relative;
+				width: 100%;
+				margin-bottom: $banner-padding;
+			}
+
+			p {
+				float: left;
+				background: $color-highlight;
+				margin: 0;
+				padding: 0 30px;
+
+				@media ( min-width: $breakpoint_l ) {
+					float: none;
+					padding: 0;
+				}
+			}
+		}
+
+		&-image {
+			display: none;
+			margin-top: auto;
+			align-self: flex-end;
+			width: 100%;
+
+			@media ( min-width: $breakpoint_s ) {
+				display: block;
+			}
+
+			&-s,
+			&-l,
+			&-xl,
+			&-xxl {
+				display: none;
+			}
+
+			&-s {
+				@media ( min-width: $breakpoint_s ) {
+					display: block;
+				}
+				@media ( min-width: $breakpoint_l ) {
+					display: none;
+				}
+			}
+
+			&-l {
+				@media ( min-width: $breakpoint_l ) {
+					display: block;
+				}
+			}
+		}
+
+		&-copy {
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			font-size: $copy-font-size-small;
+			width: 100%;
+
+			@media ( min-width: $breakpoint_s ) {
+				padding-left: $banner-padding;
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				font-size: $copy-font-size;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				margin-bottom: 8px;
+			}
+
+			@media ( min-width: $breakpoint_xl ) {
+				font-size: $copy-font-size-large;
+				line-height: 1.4;
+			}
+
+			@media ( min-width: $breakpoint_xxl ) {
+				font-size: $copy-font-size-extra-large;
+			}
+
+			strong {
+				background: $color-highlight;
+				border-radius: 2px;
+			}
+
+			a {
+				font-weight: bold;
+				margin-bottom: auto;
+			}
+		}
+
+		.banner__footer {
+			display: none;
+			height: 39px;
+			flex: 0 0 39px;
+
+			@media ( min-width: $breakpoint_l ) {
+				display: block;
+			}
+		}
+	}
+}

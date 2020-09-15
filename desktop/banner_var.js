@@ -6,15 +6,17 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import { Banner, BannerType } from './Banner';
+import Banner from './Banner_var.jsx';
+import { BannerType } from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
-import DonationForm from './components/ui/form/DonationFormWidthInfoHeader';
-import BannerText from './components/BannerText';
+import DonationForm from './components/ui/form/DonationFormWithBank';
+import BannerText from './components/BannerText_var';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
+import { ErrorPosition } from '../shared/components/ui/form/SelectGroup';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -40,6 +42,7 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR
+		bannerType: BannerType.VAR,
+		errorPosition: ErrorPosition.TOP
 	}
 );

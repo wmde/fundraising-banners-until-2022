@@ -2,25 +2,41 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 
-export default function SelectGroup( props ) {
+export const ErrorPosition = Object.freeze( {
+	TOP: Symbol( 'top' ),
+	BOTTOM: Symbol( 'bottom' )
+} );
+
+export function SelectGroup( props ) {
+
+	const errorPosition = props.errorPosition || ErrorPosition.BOTTOM;
+
+	const error = <span className="select-group__errormessage">
+		<span className="select-group__erroricon">
+			{ props.errorMessage }
+		</span>
+	</span>;
 
 	return <div
 		className={ classNames(
-			`select-group-container--${props.fieldname}`,
+			`select-group-container--${ props.fieldname }`,
 			{
 				'select-group-container': true,
 				'select-group-container--with-error': !props.isValid
 			}
 		) }>
+
+		{ errorPosition === ErrorPosition.TOP ? error : null }
+
 		<div className="select-group">
 			{ props.selectionItems.map( ( { value, label } ) => (
-				<label className={ 'select-group__option' } key={value}>
+				<label className={ 'select-group__option' } key={ value }>
 					<input
 						type="radio"
-						onClick={props.onSelected}
-						checked={value === props.currentValue}
-						name={props.fieldname}
-						value={value}
+						onClick={ props.onSelected }
+						checked={ value === props.currentValue }
+						name={ props.fieldname }
+						value={ value }
 						disabled={ props.disabledOptions.indexOf( value ) > -1 }
 						className="select-group__input"/>
 					<span className="select-group__state">{ label || value }</span>
@@ -28,10 +44,8 @@ export default function SelectGroup( props ) {
 			}
 			{ props.children }
 		</div>
-		<span className="select-group__errormessage">
-			<span className="select-group__erroricon">
-				{ props.errorMessage }
-			</span>
-		</span>
+
+		{ errorPosition === ErrorPosition.BOTTOM ? error : null }
+
 	</div>;
 }
