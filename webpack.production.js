@@ -1,6 +1,6 @@
 const fs = require( 'fs' );
 const toml = require( 'toml' );
-const Merge = require( 'webpack-merge' );
+const { merge } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
 
@@ -11,7 +11,7 @@ function readWrapperTemplate( name ) {
 	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' );
 }
 
-module.exports = Merge( CommonConfig, {
+module.exports = merge( CommonConfig, {
 	devtool: false,
 	mode: 'production',
 	plugins: [
