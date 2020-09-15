@@ -57,7 +57,7 @@
     "postcss-nested": "^2.1.2",
     "postcss-simple-vars": "^5.0.2",
     "regenerator-runtime": "^0.13.7",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.2",
     "sinon": "^4.5.0",
     "style-loader": "^0.23.1",
     "stylelint": "^13.7.1",
