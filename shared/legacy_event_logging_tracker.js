@@ -103,6 +103,7 @@ export default class LegacyEventLoggingTracker {
 
 	/**
 	 * Track banner event data
+	 *
 	 * @param {string} actionName
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide
