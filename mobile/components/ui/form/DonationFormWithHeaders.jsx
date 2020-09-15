@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useContext, useState } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
-import SelectGroup from '../../../../shared/components/ui/form/SelectGroup';
+import { SelectGroup } from '../../../../shared/components/ui/form/SelectGroup';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
 import SmsBox from '../../../../shared/components/ui/form/SmsBox';
 

@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-import TranslationContext from '../../components/TranslationContext';
 import { useContext } from 'preact/hooks';
-import SelectionInput from './form/SelectionInput';
+import TranslationContext from '../../../shared/components/TranslationContext';
+import SelectionInput from '../../../shared/components/ui/form/SelectionInput';
+import Tooltip from './Tooltip';
 
-export default function EasySelectFooter( { showFundsModal } ) {
+export default function Footer( { showFundsModal } ) {
 	const Translations = useContext( TranslationContext );
 
 	return <div className="banner__footer">
@@ -12,6 +13,7 @@ export default function EasySelectFooter( { showFundsModal } ) {
 			<div className="footer__bank">
 				<label className="footer__bank-item account">Spendenkonto:
 					<SelectionInput value={ 'Wikimedia' }/>
+					<Tooltip/>
 				</label>
 				<label className="footer__bank-item bic">BIC:
 					<SelectionInput value={ 'BFSWDE33BER' }/>

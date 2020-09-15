@@ -66,7 +66,11 @@ const Translations = {
 	'address-type-label': 'Möchten Sie Ihre Kontaktdaten angeben?',
 	// eslint-disable-next-line max-len
 	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
-	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
+	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
+
+	// For the collage banner
+	// eslint-disable-next-line max-len
+	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.'
 };
 
 export default Translations;

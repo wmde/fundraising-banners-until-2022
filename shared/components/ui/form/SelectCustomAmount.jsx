@@ -49,7 +49,7 @@ export default class SelectCustomAmount extends Component {
 					onFocus={ this.onFocus }
 					onBlur={ this.onBlur }
 					autoComplete="off"
-					placeholder={ props.placeholder }
+					placeholder={ state.focused ? '' : props.placeholder }
 					className="select-group__custom-input--input" />
 			</div>
 		</label>;

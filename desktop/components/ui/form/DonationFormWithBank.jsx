@@ -13,6 +13,7 @@ import useInterval from '../../../../shared/components/ui/form/hooks/use_interva
 import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_payment_method';
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
+import Footer from '../EasySelectFooterWithTooltip';
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -51,11 +52,11 @@ export default function DonationForm( props ) {
 					currentValue={ paymentInterval }
 					onSelected={ e => setInterval( e.target.value ) }
 					disabledOptions={ disabledIntervals }
+					errorPosition={ props.errorPosition }
 				/>
 			</div>
 
 			<div className={ 'form-field-group' }>
-				<legend className="form__section-head">Die durchschnittliche Spende beträgt 22,81 €.</legend>
 				<SelectGroup
 					fieldname="select-amount"
 					selectionItems={props.formItems.amounts}
@@ -64,6 +65,7 @@ export default function DonationForm( props ) {
 					currentValue={ selectedAmount }
 					onSelected={ e => selectAmount( e.target.value ) }
 					disabledOptions={ [] }
+					errorPosition={ props.errorPosition }
 				>
 					<SelectCustomAmount
 						fieldname="select-amount"
@@ -88,15 +90,19 @@ export default function DonationForm( props ) {
 					currentValue={ paymentMethod }
 					onSelected={ e => setPaymentMethod( e.target.value ) }
 					disabledOptions={ disabledPaymentMethods }
+					errorPosition={ props.errorPosition }
 				>
 					<SmsBox/>
 				</SelectGroup>
 			</div>
 
 			<div className="submit-section button-group">
-				<button className="button-group__button" onClick={ validate }>
-					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
-				</button>
+				<Footer/>
+				<div className="button-group__button-container">
+					<button className="button-group__button" onClick={ validate }>
+						<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+					</button>
+				</div>
 			</div>
 
 			<SubmitValues

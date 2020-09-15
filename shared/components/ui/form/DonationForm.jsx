@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import TranslationContext from '../../TranslationContext';
-import SelectGroup from './SelectGroup';
+import { SelectGroup } from './SelectGroup';
 import SelectCustomAmount from './SelectCustomAmount';
 import SmsBox from './SmsBox';
 
@@ -51,6 +51,7 @@ export default function DonationForm( props ) {
 					currentValue={ paymentInterval }
 					onSelected={ e => setInterval( e.target.value ) }
 					disabledOptions={ disabledIntervals }
+					errorPosition={ props.errorPosition }
 				/>
 			</div>
 
@@ -63,6 +64,7 @@ export default function DonationForm( props ) {
 					currentValue={ selectedAmount }
 					onSelected={ e => selectAmount( e.target.value ) }
 					disabledOptions={ [] }
+					errorPosition={ props.errorPosition }
 				>
 					<SelectCustomAmount
 						fieldname="select-amount"
@@ -87,6 +89,7 @@ export default function DonationForm( props ) {
 					currentValue={ paymentMethod }
 					onSelected={ e => setPaymentMethod( e.target.value ) }
 					disabledOptions={ disabledPaymentMethods }
+					errorPosition={ props.errorPosition }
 				>
 					<SmsBox/>
 				</SelectGroup>

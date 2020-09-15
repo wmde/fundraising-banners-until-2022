@@ -54,7 +54,10 @@ const Translations = {
 
 	// the following 2 lines are only for the ipad var test, remove if not in use anymore
 	'give-address-statement-positive': 'Yes',
-	'give-address-statement-negative': 'No'
+	'give-address-statement-negative': 'No',
+
+	// For the collage banner
+	'bank-account-tooltip': ''
 };
 
 export default Translations;
