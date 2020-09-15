@@ -1,10 +1,10 @@
 const fs = require( 'fs' );
 const toml = require( 'toml' );
-const Merge = require( 'webpack-merge' );
+const { merge } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 
-module.exports = Merge( CommonConfig, {
+module.exports = merge( CommonConfig, {
 	devtool: 'source-map',
 	mode: 'development',
 	entry: {
