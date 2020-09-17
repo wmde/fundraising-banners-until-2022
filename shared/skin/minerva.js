@@ -38,8 +38,4 @@ export default class Minerva extends Skin {
 	addEditorObserver( onEdit ) {
 		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
 	}
-
-	getSizeIssueThreshold() {
-		return 180;
-	}
 }

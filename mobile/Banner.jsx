@@ -17,6 +17,11 @@ const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 
+export const BannerType = Object.freeze( {
+	CTRL: Symbol( 'ctrl ' ),
+	VAR: Symbol( 'var' )
+} );
+
 export default class Banner extends Component {
 
 	static propTypes = {
@@ -125,7 +130,9 @@ export default class Banner extends Component {
 			'wmde-banner--hidden': state.displayState === CLOSED,
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
-			'wmde-banner--full-page': state.isFullPageVisible
+			'wmde-banner--full-page': state.isFullPageVisible,
+			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
+			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
 			<TranslationContext.Provider value={ props.translations }>
 				<BannerTransition

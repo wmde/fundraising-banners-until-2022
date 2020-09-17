@@ -9,7 +9,7 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 
-import Banner from './Banner';
+import Banner, { BannerType } from './Banner';
 import Slides from './components/Slides';
 import BannerText from './components/BannerText';
 
@@ -40,7 +40,8 @@ bannerPresenter.present(
 		slides: Slides,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		bannerType: BannerType.CTRL
 	},
 	0
 );

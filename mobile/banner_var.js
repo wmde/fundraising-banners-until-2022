@@ -9,8 +9,8 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 
-import Banner from './Banner';
-import Slides from './components/Slides';
+import Banner, { BannerType } from './Banner';
+import Slides from './components/SlidesVar';
 import BannerText from './components/BannerText';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
@@ -38,10 +38,10 @@ bannerPresenter.present(
 		formatters,
 		bannerText: BannerText,
 		slides: Slides,
-		sliderAutoPlay: false,
-		sliderAutoPlaySpeed: 0,
+		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		bannerType: BannerType.VAR
 	},
 	0
 );
