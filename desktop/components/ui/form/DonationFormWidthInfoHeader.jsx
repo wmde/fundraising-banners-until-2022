@@ -12,7 +12,8 @@ import useAmountWithCustom from '../../../../shared/components/ui/form/hooks/use
 import useInterval from '../../../../shared/components/ui/form/hooks/use_interval';
 import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_payment_method';
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
-import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
+import SubmitValues from './SubmitValues';
+import { BannerType } from '../../../Banner';
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -38,9 +39,19 @@ export default function DonationForm( props ) {
 	};
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
 
+	const formActionParams = {
+		piwik_campaign: props.campaignName,
+		piwik_kwd: props.bannerName,
+		provadd: props.bannerType === BannerType.CTRL ? 0 : 1
+	};
+
+	const queryString = Object.keys( formActionParams )
+		.map( key => `${key}=${formActionParams[ key ]}` )
+		.join( '&' );
+
 	return <div className="form">
 		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction }
-			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
+			action={ 'https://spenden.wikimedia.de/donation/new?' + queryString }>
 
 			<div className="form-field-group">
 				<SelectGroup
@@ -100,6 +111,7 @@ export default function DonationForm( props ) {
 			</div>
 
 			<SubmitValues
+				addressType={ '' }
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }

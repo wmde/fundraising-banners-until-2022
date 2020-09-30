@@ -139,6 +139,7 @@ export class Banner extends Component {
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
+									bannerType={ props.bannerType }
 								/>
 							</div>
 						</div>
