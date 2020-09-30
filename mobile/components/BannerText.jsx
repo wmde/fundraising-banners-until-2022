@@ -10,7 +10,7 @@ export default function BannerText( props ) {
 			<span>Liebe Leserinnen und Leser, bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir
 				gleich zur Sache. </span>
 			<span> { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland
-				gefragt, um Wikipedias Unabhängigkeit zu sichern:</span>
+				gefragt:</span>
 		</p>
 		<p>
 			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert. </span>
@@ -24,11 +24,10 @@ export default function BannerText( props ) {
 			wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit Werbung eine Menge Geld verdienen.
 			Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen.
 			Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.
-			<span className="banner-text-var"> Dabei ist Spenden mit dem Handy ganz einfach.</span>{' '}
 			Schon der Preis einer Tasse Kaffee würde genügen.
 			Wenn Sie Wikipedia nützlich finden, nehmen Sie
 			sich <span>{ weekdayPrepPhrase } { currentDayName } </span>
-			bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück, damit Wikipedia weiter wachsen kann.
+			bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.
 			<span className="text--italic"> Vielen Dank!</span>
 		</p>
 	</div>;

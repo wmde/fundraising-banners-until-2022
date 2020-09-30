@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_ctrl.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -10,11 +10,12 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 
 import Banner, { BannerType } from './Banner';
-import Slides from './components/SlidesVar';
+import Slides from './components/Slides';
 import BannerText from './components/BannerText';
+import DonationForm from './components/ui/form/DonationFormWithHeaders_var';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -38,6 +39,7 @@ bannerPresenter.present(
 		formatters,
 		bannerText: BannerText,
 		slides: Slides,
+		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
