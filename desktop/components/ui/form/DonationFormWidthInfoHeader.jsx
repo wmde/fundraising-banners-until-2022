@@ -42,7 +42,8 @@ export default function DonationForm( props ) {
 	const formActionParams = {
 		piwik_campaign: props.campaignName,
 		piwik_kwd: props.bannerName,
-		provadd: props.bannerType === BannerType.CTRL ? 0 : 1
+		// TODO do we need this check more often during campaign2020? then leave it in
+		provadd: props.bannerType === BannerType.CTRL ? 0 : 0
 	};
 
 	const queryString = Object.keys( formActionParams )
