@@ -2,7 +2,7 @@ version: '2'
 
 services:
   js-build:
-    image: node:10
+    image: node:14
     volumes:
       - ./:/code
       - ~/.npm:/npm-cache
