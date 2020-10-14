@@ -13,7 +13,6 @@ import useInterval from '../../../../shared/components/ui/form/hooks/use_interva
 import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_payment_method';
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import SubmitValues from './SubmitValues';
-import { BannerType } from '../../../Banner';
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -41,9 +40,7 @@ export default function DonationForm( props ) {
 
 	const formActionParams = {
 		piwik_campaign: props.campaignName,
-		piwik_kwd: props.bannerName,
-		// TODO do we need this check more often during campaign2020? then leave it in
-		provadd: props.bannerType === BannerType.CTRL ? 0 : 0
+		piwik_kwd: props.bannerName
 	};
 
 	const queryString = Object.keys( formActionParams )
