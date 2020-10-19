@@ -123,6 +123,7 @@ export default class Banner extends Component {
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
+					transitionSpeed={ 1000 }
 				>
 					<MiniBanner
 						{ ...props }

@@ -58,6 +58,7 @@ export default class Banner extends Component {
 			}
 		);
 
+		this.props.skinAdjuster.addSpaceInstantly( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
 	}
 
@@ -141,6 +142,7 @@ export default class Banner extends Component {
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
+					transitionSpeed={ 0 }
 				>
 					<MiniBanner
 						{ ...props }
@@ -157,7 +159,7 @@ export default class Banner extends Component {
 					onFinish={ () => { this.startHighlight(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
-					hasStaticParent={ false }
+					hasStaticParent={ true }
 					ref={this.fullBannerTransitionRef}
 				>
 					<FullpageBanner

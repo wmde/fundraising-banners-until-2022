@@ -31,12 +31,15 @@ export default class BannerTransition extends Component {
 		skinAdjuster: PropTypes.instanceOf( Skin ),
 
 		/** if the sliding area should be fixed or absolute. Default is "false" (absolute) */
-		fixed: PropTypes.bool
+		fixed: PropTypes.bool,
+
+		/** time in milliseconds that the transition should take */
+		transitionSpeed: PropTypes.number
 	};
 
 	constructor( props ) {
 		super( props );
-		this.transition = new CssTransition( 1000, 'ease-in-out' );
+		this.transition = new CssTransition( this.props.transitionSpeed, 'ease-in-out' );
 		this.state = {
 			transitionPhase: PAGELOADING
 		};
