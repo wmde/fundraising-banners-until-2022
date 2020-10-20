@@ -17,6 +17,7 @@ function validateAmount( amount ) {
 
 function amountReducer( state, action ) {
 	let numericAmount;
+	console.log("change state", action, state);
 	switch ( action.type ) {
 		case 'AMOUNT_SELECTED':
 			return {
@@ -35,10 +36,7 @@ function amountReducer( state, action ) {
 			};
 		case 'FINISH_CUSTOM_AMOUNT':
 			if ( action.payload === '' ) {
-				return {
-					...state,
-					customAmount: '',
-				}
+				return state;
 			}
 			numericAmount = parseAmount( action.payload );
 			return {

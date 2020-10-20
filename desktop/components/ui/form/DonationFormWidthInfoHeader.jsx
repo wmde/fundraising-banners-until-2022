@@ -37,6 +37,13 @@ export default function DonationForm( props ) {
 		e.preventDefault();
 	};
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
+	const onBlurCustomAmount = ( e) => {
+		if ( e.target.value === '' && selectedAmount ) {
+			selectAmount(selectedAmount);
+			return;
+		}
+		validateCustomAmount( e.target.value )
+	};
 
 	const formActionParams = {
 		piwik_campaign: props.campaignName,
@@ -78,7 +85,7 @@ export default function DonationForm( props ) {
 						fieldname="select-amount"
 						value={ customAmount }
 						onInput={ e => updateCustomAmount( e.target.value ) }
-						onBlur={ e => validateCustomAmount( e.target.value ) }
+						onBlur={ onBlurCustomAmount }
 						placeholder={ props.customAmountPlaceholder }
 						language={
 							/* eslint-disable-next-line dot-notation */
