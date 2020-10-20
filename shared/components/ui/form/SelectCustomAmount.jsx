@@ -9,13 +9,12 @@ export default class SelectCustomAmount extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			focused: false,
-			showEuro: false
+			focused: false
 		};
 	}
 
 	onFocus = ( e ) => {
-		this.setState( { showEuro: true, focused: true } );
+		this.setState( { focused: true } );
 		if ( this.props.value !== '' ) {
 			e.target.select();
 		}
@@ -30,12 +29,10 @@ export default class SelectCustomAmount extends Component {
 	onBlur = ( e ) => {
 		this.setState( { focused: false } );
 		this.props.onBlur( e );
-		if ( this.props.value === '' || this.props.value === null ) {
-			this.setState( { showEuro: false } );
-		}
 	};
 
 	render( props, state ) {
+		const showEuro = props.value !== null || state.focused;
 		return <label className="select-group__option select-group__option--amount-other-input">
 			<input type="radio"
 				name={ props.fieldname }
@@ -43,7 +40,6 @@ export default class SelectCustomAmount extends Component {
 				value=""
 				checked={ state.focused || props.value !== null }
 				onClick={ this.onRadioClicked }
-				onChange={ this.onBlur }
 			/>
 
 			<div className={ classNames(
@@ -54,7 +50,7 @@ export default class SelectCustomAmount extends Component {
 				} ) }
 			>
 
-				{ state.showEuro ? <span className="select-group__custom-input--euro-symbol">&euro;</span> : null }
+				{ showEuro ? <span className="select-group__custom-input--euro-symbol">&euro;</span> : null }
 
 				<input type="text"
 					value={ props.value || '' }
