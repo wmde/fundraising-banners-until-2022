@@ -19,7 +19,7 @@ module.exports = merge( CommonConfig, {
 			templates: campaigns.getWrapperTemplates( readWrapperTemplate ),
 			context: {
 				bannerValuesJS: '{{MediaWiki:WMDE_FR2017/Resources/BannerValues.js}}',
-				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2019}}'
+				bannerValues: '{{MediaWiki:WMDE_Fundraising/Campaign_Parameters_2020}}'
 			},
 			filePattern: '{B,WMDE}*.js',
 			campaignConfig: campaigns.getConfigForPages()
