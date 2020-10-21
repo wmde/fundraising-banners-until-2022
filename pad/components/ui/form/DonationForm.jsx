@@ -93,6 +93,7 @@ export default function DonationForm( props ) {
 				>
 					<SelectCustomAmount
 						value={ customAmount }
+						selectedAmount={ selectedAmount }
 						onInput={ e => updateCustomAmount( e.target.value ) }
 						onBlur={ e => validateCustomAmount( e.target.value ) }
 						placeholder={ Translations[ 'custom-amount-placeholder' ] }
