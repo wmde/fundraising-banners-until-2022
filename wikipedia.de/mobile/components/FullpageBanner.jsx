@@ -2,12 +2,13 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import DonationFormWithHeaders from './ui/form/DonationFormWithHeaders';
 import Infobox from '../../../shared/components/ui/Infobox';
 
 export default class FullpageBanner extends Component {
 	render( props ) {
+		const DonationForm = props.donationForm;
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
+
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
 			<div className="fullpage-banner__info">
 				<div className="close" onClick={ props.onClose }/>
@@ -23,7 +24,7 @@ export default class FullpageBanner extends Component {
 					Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
 				</div>
 			</div>
-			<DonationFormWithHeaders
+			<DonationForm
 				formItems={props.formItems}
 				bannerName={props.bannerName}
 				campaignName={props.campaignName}

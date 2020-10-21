@@ -6,13 +6,13 @@
 	margin: 0 auto;
 
 	&__box {
-		background: $color-bright;
 		display: inline-block;
 		position: relative;
 		left: 0;
 		text-align: center;
 		box-sizing: border-box;
 		z-index: 1000;
+		background: $color-primary-lighter;
 		border: 8px solid $color-primary;
 		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
 		border-radius: 15px;
@@ -24,6 +24,8 @@
 	&__content {
 		display: flex;
 		flex-wrap: wrap;
+		font-size: 16px;
+		line-height: 22.4px;
 	}
 
 	&__tab {
@@ -34,6 +36,7 @@
 		top: 100%;
 		top: calc( 100% - 1px );
 		font-size: 0.9em;
+		color: $color-primary-darker;
 		z-index: 1000;
 		text-transform: uppercase;
 		&-inner {
@@ -41,10 +44,10 @@
 			cursor: pointer;
 			position: relative;
 			left: -50%;
-			background: $color-bright;
+			background: $color-primary-lighter;
 			border: 8px solid $color-primary;
 			border-radius: 8px;
-			border-top: 2px solid $color-bright;
+			border-top: 2px solid $color-primary-lighter;
 			font-weight: bold;
 			width: 170px;
 			margin: 0 auto;
@@ -68,6 +71,9 @@
 		line-height: 39px;
 		font-size: 40px;
 		font-weight: bold;
+		@media ( min-width: $breakpoint_phone_m ) {
+			font-size: 50px;
+		}
 		&:before {
 			position: relative;
 			content: $banner-symbol-close;
@@ -100,7 +106,6 @@
 		}
 
 		&__content {
-			background-color: $color-bright;
 			font-weight: bold;
 			font-family: $banner-main-font-family;
 			font-size: 2.8vw;
@@ -111,6 +116,13 @@
 			line-height: 32px;
 			text-transform: uppercase;
 			padding: 0 5px;
+			background-color: $color-primary-lighter;
+
+			@media ( min-width: $breakpoint_phone_m ) {
+				font-size: 14px;
+				padding: 0 15px;
+				margin-left: 35px;
+			}
 		}
 	}
 

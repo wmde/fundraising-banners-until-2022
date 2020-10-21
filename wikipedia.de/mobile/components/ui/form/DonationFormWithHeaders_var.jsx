@@ -12,9 +12,11 @@ import useAmountWithCustom from '../../../../../shared/components/ui/form/hooks/
 import useInterval from '../../../../../shared/components/ui/form/hooks/use_interval';
 import usePaymentMethod from '../../../../../shared/components/ui/form/hooks/use_payment_method';
 import { amountMessage, validateRequired } from '../../../../../shared/components/ui/form/utils';
-import { Intervals, PaymentMethods } from './FormItemsBuilder';
+import { Intervals, PaymentMethods } from '../../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../../shared/components/ui/form/SubmitValues';
 import Footer from '../../../../../shared/components/ui/EasySelectFooter';
+import { AddressType } from './FormItemsBuilder';
+import useAddressType from './hooks/use_address_type';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -24,14 +26,36 @@ export default function DonationFormWithHeaders( props ) {
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
+	const [ addressType, setAddressType, addressTypeValidity, setAddressTypeValidity ] = useAddressType( null );
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
+	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+
+	const addDisabledPaymentMethod = paymentMethod => {
+		let currentDisabledPaymentMethods = disabledPaymentMethods;
+		if ( currentDisabledPaymentMethods.includes( paymentMethod ) ) {
+			return;
+		}
+		currentDisabledPaymentMethods.push( paymentMethod );
+		setDisabledPaymentMethods( currentDisabledPaymentMethods );
+	};
+
+	const removeDisabledPaymentMethod = paymentMethod => {
+		let currentDisabledPaymentMethods = disabledPaymentMethods;
+		const index = currentDisabledPaymentMethods.indexOf( paymentMethod );
+		if ( index === -1 ) {
+			return;
+		}
+		currentDisabledPaymentMethods.splice( index, 1 );
+		setDisabledPaymentMethods( currentDisabledPaymentMethods );
+	};
 
 	const validate = e => {
 		if ( [
 			[ intervalValidity, setIntervalValidity ],
 			[ amountValidity, setAmountValidity ],
-			[ paymentMethodValidity, setPaymentMethodValidity ]
+			[ paymentMethodValidity, setPaymentMethodValidity ],
+			[ addressTypeValidity, setAddressTypeValidity ]
 		].map( validateRequired ).every( isValid ) ) {
 			props.onSubmit();
 			return;
@@ -41,10 +65,11 @@ export default function DonationFormWithHeaders( props ) {
 
 	const onChangeInterval = e => {
 		setInterval( e.target.value );
+
 		if ( e.target.value !== Intervals.ONCE.value ) {
-			setDisabledPaymentMethods( [ PaymentMethods.SOFORT.value ] );
+			addDisabledPaymentMethod( PaymentMethods.SOFORT.value );
 		} else {
-			setDisabledPaymentMethods( [] );
+			removeDisabledPaymentMethod( PaymentMethods.SOFORT.value );
 		}
 	};
 
@@ -60,11 +85,62 @@ export default function DonationFormWithHeaders( props ) {
 		} else {
 			setDisabledIntervals( [] );
 		}
+
+		if ( e.target.value === PaymentMethods.DIRECT_DEBIT.value ) {
+			setDisabledAddressTypes( [ AddressType.EMAIL.value, AddressType.NO.value ] );
+		} else {
+			setDisabledAddressTypes( [] );
+		}
+	};
+
+	const onChangeAddressType = e => {
+		setAddressType( e.target.value );
+
+		if ( e.target.value === AddressType.FULL.value ) {
+			removeDisabledPaymentMethod( PaymentMethods.DIRECT_DEBIT.value );
+		} else {
+			addDisabledPaymentMethod( PaymentMethods.DIRECT_DEBIT.value );
+		}
+	};
+
+	const formActionParams = {
+		piwik_campaign: props.campaignName,
+		piwik_kwd: props.bannerName,
+		provadd: 1
+	};
+
+	const queryString = Object.keys( formActionParams )
+		.map( key => `${key}=${formActionParams[ key ]}` )
+		.join( '&' );
+
+	const getFormAction = () => {
+		if ( addressType !== AddressType.NO.value ) {
+			return 'https://spenden.wikimedia.de/donation/new?' + queryString;
+		}
+		return 'https://spenden.wikimedia.de/donation/add?' + queryString + '&mbt=1';
+	};
+
+	const getButtonText = () => {
+		if ( addressType !== AddressType.NO.value ) {
+			return Translations[ 'submit-label-default' ];
+		}
+
+		if ( paymentMethod === PaymentMethods.PAYPAL.value ) {
+			return Translations[ 'submit-label-paypal' ];
+		} else if ( paymentMethod === PaymentMethods.CREDIT_CARD.value ) {
+			return Translations[ 'submit-label-credit-card' ];
+		} else if ( paymentMethod === PaymentMethods.SOFORT.value ) {
+			return Translations[ 'submit-label-sofort' ];
+		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
+			return Translations[ 'submit-label-bank-transfer' ];
+		} else {
+			return Translations[ 'submit-label-default' ];
+		}
 	};
 
 	return <div className="form">
 		<form method="post" name="donationForm" className="form__element"
-			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
+			action={ getFormAction() }>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head">{ Translations[ 'intervals-header' ]}</legend>
@@ -125,9 +201,25 @@ export default function DonationFormWithHeaders( props ) {
 				</div>
 			</fieldset>
 
+			<fieldset className="form__section">
+				<legend className="form__section-head">{ Translations[ 'address-type-label' ] }</legend>
+				<div className="form-field-group">
+					<SelectGroup
+						fieldname="address-option"
+						selectionItems={ props.formItems.addressType }
+						isValid={ isValidOrUnset( addressTypeValidity ) }
+						errorMessage={ Translations[ 'address-type-error-message' ] }
+						currentValue={ addressType }
+						onSelected={ onChangeAddressType }
+						disabledOptions={ disabledAddressTypes }
+					>
+					</SelectGroup>
+				</div>
+			</fieldset>
+
 			<div className="submit-section button-group">
 				<button className="button-group__button" onClick={ validate }>
-					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+					<span className="button-group__label">{ getButtonText() }</span>
 				</button>
 			</div>
 
@@ -138,6 +230,7 @@ export default function DonationFormWithHeaders( props ) {
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
 				impressionCounts={ props.impressionCounts }
+				addressType={ addressType }
 			/>
 		</form>
 	</div>;

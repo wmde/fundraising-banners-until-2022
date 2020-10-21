@@ -142,7 +142,6 @@ export default class Banner extends Component {
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
-					transitionSpeed={ 0 }
 				>
 					<MiniBanner
 						{ ...props }
@@ -167,6 +166,7 @@ export default class Banner extends Component {
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
 						onSubmit={props.onSubmit}
+						donationForm={props.donationForm}
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Slides( { currentDayName } ) {
+export default function Slides( { currentDayName, formattedGoalDonationSumNumeric, progressBar } ) {
 	return <div className="mini-banner-carousel">
 		<div className="carousel-cell">
 			<p>Liebe Leserinnen und Leser:</p>
@@ -12,6 +12,10 @@ export default function Slides( { currentDayName } ) {
 		<div className="carousel-cell">
 			<p>An diesem { currentDayName } sind Sie in Deutschland gefragt. Schon der Preis
 				einer Tasse Kaffee würde genügen.</p>
+		</div>
+		<div className="carousel-cell">
+			<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSumNumeric } Millionen Euro</p>
+			{ progressBar }
 		</div>
 		<div className="carousel-cell">
 			<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>

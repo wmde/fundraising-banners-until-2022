@@ -21,6 +21,10 @@
 		padding: 8px 0;
 		text-align: center;
 		font-size: 16px;
+
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			font-size: 18px;
+		}
 	}
 
 	.button-group__container {
@@ -36,7 +40,7 @@
 		width: 100%;
 		background-color: $color-secondary;
 		color: $color-white;
-		border-radius: $banner-border-radius;
+		border-radius: $form-element-border-radius;
 		padding: 24px 10px;
 		outline: 0;
 		text-align: center;

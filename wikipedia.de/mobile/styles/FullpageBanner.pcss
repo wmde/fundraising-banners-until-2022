@@ -1,9 +1,10 @@
 .wmde-banner {
 
 	.fullpage-banner {
+		background: $color-primary-lighter;
 		width: 98%;
 		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
-		background: $color-bright;
+
 		text-align: center;
 		box-sizing: border-box;
 		display: block;
@@ -28,6 +29,12 @@
 		z-index: 999;
 		padding: 36px;
 		background-size: 15px;
+	}
+
+	@media ( min-width: $breakpoint_phone_m ) {
+		.close {
+			background-size: 20px;
+		}
 	}
 
 	.close:active {
@@ -72,6 +79,10 @@
 
 	.call-to-action__optional-text {
 		display: none;
+
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			display: inline;
+		}
 	}
 
 	.smallprint {

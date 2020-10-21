@@ -43,7 +43,7 @@
 		padding: 0;
 	}
 
-	.select-group__option {
+	.select-group__option > label {
 		box-sizing: border-box;
 		display: block;
 		margin: 0 0 6px;
@@ -114,6 +114,16 @@
 		}
 	}
 
+	.select-group__notice {
+		display: block;
+		font-size: 9pt;
+		line-height: 12pt;
+		margin-right: 0;
+		width: 100%;
+		padding: 0 0 15px 0;
+		color: $color-secondary-dark;
+	}
+
 	.select-group__errormessage {
 		display: none;
 		color: $color-black;
@@ -180,6 +190,13 @@
 			}
 		}
 
+		.select-group__notice {
+			display: none;
+			&.select-group__notice--selected {
+				display: block;
+			}
+		}
+
 		/* Sofortüberweisung button */
 		.select-group__option:nth-child( 5 ) {
 			width: 100%;
@@ -187,6 +204,14 @@
 		}
 
 		.sms-box .select-group__option {
+			width: 100%;
+			flex: 1 1 auto;
+		}
+	}
+
+	.select-group-container--address-option {
+		margin-bottom: 30px;
+		.select-group__option {
 			width: 100%;
 			flex: 1 1 auto;
 		}

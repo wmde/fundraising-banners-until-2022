@@ -12,6 +12,7 @@ import LocalTranslations from './translations';
 import Banner, { BannerType } from './Banner';
 import Slides from './components/Slides';
 import BannerText from './components/BannerText';
+import DonationForm from './components/ui/form/DonationFormWithHeaders';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -38,6 +39,7 @@ bannerPresenter.present(
 		formatters,
 		bannerText: BannerText,
 		slides: Slides,
+		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
