@@ -34,6 +34,12 @@ function amountReducer( state, action ) {
 				numericAmount: parseAmount( action.payload )
 			};
 		case 'FINISH_CUSTOM_AMOUNT':
+			if ( action.payload === '' ) {
+				return {
+					...state,
+					customAmount: ''
+				};
+			}
 			numericAmount = parseAmount( action.payload );
 			return {
 				...state,
