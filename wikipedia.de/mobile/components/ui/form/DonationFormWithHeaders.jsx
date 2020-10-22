@@ -96,6 +96,7 @@ export default function DonationFormWithHeaders( props ) {
 						<SelectCustomAmount
 							fieldname="select-amount"
 							value={ customAmount }
+							selectedAmount={ selectedAmount }
 							onInput={ e => updateCustomAmount( e.target.value ) }
 							onBlur={ e => validateCustomAmount( e.target.value ) }
 							placeholder={ props.customAmountPlaceholder }
