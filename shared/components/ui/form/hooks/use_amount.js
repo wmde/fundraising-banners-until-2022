@@ -33,11 +33,15 @@ function amountReducer( state, action ) {
 				customAmount: action.payload,
 				numericAmount: parseAmount( action.payload )
 			};
-		case 'FINISH_CUSTOM_AMOUNT':
+		case 'CUSTOM_AMOUNT_LOST_FOCUS':
+			// Don't validate immediately when field is empty
 			if ( action.payload === '' ) {
 				return {
 					...state,
-					customAmount: ''
+					selectedAmount: null,
+					customAmount: action.payload,
+					numericAmount: 0,
+					amountValidity: UNSET
 				};
 			}
 			numericAmount = parseAmount( action.payload );
@@ -80,7 +84,7 @@ export default function useAmountWithCustom( initial, customAmountFormatter ) {
 		{
 			selectAmount: createAction( 'AMOUNT_SELECTED', dispatch ),
 			updateCustomAmount: createAction( 'AMOUNT_TYPED', dispatch ),
-			validateCustomAmount: amount => dispatch( { type: 'FINISH_CUSTOM_AMOUNT', payload: amount, formatter: customAmountFormatter } ),
+			validateCustomAmount: amount => dispatch( { type: 'CUSTOM_AMOUNT_LOST_FOCUS', payload: amount, formatter: customAmountFormatter } ),
 			setAmountValidity: createAction( 'SET_VALIDITY', dispatch )
 		}
 
