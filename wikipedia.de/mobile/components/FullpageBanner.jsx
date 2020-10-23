@@ -27,8 +27,8 @@ export default class FullpageBanner extends Component {
 					donationAmount={campaignProjection.getProjectedDonationSum()}
 					goalDonationSum={campaignProjection.goalDonationSum}
 					missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-					setStartAnimation={ () => {} }
-					animate={false}
+					setStartAnimation={props.setStartAnimation}
+					animate={true}
 				/>
 
 				<div className="call-to-action">

@@ -29,8 +29,8 @@ export default function MiniBanner( props ) {
 							donationAmount={campaignProjection.getProjectedDonationSum()}
 							goalDonationSum={campaignProjection.goalDonationSum}
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={props.startAnimation}
-							animate={false}
+							setStartAnimation={props.setStartAnimation}
+							animate={true}
 						/> )
 					}}
 				/>
@@ -51,6 +51,6 @@ MiniBanner.propTypes = {
 	formatters: PropTypes.object,
 	campaignProjection: PropTypes.any,
 	campaignParameters: PropTypes.object,
-	startAnimation: PropTypes.func,
+	setStartAnimation: PropTypes.func,
 	onExpandFullpage: PropTypes.func
 };

@@ -25,7 +25,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 5000,
+	0,
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
