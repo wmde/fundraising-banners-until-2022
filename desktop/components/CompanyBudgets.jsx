@@ -2,9 +2,9 @@
 import { h } from 'preact';
 
 const companies = [
-	{ name: 'Google', budget: 161, budgetCitation: 'https://www.macrotrends.net/stocks/charts/GOOGL/alphabet/revenue' },
-	{ name: 'Amazon', budget: 280, budgetCitation: 'https://www.macrotrends.net/stocks/charts/AMZN/amazon/revenue' },
-	{ name: 'Facebook', budget: 70, budgetCitation: 'https://www.macrotrends.net/stocks/charts/FB/facebook/revenue' },
+	{ name: 'Google', budget: 161, budgetCitation: 'https://www.statista.com/statistics/266206/googles-annual-global-revenue/' },
+	{ name: 'Amazon', budget: 280, budgetCitation: 'https://www.statista.com/statistics/266282/annual-net-revenue-of-amazoncom/' },
+	{ name: 'Facebook', budget: 70, budgetCitation: 'https://www.statista.com/statistics/268604/annual-revenue-of-facebook/' },
 	{ name: 'Wikipedia', budget: 0.12, budgetCitation: '' }
 ];
 

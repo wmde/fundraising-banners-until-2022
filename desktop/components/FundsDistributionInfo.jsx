@@ -4,13 +4,13 @@ import classNames from 'classnames';
 
 const applicationOfFundsDistribution = [
 	{
-		id: 'technology',
-		title: 'Technik',
+		id: 'software',
+		title: 'Software',
 		percentage: 20
 	},
 	{
 		id: 'international',
-		title: 'Internationales',
+		title: 'International und Technik',
 		percentage: 20
 	},
 	{
@@ -68,11 +68,11 @@ export default class FundsDistributionInfo extends Component {
 				</div> )}
 			</div>
 
-			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'technology' ) } ) }>
-					Die laufende Betreuung und stetige Verbesserung der technischen Infrastruktur – z. B.
-					die Software, auf der sämtliche Wikimedia-Projekte laufen – ist eine Schlüsselinvestition
-					für den langfristigen Erfolg von Wikipedia & Co. Dafür arbeiten unsere Softwareentwicklerinnen
-					und -entwickler in Deutschland und weltweit.
+			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'software' ) } ) }>
+				Aktuelle Daten der Welt sind das Rückgrat von Wikipedia & Co. Damit alle Wikipedia-Sprachversionen
+				einfach auf einen gemeinsamen Datenpool zugreifen können, entwickeln unsere Softwareentwicklerinnen
+				und -entwickler in Deutschland und weltweit eine sichere und verlässliche technische Infrastruktur.
+				Damit wird die Ergänzung und Aktualisierung von Wikipedia-Artikeln mit neuesten Daten enorm erleichtert.
 			</div>
 
 			<div className={classNames( 'funds_distribution_info__text', { active: isActive( 'international' ) } ) }>

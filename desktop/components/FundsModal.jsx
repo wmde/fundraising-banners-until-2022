@@ -45,7 +45,7 @@ export default class FundsModal extends Component {
 					<div className="banner_modal__section banner_modal__section--two-cols">
 						<div className="banner_modal__column">
 							<div className="banner_modal__column_info banner_modal__column_info--benefits_list">
-								Einen genauen Einblick in die internationalen Aktivitäten finden Sie hier:<br/>
+								Einen genauen Einblick in unsere internationalen Aktivitäten finden Sie hier:<br/>
 								<a href="#" target="_blank">Jahresplan Wikimedia Foundation</a>
 							</div>
 							<div className="banner_modal__benefits_list">
@@ -82,7 +82,7 @@ export default class FundsModal extends Component {
 						</div>
 						<div className="banner_modal__column">
 							<div className="banner_modal__column_info">
-								Einen genauen Einblick in die Aktivitäten in Deutschland finden Sie hier:<br/>
+								Einen genauen Einblick in unsere Aktivitäten in Deutschland finden Sie hier:<br/>
 								<a href="#" target="_blank">Jahresplan Wikimedia Deutschland</a>
 							</div>
 							<div className="banner_modal__comparison">
