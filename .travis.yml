@@ -4,6 +4,7 @@ services:
 install: docker-compose run js-build npm install
 
 script:
+  - find . -path ./node_modules -prune -o -path ./shared -prune -o -name "*.js" | xargs awk '/createCampaignParameters\([^)]/ { print "Forbidden call to createCampaignParameters with parameters detected in " FILENAME; exit 1 }'
   - docker-compose run js-build npm run lint:js
   - docker-compose run js-build npm run lint:css
   - docker-compose run js-build npm run test
