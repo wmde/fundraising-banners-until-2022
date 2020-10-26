@@ -9,6 +9,8 @@ parameters separately form the banner code, to update *all* banners
 when one value changes.
 
 ### Campaign projection
+![Projection Chart](Campaign%20Projection.png)
+
 For the current values of the progress bar we use a feature called
 "campaign projection" - given the current sum of donations and donors on a
 given date and time and given the amount of donations and number of donors
