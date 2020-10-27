@@ -14,7 +14,7 @@ const ENDED = 2;
  * When set to true, the "late progress" design will be used
  * @type {boolean}
  */
-const IS_LATE_PROGRESS = true;
+const IS_LATE_PROGRESS = false;
 
 export default class ProgressBar extends Component {
 	static propTypes = {

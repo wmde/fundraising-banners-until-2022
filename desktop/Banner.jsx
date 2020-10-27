@@ -3,6 +3,7 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
+import ProgressBar from '../shared/components/ui/ProgressBar';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/FundsModal';
@@ -66,8 +67,7 @@ export class Banner extends Component {
 
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
-		// Uncomment when we have a progress bar during the campaign again
-		// this.startProgressbar()
+		this.startProgressbar();
 	}
 
 	closeBanner = e => {
@@ -98,6 +98,7 @@ export class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
+		const campaignProjection = props.campaignProjection;
 
 		return <div
 			className={ classNames( {
@@ -122,11 +123,20 @@ export class Banner extends Component {
 						</div>
 						<div className="banner__content">
 							<div className="banner__infobox">
-								<Infobox
-									formatters={props.formatters}
-									campaignParameters={props.campaignParameters}
-									campaignProjection={props.campaignProjection}
-									bannerText={props.bannerText}/>
+								<div className="infobox-bubble">
+									<Infobox
+										formatters={props.formatters}
+										campaignParameters={props.campaignParameters}
+										campaignProjection={props.campaignProjection}
+										bannerText={props.bannerText}/>
+									<ProgressBar
+										formatters={props.formatters}
+										daysLeft={campaignProjection.getRemainingDays()}
+										donationAmount={campaignProjection.getProjectedDonationSum()}
+										goalDonationSum={campaignProjection.goalDonationSum}
+										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+										setStartAnimation={this.registerStartProgressbar}/>
+								</div>
 							</div>
 							<div className="banner__form">
 								<DonationForm
