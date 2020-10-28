@@ -43,12 +43,13 @@ export default class Banner extends Component {
 			}
 		);
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.adjustSurroundingSpace();
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		const bannerElement = document.querySelector( '.wmde-banner.banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
