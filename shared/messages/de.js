@@ -75,13 +75,17 @@ const Translations = {
 	// This is for the B20 02 desktop var test
 	'submit-label-short': 'Weiter',
 	'submit-label-default': 'Weiter zur Adresseingabe',
-	// eslint-disable-next-line max-len
-	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
+	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
+		'Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
 	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
 
 	// For the collage banner
-	// eslint-disable-next-line max-len
-	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.'
+	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige ' +
+		'gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.',
+
+	// for B20_WPDE_desktop_01_var text test, remove if not used anymore
+	'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
+		' aber erst {{totalNumberOfDonors}} Menschen haben bisher gespendet.'
 };
 
 export default Translations;
