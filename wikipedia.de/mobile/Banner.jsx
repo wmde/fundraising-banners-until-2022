@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../shared/banner_slider';
-import debounce from '../shared/debounce';
+import { Slider } from '../../shared/banner_slider';
+import debounce from '../../shared/debounce';
 
-import BannerTransition from '../shared/components/BannerTransition';
+import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './components/MiniBanner';
-import TranslationContext from '../shared/components/TranslationContext';
-import FollowupTransition from '../shared/components/FollowupTransition';
+import TranslationContext from '../../shared/components/TranslationContext';
+import FollowupTransition from '../../shared/components/FollowupTransition';
 import FullpageBanner from './components/FullpageBanner';
+import PropTypes from 'prop-types';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -16,7 +17,20 @@ const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 
+export const BannerType = Object.freeze( {
+	CTRL: Symbol( 'ctrl ' ),
+	VAR: Symbol( 'var' )
+} );
+
 export default class Banner extends Component {
+
+	static propTypes = {
+		/** callback when banner closes */
+		onClose: PropTypes.func,
+		/** callback when banner gets submitted */
+		onSubmit: PropTypes.func
+	}
+
 	constructor( props ) {
 		super( props );
 		this.state = {
@@ -27,6 +41,7 @@ export default class Banner extends Component {
 		this.startHighlight = () => {};
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
+		this.startProgressBarInMiniBanner = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -44,6 +59,7 @@ export default class Banner extends Component {
 			}
 		);
 
+		this.props.skinAdjuster.addSpaceInstantly( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
 	}
 
@@ -100,10 +116,15 @@ export default class Banner extends Component {
 	registerStartHighlight = cb => { this.startHighlight = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
+	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
+	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
-		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
+		if ( this.props.sliderAutoPlay !== false ) {
+			this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
+		}
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
+		this.startProgressBarInMiniBanner();
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -114,7 +135,9 @@ export default class Banner extends Component {
 			'wmde-banner--hidden': state.displayState === CLOSED,
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
-			'wmde-banner--full-page': state.isFullPageVisible
+			'wmde-banner--full-page': state.isFullPageVisible,
+			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
+			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
 			<TranslationContext.Provider value={ props.translations }>
 				<BannerTransition
@@ -123,13 +146,13 @@ export default class Banner extends Component {
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
-					transitionSpeed={ 1000 }
+					transitionSpeed={100}
 				>
 					<MiniBanner
 						{ ...props }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
-						startAnimation={ () => {} }
+						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBanner }/>
 
 				</BannerTransition>
@@ -137,10 +160,10 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); } }
+					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
-					hasStaticParent={ false }
+					hasStaticParent={ true }
 					ref={this.fullBannerTransitionRef}
 				>
 					<FullpageBanner
@@ -148,6 +171,8 @@ export default class Banner extends Component {
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
 						onSubmit={props.onSubmit}
+						donationForm={props.donationForm}
+						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

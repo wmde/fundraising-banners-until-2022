@@ -5,7 +5,7 @@ export default class Wpde extends Skin {
 	constructor() {
 		super();
 
-		this.container = $( 'body center' );
+		this.container = $( '#mainbox' );
 	}
 
 	addSpace( bannerHeight ) {

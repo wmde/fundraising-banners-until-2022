@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
-import TranslationContext from '../shared/components/TranslationContext';
+import TranslationContext from '../../shared/components/TranslationContext';
 import classNames from 'classnames';
-import Infobox from '../shared/components/ui/Infobox';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import DonationForm from '../shared/components/ui/form/DonationForm';
-import Footer from '../shared/components/ui/Footer';
-import FundsModal from '../shared/components/ui/FundsModal';
+import Infobox from '../../shared/components/ui/Infobox';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import DonationForm from '../../shared/components/ui/form/DonationForm';
+import Footer from '../../shared/components/ui/Footer';
+import FundsModal from '../../shared/components/ui/FundsModal';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;
@@ -43,12 +43,13 @@ export default class Banner extends Component {
 			}
 		);
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.adjustSurroundingSpace();
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		const bannerElement = document.querySelector( '.wmde-banner.banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 

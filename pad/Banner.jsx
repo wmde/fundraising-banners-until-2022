@@ -116,6 +116,7 @@ export default class Banner extends Component {
 				registerDisplayBanner={ this.registerBannerTransition }
 				onFinish={ this.onFinishedTransitioning }
 				skinAdjuster={ props.skinAdjuster }
+				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">

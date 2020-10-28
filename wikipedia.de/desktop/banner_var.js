@@ -1,20 +1,20 @@
 // eslint-disable-next-line no-unused-vars
 import style from './styles/styles_var.pcss';
 
-import * as formatters from '../shared/number_formatter/de';
+import * as formatters from '../../shared/number_formatter/de';
 
-import { createCampaignParameters } from '../shared/campaign_parameters';
-import { getTrackingIds } from '../shared/tracking_ids';
+import { createCampaignParameters } from '../../shared/campaign_parameters';
+import { getTrackingIds } from '../../shared/tracking_ids';
 
 import Banner from './Banner';
-import BannerPresenter from '../shared/banner_presenter';
-import Translations from '../shared/messages/de';
+import BannerPresenter from '../../shared/banner_presenter';
+import Translations from '../../shared/messages/de';
 import BannerText from './components/BannerText';
-import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
-import { createCampaignProjection } from '../shared/campaign_projection';
+import fundsModalData from 'fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
-import { LocalImpressionCount } from '../shared/local_impression_count';
-import { createTrackingData } from '../shared/tracking_data';
+import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { createTrackingData } from '../../shared/tracking_data';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
