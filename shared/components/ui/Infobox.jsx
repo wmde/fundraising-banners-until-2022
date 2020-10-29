@@ -37,6 +37,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 			visitorsVsDonorsSentence={ visitorsVsDonorsSentence.getSentence() }
 			weekdayPrepPhrase={ weekdayPrepPhrase }
 			currentDayName={ currentDayName }
+			daysSinceCampaignStart={ campaignDays.getNumberOfDaysSinceCampaignStart() }
 		/>
 	</div>;
 }
