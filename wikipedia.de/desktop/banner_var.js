@@ -6,7 +6,7 @@ import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import Banner from './Banner';
+import Banner, { BannerType } from './Banner';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import BannerText from './components/BannerText';
@@ -39,6 +39,7 @@ bannerPresenter.present(
 		fundsModalData,
 		bannerText: BannerText,
 		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		bannerType: BannerType.VAR
 	}
 );

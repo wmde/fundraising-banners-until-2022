@@ -41,6 +41,10 @@ export default class CampaignDays {
 		return Math.ceil( this.getSecondsUntilCampaignEnds() / 60 / 60 / 24 );
 	}
 
+	getNumberOfDaysSinceCampaignStart() {
+		return Math.floor( this.getSecondsSinceCampaignStart() / 60 / 60 / 24 );
+	}
+
 }
 
 /**
