@@ -4,11 +4,7 @@ import { capitalizeFirstLetter } from '../../../shared/capitalize_first_letter';
 import TextHighlight from '../../../shared/components/ui/TextHighlight';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, daysSinceCampaignStart } = props;
-
-	const campaignDonationSentence = <span>{ campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser
-	Spendenaufruf täglich angezeigt, aber erst { numberOfDonors } Menschen haben bisher
-		gespendet.</span>;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, visitorsVsDonorsSentence } = props;
 
 	return <div className="banner-text">
 		<div className="banner-text-inner">
@@ -67,7 +63,7 @@ export default function BannerText( props ) {
 					nichts – sie übergehen diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die bereits
 					gespendet haben, danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich
 					22,81 € finanziert. Doch schon mit einer Spende von 5 € kann Wikipedia sich auch in Zukunft
-					erfolgreich entwickeln. { daysSinceCampaignStart >= 2 ? campaignDonationSentence : '' } Die meisten
+					erfolgreich entwickeln. { visitorsVsDonorsSentence } Die meisten
 					Menschen spenden, weil Sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in
 					diesem Jahr Wissen im Wert von 5 € geschenkt? Dann nehmen Sie sich doch bitte eine Minute Zeit und
 					geben Sie etwas zurück. Zeigen Sie den Freiwilligen, die Ihnen verlässliche und neutrale
