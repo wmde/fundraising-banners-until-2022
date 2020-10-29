@@ -15,7 +15,7 @@ export default function BannerText( props ) {
 		</p>
 
 		<p className="text__paragraph">
-			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 23,83&nbsp;€ finanziert, aber
+			{' '}{campaignDaySentence} Wikipedia wird durch Spenden von durchschnittlich 23,81&nbsp;€ finanziert, aber
 			99&nbsp;% der Leserinnen und Leser spenden nicht.
 
 			<span className="optional-text-highlight">
@@ -33,25 +33,17 @@ export default function BannerText( props ) {
 				Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {numberOfDonors} Menschen haben bisher gespendet. </span>
 
 			<span className="optional-text text-l">
-				Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt.
-				Wikipedia ist ein Ort des Lernens – Werbung hat darin keinen Platz. </span>
+				Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. </span>
 
 			<span>
 				Sicher könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders.
 				Wir könnten ihr nicht vertrauen. </span>
 
 			<span className="optional-text text-xxl">
-				Wikipedia bringt uns alle, die Wissen lieben, zusammen: Beitragende, Lesende und die Spendenden, die uns finanzieren. </span>
-			<span className="optional-text text-xxl">
 				Das Herzstück von Wikipedia ist die Gemeinschaft von Menschen, die uns unbegrenzten Zugang zu verlässlichen und neutralen Informationen geben. </span>
 
 			<span>
 				Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. </span>
-
-			<span className="optional-text text-xs">
-				Wenn Sie Wikipedia nützlich finden, nehmen Sie sich {weekdayPrepPhrase} {currentDayName} bitte
-				eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.
-			</span>
 
 			<span className="text__paragraph--italic">
 				{' '}Vielen Dank! </span>
