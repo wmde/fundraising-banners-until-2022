@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
 import classNames from 'classnames';
-import FundsDistributionInfo from './FundsDistributionInfo';
 import CompanyBudgets from './CompanyBudgets';
 
 export default class FundsModal extends Component {
@@ -15,9 +14,6 @@ export default class FundsModal extends Component {
 			return amount.replace( / /g, '.' );
 		}
 		return amount.replace( / /g, ',' );
-	};
-	getIntValue = function ( stringValue ) {
-		return parseInt( stringValue.replace( / /g, '' ) );
 	};
 
 	render( props ) {
@@ -40,7 +36,7 @@ export default class FundsModal extends Component {
 								Also für Sie – und alle Menschen weltweit.
 							</div>
 						</div>
-						<FundsDistributionInfo/>
+						{props.children}
 					</div>
 					<div className="banner_modal__section banner_modal__section--two-cols">
 						<div className="banner_modal__column">

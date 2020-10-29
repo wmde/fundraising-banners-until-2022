@@ -7,6 +7,7 @@ import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from './components/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
+import FundsDistributionInfo from './components/FundsDistributionInfo';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -151,7 +152,9 @@ export class Banner extends Component {
 				fundsModalData={props.fundsModalData}
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
+				locale='de'>
+				<FundsDistributionInfo/>
+			</FundsModal>
 		</div>;
 	}
 
