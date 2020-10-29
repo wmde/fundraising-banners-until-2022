@@ -3,7 +3,7 @@ import { h } from 'preact';
 import TextHighlight from '../../shared/components/ui/TextHighlight';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
+	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			To all our readers in Germany.
@@ -11,9 +11,8 @@ export default function BannerText( props ) {
 		<p>
 			It's a little awkward, so we'll get straight to the point: { weekdayPrepPhrase } { currentDayName } we humbly
 			ask you to protect Wikipedia's independence.
-			{ campaignDaySentence } We depend on donations averaging about € 23.83, but 99% of our readers don't give.
-			Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
-			but currently only { numberOfDonors } people have donated.
+			{ campaignDaySentence } We depend on donations averaging about € 22.81, but 99% of our readers don't give.{ ' ' }
+			{ visitorsVsDonorsSentence }
 			<TextHighlight registerStartAnimation={ props.registerStartHighlight }>
 				If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come.
 			</TextHighlight>

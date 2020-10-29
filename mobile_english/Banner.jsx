@@ -27,6 +27,7 @@ export default class Banner extends Component {
 		this.startHighlight = () => {};
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
+		this.startProgressBarInMiniBanner = () => {};
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -100,10 +101,13 @@ export default class Banner extends Component {
 	registerStartHighlight = cb => { this.startHighlight = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
+	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
+	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
 		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
+		this.startProgressBarInMiniBanner();
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -129,7 +133,7 @@ export default class Banner extends Component {
 						{ ...props }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
-						startAnimation={ () => {} }
+						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBanner }/>
 
 				</BannerTransition>
@@ -137,7 +141,7 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); } }
+					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
@@ -148,6 +152,7 @@ export default class Banner extends Component {
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
 						onSubmit={props.onSubmit}
+						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

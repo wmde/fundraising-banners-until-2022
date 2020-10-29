@@ -29,13 +29,13 @@ export default class FullpageBanner extends Component {
 
 				<div>
 					<ProgressBar
-						animate={false}
 						formatters={props.formatters}
 						daysLeft={campaignProjection.getRemainingDays()}
 						donationAmount={campaignProjection.getProjectedDonationSum()}
 						goalDonationSum={campaignProjection.goalDonationSum}
 						missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-						setStartAnimation={() => {}}
+						setStartAnimation={props.setStartAnimation}
+						animate={true}
 					/>
 				</div>
 			</div>

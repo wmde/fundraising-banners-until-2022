@@ -58,7 +58,11 @@ const Translations = {
 	'give-address-statement-negative': 'No',
 
 	// For the collage banner
-	'bank-account-tooltip': ''
+	'bank-account-tooltip': '',
+
+	// for B20_WMDE_en_01_var text test, B20_WMDE_mobile_en_01 remove if not used anymore
+	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million ' +
+		'times a day, but currently only {{totalNumberOfDonors}} people have donated.'
 };
 
 export default Translations;
