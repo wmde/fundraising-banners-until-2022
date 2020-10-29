@@ -82,7 +82,11 @@ const Translations = {
 
 	// For the collage banner
 	// eslint-disable-next-line max-len
-	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.'
+	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.',
+
+	// for B20_WPDE_desktop_01_var, B20_WMDE_mobile_en_01 text test, remove if not used anymore
+	'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
+		' aber erst {{totalNumberOfDonors}} Menschen haben bisher gespendet.'
 };
 
 export default Translations;

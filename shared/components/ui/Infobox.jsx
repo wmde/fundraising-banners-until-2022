@@ -5,6 +5,7 @@ import TranslationContext from '../TranslationContext';
 import CampaignDays, { endOfDay, startOfDay } from '../../campaign_days';
 import CampaignDaySentence from '../../campaign_day_sentence';
 import { useContext } from 'preact/hooks';
+import VisitorsVsDonorsSentence from '../../visitors_vs_donors_sentence';
 
 export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText, propsForText } ) {
 
@@ -19,6 +20,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 		endOfDay( campaignParameters.endDate )
 	);
 	const campaignDaySentence = new CampaignDaySentence( campaignDays, Translations );
+	const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( campaignParameters, campaignProjection, campaignDays, Translations );
 	const additionalProps = propsForText || {};
 
 	return <div className="infobox">
@@ -27,6 +29,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 			campaignParameters={ campaignParameters }
 			numberOfDonors={ formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ) }
 			campaignDaySentence={ campaignDaySentence.getSentence() }
+			visitorsVsDonorsSentence={ visitorsVsDonorsSentence.getSentence() }
 			weekdayPrepPhrase={ weekdayPrepPhrase }
 			currentDayName={ currentDayName }
 		/>

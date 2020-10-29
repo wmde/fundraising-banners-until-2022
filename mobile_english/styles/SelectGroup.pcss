@@ -167,8 +167,12 @@
 
 	.select-group-container--select-amount {
 		.select-group__option {
-			width: 31%;
-			flex: 0 1 31%;
+			width: 49%;
+			flex: 0 1 49%;
+			@media ( min-width: $breakpoint_phone_s ) {
+				width: 31%;
+				flex: 0 1 31%;
+			}
 		}
 		.select-group__option--amount-other-input {
 			position: relative;
