@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from './components/FundsModal';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
-import FundsDistributionInfo from './components/FundsDistributionInfo';
 
 const PENDING = 0;
 const VISIBLE = 1;
