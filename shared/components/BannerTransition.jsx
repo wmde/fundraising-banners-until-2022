@@ -60,6 +60,9 @@ export default class BannerTransition extends Component {
 	};
 
 	onTransitionEnd = () => {
+		if ( this.state.transitionPhase === FINISHED ) {
+			return;
+		}
 		this.setState( { transitionPhase: FINISHED } );
 		if ( this.props.onFinish ) {
 			this.props.onFinish();
@@ -91,7 +94,7 @@ export default class BannerTransition extends Component {
 					'banner-position--fixed': props.fixed
 				}
 			)}
-			onTransitionEnd={ this.onTransitionEnd}>
+			onTransitionEnd={ this.onTransitionEnd }>
 			{ props.children }
 		</div>;
 	}
