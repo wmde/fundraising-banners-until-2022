@@ -8,7 +8,6 @@ import BannerTransition from '../shared/components/BannerTransition';
 import MiniBanner from './components/MiniBanner';
 import TranslationContext from '../shared/components/TranslationContext';
 import FollowupTransition from '../shared/components/FollowupTransition';
-import FullpageBanner from './components/FullpageBanner';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;
@@ -128,6 +127,7 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
+		const FullpageBanner = props.fullpageBanner;
 		const campaignProjection = props.campaignProjection;
 		return <div className={classNames( {
 			'wmde-banner': true,

@@ -77,6 +77,7 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ paymentInterval }
 						onSelected={ onChangeInterval }
 						disabledOptions={ disabledIntervals }
+						errorPosition={ props.errorPosition }
 					/>
 				</div>
 			</fieldset>
@@ -92,6 +93,7 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ selectedAmount }
 						onSelected={ e => selectAmount( e.target.value ) }
 						disabledOptions={ [] }
+						errorPosition={ props.errorPosition }
 					>
 						<SelectCustomAmount
 							fieldname="select-amount"
@@ -120,6 +122,7 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ paymentMethod }
 						onSelected={ onChangePaymentMethod }
 						disabledOptions={ disabledPaymentMethods }
+						errorPosition={ props.errorPosition }
 					>
 						<SmsBox/>
 					</SelectGroup>
