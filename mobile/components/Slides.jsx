@@ -1,8 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Slides( { currentDayName } ) {
+export default function Slides( { formattedGoalDonationSumNumeric, currentDayName, progressBar } ) {
 	return <div className="mini-banner-carousel">
+		<div className="carousel-cell">
+			<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSumNumeric } Millionen Euro</p>
+			{ progressBar }
+		</div>
 		<div className="carousel-cell">
 			<p>Liebe Leserinnen und Leser:</p>
 			<p>Millionen Menschen nutzen Wikipedia, aber 99 % der Leserinnen und Leser spenden nicht. Wenn alle, die das
