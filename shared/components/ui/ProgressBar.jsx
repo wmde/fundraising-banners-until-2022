@@ -10,6 +10,11 @@ const PENDING = 0;
 const STARTED = 1;
 const ENDED = 2;
 
+export const AmountToShowOnRight = Object.freeze( {
+	TOTAL: Symbol( 'total' ),
+	MISSING: Symbol( 'missing' )
+} );
+
 /**
  * When set to true, the "late progress" design will be used
  * @type {boolean}
@@ -44,7 +49,12 @@ export default class ProgressBar extends Component {
 		 * If the progress bar should be animated. Default: true
 		 * If it's not animated you can set setStartAnimation to an empty function like this: () => {}
 		 */
-		animate: PropTypes.bool
+		animate: PropTypes.bool,
+
+		/**
+		 * Show the total amount required or amount remaining on the right side
+		 */
+		amountToShowOnRight: PropTypes.string
 	};
 
 	constructor( props ) {
@@ -99,6 +109,12 @@ export default class ProgressBar extends Component {
 				( daysLeft === 1 ? Translations[ 'day-singular' ] : Translations[ 'day-plural' ] ) + ' ' +
 				Translations[ 'suffix-days-left' ];
 		};
+		const rightText = () => {
+			if ( props.amountToShowOnRight === AmountToShowOnRight.MISSING ) {
+				return Translations[ 'amount-missing' ] + ' ' + getMillion( props.missingAmount );
+			}
+			return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
+		};
 		return <div className={ classNames( 'progress_bar', {
 			'progress_bar--finished': state.animation === ENDED,
 			'progress_bar--animating': state.animation === STARTED,
@@ -111,17 +127,14 @@ export default class ProgressBar extends Component {
 					</div>
 					<div className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</div>
 				</div>
-				<div
-					className="progress_bar__donation_remaining progress_bar__donation_remaining--inner">
-					{ Translations[ 'amount-missing' ] }{ ' ' }
-					{ getMillion( props.missingAmount ) }
+				<div className="progress_bar__donation_remaining progress_bar__donation_remaining--inner">
+					{ rightText() }
 				</div>
 			</div>
 			<div className="progress_bar__donation_remaining progress_bar__donation_remaining--outer">
 				<div className="progress_bar__pointer_tip"></div>
 				<hr className="progress_bar__pointer_line" />
-				{ Translations[ 'amount-missing' ] }{ ' ' }
-				{ getMillion( props.missingAmount ) }
+				{ rightText() }
 			</div>
 		</div>;
 	}
