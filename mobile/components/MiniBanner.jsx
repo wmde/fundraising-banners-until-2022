@@ -11,7 +11,7 @@ export default function MiniBanner( props ) {
 			<div className="mini-banner__content">
 				<header className="headline">
 					<div className="headline__container">
-						<span className="headline__content">Die Wikimedia-Spendenkampagne</span>
+						<span className="headline__content">{ props.sliderHeading }</span>
 					</div>
 				</header>
 				<div className="close-button" onClick={props.onClose}/>
@@ -37,9 +37,9 @@ export default function MiniBanner( props ) {
 				/>
 
 				<div className="mini-banner__tab">
-					<div className="mini-banner__tab-inner" onClick={props.onExpandFullpage}>
+					<button className="mini-banner__tab-inner mini-banner__button" onClick={props.onExpandFullpage}>
 						Jetzt spenden
-					</div>
+					</button>
 				</div>
 			</div>
 		</div>
