@@ -60,6 +60,7 @@ export default class BannerTransition extends Component {
 	};
 
 	onTransitionEnd = () => {
+		// TODO: Discover why this is being called multiple times
 		if ( this.state.transitionPhase === FINISHED ) {
 			return;
 		}
