@@ -12,6 +12,7 @@ const Translations = {
 	'sms-payment-message': '5 € by text message',
 	'custom-amount-placeholder': 'Other amount',
 	'custom-amount-placeholder-short': 'other',
+	'submit-label-short': 'Proceed',
 	'submit-label': 'Proceed with the donation',
 	'use-of-funds-link': 'Where does my donation go?',
 	'prefix-days-left': 'Only',
@@ -76,7 +77,8 @@ const Translations = {
 	'submit-label-paypal': 'Proceed with PayPal',
 	'submit-label-credit-card': 'Proceed with credit card',
 	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
-	'submit-label-bank-transfer': 'Proceed with bank transfer'
+	'submit-label-bank-transfer': 'Proceed with bank transfer',
+	'submit-label-default': 'Proceed with the donation'
 	// End of This is for C20_WMDE_mobile EN 01
 
 };
