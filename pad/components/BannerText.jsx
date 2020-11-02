@@ -3,11 +3,7 @@ import { h } from 'preact';
 import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, daysSinceCampaignStart } = props;
-
-	const campaignDonationSentence = <span>{ campaignParameters.millionImpressionsPerDay } Millionen Mal wird unser
-	Spendenaufruf täglich angezeigt, aber erst { numberOfDonors } Menschen haben bisher
-		gespendet.</span>;
+	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 
 	return <div className="banner-text">
 		<p className="text__headline text__headline--bold">
@@ -23,7 +19,7 @@ export default function BannerText( props ) {
 			<span className="text__highlight">Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre
 				unser Spendenziel bereits am heutigen { currentDayName } erreicht.</span>
 
-			<span> Schon der Preis einer Tasse Kaffee würde genügen. Über { daysSinceCampaignStart >= 2 ? campaignDonationSentence : '' } Sicher
+			<span> Schon der Preis einer Tasse Kaffee würde genügen. Über { visitorsVsDonorsSentence } Sicher
 				könnten wir mit Werbung eine Menge Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen.
 				Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia nützlich finden, nehmen
 				Sie sich an diesem { currentDayName } bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.</span>

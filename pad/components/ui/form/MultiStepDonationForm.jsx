@@ -228,7 +228,7 @@ export default function DonationForm( props ) {
 
 				<div className="submit-section button-group">
 					<button className="button-group__button" onClick={ onSubmitStep1 }>
-						<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+						<span className="button-group__label">{ Translations[ 'submit-label-short' ] }</span>
 					</button>
 				</div>
 
