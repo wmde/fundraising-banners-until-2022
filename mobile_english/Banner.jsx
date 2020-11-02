@@ -152,6 +152,7 @@ export default class Banner extends Component {
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
 						onSubmit={props.onSubmit}
+						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 					/>
 				</FollowupTransition>

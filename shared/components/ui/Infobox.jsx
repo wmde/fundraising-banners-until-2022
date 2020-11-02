@@ -20,7 +20,12 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 		endOfDay( campaignParameters.endDate )
 	);
 	const campaignDaySentence = new CampaignDaySentence( campaignDays, Translations );
-	const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence( campaignParameters, campaignProjection, campaignDays, Translations );
+	const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence(
+		campaignParameters.millionImpressionsPerDay,
+		campaignProjection.getProjectedNumberOfDonors(),
+		campaignDays.getDaysSinceCampaignStart(),
+		Translations[ 'visitors-vs-donors-sentence' ]
+	);
 	const additionalProps = propsForText || {};
 
 	return <div className="infobox">

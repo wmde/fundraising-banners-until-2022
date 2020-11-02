@@ -45,12 +45,12 @@ wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
 filename = "./mobile_english/banner_ctrl.js"
-pagename = "B19WMDE_mob_en01_201103_ctrl"
+pagename = "B20WMDE_mob_en01_201103_ctrl"
 tracking = "org-mob_en01-201103-ctrl"
 
 [mobile_english.banners.var]
 filename = "./mobile_english/banner_var.js"
-pagename = "B19WMDE_mob_en01_201103_var"
+pagename = "B20WMDE_mob_en01_201103_var"
 tracking = "org-mob_en01-201103-var"
 
 

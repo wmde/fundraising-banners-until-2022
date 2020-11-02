@@ -62,7 +62,23 @@ const Translations = {
 
 	// for B20_WMDE_en_01_var text test, B20_WMDE_mobile_en_01 remove if not used anymore
 	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million ' +
-		'times a day, but currently only {{totalNumberOfDonors}} people have donated.'
+		'times a day, but currently only {{totalNumberOfDonors}} people have donated.',
+
+	// This is for C20_WMDE_mobile EN 01
+	'address-type-label': 'Do you want to provide your address data?',
+	'address-type-option-full': 'Full address data',
+	'address-type-option-email': 'Only e-mail address',
+	'address-type-option-none': 'No address data',
+	'address-type-notice-full': 'for postal donation receipt and e-mail confirmation',
+	'address-type-notice-email': 'for e-mail confirmation',
+	'address-type-notice-direct-debit': 'A postal address is necessary for donating by direct-debit.',
+	'address-type-error-message': 'Please choose an option.',
+	'submit-label-paypal': 'Proceed with PayPal',
+	'submit-label-credit-card': 'Proceed with credit card',
+	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
+	'submit-label-bank-transfer': 'Proceed with bank transfer'
+	// End of This is for C20_WMDE_mobile EN 01
+
 };
 
 export default Translations;
