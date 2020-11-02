@@ -56,7 +56,9 @@ export default class FullpageBanner extends Component {
 				</span>
 				<span className="separator"> | </span>
 				<span>
-					<a href={`https://spenden.wikimedia.de/use-of-funds?${ trackingParams }`} target="_blank">Wohin geht meine Spende?</a>
+					<a className="application-of-funds-link"
+						href={`https://spenden.wikimedia.de/use-of-funds?${ trackingParams }`}
+						onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
 				</span>
 			</div>
 		</div>;
