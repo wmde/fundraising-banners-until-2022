@@ -30,7 +30,10 @@ export function SelectGroup( props ) {
 
 		<div className="select-group">
 			{ props.selectionItems.map( ( { value, label } ) => (
-				<label className={ 'select-group__option' } key={ value }>
+				<label className={ classNames(
+					'select-group__option',
+					`select-group__option--${ props.fieldname }-${value.replace( ' ', '-' )}`,
+				) } key={ value }>
 					<input
 						type="radio"
 						onClick={ props.onSelected }
