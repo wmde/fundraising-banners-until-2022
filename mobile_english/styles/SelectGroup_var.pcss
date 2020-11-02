@@ -16,16 +16,8 @@
 		color: $color-black-light;
 		background-color: $color-gray-medium-bright;
 		border-radius: $form-element-border-radius;
-
+		padding: 18px 2px;
 		min-height: 54px;
-		padding: 15px 2px;
-		height: 54px;
-		outline: 0;
-		text-align: center;
-		line-height: 1;
-		cursor: pointer;
-
-		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
 	}
 
 	.select-group__input:checked + .select-group__state {
@@ -50,12 +42,29 @@
 		padding: 0;
 	}
 
-	.select-group__option {
+	.select-group__option > label {
 		box-sizing: border-box;
 		display: block;
 		margin: 0 0 10px;
-		font-weight: bold;
-		width: 31%;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+
+		&:focus,
+		&:active {
+			.select-group__state {
+				background-color: $color-secondary-light;
+				color: $color-black;
+				border-color: $color-gray-medium;
+			}
+
+			&::placeholder {
+				color: $color-primary-lighter;
+			}
+		}
 	}
 
 	.select-group__custom-input {
@@ -63,12 +72,13 @@
 		box-sizing: border-box;
 
 		border-radius: $form-element-border-radius;
+
 		min-height: 54px;
 
 		display: block;
 		background-color: $color-gray-medium-bright;
 		padding: 15px 2px;
-		height: 54px;
+		height: 60px;
 		outline: 0;
 		cursor: pointer;
 		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
@@ -99,7 +109,7 @@
 			height: 30px;
 			top: 50%;
 			left: 0;
-			margin-top: -15px;
+			margin-top: -19px;
 			text-align: center;
 			line-height: 30px;
 			font-size: 24px;
@@ -115,6 +125,16 @@
 				color: $color-white;
 			}
 		}
+	}
+
+	.select-group__notice {
+		display: block;
+		font-size: 9pt;
+		line-height: 12pt;
+		margin-right: 0;
+		width: 100%;
+		padding: 0 0 15px 0;
+		color: $color-secondary-dark;
 	}
 
 	.select-group__errormessage {
@@ -171,6 +191,7 @@
 				flex: 0 1 31%;
 			}
 		}
+
 		.select-group__option--amount-other-input {
 			position: relative;
 		}
@@ -180,7 +201,6 @@
 		.select-group__option {
 			width: 100%;
 			flex: 1 1 auto;
-			margin-bottom: 10px;
 			@media ( min-width: $breakpoint_phone_l ) {
 				width: 49%;
 				flex: 0 1 49%;
@@ -192,6 +212,13 @@
 			padding-bottom: 25px;
 		}
 
+		.select-group__notice {
+			display: none;
+			&.select-group__notice--selected {
+				display: block;
+			}
+		}
+
 		/* Sofortüberweisung button */
 		.select-group__option:nth-child( 5 ) {
 			width: 100%;
@@ -199,6 +226,14 @@
 		}
 
 		.sms-box .select-group__option {
+			width: 100%;
+			flex: 1 1 auto;
+		}
+	}
+
+	.select-group-container--address-option {
+		margin-bottom: 30px;
+		.select-group__option {
 			width: 100%;
 			flex: 1 1 auto;
 		}

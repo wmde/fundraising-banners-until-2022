@@ -3,23 +3,23 @@
 export default class VisitorsVsDonorsSentence {
 
 	/**
-	 * @param {CampaignParameters} campaignParameters
-	 * @param {CampaignProjection} campaignProjection
-	 * @param {CampaignDays} campaignDays
-	 * @param {Object} translations
+	 * @param {number} millionImpressionsPerDay
+	 * @param {number} projectedNumberOfDonors
+	 * @param {number} daysSinceCampaignStart
+	 * @param {string} text
 	 */
-	constructor( campaignParameters, campaignProjection, campaignDays, translations ) {
-		this.campaignParameters = campaignParameters;
-		this.campaignProjection = campaignProjection;
-		this.campaignDays = campaignDays;
-		this.translations = translations;
+	constructor( millionImpressionsPerDay, projectedNumberOfDonors, daysSinceCampaignStart, text ) {
+		this.millionImpressionsPerDay = millionImpressionsPerDay;
+		this.projectedNumberOfDonors = projectedNumberOfDonors;
+		this.daysSinceCampaignStart = daysSinceCampaignStart;
+		this.text = text;
 	}
 
 	getSentence() {
-		if ( this.campaignDays.getDaysSinceCampaignStart() >= 2 ) {
-			return this.translations[ 'visitors-vs-donors-sentence' ]
-				.replace( '{{millionImpressionsPerDay}}', this.campaignParameters.millionImpressionsPerDay )
-				.replace( '{{totalNumberOfDonors}}', Math.floor( this.campaignProjection.getProjectedNumberOfDonors() ) );
+		if ( this.daysSinceCampaignStart >= 2 ) {
+			return this.text
+				.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay )
+				.replace( '{{totalNumberOfDonors}}', String( Math.floor( this.projectedNumberOfDonors ) ) );
 		} else {
 			return '';
 		}

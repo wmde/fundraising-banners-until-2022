@@ -2,13 +2,13 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import DonationForm from '../../shared/components/ui/form/DonationForm';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Infobox from '../../shared/components/ui/Infobox';
 import Footer from '../../shared/components/ui/Footer';
 
 export default class FullpageBanner extends Component {
 	render( props ) {
+		const DonationForm = props.donationForm;
 		const campaignProjection = props.campaignProjection;
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
