@@ -32,6 +32,7 @@ export function SelectGroup( props ) {
 			{ props.selectionItems.map( ( { value, label } ) => (
 				<label key={ value } className={ classNames(
 					'select-group__option',
+					`select-group__option--${ props.fieldname }-${value.replace( ' ', '-' )}`,
 					{ 'select-group__disabled': props.disabledOptions.indexOf( value ) > -1 }
 				) }>
 					<input
