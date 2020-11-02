@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
-import Footer from './components/ui/Footer';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
 import TranslationContext from '../shared/components/TranslationContext';
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -138,11 +138,13 @@ export default class Banner extends Component {
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}/>
-								<Footer
-									showFundsModal={() => {}}
-									bannerName={props.bannerName}
-									campaignName={props.campaignName}
-								/>
+								<Footer showFundsModal={ () => {
+									const tab = window.open(
+										`https://spenden.wikimedia.de/use-of-funds?skin=0&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`,
+										'_blank'
+									);
+									tab.focus();
+								} }/>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
