@@ -2,10 +2,7 @@
 import { h } from 'preact';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, daysSinceCampaignStart } = props;
-
-	const campaignDonationSentence = <span>Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
-				but currently only { numberOfDonors } people have donated.</span>;
+	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 
 	return <div className="banner-text">
 
@@ -18,7 +15,7 @@ export default function BannerText( props ) {
 			<span> It's a little awkward, so we'll get straight to the point:</span>
 			<span> { weekdayPrepPhrase } { currentDayName } we humbly ask you to protect Wikipedia's independence.</span>
 			<span> { campaignDaySentence} We depend on donations averaging about €&nbsp;22.81, but 99% of our readers
-				don't give. { daysSinceCampaignStart >= 2 ? campaignDonationSentence : '' }
+				don't give. { visitorsVsDonorsSentence }
 			</span>
 
 			<span className="text__highlight text__headline--bold"> If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come.</span>
