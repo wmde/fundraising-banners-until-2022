@@ -1,0 +1,46 @@
+.banner_modal {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	&.is-visible {
+		display: flex;
+	}
+	&__background {
+		display:none;
+	}
+	&__container {
+		overflow-y: scroll;
+		background-color: #ffffff;
+	}
+
+	&_close {
+		position: absolute;
+		width: 32px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 13px;
+		right: 20px;
+		&__link {
+			background-color: transparent;
+			color: #000000;
+			font-size: 25px;
+			text-decoration: none;
+			border: 0;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				background-color: transparent;
+				text-decoration: none;
+			}
+		}
+		&:hover {
+			opacity: 0.75;
+		}
+	}
+}

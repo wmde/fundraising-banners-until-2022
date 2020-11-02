@@ -9,6 +9,8 @@ import MiniBanner from './components/MiniBanner';
 import TranslationContext from '../shared/components/TranslationContext';
 import FollowupTransition from '../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
+import FundsModal from "../shared/components/ui/use_of_funds/FundsModal";
+import FundsDistributionAccordion from "../shared/components/ui/use_of_funds/FundsDistributionAccordion";
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -34,7 +36,8 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			isFullPageVisible: false
+			isFullPageVisible: false,
+			isFundsModalVisible: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -87,6 +90,14 @@ export default class Banner extends Component {
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
+	};
+
+	toggleFundsModal = e => {
+		e.preventDefault();
+		if ( !this.state.isFundsModalVisible ) {
+			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		}
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	getMiniBannerHeight() {
@@ -172,9 +183,16 @@ export default class Banner extends Component {
 						onSubmit={props.onSubmit}
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
+						toggleFundsModal={ this.toggleFundsModal }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>
+			<FundsModal
+				toggleFundsModal={ this.toggleFundsModal }
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale='de'>
+				<FundsDistributionAccordion/>
+			</FundsModal>
 		</div>;
 	}
 }

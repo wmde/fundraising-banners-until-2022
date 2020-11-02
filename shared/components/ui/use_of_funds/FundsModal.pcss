@@ -1,0 +1,73 @@
+$modal_padding: 32px;
+
+.banner_modal {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	&.is-visible {
+		display: flex;
+	}
+	&__background {
+		background-color: #000000;
+		opacity: 0.6;
+		width: 100vw;
+		height: 100vh;
+	}
+	&__container {
+		background-color: #ffffff;
+		height: 80vh;
+		position: absolute;
+		min-width: 800px; /* for IE */
+		min-width: max( 95vw, 800px );
+		top: 50%;
+		left: 50%;
+		/* stylelint-disable-next-line function-parentheses-space-inside */
+		transform: translate(-50%, -50%);
+		/* IE11 does not support spaces in CSS function calls, do not add spaces! */
+		overflow-y: scroll;
+		@media ( min-width: $breakpoint_m ) {
+			width: 1024px;
+			max-width: 1024px;
+			min-width: 0;
+		}
+		@media ( min-width: $breakpoint_l ) {
+			width: 1200px;
+			max-width: 1200px;
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			width: 1500px;
+			max-width: 1500px;
+		}
+	}
+
+	&_close {
+		position: absolute;
+		width: 32px;
+		margin: 0.25em 0.25em 0.25em 0;
+		top: 13px;
+		right: 20px;
+		&__link {
+			background-color: transparent;
+			color: #000000;
+			font-size: 25px;
+			text-decoration: none;
+			border: 0;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				background-color: transparent;
+				text-decoration: none;
+			}
+		}
+		&:hover {
+			opacity: 0.75;
+		}
+	}
+}
