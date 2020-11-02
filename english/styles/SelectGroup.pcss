@@ -154,6 +154,7 @@ $select-group-line-height: 30px;
 			border: 1px solid $color-gray-light;
 			box-sizing: border-box;
 			width: 100%;
+			min-width: 110px;
 			margin: 2px 0;
 			line-height: 25px;
 			height: 26px;
@@ -241,6 +242,13 @@ $select-group-line-height: 30px;
 			@media ( min-width: $breakpoint_l ) {
 				width: 50%;
 			}
+		}
+	}
+
+	.select-group__option--select-interval-6 {
+		display: none;
+		@media ( min-width: $breakpoint_l ) {
+			display: flex;
 		}
 	}
 }
