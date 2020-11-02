@@ -9,7 +9,7 @@ import { getTrackingIds } from '../shared/tracking_ids';
 import Banner from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
-import BannerText from './components/BannerText_var';
+import BannerText from './components/BannerText';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';

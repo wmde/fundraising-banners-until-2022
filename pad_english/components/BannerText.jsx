@@ -2,19 +2,23 @@
 import { h } from 'preact';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters } = props;
+	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, daysSinceCampaignStart } = props;
+
+	const campaignDonationSentence = <span>Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
+				but currently only { numberOfDonors } people have donated.</span>;
+
 	return <div className="banner-text">
 
 		<p className="text__headline text__headline--bold">
-			To all our readers in Germany.
+			{/* eslint-disable-next-line max-len */}
+			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" width="16" height="16" /> To all our readers in Germany.
 		</p>
 
 		<p className="text__paragraph text__paragraph--bold">
 			<span> It's a little awkward, so we'll get straight to the point:</span>
 			<span> { weekdayPrepPhrase } { currentDayName } we humbly ask you to protect Wikipedia's independence.</span>
-			<span> { campaignDaySentence} We depend on donations averaging about €&nbsp;23.83, but 99% of our readers
-				don't give. Our fundraising appeal is displayed over { campaignParameters.millionImpressionsPerDay } million times a day,
-				but currently only { numberOfDonors } people have donated.
+			<span> { campaignDaySentence} We depend on donations averaging about €&nbsp;22.81, but 99% of our readers
+				don't give. { daysSinceCampaignStart >= 2 ? campaignDonationSentence : '' }
 			</span>
 
 			<span className="text__highlight text__headline--bold"> If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come.</span>
