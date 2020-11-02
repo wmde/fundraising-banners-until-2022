@@ -33,6 +33,7 @@ const Translations = {
 	'day-name-christmas-day': '1. Weihnachtsfeiertag',
 	'day-name-2nd-christmas-day': '2. Weihnachtsfeiertag',
 	'amount-missing': 'Es fehlen',
+	'amount-total': 'Spendenziel:',
 	'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
 	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
 	'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
