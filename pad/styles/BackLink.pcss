@@ -1,0 +1,28 @@
+$leftArrow: url( 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Chevron-left.svg' );
+
+.wmde-banner {
+	.back {
+		position: relative;
+		height: 20px;
+		display: block;
+		left: 0;
+		top: 0;
+		width: 20px;
+		margin-bottom: 10px;
+
+		&__arrow {
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -10px;
+			background: $leftArrow;
+			width: 12px;
+			height: 20px;
+			display: block;
+
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+	}
+}

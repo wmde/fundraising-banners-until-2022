@@ -8,7 +8,7 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 0.5em 1.5em 0 0.25em;
-		width: 16em;
+		width: $form-width;
 		&__form {
 			margin: 0.8em;
 		}
@@ -19,6 +19,30 @@
 		}
 		&-field-group {
 			display: block;
+		}
+
+		&-step-1 {
+			display: block;
+		}
+
+		&-step-2 {
+			position: relative;
+			display: none;
+			text-align: center;
+
+			&-notice {
+				font-size: 12px;
+				font-weight: normal;
+			}
+		}
+
+		&.is-step-2 {
+			.form-step-1 {
+				display: none;
+			}
+			.form-step-2 {
+				display: block;
+			}
 		}
 	}
 
