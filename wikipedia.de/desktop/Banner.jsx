@@ -6,12 +6,18 @@ import Infobox from '../../shared/components/ui/Infobox';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
 import DonationForm from '../../shared/components/ui/form/DonationForm';
 import Footer from '../../shared/components/ui/Footer';
-import FundsModal from '../../shared/components/ui/FundsModal';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
+
+export const BannerType = Object.freeze( {
+	CTRL: Symbol( 'ctrl ' ),
+	VAR: Symbol( 'var' )
+} );
 
 export default class Banner extends Component {
 
@@ -87,8 +93,12 @@ export default class Banner extends Component {
 			className={ classNames(
 				'wmde-banner',
 				'banner-position',
-				state.displayState === CLOSED ? 'wmde-banner--hidden' : '',
-				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
+				{
+					'wmde-banner--hidden': state.displayState === CLOSED,
+					'wmde-banner--visible': state.displayState === VISIBLE,
+					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
+					'wmde-banner--var': props.bannerType === BannerType.VAR
+				}
 			) }
 			ref={ this.ref }>
 			<TranslationContext.Provider value={ props.translations }>
@@ -130,7 +140,9 @@ export default class Banner extends Component {
 				fundsModalData={ props.fundsModalData }
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
+				locale='de'>
+				<FundsDistributionInfo />
+			</FundsModal>
 		</div>;
 	}
 }
