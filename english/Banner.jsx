@@ -7,7 +7,8 @@ import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import TranslationContext from '../shared/components/TranslationContext';
 import { CampaignProjection } from '../shared/campaign_projection';
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -58,6 +59,7 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			showLanguageWarning: false,
+			isFundsModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -171,13 +173,7 @@ export default class Banner extends Component {
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer showFundsModal={ () => {
-							const tab = window.open(
-								`https://spenden.wikimedia.de/use-of-funds?skin=0&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`,
-								'_blank'
-							);
-							tab.focus();
-						} }/>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 						<LanguageWarningBox
 							show={state.showLanguageWarning}
 						/>
@@ -188,7 +184,9 @@ export default class Banner extends Component {
 				fundsModalData={props.fundsModalData}
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
+				locale='en'>
+				<FundsDistributionInfo />
+			</FundsModal>
 		</div>;
 	}
 
