@@ -29,7 +29,7 @@ export default class FundsModal extends Component {
 				<div className="banner_modal__content">
 					<div className="banner_modal__section">
 						<div className="banner_modal__section_intro">
-							<h2>Wofür wird Ihre Spende verwendet?</h2>
+							<h2>Wofür wird Ihre Spende verwendet*?</h2>
 							<div>
 								Für eine organisatorisch und technisch stets verlässliche Wikipedia, heute und in
 								Zukunft. Für freien Zugang zu umfassendem, vertrauenswürdigem Wissen immer und überall.
@@ -143,6 +143,7 @@ export default class FundsModal extends Component {
 					<div className="banner_model__section banner_modal__section--call_to_action">
 						<button className="banner_modal__button" onClick={props.toggleFundsModal}>Jetzt spenden</button>
 					</div>
+					<div style="text-align: left; font-size: small; padding-bottom: 16px;">*) vorläufig</div>
 				</div>
 			</div>
 		</div>;
