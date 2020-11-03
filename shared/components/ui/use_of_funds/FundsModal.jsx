@@ -89,7 +89,7 @@ export default class FundsModal extends Component {
 								<div>
 									<p>
 										Unser Spendenziel von 8,7 Millionen € ist ein wichtiger Teil unserer für das Jahr
-										2020 geplanten Gesamteinnahmen. Das ist zweifelsohne viel Geld.
+										2021 geplanten Gesamteinnahmen. Das ist zweifelsohne viel Geld.
 									</p>
 
 									<p>
