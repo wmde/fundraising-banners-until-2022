@@ -85,10 +85,10 @@ export default class FundsModal extends Component {
 						</div>
 						<div className="banner_modal__column">
 							<div className="banner_modal__comparison">
-								<h2>Warum wir nur 9.000.000 € brauchen</h2>
+								<h2>Warum wir nur 8.700.000 € brauchen</h2>
 								<div>
 									<p>
-										Unser Spendenziel von 9 Millionen € ist ein wichtiger Teil unserer für das Jahr
+										Unser Spendenziel von 8,7 Millionen € ist ein wichtiger Teil unserer für das Jahr
 										2020 geplanten Gesamteinnahmen. Das ist zweifelsohne viel Geld.
 									</p>
 
