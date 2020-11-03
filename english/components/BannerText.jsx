@@ -41,7 +41,7 @@ export default function BannerText( props ) {
 					<strong> To all our readers in Germany,</strong>
 				</p>
 				<p>
-					It might be awkward, but please don't scroll past this. This { currentDayName }, for the 1st time
+					It might be awkward, but please don't scroll past this. { campaignDaySentence } This { currentDayName }, for the 1st time
 					recently, we humbly ask you to defend Wikipedia's independence. 99% of our readers don't give;
 					they simply look the other way. If you are an exceptional reader who has already donated,
 					we sincerely thank you. We depend on donations averaging about € 22.81.{ ' ' }
