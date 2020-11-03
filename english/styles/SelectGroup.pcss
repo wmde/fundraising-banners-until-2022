@@ -1,9 +1,10 @@
+$select-group-line-height: 30px;
+
 .wmde-banner {
 
 	.select-group {
 		border: 0;
 		margin: 0 auto;
-		padding: 0.4em 0.5em 0.5em 0.5em;
 		display: flex;
 		flex-wrap: nowrap;
 		flex-direction: row;
@@ -12,9 +13,11 @@
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
+		line-height: $select-group-line-height;
 
 		@media ( min-width: $breakpoint_l ) {
 			flex-wrap: wrap;
+			line-height: 25px;
 		}
 
 		&-container {
@@ -22,31 +25,21 @@
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
-			margin: 0.3em 1em;
+			padding: 0 10px;
+
 			@media ( min-width: $breakpoint_l ) {
+				margin-bottom: 0;
+				margin-top: 0;
+				line-height: inherit;
 				border: 0;
-				max-width: 20em;
-				margin: 0;
-			}
-		}
-
-		&:first-child {
-			padding-left: 0;
-		}
-
-		&:last-child {
-			padding-right: 0;
-		}
-
-		@media ( min-width: $breakpoint_l ) {
-			&:first-child,
-			&:last-child {
-				padding-left: 0.8em;
+				padding: 0;
 			}
 		}
 
 		&__errormessage {
 			display: none;
+			height: 16px;
+			line-height: 16px;
 			color: $color-black;
 			font-weight: bold;
 			text-align: left;
@@ -74,38 +67,62 @@
 			.select-group__errormessage {
 				display: block;
 				color: $color-error;
-				margin-left: 6px;
-				@media ( min-width: $breakpoint_l ) {
-					margin-left: 0.5em;
-				}
 			}
 		}
 
 		&__option {
 			flex: 1 1 auto;
-			padding: 0 0.2em 0.2em 0;
 			margin: 0;
-			height: 25px;
+			padding: 3px 10px 0 25px;
 			box-sizing: border-box;
 			display: flex;
 			position: relative;
+			cursor: pointer;
 
-			&-amount-other-input {
-				min-width: 100px;
+			@media ( min-width: $breakpoint_l ) {
+				height: 25px;
+			}
+
+			&--amount-other-input {
+				height: 35px;
+				@media ( min-width: $breakpoint_l ) {
+					height: auto;
+				}
 			}
 		}
 
-		&__state {
+		&__state,
+		&__custom-input {
 			box-sizing: border-box;
 			display: inline-block;
 			color: $color-black;
 			border: 0 none;
-			cursor: pointer;
 			text-align: center;
 			font-size: 0.95em;
 			white-space: nowrap;
-			padding: 0 5px;
-			line-height: 25px;
+
+			&:before {
+				box-sizing: border-box;
+				top: calc( $select-group-line-height / 2 );
+				left: 0;
+				content: '';
+				position: absolute;
+				height: 16px;
+				width: 16px;
+				margin-top: -6px;
+				background: $color-white;
+				border-radius: 50%;
+				border: 1px solid #bbbbbb;
+
+				@media ( min-width: $breakpoint_l ) {
+					top: 50%;
+				}
+			}
+		}
+
+		&__custom-input:before {
+			top: 45%;
+			left: -25px;
 		}
 
 		&__custom-input + .select-group__state {
@@ -117,12 +134,18 @@
 		}
 
 		&__input {
-			margin-top: 3px;
+			display: none;
 
 			&:checked + .select-group__state {
 				border: 0 none;
 				outline: 0 none;
 				border-radius: 0;
+			}
+
+			&:checked + .select-group__state:before,
+			&:checked + .select-group__custom-input:before {
+				border: 6px solid $color-secondary;
+				box-shadow: none;
 			}
 		}
 
@@ -130,16 +153,21 @@
 			position: relative;
 			border: 1px solid $color-gray-light;
 			box-sizing: border-box;
-			padding-left: 10px;
 			width: 100%;
+			min-width: 110px;
+			margin: 2px 0;
+			line-height: 25px;
 			height: 26px;
-			margin-top: -2px;
+
+			@media ( min-width: $breakpoint_l ) {
+				margin: -2px 0 0;
+			}
 
 			&--input {
 				display: inline-block;
 				color: $color-black;
 				background-color: transparent;
-				padding: 0 0.4em;
+				padding: 0 1em;
 				width: 100%;
 				height: 25px;
 				margin: 0;
@@ -167,7 +195,7 @@
 				line-height: 21px;
 				text-align: center;
 				top: 50%;
-				left: 0;
+				right: 0;
 				margin-top: -10px;
 			}
 
@@ -186,21 +214,24 @@
 
 	.select-group-container--select-amount {
 		.select-group__option {
-			width: 50%;
 			@media ( min-width: $breakpoint_l ) {
 				width: 25%;
 			}
 		}
 
 		.select-group__option--amount-other-input {
-			width: 50%;
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
+		}
+		@media ( min-width: $breakpoint_l ) {
+			margin-top: 0;
 		}
 	}
 
 	.select-group-container--select-interval {
 		.select-group__option {
-			width: 100%;
-			@media ( min-width: $breakpoint_xs ) {
+			@media ( min-width: $breakpoint_l ) {
 				width: 50%;
 			}
 		}
@@ -208,10 +239,16 @@
 
 	.select-group-container--select-payment-method {
 		.select-group__option {
-			width: 100%;
-			@media ( min-width: $breakpoint_s ) {
+			@media ( min-width: $breakpoint_l ) {
 				width: 50%;
 			}
+		}
+	}
+
+	.select-group__option--select-interval-6 {
+		display: none;
+		@media ( min-width: $breakpoint_l ) {
+			display: flex;
 		}
 	}
 }

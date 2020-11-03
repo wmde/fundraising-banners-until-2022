@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
 import DonationForm from '../shared/components/ui/form/DonationForm';
-import Footer from '../shared/components/ui/Footer';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/FundsModal';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import TranslationContext from '../shared/components/TranslationContext';
 import { CampaignProjection } from '../shared/campaign_projection';
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -16,6 +17,11 @@ import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
+
+export const BannerType = Object.freeze( {
+	CTRL: Symbol( 'ctrl ' ),
+	VAR: Symbol( 'var' )
+} );
 
 export default class Banner extends Component {
 
@@ -53,6 +59,7 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			showLanguageWarning: false,
+			isFundsModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -118,11 +125,13 @@ export default class Banner extends Component {
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
 		return <div
-			className={classNames(
-				'wmde-banner',
-				state.displayState === CLOSED ? 'wmde-banner--hidden' : '',
-				state.displayState === VISIBLE ? 'wmde-banner--visible' : ''
-			)}
+			className={ classNames( {
+				'wmde-banner': true,
+				'wmde-banner--hidden': state.displayState === CLOSED,
+				'wmde-banner--visible': state.displayState === VISIBLE,
+				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
+				'wmde-banner--var': props.bannerType === BannerType.VAR
+			} ) }
 			ref={this.ref}>
 			<BannerTransition
 				fixed={ true }
@@ -135,18 +144,20 @@ export default class Banner extends Component {
 					<div className="banner__wrapper">
 						<div className="banner__content">
 							<div className="banner__infobox">
-								<Infobox
-									formatters={props.formatters}
-									campaignParameters={props.campaignParameters}
-									campaignProjection={props.campaignProjection}
-									bannerText={props.bannerText}/>
-								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
+								<div className="infobox-bubble">
+									<Infobox
+										formatters={props.formatters}
+										campaignParameters={props.campaignParameters}
+										campaignProjection={props.campaignProjection}
+										bannerText={props.bannerText}/>
+									<ProgressBar
+										formatters={props.formatters}
+										daysLeft={campaignProjection.getRemainingDays()}
+										donationAmount={campaignProjection.getProjectedDonationSum()}
+										goalDonationSum={campaignProjection.goalDonationSum}
+										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+										setStartAnimation={this.registerStartProgressbar}/>
+								</div>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
@@ -173,7 +184,9 @@ export default class Banner extends Component {
 				fundsModalData={props.fundsModalData}
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
-				locale='de'/>
+				locale='en'>
+				<FundsDistributionInfo />
+			</FundsModal>
 		</div>;
 	}
 

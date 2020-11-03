@@ -16,7 +16,7 @@ export default class VisitorsVsDonorsSentence {
 	}
 
 	getSentence() {
-		if ( this.daysSinceCampaignStart >= 2 ) {
+		if ( this.daysSinceCampaignStart >= 1 ) {
 			return this.text
 				.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay )
 				.replace( '{{totalNumberOfDonors}}', String( Math.floor( this.projectedNumberOfDonors ) ) );
