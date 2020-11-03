@@ -48,6 +48,10 @@ $select-group-line-height: 30px;
 			font-size: 0.8em;
 		}
 
+		&__disabled {
+			opacity: 0.5;
+		}
+
 		&-container--with-error {
 			.select-group__erroricon {
 				position: relative;
@@ -89,6 +93,13 @@ $select-group-line-height: 30px;
 					height: auto;
 				}
 			}
+		}
+
+		&__notice {
+			padding: 0 10px 0 25px;
+			line-height: 1.2;
+			display: block;
+			font-weight: normal;
 		}
 
 		&__state,

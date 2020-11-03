@@ -29,23 +29,27 @@ export function SelectGroup( props ) {
 		{ errorPosition === ErrorPosition.TOP ? error : null }
 
 		<div className="select-group">
-			{ props.selectionItems.map( ( { value, label } ) => (
-				<label key={ value } className={ classNames(
-					'select-group__option',
-					`select-group__option--${ props.fieldname }-${value.replace( ' ', '-' )}`,
-					{ 'select-group__disabled': props.disabledOptions.indexOf( value ) > -1 }
-				) }>
-					<input
-						type="radio"
-						onClick={ props.onSelected }
-						checked={ value === props.currentValue }
-						name={ props.fieldname }
-						value={ value }
-						disabled={ props.disabledOptions.indexOf( value ) > -1 }
-						className="select-group__input"/>
-					<span className="select-group__state">{ label || value }</span>
-				</label> ) )
-			}
+			{ props.selectionItems.map( ( { value, label, notice } ) => (
+				<div key={ value } className={ 'select-group__option' }>
+					<label>
+						<input
+							type="radio"
+							onClick={ props.onSelected }
+							checked={ value === props.currentValue }
+							name={ props.fieldname }
+							value={ value }
+							disabled={ props.disabledOptions.indexOf( value ) > -1 }
+							className="select-group__input"/>
+						<span className="select-group__state">{ label || value }</span>
+						{ notice ? <span className={ classNames(
+							'select-group__notice',
+							{
+								'select-group__notice--selected': value === props.currentValue
+							}
+						) }>{ notice }</span> : null }
+					</label>
+				</div>
+			) ) }
 			{ props.children }
 		</div>
 

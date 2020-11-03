@@ -58,7 +58,7 @@ const Translations = {
 	'give-address-statement-positive': 'Ja',
 	'give-address-statement-negative': 'Nein',
 
-	// This is for C20_WMDE_Mobile_Test_03
+	// This is for C20_WMDE_Mobile_Test_03 and C20_WMDE_Test_09
 	'address-type-label': 'Möchten Sie Ihre Kontaktdaten angeben?',
 	'address-type-option-full': 'Vollständige Kontaktdaten',
 	'address-type-option-email': 'Nur E-Mail-Adresse',
@@ -71,7 +71,7 @@ const Translations = {
 	'submit-label-credit-card': 'Weiter zur Dateneingabe',
 	'submit-label-sofort': 'Weiter zu Sofort',
 	'submit-label-bank-transfer': 'Weiter zur Bankverbindung',
-	// End of C20_WMDE_Mobile_Test_03
+	// End of C20_WMDE_Mobile_Test_03 and C20_WMDE_Test_09
 
 	// This is for the B20 02 desktop var test
 	'submit-label-short': 'Weiter',
