@@ -171,7 +171,13 @@ export default class Banner extends Component {
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<Footer showFundsModal={ () => {
+							const tab = window.open(
+								`https://spenden.wikimedia.de/use-of-funds?skin=0&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`,
+								'_blank'
+							);
+							tab.focus();
+						} }/>
 						<LanguageWarningBox
 							show={state.showLanguageWarning}
 						/>
