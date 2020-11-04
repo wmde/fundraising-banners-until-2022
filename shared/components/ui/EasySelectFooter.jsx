@@ -10,7 +10,7 @@ export default function EasySelectFooter( { showFundsModal } ) {
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__bank">
-				<label className="footer__bank-item account">Spendenkonto:
+				<label className="footer__bank-item account">{ Translations[ 'donation-account' ] }:
 					<SelectionInput value={ 'Wikimedia' }/>
 				</label>
 				<label className="footer__bank-item bic">BIC:

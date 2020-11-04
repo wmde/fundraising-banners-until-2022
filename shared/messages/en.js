@@ -52,7 +52,7 @@ const Translations = {
 	'payment-paypal': 'PayPal',
 	'payment-sofort': 'Sofortüberweisung',
 
-	'donation-account': 'donation account',
+	'donation-account': 'Donation account',
 
 	// the following 2 lines are only for the ipad var test, remove if not in use anymore
 	'give-address-statement-positive': 'Yes',

@@ -9,7 +9,7 @@ export default function Footer( { showFundsModal } ) {
 	return <div className="banner__footer">
 		<div className="footer">
 			<div className="footer__item">
-				<span>Spendenkonto Wikimedia</span>
+				<span>{ Translations[ 'donation-account' ] } Wikimedia</span>
 			</div>
 			<div className="footer__item">
 				<span>BIC</span>
