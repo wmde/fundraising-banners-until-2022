@@ -10,6 +10,8 @@ import TranslationContext from '../shared/components/TranslationContext';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
 import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -50,6 +52,7 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			showLanguageWarning: false,
+			isFundsModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -100,6 +103,13 @@ export default class Banner extends Component {
 		this.startProgressbar = startPb;
 	};
 
+	toggleFundsModal = () => {
+		if ( !this.state.isFundsModalVisible ) {
+			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		}
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
+	};
+
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
@@ -138,13 +148,7 @@ export default class Banner extends Component {
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}/>
-								<Footer showFundsModal={ () => {
-									const tab = window.open(
-										`https://spenden.wikimedia.de/use-of-funds?skin=0&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`,
-										'_blank'
-									);
-									tab.focus();
-								} }/>
+								<Footer showFundsModal={ this.toggleFundsModal }/>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
@@ -166,6 +170,13 @@ export default class Banner extends Component {
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
+			<FundsModal
+				fundsModalData={ props.fundsModalData }
+				toggleFundsModal={ this.toggleFundsModal }
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale='de'>
+				<FundsDistributionInfo/>
+			</FundsModal>
 		</div>;
 	}
 

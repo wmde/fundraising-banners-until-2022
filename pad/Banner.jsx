@@ -9,6 +9,8 @@ import Infobox from '../shared/components/ui/Infobox';
 import TranslationContext from '../shared/components/TranslationContext';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
+import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -48,6 +50,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			isFundsModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false
@@ -94,6 +97,13 @@ export default class Banner extends Component {
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
+	};
+
+	toggleFundsModal = () => {
+		if ( !this.state.isFundsModalVisible ) {
+			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		}
+		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	onFormInteraction = () => {
@@ -149,16 +159,17 @@ export default class Banner extends Component {
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer showFundsModal={ () => {
-							const tab = window.open(
-								`https://spenden.wikimedia.de/use-of-funds?skin=0&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`,
-								'_blank'
-							);
-							tab.focus();
-						} }/>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
+			<FundsModal
+				fundsModalData={ props.fundsModalData }
+				toggleFundsModal={ this.toggleFundsModal }
+				isFundsModalVisible={ this.state.isFundsModalVisible }
+				locale='de'>
+				<FundsDistributionInfo/>
+			</FundsModal>
 		</div>;
 	}
 
