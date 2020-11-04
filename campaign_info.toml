@@ -4,88 +4,88 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "09-ba-201103"
+campaign_tracking = "09-ba-201104"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B20WMDE_09_201103_ctrl"
-tracking = "org-09-201103-ctrl"
+pagename = "B20WMDE_09_201104_ctrl"
+tracking = "org-09-201104-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B20WMDE_09_201103_var"
-tracking = "org-09-201103-var"
+pagename = "B20WMDE_09_201104_var"
+tracking = "org-09-201104-var"
 
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob04-ba-201103"
+campaign_tracking = "mob04-ba-201104"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B20WMDE_mob04_201103_ctrl"
-tracking = "org-mob04-201103-ctrl"
+pagename = "B20WMDE_mob04_201104_ctrl"
+tracking = "org-mob04-201104-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B20WMDE_mob04_201103_var"
-tracking = "org-mob04-201103-var"
+pagename = "B20WMDE_mob04_201104_var"
+tracking = "org-mob04-201104-var"
 
 
 # Mobile English Campaign
 [mobile_english]
-campaign_tracking = "mob_en01-ba-201103"
+campaign_tracking = "mob_en01-ba-201104"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
 filename = "./mobile_english/banner_ctrl.js"
-pagename = "B20WMDE_mob_en01_201103_ctrl"
-tracking = "org-mob_en01-201103-ctrl"
+pagename = "B20WMDE_mob_en01_201104_ctrl"
+tracking = "org-mob_en01-201104-ctrl"
 
 [mobile_english.banners.var]
 filename = "./mobile_english/banner_var.js"
-pagename = "B20WMDE_mob_en01_201103_var"
-tracking = "org-mob_en01-201103-var"
+pagename = "B20WMDE_mob_en01_201104_var"
+tracking = "org-mob_en01-201104-var"
 
 
 # iPad campaign
 [pad]
-campaign_tracking = "pad01-ba-201103"
+campaign_tracking = "pad01-ba-201104"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
-pagename = "B20WMDE_pad_01_201103_ctrl"
-tracking = "org-pad01-201103-ctrl"
+pagename = "B20WMDE_pad_01_201104_ctrl"
+tracking = "org-pad01-201104-ctrl"
 
 [pad.banners.pad]
 filename = "./pad/banner_var.js"
-pagename = "B20WMDE_pad_01_201103_var"
-tracking = "org-pad01-201103-var"
+pagename = "B20WMDE_pad_01_201104_var"
+tracking = "org-pad01-201104-var"
 
 
 # iPad English campaign
 [pad_en]
-campaign_tracking = "en-ipad01-201103"
+campaign_tracking = "en-ipad01-201104"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad_en.banners.ctrl]
 filename = "./pad_english/banner_ctrl.js"
 pagename = "B20WMDE_ipad_en_01_ctrl"
-tracking = "org-en-ipad-201103-ctrl"
+tracking = "org-en-ipad-201104-ctrl"
 
 [pad_en.banners.var]
 filename = "./pad_english/banner_var.js"
 pagename = "B20WMDE_ipad_en_01_var"
-tracking = "org-en-ipad-201103-var"
+tracking = "org-en-ipad-201104-var"
 
 
 # Wikipedia.de Campaign
@@ -125,19 +125,19 @@ tracking = "wpde-mob01-201103-var"
 
 # English Campaign
 [english]
-campaign_tracking = "en01-ba-201103"
+campaign_tracking = "en01-ba-201104"
 preview_link = "/wiki/Wikipedia:Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B20WMDE_en01_201103_ctrl"
-tracking = "org-en01-201103-ctrl"
+pagename = "B20WMDE_en01_201104_ctrl"
+tracking = "org-en01-201104-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B20WMDE_en01_201103_var"
-tracking = "org-en01-201103-var"
+pagename = "B20WMDE_en01_201104_var"
+tracking = "org-en01-201104-var"
 
 
 # Thank You Campaign
