@@ -79,12 +79,12 @@ wrapper_template = "wikipedia_org"
 
 [pad_en.banners.ctrl]
 filename = "./pad_english/banner_ctrl.js"
-pagename = "B20WMDE_ipad_en_01_ctrl"
+pagename = "B20WMDE_ipad_en_01_201104_ctrl"
 tracking = "org-en-ipad-201104-ctrl"
 
 [pad_en.banners.var]
 filename = "./pad_english/banner_var.js"
-pagename = "B20WMDE_ipad_en_01_var"
+pagename = "B20WMDE_ipad_en_01_201104_var"
 tracking = "org-en-ipad-201104-var"
 
 

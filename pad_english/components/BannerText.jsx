@@ -8,7 +8,7 @@ export default function BannerText( props ) {
 
 		<p className="text__headline text__headline--bold">
 			{/* eslint-disable-next-line max-len */}
-			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" width="16" height="16" /> To all our readers in Germany.
+			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" /> To all our readers in Germany.
 		</p>
 
 		<p className="text__paragraph text__paragraph--bold">

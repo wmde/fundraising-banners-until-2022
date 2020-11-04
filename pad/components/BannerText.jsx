@@ -7,7 +7,7 @@ export default function BannerText( props ) {
 
 	return <div className="banner-text">
 		<p className="text__headline text__headline--bold">
-			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" width="16" height="16" />
+			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
 			<span className="text__headline--italic"> Liebe Leserinnen und Leser, </span>
 			<span>verzeihen Sie die Störung. <span> { capitalizeFirstLetter( weekdayPrepPhrase ) } { currentDayName } sind Sie in Deutschland gefragt:</span></span>
 		</p>
