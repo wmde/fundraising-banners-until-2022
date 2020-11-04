@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import Infobox from '../../../shared/components/ui/Infobox';
-import ProgressBar from '../../../shared/components/ui/ProgressBar';
+import ProgressBar, { AmountToShowOnRight } from '../../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
 
 export default function MiniBanner( props ) {
@@ -31,6 +31,7 @@ export default function MiniBanner( props ) {
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 							setStartAnimation={props.setStartAnimation}
 							animate={true}
+							amountToShowOnRight={AmountToShowOnRight.MISSING}
 						/> )
 					}}
 				/>
