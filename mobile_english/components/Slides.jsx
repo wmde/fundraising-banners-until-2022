@@ -11,11 +11,9 @@ export default function Slides( { formattedGoalDonationSumNumeric, currentDayNam
 			<p>To all our readers in Germany. We will get straight to the point:
 				This { currentDayName } we ask you to protect Wikipedia's independence.</p>
 		</div>
-		{ visitorsVsDonorsSentence.length > 0 &&
-			<div className="carousel-cell">
-				<p>{ visitorsVsDonorsSentence }</p>
-			</div>
-		}
+		<div className="carousel-cell">
+			<p>{ visitorsVsDonorsSentence } The price of a coffee is all we need.</p>
+		</div>
 		<div className="carousel-cell">
 			<p>If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come.</p>
 		</div>
