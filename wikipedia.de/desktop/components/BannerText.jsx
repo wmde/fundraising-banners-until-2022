@@ -4,14 +4,15 @@ import { capitalizeFirstLetter } from '../../../shared/capitalize_first_letter';
 import TextHighlight from '../../../shared/components/ui/TextHighlight';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, numberOfDonors, campaignDaySentence, campaignParameters, visitorsVsDonorsSentence } = props;
+	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 
 	return <div className="banner-text">
 		<div className="banner-text-inner">
 
 			<div className="banner-text-ctrl">
 				<p className="text__headline">
-					<span className="text__headline--bold">Liebe Leserinnen und Leser,</span>
+					<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
+					<span className="text__headline--bold"> Liebe Leserinnen und Leser,</span>
 					<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
 					{capitalizeFirstLetter( weekdayPrepPhrase )} {currentDayName} sind Sie in Deutschland
 					gefragt<span className="optional-text text-l">, um Wikipedias Unabhängigkeit zu sichern</span>:
@@ -32,8 +33,7 @@ export default function BannerText( props ) {
 
 					<span className='ab-test-text'>Menschen spenden aus einem einfachen Grund – weil Wikipedia nützlich ist. </span>
 
-					<span>Schon der Preis einer Tasse Kaffee würde genügen. Über { campaignParameters.millionImpressionsPerDay }{' '}
-						Millionen Mal wird unser Spendenaufruf täglich angezeigt, aber nur {numberOfDonors} Menschen haben bisher gespendet. </span>
+					<span>Schon der Preis einer Tasse Kaffee würde genügen. { visitorsVsDonorsSentence } </span>
 
 					<span className="optional-text text-l">
 						Wenn Wikipedia eine kommerzielle Seite sein würde, wäre das ein riesiger Verlust für die Welt. </span>
@@ -55,10 +55,13 @@ export default function BannerText( props ) {
 				</p>
 			</div>
 			<div className="banner-text-var">
-				<p><strong>An alle unsere Leserinnen und Leser in Deutschland.</strong></p>
 				<p>
-					Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken Sie jetzt nicht weg! Zum ersten
-					Mal seit langem möchten wir Sie an diesem { capitalizeFirstLetter( weekdayPrepPhrase ) } bescheiden
+					<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
+					<strong> An alle unsere Leserinnen und Leser in Deutschland.</strong>
+				</p>
+				<p>
+					Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken Sie jetzt nicht weg! {campaignDaySentence} Zum ersten
+					Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden
 					darum bitten, die Unabhängigkeit von Wikipedia zu verteidigen. Insgesamt spenden 99% unserer Leserinnen und Leser
 					nichts – sie übergehen diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die bereits
 					gespendet haben, danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich
