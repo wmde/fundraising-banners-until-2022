@@ -4,7 +4,7 @@ import TextHighlight from '../../../shared/components/ui/TextHighlight';
 import { capitalizeFirstLetter } from '../../../shared/capitalize_first_letter';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, campaignDaySentence } = props;
+	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span>Liebe Leserinnen und Leser, bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir
@@ -19,8 +19,7 @@ export default function BannerText( props ) {
 				wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.
 			</TextHighlight>
 
-			Millionen Menschen nutzen Wikipedia, aber 99 % der
-			Leserinnen und Leser spenden nicht. Wenn Wikipedia eine kommerzielle Seite sein würde,
+			{' '}{ visitorsVsDonorsSentence } Wenn Wikipedia eine kommerzielle Seite sein würde,
 			wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit Werbung eine Menge Geld verdienen.
 			Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen.
 			Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.
