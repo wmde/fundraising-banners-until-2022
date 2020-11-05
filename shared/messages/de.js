@@ -85,7 +85,7 @@ const Translations = {
 		'gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.',
 
 	// for B20_WPDE_desktop_01_var, B20_WMDE_mobile_en_01 text test, remove if not used anymore
-	'visitors-vs-donors-sentence': '{{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
+	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
 		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.'
 };
 

@@ -9,7 +9,7 @@ export default function Slides( { formattedGoalDonationSumNumeric, currentDayNam
 		</div>
 		<div className="carousel-cell">
 			<p>Liebe Leserinnen und Leser:</p>
-			<p><span className="text-highlight">{ visitorsVsDonorsSentence }</span>. Wenn alle, die das
+			<p><span className="text-highlight">{ visitorsVsDonorsSentence }</span> Wenn alle, die das
 				jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am
 				heutigen { currentDayName } vorbei.</p>
 		</div>
