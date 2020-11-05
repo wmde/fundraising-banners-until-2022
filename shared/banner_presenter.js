@@ -105,6 +105,7 @@ export default class BannerPresenter {
 			() => {
 				this.impressionCounts.incrementImpressionCounts();
 				displayBanner();
+				this.trackingData.tracker.recordBannerImpression();
 			},
 			this.appearanceDelay
 		);

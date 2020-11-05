@@ -57,4 +57,10 @@ export class EventLoggingTracker {
 			} );
 		}
 	}
+
+	recordBannerImpression() {
+		// Do nothing, on wp.org we're using trackViewPortDimensions
+		// TODO move call to trackViewPortDimensions from bannerPresenter (lines 87-91) to here & test if it has the same effect.
+		//      This will unify tracking more on wp.de and wp.org
+	}
 }
