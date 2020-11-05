@@ -15,7 +15,7 @@ export default function BannerText( props ) {
 					<span className="text__headline--bold"> Liebe Leserinnen und Leser,</span>
 					<span> bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache. </span>
 					{capitalizeFirstLetter( weekdayPrepPhrase )} {currentDayName} sind Sie in Deutschland
-					gefragt<span className="optional-text text-l">, um Wikipedias Unabhängigkeit zu sichern</span>:
+					gefragt:
 				</p>
 
 				<p className="text__paragraph">
@@ -46,7 +46,8 @@ export default function BannerText( props ) {
 						Das Herzstück von Wikipedia ist die Gemeinschaft von Menschen, die uns unbegrenzten Zugang zu verlässlichen und neutralen Informationen geben. </span>
 
 					<span>
-						Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. </span>
+						Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia nützlich
+						finden, nehmen Sie sich an diesem Donnerstag bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück. </span>
 
 					<span className="text__paragraph--italic">
 						{' '}Vielen Dank! </span>
