@@ -21,7 +21,11 @@
 			}
 			&-item {
 				white-space: nowrap;
-				padding-right: 2em;
+				padding-right: 1em;
+
+				@media ( min-width: $breakpoint_xs ) {
+					padding-right: 2em;
+				}
 
 				&.account .selection-input-text,
 				&.account .selection-input-input {
@@ -33,9 +37,13 @@
 		&__usage {
 			flex-grow: 0;
 			text-align: center;
-			width: $form-width;
-			.footer__item {
-				padding-left: 1em;
+
+			@media ( min-width: $breakpoint_xs ) {
+				width: $form-width;
+
+				.footer__item {
+					padding-left: 1em;
+				}
 			}
 		}
 	}
