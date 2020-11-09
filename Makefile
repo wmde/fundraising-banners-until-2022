@@ -1,6 +1,6 @@
 .PHONY: setup server lint lint-js lint-css test ci build help
 
-build: ## Build all banners into dist drectory
+build: clean ## Build all banners into dist drectory
 	docker-compose run js-build npm run build
 
 setup: ## Install all npm dependencies

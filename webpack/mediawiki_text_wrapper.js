@@ -38,9 +38,13 @@ MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 			}
 
 			let template = self.templates[ pagename ];
+			const buildDate = new Date().toISOString()
+				.replace( 'T', ' ' )
+				.replace( /\.\d+Z$/, '' );
 			wrappedFiles[ filename ] = template( Object.assign( {
 				banner: compilation.assets[ filename ].source(),
-				campaignConfig: self.campaignConfig[ pagename ] || {}
+				campaignConfig: self.campaignConfig[ pagename ] || {},
+				build_date: buildDate
 			}, self.context ) );
 		}
 

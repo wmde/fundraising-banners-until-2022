@@ -69,7 +69,10 @@ module.exports = {
 					return '';
 				}
 				const trackingData = campaigns.getCampaignTracking( pageName.replace( '.js', '' ) );
-				return `var BannerName = '${trackingData.bannerTracking}'; var CampaignName = '${trackingData.campaignTracking}';`;
+				return `var BannerName = '${trackingData.bannerTracking}';
+					var CampaignName = '${trackingData.campaignTracking}';
+					var BuildDate = '${new Date().toISOString().replace( 'T', ' ' ).replace( /\.\d+Z$/, '' )}';
+				`;
 			}
 		} )
 	]
