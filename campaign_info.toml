@@ -90,20 +90,20 @@ tracking = "org-en-ipad-201104-var"
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-01-2-201105"
+campaign_tracking = "wpde-01-3-201109"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade.banners.ctrl]
 filename = "./wikipedia.de/desktop/banner_ctrl.js"
-pagename = "B20WPDE_01-2-201105_ctrl"
-tracking = "wpde-01-2-201105-ctrl"
+pagename = "B20WPDE_01-3-201109_ctrl"
+tracking = "wpde-01-3-201109-ctrl"
 
 [wikipediade.banners.var]
 filename = "./wikipedia.de/desktop/banner_var.js"
-pagename = "B20WPDE_01-2-201105_var"
-tracking = "wpde-01-2-201105-var"
+pagename = "B20WPDE_01-3-201109_var"
+tracking = "wpde-01-3-201109-var"
 
 # Wikipedia.de Mobile Campaign
 [wikipediade_mobile]
