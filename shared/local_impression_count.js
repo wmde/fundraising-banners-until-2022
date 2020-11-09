@@ -27,4 +27,8 @@ export class LocalImpressionCount {
 		window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
 		window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
 	}
+
+	getOverallCount() {
+		return this.overallCount;
+	}
 }
