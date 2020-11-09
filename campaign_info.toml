@@ -140,18 +140,3 @@ pagename = "B20WMDE_en01_201104_var"
 tracking = "org-en01-201104-var"
 
 
-# Thank You Campaign
-[thank_you]
-campaign_tracking = "ty01-ba-190101"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-wrapper_template = "wikipedia_org"
-
-[thank_you.banners.ctrl]
-filename = "./thank_you/banner_ctrl.js"
-pagename = "B18WMDE_ty01_190101_ctrl"
-tracking = "org-ty01-190101-ctrl"
-
-[thank_you.banners.var]
-filename = "./thank_you/banner_var.js"
-pagename = "B18WMDE_ty01_190101_var"
-tracking = "org-ty01-190101-var"
