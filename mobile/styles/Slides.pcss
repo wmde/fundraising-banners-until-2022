@@ -10,7 +10,16 @@
 			font-family: $banner-main-font-family;
 		}
 		.goal-headline {
-			margin: 0 0 5px 0;
+			margin: 0 0 9vw 0;
+			@media ( min-width: $breakpoint_phone_s ) {
+				margin: 0 0 6vw 0;
+			}
+			@media ( min-width: $breakpoint_phone_m ) {
+				margin: 0 0 4vw 0;
+			}
+			@media ( min-width: $breakpoint_phone_l ) {
+				margin: 0 0 2vw 0;
+			}
 		}
 	}
 	.flickity {

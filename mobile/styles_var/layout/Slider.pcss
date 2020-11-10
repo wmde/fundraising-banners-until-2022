@@ -3,6 +3,18 @@
 		width: 100%;
 		height: auto;
 		box-sizing: border-box;
+		.goal-headline {
+			margin: 0 0 18vw 0;
+			@media ( min-width: $breakpoint_phone_s ) {
+				margin: 0 0 12vw 0;
+			}
+			@media ( min-width: $breakpoint_phone_m ) {
+				margin: 0 0 8vw 0;
+			}
+			@media ( min-width: $breakpoint_phone_l ) {
+				margin: 0 0 4vw 0;
+			}
+		}
 	}
 	.flickity {
 		&-viewport {
