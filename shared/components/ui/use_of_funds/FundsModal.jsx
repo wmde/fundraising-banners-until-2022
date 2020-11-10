@@ -15,7 +15,9 @@ export default class FundsModal extends Component {
 						<img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Icon_close.svg" />
 					</button>
 				</div>
-				<FundsContent {...props} />
+				<div className="banner_modal__content">
+					<FundsContent {...props} />
+				</div>
 			</div>
 		</div>;
 	}
