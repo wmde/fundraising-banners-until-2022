@@ -92,6 +92,11 @@ export class Banner extends Component {
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
+	fundsModalDonate = () => {
+		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: false } );
+	};
+
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
@@ -164,6 +169,7 @@ export class Banner extends Component {
 				fundsModalData={props.fundsModalData}
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
+				onCallToAction={ this.fundsModalDonate }
 				locale='de'>
 				<FundsDistributionInfo/>
 			</FundsModal>
