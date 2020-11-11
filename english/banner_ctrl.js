@@ -9,6 +9,7 @@ import { getTrackingIds } from '../shared/tracking_ids';
 import Banner from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
+import DonationForm from '../shared/components/ui/form/DonationForm';
 import BannerText from './components/BannerText';
 import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
@@ -36,6 +37,7 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		fundsModalData,
+		donationForm: DonationForm,
 		bannerText: BannerText,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),

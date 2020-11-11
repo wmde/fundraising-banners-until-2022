@@ -78,7 +78,8 @@ const Translations = {
 	'submit-label-credit-card': 'Proceed with credit card',
 	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
 	'submit-label-bank-transfer': 'Proceed with bank transfer',
-	'submit-label-default': 'Proceed with the donation'
+	'submit-label-default': 'Proceed with the donation',
+	'address-type-notice-disabled': 'A postal address is necessary for donating by direct-debit.'
 	// End of forms with address type
 
 };

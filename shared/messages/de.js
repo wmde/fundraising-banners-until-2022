@@ -73,7 +73,7 @@ const Translations = {
 	'submit-label-bank-transfer': 'Weiter zur Bankverbindung',
 	'submit-label-short': 'Weiter',
 	'submit-label-default': 'Weiter zur Adresseingabe',
-	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
+	'address-type-notice-negative': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
 		'Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
 	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
 	// End of 2 forms with address type

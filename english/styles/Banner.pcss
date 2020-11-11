@@ -2,6 +2,12 @@
 	visibility: hidden;
 	width: 100%;
 
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
 	&--visible {
 		visibility: visible;
 	}
@@ -11,6 +17,10 @@
 
 	img {
 		border: 0 none;
+	}
+
+	ul {
+		list-style-image: unset;
 	}
 
 	.banner__wrapper {
@@ -31,9 +41,8 @@
 	}
 
 	.banner__content {
-		display: flex;
-		flex-direction: column;
 		@media ( min-width: $breakpoint_l ) {
+			display: flex;
 			flex-direction: row;
 			order: 1;
 		}

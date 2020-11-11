@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
-import DonationForm from '../shared/components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import Infobox from '../shared/components/ui/Infobox';
 import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
@@ -123,6 +122,7 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
+		const DonationForm = props.donationForm;
 		const campaignProjection = props.campaignProjection;
 		return <div
 			className={ classNames( {
@@ -142,6 +142,9 @@ export default class Banner extends Component {
 			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
+						<div className="close">
+							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+						</div>
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
@@ -159,19 +162,18 @@ export default class Banner extends Component {
 										setStartAnimation={this.registerStartProgressbar}/>
 								</div>
 							</div>
-							<DonationForm
-								formItems={props.formItems}
-								bannerName={props.bannerName}
-								campaignName={props.campaignName}
-								formatters={props.formatters}
-								impressionCounts={props.impressionCounts}
-								onFormInteraction={this.onFormInteraction}
-								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-								onSubmit={props.onSubmit}
-							/>
-						</div>
-						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+							<div className="banner__form">
+								<DonationForm
+									formItems={props.formItems}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+									formatters={props.formatters}
+									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									onSubmit={props.onSubmit}
+								/>
+							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
 						<LanguageWarningBox
