@@ -1,18 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
+import * as PropTypes from 'prop-types';
 
-const companies = [
-	{ name: 'Google', budget: 161, budgetCitation: 'https://www.statista.com/statistics/266206/googles-annual-global-revenue/' },
-	{ name: 'Amazon', budget: 280, budgetCitation: 'https://www.statista.com/statistics/266282/annual-net-revenue-of-amazoncom/' },
-	{ name: 'Facebook', budget: 70, budgetCitation: 'https://www.statista.com/statistics/268604/annual-revenue-of-facebook/' },
-	{ name: 'Wikipedia', budget: 0.12, budgetCitation: '' }
-];
-
-export default function CompanyBudgets() {
+export default function CompanyBudgets( { companies, citationLabel } ) {
 	const highestBudget = companies.reduce( ( highestBudget, company ) => Math.max( highestBudget, company.budget ), 0 );
 	return <table className="company_budgets">
 		{companies.map( company => {
-			const citation = company.budgetCitation ? ( <a className="company_budgets__citation_link" href={company.budgetCitation} target="_blank">Quelle</a> ) : '\u00A0';
+			const citation = company.budgetCitation ? ( <a
+				className="company_budgets__citation_link"
+				href={company.budgetCitation}
+				target="_blank">
+				{citationLabel}
+			</a>
+			) : '\u00A0';
 			return (
 				<tr className={'company_budgets__row--' + company.name.toLowerCase()} key={company.name}>
 					<td className="company_budgets__col--company">{company.name} </td>
@@ -31,3 +31,14 @@ export default function CompanyBudgets() {
 		) }
 	</table>;
 }
+
+CompanyBudgets.propTypes = {
+	/**
+	 * Company data with name, budget, and budgetCitation URL link
+	 */
+	companies: PropTypes.arrayOf( PropTypes.object ),
+	/**
+	 * Label for the budget citation link
+	 */
+	citationLabel: PropTypes.string
+};

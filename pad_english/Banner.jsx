@@ -171,11 +171,12 @@ export default class Banner extends Component {
 				</TranslationContext.Provider>
 			</BannerTransition>
 			<FundsModal
-				fundsModalData={ props.fundsModalData }
-				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
+				toggleFundsModal={ this.toggleFundsModal }
+				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
-				<FundsDistributionInfo/>
+				<FundsDistributionInfo
+					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData } />
 			</FundsModal>
 		</div>;
 	}

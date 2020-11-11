@@ -8,6 +8,7 @@ import { getTrackingIds } from '../shared/tracking_ids';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
+import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
 import Banner, { BannerType } from './Banner';
 import Slides from './components/Slides';
@@ -40,6 +41,7 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
+		useOfFundsText,
 		bannerText: BannerText,
 		slides: Slides,
 		fullpageBanner: FullpageBanner,

@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
 import classNames from 'classnames';
-import { applicationOfFundsData } from './FundsDistributionData';
+import * as PropTypes from 'prop-types';
 
-export default class FundsDistributionInfo extends Component {
+export default class FundsDistributionAccordion extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			activeInfo: applicationOfFundsData.reduce( ( activeInfo, fundsItem ) => {
+			activeInfo: props.applicationOfFundsData.reduce( ( activeInfo, fundsItem ) => {
 				const itemId = fundsItem.id;
 				return { ...activeInfo, [ itemId ]: false };
 			}, {} )
@@ -20,7 +20,7 @@ export default class FundsDistributionInfo extends Component {
 		this.setState( { activeInfo } );
 	};
 
-	render( props, state ) {
+	render( { applicationOfFundsData }, state ) {
 		const isActive = name => state.activeInfo[ name ];
 		return <div className="funds_distribution_info">
 
@@ -44,3 +44,7 @@ export default class FundsDistributionInfo extends Component {
 		</div>;
 	}
 }
+
+FundsDistributionAccordion.propTypes = {
+	applicationOfFundsData: PropTypes.arrayOf( PropTypes.object ).isRequired
+};

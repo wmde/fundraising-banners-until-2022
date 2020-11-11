@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h } from 'preact';
 import classNames from 'classnames';
-import { applicationOfFundsData } from './FundsDistributionData';
+import * as PropTypes from 'prop-types';
 
 export default class FundsDistributionInfo extends Component {
 	constructor( props ) {
@@ -18,7 +18,7 @@ export default class FundsDistributionInfo extends Component {
 		}
 	};
 
-	render( props, state ) {
+	render( { applicationOfFundsData }, state ) {
 		const isActive = name => state.activeInfo === name;
 		return <div className="funds_distribution_info">
 
@@ -51,3 +51,7 @@ export default class FundsDistributionInfo extends Component {
 		</div>;
 	}
 }
+
+FundsDistributionInfo.propTypes = {
+	applicationOfFundsData: PropTypes.arrayOf( PropTypes.object ).isRequired
+};
