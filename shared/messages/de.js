@@ -58,7 +58,7 @@ const Translations = {
 	'give-address-statement-positive': 'Ja',
 	'give-address-statement-negative': 'Nein',
 
-	// This is for C20_WMDE_Mobile_Test_03 and C20_WMDE_Test_09
+	// This is for the forms with address type
 	'address-type-label': 'Möchten Sie Ihre Kontaktdaten angeben?',
 	'address-type-option-full': 'Vollständige Kontaktdaten',
 	'address-type-option-email': 'Nur E-Mail-Adresse',
@@ -71,14 +71,12 @@ const Translations = {
 	'submit-label-credit-card': 'Weiter zur Dateneingabe',
 	'submit-label-sofort': 'Weiter zu Sofort',
 	'submit-label-bank-transfer': 'Weiter zur Bankverbindung',
-	// End of C20_WMDE_Mobile_Test_03 and C20_WMDE_Test_09
-
-	// This is for the B20 02 desktop var test
 	'submit-label-short': 'Weiter',
 	'submit-label-default': 'Weiter zur Adresseingabe',
 	'address-type-notice-nein': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
 		'Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
 	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
+	// End of 2 forms with address type
 
 	// For the collage banner
 	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige ' +
