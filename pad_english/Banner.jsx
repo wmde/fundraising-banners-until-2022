@@ -174,7 +174,7 @@ export default class Banner extends Component {
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				toggleFundsModal={ this.toggleFundsModal }
 				useOfFundsText={ props.useOfFundsText }
-				locale='de'>
+				locale='en'>
 				<FundsDistributionInfo
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData } />
 			</FundsModal>

@@ -11,7 +11,8 @@ export default function FundsContent( props ) {
 	const organizationClassLookup = new Map( Object.entries( content.orgchart.organizationClasses ) );
 	const getHighlightClassName = part => organizationClassLookup.has( part ) ? `use_of_funds__org use_of_funds__org--${organizationClassLookup.get( part )}` : '';
 	const highlightOrganizations = text => splitStringAt( Array.from( organizationClassLookup.keys() ), text ).map( part =>
-		<span className={classNames( getHighlightClassName( part ) )} key={part}> { part } </span>
+		// Don't wrap punctuation in span to avoid whitespace. A workaround for https://github.com/facebook/react/issues/1643
+		part === '.' ? part : <span className={classNames( getHighlightClassName( part ) )} key={part}> { part } </span>
 	);
 	return <div className="use_of_funds">
 		<div className="use_of_funds__section">
@@ -56,8 +57,10 @@ export default function FundsContent( props ) {
 						<h3>{content.comparison.subhead}</h3>
 					</div>
 					<CompanyBudgets
-						citationLabel={content.comparison.citationLabel}
-						companies={content.comparison.companies}/>
+						citationLabel={ content.comparison.citationLabel }
+						companies={ content.comparison.companies }
+						locale={ props.locale }
+					/>
 				</div>
 			</div>
 		</div>
@@ -72,7 +75,7 @@ export default function FundsContent( props ) {
 				</div>
 			</div>
 			<div className="use_of_funds__orgchart_image">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/WMDE-funds-forwarding.gif"/>
+				<img src={ content.orgchart.imageUrl }/>
 			</div>
 		</div>
 		<div className="banner_model__section use_of_funds__section--call_to_action">
