@@ -12,8 +12,11 @@ export default class FullpageBanner extends Component {
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
 
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
+			<div className="fullpage-banner__close" onClick={ props.onClose }/>
 			<div className="fullpage-banner__info">
-				<div className="close" onClick={ props.onClose }/>
+				<div className="fullpage-banner__heading">
+					Jetzt Spenden
+				</div>
 				<Infobox
 					formatters={props.formatters}
 					campaignParameters={props.campaignParameters}
@@ -30,9 +33,9 @@ export default class FullpageBanner extends Component {
 					setStartAnimation={props.setStartAnimation}
 					animate={true}
 				/>
-				<div className="call-to-action">
-					Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
-				</div>
+			</div>
+			<div className="call-to-action">
+				Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
 			</div>
 			<DonationForm
 				formItems={props.formItems}

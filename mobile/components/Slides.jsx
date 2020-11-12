@@ -9,20 +9,20 @@ export default function Slides( { formattedGoalDonationSumNumeric, currentDayNam
 		</div>
 		<div className="carousel-cell">
 			<p>Liebe Leserinnen und Leser:</p>
-			<p>{ visitorsVsDonorsSentence } Wenn alle, die das
+			<p><span className="text-highlight">{ visitorsVsDonorsSentence }</span> Wenn alle, die das
 				jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am
 				heutigen { currentDayName } vorbei.</p>
 		</div>
 		<div className="carousel-cell">
-			<p>An diesem { currentDayName } sind Sie in Deutschland gefragt. Schon der Preis
-				einer Tasse Kaffee würde genügen.</p>
+			<p>An diesem { currentDayName } sind Sie in Deutschland gefragt. <span className="text-highlight">Schon der Preis
+				einer Tasse Kaffee würde genügen</span>.</p>
 		</div>
 		<div className="carousel-cell">
 			<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
 		</div>
 		<div className="carousel-cell">
 			<p>Wenn Sie Wikipedia nützlich finden, nehmen Sie sich an diesem { currentDayName } bitte
-				eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.</p>
+				eine Minute Zeit und <span className="text-highlight">geben Wikipedia mit Ihrer Spende etwas zurück</span>.</p>
 		</div>
 	</div>;
 }
