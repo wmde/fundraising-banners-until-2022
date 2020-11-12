@@ -22,7 +22,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 	const campaignDaySentence = new CampaignDaySentence( campaignDays, Translations );
 	const visitorsVsDonorsSentence = new VisitorsVsDonorsSentence(
 		campaignParameters.millionImpressionsPerDay,
-		campaignProjection.getProjectedNumberOfDonors(),
+		formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 		campaignDays.getDaysSinceCampaignStart(),
 		Translations[ 'visitors-vs-donors-sentence' ]
 	);
