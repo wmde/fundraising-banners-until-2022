@@ -33,10 +33,12 @@
 
 	.optional-text {
 		display: none;
-		@media ( min-width: $breakpoint_l ) {
+		@media ( min-width: $breakpoint_m ) {
 			&.text-m {
 				display: inline;
 			}
+		}
+		@media ( min-width: $breakpoint_l ) {
 			&.text-l {
 				display: inline;
 			}
