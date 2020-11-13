@@ -7,7 +7,7 @@ import CampaignDaySentence from '../../campaign_day_sentence';
 import { useContext } from 'preact/hooks';
 import VisitorsVsDonorsSentence from '../../visitors_vs_donors_sentence';
 
-export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText, propsForText } ) {
+export default function Infobox( { campaignParameters, campaignProjection, formatters, bannerText, propsForText, visitorsVsDonorsSentenceKey } ) {
 
 	const BannerText = bannerText;
 	const Translations = useContext( TranslationContext );
@@ -24,7 +24,7 @@ export default function Infobox( { campaignParameters, campaignProjection, forma
 		campaignParameters.millionImpressionsPerDay,
 		formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 		campaignDays.getDaysSinceCampaignStart(),
-		Translations[ 'visitors-vs-donors-sentence' ]
+		Translations[ visitorsVsDonorsSentenceKey || 'visitors-vs-donors-sentence' ]
 	);
 	const additionalProps = propsForText || {};
 

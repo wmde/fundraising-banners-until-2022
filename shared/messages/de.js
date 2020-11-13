@@ -86,7 +86,11 @@ const Translations = {
 
 	// for B20_WPDE_desktop_01_var, B20_WMDE_mobile_en_01 text test, remove if not used anymore
 	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
-		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.'
+		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
+
+	// for C20_WMDE_Test_13 var banner
+	'visitors-vs-donors-sentence-var': 'Bis heute haben {{totalNumberOfDonors}} Menschen gespendet – das sind noch sehr wenige,' +
+		' wenn man bedenkt, dass unser Aufruf jeden Tag {{millionImpressionsPerDay}} Millionen Mal gezeigt wird.'
 };
 
 export default Translations;
