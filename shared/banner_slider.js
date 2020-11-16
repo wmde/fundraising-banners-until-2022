@@ -72,4 +72,12 @@ export class Slider {
 	resize() {
 		this.slider.resize();
 	}
+
+	next() {
+		this.slider.next( true );
+	}
+
+	previous() {
+		this.slider.previous( true );
+	}
 }

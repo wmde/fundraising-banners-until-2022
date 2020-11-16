@@ -1,0 +1,108 @@
+.wmde-banner {
+	.banner__reopen {
+		visibility: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 22px;
+		z-index: 100;
+
+		svg {
+			position: absolute;
+			display: block;
+			top: 50%;
+			margin-top: -6px;
+			height: 12px;
+		}
+		path {
+			fill: $color-white;
+		}
+
+		&-text-main,
+		&-text-small {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 22px;
+			line-height: 22px;
+			background: $color-primary;
+			color: $color-white;
+		}
+
+		&-text-main {
+			z-index: 30;
+			width: 100%;
+			font-size: 14px;
+			font-weight: bold;
+			white-space: nowrap;
+			overflow: hidden;
+			&-text {
+				padding: 0 14px;
+			}
+		}
+
+		&-text-small {
+			z-index: 20;
+			font-size: 13px;
+			width: 176px;
+			border-radius: 0 11px 11px 0;
+			text-align: center;
+			line-height: 22px;
+		}
+
+		&-reopen {
+			text-decoration: none;
+			color: $color-white;
+			&:hover,
+			&:focus {
+				color: $color-white;
+				text-decoration: underline;
+			}
+		}
+
+		&-close,
+		&-chevron {
+			position: absolute;
+			top: 0;
+			display: block;
+			height: 22px;
+			width: 22px;
+		}
+
+		&-close {
+			left: 4px;
+
+			&:hover,
+			&:focus {
+				path {
+					fill: $color-primary-light;
+				}
+			}
+		}
+
+		&-chevron {
+			right: 0;
+		}
+	}
+
+	&--minimised {
+		.banner__reopen {
+			visibility: visible;
+
+			&-text-main {
+				animation: shrink-minimised 1200ms $banner-easing 5s;
+				animation-fill-mode: forwards;
+			}
+		}
+	}
+
+	@keyframes shrink-minimised {
+		0% {
+			width: 100%;
+		}
+		100% {
+			width: 0;
+		}
+	}
+}

@@ -1,0 +1,290 @@
+.wmde-banner {
+	visibility: hidden;
+	font-family: $banner-sans-serif;
+	color: $color-black-light;
+	width: 100%;
+	z-index: 10;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	&--visible {
+		visibility: visible;
+	}
+	&--hidden {
+		display: none;
+	}
+	&--minimised {
+		.banner__inner {
+			display: none;
+		}
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	button {
+		cursor: pointer;
+		transition: background 500ms $banner-easing;
+	}
+
+	a {
+		text-decoration: underline;
+		color: $color-gray;
+		transition: color 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			color: $color-primary-light;
+		}
+	}
+
+	.banner__close {
+		position: absolute;
+		z-index: 30;
+		top: 25px;
+		right: 25px;
+		font-size: 14px;
+		font-weight: bold;
+
+		a {
+			position: relative;
+			display: block;
+			color: $color-gray;
+			text-decoration: none;
+			height: 23px;
+			line-height: 24px;
+			padding-right: 30px;
+			transition: color 500ms $banner-easing;
+
+			svg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 23px;
+				width: 22px;
+				path {
+					transition: fill 500ms $banner-easing;
+				}
+			}
+
+			&:hover,
+			&:focus {
+				color: $color-primary-light;
+				svg path {
+					fill: $color-primary-light;
+				}
+			}
+		}
+	}
+
+	.banner__inner {
+		position: relative;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Puzzle-compressed.png' ) bottom right;
+		border: 3px solid $color-primary;
+		border-bottom: 1px solid $color-primary;
+		padding: 25px 0 40px;
+		overflow: hidden;
+
+		&-content-size-fitter {
+			margin: 0 50px;
+			transition: height 500ms $banner-easing;
+
+			@media ( min-width: $breakpoint_m ) {
+				margin: 0 100px;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				margin: 0 200px;
+			}
+
+			@media ( min-width: $breakpoint_xl ) {
+				margin: 0 250px;
+			}
+		}
+	}
+
+	.banner__logo {
+		display: none;
+		position: absolute;
+		z-index: 10;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		padding-top: 25px;
+		padding-left: 20px;
+		width: 360px;
+		overflow: hidden;
+		background: url( 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAABCAYAAADzaTTzAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kb9LQlEUxz9qUZRRUUNDg4Q1VZiC1BKkhAURYgb9WvT5K1B7vGeEtAatQkHU0q+h/oJag+YgKIogmhqai1pKXuepoETeyznnc7/3nsO954I1nFYyeoMLMtmcFgr4HAuLS46mV1rpFLPhiSi6OhEMzlB3fD1gMePdkFmr/rl/R2ssritgaRYeV1QtJzwlPLORU03eFe5WUpGY8LnwoCYXFL439WiZ30xOlvnHZC0c8oO1Q9iRrOFoDSspLSMsL8eZSa8rlfuYL7HHs/NzEvvEetEJEcCHg2km8eNlhDHxXoZwMywr6uS7SvmzrEmuIl4lj8YqSVLkGBR1XarHJSZEj8tMkzf7/7evesLjLle3+6DxxTA++qFpB4oFw/g+NoziCdie4SpbzV87gtFP0QtVzXkI7VtwcV3VontwuQ09T2pEi5Qkm5g1kYD3M2hbhK5baFku96yyz+kjhDflq25g/wAG5Hz7yi8/7WfU3wDDigAAAAlwSFlzAAALEwAACxMBAJqcGAAAANNJREFUOI19lEsWwyAMA4f0JL3/GQPd1K8T1eANxJEt+ZMM4M3PJnABCxjsrXCJr9N+9C5xS7i63+Ieui/lg6c++9OSj7g71/pqHzz13cAr6vP7ueFEGNew037Fs/uSPa8T6em4d/V6JoUdPOdhrXWaq5tn1THj7r7lrjg/8lfsaR+9QzWrrLFwOQv4703WfJr5bqeyV13vMqbbUeu0eU8yZ+WxL7W6D9Zx+kZ3XJ11O5g81prY9Cdf/jc8n+TscuzmvfM77oQpHVlHp6Xbf8dfwPwAw7yCAqYFuBUAAAAASUVORK5CYII=' ) top left repeat-y;
+
+		@media ( min-width: $breakpoint_m ) {
+			display: block;
+		}
+	}
+
+	.banner__slideshow,
+	.banner__content {
+		position: relative;
+		z-index: 20;
+		box-shadow: 0 0 5px rgba( 0, 0, 0, 0.1 );
+	}
+
+	.banner__slideshow {
+		background: $color-white;
+	}
+
+	.banner__content {
+		display: none;
+		background: $color-gray-light;
+	}
+
+	&--form {
+		.banner__slideshow {
+			display: none;
+		}
+
+		.banner__content {
+			display: flex;
+		}
+	}
+
+	.slideshow-previous,
+	.slideshow-next {
+		position: absolute;
+		z-index: 30;
+		width: 52px;
+		height: 52px;
+		top: 50%;
+		margin-top: -26px;
+		border: 0;
+		background: $color-white;
+		border-radius: 50%;
+		text-align: center;
+		padding: 5px 0 0;
+	}
+
+	.slideshow-previous {
+		left: -26px;
+		padding-right: 10px;
+		box-shadow: -3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: left 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			left: -30px;
+		}
+	}
+
+	.slideshow-next {
+		right: -26px;
+		padding-left: 10px;
+		box-shadow: 3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: right 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			right: -30px;
+		}
+	}
+
+	.slideshow-application-of-funds-link {
+		position: absolute;
+		display: inline-block;
+		bottom: 14px;
+		left: 20px;
+		font-size: 15px;
+	}
+
+	.banner__infobox,
+	.banner__form {
+		position: relative;
+		padding: 20px;
+		width: 100%;
+		@media ( min-width: $breakpoint_m ) {
+			width: 50%;
+		}
+	}
+
+	.banner__infobox {
+		display: none;
+		@media ( min-width: $breakpoint_m ) {
+			display: block;
+		}
+	}
+
+	.banner-button__next,
+	.button-group__button {
+		position: absolute;
+		bottom: -22px;
+		right: 20px;
+		font-size: 18px;
+		font-weight: bold;
+		border: 0;
+		border-radius: 10px;
+		height: 44px;
+		line-height: 44px;
+		padding: 0 54px 0 29px;
+		color: $color-white;
+
+		@media ( min-width: $breakpoint_m ) {
+			right: -70px;
+		}
+
+		@media ( min-width: $breakpoint_l ) {
+			right: -110px;
+		}
+
+		svg {
+			position: absolute;
+			width: 22px;
+			height: 14px;
+			right: 20px;
+			top: 50%;
+			margin-top: -5px;
+			transition: margin-top 500ms $banner-easing, right 500ms $banner-easing;
+		}
+	}
+
+	.banner-button__next {
+		background: $color-primary;
+		&:hover,
+		&:focus {
+			background: $color-primary-light;
+			svg {
+				margin-top: -3px;
+			}
+		}
+	}
+
+	.button-group__button {
+		background: $color-gray;
+		&.is-valid,
+		&.is-valid:hover,
+		&.is-valid:focus {
+			background: $color-primary;
+		}
+		svg {
+			height: 23px;
+			margin-top: -11px;
+			path {
+				fill: $color-white;
+			}
+		}
+		&:hover,
+		&:focus {
+			background: $color-gray-dark;
+			svg {
+				right: 17px;
+			}
+		}
+	}
+
+	/* put the shadow on the progress bar because it has rounded corners */
+	.progress_bar {
+		box-shadow: 0 5px 10px rgba( 0, 0, 0, 0.3 );
+	}
+}
