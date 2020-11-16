@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import BannerTransition from '../shared/components/BannerTransition';
 import ProgressBar from '../shared/components/ui/ProgressBar';
 import Footer from '../shared/components/ui/EasySelectFooter';
-import Infobox from '../shared/components/ui/Infobox';
+import Infobox from './components/ui/Infobox';
 import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../shared/components/TranslationContext';
@@ -135,8 +135,7 @@ export class Banner extends Component {
 										campaignParameters={props.campaignParameters}
 										campaignProjection={props.campaignProjection}
 										bannerText={props.bannerText}
-										propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
-										visitorsVsDonorsSentenceKey={props.visitorsVsDonorsSentenceKey}/>
+										propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }/>
 									<ProgressBar
 										formatters={props.formatters}
 										daysLeft={campaignProjection.getRemainingDays()}
