@@ -44,14 +44,13 @@ export default class Banner extends Component {
 
 	componentDidMount() {
 		this.props.registerDisplayBanner(
-			() => {
-				this.setState( { displayState: VISIBLE } );
-			}
+			() => {}
 		);
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
 		this.adjustSurroundingSpace();
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
+		this.setState( { displayState: VISIBLE } );
 	}
 
 	adjustSurroundingSpace() {
