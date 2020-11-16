@@ -2,7 +2,6 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 
 .wmde-banner {
 	.form {
-		position: relative;
 		overflow: hidden;
 		margin: 0 -5px;
 
@@ -13,18 +12,22 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			margin: 0;
 		}
 
-		&-step-2 {
-			position: absolute;
+		&-step-1 {
 			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+
+		&-step-2 {
+			display: none;
 			flex-direction: column;
 			background: $color-white;
 			top: 0;
 			bottom: 0;
-			width: 100%;
-			right: -100%;
 			justify-content: center;
 			align-items: center;
-			transition: right 200ms $banner-easing;
+			width: 100%;
 
 			@media ( min-width: $breakpoint_l ) {
 				padding-left: 1em;
@@ -34,6 +37,7 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 				width: 100%;
 				display: flex;
 				flex-wrap: wrap;
+				justify-content: flex-end;
 
 				@media ( min-width: $breakpoint_m ) {
 					flex-wrap: nowrap;
@@ -77,16 +81,24 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			}
 
 			.select-group {
-				padding-right: 30%;
+				padding-bottom: 8px;
 				@media ( min-width: $breakpoint_l ) {
-					padding-right: 0;
+					padding-bottom: 0;
 				}
+			}
+
+			.select-group__errormessage {
+				padding: 8px 0;
+				height: auto;
 			}
 		}
 
 		&.is-step-2 {
+			.form-step-1 {
+				display: none;
+			}
 			.form-step-2 {
-				right: 0;
+				display: flex;
 			}
 		}
 
@@ -146,10 +158,11 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			flex-wrap: wrap;
 			padding: 0;
 			margin: 0;
+			width: 100%;
 		}
 
 		&__button {
-			/* min-width: 240px; */
+			min-width: 240px;
 			width: 100%;
 			display: block;
 			box-sizing: border-box;

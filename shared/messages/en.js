@@ -65,7 +65,7 @@ const Translations = {
 	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million ' +
 		'times a day, but currently only {{totalNumberOfDonors}} people have donated.',
 
-	// This is for C20_WMDE_mobile EN 01
+	// This is for the forms with address type
 	'address-type-label': 'Do you want to provide your address data?',
 	'address-type-option-full': 'Full address data',
 	'address-type-option-email': 'Only e-mail address',
@@ -78,8 +78,9 @@ const Translations = {
 	'submit-label-credit-card': 'Proceed with credit card',
 	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
 	'submit-label-bank-transfer': 'Proceed with bank transfer',
-	'submit-label-default': 'Proceed with the donation'
-	// End of This is for C20_WMDE_mobile EN 01
+	'submit-label-default': 'Proceed with the donation',
+	'address-type-notice-disabled': 'A postal address is necessary for donating by direct-debit.'
+	// End of forms with address type
 
 };
 
