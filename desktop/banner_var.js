@@ -27,8 +27,6 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const visitorsVsDonorsSentenceKey = 'visitors-vs-donors-sentence-var';
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -42,7 +40,6 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
-		visitorsVsDonorsSentenceKey: visitorsVsDonorsSentenceKey
+		bannerType: BannerType.VAR
 	}
 );
