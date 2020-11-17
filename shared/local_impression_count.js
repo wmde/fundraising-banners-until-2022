@@ -6,9 +6,9 @@ export class LocalImpressionCount {
 		if ( !window.localStorage ) {
 			return;
 		}
-		const overallCount = window.localStorage.getItem( 'fundraising.overallCount' ) || '0';
+		const overallCount = this.getItem( 'fundraising.overallCount' );
 		this.overallCount = parseInt( overallCount, 10 );
-		const bannerCount = window.localStorage.getItem( 'fundraising.bannerCount' ) || '';
+		const bannerCount = this.getItem( 'fundraising.bannerCount' ) || '';
 		if ( bannerCount.indexOf( '|' ) === -1 ) {
 			return;
 		}
@@ -18,14 +18,32 @@ export class LocalImpressionCount {
 		}
 	}
 
+	getItem( name, defaultValue ) {
+		try {
+			return window.localStorage.getItem( name ) || defaultValue;
+		} catch ( e ) {
+			if ( e.name === 'NS_ERROR_FILE_CORRUPTED' ) {
+				return defaultValue;
+			}
+			throw e;
+		}
+	}
+
 	incrementImpressionCounts() {
 		this.overallCount++;
 		this.bannerCount++;
 		if ( !window.localStorage ) {
 			return;
 		}
-		window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
-		window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
+		try {
+			window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
+			window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
+		} catch ( e ) {
+			if ( e.name === 'NS_ERROR_FILE_CORRUPTED' ) {
+				return;
+			}
+			throw e;
+		}
 	}
 
 	getOverallCount() {
