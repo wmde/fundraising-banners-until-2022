@@ -11,7 +11,7 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
 import DonationForm from './components/ui/form/MultiStepDonationForm';
 import BannerText from './components/BannerText';
-import fundsModalData from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_US/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -35,7 +35,7 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		fundsModalData,
+		useOfFundsText,
 		donationForm: DonationForm,
 		bannerText: BannerText,
 		translations: Translations,

@@ -204,11 +204,14 @@ export default class Banner extends Component {
 				</FollowupTransition>
 			</TranslationContext.Provider>
 			<FundsModal
+				isFundsModalVisible={ this.state.isFundsModalVisible }
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
-				isFundsModalVisible={ this.state.isFundsModalVisible }
+				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
-				<FundsDistributionAccordion/>
+				<FundsDistributionAccordion
+					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
+				/>
 			</FundsModal>
 		</div>;
 	}

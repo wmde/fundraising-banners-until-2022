@@ -207,8 +207,11 @@ export default class Banner extends Component {
 				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				onCallToAction={ this.fundsModalDonate }
+				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
-				<FundsDistributionAccordion/>
+				<FundsDistributionAccordion
+					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
+				/>
 			</FundsModal>
 		</div>;
 	}

@@ -10,7 +10,7 @@ import Banner, { BannerType } from './Banner';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import BannerText from './components/BannerText';
-import fundsModalData from 'fundraising-frontend-content/i18n/de_DE/data/useOfFunds.json';
+import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
@@ -36,7 +36,7 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		fundsModalData,
+		useOfFundsText,
 		bannerText: BannerText,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
