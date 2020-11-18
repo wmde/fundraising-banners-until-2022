@@ -14,12 +14,10 @@ export default function BannerText( props ) {
 		</p>
 		<p>
 			<span>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert. </span>
-			<TextHighlight registerStartAnimation={ props.registerStartHighlight }>
-				Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,
-				wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.
-			</TextHighlight>
-
-			{' '}{ visitorsVsDonorsSentence } Wenn Wikipedia eine kommerzielle Seite sein würde,
+			Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten,
+			wäre unser Spendenziel bereits am heutigen { currentDayName } erreicht.
+			{' '}<TextHighlight registerStartAnimation={ props.registerStartHighlight }>{ visitorsVsDonorsSentence }</TextHighlight>
+			Wenn Wikipedia eine kommerzielle Seite sein würde,
 			wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit Werbung eine Menge Geld verdienen.
 			Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen.
 			Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.

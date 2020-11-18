@@ -10,11 +10,9 @@ export default function MiniBanner( props ) {
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
 				<header className="headline">
-					{ props.sliderHeading &&
-						<div className="headline__container">
-							<span className="headline__content">{ props.sliderHeading }</span>
-						</div>
-					}
+					<div className="headline__container">
+						<span className="headline__content">{ props.sliderHeading }</span>
+					</div>
 				</header>
 				<div className="close-button" onClick={props.onClose}/>
 
