@@ -37,7 +37,14 @@ $padding_mobile: 16px;
 	}
 
 	&__section--two-cols-info {
-		display: none; /* TODO switch to flex when we have the final URL targets for the reports */
+		display: flex;
+
+		.use_of_funds__column--info {
+			padding: 12px 0 0 0;
+			@media ( min-width: $use_of_funds_breakpoint_l ) {
+				padding: 0 0 12px 0;
+			}
+		}
 	}
 	&__section--two-cols {
 		@media ( min-width: $use_of_funds_breakpoint_l ) {
