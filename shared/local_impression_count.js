@@ -3,7 +3,7 @@ export class LocalImpressionCount {
 		this.bannerName = bannerName;
 		this.overallCount = 0;
 		this.bannerCount = 0;
-		if ( !window.localStorage ) {
+		if ( !this.hasLocalStorage() ) {
 			return;
 		}
 		const overallCount = this.getItem( 'fundraising.overallCount' );
@@ -32,9 +32,11 @@ export class LocalImpressionCount {
 	incrementImpressionCounts() {
 		this.overallCount++;
 		this.bannerCount++;
-		if ( !window.localStorage ) {
+
+		if ( !this.hasLocalStorage() ) {
 			return;
 		}
+
 		try {
 			window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
 			window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
@@ -44,6 +46,27 @@ export class LocalImpressionCount {
 			}
 			throw e;
 		}
+	}
+
+	/**
+	 * The try/catch is to check for browsers that explicitly have localStorage blocked
+	 * as the window still has the object but throws an exception when we try to use it
+	 * @return {boolean}
+	 */
+	hasLocalStorage() {
+		if ( typeof this.localStorageActive !== undefined ) {
+			return this.localStorageActive;
+		}
+
+		try {
+			window.localStorage.setItem( 'mDQcDkrbb2', 'mDQcDkrbb2' );
+			window.localStorage.removeItem( 'mDQcDkrbb2' );
+			this.localStorageActive = true;
+		} catch ( e ) {
+			this.localStorageActive = false;
+		}
+
+		return this.localStorageActive;
 	}
 
 	getOverallCount() {
