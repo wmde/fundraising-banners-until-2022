@@ -3,12 +3,12 @@ export class LocalImpressionCount {
 		this.bannerName = bannerName;
 		this.overallCount = 0;
 		this.bannerCount = 0;
-		if ( !window.localStorage ) {
+		if ( !this.hasLocalStorage() ) {
 			return;
 		}
-		const overallCount = window.localStorage.getItem( 'fundraising.overallCount' ) || '0';
+		const overallCount = this.getItem( 'fundraising.overallCount' );
 		this.overallCount = parseInt( overallCount, 10 );
-		const bannerCount = window.localStorage.getItem( 'fundraising.bannerCount' ) || '';
+		const bannerCount = this.getItem( 'fundraising.bannerCount' ) || '';
 		if ( bannerCount.indexOf( '|' ) === -1 ) {
 			return;
 		}
@@ -18,14 +18,49 @@ export class LocalImpressionCount {
 		}
 	}
 
+	getItem( name, defaultValue ) {
+		try {
+			return window.localStorage.getItem( name ) || defaultValue;
+		} catch ( e ) {
+			return defaultValue;
+		}
+	}
+
 	incrementImpressionCounts() {
 		this.overallCount++;
 		this.bannerCount++;
-		if ( !window.localStorage ) {
+
+		if ( !this.hasLocalStorage() ) {
 			return;
 		}
-		window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
-		window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
+
+		try {
+			window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
+			window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
+		} catch ( e ) {
+			// Don't throw localStorage exceptions
+		}
+	}
+
+	/**
+	 * The try/catch is to check for browsers that explicitly have localStorage blocked
+	 * as the window still has the object but throws an exception when we try to use it
+	 * @return {boolean}
+	 */
+	hasLocalStorage() {
+		if ( typeof this.localStorageActive !== undefined ) {
+			return this.localStorageActive;
+		}
+
+		try {
+			window.localStorage.setItem( 'mDQcDkrbb2', 'mDQcDkrbb2' );
+			window.localStorage.removeItem( 'mDQcDkrbb2' );
+			this.localStorageActive = true;
+		} catch ( e ) {
+			this.localStorageActive = false;
+		}
+
+		return this.localStorageActive;
 	}
 
 	getOverallCount() {
