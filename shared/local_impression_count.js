@@ -22,10 +22,7 @@ export class LocalImpressionCount {
 		try {
 			return window.localStorage.getItem( name ) || defaultValue;
 		} catch ( e ) {
-			if ( e.name === 'NS_ERROR_FILE_CORRUPTED' ) {
-				return defaultValue;
-			}
-			throw e;
+			return defaultValue;
 		}
 	}
 
@@ -41,10 +38,7 @@ export class LocalImpressionCount {
 			window.localStorage.setItem( 'fundraising.overallCount', this.overallCount.toFixed( 0 ) );
 			window.localStorage.setItem( 'fundraising.bannerCount', this.bannerName + '|' + this.bannerCount );
 		} catch ( e ) {
-			if ( e.name === 'NS_ERROR_FILE_CORRUPTED' ) {
-				return;
-			}
-			throw e;
+			// Don't throw localStorage exceptions
 		}
 	}
 
