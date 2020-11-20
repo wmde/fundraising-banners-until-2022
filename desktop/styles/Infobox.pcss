@@ -14,8 +14,20 @@
 		line-height: 1.3em;
 		text-align: left;
 		@media ( min-width: $breakpoint_m ) {
+			margin-left: 24px;
 			font-family: $banner-text-font-family;
 			font-size: 1.3em;
+
+			&:before {
+				position: absolute;
+				bottom: 1.5em;
+				left: 0;
+				content: ' ';
+				margin-left: -24px;
+				border-style: solid;
+				border-width: 0 0 25px 25px;
+				border-color: transparent transparent $color-primary transparent;
+			}
 		}
 
 		p {
