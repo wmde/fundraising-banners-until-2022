@@ -1,6 +1,6 @@
 .PHONY: setup server lint lint-js lint-css test ci build help
 
-build: clean ## Build all banners into dist drectory
+build: clean setup ## Build all banners into dist directory
 	docker-compose run js-build npm run build
 
 setup: ## Install all npm dependencies
@@ -20,7 +20,7 @@ lint: lint-js lint-css ## Check JavaScript and CSS code style
 test: ## Run all unit tests
 	docker-compose run js-build npm run test
 
-ci: test lint ## Run continous integration tasks (linting, testing)
+ci: test lint ## Run continuous integration tasks (linting, testing)
 
 clean: ## Clean up dist directory
 	docker-compose run js-build npm run clean
