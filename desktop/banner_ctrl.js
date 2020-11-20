@@ -10,6 +10,7 @@ import { Banner, BannerType } from './Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import DonationForm from './components/ui/form/DonationFormWidthInfoHeader';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import BannerText from './components/BannerText';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
@@ -37,6 +38,7 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
+		footer: Footer,
 		bannerText: BannerText,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),

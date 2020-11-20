@@ -2,12 +2,11 @@
 import { h } from 'preact';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, numberOfDonors, millionImpressionsPerDay } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
 
 	return <div className="banner-text">
 
 		<div className="banner-text-inner">
-
 
 			<div className="banner-text-ctrl">
 				<p>
