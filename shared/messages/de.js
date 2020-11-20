@@ -88,7 +88,10 @@ const Translations = {
 
 	// for C20_WMDE_Test_13 var banner
 	'visitors-vs-donors-sentence-var': 'Bis heute haben {{totalNumberOfDonors}} Menschen gespendet – das sind noch sehr wenige,' +
-		' wenn man bedenkt, dass unser Aufruf jeden Tag {{millionImpressionsPerDay}} Millionen Mal gezeigt wird.'
+		' wenn man bedenkt, dass unser Aufruf jeden Tag {{millionImpressionsPerDay}} Millionen Mal gezeigt wird.',
+
+	// for C20_WMDE_Test_16_var
+	'use-of-funds-link2': 'Warum wir nur 8,7 Mio. € brauchen'
 };
 
 export default Translations;
