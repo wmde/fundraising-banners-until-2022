@@ -129,6 +129,7 @@ export default class Banner extends Component {
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
+			setCookie: true,
 			isFullPageVisible: false
 		} );
 		this.props.onClose(
