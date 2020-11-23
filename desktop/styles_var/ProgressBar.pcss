@@ -1,0 +1,46 @@
+.wmde-banner {
+	.progress_bar {
+		background: $color-white;
+		border: 3px solid $color-primary;
+		border-top: 0;
+		border-radius: 0 0 10px 10px;
+		font-size: 14px;
+
+		&__wrapper {
+			position: relative;
+			height: 19px;
+			line-height: 19px;
+		}
+
+		&__donation_fill,
+		&__donation_remaining {
+			position: absolute;
+			height: 100%;
+			transition: width 3000ms $banner-easing, color 250ms $banner-easing;
+			color: transparent;
+		}
+
+		&__donation_fill {
+			background: $progressbar-gradient;
+			left: 0;
+			padding-right: 16px;
+			text-align: right;
+			border-radius: 0 10px 10px 0;
+		}
+
+		&__donation_remaining {
+			right: 0;
+			padding-left: 10px;
+		}
+
+		&--finished {
+			.progress_bar__donation_fill {
+				color: $color-white;
+			}
+
+			.progress_bar__donation_remaining {
+				color: $color-primary;
+			}
+		}
+	}
+}

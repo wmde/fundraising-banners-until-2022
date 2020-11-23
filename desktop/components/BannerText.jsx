@@ -18,7 +18,7 @@ export default function BannerText( props ) {
 			Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert. Doch schon mit einer Spende
 			von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln. { visitorsVsDonorsSentence } Die meisten Menschen spenden,
 			weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert von 5&nbsp;€ geschenkt?
-			Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. <span className="optional-text text-m">Zeigen
+			Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. <span className="optional-text text-l">Zeigen
 			Sie den Freiwilligen, die Ihnen verlässliche und neutrale Informationen zur Verfügung stellen,
 			dass Sie ihre Arbeit wertschätzen.</span> Vielen Dank!
 		</p>

@@ -1,0 +1,143 @@
+.wmde-banner {
+	.slideshow-previous,
+	.slideshow-next {
+		position: absolute;
+		z-index: 30;
+		width: 52px;
+		height: 52px;
+		top: 50%;
+		margin-top: -26px;
+		border: 0;
+		background: $color-white;
+		border-radius: 50%;
+		text-align: center;
+		padding: 5px 0 0;
+	}
+
+	.slideshow-previous {
+		left: -26px;
+		padding-right: 10px;
+		box-shadow: -3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: left 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			left: -30px;
+		}
+	}
+
+	.slideshow-next {
+		right: -26px;
+		padding-left: 10px;
+		box-shadow: 3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: right 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			right: -30px;
+		}
+	}
+
+	.slideshow-application-of-funds-link {
+		position: absolute;
+		display: inline-block;
+		bottom: 14px;
+		left: 20px;
+		font-size: 12px;
+
+		@media ( min-width: $breakpoint_xs ) {
+			font-size: 15px;
+		}
+	}
+	.carousel-cell {
+		width: 100%;
+		height: auto;
+		font-family: $banner-serif;
+		font-size: 17px;
+		text-align: center;
+		padding: 16px 26px;
+
+		@media ( min-width: $breakpoint_m ) {
+			padding: 36px;
+		}
+
+		.headline {
+			font-size: 22px;
+			line-height: 41px;
+
+			@media ( min-width: $breakpoint_xs ) {
+				font-size: 26px;
+			}
+		}
+	}
+	.flickity {
+		&-viewport {
+			overflow: hidden;
+			position: relative;
+			height: 100%;
+			margin-bottom: 16px;
+		}
+		&-enabled {
+			position: relative;
+			&:focus {
+				outline: transparent;
+			}
+			&.is-draggable {
+				-webkit-tap-highlight-color: transparent;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				.flickity-viewport {
+					cursor: move;
+					cursor: -webkit-grab;
+					cursor: grab;
+					&.is-pointer-down {
+						cursor: -webkit-grabbing;
+						cursor: grabbing;
+					}
+				}
+			}
+		}
+		&-slider {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+		&-button {
+			position: absolute;
+			border: 0;
+		}
+		&-page-dots {
+			position: relative;
+			width: 100%;
+			padding: 0 0 18px;
+			margin: 0;
+			list-style: none;
+			text-align: center;
+			line-height: 1;
+			.dot {
+				background: $color-white;
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				margin: 0 4px;
+				border: 2px solid $color-gray;
+				border-radius: 50%;
+				cursor: pointer;
+
+				@media ( min-width: $breakpoint_xs ) {
+					width: 20px;
+					height: 20px;
+				}
+
+				&.is-selected {
+					background: $color-gray;
+				}
+			}
+		}
+		&-rtl .flickity-page-dots {
+			direction: rtl;
+		}
+	}
+}
