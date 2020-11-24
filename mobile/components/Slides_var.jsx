@@ -12,14 +12,8 @@ export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySe
 				aber dennoch: Bitte klicken Sie jetzt nicht weg! { campaignDaySentence }</p>
 		</div>
 		<div className="carousel-cell">
-			<p style={'position:absolute'}>Zum ersten Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
+			<p>Zum ersten Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
 				die Unabhängigkeit von Wikipedia zu verteidigen. <span className="text-highlight">{ visitorsVsDonorsSentence }</span></p>
-			<p className="space-placeholder">
-				<p>Liebe Leserinnen und Leser:</p>
-				<p>{ visitorsVsDonorsSentence } Wenn alle, die das
-					jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am heutigen { currentDayName } vorbei.
-				</p>
-			</p>
 		</div>
 		<div className="carousel-cell">
 			<p>Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert. <span className="text-highlight">Doch schon mit einer
