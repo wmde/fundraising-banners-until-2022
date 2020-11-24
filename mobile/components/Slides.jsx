@@ -3,7 +3,7 @@ import { h } from 'preact';
 
 export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySentence, currentDayName, progressBar, visitorsVsDonorsSentence } ) {
 
-	return <div><div className="mini-banner-carousel">
+	return <div className="mini-banner-carousel">
 		<div className="carousel-cell">
 			<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSumNumeric } Millionen Euro</p>
 			{ progressBar }
@@ -26,6 +26,5 @@ export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySe
 			<span className="text-highlight"> Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück.</span>
 			</p>
 		</div>
-	</div>
 	</div>;
 }
