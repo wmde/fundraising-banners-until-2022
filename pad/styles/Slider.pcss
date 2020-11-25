@@ -1,0 +1,98 @@
+.wmde-banner {
+	.banner-slider-next,
+	.banner-slider-previous {
+		position: absolute;
+		z-index: 30;
+		height: 40px;
+		line-height: 40px;
+		width: 16px;
+		top: 50%;
+		margin-top: -20px;
+	}
+	.banner-slider-next {
+		right: 16px;
+		text-align: right;
+	}
+	.banner-slider-previous {
+		left: 16px;
+		text-align: left;
+	}
+	.carousel-cell {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		padding: 0 41px 88px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.flickity {
+		&-viewport {
+			overflow: hidden;
+			position: absolute;
+			z-index: 20;
+			width: 100%;
+			height: 100%;
+		}
+		&-enabled {
+			&:focus {
+				outline: transparent;
+			}
+			&.is-draggable {
+				-webkit-tap-highlight-color: transparent;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				.flickity-viewport {
+					cursor: move;
+					cursor: -webkit-grab;
+					cursor: grab;
+					&.is-pointer-down {
+						cursor: -webkit-grabbing;
+						cursor: grabbing;
+					}
+				}
+			}
+		}
+		&-slider {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+		&-button {
+			position: absolute;
+			border: 0;
+		}
+		&-page-dots {
+			position: absolute;
+			width: 100%;
+			bottom: 16px;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			text-align: center;
+			line-height: 1;
+			.dot {
+				background: $color-gray-medium;
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				margin: 0 4px;
+				border-radius: 50%;
+				cursor: pointer;
+				border: 4px solid $color-white;
+				&.is-selected {
+					width: 10px;
+					height: 10px;
+					background: $color-white;
+					border: 3px solid $color-primary;
+				}
+			}
+		}
+		&-rtl .flickity-page-dots {
+			direction: rtl;
+		}
+	}
+}

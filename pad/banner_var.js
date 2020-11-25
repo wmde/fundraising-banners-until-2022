@@ -1,20 +1,21 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './Banner';
+import Banner from './BannerVar';
+import { BannerType } from './BannerType';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import BannerText from './components/BannerText';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
-import DonationForm from './components/ui/form/MultiStepDonationForm';
+import DonationForm from '../shared/components/ui/form/DonationForm';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -38,7 +39,9 @@ bannerPresenter.present(
 		useOfFundsText,
 		bannerText: BannerText,
 		donationForm: DonationForm,
+		sliderAutoPlaySpeed: 10000,
 		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		bannerType: BannerType.VAR
 	}
 );

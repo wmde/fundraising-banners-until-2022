@@ -2,6 +2,7 @@
 	.banner-text {
 		overflow-x: hidden;
 		font-weight: bold;
+		box-sizing: border-box;
 
 		&-inner {
 			display: flex;
@@ -10,8 +11,13 @@
 
 		&-ctrl,
 		&-var {
-			flex: 1 0 0;
-			padding: 16px;
+			flex: 0 0 50%;
+			box-sizing: border-box;
+			width: 50%;
+		}
+
+		&-ctrl {
+			padding: 16px 32px 90px;
 		}
 	}
 
@@ -85,5 +91,11 @@
 				display: inline;
 			}
 		}
+	}
+
+	.info-icon {
+		float: left;
+		margin-left: -20px;
+		margin-right: 4px;
 	}
 }

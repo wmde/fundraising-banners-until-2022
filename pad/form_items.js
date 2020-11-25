@@ -1,8 +1,7 @@
-import { Intervals, PaymentMethods } from '../shared/components/ui/form/FormItemsBuilder';
-import LocalFormItemsBuilder from './components/ui/form/FormItemsBuilder';
+import FormItemsBuilder, { Intervals, PaymentMethods } from '../shared/components/ui/form/FormItemsBuilder';
 
 export function createFormItems( translations, amountFormatter ) {
-	const builder = new LocalFormItemsBuilder( translations, amountFormatter );
+	const builder = new FormItemsBuilder( translations, amountFormatter );
 	builder.setIntervals(
 		Intervals.ONCE,
 		Intervals.MONTHLY,
