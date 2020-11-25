@@ -1,4 +1,26 @@
 .wmde-banner {
+	.banner-text {
+		overflow-x: hidden;
+		font-weight: bold;
+
+		&-inner {
+			display: flex;
+			width: 200%;
+		}
+
+		&-ctrl,
+		&-var {
+			flex: 1 0 0;
+			padding: 16px;
+		}
+	}
+
+	&--var {
+		.banner-text-inner {
+			margin-left: -100%;
+		}
+	}
+
 	.text {
 		&__headline {
 			margin: 0.2em 0;

@@ -1,8 +1,7 @@
 .wmde-banner {
 	.progress_bar {
 		display: flex;
-		margin-right: 1.2em;
-		margin-left: 1.2em;
+		padding: 0 16px 16px;
 
 		&__days_left {
 			visibility: hidden;
@@ -22,18 +21,7 @@
 			justify-content: space-between;
 			flex: 1;
 			max-height: 30px;
-			margin: 1.75em 35px 0.75em 16px;
-
 			height: 28px;
-			@media ( orientation: landscape ) {
-				margin: 3.75em 35px 3.75em 16px;
-				@media ( min-width: $breakpoint_m_ipad ) {
-					margin: 5.6em 35px 5.6em 16px;
-				}
-			}
-			@media ( min-height: $breakpoint_m_ipad ) {
-				margin: 3em 35px;
-			}
 		}
 		&__donation_fill {
 			width: 0;
@@ -75,7 +63,7 @@
 			white-space: nowrap;
 
 			color: $color-black;
-			line-height: 1.6em;
+			line-height: 30px;
 			margin-left: -40px;
 		}
 
