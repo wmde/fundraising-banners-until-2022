@@ -1,9 +1,27 @@
 .wmde-banner {
 
 	.banner-text {
-		padding-right: 1.7em;
+		overflow-x: hidden;
+		margin: -10px 5px -10px -10px;
 		@media ( min-width: $breakpoint_l ) {
-			padding-right: 0;
+			margin: -10px;
+		}
+
+		&-inner {
+			display: flex;
+			width: 200%;
+		}
+
+		&-ctrl,
+		&-var {
+			flex: 1 0 0;
+			padding: 10px;
+		}
+	}
+
+	&--var {
+		.banner-text-inner {
+			margin-left: -100%;
 		}
 	}
 
