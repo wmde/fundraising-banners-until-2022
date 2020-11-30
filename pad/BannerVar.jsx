@@ -73,10 +73,10 @@ export default class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
-		this.props.registerResizeBanner( this.onPageResize.bind( this ) );
+		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
 	}
 
-	onPageResize() {
+	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 		this.bannerSlider.resize();
