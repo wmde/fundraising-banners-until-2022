@@ -8,9 +8,11 @@ export class Slider {
 
 	/**
 	 * @param {int} sliderAutoPlaySpeed - Waiting time before next slide is shown automatically
+	 * @param {Object} extraOptions - any custom stuff needed for the slider
 	 */
-	constructor( sliderAutoPlaySpeed ) {
+	constructor( sliderAutoPlaySpeed, extraOptions = {} ) {
 		this.sliderAutoPlaySpeed = sliderAutoPlaySpeed;
+		this.extraOptions = extraOptions;
 	}
 
 	/**
@@ -18,11 +20,14 @@ export class Slider {
 	 */
 	initialize() {
 		if ( Object.prototype.hasOwnProperty.call( this, 'slider' ) === false ) {
-			this.slider = new Flickity( document.querySelector( '.mini-banner-carousel' ), {
-				wrapAround: true,
-				autoPlay: this.sliderAutoPlaySpeed,
-				prevNextButtons: false
-			} );
+			this.slider = new Flickity(
+				document.querySelector( '.mini-banner-carousel' ),
+				Object.assign( {
+					wrapAround: true,
+					autoPlay: this.sliderAutoPlaySpeed,
+					prevNextButtons: false
+				}, this.extraOptions )
+			);
 		}
 		this.disableAutoplay();
 		this.viewedSlides = 1;

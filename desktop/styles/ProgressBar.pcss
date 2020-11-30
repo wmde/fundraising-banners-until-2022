@@ -3,6 +3,10 @@
 		display: flex;
 		font-family: $banner-main-font-family;
 		font-size: 14px;
+		padding: 0 18px 0;
+		position: absolute;
+		z-index: 10;
+		box-sizing: border-box;
 
 		&__days_left {
 			visibility: hidden;
@@ -108,6 +112,22 @@
 			.progress_bar__donation_fill {
 				margin-right: 16px;
 			}
+		}
+	}
+
+	&--ctrl {
+		.progress_bar {
+			bottom: 16px;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&--var {
+		.progress_bar {
+			bottom: 56px;
+			left: 20px;
+			right: 20px;
 		}
 	}
 }

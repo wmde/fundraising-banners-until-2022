@@ -1,6 +1,7 @@
 .wmde-banner {
 
 	.banner-text {
+		box-sizing: border-box;
 		overflow-x: hidden;
 		margin: -10px 1em -10px -10px;
 		@media ( min-width: $breakpoint_l ) {
@@ -14,14 +15,25 @@
 
 		&-ctrl,
 		&-var {
-			flex: 1 0 0;
-			padding: 10px;
+			flex: 0 0 50%;
+			box-sizing: border-box;
+			width: 50%;
+		}
+
+		&-ctrl {
+			/* padding: 16px 32px 60px; */
+			padding: 11px 11px 45px;
 		}
 	}
 
 	&--var {
 		.banner-text-inner {
 			margin-left: -100%;
+		}
+
+		&-ctrl {
+			/* padding: 16px 32px 60px; */
+			padding: 16px 32px 45px;
 		}
 	}
 
@@ -31,6 +43,10 @@
 		@media ( min-width: $breakpoint_xl ) {
 			display: block;
 			margin-bottom: 1em;
+		}
+
+		&--bold {
+			font-weight: bold;
 		}
 	}
 
