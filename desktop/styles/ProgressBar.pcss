@@ -1,11 +1,20 @@
+$progress-bar-height: 30px;
+
 .wmde-banner {
 	.progress_bar {
 		display: flex;
 		font-family: $banner-main-font-family;
-		font-size: 14px;
+		font-size: 12px;
+		line-height: $progress-bar-height;
+
+		&__days_left,
+		&__donation_text,
+		&__donation_remaining {
+			opacity: 0;
+			visibility: hidden;
+		}
 
 		&__days_left {
-			visibility: hidden;
 			font-weight: bold;
 			padding-left: 5px;
 
@@ -15,13 +24,13 @@
 		}
 		&__wrapper {
 			position: relative;
+			height: $progress-bar-height;
 			display: flex;
 			justify-content: space-between;
 			flex: 1;
-			border: 2px solid $color-primary-light;
-			background-color: $color-white;
-			border-radius: 0.55em;
-			margin-top: 1em;
+			border-top: 1px solid $color-secondary-light;
+			border-bottom: 1px solid $color-secondary-light;
+			background-color: $color-secondary-lighter;
 		}
 		&__donation_fill {
 			width: 0;
@@ -30,10 +39,9 @@
 			justify-content: space-between;
 
 			background: $color-secondary;
-			height: 22px;
-			border-radius: 0.4em;
-			transition-duration: 3000ms;
-			transition-property: width;
+			height: $progress-bar-height;
+			border-radius: 0 15px 15px 0;
+			transition: width 3000ms $banner-easing;
 		}
 		&__donation_text {
 			text-align: right;
@@ -41,11 +49,10 @@
 			overflow: hidden;
 			padding-right: 16px;
 			flex: 1;
-			visibility: hidden;
-
 			color: $color-white;
-			line-height: 1.8em;
 			white-space: nowrap;
+
+			transition: opacity 300ms $banner-easing;
 		}
 		&__donation_remaining {
 			padding: 0 10px;
@@ -54,7 +61,6 @@
 			white-space: nowrap;
 
 			color: $color-black;
-			line-height: 1.6em;
 			margin-left: -40px;
 		}
 		&__pointer_tip {
@@ -85,6 +91,7 @@
 			.progress_bar__days_left,
 			.progress_bar__donation_text,
 			.progress_bar__donation_remaining {
+				opacity: 1;
 				visibility: visible;
 			}
 		}

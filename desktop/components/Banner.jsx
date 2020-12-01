@@ -143,13 +143,6 @@ export class Banner extends Component {
 											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay,
 											textIcon: TextIcon
 										} }/>
-									<ProgressBar
-										formatters={props.formatters}
-										daysLeft={campaignProjection.getRemainingDays()}
-										donationAmount={campaignProjection.getProjectedDonationSum()}
-										goalDonationSum={campaignProjection.goalDonationSum}
-										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-										setStartAnimation={this.registerStartProgressbar}/>
 								</div>
 							</div>
 							<div className="banner__form">
@@ -169,6 +162,13 @@ export class Banner extends Component {
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={props.formatters}
+							daysLeft={campaignProjection.getRemainingDays()}
+							donationAmount={campaignProjection.getProjectedDonationSum()}
+							goalDonationSum={campaignProjection.goalDonationSum}
+							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+							setStartAnimation={this.registerStartProgressbar}/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>

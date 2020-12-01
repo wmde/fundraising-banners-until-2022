@@ -5,12 +5,19 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		font-size: 12px;
-		line-height: 1.6em;
+		line-height: 20px;
 		color: $color-black;
+		padding: 0 10px;
+		margin-top: -10px;
 
 		@media ( min-width: $breakpoint_l ) {
-			padding-left: 1em;
-			padding-top: 10px;
+			padding: 0 24px;
+			margin-top: 0;
+		}
+
+		&__bank,
+		&__usage {
+			padding: 10px 0;
 		}
 
 		&__bank {
@@ -19,8 +26,10 @@
 			flex-wrap: wrap;
 
 			@media ( min-width: $breakpoint_l ) {
+				border-right: 1px solid $color-secondary-light;
 				display: block;
 				flex-wrap: nowrap;
+				margin-right: 30px;
 			}
 			&-item {
 				white-space: nowrap;
@@ -41,7 +50,6 @@
 				text-align: center;
 				.footer__item {
 					width: $form-width;
-					padding-left: 1em;
 				}
 			}
 		}
