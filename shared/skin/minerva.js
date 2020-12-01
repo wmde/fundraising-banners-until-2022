@@ -1,6 +1,8 @@
 import Skin from './Skin';
 import $ from 'jquery';
 
+// usually mobile skin
+
 export default class Minerva extends Skin {
 	constructor() {
 		super();
