@@ -11,11 +11,14 @@ import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
 import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
+import { Slider } from '../shared/banner_slider';
 import { BannerType } from './BannerType';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
+
+const SLIDESHOW_START_DELAY = 2000;
 
 export default class Banner extends Component {
 
@@ -60,6 +63,10 @@ export default class Banner extends Component {
 	}
 
 	componentDidMount() {
+		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed, { adaptiveHeight: false, setGallerySize: false } );
+		this.bannerSlider.initialize();
+		this.bannerSlider.disableAutoplay();
+
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
@@ -72,6 +79,7 @@ export default class Banner extends Component {
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		this.bannerSlider.resize();
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -83,13 +91,17 @@ export default class Banner extends Component {
 
 	onFinishedTransitioning = () => {
 		this.startProgressbar();
+		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
 		this.props.onFinishedTransitioning();
 	}
 
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
-		this.props.onClose();
+		this.props.onClose(
+			this.bannerSlider.getViewedSlides(),
+			this.bannerSlider.getCurrentSlide(),
+		);
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -102,13 +114,28 @@ export default class Banner extends Component {
 
 	toggleFundsModal = () => {
 		if ( !this.state.isFundsModalVisible ) {
-			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+			this.props.trackingData.tracker.trackBannerEvent(
+				'application-of-funds-shown',
+				this.bannerSlider.getViewedSlides(),
+				this.bannerSlider.getCurrentSlide(),
+				this.props.trackingData.bannerClickTrackRatio
+			);
 		}
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+	}
+
+	bannerSliderNext = e => {
+		e.preventDefault();
+		this.bannerSlider.next();
+	}
+
+	bannerSliderPrevious = e => {
+		e.preventDefault();
+		this.bannerSlider.previous();
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -141,7 +168,12 @@ export default class Banner extends Component {
 									formatters={props.formatters}
 									campaignParameters={props.campaignParameters}
 									campaignProjection={props.campaignProjection}
-									bannerText={props.bannerText}/>
+									bannerText={props.bannerText}
+									propsForText={ {
+										bannerSliderNext: this.bannerSliderNext,
+										bannerSliderPrevious: this.bannerSliderPrevious
+									} }
+								/>
 								<ProgressBar
 									formatters={props.formatters}
 									daysLeft={campaignProjection.getRemainingDays()}

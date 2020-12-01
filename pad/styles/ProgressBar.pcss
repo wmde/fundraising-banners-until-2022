@@ -1,8 +1,10 @@
 .wmde-banner {
 	.progress_bar {
 		display: flex;
-		margin-right: 1.2em;
-		margin-left: 1.2em;
+		padding: 0 32px 0;
+		position: absolute;
+		z-index: 10;
+		box-sizing: border-box;
 
 		&__days_left {
 			visibility: hidden;
@@ -22,18 +24,7 @@
 			justify-content: space-between;
 			flex: 1;
 			max-height: 30px;
-			margin: 1.75em 35px 0.75em 16px;
-
 			height: 28px;
-			@media ( orientation: landscape ) {
-				margin: 3.75em 35px 3.75em 16px;
-				@media ( min-width: $breakpoint_m_ipad ) {
-					margin: 5.6em 35px 5.6em 16px;
-				}
-			}
-			@media ( min-height: $breakpoint_m_ipad ) {
-				margin: 3em 35px;
-			}
 		}
 		&__donation_fill {
 			width: 0;
@@ -50,7 +41,7 @@
 			justify-content: space-between;
 		}
 		&__donation_text {
-			text-align: right;
+			text-align: left;
 			font-size: 0.9em;
 			font-weight: bold;
 			overflow: hidden;
@@ -59,11 +50,11 @@
 			visibility: hidden;
 			white-space: nowrap;
 			line-height: 30px;
-
+			margin-top: -30px;
 			position: relative;
 			top: auto;
 			left: auto;
-			color: $color-white;
+			color: $color-black;
 		}
 
 		&__donation_remaining {
@@ -75,41 +66,35 @@
 			white-space: nowrap;
 
 			color: $color-black;
-			line-height: 1.6em;
+			line-height: 30px;
 			margin-left: -40px;
+			margin-top: -30px;
 		}
 
 		&__pointer_tip {
-			width: 5px;
-			height: 5px;
+			width: 6px;
+			height: 6px;
 			background: $color-black;
 			float: left;
 			border-radius: 100%;
-			margin-top: 18px;
+			margin-top: 14px;
 		}
 
 		&__pointer_line {
 			float: left;
 			width: 25px;
 			background: $color-black;
-			margin: 20px 2px 0 0;
+			margin: 16px 2px 0 0;
 		}
 		&__donation_remaining--outer {
 			display: none;
 			position: relative;
-			line-height: 40px;
+			height: 30px;
+			line-height: 34px;
 			font-size: 0.9em;
 			color: $color-black;
 			font-weight: bold;
 			margin-left: -3px;
-			padding-top: 21px;
-
-			@media ( orientation: landscape ) {
-				padding-top: 55px;
-				@media ( min-width: $breakpoint_m_ipad ) {
-					padding-top: 6em;
-				}
-			}
 		}
 
 		&--finished {
@@ -142,6 +127,22 @@
 			.progress_bar__wrapper {
 				margin-right: -20px;
 			}
+		}
+	}
+
+	&--ctrl {
+		.progress_bar {
+			bottom: 16px;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	&--var {
+		.progress_bar {
+			bottom: 56px;
+			left: 9px;
+			right: 9px;
 		}
 	}
 }

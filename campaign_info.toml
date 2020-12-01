@@ -56,19 +56,19 @@ tracking = "org-mob_en01-201104-var"
 
 # iPad campaign
 [pad]
-campaign_tracking = "pad01-ba-201104"
+campaign_tracking = "pad02-ba-201130"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
 filename = "./pad/banner_ctrl.js"
-pagename = "B20WMDE_pad_01_201104_ctrl"
-tracking = "org-pad01-201104-ctrl"
+pagename = "B20WMDE_pad_02_201130_ctrl"
+tracking = "org-pad02-201130-ctrl"
 
 [pad.banners.pad]
 filename = "./pad/banner_var.js"
-pagename = "B20WMDE_pad_01_201104_var"
-tracking = "org-pad01-201104-var"
+pagename = "B20WMDE_pad_02_201130_var"
+tracking = "org-pad02-201130-var"
 
 
 # iPad English campaign
