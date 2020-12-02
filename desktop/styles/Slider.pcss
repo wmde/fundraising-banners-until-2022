@@ -17,89 +17,19 @@
 		left: 16px;
 		text-align: left;
 	}
-	.carousel-cell {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-		padding: 0 41px 88px;
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-		padding-left: 57px;
 
+	.splide__slide {
+		/* The padding makes room for the progress and slide change elements */
+		padding: 1em 2em 2em 2em;
 		@media ( min-width: $breakpoint_l ) {
-			padding-left: 40px;
+			padding: 2em;
 		}
 	}
-	.flickity {
-		&-viewport {
-			overflow: hidden;
-			position: absolute;
-			z-index: 20;
-			width: 100%;
-			height: 100%;
-		}
-		&-enabled {
-			&:focus {
-				outline: transparent;
-			}
-			&.is-draggable {
-				-webkit-tap-highlight-color: transparent;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-				.flickity-viewport {
-					cursor: move;
-					cursor: -webkit-grab;
-					cursor: grab;
-					&.is-pointer-down {
-						cursor: -webkit-grabbing;
-						cursor: grabbing;
-					}
-				}
-			}
-		}
-		&-slider {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-		}
-		&-button {
-			position: absolute;
-			border: 0;
-		}
-		&-page-dots {
-			z-index: 999;
-			position: absolute;
-			width: 100%;
-			bottom: 16px;
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			text-align: center;
-			line-height: 1;
-			.dot {
-				background: $color-gray-light-darker;
-				display: inline-block;
-				width: 8px;
-				height: 8px;
-				margin: 0 4px;
-				border-radius: 50%;
-				cursor: pointer;
-				border: 4px solid $color-white;
-				&.is-selected {
-					width: 14px;
-					height: 14px;
-					background: $color-primary;
-					border: 3px solid $color-gray-light-darker;
-					margin-bottom: -3px;
-				}
-			}
-		}
-		&-rtl .flickity-page-dots {
-			direction: rtl;
+
+	.splide--draggable {
+		cursor: grab;
+		&.splide--dragging {
+			cursor: grabbing;
 		}
 	}
 }

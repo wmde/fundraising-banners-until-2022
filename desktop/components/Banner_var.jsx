@@ -2,19 +2,20 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import Infobox from '../shared/components/ui/Infobox';
-import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import TranslationContext from '../shared/components/TranslationContext';
-import { Slider } from '../shared/banner_slider';
+import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Infobox from '../../shared/components/ui/Infobox';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import TranslationContext from '../../shared/components/TranslationContext';
+import SlideState from '../../shared/slide_state';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
+const SLIDESHOW_SLIDE_INTERVAL = 10000;
 
 export const BannerType = Object.freeze( {
 	CTRL: Symbol( 'ctrl ' ),
@@ -28,7 +29,7 @@ export class Banner extends Component {
 		onClose: PropTypes.func,
 		/** callback when banner gets submitted */
 		onSubmit: PropTypes.func,
-		/** */
+		/** callback to register this banner's display function with parent code */
 		registerDisplayBanner: PropTypes.func.isRequired
 	}
 
@@ -39,17 +40,16 @@ export class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			isFundsModalVisible: false,
-
-			// trigger for banner resize events
 			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
+		this.startProgressbar = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
 	}
 
 	componentDidMount() {
-		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed, { adaptiveHeight: false, setGallerySize: false } );
-		this.bannerSlider.initialize();
-		this.bannerSlider.disableAutoplay();
 
 		this.props.registerDisplayBanner(
 			() => {
@@ -60,12 +60,6 @@ export class Banner extends Component {
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
 	}
 
-	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
-		this.bannerSlider.resize();
-	}
-
 	// eslint-disable-next-line no-unused-vars
 	componentDidUpdate( previousProps, previousState, snapshot ) {
 		if ( previousState.formInteractionSwitcher !== this.state.formInteractionSwitcher ) {
@@ -73,18 +67,28 @@ export class Banner extends Component {
 		}
 	}
 
+	adjustSurroundingSpace() {
+		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+	}
+
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
-		this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
 		this.startProgressbar();
+		setTimeout( this.startSliderAutoplay(), SLIDESHOW_START_DELAY );
+	}
+
+	onFormInteraction = () => {
+		this.setState( { formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+		this.stopSliderAutoplay();
 	}
 
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
 		this.props.onClose(
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
+			this.slideState.slidesShown,
+			this.slideState.currentSlide
 		);
 	};
 
@@ -96,12 +100,17 @@ export class Banner extends Component {
 		this.startProgressbar = startPb;
 	};
 
+	registerAutoplayCallbacks = ( startAutoplay, stopAutoplay ) => {
+		this.startSliderAutoplay = startAutoplay;
+		this.stopSliderAutoplay = stopAutoplay;
+	}
+
 	toggleFundsModal = () => {
 		if ( !this.state.isFundsModalVisible ) {
 			this.props.trackingData.tracker.trackBannerEvent(
 				'application-of-funds-shown',
-				this.bannerSlider.getViewedSlides(),
-				this.bannerSlider.getCurrentSlide(),
+				this.slideState.slidesShown,
+				this.slideState.currentSlide,
 				this.props.trackingData.bannerClickTrackRatio
 			);
 		}
@@ -112,20 +121,6 @@ export class Banner extends Component {
 		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: false } );
 	};
-
-	onFormInteraction = () => {
-		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
-
-	bannerSliderNext = e => {
-		e.preventDefault();
-		this.bannerSlider.next();
-	}
-
-	bannerSliderPrevious = e => {
-		e.preventDefault();
-		this.bannerSlider.previous();
-	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -160,8 +155,9 @@ export class Banner extends Component {
 										campaignProjection={props.campaignProjection}
 										bannerText={props.bannerText}
 										propsForText={ {
-											bannerSliderNext: this.bannerSliderNext,
-											bannerSliderPrevious: this.bannerSliderPrevious
+											slideshowSlideInterval: SLIDESHOW_SLIDE_INTERVAL,
+											onSlideChange: this.slideState.onSlideChange.bind( this.slideState ),
+											registerAutoplay: this.registerAutoplayCallbacks
 										} }
 									/>
 									<ProgressBar
