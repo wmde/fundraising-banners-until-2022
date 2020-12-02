@@ -1,6 +1,6 @@
 .wmde-banner {
-	visibility: hidden;
-	width: 100%;
+	font-family: $font-family;
+	color: $font-color;
 
 	* {
 		box-sizing: border-box;
@@ -8,87 +8,131 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	&--visible {
-		visibility: visible;
-	}
-	&--hidden {
-		display: none;
+	p {
+		margin: 0;
 	}
 
-	img {
-		border: 0 none;
-	}
-
-	ul {
-		list-style-image: unset;
+	figure {
+		margin: 0;
+		padding: 0;
 	}
 
 	.banner__wrapper {
-		font-size: 14px;
-		font-family: $banner-main-font-family;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background-color: $color-white;
-	}
+		position: relative;
+		background: $background-home;
+		box-shadow: 0 5px 10px rgba( 0, 0, 0, 0.3 );
 
-	.banner__content {
-		padding: 10px 10px 0;
+		button {
+			display: inline-block;
+			width: auto;
+			background: $button-background-color;
+			color: $button-font-color;
+			height: $button-height;
+			line-height: $button-height;
+			border: 0;
+			border-radius: $button-border-radius;
+			text-align: center;
+			padding: 0 32px;
+			font-weight: bold;
+			font-size: 14px;
+			white-space: nowrap;
+			cursor: pointer;
+			transition: border-radius 500ms $banner-easing;
 
-		@media ( min-width: $breakpoint_l ) {
-			display: flex;
-			flex-direction: row;
-			order: 1;
-			padding: 12px 24px 0;
-		}
-	}
-
-	.banner__infobox {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex: 0 1 100%;
-		margin-bottom: 10px;
-		@media ( min-width: $breakpoint_l ) {
-			margin-bottom: 0;
-		}
-	}
-
-	.banner__form {
-		order: 2;
-		@media ( min-width: $breakpoint_l ) {
-			display: flex;
-			flex-direction: row;
-			.form {
-				width: $form-width;
+			&:hover,
+			&:focus {
+				border-radius: 10px;
 			}
 		}
 	}
 
-	.banner__footer {
-		@media ( min-width: $breakpoint_l ) {
-			order: 2;
+	.back,
+	.close {
+		position: absolute;
+		z-index: 20;
+		top: 0;
+		text-align: center;
+
+		svg path {
+			fill: rgba( 0, 0, 0, 0.5 );
+			transition: fill 500ms $banner-easing;
 		}
+
+		&__link {
+			width: $banner-padding;
+			height: $banner-padding;
+			padding-top: 18px;
+			display: block;
+		}
+
+		&:hover,
+		&:focus {
+			svg path {
+				fill: rgba( 0, 0, 0, 0.8 );
+			}
+		}
+	}
+
+	.back {
+		left: 0;
 	}
 
 	.close {
-		position: absolute;
-		width: 30px;
-		height: 30px;
-		line-height: 30px;
-		text-align: center;
-		top: 8px;
-		right: 8px;
-		z-index: 1;
+		right: 0;
+	}
 
-		&__link {
-			display: block;
-			width: 100%;
-			font-size: 25px;
-			color: $color-black-light;
-			text-decoration: none;
-			&:hover {
-				text-decoration: none;
-				color: $color-gray-medium;
+	.content-home {
+		padding: $banner-padding 20px 75px;
+		text-align: center;
+		color: $color-white;
+
+		@media ( min-width: $breakpoint_s ) {
+			padding: $banner-padding $banner-padding 75px;
+		}
+
+		&-headline {
+			vertical-align: top;
+			font-size: 20px;
+			line-height: 20px;
+			margin: 0 0 14px;
+			padding: 0;
+
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 26px;
+				height: 26px;
+				line-height: 26px;
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				font-size: 36px;
+				height: 36px;
+				line-height: 36px;
 			}
 		}
+
+		&-choice {
+			display: inline-block;
+			margin: 0 10px 10px;
+			width: 116px;
+			text-align: center;
+
+			@media ( min-width: $breakpoint_s ) {
+				margin: 0 25px;
+			}
+
+			&-image {
+				display: block;
+				margin-bottom: 14px;
+			}
+			button {
+				padding: 0;
+				width: 100%;
+			}
+		}
+	}
+
+	.content-container {
+		max-width: $banner-content-width;
+		margin: auto;
 	}
 }
