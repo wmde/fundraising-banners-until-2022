@@ -59,7 +59,10 @@ export default class BannerTransition extends Component {
 		this.props.skinAdjuster.addSpace( this.ref.current.offsetHeight, this.transition );
 	};
 
-	onTransitionEnd = () => {
+	onTransitionEnd = evt => {
+		if ( !this.transitionEventOriginatesFromThisComponent( evt ) ) {
+			return;
+		}
 		// TODO: Discover why this is being called multiple times
 		if ( this.state.transitionPhase === FINISHED ) {
 			return;
@@ -69,6 +72,10 @@ export default class BannerTransition extends Component {
 			this.props.onFinish();
 		}
 	};
+
+	transitionEventOriginatesFromThisComponent( evt ) {
+		return /banner-position/.test( evt.target.className );
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

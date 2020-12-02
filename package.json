@@ -17,6 +17,7 @@
   "license": "MIT",
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
+    "@splidejs/react-splide": "^0.4.4",
     "classnames": "^2.2.6",
     "flickity": "^2.2.1",
     "format-number": "^3.0.0",
