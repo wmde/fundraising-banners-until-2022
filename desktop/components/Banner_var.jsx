@@ -106,8 +106,11 @@ export class Banner extends Component {
 		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
 
-		const TextIcon = <img className="info-icon" height="16" width="16"
-			src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />;
+		const TextIcon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="8" cy="8" r="8" fill="#2B6DA0"/>
+			{/* eslint-disable-next-line max-len */}
+			<path d="M8.80003 5.73332V11.7173H10.2667V13.0667H5.96937V11.7173H7.33337V7.19999H5.8667V5.73332H8.80003ZM7.33337 2.79999H8.80003V4.26665H7.33337V2.79999Z" fill="white"/>
+		</svg>;
 
 		return <div
 			className={ classNames( {
@@ -143,13 +146,6 @@ export class Banner extends Component {
 											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay,
 											textIcon: TextIcon
 										} }/>
-									<ProgressBar
-										formatters={props.formatters}
-										daysLeft={campaignProjection.getRemainingDays()}
-										donationAmount={campaignProjection.getProjectedDonationSum()}
-										goalDonationSum={campaignProjection.goalDonationSum}
-										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-										setStartAnimation={this.registerStartProgressbar}/>
 								</div>
 							</div>
 							<div className="banner__form">
@@ -169,6 +165,13 @@ export class Banner extends Component {
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={props.formatters}
+							daysLeft={campaignProjection.getRemainingDays()}
+							donationAmount={campaignProjection.getProjectedDonationSum()}
+							goalDonationSum={campaignProjection.goalDonationSum}
+							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+							setStartAnimation={this.registerStartProgressbar}/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
