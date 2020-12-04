@@ -125,18 +125,18 @@ tracking = "wpde-mob01-201104-var"
 
 # English Campaign
 [english]
-campaign_tracking = "en03-ba-201124"
+campaign_tracking = "en04-ba-201204"
 preview_link = "/wiki/Wikipedia:Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B20WMDE_en03_201124_ctrl"
-tracking = "org-en03-201124-ctrl"
+pagename = "B20WMDE_en04_201204_ctrl"
+tracking = "org-en04-201204-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B20WMDE_en03_201124_var"
-tracking = "org-en03-201124-var"
+pagename = "B20WMDE_en04_201204_var"
+tracking = "org-en04-201204-var"
 
 

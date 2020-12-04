@@ -58,7 +58,8 @@ export default function BannerText( props ) {
 				It unites all of us who love knowledge: contributors, readers and the donors who keep us thriving.
 				The heart and soul of Wikipedia is a community of people working to bring you unlimited access
 				to reliable, neutral information.</span>
-					<span> Please take a minute to donate and help us keep Wikipedia growing.</span>
+					<span> If Wikipedia gave you €&nbsp;5 worth of knowledge this year,
+				take a minute to donate and help us to keep Wikipedia growing.</span>
 					<span> Thank you! </span>
 				</p>
 			</div>
