@@ -1,4 +1,10 @@
 .wmde-banner {
+	.banner-slider {
+		position: relative;
+		z-index: 20;
+		height: 100%;
+	}
+
 	.banner-slider-next,
 	.banner-slider-previous {
 		position: absolute;
@@ -18,18 +24,45 @@
 		text-align: left;
 	}
 
+	.splide,
+	.splide__track,
+	.splide__list {
+		height: 100%;
+	}
+
 	.splide__slide {
-		/* The padding makes room for the progress and slide change elements */
-		padding: 1em 2em 2em 2em;
-		@media ( min-width: $breakpoint_l ) {
-			padding: 2em;
-		}
+		padding: 10px 41px 88px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.splide--draggable {
 		cursor: grab;
 		&.splide--dragging {
 			cursor: grabbing;
+		}
+	}
+
+	.splide__pagination {
+		bottom: 16px;
+		padding-bottom: 4px;
+
+		&__page {
+			background: $color-white;
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			margin: 0 4px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 4px solid $color-primary;
+			box-sizing: border-box;
+			&.is-active {
+				transform: scale( 1 );
+				background: $color-primary;
+				border: 3px solid $color-white;
+			}
 		}
 	}
 }

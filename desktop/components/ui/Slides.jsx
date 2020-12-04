@@ -51,16 +51,14 @@ export default function Slides( props ) {
 
 	return <div className="banner-slider">
 		<a href="#" className="banner-slider-previous" onClick={goToPreviousSlide}><ChevronLeftIcon /></a>
-		<div className="banner-slider__container">
-			<Splide ref={slideRef} options={{
-				type: 'loop',
-				arrows: false,
-				autoplay: true,
-				interval: props.interval || DEFAULT_INTERVAL
-			}}
-			className={dragState ? 'splide--dragging' : ''}
-			>{props.children}</Splide>
-		</div>
+		<Splide ref={slideRef} options={{
+			type: 'loop',
+			arrows: false,
+			autoplay: true,
+			interval: props.interval || DEFAULT_INTERVAL
+		}}
+		className={dragState ? 'splide--dragging' : ''}
+		>{props.children}</Splide>
 		<a href="#" className="banner-slider-next" onClick={goToNextSlide}><ChevronRightIcon /></a>
 	</div>;
 }

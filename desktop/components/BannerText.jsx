@@ -34,20 +34,22 @@ export default function BannerText( props ) {
 					interval={slideshowSlideInterval}
 				>
 					<SplideSlide>
-						<p>
-							<span>
-								<img className="info-icon" height="16" width="16"
-									src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
-								<strong> An alle unsere Leserinnen und Leser in Deutschland.  </strong>
-							</span>
-						</p>
-						<p>
-							Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken
-							Sie jetzt nicht weg! { campaignDaySentence } Zum ersten Mal seit langem möchten
-							wir Sie an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
-							von Wikipedia zu verteidigen. Insgesamt spenden 99% unserer Leserinnen
-							und Leser nichts – sie übergehen diesen Aufruf.
-						</p>
+						<div>
+							<p>
+								<span>
+									<img className="info-icon" height="16" width="16"
+										src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
+									<strong> An alle unsere Leserinnen und Leser in Deutschland.  </strong>
+								</span>
+							</p>
+							<p>
+								Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken
+								Sie jetzt nicht weg! { campaignDaySentence } Zum ersten Mal seit langem möchten
+								wir Sie an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
+								von Wikipedia zu verteidigen. Insgesamt spenden 99% unserer Leserinnen
+								und Leser nichts – sie übergehen diesen Aufruf.
+							</p>
+						</div>
 					</SplideSlide>
 					<SplideSlide>
 						<p>Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet haben, danken
