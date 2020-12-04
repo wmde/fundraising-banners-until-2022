@@ -2,12 +2,12 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import Infobox from '../shared/components/ui/Infobox';
-import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import TranslationContext from '../shared/components/TranslationContext';
+import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Infobox from '../../shared/components/ui/Infobox';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import TranslationContext from '../../shared/components/TranslationContext';
 
 const PENDING = 0;
 const VISIBLE = 1;
