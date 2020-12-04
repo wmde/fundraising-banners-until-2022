@@ -152,7 +152,9 @@ export default class Banner extends Component {
 										formatters={props.formatters}
 										campaignParameters={props.campaignParameters}
 										campaignProjection={props.campaignProjection}
-										bannerText={props.bannerText}/>
+										bannerText={props.bannerText}
+										propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
+									/>
 									<ProgressBar
 										formatters={props.formatters}
 										daysLeft={campaignProjection.getRemainingDays()}
