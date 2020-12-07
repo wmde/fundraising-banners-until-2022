@@ -2,12 +2,12 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import Infobox from '../shared/components/ui/Infobox';
-import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import TranslationContext from '../shared/components/TranslationContext';
+import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Infobox from '../../shared/components/ui/Infobox';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import TranslationContext from '../../shared/components/TranslationContext';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -106,6 +106,9 @@ export class Banner extends Component {
 		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
 
+		const TextIcon = <img className="info-icon" height="16" width="16"
+			src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />;
+
 		return <div
 			className={ classNames( {
 				'wmde-banner': true,
@@ -137,7 +140,8 @@ export class Banner extends Component {
 										bannerText={props.bannerText}
 										propsForText={ {
 											overallImpressionCount: props.impressionCounts.getOverallCount(),
-											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
+											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay,
+											textIcon: TextIcon
 										} }/>
 									<ProgressBar
 										formatters={props.formatters}
