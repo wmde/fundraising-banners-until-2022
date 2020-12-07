@@ -1,16 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../shared/banner_slider';
-import debounce from '../shared/debounce';
+import { Slider } from '../../shared/banner_slider';
+import debounce from '../../shared/debounce';
 
-import BannerTransition from '../shared/components/BannerTransition';
-import MiniBanner from './components/MiniBanner';
-import TranslationContext from '../shared/components/TranslationContext';
-import FollowupTransition from '../shared/components/FollowupTransition';
+import BannerTransition from '../../shared/components/BannerTransition';
+import MiniBanner from './MiniBanner';
+import TranslationContext from '../../shared/components/TranslationContext';
+import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionAccordion from '../shared/components/ui/use_of_funds/FundsDistributionAccordion';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 
 const PENDING = 0;
 const VISIBLE = 1;
