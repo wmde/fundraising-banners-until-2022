@@ -106,9 +106,6 @@ export class Banner extends Component {
 		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
 
-		const TextIcon = <img className="info-icon" height="16" width="16"
-			src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />;
-
 		return <div
 			className={ classNames( {
 				'wmde-banner': true,
@@ -140,8 +137,7 @@ export class Banner extends Component {
 										bannerText={props.bannerText}
 										propsForText={ {
 											overallImpressionCount: props.impressionCounts.getOverallCount(),
-											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay,
-											textIcon: TextIcon
+											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
 										} }/>
 								</div>
 							</div>

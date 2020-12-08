@@ -8,10 +8,14 @@ import Infobox from '../../shared/components/ui/Infobox';
 import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../shared/components/TranslationContext';
+import SlideState from '../../shared/slide_state';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
+
+const SLIDESHOW_START_DELAY = 2000;
+const SLIDESHOW_SLIDE_INTERVAL = 10000;
 
 export const BannerType = Object.freeze( {
 	CTRL: Symbol( 'ctrl ' ),
@@ -41,6 +45,9 @@ export class Banner extends Component {
 			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
 	}
 
 	componentDidMount() {
@@ -65,10 +72,20 @@ export class Banner extends Component {
 		}
 	}
 
+	trackBannerEvent( name ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			name,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
 		this.startProgressbar();
-	}
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -78,39 +95,39 @@ export class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
 	};
 
+	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
+		this.startSliderAutoplay = onStartAutoplay;
+		this.stopSliderAutoplay = onStopAutoplay;
+	};
+
 	toggleFundsModal = () => {
 		if ( !this.state.isFundsModalVisible ) {
-			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+			this.trackBannerEvent( 'application-of-funds-shown' );
 		}
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
 	fundsModalDonate = () => {
-		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.trackBannerEvent( 'funds-modal-donate-clicked' );
 		this.setState( { isFundsModalVisible: false } );
 	};
 
 	onFormInteraction = () => {
-		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
+		this.setState( { formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+		this.stopSliderAutoplay();
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
 		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
-
-		const TextIcon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<circle cx="8" cy="8" r="8" fill="#2B6DA0"/>
-			{/* eslint-disable-next-line max-len */}
-			<path d="M8.80003 5.73332V11.7173H10.2667V13.0667H5.96937V11.7173H7.33337V7.19999H5.8667V5.73332H8.80003ZM7.33337 2.79999H8.80003V4.26665H7.33337V2.79999Z" fill="white"/>
-		</svg>;
 
 		return <div
 			className={ classNames( {
@@ -144,7 +161,9 @@ export class Banner extends Component {
 										propsForText={ {
 											overallImpressionCount: props.impressionCounts.getOverallCount(),
 											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay,
-											textIcon: TextIcon
+											slideshowSlideInterval: SLIDESHOW_SLIDE_INTERVAL,
+											onSlideChange: this.slideState.onSlideChange.bind( this.slideState ),
+											registerAutoplay: this.registerAutoplayCallbacks
 										} }/>
 								</div>
 							</div>
