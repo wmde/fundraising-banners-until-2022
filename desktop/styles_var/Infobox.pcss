@@ -1,42 +1,143 @@
 .wmde-banner {
-	.infobox-bubble {
-		display: flex;
-		flex-direction: column;
+	.infobox {
+		position: absolute;
+		z-index: 10;
+		visibility: hidden;
+		opacity: 0;
+		background: $color-pink-light;
+		top: 0;
+		left: 0;
 		height: 100%;
-		border: 0 none;
-		border-radius: 0.4em;
-		position: relative;
-		font-family: $banner-main-font-family;
+		width: 100%;
+		transition: opacity 200ms $banner-easing;
 
-		font-size: 1em;
-		line-height: 1.3em;
-		text-align: left;
-
-		@media ( min-width: $breakpoint_m ) {
-			font-family: $banner-text-font-family;
-			font-size: 1.3em;
+		&.is-visible {
+			visibility: visible;
+			opacity: 1;
 		}
 
-		@media ( min-width: $breakpoint_l ) {
-			padding-right: 30px;
-			margin-right: 30px;
+		strong {
+			background: $color-pink;
+			font-weight: normal;
+		}
 
-			&:after {
-				position: absolute;
-				content: '';
-				width: 1px;
-				top: 0;
-				right: 0;
-				height: 100%;
-				background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
+		a {
+			color: $color-wine;
+			text-decoration: underline;
+		}
+
+		&-container {
+			max-width: $banner-content-width;
+			margin: auto;
+			display: flex;
+			padding: 0 20px;
+		}
+
+		&-column {
+			width: 50%;
+			flex-basis: 50%;
+		}
+
+		&-column-left,
+		&-column-right {
+			display: flex;
+		}
+
+		&-column-right {
+			flex-direction: column;
+			padding-left: 30px;
+		}
+
+		&-image {
+			flex-grow: 0;
+			flex-shrink: 0;
+			width: 100px;
+			flex-basis: 100px;
+			padding-top: $banner-padding;
+
+			img {
+				width: 100px;
+				height: auto;
+			}
+
+			@media ( min-width: $breakpoint_s ) {
+				width: 150px;
+				flex-basis: 150px;
+
+				img {
+					width: 150px;
+				}
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				padding-top: 25px;
+				width: 250px;
+				flex-basis: 250px;
+
+				img {
+					width: 250px;
+				}
 			}
 		}
 
-		p {
-			margin: 0 0 1em;
+		&-heading {
+			font-size: 18px;
+			padding-top: $banner-padding;
 
-			&:last-child {
-				margin-bottom: 0;
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 20px;
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				font-size: 22px;
+			}
+		}
+
+		&-content {
+			margin-bottom: auto;
+			font-size: 12px;
+			padding-top: $banner-padding;
+
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 14px;
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				font-size: 16px;
+			}
+
+			p {
+				margin-bottom: 10px;
+
+				@media ( min-width: $breakpoint_m ) {
+					margin-bottom: 16px;
+				}
+			}
+		}
+
+		&-button {
+			margin-bottom: 10px;
+
+			@media ( min-width: $breakpoint_m ) {
+				margin-bottom: 16px;
+			}
+
+			button {
+				background-color: $color-red;
+				color: $color-white;
+			}
+		}
+
+		&-info {
+			font-size: 10px;
+			color: $color-wine;
+
+			@media ( min-width: $breakpoint_s ) {
+				font-size: 12px;
+			}
+
+			@media ( min-width: $breakpoint_m ) {
+				font-size: 14px;
 			}
 		}
 	}

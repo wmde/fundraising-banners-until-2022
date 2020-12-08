@@ -21,7 +21,7 @@ $select-group-line-height: 30px;
 		}
 
 		&-container {
-			border: 1px solid $color-primary;
+			border: 1px solid $color-secondary-light;
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
@@ -109,7 +109,7 @@ $select-group-line-height: 30px;
 				position: absolute;
 				height: 16px;
 				width: 16px;
-				margin-top: -6px;
+				margin-top: -5px;
 				background: $color-white;
 				border-radius: 50%;
 				border: 1px solid #bbbbbb;
@@ -123,6 +123,7 @@ $select-group-line-height: 30px;
 		&__custom-input:before {
 			top: 45%;
 			left: -25px;
+			margin-top: -6px;
 		}
 
 		&__custom-input + .select-group__state {
@@ -144,7 +145,7 @@ $select-group-line-height: 30px;
 
 			&:checked + .select-group__state:before,
 			&:checked + .select-group__custom-input:before {
-				border: 6px solid $color-secondary;
+				border: 6px solid $color-primary;
 				box-shadow: none;
 			}
 		}
