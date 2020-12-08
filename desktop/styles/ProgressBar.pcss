@@ -61,7 +61,7 @@ $progress-bar-height: 30px;
 			white-space: nowrap;
 
 			color: $color-black;
-			margin-left: -40px;
+			line-height: 2.5em;
 		}
 		&__pointer_tip {
 			width: 5px;
@@ -103,7 +103,8 @@ $progress-bar-height: 30px;
 			}
 		}
 
-		&--lateprogress {
+		/* lateprogress is design-wise not needed in this banner style */
+		/* &--lateprogress {
 			.progress_bar__donation_remaining--inner {
 				display: none;
 			}
@@ -112,6 +113,16 @@ $progress-bar-height: 30px;
 				display: block;
 			}
 
+			.progress_bar__donation_fill {
+				margin-right: 16px;
+			}
+		} */
+
+		&__right_text {
+			display: none;
+		}
+
+		&--lateprogress {
 			.progress_bar__donation_fill {
 				margin-right: 16px;
 			}

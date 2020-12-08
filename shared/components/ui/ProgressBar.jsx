@@ -19,7 +19,7 @@ export const AmountToShowOnRight = Object.freeze( {
  * When set to true, the "late progress" design will be used
  * @type {boolean}
  */
-const IS_LATE_PROGRESS = false;
+const IS_LATE_PROGRESS = true;
 
 export default class ProgressBar extends Component {
 	static propTypes = {
@@ -111,9 +111,15 @@ export default class ProgressBar extends Component {
 		};
 		const rightText = () => {
 			if ( props.amountToShowOnRight === AmountToShowOnRight.MISSING ) {
-				return Translations[ 'amount-missing' ] + ' ' + getMillion( props.missingAmount );
+				return <div>
+					<span className="progress_bar__right_text">{ Translations[ 'amount-missing' ] }</span>
+					{ ' ' } { getMillion( props.missingAmount ) }
+				</div>;
 			}
-			return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
+			return <div>
+				<span className="progress_bar__right_text">{ Translations[ 'amount-total' ] }</span>
+				{ ' ' } { getMillion( props.goalDonationSum ) }
+			</div>;
 		};
 		return <div className={ classNames( 'progress_bar', {
 			'progress_bar--finished': state.animation === ENDED,

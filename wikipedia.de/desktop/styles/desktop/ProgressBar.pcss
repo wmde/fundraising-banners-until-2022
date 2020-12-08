@@ -130,8 +130,23 @@
 				display: none;
 			}
 		}
-		@media ( min-width: $breakpoint-m ) {
-			&--lateprogress {
+
+		&--lateprogress {
+
+			.progress_bar__donation_remaining {
+				padding-right: 0;
+			}
+
+			.progress_bar__donation_remaining--inner {
+				top: -28px;
+			}
+
+			@media ( min-width: $breakpoint-m ) {
+				.progress_bar__donation_remaining {
+					padding-right: 30px;
+					padding-top: 3px;
+				}
+
 				.progress_bar__donation_remaining--inner {
 					display: none;
 				}
