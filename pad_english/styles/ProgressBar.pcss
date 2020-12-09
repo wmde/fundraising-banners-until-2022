@@ -3,6 +3,7 @@
 		display: flex;
 		margin-right: 1.2em;
 		margin-left: 1.2em;
+		padding-top: 20px;
 
 		&__days_left {
 			visibility: hidden;
@@ -41,7 +42,7 @@
 			justify-content: space-between;
 		}
 		&__donation_text {
-			text-align: right;
+			text-align: left;
 			font-size: 0.9em;
 			font-weight: bold;
 			overflow: hidden;
@@ -50,11 +51,11 @@
 			visibility: hidden;
 			white-space: nowrap;
 			line-height: 30px;
-
+			margin-top: -30px;
 			position: relative;
 			top: auto;
 			left: auto;
-			color: $color-white;
+			color: $color-black;
 		}
 
 		&__donation_remaining {
@@ -67,23 +68,17 @@
 			color: $color-black;
 			line-height: 28px;
 			margin-left: -40px;
+			margin-top: -30px;
 		}
 
 		&__pointer_tip {
-			width: 5px;
-			height: 5px;
-			background: $color-black;
-			float: left;
-			border-radius: 100%;
-			margin-top: 18px;
+			display: none;
 		}
 
 		&__pointer_line {
-			float: left;
-			width: 25px;
-			background: $color-black;
-			margin: 20px 2px 0 0;
+			display: none;
 		}
+
 		&__donation_remaining--outer {
 			display: none;
 			position: relative;
@@ -92,6 +87,7 @@
 			color: $color-black;
 			font-weight: bold;
 			padding-top: 3px;
+			margin-left: -170px;
 		}
 
 		&--finished {
@@ -119,10 +115,10 @@
 			}
 
 			.progress_bar__donation_fill {
-				margin-right: 16px;
+				margin-right: 0;
 			}
 			.progress_bar__wrapper {
-				margin-right: 25px;
+				margin-right: 10px;
 			}
 		}
 	}
