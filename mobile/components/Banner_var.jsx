@@ -19,7 +19,7 @@ const CLOSED = 2;
 const SLIDESHOW_START_DELAY = 2000;
 
 const FULLPAGEBANNER_MINIBANNER_TRANSITION_DURATION = 1250;
-const FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION = 0;
+const FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION = 1;
 
 export const BannerType = Object.freeze( {
 	CTRL: Symbol( 'ctrl ' ),
@@ -96,15 +96,32 @@ export default class Banner extends Component {
 		this.setState( { isFullPageVisible: true } );
 	};
 
-	// eslint-disable-next-line no-unused-vars
-	showFullPageBannerImmediately = e => {
-		this.transitionDuration = FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION;
-		this.transitionToFullpage( this.getFullBannerHeight() );
-		this.setState( { isFullPageVisible: true } );
+	scrollToForm = () => {
 		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
-
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
+		}
+	}
+
+	showFullPageBannerImmediately = () => {
+		if ( !this.state.isFullPageVisible ) {
+			this.transitionDuration = FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION;
+			this.transitionToFullpage( this.getFullBannerHeight() );
+			this.setState( { isFullPageVisible: true } );
+
+			return;
+		}
+
+		this.scrollToForm();
+	}
+
+	/**
+	 * Trigger scroll to form when followUpTransition finishes, but only when it finishes after showing use of funds
+	 * (when the transition is very short)
+	 */
+	maybeScrollToForm = () => {
+		if ( this.transitionDuration === FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION ) {
+			this.scrollToForm();
 		}
 	}
 
@@ -201,7 +218,11 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
+					onFinish={ () => {
+						this.maybeScrollToForm();
+						this.startHighlight();
+						this.startProgressBarInFullPageBanner();
+					} }
 					transitionDuration={ this.transitionDuration }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
