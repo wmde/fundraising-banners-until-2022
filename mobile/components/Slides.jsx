@@ -14,16 +14,22 @@ export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySe
 		</div>
 		<div className="carousel-cell">
 			<p>Zum ersten Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
-				die Unabhängigkeit von Wikipedia zu verteidigen. <span className="text-highlight">{ visitorsVsDonorsSentence }</span></p>
+				die Unabhängigkeit von Wikipedia zu verteidigen.</p>
 		</div>
 		<div className="carousel-cell">
-			<p>Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert. <span className="text-highlight">Doch schon mit einer
-				Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.</span></p>
+			<p>Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert.{ ' ' }
+				<span className="text-highlight">{ visitorsVsDonorsSentence }</span>
+			</p>
 		</div>
 		<div className="carousel-cell">
 			<p>Insgesamt spenden 99% unserer Leserinnen und Leser nichts – sie
-				übergehen diesen Aufruf. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert von 5 € geschenkt?
-			<span className="text-highlight"> Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück.</span>
+				übergehen diesen Aufruf. <span className="text-highlight">Doch schon mit einer
+				Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.</span>
+			</p>
+		</div>
+		<div className="carousel-cell">
+			<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert von 5 € geschenkt?
+				<span className="text-highlight"> Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück.</span>
 			</p>
 		</div>
 	</div>;

@@ -19,6 +19,10 @@ const FINISHED = 4;
  * The downwards animation of the banner must first fill the space left
  * by the vanished mini banner, then it must look like it's "pushing down"
  * the rest of the page, while maintaining an overall smooth animation style.
+ *
+ * TODO Refactor this and BannerTransition to allow for "immediate transition" (duration 0)
+ *      that calls all the right triggers and adjustments, but skips animations,
+ *      hence does not rely so much on "onTransitionEnd"
  */
 export default class BannerTransition extends Component {
 	ref = createRef();
@@ -88,6 +92,14 @@ export default class BannerTransition extends Component {
 		this.forceUpdate();
 	};
 
+	componentDidUpdate( prevProps, prevState ) {
+		if ( prevState.transitionPhase !== FINISHED && this.state.transitionPhase === FINISHED ) {
+			if ( this.props.onFinish ) {
+				this.props.onFinish();
+			}
+		}
+	}
+
 	/**
 	 * Get ratio between the height of the previous (mini) banner and the full page banner.
 	 *
@@ -131,17 +143,21 @@ export default class BannerTransition extends Component {
 		} );
 	};
 
-	onTransitionEnd = () => {
+	onTransitionEnd = e => {
+		if ( !e.target.className.match( 'followup-banner-position' ) ) {
+			return;
+		}
 		switch ( this.state.transitionPhase ) {
 			case SLIDING_FIRST_PART:
 				this.setState( { transitionPhase: SLIDING_SECOND_PART } );
 				this.adjustSkin( this.getSecondPartDuration(), 'ease-out' );
+				// If the 2nd transition is "no transition" (because it's too short), force state to finish, omitting 2nd phase
+				if ( this.getSecondPartDuration() === 0 ) {
+					this.setState( { transitionPhase: FINISHED } );
+				}
 				break;
 			case SLIDING_SECOND_PART:
 				this.setState( { transitionPhase: FINISHED } );
-				if ( this.props.onFinish ) {
-					this.props.onFinish();
-				}
 				break;
 		}
 	};

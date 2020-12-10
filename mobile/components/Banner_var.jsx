@@ -1,22 +1,25 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../shared/banner_slider';
-import debounce from '../shared/debounce';
+import { Slider } from '../../shared/banner_slider';
+import debounce from '../../shared/debounce';
 
-import BannerTransition from '../shared/components/BannerTransition';
-import MiniBanner from './components/MiniBanner';
-import TranslationContext from '../shared/components/TranslationContext';
-import FollowupTransition from '../shared/components/FollowupTransition';
+import BannerTransition from '../../shared/components/BannerTransition';
+import MiniBanner from './MiniBanner_var';
+import TranslationContext from '../../shared/components/TranslationContext';
+import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionAccordion from '../shared/components/ui/use_of_funds/FundsDistributionAccordion';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
+
+const FULLPAGEBANNER_MINIBANNER_TRANSITION_DURATION = 1250;
+const FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION = 1;
 
 export const BannerType = Object.freeze( {
 	CTRL: Symbol( 'ctrl ' ),
@@ -44,6 +47,7 @@ export default class Banner extends Component {
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
 		this.startProgressBarInMiniBanner = () => {};
+		this.transitionDuration = FULLPAGEBANNER_MINIBANNER_TRANSITION_DURATION;
 	}
 
 	miniBannerTransitionRef = createRef();
@@ -92,6 +96,35 @@ export default class Banner extends Component {
 		this.setState( { isFullPageVisible: true } );
 	};
 
+	scrollToForm = () => {
+		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
+		if ( startOfForm ) {
+			startOfForm.scrollIntoView( true );
+		}
+	}
+
+	showFullPageBannerImmediately = () => {
+		if ( !this.state.isFullPageVisible ) {
+			this.transitionDuration = FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION;
+			this.transitionToFullpage( this.getFullBannerHeight() );
+			this.setState( { isFullPageVisible: true } );
+
+			return;
+		}
+
+		this.scrollToForm();
+	}
+
+	/**
+	 * Trigger scroll to form when followUpTransition finishes, but only when it finishes after showing use of funds
+	 * (when the transition is very short)
+	 */
+	maybeScrollToForm = () => {
+		if ( this.transitionDuration === FULLPAGEBANNER_USE_OF_FUNDS_TRANSITION_DURATION ) {
+			this.scrollToForm();
+		}
+	}
+
 	toggleFundsModal = e => {
 		e.preventDefault();
 		const currentlyVisible = this.state.isFundsModalVisible;
@@ -110,10 +143,7 @@ export default class Banner extends Component {
 	fundsModalDonate = e => {
 		e.preventDefault();
 		this.setState( { isFundsModalVisible: false } );
-		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
-		if ( startOfForm ) {
-			startOfForm.scrollIntoView( true );
-		}
+		this.showFullPageBannerImmediately( e );
 	}
 
 	getMiniBannerHeight() {
@@ -179,15 +209,21 @@ export default class Banner extends Component {
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBanner }/>
+						onExpandFullpage={ this.showFullPageBanner }
+						toggleFundsModal={ this.toggleFundsModal }
+					/>
 
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
-					transitionDuration={ 1250 }
+					onFinish={ () => {
+						this.maybeScrollToForm();
+						this.startHighlight();
+						this.startProgressBarInFullPageBanner();
+					} }
+					transitionDuration={ this.transitionDuration }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
 					ref={this.fullBannerTransitionRef}
