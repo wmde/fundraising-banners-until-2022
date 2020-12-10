@@ -6,21 +6,10 @@
 		border: 0 none;
 		border-radius: 0.4em;
 		background-color: $color-primary;
-		padding: 1em 2.7em 1em 1em;
 		position: relative;
+		padding: 1em;
 		@media ( min-width: $breakpoint_m ) {
-			margin-left: 24px;
-
-			&:before {
-				position: absolute;
-				bottom: 1.5em;
-				left: 0;
-				content: ' ';
-				margin-left: -24px;
-				border-style: solid;
-				border-width: 0 0 25px 25px;
-				border-color: transparent transparent $color-primary transparent;
-			}
+			padding: 1.2em;
 		}
 
 		p {
@@ -32,11 +21,11 @@
 		}
 	}
 	.infobox {
-		margin-bottom: auto;
 		/* overwrites existing infobox on en wikipedia */
 		border: 0 none;
 		border-spacing: 0;
 		padding: 0;
+		margin: 0;
 		background-color: $color-primary;
 		color: $color-white;
 		font-family: $banner-main-font-family;

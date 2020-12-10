@@ -2,16 +2,16 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import Footer from '../shared/components/ui/EasySelectFooter';
-import Infobox from '../shared/components/ui/Infobox';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import TranslationContext from '../shared/components/TranslationContext';
-import { CampaignProjection } from '../shared/campaign_projection';
-import { LocalImpressionCount } from '../shared/local_impression_count';
-import LanguageWarningBox from '../shared/components/ui/LanguageWarningBox';
+import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Footer from '../../shared/components/ui/EasySelectFooter';
+import Infobox from '../../shared/components/ui/Infobox';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import TranslationContext from '../../shared/components/TranslationContext';
+import { CampaignProjection } from '../../shared/campaign_projection';
+import { LocalImpressionCount } from '../../shared/local_impression_count';
+import LanguageWarningBox from '../../shared/components/ui/LanguageWarningBox';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -152,7 +152,9 @@ export default class Banner extends Component {
 										formatters={props.formatters}
 										campaignParameters={props.campaignParameters}
 										campaignProjection={props.campaignProjection}
-										bannerText={props.bannerText}/>
+										bannerText={props.bannerText}
+										propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
+									/>
 									<ProgressBar
 										formatters={props.formatters}
 										daysLeft={campaignProjection.getRemainingDays()}
