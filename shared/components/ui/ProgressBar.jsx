@@ -94,7 +94,14 @@ export default class ProgressBar extends Component {
 	}
 
 	calculateWidth() {
-		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum;
+		let width = ( this.props.donationAmount * 100 ) / this.props.goalDonationSum;
+		if ( width < 0 ) {
+			width = 0;
+		}
+		if ( width > 100 ) {
+			width = 100;
+		}
+		return width;
 	}
 
 	render( props, state ) {
