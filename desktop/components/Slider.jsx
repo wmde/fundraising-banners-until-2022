@@ -6,17 +6,19 @@ import classNames from 'classnames';
 
 const DEFAULT_INTERVAL = 5000;
 
+/**
+ * Return an array with numbers from 0 to size
+ * @param {number} size
+ * @return {number[]}
+ */
+function arrayRange( size ) {
+	return [ ...Array( size ).keys() ];
+}
+
 export default function Slider( props ) {
 	const { slides, previous, next, onSlideChange, registerAutoplay, interval } = props;
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	const [ timer, setTimer ] = useState( 0 );
-
-	/**
-	 * We don't reset the timer here so it can't be started again
-	 */
-	const onStopAutoplay = () => {
-		clearInterval( timer );
-	};
 
 	const [ sliderRef, slider ] = useKeenSlider( {
 		initial: 0,
@@ -29,38 +31,43 @@ export default function Slider( props ) {
 		}
 	} );
 
-	const onStartAutoplay = () => {
+	const startAutoplay = () => {
 		if ( timer !== 0 ) {
 			return;
 		}
 		setTimer( setInterval( slider.next, interval || DEFAULT_INTERVAL ) );
 	};
 
-	useEffect( () => {
-		if ( typeof registerAutoplay === 'function' ) {
-			registerAutoplay( onStartAutoplay, onStopAutoplay );
-		}
-	} );
+	const stopAutoplay = () => {
+		clearInterval( timer );
+		// We explicitly don't set `timer` to 0, so it can't be started again
+	};
 
-	const onNext = e => {
+	const gotoNextSlide = e => {
 		e.stopPropagation();
-		onStopAutoplay();
+		stopAutoplay();
 		slider.next();
 	};
 
-	const onPrevious = e => {
+	const gotoPreviousSlide = e => {
 		e.stopPropagation();
-		onStopAutoplay();
+		stopAutoplay();
 		slider.prev();
 	};
 
-	const onNavigate = idx => {
-		onStopAutoplay();
+	const goToSlide = idx => {
+		stopAutoplay();
 		slider.moveToSlideRelative( idx );
 	};
 
+	useEffect( () => {
+		if ( typeof registerAutoplay === 'function' ) {
+			registerAutoplay( startAutoplay, stopAutoplay );
+		}
+	} );
+
 	return (
-		<div className="slider-container" onMouseDown={ onStopAutoplay }>
+		<div className="slider-container" onMouseDown={ stopAutoplay }>
 			<div className="navigation-wrapper">
 				<div ref={ sliderRef } className="keen-slider">
 					{ slides.map( ( slide, idx ) => (
@@ -72,20 +79,20 @@ export default function Slider( props ) {
 					) ) }
 				</div>
 				{ slider && previous && (
-					<a href="#" className="slider-navigation-previous" onClick={ onPrevious }>{ previous }</a>
+					<a href="#" className="slider-navigation-previous" onClick={ gotoPreviousSlide }>{ previous }</a>
 				) }
 				{ slider && next && (
-					<a href="#" className="slider-navigation-next" onClick={ onNext }>{ next }</a>
+					<a href="#" className="slider-navigation-next" onClick={ gotoNextSlide }>{ next }</a>
 				) }
 			</div>
 			{ slider && (
 				<div className="pagination">
-					{ [ ...Array( slider.details().size ).keys() ].map( ( idx ) => {
+					{ arrayRange( slider.details().size ).map( ( idx ) => {
 						return (
 							<button
 								className={ classNames( 'pagination-dot', { 'is-active': currentSlide === idx } ) }
 								key={ idx }
-								onClick={ () => onNavigate( idx ) }
+								onClick={ () => goToSlide( idx ) }
 							/>
 						);
 					} ) }
