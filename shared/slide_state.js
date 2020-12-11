@@ -6,7 +6,7 @@
 export default class SlideState {
 	constructor() {
 		this.currentSlide = 0;
-		this.slidesShown = 1;
+		this.slidesShown = 0;
 	}
 
 	onSlideChange( newSlideIndex ) {

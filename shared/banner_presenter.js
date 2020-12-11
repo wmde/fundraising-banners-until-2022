@@ -10,11 +10,12 @@ import InterruptibleTimeout from './interruptible_timeout';
 import { VIEWPORT_TRACKING_IDENTIFIER, VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER } from './event_logging_tracker';
 
 export default class BannerPresenter {
-	constructor( trackingData, appearanceDelay, impressionCounts ) {
+	constructor( trackingData, appearanceDelay, impressionCounts, mwCloseHandler ) {
 		this.trackingData = trackingData;
 		this.appearanceDelay = appearanceDelay;
 		this.impressionCounts = impressionCounts;
 		this.resizeHandlerOfBanner = null;
+		this.mwCloseHandler = mwCloseHandler || mw.centralNotice.hideBanner;
 	}
 
 	createResizeHandler( bannerContainer, skinAdjuster ) {
@@ -62,7 +63,7 @@ export default class BannerPresenter {
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
 					if ( onMediaWiki() ) {
-						mw.centralNotice.hideBanner();
+						this.mwCloseHandler();
 					}
 				},
 				onSubmit: () => {

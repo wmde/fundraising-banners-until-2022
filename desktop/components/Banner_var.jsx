@@ -130,6 +130,10 @@ export class Banner extends Component {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.MINIMISED } );
 		this.props.skinAdjuster.removeSpace();
 		this.trackBannerEvent( 'banner-minimised' );
+		this.props.onClose(
+			this.slideState.slidesShown,
+			this.slideState.currentSlide
+		);
 	}
 
 	maximiseBanner = e => {
@@ -141,10 +145,8 @@ export class Banner extends Component {
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose(
-			this.slideState.slidesShown,
-			this.slideState.currentSlide
-		);
+		const cn = document.getElementById( 'centralNotice' );
+		cn.parentNode.removeChild( cn );
 	};
 
 	registerBannerTransition = ( cb ) => {
