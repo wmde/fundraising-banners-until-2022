@@ -35,6 +35,7 @@ $progress-bar-height: 30px;
 		&__donation_fill {
 			width: 0;
 			min-width: 5em;
+			max-width: 100%;
 			display: flex;
 			justify-content: space-between;
 
@@ -61,7 +62,6 @@ $progress-bar-height: 30px;
 			white-space: nowrap;
 
 			color: $color-black;
-			margin-left: -40px;
 		}
 		&__pointer_tip {
 			width: 5px;
@@ -100,20 +100,6 @@ $progress-bar-height: 30px;
 			.progress_bar__days_left,
 			.progress_bar--finished .progress_bar__days_left {
 				display: none;
-			}
-		}
-
-		&--lateprogress {
-			.progress_bar__donation_remaining--inner {
-				display: none;
-			}
-
-			.progress_bar__donation_remaining--outer {
-				display: block;
-			}
-
-			.progress_bar__donation_fill {
-				margin-right: 16px;
 			}
 		}
 	}

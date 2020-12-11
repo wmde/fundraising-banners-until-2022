@@ -53,7 +53,11 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: [ '.mjs', '.js', '.jsx' ]
+		extensions: [ '.mjs', '.js', '.jsx' ],
+		alias: {
+			'react': 'preact/compat',
+			'react-dom': 'preact/compat'
+		}
 	},
 	externals: {
 		jquery: 'jQuery'

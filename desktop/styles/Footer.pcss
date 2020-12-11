@@ -46,11 +46,9 @@
 			flex-grow: 1;
 			text-align: right;
 			@media ( min-width: $breakpoint_l ) {
-				flex-grow: 0;
+				flex: 0 0 $form-width;
 				text-align: center;
-				.footer__item {
-					width: $form-width;
-				}
+				width: $form-width;
 			}
 		}
 	}
