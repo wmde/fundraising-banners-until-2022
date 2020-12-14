@@ -37,7 +37,8 @@ export default class BannerPresenter {
 		}
 		const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
-		if ( !mediaWikiIsShowingContentPage() || mediaWikiMainContentIsHiddenByLightbox() ) {
+		if ( onMediaWiki() &&
+			( !mediaWikiIsShowingContentPage() || mediaWikiMainContentIsHiddenByLightbox() ) ) {
 			mw.centralNotice.setBannerLoadedButHidden();
 			return;
 		}
@@ -108,7 +109,7 @@ export default class BannerPresenter {
 		const bannerDisplayTimeout = new InterruptibleTimeout();
 		bannerDisplayTimeout.run(
 			() => {
-				if ( mediaWikiMainContentIsHiddenByLightbox() ) {
+				if ( onMediaWiki() && mediaWikiMainContentIsHiddenByLightbox() ) {
 					mw.centralNotice.setBannerLoadedButHidden();
 					return;
 				}

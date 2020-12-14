@@ -5,7 +5,6 @@ import classNames from 'classnames';
 
 import ExpandButton from './ExpandButton';
 import ProgressBar from '../components/ProgressBar';
-import BannerTransition from '../../shared/components/BannerTransition';
 import TranslationContext from '../../shared/components/TranslationContext';
 
 const PENDING = 0;
@@ -25,21 +24,34 @@ export class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			infoVisible: false,
-			donationSkinId: '1'
+			topPosition: 0
 		};
 		this.infoVisibleChanged = false;
 		this.numExpansions = 0;
 	}
 
 	componentDidMount() {
-		window.addEventListener( 'resize', this.updateSkinId );
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
-				this.slideInBanner();
 			}
 		);
-		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.props.registerResizeBanner( this.onResizePage.bind( this ) );
+		this.props.onFinishedTransitioning();
+		this.onResizePage();
+	}
+
+	onResizePage() {
+		this.setTopPosition();
+		this.adjustSurroundingSpace();
+	}
+
+	setTopPosition() {
+		const bannerElement = document.querySelector( '.skin-minerva .wmde-banner .banner-position' );
+		if ( !bannerElement ) {
+			return;
+		}
+		this.setState( { topPosition: bannerElement.offsetHeight * -1 } );
 	}
 
 	adjustSurroundingSpace() {
@@ -61,22 +73,9 @@ export class Banner extends Component {
 		this.props.onClose();
 	};
 
-	registerBannerTransition = ( cb ) => {
-		this.slideInBanner = cb;
-	}
-
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
 	};
-
-	updateSkinId = () => {
-		const donationSkinId = window.innerWidth > 900 ? '1' : '0';
-		this.setState( ( { donationSkinId } ) );
-	};
-
-	componentWillUnmount() {
-		window.removeEventListener( 'resize', this.updateSkinId );
-	}
 
 	// eslint-disable-next-line no-unused-vars
 	componentWillUpdate( nextProps, nextState, nextContext ) {
@@ -85,7 +84,7 @@ export class Banner extends Component {
 
 	componentDidUpdate() {
 		if ( this.infoVisibleChanged ) {
-			this.props.skinFunctions.addSpaceInstantly( this.ref.current.offsetHeight );
+			this.adjustSurroundingSpace();
 			if ( this.state.infoVisible ) {
 				window.scrollTo( 0, 0 );
 			}
@@ -99,7 +98,9 @@ export class Banner extends Component {
 		}
 		this.numExpansions++;
 		e.preventDefault();
-		this.setState( { infoVisible } );
+		this.setState( { infoVisible }, () => {
+			this.setTopPosition();
+		} );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -118,13 +119,7 @@ export class Banner extends Component {
 				},
 			)}
 			ref={this.ref}>
-			<BannerTransition
-				fixed={ true }
-				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.onFinishedTransitioning }
-				skinAdjuster={ props.skinAdjuster }
-				transitionSpeed={ 0 }
-			>
+			<div className="banner-position" style={ { top: state.topPosition + 'px' } }>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner-wrapper">
 						<div className={'small-banner'}>
@@ -146,17 +141,27 @@ export class Banner extends Component {
 						</div>
 
 						<div className={classNames( 'expand-wrapper', state.infoVisible ? 'expand-wrapper--expanded' : 'expand-wrapper--collapsed' )}>
-							<ExpandButton expanded={state.infoVisible} expandText={props.expandText} toggleExpansion={ e => this.expandBanner( e ) }/>
+							<ExpandButton
+								expanded={state.infoVisible}
+								expandText={props.expandText}
+								toggleExpansion={ e => this.expandBanner( e ) }
+							/>
 						</div>
 						<div className={classNames( 'more-info', state.infoVisible ? 'more-info--expanded' : 'more-info--collapsed', 'more-info--' + props.bannerVariant )}>
-							<MoreInfo {...props} donationSkinId={ state.donationSkinId } />
+							<MoreInfo
+								{...props}
+							/>
 						</div>
 						<div className={classNames( 'secondary-expand-wrapper', state.infoVisible ? 'secondary-expand-wrapper--expanded' : 'secondary-expand-wrapper--collapsed' )}>
-							<ExpandButton expanded={state.infoVisible} expandText={props.expandText} toggleExpansion={ e => this.expandBanner( e ) }/>
+							<ExpandButton
+								expanded={state.infoVisible}
+								expandText={props.expandText}
+								toggleExpansion={ e => this.expandBanner( e ) }
+							/>
 						</div>
 					</div>
 				</TranslationContext.Provider>
-			</BannerTransition>
+			</div>
 		</div>;
 	}
 

@@ -1,9 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import ImageWithCopyright from './ImageWithCopyright';
+import { integerFormatter } from '../../shared/number_formatter/de';
 
 export default function MembershipMoreInfo( props ) {
-	const addTrackingParams = url => `${url}&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}`;
+	const numberOfDonors = integerFormatter( props.campaignParameters.donationProjection.donorsBase );
+
+	const incentiveABTestURLParam = 'incentive=1';
+	const addTrackingParams = url =>
+		`${url}&piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}&bImpCount=
+		${props.impressionCounts.bannerCount}&${incentiveABTestURLParam}`;
+	const formAction = addTrackingParams( 'https://spenden.wikimedia.de/apply-for-membership?type=sustaining' );
 
 	return <div className="more-info__wrapper">
 		<div className="more-info__intro">
@@ -12,7 +19,7 @@ export default function MembershipMoreInfo( props ) {
 		<div className="more-info__text">
 			<ImageWithCopyright/>
 			<p>Ich bin sehr glücklich darüber, dass wir auch diesmal wieder unser Spendenziel erreichen
-				konnten. Ermöglicht wurde dies von den großartigen {props.numberOfDonors} Menschen, die unser
+				konnten. Ermöglicht wurde dies von den großartigen {numberOfDonors} Menschen, die unser
 				Spendenbanner nicht weggeklickt haben. Sie haben mit ihrer Unterstützung den vielen
 				Ehrenamtlichen, die Wikipedia zu einer einzigartigen Wissensplattform machen, ihre
 				Wertschätzung erwiesen. <strong>Dafür danke ich allen Spenderinnen und Spendern von ganzem Herzen!</strong>
@@ -39,28 +46,48 @@ export default function MembershipMoreInfo( props ) {
 				Spendenkampagne hängt letztlich alles ab. Umso wichtiger ist es, dass mehr Menschen uns regelmäßig
 				unterstützen. In Deutschland engagieren sich bereits rund 80.000 Menschen mit einer
 				Fördermitgliedschaft.
-				<strong>Heute möchte ich Sie herzlich einladen, diesem Kreis von außergewöhnlichen
+				<strong> Heute möchte ich Sie herzlich einladen, diesem Kreis von außergewöhnlichen
 					Menschen als neues Fördermitglied beizutreten. </strong>
 				Bereits mit 2 Euro im Monat sind Sie dabei.
+				Als Dankeschön erhalten Sie einen exklusiven Wikipedia-Stoffbeutel.
 			</p>
 
 			<p>
-				<strong>Werden Sie jetzt Fördermitglied – und machen Sie ab dem kommenden Jubiläumsjahr 2021
+				<strong>Werden Sie jetzt Fördermitglied – und machen Sie ab dem Jubiläumsjahr 2021
 					mehr für Wikipedia möglich!</strong>
 			</p>
 		</div>
 
 		<div className="call-to-action">
 			<div className="call-to-action__item">
-				<a href={ addTrackingParams( 'https://spenden.wikimedia.de/apply-for-membership?skin=' + props.donationSkinId + '&type=sustaining' ) }
-					className="call-to-action__button">Jetzt Fördermitglied werden</a>
+				<form
+					method="GET"
+					name="impCountForm"
+					action={ formAction }
+				>
+					<input type="hidden" name="incentive" value="1"/>
+					<input type="hidden" name="bImpCount" value={ props.impressionCounts.bannerCount }/>
+					<input type="hidden" name="piwik_campaign" value={ props.campaignName }/>
+					<input type="hidden" name="piwik_kwd" value={ props.bannerName }/>
+					<input type="hidden" name="type" value="sustaining"/>
+					<button
+						onClick={ props.onSubmit }
+						className="call-to-action__button">Jetzt Fördermitglied werden</button>
+				</form>
 			</div>
 			<ul className="call-to-action__item">
 				<li>Mitgliedsbeiträge sind steuerlich absetzbar</li>
 				<li>Automatische Zuwendungsbescheinigung</li>
+				<li>Wikipedia-Stoffbeutel als Begrüßungsgeschenk</li>
 				<li>Kein Risiko: Kündigung jederzeit fristlos möglich</li>
 			</ul>
 		</div>
-		<p><a className="more-info__link" href={ addTrackingParams( 'https://www.wikimedia.de/mitglieder/?' ) }>Weitere Informationen auf unserer Webseite</a></p>
+		<p>
+			<a className="more-info__link"
+				href={ addTrackingParams( 'https://www.wikimedia.de/mitglieder/?' ) }
+				onClick={ props.onSubmit }>
+				Weitere Informationen auf unserer Webseite
+			</a>
+		</p>
 	</div>;
 }

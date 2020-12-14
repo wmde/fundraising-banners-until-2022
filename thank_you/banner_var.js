@@ -32,10 +32,9 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		trackingData: createTrackingData( trackingIds.bannerName ),
 		expandText: 'Dankestext lesen',
 		moreInfo: MembershipMoreInfo,
-		skinFunctions: getSkinAdjuster(),
+		skinAdjuster: getSkinAdjuster(),
 		bannerType: BannerType.VAR
 	}
 );
