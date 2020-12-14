@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_ctrl.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -9,7 +9,7 @@ import { getSkinAdjuster } from '../shared/skin';
 
 import { Banner, BannerType } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
-import MembershipMoreInfo from './components/MembershipMoreInfo';
+import MembershipMoreInfo from './components/MembershipMoreInfo_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { createCampaignProjection } from '../shared/campaign_projection';
 

@@ -48,21 +48,6 @@ export default function MembershipMoreInfo( props ) {
 				<strong>Werden Sie jetzt Fördermitglied – und machen Sie ab dem kommenden Jubiläumsjahr 2021
 					mehr für Wikipedia möglich!</strong>
 			</p>
-
-			<ul className="more-info__list">
-				<li>Mitgliedsbeiträge sind steuerlich absetzbar</li>
-				<li>Automatische Zuwendungsbescheinigung</li>
-				<li>Kein Risiko: Kündigung jederzeit fristlos möglich</li>
-			</ul>
-			<p>Damit wir den freien Zugang zu Wissen dauerhaft etablieren können, müssen wir Menschen wie Sie von einer
-				regelmäßigen Förderung Wikipedias überzeugen. Die Fördermitgliedschaft ist Ihre Möglichkeit,
-				Wikipedia langfristig zu sichern. Sie erhalten dabei Zugang zu der Welt hinter Wikipedia:
-				Einblicke in die Arbeit der Freiwilligen, Einladungen zu regionalen Veranstaltungen und
-				Hintergrundinformationen, warum wir mit Museen zusammenarbeiten oder wir fordern, dass öffentlich
-				finanzierte Publikationen für Wikipedia nutzbar sein müssen.</p>
-
-			<p>Schon 2 Euro monatlich – der Preis eines Kaffees – ermöglichen uns, Wikipedias Erfolgsgeschichte fortzuführen.
-				Sie sehen: Ein kleiner Beitrag kann so viel bewirken. Daher meine Bitte an Sie: Fördern Sie Wikipedia ab jetzt regelmäßig.</p>
 		</div>
 
 		<div className="call-to-action">

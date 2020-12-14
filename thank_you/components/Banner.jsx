@@ -53,13 +53,10 @@ export class Banner extends Component {
 	}
 
 	closeBanner = e => {
-		// TODO does this have to go back in
-		// this.props.trackingData.tracker.trackBannerEvent( 'banner-closed', 0, 0, this.props.trackingData.bannerCloseTrackRatio );
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
 		if ( onMediaWiki() ) {
-			// TODO wtf is this
-			// mw.centralNotice.customHideBanner( 'close', 1814400 );
+			mw.centralNotice.customHideBanner( 'close', 1814400 );
 		}
 		this.props.onClose();
 	};
