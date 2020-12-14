@@ -1,6 +1,10 @@
 import SizeIssueIndicator from './track_size_issues';
 import { getSkinAdjuster } from './skin';
-import { mediaWikiIsShowingContentPage, onMediaWiki } from './mediawiki_checks';
+import {
+	mediaWikiIsShowingContentPage,
+	mediaWikiMainContentIsHiddenByLightbox,
+	onMediaWiki
+} from './mediawiki_checks';
 import { createElement, render } from 'preact';
 import InterruptibleTimeout from './interruptible_timeout';
 import { VIEWPORT_TRACKING_IDENTIFIER, VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER } from './event_logging_tracker';
@@ -32,7 +36,7 @@ export default class BannerPresenter {
 		}
 		const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
-		if ( onMediaWiki() && !mediaWikiIsShowingContentPage() ) {
+		if ( !mediaWikiIsShowingContentPage() || mediaWikiMainContentIsHiddenByLightbox() ) {
 			mw.centralNotice.setBannerLoadedButHidden();
 			return;
 		}
@@ -103,6 +107,10 @@ export default class BannerPresenter {
 		const bannerDisplayTimeout = new InterruptibleTimeout();
 		bannerDisplayTimeout.run(
 			() => {
+				if ( mediaWikiMainContentIsHiddenByLightbox() ) {
+					mw.centralNotice.setBannerLoadedButHidden();
+					return;
+				}
 				this.impressionCounts.incrementImpressionCounts();
 				displayBanner();
 				this.trackingData.tracker.recordBannerImpression();

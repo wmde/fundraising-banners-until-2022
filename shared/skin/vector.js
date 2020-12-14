@@ -1,6 +1,8 @@
 import Skin from './Skin';
 import $ from 'jquery';
 
+// usually desktop skin
+
 export default class Vector extends Skin {
 	constructor() {
 		super();
