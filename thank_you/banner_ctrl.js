@@ -1,32 +1,41 @@
 // eslint-disable-next-line no-unused-vars
 import style from './styles/styles_ctrl.pcss';
 
-import { integerFormatter, millionFormatter } from '../shared/number_formatter/de';
+import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
-import { showBanner } from './src/show_banner';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import { getSkinAdjuster } from '../shared/skin';
 
-import Banner from './banners/Banner';
+import { Banner, BannerType } from './components/Banner';
+import BannerPresenter from '../shared/banner_presenter';
 import MembershipMoreInfo from './components/MembershipMoreInfo';
+import { LocalImpressionCount } from '../shared/local_impression_count';
+import { createCampaignProjection } from '../shared/campaign_projection';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
-
-const CampaignParameters = createCampaignParameters();
+const campaignParameters = createCampaignParameters();
+const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
+const trackingData = createTrackingData( trackingIds.bannerName );
+const bannerPresenter = new BannerPresenter(
+	trackingData,
+	bannerContainer.dataset.delay || 0,
+	new LocalImpressionCount( trackingIds.bannerName )
+);
 
-showBanner(
+bannerPresenter.present(
 	Banner,
 	bannerContainer,
 	{
 		...trackingIds,
-		numberOfDonors: integerFormatter( CampaignParameters.donationProjection.donorsBase ),
-		numberOfMembers: integerFormatter( CampaignParameters.numberOfMembers ),
-		goalDonationSum: millionFormatter( CampaignParameters.donationProjection.goalDonationSum / 1000000 ),
+		campaignParameters,
+		campaignProjection,
+		formatters,
 		trackingData: createTrackingData( trackingIds.bannerName ),
 		expandText: 'Dankestext lesen',
 		moreInfo: MembershipMoreInfo,
-		skinFunctions: getSkinAdjuster()
+		skinFunctions: getSkinAdjuster(),
+		bannerType: BannerType.CTRL
 	}
 );
