@@ -1,10 +1,10 @@
 # Triggering effects in child components from a parent component
 
-2020-12-10
+2020-12-15
 
 ## Status
 
-Pending
+Accepted
 
 ## Context
 
@@ -12,12 +12,13 @@ Our entry point code and main banner components are responsible for coordinating
 In reactive frameworks like React, Preact and Vue it's unusual / an anti-pattern to call methods of children, so we need 
 a different mechanism to "expose" the methods of child components to parent component components.
 
-Examples of this pattern:
+Currently, these are:
 
 * Start sliding in the banner after a period of time (exposing `BannerTransition.displayBanner`)
 * Start animating the progress bar animation after the banner has finished sliding in (exposing `ProgressBar.startAnimation`)  
 * Stop animating the slider when the user interacts with the form (exposing `Slider.onStopAutoplay`)
 * Start sliding in the full page banner when the user clicks on the mini banner (exposing `FollowupTransition.displayBanner`)
+* Start animating the text highlight (exposing `TextHighlight.animateHighlight`). *Not in use at the moment!*
 
 ## Decision Drivers
 * Parents and children must be interchangeable for the different channels
@@ -26,6 +27,7 @@ Examples of this pattern:
 * "Developer experience" - how easy is it to navigate and understand the code
 * Pattern should be "portable" across reactive frameworks, so we don't have to rewrite too much code when switching 
   from Preact to Vue.
+* Best practices - Single Responsibility and decoupling, avoiding duplicated code
 
 ## Options
 
@@ -222,7 +224,6 @@ calls a callback with its payload, making the payload more private.
   breaking the independence of the event subscribers from event emitters.
 
 
-
 ### Animation state passed down as properties
 The parent keeps an "animation state" object, passes individual values as properties to children. 
 Children react to property changes by calling their methods. The state can either be binary to trigger the method once, 
@@ -265,8 +266,7 @@ function Child( { shouldUpdateStatusView, okState } ) {
 } 
 ```
 
-The example above looks a bit convoluted. Some "animation triggers" could become simple properties combined with internal 
-state or a specialized hook.  
+The example above looks a bit convoluted. Some "animation triggers" could become simple properties combined picked up by the child component:
 
 ```jsx
 function Parent(props) {
@@ -312,11 +312,110 @@ function Child( { okState } ) {
   solved with other mechanisms (callbacks in Preact, events in Vue).
 - The naming flexibility can lead to confusion. Might be better to use a convention.
 
+
+### A reactive data store
+A reactive data store like [flux](https://facebook.github.io/flux/), [redux](https://redux.js.org) or [vuex](https://vuex.vuejs.org)
+is a combination of the command bus and shared reactive state option. All components share the same state object where 
+they can `subscribe` to property changes or `dispatch` actions that will trigger state changes.
+
+There are several articles looking at the difference between keeping state in a store and using hooks/composition API.
+Although the majority of articles recommends using a store, the described use cases for hooks are a better fit for our 
+situation, since we don't need the more advanced features of a store:
+
+- https://medium.com/javascript-scene/do-react-hooks-replace-redux-210bab340672
+- https://blog.logrocket.com/state-management-using-only-react-hooks/
+- https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/
+
+#### Pros
+- Established pattern
+- Existing libraries
+- Clearly defined "state machine" through testable reducers, that prevent invalid states
+- Logging middleware for easy debugging and adding features
+
+#### Cons
+- More complexity because we have to define actions
+- Compiled source code will get bigger, we add another dependency
+- Not really portable (redux is for (P)React, Vuex is for Vue)
+- We don't need many features of the libraries
+- Weakens boundaries between components, without developer discipline any component can "talk" to any other component
+- Temptation to move too much state into the store, making the components harder to understand
+
+
+### CSS-Only solution
+For effects, where we don't need to change the internal state of the child, we can define a set of class names that 
+trigger different content, display or animations in the children. The class names are all inserted in the parent components,
+the CSS for the child components defines how they display when the parent class changes.
+ 
+```jsx
+function Parent(props) {
+    const [ everythingOk, setEverythingOk ] = useState( false );
+    useEffect( () => {
+            setTimeout( () => setEverythingOk( true ), 1000 ); 
+        });
+    return <div className={everythingOk ? 'child--this-is-fine' : 'child--this-is-not-normal' }>
+            <Child />
+          </div>;
+} 
+```  
+
+```jsx
+function Child( { okState } ) {
+    return <div>
+        <span>Everything is </span> 
+        <span className="child_status child_status--this-is-fine">green</span>
+        <span className="child_status child_status--this-is-not-normal">red</span>
+    </div>;
+} 
+```
+
+```css
+/* Child.pcss */
+
+/** Default view */
+.child_status {
+    display: none;
+}
+/** Status-specific views */
+.child--this-is-fine .child_status--this-is-fine { 
+    display: inline-block;
+}
+.child--this-is-not-normal .child_status--this-is-not-normal { 
+    display: inline-block;
+}
+```
+
+#### Pros
+- Very performant (display changes and animations handled by browser, CSS compresses well)
+- Less JS code and reactivity in the Child
+- Fits well with BEM naming or other naming conventions
+
+#### Cons
+- Might duplicate content
+- Not usable for components that need to keep and change state, triggered from the outside.
+
 ## Decision
 
-TBD
+We will try to find a "middle ground" between the animation state, reactive store and CSS-only approaches, favoring the 
+CSS-only approach. The centerpiece class will be `AnimationState`, a class with the following responsibilities:
 
+- Provide methods for changing state, e.g. `displayBanner`, `startProgressBar`, `startSlider`, `displayFollowupBanner`. 
+  The methods make sure the state stays consistent and things happen in the right order.
+- Generate reactive class names for the `Banner` component. Children can define CSS rules for these parent states.
+- Provide reactive properties for children (Slider, FollowUpBanner) to trigger state changes.
+- Listen to `transitionEnd` events and change the state accordingly, checking for marker classes in the event target 
+  (see `FollowupTransition` for an example).
+
+We will experiment how we define the "state machine" for coordinating dependent animations 
+(e.g. banner display -> start progress bar -> start slider), possibly moving the code out of the `Banner` and `BannerPresenter`
+class, either into `AnimationState` or into a separate `AnimationTransition` class. The goal here is to move all calls 
+to `setTimeout` to a central place and to make the animation flow/dependency more visible.
+
+We will introduce a `BannerDimension` class that measures the banner dimensions (with debouncing on viewport resize events)
+and provides reactive `width` and `height` properties to children so they can adapt width/height dependent state. 
 
 ## Consequences
 
-TBD
+- `BannerTransition` and `FollowupTransition` components will probably become CSS-only classes, `ProgressBar` might lose 
+  its method to start the progress.
+- We can get rid of the `registerXXX` functions and their properties inside the `Banner` components
+- BannerPresenter might become easier to understand and more structured.
