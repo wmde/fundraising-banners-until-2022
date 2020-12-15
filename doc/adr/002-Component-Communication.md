@@ -28,6 +28,7 @@ Examples of this pattern:
   from Preact to Vue.
 
 ## Options
+
 ### `registerXXX` callbacks
 
 This is how we currently solve the parent-child communication: On mount, the parent component has a variable that holds 
@@ -59,6 +60,20 @@ function Child({registerDoSomething}) {
     </div>;
 } 
 ```
+
+#### Pros
+- Currently used, no changes needed
+- Flexibility to use function and property names that fit best
+
+#### Cons
+- An unfamiliar pattern for new developers
+- Looking up what's happening means jumping between 3 places in the code - the child class, the call to the set function 
+  in the parent class, the child component in the parent class and the register function
+- It's hard to navigate in the IDE - jumping to the definition of the property results in the empty function instead of 
+  the `registerXXX` function  
+- The Parent class needs to define an additional `registerXXX` function
+- The naming flexibility can lead to confusion. Might be better to use a naming convention and renaming existing methods.  
+
 
 ### `ref` to child component
 
@@ -99,8 +114,20 @@ class Child extends Component {
 } 
 ```
 
+#### Pro
+The simple use case is easy and familiar.
 
-### Event bus
+#### Cons
+- Only works with direct parent-child relationships
+- Can trigger re-render of parent when child changes
+- We can't use functional components with hooks as children
+- Forces children to implement a specific interface, otherwise calling a method from the parent will break.
+- We always have to check for the `.current` property of the reference to avoid calling methods on an empty object
+
+
+### Event bus / Command Bus
+
+#### Event bus
 
 Parents and children connect to the same event bus through a custom hook that returns a singleton.  
 Parents *trigger* events that children may *handle*.
@@ -134,8 +161,7 @@ function Child() {
 } 
 ```
 
-
-### Command bus
+#### Command bus
 
 The code is similar to the event bus, but conceptually the parents don't inform children of events that "happened" in 
 the parent, but send commands to all children that are interested in these commands. Parents and children connect to the
@@ -172,6 +198,29 @@ function Child() {
 
 The child example shows an optional inversion of control where the every `Command` class has an `execute` method that 
 calls a callback with its payload, making the payload more private. 
+
+#### Pros
+- We can visualize/list the events/commands and their handlers, helping us to understand the timings
+- Easier debugging by adding a logger middleware to the bus or looking at the registered handlers/subscribers
+- Event handlers/command subscribers for grandchild components don't need to be passed as props through a child component, 
+  but attach directly to the bus. 
+- Easier code navigation in the IDE with "Go to usages" and "Go to definition"
+- More type safety and intelligent IDE autocompletion through constructor parameters for the event
+- Most portable solution: when switching from Preact to Vue, we only need to replace `useCommandBus`/`useEventBus` 
+  (a utility function which returns the bus singleton from the module) with Vue's [`inject`](https://composition-api.vuejs.org/api.html#dependency-injection)
+  function.  
+
+#### Cons
+- Danger to leave events/commands unhandled - more burden on the acceptance test
+- Might be harder to understand
+- In event handlers, the child components code at least conceptually "knows" about other components and their code to attach an event handler.
+  This can lead to code dependencies. 
+  Example: The progress bar must react to `bannerTransitionHasFinished`. This could be mitigated by a 
+  "mapping" middleware, that translates component-specific events into more generalized events. 
+  But it might be hard to always stick to the "noun + past tense verb" convention, and the mapper might soon resemble a command bus.
+- It might be tempting to implement a `target` property in the event object, 
+  breaking the independence of the event subscribers from event emitters.
+
 
 
 ### Animation state passed down as properties
@@ -246,60 +295,6 @@ function Child( { okState } ) {
 } 
 ```
 
-## Pros and cons of Options
-
-### `registerXXX` callbacks
-#### Pros
-- Currently used, no changes needed
-- Flexibility to use function and property names that fit best
-
-#### Cons
-- An unfamiliar pattern for new developers
-- Looking up what's happening means jumping between 3 places in the code - the child class, the call to the set function 
-  in the parent class, the child component in the parent class and the register function
-- It's hard to navigate in the IDE - jumping to the definition of the property results in the empty function instead of 
-  the `registerXXX` function  
-- The Parent class needs to define an additional `registerXXX` function
-- The naming flexibility can lead to confusion. Might be better to use a naming convention and renaming existing methods.  
-
-
-### `ref` to child component
-#### Pro
-The simple use case is easy
-
-#### Cons
-- Only works with direct parent-child relationships
-- Can trigger re-render of parent when child changes
-- We can't use functional components with hooks as children
-- Forces children to implement a specific interface, otherwise calling a method from the parent will break.
-- We always have to check for the `.current` property of the reference to avoid calling methods on an empty object
-
-
-### Event Bus / Command Bus
-#### Pros
-- We can visualize/list the events/commands and their handlers, helping us to understand the timings
-- Easier debugging by adding a logger middleware to the bus or looking at the registered handlers/subscribers
-- Event handlers/command subscribers for grandchild components don't need to be passed as props through a child component, 
-  but attach directly to the bus. 
-- Easier code navigation in the IDE with "Go to usages" and "Go to definition"
-- More type safety and intelligent IDE autocompletion through constructor parameters for the event
-- Most portable solution: when switching from Preact to Vue, we only need to replace `useCommandBus`/`useEventBus` 
-  (a utility function which returns the bus singleton from the module) with Vue's [`inject`](https://composition-api.vuejs.org/api.html#dependency-injection)
-  function.  
-
-#### Cons
-- Danger to leave events/commands unhandled - more burden on the acceptance test
-- Might be harder to understand
-- In event handlers, the child components code at least conceptually "knows" about other components and their code to attach an event handler.
-  This can lead to code dependencies. 
-  Example: The progress bar must react to `bannerTransitionHasFinished`. This could be mitigated by a 
-  "mapping" middleware, that translates component-specific events into more generalized events. 
-  But it might be hard to always stick to the "noun + past tense verb" convention, and the mapper might soon resemble a command bus.
-- It might be tempting to implement a `target` property in the event object, 
-  breaking the independence of the event subscribers from event emitters.
-
-
-### Animation State
 #### Pros
 - Most idiomatic solution
 - Some type hinting with `PropTypes`, although the function parameters can't be hinted
