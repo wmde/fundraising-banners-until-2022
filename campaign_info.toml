@@ -72,3 +72,75 @@ tracking = "org-wpde-ty-201222-ctrl"
 filename = "./thank_you/banner_var.js"
 pagename = "B20WPDE_ty01_201222_var"
 tracking = "org-wpde-ty-201222-var"
+
+
+
+
+
+# Thank You BACKUP Campaign
+[thank_you_BA]
+campaign_tracking = "ty01-ba-201222"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
+wrapper_template = "wikipedia_org"
+
+[thank_you_BA.banners.ctrl]
+filename = "./thank_you/banner_backup_ctrl.js"
+pagename = "B20WMDE_ty01_ba_201222_ctrl"
+tracking = "org-ty-201222-ctrl"
+
+[thank_you_BA.banners.var]
+filename = "./thank_you/banner_backup_var.js"
+pagename = "B20WMDE_ty01_ba_201222_var"
+tracking = "org-ty-ba-201222-var"
+
+
+# Thank you BACKUP campaign mobile wp.org
+[thank_you_mobile_BA]
+campaign_tracking = "ty01-mob-ba-201222"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+wrapper_template = "wikipedia_org"
+
+[thank_you_mobile_BA.banners.ctrl]
+filename = "./thank_you/banner_backup_ctrl.js"
+pagename = "B20WMDE_mob_ty01_ba_201222_ctrl"
+tracking = "org-mob-ty-ba-201222-ctrl"
+
+[thank_you_mobile_BA.banners.var]
+filename = "./thank_you/banner_backup_var.js"
+pagename = "B20WMDE_mob_ty01_ba_201222_var"
+tracking = "org-mob-ty-ba-201222-var"
+
+
+# Thank you BACKUP campaign ipad wp.org
+[thank_you_ipad_BA]
+campaign_tracking = "ty01-ipad-ba-201222"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+wrapper_template = "wikipedia_org"
+
+[thank_you_ipad_BA.banners.ctrl]
+filename = "./thank_you/banner_backup_ctrl.js"
+pagename = "B20WMDE_ipad_ty01_ba_201222_ctrl"
+tracking = "org-ipad-ty-ba-201222-ctrl"
+
+[thank_you_ipad_BA.banners.var]
+filename = "./thank_you/banner_backup_var.js"
+pagename = "B20WMDE_ipad_ty01_ba_201222_var"
+tracking = "org-ipad-ty-ba-201222-var"
+
+
+# Thank you BACKUP campaign wp.de
+[thank_you_wpde_BA]
+campaign_tracking = "ty01-wpde-ba-201222"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[thank_you_wpde_BA.banners.ctrl]
+filename = "./thank_you/banner_backup_ctrl.js"
+pagename = "B20WPDE_ty01_ba_201222_ctrl"
+tracking = "org-wpde-ty-ba-201222-ctrl"
+
+[thank_you_wpde_BA.banners.var]
+filename = "./thank_you/banner_backup_var.js"
+pagename = "B20WPDE_ty01_ba_201222_var"
+tracking = "org-wpde-ty-ba-201222-var"
