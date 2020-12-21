@@ -15,7 +15,19 @@ export default class BannerPresenter {
 		this.appearanceDelay = appearanceDelay;
 		this.impressionCounts = impressionCounts;
 		this.resizeHandlerOfBanner = null;
-		this.mwCloseHandler = mwCloseHandler || mw.centralNotice.hideBanner;
+		this.mwCloseHandler = this.getmwCloseHandler( mwCloseHandler );
+	}
+
+	getmwCloseHandler( mwCloseHandler ) {
+		if ( mwCloseHandler ) {
+			return mwCloseHandler;
+		}
+
+		if ( !onMediaWiki() ) {
+			return null;
+		}
+
+		return mw.centralNotice.hideBanner;
 	}
 
 	createResizeHandler( bannerContainer, skinAdjuster ) {
