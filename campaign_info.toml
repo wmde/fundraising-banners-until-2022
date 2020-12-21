@@ -74,6 +74,24 @@ pagename = "B20WPDE_ty01_201222_var"
 tracking = "org-wpde-ty-201222-var"
 
 
+# Thank you campaign wp.de mobile
+[thank_you_wpde_mobile]
+campaign_tracking = "ty01-wpde-mob-201222"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[thank_you_wpde_mobile.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B20WPDE_ty01_mob_201222_ctrl"
+tracking = "org-wpde-ty-mob-201222-ctrl"
+
+[thank_you_wpde_mobile.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B20WPDE_ty01_mob_201222_var"
+tracking = "org-wpde-ty-mob-201222-var"
+
+
 
 
 
@@ -144,3 +162,21 @@ tracking = "org-wpde-ty-ba-201222-ctrl"
 filename = "./thank_you/banner_backup_var.js"
 pagename = "B20WPDE_ty01_ba_201222_var"
 tracking = "org-wpde-ty-ba-201222-var"
+
+
+# Thank you BACKUP campaign wp.de mobile
+[thank_you_wpde_BA_mobile]
+campaign_tracking = "ty01-wpde-ba-mob-201222"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[thank_you_wpde_BA_mobile.banners.ctrl]
+filename = "./thank_you/banner_backup_ctrl.js"
+pagename = "B20WPDE_ty01_ba_mob_201222_ctrl"
+tracking = "org-wpde-ty-ba-mob-201222-ctrl"
+
+[thank_you_wpde_BA_mobile.banners.var]
+filename = "./thank_you/banner_backup_var.js"
+pagename = "B20WPDE_ty01_ba_mob_201222_var"
+tracking = "org-wpde-ty-ba-mob-201222-var"

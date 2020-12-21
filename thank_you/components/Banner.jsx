@@ -47,8 +47,9 @@ export class Banner extends Component {
 	}
 
 	setTopPosition() {
-		const bannerElement = document.querySelector( '.skin-minerva .wmde-banner .banner-position' );
+		const bannerElement = document.querySelector( '.skin-minerva .wmde-banner--expanded .banner-position' );
 		if ( !bannerElement ) {
+			this.setState( { topPosition: 0 } );
 			return;
 		}
 		this.setState( { topPosition: bannerElement.offsetHeight * -1 } );

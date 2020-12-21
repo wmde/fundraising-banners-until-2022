@@ -49,7 +49,8 @@ export default function MembershipMoreInfo( props ) {
 				<strong> Heute möchte ich Sie herzlich einladen, diesem Kreis von außergewöhnlichen
 					Menschen als neues Fördermitglied beizutreten. </strong>
 				Bereits mit 2 Euro im Monat sind Sie dabei.
-				Als Dankeschön erhalten Sie einen exklusiven Wikipedia-Stoffbeutel.
+				Als Dankeschön erhalten Sie auf Wunsch einen Stoffbeutel mit dem markanten Wikipedia-Logo, damit
+				Sie Ihre Begeisterung für Wissen auch nach außen tragen können.
 			</p>
 
 			<p>

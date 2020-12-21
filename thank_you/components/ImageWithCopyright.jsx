@@ -14,7 +14,7 @@ export default function ImageWithCopyright() {
 		</div>
 		<div className="image-wrapper__copyright">
 			René Zieger für Wikimedia Deutschland, {' '}
-			<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Abraham_Taherivand_2017.jpg/354px-Abraham_Taherivand_2017.jpg">Abraham Headshot</a>
+			<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Abraham_Taherivand_2017.jpg/354px-Abraham_Taherivand_2017.jpg">Abraham Taherivand</a>
 			{', '}
 			<a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" rel="license">CC BY-SA 4.0</a>
 		</div>

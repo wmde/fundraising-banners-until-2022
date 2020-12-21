@@ -42,7 +42,8 @@ export default function MembershipMoreInfo( props ) {
 				finanzierte Publikationen für Wikipedia nutzbar sein müssen.
 				Schon 2 Euro monatlich – der Preis eines Kaffees – ermöglichen uns, Wikipedias Erfolgsgeschichte
 				fortzuführen. Sie sehen: Ein kleiner Beitrag kann so viel bewirken. Daher meine Bitte an Sie: Fördern
-				Sie Wikipedia ab jetzt regelmäßig. Als Dankeschön erhalten Sie einen exklusiven Wikipedia-Stoffbeutel.
+				Sie Wikipedia ab jetzt regelmäßig. Als Dankeschön erhalten Sie auf Wunsch einen Stoffbeutel mit dem
+				markanten Wikipedia-Logo, damit Sie Ihre Begeisterung für Wissen auch nach außen tragen können.
 			</p>
 		</div>
 
