@@ -1,86 +1,131 @@
-.small-banner {
-	background: $color-secondary;
-	box-sizing: border-box;
-	padding: 16px;
-	cursor: pointer;
-}
+.wmde-banner {
 
-.small-banner__inner {
-	background-color: $color-primary;
-	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_s;
-	background-position: left top, right -2px top;
-	background-repeat: no-repeat, no-repeat;
-	background-size: contain;
-	box-sizing: border-box;
-	border-radius: 6px;
-	padding: 14px;
-	@media ( min-width: $breakpoint_m ) {
-		padding: 32px;
-		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_m;
-	}
-	@media ( min-width: $breakpoint_l ) {
-		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_l;
-	}
-}
+	position: fixed;
+	z-index: 1000;
 
-.small-banner__content {
-	@media ( min-width: $breakpoint_m ) {
+	&--expanded {
+		position: relative;
+		.banner-position {
+			position: absolute;
+			left: 0;
+			width: 100%;
+		}
+	}
+
+	&--hidden {
+		display: none;
+	}
+
+	.small-banner {
+		background: $color-secondary;
+		box-sizing: border-box;
+		padding: 16px;
+		cursor: pointer;
+	}
+
+	.small-banner__inner {
+		background-color: $color-primary;
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_s;
+		background-position: left top, right -2px top;
+		background-repeat: no-repeat, no-repeat;
+		background-size: contain;
+		box-sizing: border-box;
+		border-radius: 6px;
+		padding: 14px;
+		@media ( min-width: $breakpoint_m ) {
+			padding: 32px;
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_m;
+		}
+		@media ( min-width: $breakpoint_l ) {
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_l;
+		}
+	}
+
+	.small-banner__content {
+		@media ( min-width: $breakpoint_m ) {
+			display: flex;
+			align-items: flex-end;
+		}
+	}
+
+	.thankyou-message {
+		font-size: 24px;
+		color: $color-white;
+		text-align: center;
+		margin-top: 24px;
+		@media ( min-width: $breakpoint_m ) {
+			font-size: 26px;
+			margin-top: 0;
+		}
+		@media ( min-width: $breakpoint_l ) {
+			font-size: 42px;
+		}
+	}
+
+	.thankyou-image {
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Thank-you-white.svg' );
+		background-repeat: no-repeat;
+		background-position: center center;
+		box-sizing: border-box;
+		width: 100%;
+		height: 85px;
+		@media ( min-width: $breakpoint_m ) {
+			width: 203px;
+			background-position: left top;
+		}
+	}
+
+	.info-icon {
+		position: absolute;
 		display: flex;
-		align-items: flex-end;
-	}
-}
-
-.thankyou-message {
-	font-size: 24px;
-	color: $color-white;
-	text-align: center;
-	margin-top: 24px;
-	@media ( min-width: $breakpoint_m ) {
-		font-size: 26px;
-		margin-top: 0;
-	}
-	@media ( min-width: $breakpoint_l ) {
-		font-size: 42px;
-	}
-}
-
-.thankyou-image {
-	background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Thank-you-white.svg' );
-	background-repeat: no-repeat;
-	background-position: center center;
-	box-sizing: border-box;
-	width: 100%;
-	height: 85px;
-	@media ( min-width: $breakpoint_m ) {
-		width: 203px;
-		background-position: left top;
-	}
-}
-
-.info-icon {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	top: 24px;
-	left: 24px;
-	width: 24px;
-	height: 24px;
-	border-radius: 16px;
-	font-size: 16px;
-	background: $color-accent;
-	color: $color-white;
-	font-weight: bold;
-	@media ( min-width: $breakpoint_m ) {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 		top: 24px;
-		left: 32px;
-		width: 32px;
-		height: 32px;
-		font-size: 22px;
+		left: 24px;
+		width: 24px;
+		height: 24px;
+		border-radius: 16px;
+		font-size: 16px;
+		background: $color-accent;
+		color: $color-white;
+		font-weight: bold;
+		@media ( min-width: $breakpoint_m ) {
+			top: 24px;
+			left: 32px;
+			width: 32px;
+			height: 32px;
+			font-size: 22px;
+		}
+	}
+
+	.info-icon__i {
+		padding-top: 3px;
 	}
 }
 
-.info-icon__i {
-	padding-top: 3px;
+/* special adjustments for the mobile skin minerva */
+.skin-minerva {
+
+	.wmde-banner {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+
+	.banner-position {
+		position: fixed;
+		width: 100%;
+	}
+
+	.wmde-banner--expanded .banner-position {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 0;
+	}
+
+	.wmde-banner--expanded {
+		position: absolute;
+	}
 }

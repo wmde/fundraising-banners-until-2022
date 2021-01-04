@@ -6,7 +6,7 @@ export default function ImageWithCopyright() {
 		<div className="image-wrapper__image">
 			<img width={148}
 				alt="Abraham Taherivand, Wikimedia Deutschland e.V."
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Abraham_Headshot.jpg/354px-Abraham_Headshot.jpg"/>
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Abraham_Taherivand_2017.jpg/354px-Abraham_Taherivand_2017.jpg"/>
 		</div>
 		<div className="image-wrapper__legend">
 			Abraham Taherivand<br/>
@@ -14,7 +14,7 @@ export default function ImageWithCopyright() {
 		</div>
 		<div className="image-wrapper__copyright">
 			René Zieger für Wikimedia Deutschland, {' '}
-			<a href="https://commons.wikimedia.org/wiki/File:Abraham_Headshot.jpg">Abraham Headshot</a>
+			<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Abraham_Taherivand_2017.jpg/354px-Abraham_Taherivand_2017.jpg">Abraham Taherivand</a>
 			{', '}
 			<a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" rel="license">CC BY-SA 4.0</a>
 		</div>

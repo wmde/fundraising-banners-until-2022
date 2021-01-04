@@ -9,7 +9,7 @@ import { getSkinAdjuster } from '../shared/skin';
 
 import { Banner, BannerType } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
-import MembershipMoreInfo from './components/MembershipMoreInfo_ctrl';
+import MembershipMoreInfo from './components/MembershipMoreInfo_backup_ctrl';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { createCampaignProjection } from '../shared/campaign_projection';
 

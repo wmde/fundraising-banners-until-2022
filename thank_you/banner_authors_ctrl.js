@@ -8,7 +8,7 @@ import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import { getSkinAdjuster } from '../shared/skin';
 
-import Banner from './banners/Banner';
+import Banner from './components/Banner';
 import AuthorsMoreInfo from './components/AuthorsMoreInfo';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
