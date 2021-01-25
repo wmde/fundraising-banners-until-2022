@@ -55,7 +55,7 @@
     "postcss-custom-properties": "^11.0.0",
     "postcss-import": "^14.0.0",
     "postcss-load-config": "^3.0.0",
-    "postcss-loader": "^4.1.0",
+    "postcss-loader": "^4.2.0",
     "postcss-nested": "^5.0.1",
     "postcss-simple-vars": "^6.0.1",
     "regenerator-runtime": "^0.13.7",
