@@ -1,15 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import * as PropTypes from 'prop-types';
-import formatter from 'format-number';
 
-export default function CompanyBudgets( { companies, citationLabel, locale } ) {
-	const billionFormatter = locale === 'en' ?
-		formatter( { round: 0, prefix: '€', suffix: ' billion' } ) :
-		formatter( { round: 0, suffix: ' Mrd. €' } );
-	const millionFormatter = locale === 'en' ?
-		formatter( { round: 2, prefix: '€', suffix: ' billion', padRight: 1 } ) :
-		formatter( { round: 2, decimal: ',', suffix: ' Mrd. €', padRight: 1 } );
+export default function CompanyBudgets( { companies, citationLabel } ) {
 	const highestBudget = companies.reduce( ( highestBudget, company ) => Math.max( highestBudget, company.budget ), 0 );
 	return <table className="company_budgets">
 		{companies.map( company => {
@@ -28,7 +21,7 @@ export default function CompanyBudgets( { companies, citationLabel, locale } ) {
 							style={{ width: ( company.budget / highestBudget * 100 ) + '%' }}>{'\u00A0'}</span>
 					</td>
 					<td className="company_budgets__col--budget_number">
-						<span className="company_budgets__number">{ company.budget > 1 ? billionFormatter( company.budget ) : millionFormatter( company.budget ) }</span>
+						<span className="company_budgets__number">{ company.budgetString }</span>
 						<span className="company_budgets__inline-citation">{citation}</span>
 					</td>
 					<td className="company_budgets__col--citation">{citation}</td>
