@@ -59,7 +59,6 @@ export default function FundsContent( props ) {
 					<CompanyBudgets
 						citationLabel={ content.comparison.citationLabel }
 						companies={ content.comparison.companies }
-						locale={ props.locale }
 					/>
 				</div>
 			</div>
