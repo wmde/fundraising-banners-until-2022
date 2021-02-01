@@ -29,7 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-react-jsx": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "autoprefixer": "^10.2.3",
