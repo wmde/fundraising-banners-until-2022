@@ -62,7 +62,7 @@
     "rimraf": "^3.0.2",
     "sinon": "^9.0.3",
     "style-loader": "^2.0.0",
-    "stylelint": "^13.9.0",
+    "stylelint": "^13.10.0",
     "stylelint-config-wikimedia": "^0.10.2",
     "toml": "^3.0.0",
     "url": "^0.11.0",
