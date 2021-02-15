@@ -47,7 +47,7 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
     "minimatch": "^3.0.4",
-    "mocha": "^8.2.0",
+    "mocha": "^8.3.0",
     "mocha-jsdom": "^2.0.0",
     "postcss": "^8.1.4",
     "postcss-calc": "^8.0.0",
