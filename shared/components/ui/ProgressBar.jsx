@@ -17,6 +17,7 @@ export const AmountToShowOnRight = Object.freeze( {
 
 /**
  * When set to true, the "late progress" design will be used
+ *
  * @type {boolean}
  */
 const IS_LATE_PROGRESS = true;

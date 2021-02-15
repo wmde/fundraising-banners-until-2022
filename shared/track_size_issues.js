@@ -8,6 +8,7 @@ export default class SizeIssueIndicator {
 
 	/**
 	 * Get banner height and screen/window dimensions as a concatenated string
+	 *
 	 * @param {number} bannerHeight
 	 * @return {Object} screen, window and banner dimensions
 	 */
@@ -31,6 +32,7 @@ export default class SizeIssueIndicator {
 
 	/**
 	 * Check if Banner takes too much screen space and track the incident
+	 *
 	 * @param {HTMLElement} bannerElement
 	 * @return {boolean} whether or not the remaining viewport height is below the threshold
 	 */

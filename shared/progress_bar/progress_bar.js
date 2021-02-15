@@ -1,4 +1,5 @@
 require( './style.pcss' );
+import { CampaignProjection } from '../campaign_projection';
 
 /**
  * Display a progress bar

@@ -1,9 +1,11 @@
+import CampaignDays from './campaign_days';
+
 export default class CampaignDaySentence {
 
 	/**
 	 * @param {CampaignDays} campaignDays
 	 * @param {Object} translations
-	 * @param {int} urgencyThreshold
+	 * @param {number} urgencyThreshold
 	 */
 	constructor( campaignDays, translations, urgencyThreshold = 10 ) {
 		this.campaignDays = campaignDays;

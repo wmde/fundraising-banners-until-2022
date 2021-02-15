@@ -49,9 +49,9 @@ export default class TextHighlight extends Component {
 		const sliceSize = Math.max( 1, plainText.length / duration );
 		const animateSlice = () => {
 			const highlightedText = this.state.highlightedText + this.state.plainText.slice( 0, sliceSize );
-			const plainText = this.state.plainText.slice( sliceSize );
-			this.setState( { highlightedText, plainText } );
-			if ( plainText ) {
+			const newPlainText = this.state.plainText.slice( sliceSize );
+			this.setState( { highlightedText, plainText: newPlainText } );
+			if ( newPlainText ) {
 				this.highlightAnimationId = setTimeout( animateSlice, millisecondsPerChar );
 			}
 		};

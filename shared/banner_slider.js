@@ -7,7 +7,7 @@ import Flickity from 'flickity';
 export class Slider {
 
 	/**
-	 * @param {int} sliderAutoPlaySpeed - Waiting time before next slide is shown automatically
+	 * @param {number} sliderAutoPlaySpeed - Waiting time before next slide is shown automatically
 	 * @param {Object} extraOptions - any custom stuff needed for the slider
 	 */
 	constructor( sliderAutoPlaySpeed, extraOptions = {} ) {
@@ -50,7 +50,7 @@ export class Slider {
 	}
 
 	/**
-	 * @param {int} milliseconds - Time to wait before the slider starts
+	 * @param {number} milliseconds - Time to wait before the slider starts
 	 */
 	enableAutoplayAfter( milliseconds = 0 ) {
 		setTimeout( () => this.enableAutoplay(), milliseconds );

@@ -3,7 +3,7 @@ import { h } from 'preact';
 import * as PropTypes from 'prop-types';
 
 export default function CompanyBudgets( { companies, citationLabel } ) {
-	const highestBudget = companies.reduce( ( highestBudget, company ) => Math.max( highestBudget, company.budget ), 0 );
+	const highestBudget = companies.reduce( ( maxBudget, company ) => Math.max( maxBudget, company.budget ), 0 );
 	return <table className="company_budgets">
 		{companies.map( company => {
 			const citation = company.budgetCitation ? ( <a

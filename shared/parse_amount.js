@@ -3,6 +3,7 @@
  *  - commas to dots
  *  - remove euro sign
  *  - trim
+ *
  *  @param {string} amountStr
  *  @return {number}
  */
