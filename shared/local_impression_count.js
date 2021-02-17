@@ -45,6 +45,7 @@ export class LocalImpressionCount {
 	/**
 	 * The try/catch is to check for browsers that explicitly have localStorage blocked
 	 * as the window still has the object but throws an exception when we try to use it
+	 *
 	 * @return {boolean}
 	 */
 	hasLocalStorage() {

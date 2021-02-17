@@ -68,6 +68,7 @@ export default class MatomoTracker {
 
 	/**
 	 * Emulate EventTracker interface
+	 *
 	 * @param {string} actionName
 	 * @param {number} slidesShown
 	 * @param {number} finalSlide

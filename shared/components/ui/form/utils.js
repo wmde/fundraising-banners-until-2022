@@ -2,6 +2,7 @@ import { AMOUNT_TOO_HIGH, AMOUNT_TOO_LOW, INVALID, UNSET } from './hooks/validat
 
 /**
  * Create translated message from amount validation result
+ *
  * @param {number} amountValidity
  * @param {Object} translations
  * @return {string}
@@ -21,6 +22,7 @@ export function amountMessage( amountValidity, translations ) {
 
 /**
  * Convert UNSET to INVALID validity
+ *
  * @param {number} validity
  * @param {Function} updateValidity Setter for updated validity if it changes
  * @return {number} Validity, cannot be UNSET

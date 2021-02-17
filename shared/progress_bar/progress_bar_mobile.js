@@ -1,5 +1,6 @@
 require( './style.pcss' );
 require( './style_mobile.pcss' );
+import { CampaignProjection } from '../campaign_projection';
 
 /**
  * Display a progress bar

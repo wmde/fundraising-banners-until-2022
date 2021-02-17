@@ -60,18 +60,18 @@ export default function DonationForm( props ) {
 		setFormStep( formSteps.ONE );
 	};
 
-	const addDisabledPaymentMethod = paymentMethod => {
+	const addDisabledPaymentMethod = paymentMethodToDisable => {
 		let currentDisabledPaymentMethods = disabledPaymentMethods;
-		if ( currentDisabledPaymentMethods.includes( paymentMethod ) ) {
+		if ( currentDisabledPaymentMethods.includes( paymentMethodToDisable ) ) {
 			return;
 		}
-		currentDisabledPaymentMethods.push( paymentMethod );
+		currentDisabledPaymentMethods.push( paymentMethodToDisable );
 		setDisabledPaymentMethods( currentDisabledPaymentMethods );
 	};
 
-	const removeDisabledPaymentMethod = paymentMethod => {
+	const removeDisabledPaymentMethod = paymentMethodToEnable => {
 		let currentDisabledPaymentMethods = disabledPaymentMethods;
-		const index = currentDisabledPaymentMethods.indexOf( paymentMethod );
+		const index = currentDisabledPaymentMethods.indexOf( paymentMethodToEnable );
 		if ( index === -1 ) {
 			return;
 		}

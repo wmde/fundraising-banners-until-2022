@@ -2,6 +2,7 @@
 
 // eslint-disable-next-line no-unused-vars
 import $ from 'jquery';
+import CssTransition from '../css_transition';
 
 export default class Skin {
 	/**
@@ -35,6 +36,7 @@ export default class Skin {
 
 	/**
 	 * Some Children must implement this, if their search ui interferes with the banner
+	 *
 	 * @param {Function} onSearchFocus
 	 */
 	addSearchObserver( onSearchFocus ) { // eslint-disable-line no-unused-vars
@@ -42,6 +44,7 @@ export default class Skin {
 
 	/**
 	 * close banner when editor is activated
+	 *
 	 * @param {Function} onEdit
 	 */
 	addEditorObserver( onEdit ) { // eslint-disable-line no-unused-vars

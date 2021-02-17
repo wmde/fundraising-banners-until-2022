@@ -8,6 +8,7 @@ const DEFAULT_INTERVAL = 5000;
 
 /**
  * Return an array with numbers from 0 to size
+ *
  * @param {number} size
  * @return {number[]}
  */

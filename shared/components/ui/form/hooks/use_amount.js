@@ -62,9 +62,10 @@ function amountReducer( state, action ) {
 
 /**
  * Create "setter" function with dispatcher
+ *
  * @param {string} name
  * @param {Function} dispatch
- * @return {function([*]=)}
+ * @return {Function}
  */
 function createAction( name, dispatch ) {
 	return function ( value ) {

@@ -16,6 +16,11 @@ function calculateProjection( campaignDays, base, increasePerMinute ) {
 	return base + ( campaignDays.getSecondsSinceCampaignStart() / 60 ) * increasePerMinute;
 }
 
+/**
+ * @param {CampaignDays} campaignDays
+ * @param {Object} options
+ * @constructor
+ */
 export function CampaignProjection( campaignDays, options ) {
 	this.campaignDays = campaignDays;
 	this.baseDonationSum = options.baseDonationSum || 0;
