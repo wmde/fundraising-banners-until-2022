@@ -51,7 +51,7 @@
     "mocha-jsdom": "^2.0.0",
     "postcss": "^8.1.4",
     "postcss-calc": "^8.0.0",
-    "postcss-combine-duplicated-selectors": "^6.1.0",
+    "postcss-combine-duplicated-selectors": "^10.0.2",
     "postcss-custom-properties": "^10.0.0",
     "postcss-import": "^12.0.1",
     "postcss-load-config": "^3.0.0",
