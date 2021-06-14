@@ -67,7 +67,7 @@
     "toml": "^3.0.0",
     "url": "^0.11.0",
     "webpack": "^4.46.0",
-    "webpack-cli": "^4.7.0",
+    "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.3.0",
     "wrapper-webpack-plugin": "2.1.0"
