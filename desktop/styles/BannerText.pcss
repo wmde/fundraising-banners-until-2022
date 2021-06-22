@@ -1,12 +1,43 @@
 .wmde-banner {
-	.banner-text {
-		p {
-			margin: 0;
-			padding-bottom: 10px;
 
-			&:last-child {
-				padding-bottom: 0;
+	.banner-text {
+		margin-right: 38px;
+		@media ( min-width: $breakpoint_l ) {
+			margin-right: 0;
+		}
+	}
+
+	.banner-headline {
+		display: inline;
+		margin: 0;
+		@media ( min-width: $breakpoint_xl ) {
+			display: block;
+			margin-bottom: 1em;
+		}
+	}
+
+	.optional-text {
+		display: none;
+		@media ( min-width: $breakpoint_m ) {
+			&.text-m {
+				display: inline;
 			}
 		}
+		@media ( min-width: $breakpoint_l ) {
+			&.text-l {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			&.text-xl {
+				display: inline;
+			}
+		}
+	}
+
+	.banner-text .info-icon {
+		position: relative;
+		top: -3px;
+		left: 0;
 	}
 }
