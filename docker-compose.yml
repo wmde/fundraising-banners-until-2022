@@ -2,13 +2,10 @@ version: '2'
 
 services:
   js-build:
-    image: node:14
+    image: node:16
     volumes:
       - ./:/code
-      - ~/.npm:/npm-cache
     working_dir: /code
-    environment:
-      - npm_config_cache=/npm-cache
   js-serve:
     extends: js-build
     ports:
