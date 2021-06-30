@@ -25,8 +25,8 @@ export class Slider {
 				Object.assign( {
 					loop: true,
 					pause: false,
-					initial: 0,
-					// duration is the wrong property for this speed
+					// TODO
+					// duration is the wrong property for this speed, interval probably too
 					interval: this.sliderAutoPlaySpeed,
 					prevNextButtons: false,
 					mode: 'snap',
@@ -36,7 +36,8 @@ export class Slider {
 				}, this.extraOptions )
 			);
 		}
-		this.disableAutoplay();
+		this.interval = 0;
+		this.autoplay( false );
 		this.viewedSlides = 1;
 		this.slidesCount = document.querySelectorAll( '.mini-banner-carousel .carousel-cell' ).length;
 	}
@@ -48,11 +49,11 @@ export class Slider {
 	onSlideDrag() {
 		this.viewedSlides++;
 		if ( !this.slider.pause ) {
-			this.disableAutoplay();
+			this.autoplay( false );
 			return;
 		}
 		if ( this.viewedSlides >= this.slidesCount ) {
-			this.disableAutoplay();
+			this.autoplay( false );
 		}
 	}
 
@@ -60,24 +61,36 @@ export class Slider {
 	 * @param {number} milliseconds - Time to wait before the slider starts
 	 */
 	enableAutoplayAfter( milliseconds = 0 ) {
-		setTimeout( () => this.enableAutoplay(), milliseconds );
+		setTimeout( () => this.autoplay( true ), milliseconds );
 	}
 
+	autoplay( autoplayIsActivated ) {
+		clearInterval( this.interval );
+		this.interval = setInterval( () => {
+			if ( autoplayIsActivated && this.slider ) {
+				this.slider.next();
+			}
+		}, 2000 );
+	}
+
+	/*
 	enableAutoplay() {
 		this.slider.pause = false;
 	}
+	*/
 
 	disableAutoplay() {
-		this.slider.pause = true;
+		this.autoplay( false );
 	}
+
 
 	getViewedSlides() {
 		return this.viewedSlides;
 	}
 
 	getCurrentSlide() {
-		//TODO find property for keen
-		return this.slider.selectedIndex + 1;
+		//TODO check if this needs a +1 like in the former solution
+		return this.slider.details().relativeSlide;
 	}
 
 	resize() {
