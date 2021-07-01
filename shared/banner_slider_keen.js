@@ -32,6 +32,13 @@ export class Slider {
 					mode: 'snap',
 					dragStart: () => {
 						this.onSlideDrag();
+					},
+					slideChanged: ( instance ) => {
+						this.updateNavigationDots( instance );
+					},
+					mounted: ( instance ) => {
+						this.initializeDotsNavigation( instance );
+						this.updateNavigationDots( instance );
 					}
 				}, this.extraOptions )
 			);
@@ -40,6 +47,32 @@ export class Slider {
 		this.autoplay( false );
 		this.viewedSlides = 1;
 		this.slidesCount = document.querySelectorAll( '.mini-banner-carousel .carousel-cell' ).length;
+	}
+
+	initializeDotsNavigation( sliderInstance ) {
+		const dotsWrapper = document.getElementById( 'dots-navigation' );
+		const slideElements = document.querySelectorAll( '.keen-slider__slide' );
+
+		slideElements.forEach( function ( t, slideId ) {
+			const dot = document.createElement( 'button' );
+			dot.classList.add( 'dot' );
+			dotsWrapper.appendChild( dot );
+			dot.addEventListener( 'click', function () {
+				sliderInstance.moveToSlide( slideId );
+			} );
+		} );
+	}
+
+	updateNavigationDots( sliderInstance ) {
+		const slide = sliderInstance.details().relativeSlide;
+		const dots = document.querySelectorAll( '.dot' );
+		dots.forEach( function ( dotElement, dotIndex ) {
+			if ( dotIndex === slide ) {
+				dotElement.classList.add( 'dot--active' );
+			} else {
+				dotElement.classList.remove( 'dot--active' );
+			}
+		} );
 	}
 
 	/**
@@ -83,14 +116,12 @@ export class Slider {
 		this.autoplay( false );
 	}
 
-
 	getViewedSlides() {
 		return this.viewedSlides;
 	}
 
 	getCurrentSlide() {
-		//TODO check if this needs a +1 like in the former solution
-		return this.slider.details().relativeSlide;
+		return this.slider.details().relativeSlide + 1;
 	}
 
 	resize() {
