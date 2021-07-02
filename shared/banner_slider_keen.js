@@ -25,9 +25,7 @@ export class Slider {
 				Object.assign( {
 					loop: true,
 					pause: false,
-					// TODO
-					// duration is the wrong property for this speed, interval probably too
-					interval: this.sliderAutoPlaySpeed,
+					interval: 0,
 					prevNextButtons: false,
 					mode: 'snap',
 					dragStart: () => {
@@ -103,17 +101,7 @@ export class Slider {
 			if ( autoplayIsActivated && this.slider ) {
 				this.slider.next();
 			}
-		}, 2000 );
-	}
-
-	/*
-	enableAutoplay() {
-		this.slider.pause = false;
-	}
-	*/
-
-	disableAutoplay() {
-		this.autoplay( false );
+		}, this.sliderAutoPlaySpeed );
 	}
 
 	getViewedSlides() {
