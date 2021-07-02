@@ -23,6 +23,16 @@ export default function MiniBanner( props ) {
 					bannerText={props.slides}
 					propsForText={{
 						formattedGoalDonationSumNumeric: props.formatters.millionFormatterNumeric( campaignProjection.goalDonationSum ),
+						progressBar: ( <ProgressBar
+							formatters={props.formatters}
+							daysLeft={campaignProjection.getRemainingDays()}
+							donationAmount={campaignProjection.getProjectedDonationSum()}
+							goalDonationSum={campaignProjection.goalDonationSum}
+							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+							setStartAnimation={props.setStartAnimation}
+							animate={true}
+							amountToShowOnRight={AmountToShowOnRight.MISSING}
+						/> )
 					}}
 				/>
 

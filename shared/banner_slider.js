@@ -1,6 +1,7 @@
 import Flickity from 'flickity';
 
 /**
+ * @deprecated
  * A wrapper around the Flickity slider library that tracks viewed slides
  * and attaches to elements with the .mini-banner-carousel and .carousel-cell classes.
  */

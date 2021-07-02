@@ -65,7 +65,7 @@ export default class Banner extends Component {
 	componentDidMount() {
 		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed, { adaptiveHeight: false, setGallerySize: false } );
 		this.bannerSlider.initialize();
-		this.bannerSlider.disableAutoplay();
+		this.bannerSlider.autoplay( false );
 
 		this.props.registerDisplayBanner(
 			() => {
