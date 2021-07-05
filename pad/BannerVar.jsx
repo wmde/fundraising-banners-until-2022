@@ -11,7 +11,7 @@ import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
 import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import { Slider } from '../shared/banner_slider';
+import { Slider } from '../shared/banner_slider_keen';
 import { BannerType } from './BannerType';
 
 const PENDING = 0;
