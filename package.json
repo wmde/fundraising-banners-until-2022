@@ -18,7 +18,6 @@
   "repository": "https://github.com/wmde/fundraising-banners",
   "dependencies": {
     "classnames": "^2.3.1",
-    "flickity": "^2.2.1",
     "format-number": "^3.0.0",
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
     "keen-slider": "^5.5.1",
