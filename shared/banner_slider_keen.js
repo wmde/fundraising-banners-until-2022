@@ -29,7 +29,7 @@ export class Slider {
 					prevNextButtons: false,
 					mode: 'snap',
 					dragStart: () => {
-						this.onSlideDrag();
+						this.disableAutoplay();
 					},
 					slideChanged: ( instance ) => {
 						this.updateNavigationDots( instance );
