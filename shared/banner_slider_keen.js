@@ -23,8 +23,7 @@ export class Slider {
 			this.slider = new KeenSlider(
 				'.mini-banner-carousel',
 				Object.assign( {
-					loop: true,
-					pause: false,
+					loop: false,
 					interval: 0,
 					prevNextButtons: false,
 					mode: 'snap',
@@ -32,6 +31,7 @@ export class Slider {
 						this.disableAutoplay();
 					},
 					slideChanged: ( instance ) => {
+						this.viewedSlides++;
 						this.updateNavigationDots( instance );
 					},
 					mounted: ( instance ) => {
@@ -71,21 +71,6 @@ export class Slider {
 				dotElement.classList.remove( 'dot--active' );
 			}
 		} );
-	}
-
-	/**
-	 * Handler for "change" event which is triggered when a new slide is shown
-	 * This custom handler implements a way to stop the autoplay functionality at the last slide
-	 */
-	onSlideDrag() {
-		this.viewedSlides++;
-		if ( !this.slider.pause ) {
-			this.disableAutoplay();
-			return;
-		}
-		if ( this.viewedSlides >= this.slidesCount ) {
-			this.disableAutoplay();
-		}
 	}
 
 	/**
