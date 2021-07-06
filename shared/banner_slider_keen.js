@@ -42,7 +42,7 @@ export class Slider {
 			);
 		}
 		this.interval = 0;
-		this.autoplay( false );
+		this.disableAutoplay();
 		this.viewedSlides = 1;
 		this.slidesCount = document.querySelectorAll( '.mini-banner-carousel .carousel-cell' ).length;
 	}
@@ -80,11 +80,11 @@ export class Slider {
 	onSlideDrag() {
 		this.viewedSlides++;
 		if ( !this.slider.pause ) {
-			this.autoplay( false );
+			this.disableAutoplay();
 			return;
 		}
 		if ( this.viewedSlides >= this.slidesCount ) {
-			this.autoplay( false );
+			this.disableAutoplay();
 		}
 	}
 
@@ -92,13 +92,17 @@ export class Slider {
 	 * @param {number} milliseconds - Time to wait before the slider starts
 	 */
 	enableAutoplayAfter( milliseconds = 0 ) {
-		setTimeout( () => this.autoplay( true ), milliseconds );
+		setTimeout( () => this.enableAutoplay(), milliseconds );
 	}
 
-	autoplay( autoplayIsActivated ) {
+	disableAutoplay() {
+		clearInterval( this.interval );
+	}
+
+	enableAutoplay() {
 		clearInterval( this.interval );
 		this.interval = setInterval( () => {
-			if ( autoplayIsActivated && this.slider ) {
+			if ( this.slider ) {
 				this.slider.next();
 			}
 		}, this.sliderAutoPlaySpeed );
