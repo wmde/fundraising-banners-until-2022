@@ -11,7 +11,7 @@ import { LocalImpressionCount } from '../shared/local_impression_count';
 import { CampaignProjection } from '../shared/campaign_projection';
 import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import { Slider } from '../shared/banner_slider';
+import { Slider } from '../shared/banner_slider_keen';
 import { BannerType } from './BannerType';
 
 const PENDING = 0;
@@ -63,9 +63,8 @@ export default class Banner extends Component {
 	}
 
 	componentDidMount() {
-		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed, { adaptiveHeight: false, setGallerySize: false } );
+		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
 		this.bannerSlider.initialize();
-		this.bannerSlider.disableAutoplay();
 
 		this.props.registerDisplayBanner(
 			() => {

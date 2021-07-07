@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../shared/banner_slider';
+import { Slider } from '../shared/banner_slider_keen';
 import debounce from '../shared/debounce';
 
 import BannerTransition from '../shared/components/BannerTransition';
@@ -39,7 +39,6 @@ export default class Banner extends Component {
 	componentDidMount() {
 		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
 		this.bannerSlider.initialize();
-		this.bannerSlider.disableAutoplay();
 
 		this.props.registerDisplayBanner(
 			() => {

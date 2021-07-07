@@ -17,55 +17,27 @@
 		left: 16px;
 		text-align: left;
 	}
+	.mini-banner-carousel {
+		display: flex;
+		align-items: center;
+	}
 	.carousel-cell {
-		position: absolute;
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
-		padding: 0 41px 88px;
+		padding: 100px 26px 100px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		cursor: grab;
 	}
-	.flickity {
-		&-viewport {
-			overflow: hidden;
-			position: absolute;
-			z-index: 20;
-			width: 100%;
-			height: 100%;
-		}
-		&-enabled {
-			&:focus {
-				outline: transparent;
-			}
-			&.is-draggable {
-				-webkit-tap-highlight-color: transparent;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-				.flickity-viewport {
-					cursor: move;
-					cursor: -webkit-grab;
-					cursor: grab;
-					&.is-pointer-down {
-						cursor: -webkit-grabbing;
-						cursor: grabbing;
-					}
-				}
-			}
-		}
-		&-slider {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-		}
-		&-button {
-			position: absolute;
-			border: 0;
-		}
-		&-page-dots {
+
+	.navigation-wrapper {
+		overflow: hidden;
+		margin: 0 26px 0 26px;
+		#dots-navigation {
+			display: flex;
+			justify-content: center;
 			z-index: 999;
 			position: absolute;
 			width: 100%;
@@ -75,25 +47,27 @@
 			list-style: none;
 			text-align: center;
 			line-height: 1;
-			.dot {
-				background: $color-gray-medium;
-				display: inline-block;
-				width: 8px;
-				height: 8px;
-				margin: 0 4px;
-				border-radius: 50%;
-				cursor: pointer;
-				border: 4px solid $color-white;
-				&.is-selected {
-					width: 10px;
-					height: 10px;
-					background: $color-white;
-					border: 3px solid $color-primary;
-				}
-			}
 		}
-		&-rtl .flickity-page-dots {
-			direction: rtl;
+
+		.dot {
+			background: $color-gray-medium;
+			background-color: $color-gray-medium;
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 4px solid $color-white;
+		}
+
+		.dot:focus {
+			outline: 0;
+		}
+
+		.dot--active {
+			background: $color-white;
+			border: 3px solid $color-primary;
 		}
 	}
 }
