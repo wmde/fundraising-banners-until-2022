@@ -23,15 +23,15 @@ export class Slider {
 			this.slider = new KeenSlider(
 				'.mini-banner-carousel',
 				Object.assign( {
-					loop: true,
-					pause: false,
+					loop: false,
 					interval: 0,
 					prevNextButtons: false,
 					mode: 'snap',
 					dragStart: () => {
-						this.onSlideDrag();
+						this.disableAutoplay();
 					},
 					slideChanged: ( instance ) => {
+						this.viewedSlides++;
 						this.updateNavigationDots( instance );
 					},
 					mounted: ( instance ) => {
@@ -42,7 +42,7 @@ export class Slider {
 			);
 		}
 		this.interval = 0;
-		this.autoplay( false );
+		this.disableAutoplay();
 		this.viewedSlides = 1;
 		this.slidesCount = document.querySelectorAll( '.mini-banner-carousel .carousel-cell' ).length;
 	}
@@ -74,31 +74,20 @@ export class Slider {
 	}
 
 	/**
-	 * Handler for "change" event which is triggered when a new slide is shown
-	 * This custom handler implements a way to stop the autoplay functionality at the last slide
-	 */
-	onSlideDrag() {
-		this.viewedSlides++;
-		if ( !this.slider.pause ) {
-			this.autoplay( false );
-			return;
-		}
-		if ( this.viewedSlides >= this.slidesCount ) {
-			this.autoplay( false );
-		}
-	}
-
-	/**
 	 * @param {number} milliseconds - Time to wait before the slider starts
 	 */
 	enableAutoplayAfter( milliseconds = 0 ) {
-		setTimeout( () => this.autoplay( true ), milliseconds );
+		setTimeout( () => this.enableAutoplay(), milliseconds );
 	}
 
-	autoplay( autoplayIsActivated ) {
+	disableAutoplay() {
+		clearInterval( this.interval );
+	}
+
+	enableAutoplay() {
 		clearInterval( this.interval );
 		this.interval = setInterval( () => {
-			if ( autoplayIsActivated && this.slider ) {
+			if ( this.slider ) {
 				this.slider.next();
 			}
 		}, this.sliderAutoPlaySpeed );
