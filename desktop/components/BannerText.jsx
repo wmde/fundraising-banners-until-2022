@@ -1,8 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
+import { useContext } from 'preact/hooks';
+import TranslationContext from '../../shared/components/TranslationContext';
+import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
+import ChevronLeftIcon from '../components/ui/ChevronLeftIcon';
+import ChevronRightIcon from '../components/ui/ChevronRightIcon';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, bannerSliderNext, bannerSliderPrevious } = props;
 
 	const Icon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<circle cx="8" cy="8" r="8" fill="#2B6DA0"/>
@@ -11,23 +16,86 @@ export default function BannerText( props ) {
 
 	return <div className="banner-text">
 		<div className="banner-text-inner">
-			<p>
-				<span className="banner-headline">
-					{ Icon }
-					<strong> An alle unsere Leserinnen und Leser in Deutschland. </strong>
-				</span>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch:
-				Bitte klicken Sie jetzt nicht weg! { campaignDaySentence } Zum ersten Mal seit langem möchten wir Sie an
-				diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit von Wikipedia zu verteidigen.
-				Insgesamt spenden 99% unserer Leserinnen und Leser nichts – sie übergehen diesen Aufruf. Sollten
-				Sie zu dem kleinen Kreis gehören, die bereits gespendet haben, danken wir Ihnen sehr herzlich.
-				Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert. Doch schon mit einer Spende
-				von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln. { visitorsVsDonorsSentence } Die meisten Menschen spenden,
-				weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
-				Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. <span className="optional-text text-l">Zeigen
-				Sie den Freiwilligen, die Ihnen verlässliche und neutrale Informationen zur Verfügung stellen,
-				dass Sie ihre Arbeit wertschätzen.</span> Vielen Dank!
-			</p>
+			<div className="banner-text-ctrl">
+				<a href="#" className="banner-slider-previous" onClick={ bannerSliderPrevious }><ChevronLeftIcon/></a>
+
+				<div className="navigation-wrapper">
+					<div className="mini-banner-carousel">
+						<div className="carousel-cell keen-slider__slide">
+							<p>
+								<span>
+									{ Icon }
+									<strong> An alle unsere Leserinnen und Leser in Deutschland.  </strong>
+								</span>
+							</p>
+							<p>
+								Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken
+								Sie jetzt nicht weg! { campaignDaySentence } Zum ersten Mal seit langem möchten
+								wir Sie an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
+								von Wikipedia zu verteidigen. Insgesamt spenden 99% unserer Leserinnen
+								und Leser nichts – sie übergehen diesen Aufruf.
+							</p>
+						</div>
+						<div className="carousel-cell keen-slider__slide">
+							<p>Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet haben, danken
+								wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich
+								22,81&nbsp;€ finanziert. Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia
+								sich auch in Zukunft erfolgreich entwickeln. { visitorsVsDonorsSentence } </p>
+						</div>
+						<div className="carousel-cell keen-slider__slide">
+							<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia
+								Ihnen in diesem Jahr Wissen im Wert von 5&nbsp;€ geschenkt? Dann nehmen Sie sich
+								doch bitte eine Minute Zeit und geben Sie etwas zurück. Zeigen Sie den
+								Freiwilligen, die Ihnen verlässliche und neutrale Informationen zur Verfügung
+								stellen, dass Sie ihre Arbeit wertschätzen. Vielen Dank!</p>
+						</div>
+					</div>
+					<div id="dots-navigation">
+					</div>
+
+				</div>
+				<a href="#" className="banner-slider-next" onClick={ bannerSliderNext }><ChevronRightIcon/></a>
+			</div>
+			<div className="banner-text-var">
+				<a href="#" className="banner-slider-previous" onClick={ bannerSliderPrevious }><ChevronLeftIcon/></a>
+
+				<div className="navigation-wrapper">
+					<div className="mini-banner-carousel">
+						<div className="carousel-cell keen-slider__slide">
+							<p>
+								<span>
+									{ Icon }
+									<strong> An alle unsere Leserinnen und Leser in Deutschland.  </strong>
+								</span>
+							</p>
+							<p>
+								Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken
+								Sie jetzt nicht weg! { campaignDaySentence } Zum ersten Mal seit langem möchten
+								wir Sie an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
+								von Wikipedia zu verteidigen. Insgesamt spenden 99% unserer Leserinnen
+								und Leser nichts – sie übergehen diesen Aufruf.
+							</p>
+						</div>
+						<div className="carousel-cell keen-slider__slide">
+							<p>Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet haben, danken
+								wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich
+								22,81&nbsp;€ finanziert. Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia
+								sich auch in Zukunft erfolgreich entwickeln. { visitorsVsDonorsSentence } </p>
+						</div>
+						<div className="carousel-cell keen-slider__slide">
+							<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia
+								Ihnen in diesem Jahr Wissen im Wert von 5&nbsp;€ geschenkt? Dann nehmen Sie sich
+								doch bitte eine Minute Zeit und geben Sie etwas zurück. Zeigen Sie den
+								Freiwilligen, die Ihnen verlässliche und neutrale Informationen zur Verfügung
+								stellen, dass Sie ihre Arbeit wertschätzen. Vielen Dank!</p>
+						</div>
+					</div>
+					<div id="dots-navigation">
+					</div>
+
+				</div>
+				<a href="#" className="banner-slider-next" onClick={ bannerSliderNext }><ChevronRightIcon/></a>
+			</div>
 		</div>
 	</div>;
 }
