@@ -4,25 +4,25 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "02-ba-210704"
+campaign_tracking = "02-ba-210716"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B21WMDE_02_210704_ctrl"
-tracking = "org-02-210704-ctrl"
+pagename = "B21WMDE_02_210716_ctrl"
+tracking = "org-02-210716-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B21WMDE_02_210704_var"
-tracking = "org-02-210704-var"
+pagename = "B21WMDE_02_210716_var"
+tracking = "org-02-210716-var"
 
 [desktop.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
+
 
 # Mobile Campaign
 [mobile]

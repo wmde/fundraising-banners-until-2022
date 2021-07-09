@@ -16,26 +16,34 @@ export default function Slides() {
 	return [
 		{ content: <div>
 			<p className="headline">
-				{ Icon }
-				<strong> An alle unsere Leserinnen und Leser in Deutschland</strong>
+				{ Icon } An alle unsere Leserinnen und Leser in Deutschland
 			</p>
 			<p>Vielleicht kommen wir gerade ungelegen. Aber dennoch: Klicken Sie jetzt bitte nicht weg!
 				Zum ersten Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
 				die Unabhängigkeit von Wikipedia zu verteidigen.</p>
 		</div> },
 		{ content: <div>
-			<p>Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert. Insgesamt spenden 99%
+			<p className="headline">
+				Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.
+			</p>
+			<p>Insgesamt spenden 99%
 				unserer Leserinnen und Leser nichts – sie übergehen diesen Aufruf. Sollten Sie zu dem kleinen Kreis
 				gehören, die bereits gespendet haben, danken wir Ihnen sehr herzlich.
 			</p>
 		</div> },
 		{ content: <div>
-			<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Schon mit einer Spende
+			<p className="headline">
+				Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			</p>
+			<p>Schon mit einer Spende
 					von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			</p>
 		</div> },
 		{ content: <div>
-			<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			<p className="headline">
+				Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			</p>
+			<p>
 				Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. Zeigen
 				Sie den Freiwilligen, die Ihnen verlässliche und neutrale Informationen zur Verfügung stellen,
 				dass Sie ihre Arbeit wertschätzen. Vielen Dank!</p>
