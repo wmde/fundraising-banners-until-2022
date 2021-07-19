@@ -41,6 +41,17 @@
 		}
 	}
 
+	.banner__infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1 1 auto;
+		margin-bottom: 10px;
+		@media ( min-width: $breakpoint_l ) {
+			margin-bottom: 0;
+		}
+	}
+
 	.banner__form {
 		order: 2;
 		@media ( min-width: $breakpoint_l ) {
