@@ -6,7 +6,7 @@ import BannerTransition from '../../shared/components/BannerTransition';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Footer from '../../shared/components/ui/EasySelectFooter';
 import Slider from './Slider';
-import Slides from './Slides';
+import Slides from './Slides_var';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
