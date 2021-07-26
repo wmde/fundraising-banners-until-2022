@@ -57,7 +57,7 @@
     "postcss-loader": "^4.3.0",
     "postcss-nested": "5.0.5",
     "postcss-simple-vars": "^6.0.3",
-    "regenerator-runtime": "^0.13.7",
+    "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
     "sinon": "^11.1.1",
     "style-loader": "^2.0.0",
