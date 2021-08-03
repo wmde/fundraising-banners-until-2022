@@ -40,6 +40,7 @@ bannerPresenter.present(
 		useOfFundsText,
 		footer: Footer,
 		donationForm: DonationForm,
+		sliderAutoPlaySpeed: 10000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL
