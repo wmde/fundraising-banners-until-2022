@@ -1,0 +1,49 @@
+.wmde-banner {
+	.progress_bar {
+		/* remove this when campaign starts */
+		display: none;
+
+		background: $color-white;
+		border: 3px solid $color-primary;
+		border-top: 0;
+		border-radius: 0 0 10px 10px;
+		font-size: 14px;
+
+		&__wrapper {
+			position: relative;
+			display: flex;
+			height: 26px;
+			line-height: 26px;
+			white-space: nowrap;
+		}
+
+		&__donation_fill,
+		&__donation_remaining {
+			height: 100%;
+			transition: width 3000ms $banner-easing, color 250ms $banner-easing;
+			color: transparent;
+		}
+
+		&__donation_fill {
+			background: $progressbar-gradient;
+			min-width: 120px;
+			padding-right: 16px;
+			text-align: right;
+			border-radius: 0 13px 13px 0;
+		}
+
+		&__donation_remaining {
+			padding: 0 10px;
+		}
+
+		&--finished {
+			.progress_bar__donation_fill {
+				color: $color-white;
+			}
+
+			.progress_bar__donation_remaining {
+				color: $color-primary;
+			}
+		}
+	}
+}
