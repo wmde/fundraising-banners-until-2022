@@ -12,9 +12,8 @@ import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../shared/components/TranslationContext';
 import debounce from '../../shared/debounce';
 import ChevronDownIcon from './ui/ChevronDownIcon';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
-import ChevronRightIcon from './ui/ChevronRightIcon';
-import BannerReopen from './BannerReopen';
+import ChevronLeftIcon from './ui/ChevronLeftIcon_var';
+import ChevronRightIcon from './ui/ChevronRightIcon_var';
 import SlideState from '../../shared/slide_state';
 import Slider from './Slider';
 import { BannerType } from '../BannerType';
@@ -25,7 +24,6 @@ const SLIDESHOW_SLIDE_INTERVAL = 10000;
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
-	MINIMISED: Symbol( 'minimised' ),
 	CLOSED: Symbol( 'closed' )
 } );
 
@@ -74,7 +72,9 @@ export class Banner extends Component {
 			}
 		);
 		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
-		this.setContentSize();
+
+		// TODO keen slider is doing something after initialisation that changes the height of the element, we need to wait for that
+		setTimeout( () => this.setContentSize(), 1000 );
 	}
 
 	trackBannerEvent( eventName ) {
@@ -117,32 +117,18 @@ export class Banner extends Component {
 
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
-		this.startProgressbar();
+		// this.startProgressbar();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
-	}
-
-	minimiseBanner = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.MINIMISED } );
-		this.props.skinAdjuster.removeSpace();
-		this.trackBannerEvent( 'banner-minimised' );
-		this.props.onClose(
-			this.slideState.slidesShown,
-			this.slideState.currentSlide
-		);
-	}
-
-	maximiseBanner = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE }, this.addBannerSpace );
-		this.trackBannerEvent( 'banner-maximised' );
+		this.onPageResize();
 	}
 
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		const cn = document.getElementById( 'centralNotice' );
-		cn.parentNode.removeChild( cn );
+		this.props.onClose(
+			this.slideState.slidesShown,
+			this.slideState.currentSlide
+		);
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -196,7 +182,6 @@ export class Banner extends Component {
 			className={ classNames( {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
-				'wmde-banner--minimised': state.bannerVisibilityState === BannerVisibilityState.MINIMISED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 				'wmde-banner--slides': state.bannerContentState === BannerContentState.SLIDES,
 				'wmde-banner--form': state.bannerContentState === BannerContentState.FORM,
@@ -213,13 +198,9 @@ export class Banner extends Component {
 			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
-						<BannerReopen
-							maximiseBanner={ this.maximiseBanner }
-							closeBanner={ this.closeBanner }
-						/>
 						<div className="banner__inner">
 							<div className="banner__close">
-								<a className="close__link" onClick={ this.minimiseBanner }>
+								<a className="close__link" onClick={this.closeBanner}>
 									<CloseIcon/>
 								</a>
 							</div>
