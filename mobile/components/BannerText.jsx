@@ -14,7 +14,7 @@ export default function BannerText( props ) {
 			darum bitten, die Unabhängigkeit von Wikipedia zu verteidigen.
 			Insgesamt spenden 99% unserer Leserinnen und Leser nichts – sie übergehen
 			diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet haben,
-			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert.
+			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.
 			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			{' '}<TextHighlight registerStartAnimation={ props.registerStartHighlight }>{ visitorsVsDonorsSentence }</TextHighlight>
 

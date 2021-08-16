@@ -29,11 +29,15 @@ export default class Minerva extends Skin {
 		this.viewport.css( { top: 0, marginTop: 0, transition: 'unset' } );
 	}
 
-	addSearchObserver( onSearchFocus ) {
+	addSearchObserver( onSearchFocusWhenBannerIsLoading, onSearchFocusWhenBannerIsVisible ) {
 		if ( this.searchField.is( ':focus' ) ) {
-			onSearchFocus();
+			onSearchFocusWhenBannerIsLoading();
+			onSearchFocusWhenBannerIsVisible();
 		} else {
-			this.searchField.one( 'focus', onSearchFocus );
+			this.searchField.one( 'focus', () => {
+				onSearchFocusWhenBannerIsLoading();
+				onSearchFocusWhenBannerIsVisible();
+			} );
 		}
 	}
 
