@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -10,8 +10,8 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
-import Banner, { BannerType } from './components/Banner_var';
-import Slides from './components/Slides';
+import Banner, { BannerType } from './components/Banner';
+import Slides from './components/Slides_var';
 import BannerText from './components/BannerText';
 import DonationForm from './components/ui/form/DonationFormWithHeaders';
 import FullpageBanner from './components/FullpageBanner';
