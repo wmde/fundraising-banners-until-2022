@@ -138,6 +138,9 @@ export default class BannerPresenter {
 			if ( onMediaWiki() ) {
 				mw.centralNotice.setBannerLoadedButHidden();
 			}
+		}, function () {
+			mw.centralNotice.hideBanner();
+			skinAdjuster.removeSpace();
 		} );
 
 		// hide banner when the visual editor is initialized

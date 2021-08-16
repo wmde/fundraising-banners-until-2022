@@ -86,6 +86,7 @@ export default class Banner extends Component {
 			this.bannerSlider.getCurrentSlide(),
 			this.props.trackingData.bannerClickTrackRatio
 		);
+		this.bannerSlider.disableAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
@@ -185,7 +186,7 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
+					onFinish={ () => { this.startHighlight(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }

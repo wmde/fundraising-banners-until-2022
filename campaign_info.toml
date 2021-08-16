@@ -26,19 +26,19 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob09-ba-201210"
+campaign_tracking = "mob01-ba-210901"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
-pagename = "B20WMDE_mob09_201210_ctrl"
-tracking = "org-mob09-201210-ctrl"
+pagename = "B20WMDE_mob01_210901_ctrl"
+tracking = "org-mob01-210901-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
-pagename = "B20WMDE_mob09_201210_var"
-tracking = "org-mob09-201210-var"
+pagename = "B20WMDE_mob01_210901_var"
+tracking = "org-mob01-210901-var"
 
 
 # Mobile English Campaign

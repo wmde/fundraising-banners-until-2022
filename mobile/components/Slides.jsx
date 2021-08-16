@@ -1,14 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
-export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySentence, currentDayName, progressBar, visitorsVsDonorsSentence } ) {
+export default function Slides( { campaignDaySentence, currentDayName, visitorsVsDonorsSentence } ) {
 
 	return <div className="navigation-wrapper">
 		<div className="mini-banner-carousel">
-			<div className="carousel-cell keen-slider__slide">
-				<p className="goal-headline">Unser Spendenziel: { formattedGoalDonationSumNumeric } Millionen Euro</p>
-				{ progressBar }
-			</div>
 			<div className="carousel-cell keen-slider__slide">
 				<p>An alle unsere Leserinnen und Leser in Deutschland. Vielleicht kommen wir gerade ungelegen,
 					aber dennoch: Bitte klicken Sie jetzt nicht weg! { campaignDaySentence }</p>
@@ -18,7 +14,7 @@ export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySe
 					die Unabhängigkeit von Wikipedia zu verteidigen.</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>Wikipedia wird durch Spenden von durchschnittlich 22,81&nbsp;€ finanziert.{ ' ' }
+				<p>Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.{ ' ' }
 					<span className="text-highlight">{ visitorsVsDonorsSentence }</span>
 				</p>
 			</div>
@@ -29,7 +25,7 @@ export default function Slides( { formattedGoalDonationSumNumeric, campaignDaySe
 				</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert von 5 € geschenkt?
+				<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
 					<span className="text-highlight"> Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück.</span>
 				</p>
 			</div>

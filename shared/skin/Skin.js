@@ -37,9 +37,10 @@ export default class Skin {
 	/**
 	 * Some Children must implement this, if their search ui interferes with the banner
 	 *
-	 * @param {Function} onSearchFocus
+	 * @param {Function} onSearchFocusWhenBannerIsLoading
+	 * @param {Function} onSearchFocusWhenBannerIsVisible
 	 */
-	addSearchObserver( onSearchFocus ) { // eslint-disable-line no-unused-vars
+	addSearchObserver( onSearchFocusWhenBannerIsLoading, onSearchFocusWhenBannerIsVisible ) { // eslint-disable-line no-unused-vars
 	}
 
 	/**

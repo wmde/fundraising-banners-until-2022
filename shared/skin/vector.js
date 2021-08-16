@@ -31,8 +31,8 @@ export default class Vector extends Skin {
 		this.pageBase.css( { paddingTop: 0, transition: 'unset' } );
 	}
 
-	addSearchObserver( onSearchFocus ) {
-		this.searchField.one( 'focus', onSearchFocus );
+	addSearchObserver( onSearchFocusWhenBannerIsLoading ) {
+		this.searchField.one( 'focus', onSearchFocusWhenBannerIsLoading );
 	}
 
 	addEditorObserver( onEdit ) {
