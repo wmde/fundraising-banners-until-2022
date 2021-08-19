@@ -1,5 +1,5 @@
 function addCharacterSpans( $elem, startCharacter, endCharacter ) {
-	var text = $elem.text().trim(),
+	let text = $elem.text().trim(),
 		i = startCharacter,
 		$newContainer = $( '<span></span>' );
 	if ( startCharacter > 0 ) {

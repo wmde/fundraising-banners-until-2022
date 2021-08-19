@@ -31,12 +31,12 @@ export default class CampaignDaySentence {
 
 		if ( daysSinceCampaignStart === 1 ) {
 			return this.translations[ 'campaign-day-first-day' ];
-		} else {
-			if ( this.translations.LANGUAGE === 'en' ) {
-				daysSinceCampaignStart = this.getEnglishOrdinalSuffixOf( daysSinceCampaignStart );
-			}
-			return this.translations[ 'campaign-day-nth-day' ].replace( '{{days}}', daysSinceCampaignStart );
 		}
+		if ( this.translations.LANGUAGE === 'en' ) {
+			daysSinceCampaignStart = this.getEnglishOrdinalSuffixOf( daysSinceCampaignStart );
+		}
+		return this.translations[ 'campaign-day-nth-day' ].replace( '{{days}}', daysSinceCampaignStart );
+
 	}
 
 	getEnglishOrdinalSuffixOf( i ) {

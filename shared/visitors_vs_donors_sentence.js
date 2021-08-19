@@ -20,9 +20,9 @@ export default class VisitorsVsDonorsSentence {
 			return this.text
 				.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay.toString() )
 				.replace( '{{totalNumberOfDonors}}', this.projectedNumberOfDonors );
-		} else {
-			return '';
 		}
+		return '';
+
 	}
 
 }
