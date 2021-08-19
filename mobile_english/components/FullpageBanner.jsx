@@ -5,6 +5,7 @@ import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Infobox from '../../shared/components/ui/Infobox';
 import Footer from '../../shared/components/ui/Footer';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
 	render( props ) {
 		const DonationForm = props.donationForm;

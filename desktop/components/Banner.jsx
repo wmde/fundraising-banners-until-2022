@@ -169,6 +169,10 @@ export class Banner extends Component {
 		this.setState( { bannerContentState: BannerContentState.SLIDES }, this.setContentSize );
 	}
 
+	onSlideChange = () => {
+		this.slideState.onSlideChange();
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -210,7 +214,7 @@ export class Banner extends Component {
 								<div className="banner__slideshow" ref={ this.slideshowRef }>
 									<Slider
 										slides={ Slides( props.campaignParameters, props.campaignProjection, props.formatters ) }
-										onSlideChange={ this.slideState.onSlideChange.bind( this.slideState ) }
+										onSlideChange={ this.onSlideChange }
 										registerAutoplay={ this.registerAutoplayCallbacks }
 										interval={ SLIDESHOW_SLIDE_INTERVAL }
 										previous={ <ChevronLeftIcon/> }

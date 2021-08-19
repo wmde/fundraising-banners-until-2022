@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Infobox from '../../shared/components/ui/Infobox';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
 	render( props ) {
 		const DonationForm = props.donationForm;
