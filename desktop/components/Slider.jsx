@@ -80,7 +80,7 @@ export default function Slider( props ) {
 		if ( typeof registerGoToSlide === 'function' ) {
 			registerGoToSlide( goToSlide );
 		}
-	}, [ slider ] );
+	} );
 
 	return (
 		<div className="slider-container">

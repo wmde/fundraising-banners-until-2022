@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { Component } from 'preact/compat';
 import classNames from 'classnames';
-import { useContext } from 'preact/hooks';
 import TranslationContext from '../TranslationContext';
 import PropTypes from 'prop-types';
 
@@ -104,8 +103,8 @@ export default class ProgressBar extends Component {
 		return width;
 	}
 
-	render( props, state ) {
-		const Translations = useContext( TranslationContext );
+	render( props, state, context ) {
+		const Translations = context;
 		const getMillion = n => this.props.formatters.millionFormatter( n / 1000000 );
 		const getDaysLeft = daysLeft => {
 			if ( props.daysLeft > 14 ) {
@@ -152,3 +151,5 @@ export default class ProgressBar extends Component {
 		</div>;
 	}
 }
+
+ProgressBar.contextType = TranslationContext;

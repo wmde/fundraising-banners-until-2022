@@ -1,5 +1,8 @@
 module.exports = exports = {
-	'extends': 'wikimedia',
+	'extends': [
+		'wikimedia',
+		'plugin:react-hooks/recommended'
+	],
 	'parser': 'babel-eslint',
 	'parserOptions': {
 		ecmaVersion: 6,
