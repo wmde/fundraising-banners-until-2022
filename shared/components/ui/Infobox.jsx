@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import DayName from '../../day_name';
 import TranslationContext from '../TranslationContext';

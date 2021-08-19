@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unknown-property,max-len */
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 
 export default function EditIcon() {

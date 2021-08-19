@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import { Component, h, createRef } from 'preact';
+import { Component, h } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../../shared/components/BannerTransition';

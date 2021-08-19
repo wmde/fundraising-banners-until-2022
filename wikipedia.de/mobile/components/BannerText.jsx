@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import TextHighlight from '../../../shared/components/ui/TextHighlight';
 import { capitalizeFirstLetter } from '../../../shared/capitalize_first_letter';

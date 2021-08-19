@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import CompanyBudgets from './CompanyBudgets';
 import { splitStringAt } from '../../../split_string_at';

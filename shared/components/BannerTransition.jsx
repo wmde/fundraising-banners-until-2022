@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';

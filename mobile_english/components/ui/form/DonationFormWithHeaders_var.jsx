@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import { useContext, useState, useEffect } from 'preact/hooks';
 

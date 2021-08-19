@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import ImageWithCopyright from './ImageWithCopyright';
 import { integerFormatter } from '../../shared/number_formatter/de';

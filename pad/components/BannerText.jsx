@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import { capitalizeFirstLetter } from '../../shared/capitalize_first_letter';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 import Infobox from '../../../shared/components/ui/Infobox';
 import ProgressBar, { AmountToShowOnRight } from '../../../shared/components/ui/ProgressBar';

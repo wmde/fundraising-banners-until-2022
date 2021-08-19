@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import { onMediaWiki } from '../../shared/mediawiki_checks';
 import classNames from 'classnames';
