@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
 // This component uses Component from compat because pure Preact does not support
 // animation events yet, see bug https://github.com/preactjs/preact/issues/1589

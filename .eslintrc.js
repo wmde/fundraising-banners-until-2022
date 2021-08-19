@@ -22,6 +22,15 @@ module.exports = exports = {
 	'plugins': [
 		'react'
 	],
+	'settings': {
+		react: {
+			// eslint-plugin-preact interprets this as "h.createElement",
+			// however we only care about marking h() as being a used variable.
+			pragma: 'h',
+			// We use "react 16.0" to avoid pushing folks to UNSAFE_ methods.
+			version: '16.0'
+		}
+	},
 	'rules': {
 		'dot-notation': [ 'error', { allowKeywords: true } ],
 		'one-var': [ 'off' ],

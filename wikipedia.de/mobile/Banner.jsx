@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import { Slider } from '../../shared/banner_slider_keen';

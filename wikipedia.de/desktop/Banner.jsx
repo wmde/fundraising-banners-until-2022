@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Component, h, createRef } from 'preact';
 import TranslationContext from '../../shared/components/TranslationContext';
 import classNames from 'classnames';

@@ -1,6 +1,5 @@
-import { Component } from 'preact/compat';
-// eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
+import { Component } from 'preact/compat';
 import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
 import TranslationContext from '../TranslationContext';
