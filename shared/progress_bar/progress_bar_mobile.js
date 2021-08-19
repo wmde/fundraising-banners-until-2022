@@ -30,7 +30,7 @@ export default function ProgressBar( GlobalBannerSettings, campaignProjection, o
 }
 
 ProgressBar.prototype.animate = function () {
-	var decimalSeparator = this.options.decimalSeparator,
+	let decimalSeparator = this.options.decimalSeparator,
 		donationFillElement = $( '.progress_bar__donation_fill' ),
 		donationValueElement = $( '.js-donation_value' ),
 		remainingValueElement = $( '.js-value_remaining' ),
@@ -54,7 +54,7 @@ ProgressBar.prototype.animate = function () {
 		{
 			duration: 3000,
 			progress: function ( animation, progress ) {
-				var aCollected = donationsCollected * progress,
+				let aCollected = donationsCollected * progress,
 					aRemaining = donationTarget - aCollected;
 				remainingValueElement.html( formatMillion( aRemaining, decimalSeparator ) );
 				donationValueElement.html( formatMillion( aCollected, decimalSeparator ) );
@@ -80,7 +80,7 @@ ProgressBar.prototype.reset = function () {
  * @return {string} Min width in pixel or fill width in percent
  */
 ProgressBar.prototype.getWidthToFill = function ( donationsCollected, donationsTarget, containerWidth ) {
-	var widthToFill = ( donationsCollected / donationsTarget ) * 100,
+	let widthToFill = ( donationsCollected / donationsTarget ) * 100,
 		barFilled = containerWidth * ( donationsCollected / donationsTarget );
 	return barFilled > this.options.minWidth ? widthToFill + '%' : this.options.minWidth + 'px';
 };

@@ -1,8 +1,10 @@
 import assert from 'assert';
 import sinon from 'sinon';
-import { EVENT_SCHEMA, BANNER_SIZE_SCHEMA, ALWAYS_TRACK, EventLoggingTracker } from '../shared/event_logging_tracker';
-
-import { VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER, VIEWPORT_TRACKING_IDENTIFIER } from '../shared/event_logging_tracker';
+import {
+	EVENT_SCHEMA, BANNER_SIZE_SCHEMA, ALWAYS_TRACK,
+	VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER, VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER, VIEWPORT_TRACKING_IDENTIFIER,
+	EventLoggingTracker
+} from '../shared/event_logging_tracker';
 
 const BANNER_NAME = 'TestTracker';
 const DIMENSION_DATA = {

@@ -5,9 +5,9 @@ import { onMediaWiki } from './mediawiki_checks';
 function getTracker( bannerName ) {
 	if ( onMediaWiki() ) {
 		return new EventLoggingTracker( bannerName, mw, Math.random );
-	} else {
-		return new MatomoTracker( 'FundraisingTracker', bannerName );
 	}
+	return new MatomoTracker( 'FundraisingTracker', bannerName );
+
 }
 
 export function createTrackingData( bannerName, bannerClickTrackRatio = 1, bannerCloseTrackRatio = 1, sizeTrackRatio = 0.1 ) {

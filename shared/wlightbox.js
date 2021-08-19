@@ -1,9 +1,9 @@
 ( function ( $ ) {
-	var IE = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[ 1 ] ) ) || undefined;
+	let IE = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[ 1 ] ) ) || undefined;
 
 	function getArrowDirection( elementOptions ) {
 
-		var arrowDirections = {
+		let arrowDirections = {
 				Top: 'left',
 				Bottom: 'left',
 				Left: 'top',
@@ -23,7 +23,7 @@
 
 	$.fn.wlightbox = function ( options ) {
 		return this.each( function () {
-			var s = this,
+			let s = this,
 				self = $( this ),
 				$inlineContentObj = $( $( self ).attr( 'data-href' ) ),
 				$inlineContentObjContainer = $( $( self ).attr( 'data-href' ) ).parent(),
@@ -90,7 +90,7 @@
 			};
 
 			s.initArrow = function () {
-				var arrowData = getArrowDirection( s.options ),
+				let arrowData = getArrowDirection( s.options ),
 					cssString;
 				if ( !arrowData ) {
 					return;
@@ -131,7 +131,7 @@
 				}
 
 				$( document ).keydown( function ( e ) {
-					var key = e.keyCode;
+					let key = e.keyCode;
 					if ( open && s.options.escKey && key === 27 ) {
 						e.preventDefault();
 						s.close();

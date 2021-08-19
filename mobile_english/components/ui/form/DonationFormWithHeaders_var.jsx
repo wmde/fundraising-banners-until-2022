@@ -121,9 +121,9 @@ export default function DonationFormWithHeaders( props ) {
 			return Translations[ 'submit-label-sofort' ];
 		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
 			return Translations[ 'submit-label-bank-transfer' ];
-		} else {
-			return Translations[ 'submit-label' ];
 		}
+		return Translations[ 'submit-label' ];
+
 	};
 
 	return <div className="form">

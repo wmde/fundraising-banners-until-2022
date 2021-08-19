@@ -147,9 +147,9 @@ export default function DonationForm( props ) {
 			return Translations[ 'submit-label-sofort' ];
 		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
 			return Translations[ 'submit-label-bank-transfer' ];
-		} else {
-			return Translations[ 'submit-label-default' ];
 		}
+		return Translations[ 'submit-label-default' ];
+
 	};
 
 	return <div className={ classNames(

@@ -6,7 +6,7 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './components/Banner';
+import Banner, { BannerType } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
 import DonationForm from '../shared/components/ui/form/DonationForm';
@@ -15,7 +15,6 @@ import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
-import { BannerType } from './components/Banner';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
