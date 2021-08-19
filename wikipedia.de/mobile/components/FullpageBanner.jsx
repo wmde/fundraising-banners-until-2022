@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Infobox from '../../../shared/components/ui/Infobox';
 import ProgressBar from '../../../shared/components/ui/ProgressBar';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
 	render( props ) {
 		const campaignProjection = props.campaignProjection;
