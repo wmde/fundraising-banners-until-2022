@@ -72,9 +72,7 @@ export class Banner extends Component {
 			}
 		);
 		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
-
-		// TODO keen slider is doing something after initialisation that changes the height of the element, we need to wait for that
-		setTimeout( () => this.setContentSize(), 1000 );
+		this.setContentSize();
 	}
 
 	trackBannerEvent( eventName ) {

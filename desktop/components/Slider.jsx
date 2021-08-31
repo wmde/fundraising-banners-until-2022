@@ -90,7 +90,7 @@ export default function Slider( props ) {
 				<div className="pagination">
 					{ arrayRange( slider.details().size ).map( ( idx ) => {
 						return (
-							<button
+							<a
 								className={ classNames( 'pagination-dot', { 'is-active': currentSlide === idx } ) }
 								key={ idx }
 								onClick={ () => goToSlide( idx ) }
