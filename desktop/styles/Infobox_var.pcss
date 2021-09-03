@@ -1,5 +1,38 @@
 .wmde-banner {
-	.infobox-bubble {
+
+	.banner__infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1 1 auto;
+		line-height: 1.3em;
+		font-family: $banner-main-font-family;
+		position: relative;
+		padding: 0 30px;
+		margin-bottom: 0;
+
+		@media ( min-width: $breakpoint_m ) {
+			padding: 0 60px;
+		}
+
+		@media ( min-width: $breakpoint_m ) {
+			font-family: $banner-text-font-family;
+			font-size: 1.3em;
+
+			.form {
+				font-family: $banner-main-font-family;
+				font-size: 14px;
+			}
+		}
+
+		@media ( min-width: $breakpoint_xl ) {
+			.form {
+				font-size: 0.9em;
+			}
+		}
+	}
+
+	.infobox {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -39,9 +72,5 @@
 				margin-bottom: 0;
 			}
 		}
-	}
-
-	.infobox {
-		position: relative;
 	}
 }

@@ -5,19 +5,23 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		font-size: 12px;
-		line-height: 1.6em;
+		line-height: 20px;
 		color: $color-black;
-		text-shadow: -1px -1px 0 $color-white, 1px -1px 0 $color-white, -1px 1px 0 $color-white, 1px 1px 0 $color-white;
+		padding: 16px 60px 24px;
+
+		@media ( min-width: $breakpoint_m ) {
+			padding: 16px 90px 24px;
+		}
 
 		&__bank {
 			flex: 1 1 auto;
 			display: flex;
 			flex-wrap: wrap;
-			padding: 0 20px;
 
 			@media ( min-width: $breakpoint_l ) {
 				display: block;
 				flex-wrap: nowrap;
+				margin-right: 30px;
 			}
 			&-item {
 				white-space: nowrap;
@@ -31,7 +35,8 @@
 		}
 
 		&__usage {
-			display: none;
+			flex-grow: 1;
+			text-align: right;
 		}
 	}
 
@@ -46,7 +51,7 @@
 			font-size: 12px;
 		}
 		&-input {
-			font-family: $banner-sans-serif;
+			font-family: $banner-main-font-family;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -76,6 +81,7 @@
 	}
 
 	.application-of-funds-link {
-		display: none;
+		color: $color-black;
+		cursor: pointer;
 	}
 }
