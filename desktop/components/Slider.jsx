@@ -16,32 +16,45 @@ function arrayRange( size ) {
 	return [ ...Array( size ).keys() ];
 }
 
+const SliderPlayingStates = Object.freeze( {
+	PENDING: Symbol( 'pending' ),
+	PLAYING: Symbol( 'playing' ),
+	STOPPED: Symbol( 'stopped' )
+} );
+
 export default function Slider( props ) {
-	const { slides, previous, next, onSlideChange, registerAutoplay, interval } = props;
+	const { slides, previous, next, onSlideChange, registerAutoplay, registerGoToSlide, interval, sliderOptions } = props;
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	const [ timer, setTimer ] = useState( 0 );
 
+	// NOTE: We can't use useState for this as the banner doesn't always re-render fast enough
+	let sliderPlayingState = SliderPlayingStates.PENDING;
+
 	const [ sliderRef, slider ] = useKeenSlider( {
-		initial: 0,
-		loop: true,
-		slideChanged( s ) {
-			setCurrentSlide( s.details().relativeSlide );
-			if ( typeof onSlideChange === 'function' ) {
-				onSlideChange( s.details().relativeSlide );
+		...{
+			initial: 0,
+			loop: true,
+			slideChanged( s ) {
+				setCurrentSlide( s.details().relativeSlide );
+				if ( typeof onSlideChange === 'function' ) {
+					onSlideChange( s.details().relativeSlide );
+				}
 			}
-		}
+		},
+		...sliderOptions
 	} );
 
 	const startAutoplay = () => {
-		if ( timer !== 0 ) {
+		if ( sliderPlayingState !== SliderPlayingStates.PENDING ) {
 			return;
 		}
 		setTimer( setInterval( slider.next, interval || DEFAULT_INTERVAL ) );
+		sliderPlayingState = SliderPlayingStates.PLAYING;
 	};
 
 	const stopAutoplay = () => {
 		clearInterval( timer );
-		// We explicitly don't set `timer` to 0, so it can't be started again
+		sliderPlayingState = SliderPlayingStates.STOPPED;
 	};
 
 	const gotoNextSlide = e => {
@@ -65,12 +78,15 @@ export default function Slider( props ) {
 		if ( typeof registerAutoplay === 'function' ) {
 			registerAutoplay( startAutoplay, stopAutoplay );
 		}
-	} );
+		if ( typeof registerGoToSlide === 'function' ) {
+			registerGoToSlide( goToSlide );
+		}
+	}, [ slider ] );
 
 	return (
-		<div className="slider-container" onMouseDown={ stopAutoplay }>
+		<div className="slider-container">
 			<div className="navigation-wrapper">
-				<div ref={ sliderRef } className="keen-slider">
+				<div ref={ sliderRef } className="keen-slider" onMouseDown={ stopAutoplay }>
 					{ slides.map( ( slide, idx ) => (
 						<div key={ idx } className="keen-slider__slide">
 							<div className="keen-slider__slide-content">
