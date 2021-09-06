@@ -1,9 +1,11 @@
 const Translations = {
-	'amount-total': '',
-	'donate-button': 'Jetzt spenden',
-	'info-line-1': 'Wikipedia finanziert sich durch Spenden ihrer Nutzerinnen und Nutzer von durchschnittlich',
-	'info-line-2': 'Wofür Ihre Spende verwendet wird, erfahren Sie',
-	'info-link': 'hier'
+	'intervals-header': 'Ich spende:',
+	'amounts-header': 'Betrag:',
+	'payments-header': 'Zahlweise:',
+	'next-button': 'Jetzt unterstützen',
+	'back-button': 'Zurück',
+	'minimised-text': 'Dafür haben wir natürlich Verständnis.',
+	'minimised-reopen': 'Jetzt unterstützen'
 };
 
 export default Translations;
