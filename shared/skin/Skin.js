@@ -6,6 +6,14 @@ import CssTransition from '../css_transition';
 
 export default class Skin {
 	/**
+	 * Children might implement this
+	 *
+	 * @return boolean
+	 */
+	canDisplayBanner() {
+		return true;
+	}
+	/**
 	 * Children must implement this
 	 *
 	 * @param {number} bannerHeight
@@ -50,9 +58,10 @@ export default class Skin {
 	addEditorObserver( onEdit ) { // eslint-disable-line no-unused-vars
 	}
 
-	getName() {
-		return this.constructor.name.toLowerCase();
-	}
+	/**
+	 * Children might implement this to track user interactions (e.g. user clicks on search) that should prevent banner display
+	 */
+	addUserInteractionObservers() {}
 
 	getSizeIssueThreshold() {
 		return 0;

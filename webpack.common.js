@@ -58,7 +58,7 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: [ '.mjs', '.js', '.jsx' ],
+		extensions: [ '.mjs', '.js', '.jsx', '.vue' ],
 		alias: {
 			'react': 'preact/compat',
 			'react-dom': 'preact/compat'

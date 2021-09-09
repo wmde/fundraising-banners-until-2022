@@ -1,5 +1,9 @@
 import Skin from './Skin';
 import $ from 'jquery';
+import {
+	mediaWikiIsShowingContentPage,
+	mediaWikiMainContentIsHiddenByLightbox
+} from '../mediawiki_checks';
 
 // usually desktop skin
 
@@ -11,6 +15,11 @@ export default class Vector extends Skin {
 		this.head = $( '#mw-head' );
 		this.pageBase = $( '#mw-page-base' );
 		this.searchField = $( '#searchInput' );
+		this.userHasSearched = false;
+	}
+
+	canDisplayBanner() {
+		return ( mediaWikiIsShowingContentPage() && !mediaWikiMainContentIsHiddenByLightbox() && !this.userHasSearched );
 	}
 
 	addSpace( bannerHeight, transition ) {
@@ -37,6 +46,10 @@ export default class Vector extends Skin {
 
 	addEditorObserver( onEdit ) {
 		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
+	}
+
+	addUserInteractionObservers() {
+		this.addSearchObserver( () => { this.userHasSearched = true; } );
 	}
 
 	moveBannerContainerToTopOfDom() {
