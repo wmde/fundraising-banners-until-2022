@@ -5,6 +5,7 @@ import $ from 'jquery';
 import CssTransition from '../css_transition';
 
 export default class Skin {
+
 	/**
 	 * Children might implement this
 	 *

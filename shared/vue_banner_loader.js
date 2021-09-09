@@ -1,12 +1,12 @@
-import {getSkinAdjuster} from "./skin";
+import { getSkinAdjuster } from './skin';
 
-export class BannerPresenter {
+export class BannerLoader {
 	constructor( trackingData, appearanceDelay ) {
 		this.trackingData = trackingData;
 		this.appearanceDelay = appearanceDelay;
 	}
 
-	present( Banner, bannerContainer, props ) {
+	load( Banner, bannerContainer, props ) {
 		mw.loader.using( [ 'vue' ] ).then(
 			async ( require ) => {
 				const Vue = require( 'vue' );
