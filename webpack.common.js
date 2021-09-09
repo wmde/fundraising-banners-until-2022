@@ -3,6 +3,7 @@ const fs = require( 'fs' );
 const toml = require( 'toml' );
 const webpack = require( 'webpack' );
 const WrapperPlugin = require( 'wrapper-webpack-plugin' );
+const { VueLoaderPlugin } = require('vue-loader')
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
@@ -49,6 +50,10 @@ module.exports = {
 				use: [
 					{ loader: 'handlebars-loader' }
 				]
+			},
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader'
 			}
 		]
 	},
@@ -63,6 +68,7 @@ module.exports = {
 		jquery: 'jQuery'
 	},
 	plugins: [
+		new VueLoaderPlugin(),
 		new webpack.ProvidePlugin( {
 			jQuery: 'jquery'
 		} ),
