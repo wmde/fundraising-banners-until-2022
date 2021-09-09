@@ -3,7 +3,7 @@ const fs = require( 'fs' );
 const toml = require( 'toml' );
 const webpack = require( 'webpack' );
 const WrapperPlugin = require( 'wrapper-webpack-plugin' );
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require( 'vue-loader' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );

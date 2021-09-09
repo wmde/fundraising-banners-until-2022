@@ -1,7 +1,11 @@
-import Vue from "vue";
+import Banner from "./Banner.vue";
 
-/* eslint-disable no-new */
-new Vue({
-	el: "#centralNotice",
-	render: h => h('div', 'This is a Vue banner')
-})
+mw.loader.using( [ 'vue' ] ).then(
+	async ( require ) => {
+		const Vue = require( 'vue' );
+		new Vue( {
+			el: '#centralNotice',
+			render: h => h( Banner ),
+			components: { Banner }
+		} );
+	} );
