@@ -14,6 +14,7 @@ export default class Skin {
 	canDisplayBanner() {
 		return true;
 	}
+
 	/**
 	 * Children must implement this
 	 *

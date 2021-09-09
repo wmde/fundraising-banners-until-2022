@@ -1,4 +1,5 @@
 import { getSkinAdjuster } from './skin';
+import { getBannerLoaderPlatform } from './platform';
 
 export class BannerLoader {
 	constructor( trackingData, appearanceDelay ) {
@@ -17,7 +18,8 @@ export class BannerLoader {
 					components: { Banner },
 					props,
 					provide: {
-						skinAdjuster: getSkinAdjuster()
+						skinAdjuster: getSkinAdjuster(),
+						bannerLoaderPlatform: getBannerLoaderPlatform()
 					}
 				} );
 			} );

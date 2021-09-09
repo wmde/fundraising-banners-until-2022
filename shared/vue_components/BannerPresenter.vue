@@ -27,11 +27,12 @@ export default {
 			visibilityState: BannerVisibilityState.PENDING,
 		};
 	},
-	inject: [ 'skinAdjuster' ],
+	inject: [ 'skinAdjuster', 'bannerLoaderPlatform' ],
 	methods: {
 		displayBanner() {
 			if ( !this.skinAdjuster.canDisplayBanner() ) {
 				this.visibilityState = BannerVisibilityState.HIDDEN;
+				this.bannerLoaderPlatform.bannerCouldNotBeDisplayed();
 				return;
 			}
 
@@ -44,6 +45,7 @@ export default {
 		hideBanner() {
 			this.visibilityState = BannerVisibilityState.HIDDEN;
 			this.skinAdjuster.removeSpace();
+			this.bannerLoaderPlatform.bannerWasClosed();
 		}
 	},
 	created() {
