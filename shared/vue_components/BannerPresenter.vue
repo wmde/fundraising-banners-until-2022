@@ -7,9 +7,7 @@
 <script>
 
 // TODO (might be implemented elsewhere)
-// Tracking submit
 // Register resize event
-// tracking close event
 
 export const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'PENDING' ),
@@ -27,7 +25,7 @@ export default {
 			visibilityState: BannerVisibilityState.PENDING,
 		};
 	},
-	inject: [ 'skinAdjuster', 'bannerLoaderPlatform' ],
+	inject: [ 'skinAdjuster', 'bannerLoaderPlatform', 'trackingService' ],
 	methods: {
 		displayBanner() {
 			if ( !this.skinAdjuster.canDisplayBanner() ) {
@@ -38,14 +36,14 @@ export default {
 
 			this.visibilityState = BannerVisibilityState.VISIBLE;
 
+			this.trackingService.tracker.recordBannerImpression();
+
 			// TODO
 			// this.impressionCounts.incrementImpressionCounts();
-			// this.trackingData.tracker.recordBannerImpression();
 		},
 		hideBanner() {
 			this.visibilityState = BannerVisibilityState.HIDDEN;
 			this.skinAdjuster.removeSpace();
-			this.bannerLoaderPlatform.bannerWasClosed();
 		}
 	},
 	created() {

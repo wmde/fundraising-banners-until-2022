@@ -1,33 +1,37 @@
 import $ from 'jquery';
 
+/**
+ * Get banner height and screen/window dimensions as a concatenated string
+ *
+ * @param {number} bannerHeight
+ * @return {Object} screen, window and banner dimensions
+ */
+export function getDimensions( bannerHeight ) {
+	return {
+		bannerHeight: bannerHeight,
+		screen: {
+			width: screen.width,
+			height: screen.height
+		},
+		window: {
+			width: $( window ).width(),
+			height: $( window ).height()
+		},
+		windowOuter: {
+			width: window.outerWidth,
+			height: window.outerHeight
+		}
+	};
+}
+
 export default class SizeIssueIndicator {
 
 	constructor( thresholdInPixels ) {
 		this.thresholdInPixels = thresholdInPixels;
 	}
 
-	/**
-	 * Get banner height and screen/window dimensions as a concatenated string
-	 *
-	 * @param {number} bannerHeight
-	 * @return {Object} screen, window and banner dimensions
-	 */
 	getDimensions( bannerHeight ) {
-		return {
-			bannerHeight: bannerHeight,
-			screen: {
-				width: screen.width,
-				height: screen.height
-			},
-			window: {
-				width: $( window ).width(),
-				height: $( window ).height()
-			},
-			windowOuter: {
-				width: window.outerWidth,
-				height: window.outerHeight
-			}
-		};
+		getDimensions( bannerHeight );
 	}
 
 	/**

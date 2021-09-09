@@ -19,7 +19,8 @@ export class BannerLoader {
 					props,
 					provide: {
 						skinAdjuster: getSkinAdjuster(),
-						bannerLoaderPlatform: getBannerLoaderPlatform()
+						bannerLoaderPlatform: getBannerLoaderPlatform(),
+						trackingService: this.trackingData
 					}
 				} );
 			} );
