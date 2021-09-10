@@ -1,31 +1,30 @@
 <template>
-	<BannerPresenter ref="presenter">
-		<div class="banner-position banner-position--state-finished">
-			<div class="banner__wrapper">
-				<div class="banner__content">
-					<div class="banner__infobox">
-						<div class="banner__slideshow">
-							<Slider>
-								<Slides/>
-							</Slider>
-						</div>
-					</div>
-					<div class="banner__form">
-						Form
-					</div>
-				</div>
-				<div class="close">
-					<a class="close__link" v-on:click.prevent="onClose">&#x2715;</a>
-				</div>
+    <BannerPresenter ref="presenter" v-on:banner-visible="$refs.transition.startTransition()">
+        <BannerTransition ref="transition">
+            <div class="banner__wrapper">
+                <div class="banner__content">
+                    <div class="banner__infobox">
+                        <div class="banner__slideshow">
+                            Slideshow
+                        </div>
+                    </div>
+                    <div class="banner__form">
+                        Form
+                    </div>
+                </div>
+                <div class="close">
+                    <a class="close__link" v-on:click.prevent="onClose">&#x2715;</a>
+                </div>
 				<Footer/>
-			</div>
-		</div>
-	</BannerPresenter>
+            </div>
+        </BannerTransition>
+    </BannerPresenter>
 </template>
 
 <script>
 
 import BannerPresenter from "../../shared/vue_components/BannerPresenter";
+import BannerTransition from "../../shared/vue_components/BannerTransition";
 import { getDimensions } from "../../shared/track_size_issues";
 import Footer from '../../shared/vue_components/Footer';
 import Slider from '../../shared/vue_components/Slider';
@@ -37,7 +36,8 @@ export default {
 		Slides,
 		Slider,
 		Footer,
-		BannerPresenter
+		BannerPresenter,
+		BannerTransition,
 	},
 	inject: [ 'bannerLoaderPlatform', 'trackingService' ],
 	data() {
