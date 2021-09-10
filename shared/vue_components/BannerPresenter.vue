@@ -40,6 +40,8 @@ export default {
 
 			// TODO
 			// this.impressionCounts.incrementImpressionCounts();
+
+			this.$emit( 'banner-visible' );
 		},
 		hideBanner() {
 			this.visibilityState = BannerVisibilityState.HIDDEN;

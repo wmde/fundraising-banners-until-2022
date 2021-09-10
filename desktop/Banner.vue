@@ -1,6 +1,6 @@
 <template>
-    <BannerPresenter ref="presenter">
-        <div class="banner-position banner-position--state-finished">
+    <BannerPresenter ref="presenter" v-on:banner-visible="$refs.transition.startTransition()">
+        <BannerTransition ref="transition">
             <div class="banner__wrapper">
                 <div class="banner__content">
                     <div class="banner__infobox">
@@ -17,21 +17,23 @@
                 </div>
 				<Footer/>
             </div>
-        </div>
+        </BannerTransition>
     </BannerPresenter>
 </template>
 
 <script>
 
 import BannerPresenter from "../shared/vue_components/BannerPresenter";
+import BannerTransition from "../shared/vue_components/BannerTransition";
 import {getDimensions} from "../shared/track_size_issues";
 import Footer from '../shared/vue_components/Footer';
 
 export default {
     name: "Banner",
 	components: {
+		BannerPresenter,
+		BannerTransition,
 		Footer,
-			BannerPresenter
 	},
 	inject: [ 'bannerLoaderPlatform', 'trackingService' ],
 	data() {
