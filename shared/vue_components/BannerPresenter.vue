@@ -6,8 +6,7 @@
 
 <script>
 
-// TODO (might be implemented elsewhere)
-// Register resize event
+import BannerEvents from "../../desktop/events";
 
 export const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'PENDING' ),
@@ -25,23 +24,24 @@ export default {
 			visibilityState: BannerVisibilityState.PENDING,
 		};
 	},
-	inject: [ 'skinAdjuster', 'bannerLoaderPlatform', 'trackingService' ],
+	inject: [ 'skinAdjuster', 'bannerLoaderPlatform', 'trackingService', 'eventBus' ],
 	methods: {
 		displayBanner() {
 			if ( !this.skinAdjuster.canDisplayBanner() ) {
 				this.visibilityState = BannerVisibilityState.HIDDEN;
+				// TODO move to listener
 				this.bannerLoaderPlatform.bannerCouldNotBeDisplayed();
+				this.eventBus.$emit( BannerEvents.BANNER_NOT_SHOWN );
 				return;
 			}
 
 			this.visibilityState = BannerVisibilityState.VISIBLE;
 
+			// TODO move to listener
 			this.trackingService.tracker.recordBannerImpression();
-
-			// TODO
 			// this.impressionCounts.incrementImpressionCounts();
 
-			this.$emit( 'banner-visible' );
+			this.eventBus.$emit( BannerEvents.BANNER_READY )
 		},
 		hideBanner() {
 			this.visibilityState = BannerVisibilityState.HIDDEN;
@@ -56,6 +56,7 @@ export default {
 	mounted() {
 		// TODO check for size issues and don't start timer if there is a size issue (log instead)
 		setTimeout( this.displayBanner.bind( this ), this.appearanceDelay );
+		this.eventBus.$once( BannerEvents.BANNER_CLOSED, this.hideBanner );
 	},
 	computed: {
 		visibilityClass() {

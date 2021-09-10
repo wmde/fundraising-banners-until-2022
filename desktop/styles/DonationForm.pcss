@@ -1,0 +1,187 @@
+.wmde-banner {
+	.form {
+		overflow: hidden;
+		margin: 0 -5px;
+
+		@media ( min-width: $breakpoint_l ) {
+			align-items: center;
+			display: flex;
+			margin: 0;
+		}
+
+		&-step-1 {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+
+		&-step-2 {
+			display: none;
+			flex-direction: column;
+			background: $color-white;
+			top: 0;
+			bottom: 0;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+
+			@media ( min-width: $breakpoint_l ) {
+				padding-left: 1em;
+			}
+
+			&-content {
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+
+				@media ( min-width: $breakpoint_m ) {
+					flex-wrap: nowrap;
+				}
+
+				@media ( min-width: $breakpoint_l ) {
+					display: block;
+					flex-wrap: wrap;
+				}
+			}
+
+			&-field {
+				flex-grow: 1;
+			}
+
+			.form-step-2-button {
+				display: flex;
+				align-items: flex-end;
+			}
+
+			&-label {
+				position: relative;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				padding-left: 30px;
+				margin-bottom: 10px;
+				min-height: 34px;
+				font-weight: bold;
+
+				@media ( min-width: $breakpoint_l ) {
+					display: block;
+					height: auto;
+					padding-left: 0;
+				}
+			}
+
+			&-notice {
+				font-size: 12px;
+				font-weight: normal;
+			}
+
+			.select-group {
+				padding-bottom: 8px;
+				@media ( min-width: $breakpoint_l ) {
+					padding-bottom: 0;
+				}
+			}
+
+			.select-group__errormessage {
+				padding: 8px 0;
+				height: auto;
+			}
+		}
+
+		&.is-step-2 {
+			.form-step-1 {
+				display: none;
+			}
+			.form-step-2 {
+				display: flex;
+			}
+		}
+
+		&__element {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+
+			@media ( min-width: $breakpoint_l ) {
+				display: block;
+				margin: 0;
+				width: 100%; /* For IE11 */
+			}
+		}
+		&-field-group {
+			display: flex;
+			flex: 1 1 auto;
+			flex-wrap: wrap;
+			padding: 0 5px 10px;
+
+			@media ( min-width: $breakpoint_m ) {
+				flex-wrap: nowrap;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				display: block;
+				padding: 6px 0 10px;
+			}
+		}
+		&__section-head {
+			visibility: hidden;
+			font-family: 'Montserrat', sans-serif;
+			width: 100%;
+			font-size: 12px;
+			line-height: 13px;
+			color: $color-black-light;
+			position: fixed;
+			padding: 0 0 0 10px;
+			@media ( min-width: $breakpoint_l ) {
+				position: relative;
+				padding-left: 0;
+			}
+		}
+	}
+
+	.button-group {
+		display: block;
+		border: 0;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		padding: 0 5px 10px;
+
+		@media ( min-width: $breakpoint_l ) {
+			flex-wrap: wrap;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		&__button {
+			min-width: 240px;
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			cursor: pointer;
+			color: $color-white;
+			background-color: $color-primary;
+			border: 0 none;
+			border-radius: 18px;
+			font-size: 14px;
+			line-height: 35px;
+			height: 35px;
+			font-weight: bold;
+			text-align: center;
+			white-space: nowrap;
+			transition: background-color 500ms $banner-easing;
+			&:hover {
+				background-color: $color-primary-light;
+			}
+		}
+	}
+
+	.sms-box,
+	.form__section-head {
+		display: none;
+	}
+}

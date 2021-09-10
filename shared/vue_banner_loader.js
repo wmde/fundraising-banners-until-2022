@@ -21,7 +21,8 @@ export class BannerLoader {
 					provide: {
 						skinAdjuster: getSkinAdjuster(),
 						bannerLoaderPlatform: getBannerLoaderPlatform(),
-						trackingService: this.trackingData
+						trackingService: this.trackingData,
+						eventBus: new Vue()
 					}
 				} );
 			} );

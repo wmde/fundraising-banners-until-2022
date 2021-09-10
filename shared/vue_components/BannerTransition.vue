@@ -10,6 +10,7 @@
 <script>
 
 import CssTransition from "../css_transition";
+import BannerEvents from "../../desktop/events";
 
 const LOADING = 0
 const READY = 1;
@@ -17,7 +18,7 @@ const SLIDING = 2;
 const FINISHED = 3;
 
 const STATE_NAMES = new Map( [
-		[ LOADING, 'loading' ],
+	[ LOADING, 'loading' ],
 	[ READY, 'ready' ],
 	[ SLIDING, 'sliding' ],
 	[ FINISHED, 'finished' ]
@@ -32,6 +33,7 @@ export default {
 			}
 	},
 	mounted() {
+			this.eventBus.$on( BannerEvents.BANNER_READY, this.startTransition );
 			this.transitionState = READY;
 	},
 	props: {
@@ -44,7 +46,7 @@ export default {
 				default: false
 			}
 	},
-	inject: [ 'skinAdjuster' ],
+	inject: [ 'skinAdjuster', 'eventBus' ],
 	computed: {
 		transitionClass() {
 			const cls = [
@@ -81,8 +83,7 @@ export default {
 			},
 			onTransitionEnd() {
 				this.transitionState = FINISHED;
-				this.$emit( 'transition-finished' )
-
+				this.eventBus.$emit( BannerEvents.TRANSITION_FINISHED );
 			}
 	}
 }

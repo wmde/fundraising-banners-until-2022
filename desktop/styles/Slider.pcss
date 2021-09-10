@@ -9,11 +9,6 @@
 			position: relative;
 			padding-bottom: 15px;
 
-			@media ( min-width: $breakpoint_l ) {
-				position: absolute;
-				padding-bottom: 20px;
-			}
-
 			.navigation-wrapper {
 				display: flex;
 				align-items: center;
@@ -24,9 +19,13 @@
 				position: relative;
 
 				.keen-slider {
-					display: flex;
+					width: 100%;
 					overflow: hidden;
 					position: relative;
+					>div {
+						display: flex;
+						width: 100%;
+					}
 					&__slide {
 						cursor: grab;
 						width: 100%;
