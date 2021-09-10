@@ -7,10 +7,11 @@ export class BannerLoader {
 		this.appearanceDelay = appearanceDelay;
 	}
 
-	load( Banner, bannerContainer, props ) {
+	load( Banner, bannerContainer, translations, props ) {
 		mw.loader.using( [ 'vue' ] ).then(
 			async ( require ) => {
 				const Vue = require( 'vue' );
+				Vue.prototype.$translations = translations;
 				// eslint-disable-next-line no-new
 				new Vue( {
 					el: bannerContainer,

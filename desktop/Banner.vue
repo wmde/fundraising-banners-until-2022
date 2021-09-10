@@ -15,6 +15,7 @@
                 <div class="close">
                     <a class="close__link" v-on:click.prevent="onClose">&#x2715;</a>
                 </div>
+				<Footer/>
             </div>
         </div>
     </BannerPresenter>
@@ -24,10 +25,12 @@
 
 import BannerPresenter from "../shared/vue_components/BannerPresenter";
 import {getDimensions} from "../shared/track_size_issues";
+import Footer from '../shared/vue_components/Footer';
 
 export default {
     name: "Banner",
 	components: {
+		Footer,
 			BannerPresenter
 	},
 	inject: [ 'bannerLoaderPlatform', 'trackingService' ],

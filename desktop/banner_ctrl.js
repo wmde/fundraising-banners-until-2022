@@ -4,7 +4,7 @@ import style from './styles/styles.pcss';
 import { BannerLoader } from '../shared/vue_banner_loader';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
-
+import Translations from '../shared/messages/de';
 import Banner from './Banner.vue';
 
 import { LocalImpressionCount } from '../shared/local_impression_count';
@@ -22,5 +22,6 @@ const bannerPresenter = new BannerLoader(
 bannerPresenter.load(
 	Banner,
 	bannerContainer,
+	Translations,
 	{}
 );
