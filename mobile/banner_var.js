@@ -12,7 +12,7 @@ import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de
 
 import Banner, { BannerType } from './components/Banner';
 import Slides from './components/Slides_var';
-import BannerText from './components/BannerText';
+import BannerText from './components/BannerText_var';
 import DonationForm from './components/ui/form/DonationFormWithHeaders';
 import FullpageBanner from './components/FullpageBanner';
 
