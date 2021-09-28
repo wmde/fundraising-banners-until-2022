@@ -7,7 +7,7 @@ export default function Slides( { currentDayName, visitorsVsDonorsSentence } ) {
 		<div className="mini-banner-carousel">
 			<div className="carousel-cell keen-slider__slide">
 				<p>Liebe Leserinnen und Leser in Deutschland: Zum ersten Mal seit langem möchten wir Sie an diesem{ ' ' }
-					{ currentDayName } bescheiden darum bitten, die Unabhängigkeit von Wikipedia zu verteidigen.</p>
+					{ currentDayName } bescheiden darum bitten, die Unabhängigkeit von Wikipedia zu sichern.</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
 				<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Bitte klicken Sie jetzt nicht weg!</p>
