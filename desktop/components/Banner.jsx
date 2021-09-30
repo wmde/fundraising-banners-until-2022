@@ -252,6 +252,7 @@ export class Banner extends Component {
 											buttonText={ props.buttonText }
 											errorPosition={ props.errorPosition }
 											bannerType={ props.bannerType }
+											addressFormType={ props.addressFormType }
 										/>
 									</div>
 								</div>

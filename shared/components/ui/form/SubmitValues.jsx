@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { LocalImpressionCount } from '../../../local_impression_count';
 
 export default function SubmitValues( props ) {
-	let addressType = props.addressType || 'person';
+	let addressType = props.addressType || '';
 	return <Fragment>
 		<input type="hidden" name="addressType" value={ addressType } />
 		<input type="hidden" name="amount" value={ props.amount } />

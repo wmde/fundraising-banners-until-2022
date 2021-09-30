@@ -45,6 +45,7 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR
+		bannerType: BannerType.VAR,
+		addressFormType: 2
 	}
 );
