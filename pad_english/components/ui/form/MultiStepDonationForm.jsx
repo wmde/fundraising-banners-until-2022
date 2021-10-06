@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import classNames from 'classnames';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
@@ -15,6 +15,7 @@ import useInterval from '../../../../shared/components/ui/form/hooks/use_interva
 import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_payment_method';
 import useAddressType from './hooks/use_address_type';
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
+import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
 
 const formSteps = Object.freeze( {
 	ONE: Symbol( 'one' ),
@@ -34,6 +35,12 @@ export default function DonationForm( props ) {
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+	const [ formAction, setUrl ] = useFormAction( props, { provadd: 1 } );
+
+	useEffect(
+		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
+		[ addressType ]
+	);
 
 	const onSubmitStep1 = e => {
 		e.preventDefault();
@@ -121,23 +128,6 @@ export default function DonationForm( props ) {
 		}
 	};
 
-	const formActionParams = {
-		piwik_campaign: props.campaignName,
-		piwik_kwd: props.bannerName,
-		provadd: 1
-	};
-
-	const queryString = Object.keys( formActionParams )
-		.map( key => `${key}=${formActionParams[ key ]}` )
-		.join( '&' );
-
-	const getFormAction = () => {
-		if ( addressType !== AddressType.NO.value ) {
-			return 'https://spenden.wikimedia.de/donation/new?' + queryString;
-		}
-		return 'https://spenden.wikimedia.de/donation/add?' + queryString + '&mbt=1';
-	};
-
 	const getFormNotice = () => {
 		if ( paymentMethod === PaymentMethods.DIRECT_DEBIT.value ) {
 			return Translations[ 'address-type-notice-direct-debit' ];
@@ -167,7 +157,7 @@ export default function DonationForm( props ) {
 		'form',
 		{ 'is-step-2': formStep === formSteps.TWO }
 	) }>
-		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ getFormAction() }>
+		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
 
 			<div className="form-step-1">
 
@@ -303,7 +293,6 @@ export default function DonationForm( props ) {
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
-				impressionCounts={ props.impressionCounts }
 			/>
 
 		</form>

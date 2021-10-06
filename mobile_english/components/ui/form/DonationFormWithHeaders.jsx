@@ -14,6 +14,7 @@ import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_pa
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
+import useFormAction from '../../../../shared/components/ui/form/hooks/use_form_action';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -25,6 +26,7 @@ export default function DonationFormWithHeaders( props ) {
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
+	const [ formAction ] = useFormAction( props, { provadd: 1 } );
 
 	const validate = e => {
 		if ( [
@@ -62,8 +64,7 @@ export default function DonationFormWithHeaders( props ) {
 	};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element"
-			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
+		<form method="post" name="donationForm" className="form__element" action={ formAction }>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head"></legend>
@@ -135,7 +136,6 @@ export default function DonationFormWithHeaders( props ) {
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
-				impressionCounts={ props.impressionCounts }
 			/>
 		</form>
 	</div>;
