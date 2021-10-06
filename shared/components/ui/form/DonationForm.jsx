@@ -13,6 +13,7 @@ import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
 import { amountMessage, validateRequired } from './utils';
 import SubmitValues from './SubmitValues';
+import useFormAction from './hooks/use_form_action';
 
 export default function DonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -24,6 +25,7 @@ export default function DonationForm( props ) {
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const disabledIntervals = [];
 	const disabledPaymentMethods = [];
+	const [ formAction ] = useFormAction( props );
 
 	const validate = e => {
 		if ( [
@@ -39,8 +41,7 @@ export default function DonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction }
-			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
+		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
 
 			<div className="form-field-group">
 				<SelectGroup

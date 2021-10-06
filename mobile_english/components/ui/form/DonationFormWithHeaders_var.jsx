@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext, useState, useEffect } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
 import { SelectGroup } from './SelectGroup_var';
@@ -16,6 +16,7 @@ import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
 import { AddressType } from './FormItemsBuilder';
 import useAddressType from './hooks/use_address_type';
+import useFormAction, { NEW_DONATION_URL, ADD_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -29,6 +30,12 @@ export default function DonationFormWithHeaders( props ) {
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+	const [ formAction, setUrl ] = useFormAction( props, { provadd: 1 } );
+
+	useEffect(
+		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
+		[ addressType ]
+	);
 
 	const addDisabledPaymentMethod = paymentMethodToDisable => {
 		let currentDisabledPaymentMethods = disabledPaymentMethods;
@@ -102,23 +109,6 @@ export default function DonationFormWithHeaders( props ) {
 		}
 	};
 
-	const formActionParams = {
-		piwik_campaign: props.campaignName,
-		piwik_kwd: props.bannerName,
-		provadd: 1
-	};
-
-	const queryString = Object.keys( formActionParams )
-		.map( key => `${key}=${formActionParams[ key ]}` )
-		.join( '&' );
-
-	const getFormAction = () => {
-		if ( addressType !== AddressType.NO.value ) {
-			return 'https://spenden.wikimedia.de/donation/new?' + queryString;
-		}
-		return 'https://spenden.wikimedia.de/donation/add?' + queryString + '&mbt=1';
-	};
-
 	const getButtonText = () => {
 		if ( addressType !== AddressType.NO.value ) {
 			return Translations[ 'submit-label' ];
@@ -139,7 +129,7 @@ export default function DonationFormWithHeaders( props ) {
 
 	return <div className="form">
 		<form method="post" name="donationForm" className="form__element"
-			action={ getFormAction() }>
+			action={ formAction }>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head"></legend>
@@ -227,7 +217,6 @@ export default function DonationFormWithHeaders( props ) {
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
-				impressionCounts={ props.impressionCounts }
 				addressType={ addressType }
 			/>
 		</form>
