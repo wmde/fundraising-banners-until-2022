@@ -49,7 +49,7 @@ export class LocalImpressionCount {
 	 * @return {boolean}
 	 */
 	hasLocalStorage() {
-		if ( typeof this.localStorageActive !== undefined ) {
+		if ( this.localStorageActive !== undefined ) {
 			return this.localStorageActive;
 		}
 
