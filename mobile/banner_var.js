@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -10,11 +10,10 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
-import Banner, { BannerType } from './components/Banner';
-import Slides from './components/Slides_var';
+import Banner, { BannerType } from './components/Banner_var';
 import BannerText from './components/BannerText_var';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
-import FullpageBanner from './components/FullpageBanner';
+import DonationForm from './components/ui/form/DonationFormWithHeaders_var';
+import FullpageBanner from './components/FullpageBanner_var';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -31,8 +30,6 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Wieviel ist Ihnen Wikipedia wert?';
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -43,14 +40,12 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		bannerText: BannerText,
-		slides: Slides,
 		fullpageBanner: FullpageBanner,
 		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
-		sliderHeading: sliderHeading
+		bannerType: BannerType.VAR
 	},
 	0
 );

@@ -1,0 +1,47 @@
+.wmde-banner {
+	.form {
+		padding: 30px;
+		font-family: $banner-sans-serif;
+		&__section-head {
+			text-align: left;
+			font-weight: bold;
+			font-size: 14px;
+		}
+	}
+	.button-group__button {
+		height: 60px;
+		line-height: 60px;
+		border-radius: 10px;
+		font-weight: bold;
+		color: $color-white;
+		background: $color-gray-light;
+		text-decoration: none;
+		transition: background-color 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			color: $color-white;
+			background: $color-gray-light;
+		}
+
+		svg {
+			/* stylelint-disable-next-line function-parentheses-space-inside */
+			transform: translateY(7px);
+			margin-left: 6px;
+			path {
+				fill: $color-white;
+			}
+		}
+	}
+
+	.button-group.is-valid .button-group__button {
+		color: $color-white;
+		background: $color-primary;
+
+		&:hover,
+		&:focus {
+			color: $color-white;
+			background: $color-primary-hover;
+		}
+	}
+}

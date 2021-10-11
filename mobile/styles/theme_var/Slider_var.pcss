@@ -1,0 +1,111 @@
+.wmde-banner {
+	.navigation-wrapper {
+		position: relative;
+		padding-bottom: 30px;
+	}
+
+	.mini-banner-carousel,
+	.keen-slider {
+		display: flex;
+		overflow: hidden;
+	}
+
+	.carousel-cell,
+	.keen-slider__slide {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		padding: 0 76px 0 76px;
+		cursor: grab;
+		font-size: 18px;
+
+		&-first {
+			text-align: center;
+			font-size: 24px;
+		}
+
+		p {
+			padding-bottom: 6px;
+			width: 100%;
+			flex: 0 0 100%;
+		}
+
+		a {
+			font-size: 16px;
+			text-decoration: underline;
+			color: $color-black;
+			&:hover,
+			&:focus {
+				color: $color-primary;
+			}
+		}
+	}
+
+	.slider-navigation-previous,
+	.slider-navigation-next {
+		position: absolute;
+		z-index: 30;
+		width: 52px;
+		height: 52px;
+		line-height: 52px;
+		top: 50%;
+		margin-top: -26px;
+		border: 0;
+		background: $color-white;
+		border-radius: 50%;
+		text-align: center;
+		padding: 5px 0 0;
+	}
+
+	.slider-navigation-previous {
+		left: 16px;
+		padding-right: 10px;
+		box-shadow: -3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: left 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			left: 12px;
+		}
+	}
+
+	.slider-navigation-next {
+		right: 16px;
+		padding-left: 10px;
+		box-shadow: 3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: right 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			right: 12px;
+		}
+	}
+
+	.pagination {
+		display: flex;
+		padding: 10px 0;
+		justify-content: center;
+		height: 30px;
+		width: 100%;
+
+		&-dot {
+			border: 2px solid $color-gray-medium;
+			width: 10px;
+			height: 10px;
+			background: $color-white;
+			border-radius: 50%;
+			margin: 0 10px;
+			padding: 2px;
+			cursor: pointer;
+		}
+
+		&-dot:focus {
+			outline: 0;
+		}
+
+		&-dot.is-active {
+			background: $color-gray-medium;
+		}
+	}
+}

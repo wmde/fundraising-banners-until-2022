@@ -17,9 +17,9 @@ export default function BannerText( props ) {
 			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			{' '}<TextHighlight registerStartAnimation={ props.registerStartHighlight }>{ visitorsVsDonorsSentence }</TextHighlight>
 
-			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in
-			diesem Jahr Wissen im Wert von 5&nbsp;€ geschenkt? Dann nehmen Sie sich
-			doch bitte eine Minute Zeit und geben Sie etwas zurück. Zeigen Sie den
+			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
+			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?
+			Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. Zeigen Sie den
 			Freiwilligen, die Ihnen verlässliche und neutrale Informationen
 			zur Verfügung stellen, dass Sie ihre Arbeit wertschätzen.
 			<span className="text--italic"> Vielen Dank!</span>
