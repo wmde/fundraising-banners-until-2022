@@ -1,0 +1,38 @@
+.wmde-banner {
+	.banner-text {
+		&__heading {
+			margin-bottom: 20px;
+
+			p {
+				display: inline;
+				font-family: $banner-sans-serif;
+				font-weight: bold;
+				font-size: 24px;
+				color: $color-black;
+				padding: 0;
+
+				background: transparent;
+				background: -moz-linear-gradient( 180deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 0 ) 50%, rgba( 129, 211, 248, 1 ) 50%, rgba( 129, 211, 248, 1 ) 90%, rgba( 255, 255, 255, 0 ) 90% );
+				background: -webkit-linear-gradient( 180deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 0 ) 50%, rgba( 129, 211, 248, 1 ) 50%, rgba( 129, 211, 248, 1 ) 90%, rgba( 255, 255, 255, 0 ) 90% );
+				background: linear-gradient( 180deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 0 ) 50%, rgba( 129, 211, 248, 1 ) 50%, rgba( 129, 211, 248, 1 ) 90%, rgba( 255, 255, 255, 0 ) 90% );
+				/* stylelint-disable-next-line string-quotes */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#ffffff", GradientType=1 );
+			}
+		}
+
+		&__expander {
+			height: 0;
+			overflow-y: hidden;
+
+			&.open {
+				height: auto;
+			}
+		}
+
+		&__toggle {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+	}
+}

@@ -1,0 +1,48 @@
+.wmde-banner {
+	.fullpage-banner {
+		background: $color-white;
+
+		&__info {
+			padding-top: 46px;
+		}
+
+		p {
+			padding-bottom: 16px;
+		}
+
+		.call-to-action {
+			position: relative;
+			color: $color-white;
+			background: $color-primary;
+			font-weight: bold;
+			font-family: $banner-sans-serif;
+			font-size: 14px;
+
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: -10px;
+				left: 50%;
+				margin-left: -10px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 10px 10px 0 10px;
+				border-color: $color-primary transparent transparent transparent;
+			}
+		}
+
+		.payments-info {
+			display: inline-block;
+			border-radius: 50%;
+			height: 16px;
+			width: 16px;
+			line-height: 16px;
+			text-align: center;
+			background: $color-gray-medium;
+			color: $color-white;
+			text-decoration: none;
+			margin-left: 6px;
+		}
+	}
+}

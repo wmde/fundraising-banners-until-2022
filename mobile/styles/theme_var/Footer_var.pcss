@@ -1,0 +1,88 @@
+$footer-font-size: 14px;
+
+.wmde-banner {
+	.footer {
+		text-align: center;
+		color: $color-black;
+
+		&-box {
+			font-size: $footer-font-size;
+			background: $color-gray-light;
+			padding: 16px;
+		}
+
+		&__bank {
+			&-item {
+				display: block;
+				white-space: nowrap;
+				padding-right: 1em;
+				text-align: left;
+				margin-bottom: 4px;
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&__usage {
+			display: none;
+		}
+	}
+
+	.selection-input {
+		display: inline-block;
+		position: relative;
+		margin-left: 5px;
+
+		&-text,
+		&-input {
+			font-weight: bold;
+			font-size: 14px;
+		}
+		&-input {
+			font-family: $banner-font-family;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			padding: 0;
+			border: 0;
+			outline: 0;
+			background: transparent;
+			color: transparent;
+			z-index: 2;
+		}
+
+		&.focused {
+			.selection-input-text {
+				color: transparent;
+			}
+			.selection-input-input {
+				color: $color-black;
+
+				&::selection {
+					background: $color-primary;
+					color: $color-white;
+				}
+			}
+		}
+	}
+
+	.smallprint {
+		text-align: center;
+		font-size: 12px;
+		margin-bottom: 16px;
+
+		a {
+			color: $color-gray;
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+}
