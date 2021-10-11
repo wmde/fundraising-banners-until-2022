@@ -69,7 +69,9 @@ export default function DonationForm( props ) {
 
 	return <div className="form">
 		<form method="post" name="donationForm" className="form__element"
-			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName + '&piwik_kwd=' + props.bannerName}>
+			action={ 'https://spenden.wikimedia.de/donation/new?piwik_campaign=' + props.campaignName +
+			'&piwik_kwd=' + props.bannerName +
+			'&ast=' + props.addressFormType}>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head">{ Translations[ 'intervals-header' ]}</legend>

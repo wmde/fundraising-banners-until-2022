@@ -3,7 +3,7 @@ import { h, Fragment } from 'preact';
 import PropTypes from 'prop-types';
 
 export default function SubmitValues( props ) {
-	let addressType = props.addressType || 'person';
+	let addressType = props.addressType || '';
 	return <Fragment>
 		<input type="hidden" name="addressType" value={ addressType } />
 		<input type="hidden" name="amount" value={ props.amount } />
