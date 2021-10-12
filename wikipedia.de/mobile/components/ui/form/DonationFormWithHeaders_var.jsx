@@ -34,7 +34,7 @@ export default function DonationFormWithHeaders( props ) {
 
 	useEffect(
 		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
-		[ addressType ]
+		[ addressType, setUrl ]
 	);
 
 	const addDisabledPaymentMethod = paymentMethodToDisable => {
