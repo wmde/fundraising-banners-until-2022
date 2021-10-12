@@ -6,10 +6,10 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner, { BannerType } from './components/Banner';
+import Banner, { BannerType } from './components/Banner_var';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
-import DonationForm from '../shared/components/ui/form/DonationForm';
+import DonationForm from './components/ui/form/DonationForm';
 import BannerText from './components/BannerText';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';

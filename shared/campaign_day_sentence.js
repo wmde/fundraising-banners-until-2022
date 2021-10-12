@@ -1,4 +1,5 @@
 import CampaignDays from './campaign_days';
+import getEnglishOrdinalSuffixOf from './english_ordinal';
 
 export default class CampaignDaySentence {
 
@@ -33,24 +34,9 @@ export default class CampaignDaySentence {
 			return this.translations[ 'campaign-day-first-day' ];
 		}
 		if ( this.translations.LANGUAGE === 'en' ) {
-			daysSinceCampaignStart = this.getEnglishOrdinalSuffixOf( daysSinceCampaignStart );
+			daysSinceCampaignStart = getEnglishOrdinalSuffixOf( daysSinceCampaignStart );
 		}
 		return this.translations[ 'campaign-day-nth-day' ].replace( '{{days}}', daysSinceCampaignStart );
 
-	}
-
-	getEnglishOrdinalSuffixOf( i ) {
-		let j = i % 10,
-			k = i % 100;
-		if ( j === 1 && k !== 11 ) {
-			return i + 'st';
-		}
-		if ( j === 2 && k !== 12 ) {
-			return i + 'nd';
-		}
-		if ( j === 3 && k !== 13 ) {
-			return i + 'rd';
-		}
-		return i + 'th';
 	}
 }

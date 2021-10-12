@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
 
 export default function BannerText( props ) {
 	const { currentDayName, campaignDaySentence, overallImpressionCount, visitorsVsDonorsSentence } = props;
@@ -11,16 +12,16 @@ export default function BannerText( props ) {
 				<strong> To all our readers in Germany, </strong>
 			</span>
 			It might a little awkward, but please don't scroll past this.{ ' ' }
-			{ campaignDaySentence } This { currentDayName }, for the { overallImpressionCount } time recently, we humbly
+			{ campaignDaySentence } This { currentDayName }, for the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently, we humbly
 			ask you to defend Wikipedia's independence. 99% of our readers don't give; they simply look
 			the other way. If you are an exceptional reader who has already donated, we
-			sincerely thank you. We depend on donations averaging about €&nbsp;22.81.{ ' ' }
+			sincerely thank you. We depend on donations averaging about €21.60.{ ' ' }
 			{ visitorsVsDonorsSentence }
 
-			<span className="text__highlight text__headline--bold"> If you donate just €&nbsp;5, Wikipedia
-						could keep thriving for years </span>
+			<span className="text__highlight text__headline--bold"> If you donate just €5, Wikipedia
+						could keep thriving for years. </span>
 
-			Most people donate because Wikipedia is useful. If Wikipedia has given you €&nbsp;5 worth of knowledge
+			Most people donate because Wikipedia is useful. If Wikipedia has given you €5 worth of knowledge
 			this year, take a minute to donate. Show the volunteers who bring you reliable, neutral
 			information that their work matters. Thank you.
 		</p>
