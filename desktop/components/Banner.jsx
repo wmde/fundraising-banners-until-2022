@@ -1,8 +1,8 @@
-import { Component, h } from 'preact';
+import { Component, createRef, h } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../../shared/components/BannerTransition';
-import ProgressBar from './ui/ProgressBar';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Slides from './Slides';
 import Infobox from '../../shared/components/ui/Infobox';
 import CloseIcon from './ui/CloseIcon';

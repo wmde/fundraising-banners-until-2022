@@ -38,7 +38,7 @@ export default function DonationForm( props ) {
 
 	useEffect(
 		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
-		[ addressType ]
+		[ addressType, setUrl ]
 	);
 
 	const onSubmitStep1 = e => {
