@@ -7,7 +7,7 @@ import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
-import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_US/data/use_of_funds_content.json';
+import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 
 import Banner from './Banner';
 import Slides from './components/Slides';
