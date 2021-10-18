@@ -11,7 +11,7 @@ export default function BannerText( props ) {
 				<img className="info-icon" height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
 				<strong> To all our readers in Germany, </strong>
 			</span>
-			It might a little awkward, but please don't scroll past this.{ ' ' }
+			It might be a little awkward, but please don't scroll past this.{ ' ' }
 			{ campaignDaySentence } This { currentDayName }, for the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently, we humbly
 			ask you to defend Wikipedia's independence. 99% of our readers don't give; they simply look
 			the other way. If you are an exceptional reader who has already donated, we

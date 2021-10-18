@@ -143,12 +143,16 @@ wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./english/banner_ctrl.js"
-pagename = "B21WMDE_en01_211014_ctrl"
+pagename = "B21_WMDE_Test_EN_01_ctrl"
 tracking = "org-en01-211014-ctrl"
 
 [english.banners.var]
 filename = "./english/banner_var.js"
-pagename = "B21WMDE_en01_211014_var"
+pagename = "B21_WMDE_Test_EN_01_var"
 tracking = "org-en01-211014-var"
+
+[english.test_matrix]
+platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
+resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
 
