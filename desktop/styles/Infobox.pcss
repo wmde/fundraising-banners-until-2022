@@ -1,47 +1,36 @@
 .wmde-banner {
-	.infobox-bubble {
+
+	.banner__infobox {
 		display: flex;
 		flex-direction: column;
-		height: 100%;
-		border: 0 none;
-		border-radius: 0.4em;
-		position: relative;
-		font-family: $banner-main-font-family;
-
-		font-size: 1em;
+		justify-content: space-between;
+		flex: 1 1 auto;
 		line-height: 1.3em;
-		text-align: left;
+		font-family: $banner-main-font-family;
+		padding-right: 10px;
+		margin-right: 10px;
+		margin-bottom: 0;
+		position: relative;
+		overflow-y: auto;
+
+		&:after {
+			position: absolute;
+			content: '';
+			width: 1px;
+			top: 0;
+			right: 0;
+			height: 100%;
+			background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
+		}
 
 		@media ( min-width: $breakpoint_m ) {
 			font-family: $banner-text-font-family;
 			font-size: 1.3em;
 		}
 
-		@media ( min-width: $breakpoint_l ) {
+		@media ( min-width: $breakpoint_s ) {
 			padding-right: 30px;
 			margin-right: 30px;
-
-			&:after {
-				position: absolute;
-				content: '';
-				width: 1px;
-				top: 0;
-				right: 0;
-				height: 100%;
-				background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
-			}
 		}
-
-		p {
-			margin: 0 0 1em;
-
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
-
-	.infobox {
-		position: relative;
 	}
 }
