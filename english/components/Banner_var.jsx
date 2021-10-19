@@ -9,7 +9,6 @@ import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/Funds
 import TranslationContext from '../../shared/components/TranslationContext';
 import { CampaignProjection } from '../../shared/campaign_projection';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import LanguageWarningBox from '../../shared/components/ui/LanguageWarningBox';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -55,7 +54,6 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			showLanguageWarning: false,
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
@@ -76,9 +74,7 @@ export default class Banner extends Component {
 
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		const languageWarningElement = document.querySelector( '.wmde-banner .lang-warning' );
-		languageWarningElement.style.top = bannerElement.offsetHeight;
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight + languageWarningElement.offsetHeight );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -110,7 +106,7 @@ export default class Banner extends Component {
 	};
 
 	onFormInteraction = () => {
-		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+		this.setState( { formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -159,14 +155,11 @@ export default class Banner extends Component {
 									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									onSubmit={props.onSubmit}
-									locale="de_DE"
+									locale="en_GB"
 								/>
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
-						<LanguageWarningBox
-							show={state.showLanguageWarning}
-						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>

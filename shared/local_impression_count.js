@@ -6,7 +6,12 @@ export class LocalImpressionCount {
 		if ( !this.hasLocalStorage() ) {
 			return;
 		}
-		const overallCount = this.getItem( 'fundraising.overallCount' );
+		let overallCount = this.getItem( 'fundraising.overallCount', 0 );
+		// This is a fix for a local storage issue where NaN was being stored
+		// and once it was in there it would remain NaN forever and always
+		if ( isNaN( parseInt( overallCount ) ) ) {
+			overallCount = 0;
+		}
 		this.overallCount = parseInt( overallCount, 10 );
 		const bannerCount = this.getItem( 'fundraising.bannerCount' ) || '';
 		if ( bannerCount.indexOf( '|' ) === -1 ) {
