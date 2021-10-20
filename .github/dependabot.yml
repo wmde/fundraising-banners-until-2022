@@ -9,4 +9,9 @@ updates:
       interval: "weekly"
     reviewers:
       - "wmde/funtech-core"
+    ignore:
+        # Ignore eslint 8 for now, since we're getting ESM/commonjs errors
+        # Remove and re-investigate after Jan 2022
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
       
