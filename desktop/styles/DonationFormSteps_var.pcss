@@ -1,0 +1,97 @@
+.wmde-banner {
+	.form {
+
+		&__element {
+			display: flex;
+		}
+
+		&-step-1,
+		&-step-2 {
+			display: flex;
+			flex: 0 0 50%;
+			width: 50%;
+		}
+
+		&-step-1 {
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding-right: 20px;
+			position: relative;
+
+			&:after {
+				position: absolute;
+				content: '';
+				width: 1px;
+				top: 0;
+				right: 0;
+				height: 100%;
+				background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
+			}
+		}
+
+		&-step-2 {
+			flex-direction: column;
+			background: $color-white;
+			justify-content: center;
+			padding-left: 20px;
+
+			&-content {
+				width: 100%;
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: nowrap;
+			}
+
+			&-field {
+				flex-grow: 1;
+			}
+
+			&-button.button-group {
+				display: flex;
+				align-items: flex-end;
+				margin-top: auto;
+			}
+
+			&-notice {
+				font-size: 12px;
+				font-weight: bold;
+			}
+
+			.select-group {
+				display: block;
+			}
+
+			.select-group__errormessage {
+				padding: 8px 0;
+				height: auto;
+			}
+
+			.select-group__option {
+				height: auto;
+				padding: 8px 0 0 25px;
+			}
+
+			.select-group__state {
+				white-space: normal;
+				text-align: left;
+				line-height: 1.5;
+
+				&:before {
+					top: 8px;
+					margin-top: 0;
+				}
+			}
+		}
+
+		&-step-label {
+			position: relative;
+			display: block;
+			padding: 0;
+			height: 16px;
+			line-height: 16px;
+			margin: 10px 0;
+			text-align: left;
+		}
+	}
+}

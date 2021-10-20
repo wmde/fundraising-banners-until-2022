@@ -16,12 +16,6 @@ import { amountMessage, validateRequired } from '../../../../shared/components/u
 import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
 import { AddressType, Intervals, PaymentMethods } from '../../../../pad_english/components/ui/form/FormItemsBuilder';
 import classNames from 'classnames';
-import ChevronLeftIcon from '../ChevronLeftIcon';
-
-const formSteps = Object.freeze( {
-	ONE: Symbol( 'one' ),
-	TWO: Symbol( 'two' )
-} );
 
 export default function MultiStepDonationForm( props ) {
 	const Translations = useContext( TranslationContext );
@@ -32,7 +26,6 @@ export default function MultiStepDonationForm( props ) {
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const [ addressType, setAddressType, addressTypeValidity, setAddressTypeValidity ] = useAddressType( null );
-	const [ formStep, setFormStep ] = useState( formSteps.ONE );
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
@@ -43,29 +36,17 @@ export default function MultiStepDonationForm( props ) {
 		[ addressType, setUrl ]
 	);
 
-	const onSubmitStep1 = e => {
-		e.preventDefault();
+	const onSubmitForm = e => {
 		if ( [
 			[ intervalValidity, setIntervalValidity ],
 			[ amountValidity, setAmountValidity ],
-			[ paymentMethodValidity, setPaymentMethodValidity ]
-		].map( validateRequired ).every( isValid ) ) {
-			setFormStep( formSteps.TWO );
-		}
-	};
-
-	const onSubmitStep2 = e => {
-		if ( [
+			[ paymentMethodValidity, setPaymentMethodValidity ],
 			[ addressTypeValidity, setAddressTypeValidity ]
 		].map( validateRequired ).every( isValid ) ) {
 			props.onSubmit();
 			return;
 		}
 		e.preventDefault();
-	};
-
-	const onFormBack = () => {
-		setFormStep( formSteps.ONE );
 	};
 
 	const addDisabledPaymentMethod = paymentMethodToDisable => {
@@ -153,13 +134,12 @@ export default function MultiStepDonationForm( props ) {
 		return Translations[ 'submit-label-default' ];
 	};
 
-	return <div className={ classNames(
-		'form',
-		{ 'is-step-2': formStep === formSteps.TWO }
-	) }>
+	return <div className="form">
 		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
 
 			<div className="form-step-1">
+				<div className="form-step-label">{ Translations[ 'address-label-step-1' ] }</div>
+
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="select-interval"
@@ -173,7 +153,7 @@ export default function MultiStepDonationForm( props ) {
 					/>
 				</div>
 
-				<div className={ 'form-field-group' }>
+				<div className="form-field-group">
 					<SelectGroup
 						fieldname="select-amount"
 						selectionItems={props.formItems.amounts}
@@ -213,24 +193,12 @@ export default function MultiStepDonationForm( props ) {
 						<SmsBox/>
 					</SelectGroup>
 				</div>
-
-				<div className="submit-section button-group">
-					<button className="button-group__button" onClick={ onSubmitStep1 }>
-						<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
-					</button>
-				</div>
 			</div>
 
 			<div className="form-step-2">
 
-				<label className="form-step-2-label">
-					<a href="#" className="back" onClick={ onFormBack }>
-						<ChevronLeftIcon/> { Translations[ 'address-type-label' ] }
-					</a>
-					<div>
-						<span className="form-step-2-notice">{ getFormNotice() }</span>
-					</div>
-				</label>
+				<div className="form-step-label">{ Translations[ 'address-label-step-2' ] }</div>
+				<div className="form-step-2-notice">{ getFormNotice() }</div>
 
 				<div className="form-step-2-content">
 					<div className="form-step-2-field">
@@ -276,7 +244,7 @@ export default function MultiStepDonationForm( props ) {
 					</div>
 
 					<div className="submit-section button-group form-step-2-button">
-						<button className="button-group__button" onClick={ onSubmitStep2 }>
+						<button className="button-group__button" onClick={ onSubmitForm }>
 							<span className="button-group__label">{ getButtonText() }</span>
 						</button>
 					</div>

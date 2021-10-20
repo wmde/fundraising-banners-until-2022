@@ -6,17 +6,11 @@
 		margin: 0;
 
 		&__element {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: flex-end;
-
-			@media ( min-width: $breakpoint_l ) {
-				display: block;
-				margin: 0;
-				width: 100%; /* For IE11 */
-			}
+			display: block;
+			margin: 0;
+			width: 100%; /* For IE11 */
 		}
+
 		&-field-group {
 			display: block;
 			flex: 1 1 auto;

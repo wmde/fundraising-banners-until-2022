@@ -1,0 +1,23 @@
+.wmde-banner {
+	.footer {
+		&__usage {
+			padding: 0;
+			.footer__item {
+				position: relative;
+				float: right;
+				width: 50%;
+				padding: 10px 0;
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: -1px;
+					width: 1px;
+					background: $color-secondary-light;
+				}
+			}
+		}
+	}
+}
