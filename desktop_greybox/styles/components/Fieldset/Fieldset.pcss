@@ -1,0 +1,58 @@
+.wmde-c {
+	&-form-fieldset {
+		padding: $fieldset-padding;
+		margin: $fieldset-margin;
+		border: $fieldset-border;
+		background: $fieldset-background;
+
+		&.has-error {
+			border: $fieldset-error-border;
+			background: $fieldset-error-background;
+		}
+
+		&-title {
+			margin: $title-margin;
+			padding: $title-padding;
+			font-weight: $title-font-weight;
+		}
+
+		&-options {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		&-error {
+			color: $error-color;
+			font-weight: $error-font-weight;
+			font-size: $error-font-size;
+			text-align: $error-text-align;
+			padding: $error-padding;
+			margin: $error-margin;
+		}
+
+		&--interval {
+			.wmde-c-form-field {
+				flex: 0 0 $interval-form-item-width;
+				width: $interval-form-item-width;
+			}
+		}
+
+		&--amount {
+			.wmde-c-form-field {
+				flex: 0 0 $amount-form-item-width;
+				width: $amount-form-item-width;
+			}
+			.wmde-c-form-field--custom-amount {
+				flex: 0 0 $custom-amount-form-item-width;
+				width: $custom-amount-form-item-width;
+			}
+		}
+
+		&--payment-type {
+			.wmde-c-form-field {
+				flex: 0 0 $payment-type-form-item-width;
+				width: $payment-type-form-item-width;
+			}
+		}
+	}
+}

@@ -25,6 +25,19 @@ platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
 
+[desktop_greybox]
+campaign_tracking = "06-ba-211008"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_greybox.banners.ctrl]
+filename = "./desktop_greybox/banner.js"
+pagename = "B21_WMDE_Greybox"
+tracking = "org-06-211008-ctrl"
+
+
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob02-ba-210928"
@@ -158,9 +171,4 @@ tracking = "org-en01-211014-var"
 [english.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
-
-[english.test_matrix]
-platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
-resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
-
 

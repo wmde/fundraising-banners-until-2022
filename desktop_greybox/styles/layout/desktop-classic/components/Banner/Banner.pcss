@@ -1,0 +1,21 @@
+.wmde-banner {
+	position: relative;
+	z-index: 1000;
+
+	* {
+		box-sizing: border-box;
+	}
+}
+.wmde-l {
+	&-content {
+		padding: $banner-padding;
+		display: flex;
+	}
+
+	&-form {
+		display: flex;
+		flex-direction: column;
+		flex: 0 0 $banner-form-width;
+		width: $banner-form-width;
+	}
+}

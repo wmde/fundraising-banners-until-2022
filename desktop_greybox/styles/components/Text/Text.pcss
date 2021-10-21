@@ -1,0 +1,28 @@
+.wmde-c {
+	&-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		padding: $text-padding;
+		margin: $text-margin;
+		font-family: $text-font-family;
+		font-size: $text-font-size-xs;
+
+		@media ( min-width: $breakpoint-s ) {
+			font-size: $text-font-size-s;
+		}
+
+		@media ( min-width: $breakpoint-m ) {
+			font-size: $text-font-size-m;
+		}
+
+		@media ( min-width: $breakpoint-l ) {
+			font-size: $text-font-size-l;
+		}
+
+		@media ( min-width: $breakpoint-xl ) {
+			font-size: $text-font-size-xl;
+		}
+	}
+}
