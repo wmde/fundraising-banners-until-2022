@@ -7,15 +7,18 @@
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		min-width: calc( 100% + 0px );
-		max-width: calc( 100% + 0px );
-		transform: translate3d( 0px, 0px, 0px );
+		min-width: calc( 100% + 0 );
+		max-width: calc( 100% + 0 );
+		transform: translate3d( 0, 0, 0 );
+
+		transition: transform 500ms $banner-easing, opacity 300ms linear;
 	}
 	.form-step-1 {
 		justify-content: flex-end;
 	}
 
 	.form-step-2 {
+		opacity: 0;
 		justify-content: center;
 
 		&-content {
@@ -85,7 +88,13 @@
 	.is-step-2 {
 		.form-step-1,
 		.form-step-2 {
-			transform: translate3d( -$form-width, 0px, 0px );
+			transform: translate3d( -$form-width, 0, 0 );
+		}
+		.form-step-1 {
+			opacity: 0;
+		}
+		.form-step-2 {
+			opacity: 1;
 		}
 	}
 }
