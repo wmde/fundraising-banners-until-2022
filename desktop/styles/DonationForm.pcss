@@ -1,7 +1,6 @@
 .wmde-banner {
-	.form {
-		overflow: hidden;
-		align-items: center;
+	.banner__form {
+		align-items: stretch;
 		display: flex;
 		margin: 0;
 
@@ -11,12 +10,6 @@
 			width: 100%; /* For IE11 */
 		}
 
-		&-field-group {
-			display: block;
-			flex: 1 1 auto;
-			flex-wrap: nowrap;
-			padding: 6px 0 10px;
-		}
 		&__section-head {
 			position: relative;
 			visibility: hidden;
@@ -27,13 +20,22 @@
 			color: $color-black-light;
 			padding: 0;
 		}
+
+		.application-of-funds-link {
+			display: block;
+			color: $color-black;
+			text-align: center;
+			cursor: pointer;
+			font-size: 12px;
+			line-height: 40px;
+		}
 	}
 
 	.button-group {
 		display: block;
 		width: 100%;
 		padding: 0;
-		margin: 0;
+		margin: auto 0 0;
 		border: 0;
 		flex-wrap: wrap;
 		flex-direction: row;

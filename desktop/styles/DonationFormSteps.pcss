@@ -1,95 +1,91 @@
 .wmde-banner {
-	.form {
-		&-step-1 {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: flex-end;
-		}
+	.banner__form {
+		overflow: hidden;
+	}
+	.form-step-1,
+	.form-step-2 {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		min-width: calc( 100% + 0px );
+		max-width: calc( 100% + 0px );
+		transform: translate3d( 0px, 0px, 0px );
+	}
+	.form-step-1 {
+		justify-content: flex-end;
+	}
 
-		&-step-2 {
-			display: none;
-			flex-direction: column;
-			background: $color-white;
-			justify-content: center;
+	.form-step-2 {
+		justify-content: center;
+
+		&-content {
 			width: 100%;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
 
-			&-content {
-				width: 100%;
-				flex-grow: 1;
-				display: flex;
-				flex-direction: column;
-				flex-wrap: nowrap;
+		&-field {
+			flex-grow: 1;
+		}
+
+		&-notice {
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.select-group__errormessage {
+			padding: 8px 0;
+			height: auto;
+		}
+
+		.select-group__option {
+			height: auto;
+			padding: 8px 0 0 25px;
+		}
+
+		.select-group__state {
+			white-space: normal;
+			text-align: left;
+			line-height: 1.5;
+
+			&:before {
+				top: 8px;
+				margin-top: 0;
 			}
+		}
+	}
+	.form-step-label {
+		flex: 0 0 100%;
+		width: 100%;
+		display: block;
+		padding: 0;
+		height: 16px;
+		line-height: 16px;
+		margin: 10px 0;
+		text-align: left;
 
-			&-field {
-				flex-grow: 1;
-			}
+		a {
+			color: $color-black;
+			text-decoration: none;
 
-			&-button.button-group {
-				display: flex;
-				align-items: flex-end;
-				margin-top: auto;
-			}
-
-			&-label {
-				position: relative;
-				display: block;
-				padding: 0;
-				height: 16px;
-				line-height: 16px;
-
-				a {
-					color: $color-black;
-					text-decoration: none;
-
-					&:hover,
-					&:focus {
-						color: $color-primary;
-					}
-				}
-
-				svg {
-					float: left;
-					margin-right: 6px;
-				}
-			}
-
-			&-notice {
-				font-size: 12px;
-				font-weight: normal;
-			}
-
-			.select-group__errormessage {
-				padding: 8px 0;
-				height: auto;
-			}
-
-			.select-group__option {
-				height: auto;
-				padding: 8px 0 0 25px;
-			}
-
-			.select-group__state {
-				white-space: normal;
-				text-align: left;
-				line-height: 1.5;
-
-				&:before {
-					top: 8px;
-					margin-top: 0;
-				}
+			&:hover,
+			&:focus {
+				color: $color-black;
+				text-decoration: underline;
 			}
 		}
 
-		&.is-step-2 {
-			.form-step-1 {
-				display: none;
-			}
-
-			.form-step-2 {
-				display: flex;
-			}
+		svg {
+			float: left;
+			margin-right: 6px;
+		}
+	}
+	.is-step-2 {
+		.form-step-1,
+		.form-step-2 {
+			transform: translate3d( -$form-width, 0px, 0px );
 		}
 	}
 }

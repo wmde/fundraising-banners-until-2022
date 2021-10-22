@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../../shared/components/BannerTransition';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
-import Footer from '../../shared/components/ui/EasySelectFooter';
 import Slider from './Slider';
 import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
@@ -14,6 +13,7 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import { BannerType } from '../BannerType';
+import Bank from './Bank';
 
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
@@ -179,24 +179,23 @@ export default class Banner extends Component {
 										next={ <ChevronRightIcon/> }
 									/>
 								</div>
+								<Bank/>
 							</div>
-							<div className="banner__form">
-								<DonationForm
-									formItems={props.formItems}
-									bannerName={props.bannerName}
-									campaignName={props.campaignName}
-									formatters={props.formatters}
-									impressionCounts={props.impressionCounts}
-									onFormInteraction={this.onFormInteraction}
-									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-									onSubmit={ this.onSubmit }
-								/>
-							</div>
+							<DonationForm
+								formItems={props.formItems}
+								bannerName={props.bannerName}
+								campaignName={props.campaignName}
+								formatters={props.formatters}
+								impressionCounts={props.impressionCounts}
+								onFormInteraction={this.onFormInteraction}
+								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+								onSubmit={ this.onSubmit }
+								showFundsModal={ this.toggleFundsModal }
+							/>
 						</div>
 						<div className="close">
 							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
 						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
 						<ProgressBar
 							formatters={props.formatters}
 							daysLeft={campaignProjection.getRemainingDays()}

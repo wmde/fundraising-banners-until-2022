@@ -153,143 +153,133 @@ export default function MultiStepDonationForm( props ) {
 		return Translations[ 'submit-label-default' ];
 	};
 
-	return <div className={ classNames(
-		'form',
+	return <form method="post" name="donationForm" className={ classNames(
+		'banner__form',
 		{ 'is-step-2': formStep === formSteps.TWO }
-	) }>
-		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
+	) } onClick={ onFormInteraction } action={ formAction }>
 
-			<div className="form-step-1">
-				<div className="form-field-group">
-					<SelectGroup
-						fieldname="select-interval"
-						selectionItems={ props.formItems.intervals }
-						isValid={ isValidOrUnset( intervalValidity ) }
-						errorMessage={ Translations[ 'no-interval-message' ] }
-						currentValue={ paymentInterval }
-						onSelected={ onChangeInterval }
-						disabledOptions={ disabledIntervals }
-						errorPosition={ props.errorPosition }
-					/>
-				</div>
-
-				<div className={ 'form-field-group' }>
-					<SelectGroup
-						fieldname="select-amount"
-						selectionItems={props.formItems.amounts}
-						isValid={ isValidOrUnset( amountValidity ) }
-						errorMessage={ amountMessage( amountValidity, Translations ) }
-						currentValue={ selectedAmount }
-						onSelected={ e => selectAmount( e.target.value ) }
-						disabledOptions={ [] }
-						errorPosition={ props.errorPosition }
-					>
-						<SelectCustomAmount
-							fieldname="select-amount"
-							value={ customAmount }
-							selectedAmount={ selectedAmount }
-							onInput={ e => updateCustomAmount( e.target.value ) }
-							onBlur={ e => validateCustomAmount( e.target.value ) }
-							placeholder={ props.customAmountPlaceholder }
-							language={
-								/* eslint-disable-next-line dot-notation */
-								Translations[ 'LANGUAGE' ]
-							}
-						/>
-					</SelectGroup>
-				</div>
-
-				<div className="form-field-group">
-					<SelectGroup
-						fieldname="select-payment-method"
-						selectionItems={ props.formItems.paymentMethods }
-						isValid={ isValidOrUnset( paymentMethodValidity )}
-						errorMessage={ Translations[ 'no-payment-type-message' ] }
-						currentValue={ paymentMethod }
-						onSelected={ onChangePaymentMethod }
-						disabledOptions={ disabledPaymentMethods }
-						errorPosition={ props.errorPosition }
-					>
-						<SmsBox/>
-					</SelectGroup>
-				</div>
-
-				<div className="submit-section button-group">
-					<button className="button-group__button" onClick={ onSubmitStep1 }>
-						<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
-					</button>
-				</div>
-			</div>
-
-			<div className="form-step-2">
-
-				<label className="form-step-2-label">
-					<a href="#" className="back" onClick={ onFormBack }>
-						<ChevronLeftIcon/> { Translations[ 'address-type-label' ] }
-					</a>
-					<div>
-						<span className="form-step-2-notice">{ getFormNotice() }</span>
-					</div>
-				</label>
-
-				<div className="form-step-2-content">
-					<div className="form-step-2-field">
-
-						<div className="form-field-group">
-							<div
-								className={ classNames(
-									'select-group-container--address-option',
-									'select-group-container',
-									{ 'select-group-container--with-error': !isValidOrUnset( addressTypeValidity ) }
-								) }>
-
-								<div className="select-group">
-									{ props.formItems.addressType.map( ( { value, label, notice } ) => (
-										<label key={ value } className={ classNames(
-											'select-group__option',
-											{ 'select-group__disabled': disabledAddressTypes.indexOf( value ) > -1 }
-										) }>
-											<input
-												type="radio"
-												onClick={ onChangeAddressType }
-												checked={ value === addressType }
-												name="address-option"
-												value={ value }
-												disabled={ disabledAddressTypes.indexOf( value ) > -1 }
-												className="select-group__input"/>
-											<span className="select-group__state">
-												{ label || value }
-												{ notice ? <span className="select-group__notice"><br/>({ notice })</span> : null }
-											</span>
-										</label>
-									) ) }
-								</div>
-
-								<span className="select-group__errormessage">
-									<span className="select-group__erroricon">
-										{ Translations[ 'address-type-error-message' ] }
-									</span>
-								</span>
-
-							</div>
-						</div>
-					</div>
-
-					<div className="submit-section button-group form-step-2-button">
-						<button className="button-group__button" onClick={ onSubmitStep2 }>
-							<span className="button-group__label">{ getButtonText() }</span>
-						</button>
-					</div>
-				</div>
-
-			</div>
-
-			<SubmitValues
-				addressType={ addressType }
-				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
-				interval={ paymentInterval }
-				paymentType={ paymentMethod }
+		<div className="form-step-1">
+			<SelectGroup
+				fieldname="select-interval"
+				selectionItems={ props.formItems.intervals }
+				isValid={ isValidOrUnset( intervalValidity ) }
+				errorMessage={ Translations[ 'no-interval-message' ] }
+				currentValue={ paymentInterval }
+				onSelected={ onChangeInterval }
+				disabledOptions={ disabledIntervals }
+				errorPosition={ props.errorPosition }
 			/>
-		</form>
-	</div>;
+
+			<SelectGroup
+				fieldname="select-amount"
+				selectionItems={props.formItems.amounts}
+				isValid={ isValidOrUnset( amountValidity ) }
+				errorMessage={ amountMessage( amountValidity, Translations ) }
+				currentValue={ selectedAmount }
+				onSelected={ e => selectAmount( e.target.value ) }
+				disabledOptions={ [] }
+				errorPosition={ props.errorPosition }
+			>
+				<SelectCustomAmount
+					fieldname="select-amount"
+					value={ customAmount }
+					selectedAmount={ selectedAmount }
+					onInput={ e => updateCustomAmount( e.target.value ) }
+					onBlur={ e => validateCustomAmount( e.target.value ) }
+					placeholder={ props.customAmountPlaceholder }
+					language={
+						/* eslint-disable-next-line dot-notation */
+						Translations[ 'LANGUAGE' ]
+					}
+				/>
+			</SelectGroup>
+
+			<SelectGroup
+				fieldname="select-payment-method"
+				selectionItems={ props.formItems.paymentMethods }
+				isValid={ isValidOrUnset( paymentMethodValidity )}
+				errorMessage={ Translations[ 'no-payment-type-message' ] }
+				currentValue={ paymentMethod }
+				onSelected={ onChangePaymentMethod }
+				disabledOptions={ disabledPaymentMethods }
+				errorPosition={ props.errorPosition }
+			>
+				<SmsBox/>
+			</SelectGroup>
+
+			<div className="submit-section button-group">
+				<button className="button-group__button" onClick={ onSubmitStep1 }>
+					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+				</button>
+				<a className="application-of-funds-link" onClick={ props.showFundsModal }>
+					{ Translations[ 'use-of-funds-link' ] }
+				</a>
+			</div>
+		</div>
+
+		<div className="form-step-2">
+
+			<div className="form-step-label">
+				<a href="#" className="back" onClick={ onFormBack }>
+					<ChevronLeftIcon/> { Translations[ 'address-type-label' ] }
+				</a>
+			</div>
+			<div className="form-step-2-notice">{ getFormNotice() }</div>
+
+			<div className="form-step-2-content">
+				<div className={ classNames(
+					'select-group-container--address-option',
+					'select-group-container',
+					{ 'select-group-container--with-error': !isValidOrUnset( addressTypeValidity ) }
+				) }>
+
+					<div className="select-group">
+						{ props.formItems.addressType.map( ( { value, label, notice } ) => (
+							<label key={ value } className={ classNames(
+								'select-group__option',
+								{ 'select-group__disabled': disabledAddressTypes.indexOf( value ) > -1 }
+							) }>
+								<input
+									type="radio"
+									onClick={ onChangeAddressType }
+									checked={ value === addressType }
+									name="address-option"
+									value={ value }
+									disabled={ disabledAddressTypes.indexOf( value ) > -1 }
+									className="select-group__input"/>
+								<span className="select-group__state">
+									{ label || value }
+									{ notice ? <span className="select-group__notice"><br/>({ notice })</span> : null }
+								</span>
+							</label>
+						) ) }
+					</div>
+
+					<span className="select-group__errormessage">
+						<span className="select-group__erroricon">
+							{ Translations[ 'address-type-error-message' ] }
+						</span>
+					</span>
+
+				</div>
+
+				<div className="submit-section button-group form-step-2-button">
+					<button className="button-group__button" onClick={ onSubmitStep2 }>
+						<span className="button-group__label">{ getButtonText() }</span>
+					</button>
+					<a className="application-of-funds-link" onClick={ props.showFundsModal }>
+						{ Translations[ 'use-of-funds-link' ] }
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<SubmitValues
+			addressType={ addressType }
+			amount={ props.formatters.amountForServerFormatter( numericAmount ) }
+			interval={ paymentInterval }
+			paymentType={ paymentMethod }
+		/>
+	</form>;
 }
