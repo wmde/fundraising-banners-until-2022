@@ -12,8 +12,10 @@ export default function useFormAction( { bannerName, campaignName, impressionCou
 	const initialQuery = {
 		piwik_kwd: bannerName,
 		piwik_campaign: campaignName,
-		impCount: impressionCounts.overallCount,
-		bImpCount: impressionCounts.bannerCount,
+		// FIXME: impressionCounts is not a reactive property this variable doesn't get
+		//        incremented when the banner presenter updates it, we need to figure that out
+		impCount: impressionCounts.overallCount + 1,
+		bImpCount: impressionCounts.bannerCount + 1,
 		...extraProps
 	};
 
