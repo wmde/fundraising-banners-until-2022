@@ -52,7 +52,6 @@ export default class Banner extends Component {
 	}
 
 	componentDidMount() {
-
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
@@ -140,8 +139,8 @@ export default class Banner extends Component {
 		this.setState( { showLanguageWarning: false, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
 
-	onSlideChange = () => {
-		this.slideState.onSlideChange();
+	onSlideChange = ( index ) => {
+		this.slideState.onSlideChange( index );
 	}
 
 	// eslint-disable-next-line no-unused-vars
