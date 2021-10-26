@@ -43,5 +43,7 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL
-	}
+	},
+	null,
+	880
 );
