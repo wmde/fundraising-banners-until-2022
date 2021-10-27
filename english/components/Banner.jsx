@@ -10,15 +10,11 @@ import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/Funds
 import TranslationContext from '../../shared/components/TranslationContext';
 import { CampaignProjection } from '../../shared/campaign_projection';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { BannerType } from '../../shared/BannerType';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
-
-export const BannerType = Object.freeze( {
-	CTRL: Symbol( 'ctrl ' ),
-	VAR: Symbol( 'var' )
-} );
 
 export default class Banner extends Component {
 
