@@ -1,12 +1,12 @@
 import { Component, h, createRef } from 'preact';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/components/TranslationContext';
 import classNames from 'classnames';
-import Infobox from '../../shared/components/ui/Infobox';
-import ProgressBar from '../../shared/components/ui/ProgressBar';
-import DonationForm from '../../shared/components/ui/form/DonationForm';
-import Footer from '../../shared/components/ui/Footer';
-import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import Infobox from '../../../shared/components/ui/Infobox';
+import ProgressBar from '../../../shared/components/ui/ProgressBar';
+import DonationForm from '../../../shared/components/ui/form/DonationForm';
+import Footer from '../../../shared/components/ui/Footer';
+import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;
@@ -79,6 +79,11 @@ export default class Banner extends Component {
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
+	fundsModalDonate = () => {
+		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: false } );
+	};
+
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
@@ -123,7 +128,7 @@ export default class Banner extends Component {
 							impressionCounts={ props.impressionCounts }
 							onFormInteraction={ this.onFormInteraction }
 							customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-							onSubmit={ () => {} }
+							onSubmit={ props.onSubmit }
 						/>
 					</div>
 					<div className="close">
@@ -135,6 +140,7 @@ export default class Banner extends Component {
 			</TranslationContext.Provider>
 			<FundsModal
 				toggleFundsModal={ this.toggleFundsModal }
+				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
