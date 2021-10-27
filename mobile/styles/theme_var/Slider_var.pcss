@@ -16,9 +16,13 @@
 		align-items: center;
 		justify-content: center;
 		flex-wrap: wrap;
-		padding: 0 76px 0 76px;
+		padding: 6px 20px 0 20px;
 		cursor: grab;
 		font-size: 18px;
+
+		@media ( min-width: $breakpoint_phone_m ) {
+			padding: 0 76px 0 76px;
+		}
 
 		&-first {
 			text-align: center;
@@ -45,6 +49,7 @@
 	.slider-navigation-previous,
 	.slider-navigation-next {
 		position: absolute;
+		display: none;
 		z-index: 30;
 		width: 52px;
 		height: 52px;
@@ -56,6 +61,10 @@
 		border-radius: 50%;
 		text-align: center;
 		padding: 5px 0 0;
+
+		@media ( min-width: $breakpoint_phone_m ) {
+			display: block;
+		}
 	}
 
 	.slider-navigation-previous {
