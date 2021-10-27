@@ -18,7 +18,7 @@ export const AmountToShowOnRight = Object.freeze( {
  *
  * @type {boolean}
  */
-const IS_LATE_PROGRESS = true;
+const IS_LATE_PROGRESS = false;
 
 export default class ProgressBar extends Component {
 	static propTypes = {
