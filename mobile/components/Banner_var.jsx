@@ -4,13 +4,14 @@ import { Slider } from '../../shared/banner_slider_keen';
 import debounce from '../../shared/debounce';
 
 import BannerTransition from '../../shared/components/BannerTransition';
-import MiniBanner from './MiniBanner';
+import MiniBanner from './MiniBanner_var';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 import { BannerType } from '../../shared/BannerType';
+import MinimisedBanner from './MinimisedBanner';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -31,6 +32,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			isMinimised: this.props.minimisedPersistence.isMinimised(),
 			isFullPageVisible: false,
 			isFundsModalVisible: false
 		};
@@ -55,10 +57,19 @@ export default class Banner extends Component {
 			}
 		);
 
-		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
+		this.props.registerResizeBanner( debounce( this.setContentSize.bind( this ), 200 ) );
 	}
 
-	onPageResize() {
+	trackBannerEvent( eventName ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			eventName,
+			this.bannerSlider.getViewedSlides(),
+			this.bannerSlider.getCurrentSlide(),
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	setContentSize() {
 		if ( this.state.displayState !== VISIBLE ) {
 			return;
 		}
@@ -73,14 +84,22 @@ export default class Banner extends Component {
 		}
 	}
 
+	minimiseBanner = e => {
+		e.preventDefault();
+		this.setState( { isMinimised: true }, this.setContentSize );
+		this.trackBannerEvent( 'minimised-' + this.props.bannerName );
+		this.props.minimisedPersistence.setMinimised();
+	}
+
+	maximiseBannerToForm = e => {
+		e.preventDefault();
+		this.trackBannerEvent( 'maximised-' + this.props.bannerName );
+		this.showFullPageBanner();
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent(
-			'mobile-mini-banner-expanded',
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
-			this.props.trackingData.bannerClickTrackRatio
-		);
+		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.bannerSlider.disableAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
@@ -91,7 +110,7 @@ export default class Banner extends Component {
 		e.preventDefault();
 		const currentlyVisible = this.state.isFundsModalVisible;
 		if ( !currentlyVisible ) {
-			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+			this.trackBannerEvent( 'application-of-funds-shown' );
 		}
 		this.setState( { isFundsModalVisible: !currentlyVisible } );
 		if ( currentlyVisible ) {
@@ -129,6 +148,7 @@ export default class Banner extends Component {
 			this.bannerSlider.getViewedSlides(),
 			this.bannerSlider.getCurrentSlide()
 		);
+		this.props.minimisedPersistence.removeMinimised();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -169,13 +189,18 @@ export default class Banner extends Component {
 					ref={this.miniBannerTransitionRef}
 					transitionSpeed={ 1000 }
 				>
-					<MiniBanner
+					{ state.isMinimised && ( <MinimisedBanner
+						maximiseBannerToForm={ this.maximiseBannerToForm }
+						closeBanner={ this.closeBanner }
+					/> ) }
+					{ !state.isMinimised && ( <MiniBanner
 						{ ...props }
 						onClose={ this.closeBanner }
+						onMinimise={ this.minimiseBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBanner }/>
-
+						onExpandFullpage={ this.showFullPageBanner }
+					/> ) }
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
