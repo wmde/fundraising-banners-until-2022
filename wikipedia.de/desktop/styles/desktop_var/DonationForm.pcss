@@ -1,0 +1,199 @@
+.wmde-banner {
+	.form__section {
+		position: relative;
+		padding: 0 0 0 120px;
+		margin: 0;
+		border: 0;
+		color: $color-gray-dark;
+		&-head {
+			position: absolute;
+			padding: 5px 0 0;
+			top: 0;
+			left: 0;
+			width: 110px;
+			text-align: right;
+			font-size: 15px;
+			font-weight: bold;
+		}
+	}
+
+	.select-group {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0 -4px 8px;
+
+		&__errormessage {
+			display: none;
+			color: $color-warning;
+			font-size: 14px;
+			text-align: center;
+			margin-top: -14px;
+			margin-bottom: 14px;
+		}
+
+		&-container--with-error .select-group__errormessage {
+			display: block;
+		}
+
+		&__state,
+		&__custom-input {
+			display: block;
+			float: left;
+			height: 35px;
+			line-height: 29px;
+			width: 100%;
+			font-size: 15px;
+			background: $color-white;
+			border: 3px solid $color-gray-medium;
+			color: $color-gray-dark;
+			border-radius: 10px;
+			text-align: center;
+			transition: background 200ms $banner-easing, border-color 200ms $banner-easing, color 200ms $banner-easing;
+		}
+
+		&__custom-input {
+			position: relative;
+			&--input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: inline-block;
+				color: $color-gray-dark;
+				background-color: transparent;
+				outline: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0 1em;
+				font-size: 15px;
+				border: 0 none;
+				text-align: center;
+			}
+
+			&--euro-symbol,
+			&--edit-icon {
+				position: absolute;
+				display: block;
+				height: 100%;
+				width: 20px;
+				line-height: 27px;
+				right: 0;
+				top: 0;
+				text-align: center;
+			}
+
+			&--edit-icon {
+				padding-top: 4px;
+				padding-right: 4px;
+			}
+
+			&--value-entered,
+			&--focused {
+				background: $color-secondary;
+				border-color: $color-primary;
+				color: $color-black;
+
+				.select-group__custom-input--input {
+					border: 0 none;
+					outline: 0 none;
+					border-radius: 0;
+				}
+			}
+		}
+
+		&__option {
+			width: 50%;
+			padding: 0 4px 8px;
+			cursor: pointer;
+
+			&:hover,
+			&:focus {
+				.select-group__state,
+				.select-group__custom-input {
+					background: $color-gray-light;
+					border-color: $color-gray;
+				}
+
+				.select-group__custom-input--value-entered,
+				.select-group__custom-input--focused {
+					background: $color-secondary;
+					border-color: $color-primary;
+					color: $color-black;
+				}
+			}
+		}
+
+		&__input {
+			display: none;
+
+			&:checked + .select-group__state {
+				background: $color-secondary;
+				border-color: $color-primary;
+				color: $color-black;
+			}
+		}
+	}
+
+	.select-group-container--select-amount {
+		.select-group__option {
+			width: 25%;
+
+			&--amount-other-input {
+				width: 50%;
+			}
+		}
+	}
+
+	.select-group-container--select-payment-method {
+		.direct-debit,
+		.bank-transfer,
+		.credit-card,
+		.paypal {
+			position: relative;
+			display: inline-block;
+			vertical-align: bottom;
+			height: 29px;
+			&:before {
+				position: absolute;
+				top: 2px;
+				left: 0;
+				height: 22px;
+			}
+		}
+
+		.direct-debit {
+			width: 26px;
+			&:before {
+				content: $icon-direct-debit;
+				width: 23px;
+			}
+		}
+		.bank-transfer {
+			width: 28px;
+			&:before {
+				content: $icon-bank-transfer;
+				top: 3px;
+				width: 28px;
+			}
+		}
+		.credit-card {
+			width: 30px;
+			&:before {
+				content: $icon-credit-card;
+				width: 26px;
+			}
+		}
+		.paypal {
+			width: 19px;
+			&:before {
+				content: $icon-paypal;
+				top: 3px;
+				width: 15px;
+			}
+		}
+	}
+
+	.sms-box {
+		display: none;
+	}
+}
