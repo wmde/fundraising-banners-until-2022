@@ -6,7 +6,8 @@ import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import Banner, { BannerType } from './components/Banner';
+import Banner from './components/Banner';
+import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import BannerText from './components/BannerText';

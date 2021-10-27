@@ -8,15 +8,11 @@ import Footer from '../../../shared/components/ui/Footer';
 import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import PropTypes from 'prop-types';
+import { BannerType } from '../../../shared/BannerType';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
-
-export const BannerType = Object.freeze( {
-	CTRL: Symbol( 'ctrl ' ),
-	VAR: Symbol( 'var' )
-} );
 
 export default class Banner extends Component {
 
