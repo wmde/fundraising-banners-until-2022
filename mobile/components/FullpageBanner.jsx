@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import classNames from 'classnames';
 
 import Infobox from '../../shared/components/ui/Infobox';
+import CloseIcon from './ui/CloseIcon';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
@@ -10,7 +11,7 @@ export default class FullpageBanner extends Component {
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
 
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
-			<div className="fullpage-banner__close" onClick={ props.onClose }/>
+			<button className="fullpage-banner__close" onClick={ props.onClose }><CloseIcon/></button>
 			<div className="fullpage-banner__info">
 				<div className="fullpage-banner__heading">
 					Jetzt spenden
