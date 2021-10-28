@@ -1,20 +1,29 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../shared/components/BannerTransition';
-import ProgressBar from '../shared/components/ui/ProgressBar';
-import Footer from '../shared/components/ui/EasySelectFooter';
-import Infobox from '../shared/components/ui/Infobox';
-import TranslationContext from '../shared/components/TranslationContext';
-import { LocalImpressionCount } from '../shared/local_impression_count';
-import { CampaignProjection } from '../shared/campaign_projection';
-import FundsDistributionInfo from '../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../shared/components/ui/use_of_funds/FundsModal';
-import { BannerType } from './BannerType';
+import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Footer from '../../shared/components/ui/EasySelectFooter';
+import TranslationContext from '../../shared/components/TranslationContext';
+import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { CampaignProjection } from '../../shared/campaign_projection';
+import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
+import Slider from '../../shared/components/Slider';
+import { BannerType } from '../../shared/BannerType';
+import createDynamicCampaignText from '../create_dynamic_campaign_text';
+import Slides from './Slides';
+import ChevronLeftIcon from './ui/ChevronLeftIcon';
+import ChevronRightIcon from './ui/ChevronRightIcon';
+import SlideState from '../../shared/slide_state';
+import debounce from '../../shared/debounce';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
+
+const SLIDESHOW_START_DELAY = 2000;
+const SLIDESHOW_SLIDE_INTERVAL = 10000;
 
 export default class Banner extends Component {
 
@@ -56,6 +65,16 @@ export default class Banner extends Component {
 			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
+		this.dynamicCampaignText = createDynamicCampaignText(
+			props.campaignParameters,
+			props.campaignProjection,
+			props.impressionCounts,
+			props.formatters,
+			props.translations
+		);
 	}
 
 	componentDidMount() {
@@ -65,10 +84,19 @@ export default class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
-		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
 	}
 
-	adjustSurroundingSpace() {
+	trackBannerEvent( eventName, trackRatio ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			eventName,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			trackRatio ?? this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	onPageResize() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
@@ -76,19 +104,24 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	componentDidUpdate( previousProps, previousState, snapshot ) {
 		if ( previousState.formInteractionSwitcher !== this.state.formInteractionSwitcher ) {
-			this.adjustSurroundingSpace();
+			this.onPageResize();
 		}
 	}
 
 	onFinishedTransitioning = () => {
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
+		this.onPageResize();
 	}
 
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
-		this.props.onClose();
+		this.props.onClose(
+			this.slideState.slidesShown,
+			this.slideState.currentSlide
+		);
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -99,15 +132,30 @@ export default class Banner extends Component {
 		this.startProgressbar = startPb;
 	};
 
+	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
+		this.startSliderAutoplay = onStartAutoplay;
+		this.stopSliderAutoplay = onStopAutoplay;
+	};
+
 	toggleFundsModal = () => {
 		if ( !this.state.isFundsModalVisible ) {
-			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+			this.trackBannerEvent( 'application-of-funds-shown' );
 		}
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
 	};
 
+	fundsModalDonate = () => {
+		this.trackBannerEvent( 'funds-modal-donate-clicked' );
+		this.setState( { isFundsModalVisible: false } );
+	};
+
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+		this.stopSliderAutoplay();
+	}
+
+	onSlideChange = ( index ) => {
+		this.slideState.onSlideChange( index );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -136,18 +184,23 @@ export default class Banner extends Component {
 					<div className="banner__wrapper">
 						<div className="banner__content">
 							<div className="banner__infobox">
-								<Infobox
-									formatters={props.formatters}
-									campaignParameters={props.campaignParameters}
-									campaignProjection={props.campaignProjection}
-									bannerText={props.bannerText}/>
-								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
+								<div className="banner__slideshow">
+									<Slider
+										slides={ Slides( this.dynamicCampaignText ) }
+										onSlideChange={ this.onSlideChange }
+										registerAutoplay={ this.registerAutoplayCallbacks }
+										interval={ SLIDESHOW_SLIDE_INTERVAL }
+										previous={ <ChevronLeftIcon/> }
+										next={ <ChevronRightIcon/> }
+									/>
+									<ProgressBar
+										formatters={props.formatters}
+										daysLeft={campaignProjection.getRemainingDays()}
+										donationAmount={campaignProjection.getProjectedDonationSum()}
+										goalDonationSum={campaignProjection.goalDonationSum}
+										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+										setStartAnimation={this.registerStartProgressbar}/>
+								</div>
 							</div>
 							<DonationForm
 								formItems={props.formItems}
@@ -157,7 +210,7 @@ export default class Banner extends Component {
 								impressionCounts={props.impressionCounts}
 								onFormInteraction={this.onFormInteraction}
 								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-								onSubmit={props.onSubmit}
+								onSubmit={ props.onSubmit }
 							/>
 						</div>
 						<div className="close">
@@ -169,6 +222,7 @@ export default class Banner extends Component {
 			</BannerTransition>
 			<FundsModal
 				toggleFundsModal={ this.toggleFundsModal }
+				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
