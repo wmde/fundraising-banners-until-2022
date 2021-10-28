@@ -13,11 +13,10 @@ export default function Slides( dynamicCampaignText ) {
 			<p className="headline">
 				{ Icon } To all our readers in Germany,
 			</p>
-			<p>It might be a little awkward, but please don't scroll past
-				this. {campaignDaySentence} This {currentDayName}, for
-				the {getEnglishOrdinalSuffixOf( overallImpressionCount )} time
-				recently, we humbly ask you to defend Wikipedia's independence.
-			99% of our readers don't give; they simply look the other way.</p>
+			<p>This { currentDayName }, for the {getEnglishOrdinalSuffixOf(
+				overallImpressionCount )} time recently, we humbly ask you to
+				defend Wikipedia's independence. {campaignDaySentence} 99% of
+				our readers don't give; they simply look the other way.</p>
 		</div> },
 		{ content: <div>
 			<p>If you are an exceptional reader who has already donated, we
