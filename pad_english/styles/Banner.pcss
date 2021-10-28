@@ -24,35 +24,38 @@
 	.banner__content {
 		display: flex;
 		flex-direction: row;
+		padding: $banner-padding $banner-padding 0;
 	}
 
 	.banner__infobox {
 		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex: 0 1 auto;
+		flex: 1 1 auto;
 		border: 5px solid $color-primary;
 		border-radius: 9px;
 		background-color: $color-white-off;
-		padding: 0.25em 0.5em 0.25em 0;
+		padding: 0 0 80px;
 		position: relative;
-		margin: 0.2em 0 0.2em 0.2em;
+		margin-right: $banner-padding;
+		overflow-y: hidden;
 	}
 
 	.banner__footer {
 		order: 2;
-		padding: 0.5em 0 1em 10px;
+		padding: 10px $banner-padding;
 	}
 
 	.close {
 		position: absolute;
-		width: 18px;
-		margin: 0.3em 0.3em 0.25em 0;
+		width: $banner-padding;
+		height: $banner-padding;
+		line-height: $banner-padding;
+		text-align: center;
 		top: 0;
 		right: 0;
 		opacity: 0.8;
 
 		&__link {
+			display: block;
 			font-size: 27px;
 			color: $color-gray;
 			text-decoration: none;
