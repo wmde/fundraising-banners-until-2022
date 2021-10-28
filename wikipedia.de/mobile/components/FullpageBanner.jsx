@@ -19,7 +19,7 @@ export default class FullpageBanner extends Component {
 					campaignParameters={props.campaignParameters}
 					campaignProjection={props.campaignProjection}
 					bannerText={props.bannerText}
-					propsForText={ { registerStartHighlight: props.registerStartHighlight } }
+					propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount(), } }
 				/>
 				<ProgressBar
 					formatters={props.formatters}

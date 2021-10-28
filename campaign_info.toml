@@ -127,20 +127,20 @@ tracking = "wpde-01-211103-var"
 
 # Wikipedia.de Mobile Campaign
 [wikipediade_mobile]
-campaign_tracking = "wpde-mob01-201104"
+campaign_tracking = "wpde-mob01-211103"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade_mobile.banners.ctrl]
 filename = "./wikipedia.de/mobile/banner_ctrl.js"
-pagename = "B20WPDE_mob01-201104_ctrl"
-tracking = "wpde-mob01-201104-ctrl"
+pagename = "B21WPDE_mob01-211103_ctrl"
+tracking = "wpde-mob01-211103-ctrl"
 
 [wikipediade_mobile.banners.var]
 filename = "./wikipedia.de/mobile/banner_var.js"
-pagename = "B20WPDE_mob01-201104_var"
-tracking = "wpde-mob01-201104-var"
+pagename = "B21WPDE_mob01-211103_var"
+tracking = "wpde-mob01-211103-var"
 
 
 # English Campaign
