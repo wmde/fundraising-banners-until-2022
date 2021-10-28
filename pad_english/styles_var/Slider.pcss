@@ -1,10 +1,7 @@
 .wmde-banner {
-	.banner__slideshow {
-		width: 100%;
-	}
 	.keen-slider {
-		flex: 0 0 100%;
 		display: flex;
+		height: 100%;
 		width: 100%;
 		-webkit-user-select: none;
 		-moz-user-select: none;
@@ -29,9 +26,6 @@
 		min-height: 100%;
 		min-width: calc( 100% + 0px );
 		max-width: calc( 100% + 0px );
-		box-sizing: border-box;
-		padding: 10px 26px;
-		cursor: grab;
 	}
 
 	.keen-slider__slide-content {
@@ -41,13 +35,13 @@
 		justify-content: center;
 		align-items: center;
 		cursor: grab;
-		font-family: $banner-text-font-family;
+		font-family: $banner-serif;
 		font-size: 17px;
 		text-align: center;
-		padding: 0 26px;
+		padding: 16px 26px;
 
 		@media ( min-width: $breakpoint_m ) {
-			padding: 0 30px 0 30px;
+			padding: 36px 30px 30px 36px;
 		}
 
 		.headline {
@@ -76,21 +70,40 @@
 	.slider-navigation-next {
 		position: absolute;
 		z-index: 30;
-		height: 40px;
-		line-height: 40px;
-		width: 16px;
+		width: 52px;
+		height: 52px;
+		line-height: 52px;
 		top: 50%;
-		margin-top: -20px;
+		margin-top: -26px;
+		border: 0;
+		background: $color-white;
+		border-radius: 50%;
+		text-align: center;
+		padding: 5px 0 0;
 	}
 
 	.slider-navigation-previous {
-		left: 16px;
-		text-align: left;
+		left: -26px;
+		padding-right: 10px;
+		box-shadow: -3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: left 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			left: -30px;
+		}
 	}
 
 	.slider-navigation-next {
-		right: 16px;
-		text-align: right;
+		right: -26px;
+		padding-left: 10px;
+		box-shadow: 3px 0 3px rgba( 0, 0, 0, 0.1 );
+		transition: right 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			right: -30px;
+		}
 	}
 
 	.slideshow-application-of-funds-link {
@@ -107,7 +120,6 @@
 
 	.slider-container {
 		position: relative;
-		width: 100%;
 		padding-bottom: 28px;
 		@media ( min-width: $breakpoint_xs ) {
 			padding-bottom: 38px;
@@ -125,23 +137,23 @@
 		line-height: 1;
 
 		&-dot {
-			background: $color-gray-medium;
+			background: $color-white;
 			display: inline-block;
-			width: 15px;
-			height: 15px;
+			width: 10px;
+			height: 12px;
 			margin: 0 4px;
-			border: 4px solid $color-white;
+			border: 2px solid $color-gray;
 			border-radius: 50%;
 			cursor: pointer;
 			padding: 0;
 
-			&:focus {
-				outline: 0;
+			@media ( min-width: $breakpoint_xs ) {
+				width: 20px;
+				height: 20px;
 			}
 
 			&.is-active {
-				background: $color-white;
-				border: 3px solid $color-primary;
+				background: $color-gray;
 			}
 		}
 	}
