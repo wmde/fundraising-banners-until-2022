@@ -12,7 +12,7 @@ import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import Slider from '../../shared/components/Slider';
 import { BannerType } from '../../shared/BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import Slides from './Slides';
+import Slides from '../Slides';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
 import SlideState from '../../shared/slide_state';
@@ -118,10 +118,7 @@ export default class Banner extends Component {
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
-		this.props.onClose(
-			this.slideState.slidesShown,
-			this.slideState.currentSlide
-		);
+		this.props.onClose();
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -214,7 +211,7 @@ export default class Banner extends Component {
 							/>
 						</div>
 						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+							<a className="close__link" onClick={ this.closeBanner }>&#x2715;</a>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
