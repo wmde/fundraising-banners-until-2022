@@ -6,8 +6,8 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './BannerVar';
-import { BannerType } from './BannerType';
+import Banner from './components/Banner';
+import { BannerType } from '../shared/BannerType';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import BannerText from './components/BannerText';
