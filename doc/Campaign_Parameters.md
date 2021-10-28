@@ -45,7 +45,7 @@ creating the global variable `GlobalBannerSettings`.
 
 To use the development values, you need to temporarily change the import
 from `shared/campaign_parameters` to also include `DevCampaignParameters`
-and change the call to `createCampaignParameters()` to `createCampaignParameters(new
-[DevCampaignParameters()])`. The `.travis.yml` file checks for calls to
+and change the call to `createCampaignParameters()` to `createCampaignParameters
+( [ new DevCampaignParameters() ] )`. The `.travis.yml` file checks for calls to
 `createCampaignParameters` with arguments and throws an error when one of
 your committed files calls `createCampaignParameters` with an argument.
