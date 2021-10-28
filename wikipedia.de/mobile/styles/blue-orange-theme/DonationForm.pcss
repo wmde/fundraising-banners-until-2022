@@ -1,0 +1,55 @@
+.wmde-banner {
+	.form {
+		padding: 0 40px 20px;
+		position: relative;
+		height: 100%;
+	}
+
+	.form__section {
+		width: 100%;
+		zoom: 1;
+		margin: 0 auto;
+		padding: 0;
+		border: 0 none;
+		overflow: hidden;
+	}
+
+	.form__section-head {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 8px 0;
+		text-align: center;
+		font-size: 16px;
+
+		@media ( min-width: $breakpoint_tablet_portrait ) {
+			font-size: 18px;
+		}
+	}
+
+	.button-group__container {
+		display: block;
+		width: 100%;
+		margin-bottom: 6px;
+		padding: 3px 0;
+	}
+
+	.button-group__button {
+		box-sizing: border-box;
+		display: inline-block;
+		width: 100%;
+		background-color: $color-secondary;
+		color: $color-white;
+		border-radius: $form-element-border-radius;
+		border: 0;
+		padding: 24px 10px;
+		outline: 0;
+		text-align: center;
+		line-height: 1;
+		cursor: pointer;
+		font-family: inherit;
+		font-weight: 500;
+		font-size: 24px;
+		transition: background 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+	}
+}
