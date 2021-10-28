@@ -10,6 +10,7 @@ import Banner from './components/Banner';
 import { BannerType } from '../shared/BannerType';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
+import LocalTranslations from './translations';
 import BannerText from './components/BannerText';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
@@ -27,6 +28,7 @@ const bannerPresenter = new BannerPresenter(
 	bannerContainer.dataset.delay || 7500,
 	new LocalImpressionCount( trackingIds.bannerName )
 );
+const translations = { ...Translations, ...LocalTranslations };
 
 bannerPresenter.present(
 	Banner,
@@ -39,8 +41,8 @@ bannerPresenter.present(
 		useOfFundsText,
 		bannerText: BannerText,
 		donationForm: DonationForm,
-		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		translations: translations,
+		formItems: createFormItems( translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL
 	}
 );

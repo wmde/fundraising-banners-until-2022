@@ -35,7 +35,7 @@ export default function DonationForm( props ) {
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
-	const [ formAction, setUrl ] = useFormAction( props, { provadd: 1 } );
+	const [ formAction, setUrl ] = useFormAction( props, { locale: 'en_GB', ast: '1' } );
 
 	useEffect(
 		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),

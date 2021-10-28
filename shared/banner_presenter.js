@@ -65,13 +65,11 @@ export default class BannerPresenter {
 				...props,
 				trackingData: this.trackingData,
 				impressionCounts: this.impressionCounts,
-				onClose: ( slidesShown = 0, finalSlide = 0 ) => {
-					this.trackingData.tracker.trackBannerEventWithViewport(
+				onClose: () => {
+					this.trackingData.tracker.trackViewPortDimensions(
 						'banner-closed',
-						slidesShown,
-						finalSlide,
+						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 						this.trackingData.bannerCloseTrackRatio,
-						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight )
 					);
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
