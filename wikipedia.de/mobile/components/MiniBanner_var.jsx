@@ -51,6 +51,6 @@ MiniBanner.propTypes = {
 	formatters: PropTypes.object,
 	campaignProjection: PropTypes.any,
 	campaignParameters: PropTypes.object,
-	startAnimation: PropTypes.func,
+	setStartAnimation: PropTypes.func,
 	onExpandFullpage: PropTypes.func
 };

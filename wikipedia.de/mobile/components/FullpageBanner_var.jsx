@@ -2,9 +2,11 @@ import { h, Component } from 'preact';
 import classNames from 'classnames';
 
 import Infobox from '../../../shared/components/ui/Infobox';
+import ProgressBar from '../../../shared/components/ui/ProgressBar';
 
 export default class FullpageBanner extends Component {
 	render( props ) {
+		const campaignProjection = props.campaignProjection;
 		const DonationForm = props.donationForm;
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
 
@@ -21,6 +23,15 @@ export default class FullpageBanner extends Component {
 					campaignProjection={props.campaignProjection}
 					bannerText={props.bannerText}
 					propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
+				/>
+				<ProgressBar
+					formatters={props.formatters}
+					daysLeft={campaignProjection.getRemainingDays()}
+					donationAmount={campaignProjection.getProjectedDonationSum()}
+					goalDonationSum={campaignProjection.goalDonationSum}
+					missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+					setStartAnimation={props.setStartAnimation}
+					animate={true}
 				/>
 			</div>
 			<div className="call-to-action">
