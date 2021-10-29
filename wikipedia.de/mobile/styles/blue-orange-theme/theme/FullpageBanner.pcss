@@ -1,0 +1,48 @@
+.wmde-banner {
+	.fullpage-banner {
+		border: 2px solid $color-primary;
+		background: $color-white;
+
+		p {
+			padding-bottom: 16px;
+			line-height: 22.4px;
+		}
+
+		&__close {
+			height: 25px;
+			width: 25px;
+			background: $color-white $closeIcon;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		&__heading {
+			font-weight: bold;
+			font-size: 18px;
+			color: $color-black;
+			background: $color-white;
+		}
+
+		.call-to-action {
+			position: relative;
+			color: $color-white;
+			background: $color-primary;
+			font-weight: bold;
+
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: -4px;
+				left: 50%;
+				margin-left: -4px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 4px 4px 0 4px;
+				border-color: $color-primary transparent transparent transparent;
+			}
+		}
+	}
+}

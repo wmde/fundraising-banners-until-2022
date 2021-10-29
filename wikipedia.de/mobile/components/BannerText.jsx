@@ -1,9 +1,7 @@
 import { h } from 'preact';
-import TextHighlight from '../../../shared/components/ui/TextHighlight';
-import { capitalizeFirstLetter } from '../../../shared/capitalize_first_letter';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = props;
 	return <div className="banner-text">
 		<p className="text__headline">
 			An alle, die Wikipedia in Deutschland nutzen
