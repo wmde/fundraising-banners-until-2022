@@ -1,0 +1,35 @@
+.wmde-banner {
+	.fullpage-banner {
+		position: relative;
+
+		&__info {
+			padding: 16px;
+		}
+
+		&__close {
+			position: absolute;
+			top: 16px;
+			right: 16px;
+		}
+
+		&__heading {
+			height: 25px;
+			text-align: center;
+			margin-bottom: 16px;
+		}
+
+		.call-to-action {
+			height: 31px;
+			line-height: 31px;
+			text-align: center;
+
+			&__optional-text {
+				display: none;
+
+				@media ( min-width: $breakpoint_tablet_portrait ) {
+					display: inline;
+				}
+			}
+		}
+	}
+}
