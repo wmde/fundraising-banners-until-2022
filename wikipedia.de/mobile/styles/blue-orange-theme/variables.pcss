@@ -1,35 +1,29 @@
-$color-primary: #990a00;
-$color-primary-light: #dbb0ad;
-$color-primary-lighter: #f8f9fa; /* offwhite */
-$color-primary-darker: #6c0000;
-
-$color-secondary: #2a4b8d;
-$color-secondary-light: #d9d9d9;
-$color-secondary-dark: #7d8389;
-$color-error:  #990000;
+$color-primary: #386d94;
+$color-primary-light: #648196;
+$color-secondary: #da9000;
+$color-secondary-light: #caac72;
+$color-secondary-hover: #bd7d00;
+$color-error: #dd3333;
 
 $color-white: #ffffff;
 $color-black: #000000;
-$color-black-light: #222222;
-$color-gray: #808080;
-$color-gray-medium: #7d8389;
+$color-gray: #54595d;
+$color-gray-medium: #a2a9b1;
+$color-gray-light: #e5e5e5;
+$color-highlight: #faeeb2;
 
-$color-text-highlight: #ffff00;
+$banner-font-family: 'Lato', 'Arial', 'Helvetica', 'Verdana', sans-serif;
 
-$banner-main-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', 'Arial', sans-serif;
-$banner-symbol-close: '\00d7'; /* × */
-$banner-text-font-family: 'Source Serif', 'Linux Libertine', 'Linux Libertine O', 'Georgia', 'Bitstream Charter', serif;
+$banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+$banner-height-transition-time: 200ms;
 
-$form-element-border-radius: 2px;
+/* stylelint-disable-next-line string-quotes */
+$closeIcon: url( "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNSAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMi41IDEwLjIyNzZMMi4yNzI0MyAwTDAgMi4yNzI0NEwxMC4yMjc2IDEyLjVMMCAyMi43Mjc2TDIuMjcyNDMgMjVMMTIuNSAxNC43NzI0TDIyLjcyNzYgMjVMMjUgMjIuNzI3NkwxNC43NzI0IDEyLjVMMjUgMi4yNzI0M0wyMi43Mjc1IDBMMTIuNSAxMC4yMjc2WiIgZmlsbD0iIzcyNzc3RCIvPgo8L3N2Zz4K" );
 
-$errorIcon: url( "data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.3138 0H4.68622L0 4.68622V11.3138L4.68622 16H11.3138L16 11.3138V4.68622L11.3138 0ZM8.88889 12.4444H7.11111V10.6667H8.88889V12.4444ZM8.88889 8.88889H7.11111V3.55556H8.88889V8.88889Z' fill='%23812923'/%3E%3C/svg%3E%0A" );
-
-/*
-Always work 'mobile first':
-	do not use @media ( max-width: $breakpoint-x )
-	always use @media ( min-width: $breakpoint-x )
-*/
+$breakpoint_phone_s: 400px;
 $breakpoint_phone_m: 480px;
 $breakpoint_phone_l: 568px;
 $breakpoint_tablet_portrait: 768px;
 $breakpoint_tablet_landscape: 1024px;
+
+$form-radio-height: 60px;

@@ -10,7 +10,7 @@ import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
-import Banner, { BannerType } from './Banner';
+import Banner, { BannerType } from './Banner_var';
 import Slides from './components/Slides';
 import BannerText from './components/BannerText';
 import DonationForm from './components/ui/form/DonationFormWithHeaders_var';
@@ -30,6 +30,8 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
+const sliderHeading = 'Wieviel ist Ihnen Wikipedia wert?';
+
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -45,7 +47,8 @@ bannerPresenter.present(
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR
+		bannerType: BannerType.VAR,
+		sliderHeading: sliderHeading
 	},
 	0
 );
