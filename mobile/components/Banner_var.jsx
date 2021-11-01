@@ -50,6 +50,7 @@ export default class Banner extends Component {
 		this.dynamicCampaignText = createDynamicCampaignText(
 			props.campaignParameters,
 			props.campaignProjection,
+			props.impressionCounts,
 			props.formatters,
 			props.translations
 		);
@@ -63,6 +64,9 @@ export default class Banner extends Component {
 			() => {
 				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
+				if ( this.props.minimisedPersistence.isMinimised() ) {
+					this.trackBannerEventWithDimensions( 'restored-to-minimised' );
+				}
 			}
 		);
 
@@ -74,6 +78,14 @@ export default class Banner extends Component {
 			eventName,
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	trackBannerEventWithDimensions( eventName ) {
+		this.props.trackingData.tracker.trackViewPortDimensions(
+			eventName,
+			this.props.getBannerDimensions(),
 			this.props.trackingData.bannerClickTrackRatio
 		);
 	}
@@ -95,19 +107,23 @@ export default class Banner extends Component {
 	minimiseBanner = e => {
 		e.preventDefault();
 		this.setState( { isMinimised: true }, this.setContentSize );
-		this.trackBannerEvent( 'minimised-' + this.props.bannerName );
+		this.trackBannerEventWithDimensions( 'minimised' );
 		this.props.minimisedPersistence.setMinimised();
 	}
 
 	maximiseBannerToForm = e => {
 		e.preventDefault();
-		this.trackBannerEvent( 'maximised-' + this.props.bannerName );
+		this.trackBannerEventWithDimensions( 'maximised' );
 		this.showFullPageBanner();
+	}
+
+	showFullPageBannerFromMiniBanner = e => {
+		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
+		this.showFullPageBanner( e );
 	}
 
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
-		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.stopSliderAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
@@ -161,10 +177,7 @@ export default class Banner extends Component {
 			displayState: CLOSED,
 			isFullPageVisible: false
 		} );
-		this.props.onClose(
-			this.slideState.slidesShown,
-			this.slideState.currentSlide
-		);
+		this.props.onClose();
 		this.props.minimisedPersistence.removeMinimised();
 	};
 
@@ -175,9 +188,7 @@ export default class Banner extends Component {
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
-		if ( this.props.sliderAutoPlay !== false ) {
-			setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
-		}
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 		this.startProgressBarInMiniBanner();
@@ -214,7 +225,7 @@ export default class Banner extends Component {
 						onMinimise={ this.minimiseBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBanner }
+						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
