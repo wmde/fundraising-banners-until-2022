@@ -41,13 +41,13 @@ export default class BannerPresenter {
 		}.bind( this );
 	}
 
-	present( Banner, bannerContainer, props, sizeIssueThreshold ) {
+	present( Banner, bannerContainer, props, minimumHeight, minimumWidth = 0 ) {
 		const skinAdjuster = getSkinAdjuster();
 
-		if ( sizeIssueThreshold === undefined ) {
-			sizeIssueThreshold = skinAdjuster.getSizeIssueThreshold();
+		if ( !minimumHeight ) {
+			minimumHeight = skinAdjuster.getSizeIssueThreshold();
 		}
-		const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
+		const sizeIssueIndicator = new SizeIssueIndicator( minimumHeight, minimumWidth );
 
 		if ( onMediaWiki() &&
 			( !mediaWikiIsShowingContentPage() || mediaWikiMainContentIsHiddenByLightbox() ) ) {
@@ -106,7 +106,7 @@ export default class BannerPresenter {
 		this.trackingData.tracker.trackViewPortDimensions(
 			VIEWPORT_TRACKING_IDENTIFIER,
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-			this.trackingData.sizeTrackRatio
+			this.trackingData.viewportDimensionsTrackRatio
 		);
 
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
@@ -115,7 +115,7 @@ export default class BannerPresenter {
 			}
 			this.trackingData.tracker.trackSizeIssueEvent(
 				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-				this.trackingData.sizeTrackRatio
+				this.trackingData.sizeIssueTrackRatio
 			);
 			return;
 		}
