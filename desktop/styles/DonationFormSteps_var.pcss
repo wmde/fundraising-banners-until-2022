@@ -1,0 +1,77 @@
+.wmde-banner {
+	.form-step-1,
+	.form-step-2 {
+		display: flex;
+		width: 50%;
+	}
+
+	.form-step-1 {
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding: 0 20px 40px 0;
+		position: relative;
+
+		&:after {
+			position: absolute;
+			content: '';
+			width: 1px;
+			top: 0;
+			right: 0;
+			height: 100%;
+			background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
+		}
+	}
+
+	.form-step-2 {
+		flex-direction: row;
+		flex-wrap: wrap;
+		background: $color-white;
+		justify-content: center;
+		padding-left: 20px;
+
+		&-field {
+			flex-grow: 1;
+		}
+
+		&-notice {
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.select-group {
+			display: block;
+		}
+
+		.select-group__errormessage {
+			padding: 8px 0;
+			height: auto;
+		}
+
+		.select-group__option {
+			height: auto;
+			padding: 8px 0 0 25px;
+		}
+
+		.select-group__state {
+			white-space: normal;
+			text-align: left;
+			line-height: 1.5;
+
+			&:before {
+				top: 8px;
+				margin-top: 0;
+			}
+		}
+	}
+
+	.form-step-label {
+		flex: 0 0 100%;
+		width: 100%;
+		display: block;
+		padding: 0;
+		height: 16px;
+		line-height: 16px;
+		margin: 10px 0;
+		text-align: left;
+	}
+}

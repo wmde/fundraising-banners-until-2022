@@ -11,6 +11,7 @@ export default class Vector extends Skin {
 		this.head = $( '#mw-head' );
 		this.pageBase = $( '#mw-page-base' );
 		this.searchField = $( '#searchInput' );
+		this.hidePopup();
 	}
 
 	addSpace( bannerHeight, transition ) {
@@ -45,5 +46,9 @@ export default class Vector extends Skin {
 
 	getSizeIssueThreshold() {
 		return 160;
+	}
+
+	hidePopup() {
+		$( 'head' ).prepend( '<style>.mw-notification-area-overlay { display: none; }</style>' );
 	}
 }

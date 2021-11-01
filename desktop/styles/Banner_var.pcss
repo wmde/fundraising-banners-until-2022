@@ -31,12 +31,20 @@
 	}
 
 	.banner__content {
-		padding-top: 46px;
+		display: flex;
+		flex-direction: row;
+		padding: 12px 24px 0;
 	}
 
-	.banner__footer {
+	.banner__form {
+		flex: 0 0 $form-width-small;
+		width: $form-width-small;
+		display: flex;
+		flex-direction: row;
+
 		@media ( min-width: $breakpoint_l ) {
-			order: 2;
+			flex: 0 0 $form-width;
+			width: $form-width;
 		}
 	}
 

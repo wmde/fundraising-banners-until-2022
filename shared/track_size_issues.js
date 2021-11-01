@@ -2,8 +2,9 @@ import $ from 'jquery';
 
 export default class SizeIssueIndicator {
 
-	constructor( thresholdInPixels ) {
-		this.thresholdInPixels = thresholdInPixels;
+	constructor( minimumHeight, minimumWidth = 0 ) {
+		this.minimumHeight = minimumHeight;
+		this.minimumWidth = minimumWidth;
 	}
 
 	/**
@@ -37,7 +38,13 @@ export default class SizeIssueIndicator {
 	 * @return {boolean} whether or not the remaining viewport height is below the threshold
 	 */
 	hasSizeIssues( bannerElement ) {
-		return ( $( window ).height() - $( bannerElement ).height() ) < this.thresholdInPixels;
+		if ( ( $( window ).height() - $( bannerElement ).height() ) < this.minimumHeight ) {
+			return true;
+		}
+		if ( $( window ).width() < this.minimumWidth ) {
+			return true;
+		}
+		return false;
 	}
 
 }

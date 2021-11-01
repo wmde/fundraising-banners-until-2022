@@ -1,5 +1,3 @@
-$select-group-line-height: 30px;
-
 .wmde-banner {
 
 	.select-group {
@@ -9,17 +7,15 @@ $select-group-line-height: 30px;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-		flex: 1 0 auto;
+		flex: 0 0 auto;
 		font-size: 0.9em;
 		font-weight: bold;
 		width: 100%;
-		line-height: $select-group-line-height;
-
-		@media ( min-width: $breakpoint_l ) {
-			line-height: 25px;
-		}
+		line-height: 25px;
+		padding: 6px 0 10px;
 
 		&-container {
+			position: relative;
 			display: flex;
 			flex: 1 1 auto;
 			flex-direction: column;
@@ -27,19 +23,8 @@ $select-group-line-height: 30px;
 			margin-top: 0;
 			line-height: inherit;
 			border: 0;
-			padding: 0 10px 10px;
-
-			@media ( min-width: $breakpoint_s ) {
-				padding: 0 20px 10px;
-			}
-
-			@media ( min-width: $breakpoint_m ) {
-				padding: 0 42px 10px;
-			}
-
-			@media ( min-width: $breakpoint_xl ) {
-				padding: 6px 42px 10px;
-			}
+			padding: 0;
+			width: 100%;
 		}
 
 		&__errormessage {
@@ -50,26 +35,26 @@ $select-group-line-height: 30px;
 			font-weight: bold;
 			text-align: left;
 			width: 100%;
-			margin-bottom: 0.2em;
+			margin: -8px 0 12px;
 			font-size: 0.8em;
 		}
 
-		&-container--with-error {
-			.select-group__erroricon {
-				position: relative;
-				padding-left: 20px;
-				display: block;
+		&__erroricon {
+			position: relative;
+			padding-left: 20px;
+			display: block;
 
-				&:before {
-					content: $errorIcon;
-					width: 16px;
-					height: 16px;
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
+			&:before {
+				content: $errorIcon;
+				width: 16px;
+				height: 16px;
+				position: absolute;
+				top: 0;
+				left: 0;
 			}
+		}
 
+		&-container--with-error {
 			.select-group__errormessage {
 				display: block;
 				color: $color-error;
@@ -79,29 +64,26 @@ $select-group-line-height: 30px;
 		&__option {
 			flex: 1 1 auto;
 			margin: 0;
-			padding: 6px 10px 6px 25px;
-			height: 28px;
-			line-height: 16px;
+			padding: 0 0 0 25px;
 			box-sizing: border-box;
 			display: flex;
 			position: relative;
 			cursor: pointer;
+			height: 25px;
 
 			&--amount-other-input {
-				height: 35px;
-				@media ( min-width: $breakpoint_l ) {
-					height: auto;
-				}
+				height: auto;
 			}
 		}
 
 		&__state,
 		&__custom-input {
 			box-sizing: border-box;
-			display: block;
+			display: inline-block;
 			color: $color-black;
 			border: 0 none;
 			text-align: center;
+			font-size: 0.95em;
 			white-space: nowrap;
 
 			&:before {
@@ -155,13 +137,9 @@ $select-group-line-height: 30px;
 			box-sizing: border-box;
 			width: 100%;
 			min-width: 110px;
-			margin: 2px 0;
+			margin: -2px 0 0;
 			line-height: 25px;
 			height: 26px;
-
-			@media ( min-width: $breakpoint_l ) {
-				margin: -2px 0 0;
-			}
 
 			&--input {
 				display: inline-block;
@@ -177,11 +155,9 @@ $select-group-line-height: 30px;
 				box-sizing: border-box;
 				text-align: left;
 
-				@media ( min-width: $breakpoint_l ) {
-					&:focus,
-					&:active {
-						border: 1px solid $color-secondary;
-					}
+				&:focus,
+				&:active {
+					border: 1px solid $color-secondary;
 				}
 			}
 
@@ -209,50 +185,40 @@ $select-group-line-height: 30px;
 				}
 			}
 		}
+
+		&__notice {
+			font-weight: normal;
+		}
+
+		&__disabled {
+			opacity: 0.3;
+		}
 	}
 
 	.select-group-container--select-amount {
+		margin-top: 0;
 		.select-group__option {
-			width: 33.33333%;
-			flex: 0 0 33.33333%;
+			width: 25%;
 		}
+
 		.select-group__option--amount-other-input {
-			width: 100%;
-			flex: 0 0 100%;
-		}
-		@media ( min-width: $breakpoint_l ) {
-			margin-top: 0;
+			width: 50%;
 		}
 	}
 
 	.select-group-container--select-interval {
-		.select-group {
-			align-content: flex-start;
-		}
 		.select-group__option {
-			@media ( min-width: 900px ) {
-				width: 50%;
-				flex: 0 0 50%;
-			}
+			width: 50%;
 		}
 	}
 
 	.select-group-container--select-payment-method {
-		.select-group {
-			align-content: flex-start;
-		}
 		.select-group__option {
-			@media ( min-width: 900px ) {
-				width: 50%;
-				flex: 0 0 50%;
-			}
+			width: 50%;
 		}
 	}
 
 	.select-group__option--select-interval-6 {
-		display: none;
-		@media ( min-width: $breakpoint_l ) {
-			display: flex;
-		}
+		display: flex;
 	}
 }
