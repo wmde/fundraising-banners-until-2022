@@ -44,8 +44,8 @@ includes the JavaScript file with the parameters on every request,
 creating the global variable `GlobalBannerSettings`.
 
 To use the development values, you need to temporarily change the import
-from `shared/campaign_parameters` to also include `DevCampaignParameters`
-and change the call to `createCampaignParameters()` to `createCampaignParameters
+from `shared/campaign_parameters` to also include the `DevCampaignParameters` class
+and change the call to `createCampaignParameters()` so it reads `createCampaignParameters
 ( [ new DevCampaignParameters() ] )`. The `.travis.yml` file checks for calls to
 `createCampaignParameters` with arguments and throws an error when one of
 your committed files calls `createCampaignParameters` with an argument.
