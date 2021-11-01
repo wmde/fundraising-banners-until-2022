@@ -1,8 +1,7 @@
 import { h } from 'preact';
-import TextHighlight from '../../shared/components/ui/TextHighlight';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props.dynamicCampaignText;
 	return <div className="banner-text">
 		<p className="text__headline">
 			<span>An alle unsere Leserinnen und Leser in Deutschland. Vielleicht kommen wir
@@ -15,7 +14,7 @@ export default function BannerText( props ) {
 			diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet haben,
 			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.
 			Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
-			{' '}<TextHighlight registerStartAnimation={ props.registerStartHighlight }>{ visitorsVsDonorsSentence }</TextHighlight>
+			{' '}{ visitorsVsDonorsSentence }
 
 			Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.
 			Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt?

@@ -1,17 +1,19 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../../shared/banner_slider_keen';
 import debounce from '../../shared/debounce';
 
 import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './MiniBanner_var';
+import MinimisedBanner from './MinimisedBanner';
+import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 import { BannerType } from '../../shared/BannerType';
-import MinimisedBanner from './MinimisedBanner';
+import SlideState from '../../shared/slide_state';
+import createDynamicCampaignText from '../create_dynamic_campaign_text';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -41,15 +43,22 @@ export default class Banner extends Component {
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
 		this.startProgressBarInMiniBanner = () => {};
+		this.startProgressBarInFullPageBanner = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
+		this.dynamicCampaignText = createDynamicCampaignText(
+			props.campaignParameters,
+			props.campaignProjection,
+			props.formatters,
+			props.translations
+		);
 	}
 
 	miniBannerTransitionRef = createRef();
 	fullBannerTransitionRef = createRef();
 
 	componentDidMount() {
-		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
-		this.bannerSlider.initialize();
-
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
@@ -63,8 +72,8 @@ export default class Banner extends Component {
 	trackBannerEvent( eventName ) {
 		this.props.trackingData.tracker.trackBannerEvent(
 			eventName,
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
 			this.props.trackingData.bannerClickTrackRatio
 		);
 	}
@@ -78,7 +87,6 @@ export default class Banner extends Component {
 			this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
 			this.fullPageBannerReRender();
 		} else {
-			this.bannerSlider.resize();
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
 			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		}
@@ -100,7 +108,7 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
 		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
-		this.bannerSlider.disableAutoplay();
+		this.stopSliderAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
@@ -138,6 +146,15 @@ export default class Banner extends Component {
 		return this.fullBannerTransitionRef.current ? this.fullBannerTransitionRef.current.base.offsetHeight : 0;
 	}
 
+	onSlideChange = ( index ) => {
+		this.slideState.onSlideChange( index );
+	}
+
+	registerSliderAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
+		this.startSliderAutoplay = onStartAutoplay;
+		this.stopSliderAutoplay = onStopAutoplay;
+	};
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( {
@@ -145,22 +162,21 @@ export default class Banner extends Component {
 			isFullPageVisible: false
 		} );
 		this.props.onClose(
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide()
+			this.slideState.slidesShown,
+			this.slideState.currentSlide
 		);
 		this.props.minimisedPersistence.removeMinimised();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
-	registerStartHighlight = cb => { this.startHighlight = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
 		if ( this.props.sliderAutoPlay !== false ) {
-			this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
+			setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		}
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
@@ -169,7 +185,6 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		const FullpageBanner = props.fullpageBanner;
 		const campaignProjection = props.campaignProjection;
 		return <div className={classNames( {
 			'wmde-banner': true,
@@ -200,13 +215,16 @@ export default class Banner extends Component {
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBanner }
+						onSlideChange={ this.onSlideChange }
+						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
+						dynamicCampaignText={ this.dynamicCampaignText }
 					/> ) }
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); } }
+					onFinish={ () => { this.startProgressBarInFullPageBanner(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
@@ -214,12 +232,13 @@ export default class Banner extends Component {
 				>
 					<FullpageBanner
 						{...props}
-						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
+						campaignProjection={ campaignProjection }
 						onSubmit={props.onSubmit}
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
+						dynamicCampaignText={ this.dynamicCampaignText }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>
