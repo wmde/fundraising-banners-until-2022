@@ -21,18 +21,21 @@ export default function MiniBanner( props ) {
 	return <div className="mini-banner">
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
+				<div className="banner__close">
+					<button className="close-button" onClick={ props.onClose }><CloseIcon/></button>
+				</div>
+
 				<header className="headline">
 					<div className="headline__container">
 						<span className="headline__content">{ props.sliderHeading }</span>
 					</div>
 				</header>
-				<button className="close-button" onClick={props.onClose}><CloseIcon/></button>
 
 				<div className="banner__slideshow">
 					<Slider
 						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
 						onSlideChange={ props.onSlideChange }
-						registerAutoplay={ props.registerAutoplayCallbacks }
+						registerAutoplay={ props.registerSliderAutoplayCallbacks }
 						interval={ props.sliderAutoPlaySpeed }
 					/>
 				</div>

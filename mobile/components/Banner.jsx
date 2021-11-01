@@ -13,7 +13,6 @@ import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/
 import { BannerType } from '../../shared/BannerType';
 import SlideState from '../../shared/slide_state';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -49,6 +48,7 @@ export default class Banner extends Component {
 		this.dynamicCampaignText = createDynamicCampaignText(
 			props.campaignParameters,
 			props.campaignProjection,
+			props.impressionCounts,
 			props.formatters,
 			props.translations
 		);
@@ -147,10 +147,7 @@ export default class Banner extends Component {
 			displayState: CLOSED,
 			isFullPageVisible: false
 		} );
-		this.props.onClose(
-			this.slideState.slidesShown,
-			this.slideState.currentSlide
-		);
+		this.props.onClose();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -160,9 +157,7 @@ export default class Banner extends Component {
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
-		if ( this.props.sliderAutoPlay !== false ) {
-			setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
-		}
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 		this.startProgressBarInMiniBanner();
@@ -171,16 +166,6 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
-		const ProgressBarComponent = <ProgressBar
-			formatters={props.formatters}
-			daysLeft={campaignProjection.getRemainingDays()}
-			donationAmount={campaignProjection.getProjectedDonationSum()}
-			goalDonationSum={campaignProjection.goalDonationSum}
-			missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-			setStartAnimation={props.setStartAnimation}
-			animate={true}
-			amountToShowOnRight={AmountToShowOnRight.MISSING}
-		/>;
 
 		return <div className={classNames( {
 			'wmde-banner': true,
@@ -209,7 +194,6 @@ export default class Banner extends Component {
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
-						progressBar={ ProgressBarComponent }
 					/>
 
 				</BannerTransition>
@@ -232,7 +216,6 @@ export default class Banner extends Component {
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
 						dynamicCampaignText={ this.dynamicCampaignText }
-						progressBar={ ProgressBarComponent }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>
