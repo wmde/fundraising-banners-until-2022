@@ -1,12 +1,24 @@
 import { h } from 'preact';
-import Infobox from '../../shared/components/ui/Infobox';
 import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
 import ClockIcon from './ui/ClockIcon';
 import CloseIcon from './ui/CloseIcon';
+import Slider from '../../shared/components/Slider';
+import Slides from './Slides';
 
 export default function MiniBanner( props ) {
 	const campaignProjection = props.campaignProjection;
+	const ProgressBarComponent = <ProgressBar
+		formatters={props.formatters}
+		daysLeft={campaignProjection.getRemainingDays()}
+		donationAmount={campaignProjection.getProjectedDonationSum()}
+		goalDonationSum={campaignProjection.goalDonationSum}
+		missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+		setStartAnimation={props.setStartAnimation}
+		animate={true}
+		amountToShowOnRight={AmountToShowOnRight.MISSING}
+	/>;
+
 	return <div className="mini-banner">
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
@@ -23,25 +35,14 @@ export default function MiniBanner( props ) {
 					</div>
 				</header>
 
-				<Infobox
-					campaignParameters={props.campaignParameters}
-					campaignProjection={campaignProjection}
-					formatters={props.formatters}
-					bannerText={props.slides}
-					propsForText={{
-						formattedGoalDonationSumNumeric: props.formatters.millionFormatterNumeric( campaignProjection.goalDonationSum ),
-						progressBar: ( <ProgressBar
-							formatters={props.formatters}
-							daysLeft={campaignProjection.getRemainingDays()}
-							donationAmount={campaignProjection.getProjectedDonationSum()}
-							goalDonationSum={campaignProjection.goalDonationSum}
-							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={props.setStartAnimation}
-							animate={true}
-							amountToShowOnRight={AmountToShowOnRight.MISSING}
-						/> )
-					}}
-				/>
+				<div className="banner__slideshow">
+					<Slider
+						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
+						onSlideChange={ props.onSlideChange }
+						registerAutoplay={ props.registerAutoplayCallbacks }
+						interval={ props.sliderAutoPlaySpeed }
+					/>
+				</div>
 
 				<div className="mini-banner__tab">
 					<button className="mini-banner__tab-inner mini-banner__button" onClick={props.onExpandFullpage}>
