@@ -1,4 +1,25 @@
 .wmde-banner {
+	.keen-slider {
+		display: flex;
+		height: 100%;
+		width: 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-touch-callout: none;
+		-khtml-user-select: none;
+		touch-action: pan-y;
+		-webkit-tap-highlight-color: transparent;
+		align-items: center;
+	}
+
+	.keen-slider,
+	.keen-slider__slide {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
 
 	.pagination,
 	#dots-navigation {
@@ -11,11 +32,13 @@
 	.carousel-cell,
 	.keen-slider__slide {
 		width: 100%;
+		min-height: 100%;
+		display: flex;
 		height: auto;
 		box-sizing: border-box;
 
-		min-width: calc( 100% + 0 );
-		max-width: calc( 100% + 0 );
+		min-width: calc( 100% + 0px );
+		max-width: calc( 100% + 0px );
 		transform: translate3d( 0, 0, 0 );
 
 		.goal-headline {

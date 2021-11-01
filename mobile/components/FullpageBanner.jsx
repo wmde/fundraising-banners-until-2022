@@ -1,13 +1,14 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import Infobox from '../../shared/components/ui/Infobox';
 import CloseIcon from './ui/CloseIcon';
+import BannerText from './BannerText';
+import DonationForm from './ui/form/DonationFormWithHeaders';
+import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
 	render( props ) {
-		const DonationForm = props.donationForm;
 		const trackingParams = `piwik_campaign=${props.campaignName}&piwik_kwd=${props.bannerName}_link`;
 
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
@@ -16,12 +17,16 @@ export default class FullpageBanner extends Component {
 				<div className="fullpage-banner__heading">
 					Jetzt spenden
 				</div>
-				<Infobox
+				<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
+				<ProgressBar
 					formatters={props.formatters}
-					campaignParameters={props.campaignParameters}
-					campaignProjection={props.campaignProjection}
-					bannerText={props.bannerText}
-					propsForText={ { registerStartHighlight: props.registerStartHighlight } }
+					daysLeft={props.campaignProjection.getRemainingDays()}
+					donationAmount={props.campaignProjection.getProjectedDonationSum()}
+					goalDonationSum={props.campaignProjection.goalDonationSum}
+					missingAmount={props.campaignProjection.getProjectedRemainingDonationSum()}
+					setStartAnimation={props.setStartAnimation}
+					animate={true}
+					amountToShowOnRight={AmountToShowOnRight.MISSING}
 				/>
 			</div>
 			<div className="call-to-action">
