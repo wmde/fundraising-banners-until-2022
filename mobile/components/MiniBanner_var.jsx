@@ -39,7 +39,7 @@ export default function MiniBanner( props ) {
 					<Slider
 						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
 						onSlideChange={ props.onSlideChange }
-						registerAutoplay={ props.registerAutoplayCallbacks }
+						registerAutoplay={ props.registerSliderAutoplayCallbacks }
 						interval={ props.sliderAutoPlaySpeed }
 					/>
 				</div>
