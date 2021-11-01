@@ -89,6 +89,9 @@ export default class MatomoTracker {
 		this.trackOrStore( tracker => tracker.trackContentImpression( 'Banners', this.bannerName ) );
 	}
 
-	trackViewPortDimensions() {}
+	trackViewPortDimensions( bannerName, dimensionData, trackingRatio = 0.01 ) {
+		this.trackEvent( bannerName, trackingRatio );
+	}
+
 	trackSizeIssueEvent() {}
 }

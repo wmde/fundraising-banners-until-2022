@@ -13,7 +13,9 @@ export default class FullpageBanner extends Component {
 
 		return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
 			<div className="fullpage-banner__info">
-				<div className="close" onClick={ props.onClose }/>
+				<div className="close" onClick={ props.onClose }>
+					{ props.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
+				</div>
 				<Infobox
 					formatters={props.formatters}
 					campaignParameters={props.campaignParameters}

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-export default function Slides( { currentDayName, formattedGoalDonationSumNumeric, progressBar, visitorsVsDonorsSentence, campaignDaySentence } ) {
+export default function Slides( { currentDayName, formattedGoalDonationSumNumeric, progressBar, visitorsVsDonorsSentence, campaignDaySentence, overallImpressionCount } ) {
 	return <div className="navigation-wrapper">
 		<div className="mini-banner-carousel">
 			<div className="carousel-cell keen-slider__slide">
@@ -9,7 +9,7 @@ export default function Slides( { currentDayName, formattedGoalDonationSumNumeri
 			</div>
 			<div className="carousel-cell keen-slider__slide">
 				<p>An alle, die Wikipedia in Deutschland nutzen:
-					Zum ordinal impression count Mal seit langem möchten wir Sie an
+					Zum { overallImpressionCount }. Mal seit langem möchten wir Sie an
 					diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
 					von Wikipedia zu sichern.</p>
 			</div>
