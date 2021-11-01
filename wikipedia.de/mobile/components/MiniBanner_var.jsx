@@ -13,7 +13,9 @@ export default function MiniBanner( props ) {
 						<span className="headline__content">{ props.sliderHeading }</span>
 					</div>
 				</header>
-				<div className="close-button" onClick={props.onClose}/>
+				<div className="close-button" onClick={props.onClose}>
+					{ props.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
+				</div>
 
 				<Infobox
 					campaignParameters={props.campaignParameters}
@@ -21,6 +23,7 @@ export default function MiniBanner( props ) {
 					formatters={props.formatters}
 					bannerText={props.slides}
 					propsForText={{
+						overallImpressionCount: props.impressionCounts.getOverallCount(),
 						formattedGoalDonationSumNumeric: props.formatters.millionFormatterNumeric( campaignProjection.goalDonationSum ),
 						progressBar: ( <ProgressBar
 							formatters={props.formatters}

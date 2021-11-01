@@ -36,6 +36,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			setCookie: false,
 			isFullPageVisible: false,
 			isFundsModalVisible: false
 		};
@@ -84,7 +85,7 @@ export default class Banner extends Component {
 		this.props.trackingData.tracker.trackBannerEvent(
 			'mobile-mini-banner-expanded',
 			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide(),
+			this.bannerSlider.getCurrentSlide() + 1,
 			this.props.trackingData.bannerClickTrackRatio
 		);
 		window.scrollTo( 0, 0 );
@@ -109,6 +110,7 @@ export default class Banner extends Component {
 
 	fundsModalDonate = e => {
 		e.preventDefault();
+		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
 		this.setState( { isFundsModalVisible: false } );
 		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
 		if ( startOfForm ) {
@@ -176,6 +178,7 @@ export default class Banner extends Component {
 				>
 					<MiniBanner
 						{ ...props }
+						setCookie={ state.setCookie }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
@@ -194,6 +197,7 @@ export default class Banner extends Component {
 				>
 					<FullpageBanner
 						{...props}
+						setCookie={ state.setCookie }
 						registerStartHighlight={this.registerStartHighlight}
 						onClose={ this.closeBanner }
 						onSubmit={props.onSubmit}
