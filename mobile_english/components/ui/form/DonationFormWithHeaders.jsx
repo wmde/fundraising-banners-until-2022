@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext, useState, useEffect } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
-import { SelectGroup } from '../../../../shared/components/ui/form/SelectGroup';
+import { SelectGroup } from './SelectGroup_var';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
 import SmsBox from '../../../../shared/components/ui/form/SmsBox';
 
@@ -13,7 +13,9 @@ import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_pa
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
-import useFormAction from '../../../../shared/components/ui/form/hooks/use_form_action';
+import { AddressType } from './FormItemsBuilder';
+import useAddressType from './hooks/use_address_type';
+import useFormAction, { NEW_DONATION_URL, ADD_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -23,15 +25,42 @@ export default function DonationFormWithHeaders( props ) {
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
+	const [ addressType, setAddressType, addressTypeValidity, setAddressTypeValidity ] = useAddressType( null );
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
-	const [ formAction ] = useFormAction( props, { provadd: 1 } );
+	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+	const [ formAction, setUrl ] = useFormAction( props, { ast: 1, locale: 'en_GB' } );
+
+	useEffect(
+		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
+		[ addressType, setUrl ]
+	);
+
+	const addDisabledPaymentMethod = paymentMethodToDisable => {
+		let currentDisabledPaymentMethods = disabledPaymentMethods;
+		if ( currentDisabledPaymentMethods.includes( paymentMethodToDisable ) ) {
+			return;
+		}
+		currentDisabledPaymentMethods.push( paymentMethodToDisable );
+		setDisabledPaymentMethods( currentDisabledPaymentMethods );
+	};
+
+	const removeDisabledPaymentMethod = paymentMethodToEnable => {
+		let currentDisabledPaymentMethods = disabledPaymentMethods;
+		const index = currentDisabledPaymentMethods.indexOf( paymentMethodToEnable );
+		if ( index === -1 ) {
+			return;
+		}
+		currentDisabledPaymentMethods.splice( index, 1 );
+		setDisabledPaymentMethods( currentDisabledPaymentMethods );
+	};
 
 	const validate = e => {
 		if ( [
 			[ intervalValidity, setIntervalValidity ],
 			[ amountValidity, setAmountValidity ],
-			[ paymentMethodValidity, setPaymentMethodValidity ]
+			[ paymentMethodValidity, setPaymentMethodValidity ],
+			[ addressTypeValidity, setAddressTypeValidity ]
 		].map( validateRequired ).every( isValid ) ) {
 			props.onSubmit();
 			return;
@@ -41,10 +70,11 @@ export default function DonationFormWithHeaders( props ) {
 
 	const onChangeInterval = e => {
 		setInterval( e.target.value );
+
 		if ( e.target.value !== Intervals.ONCE.value ) {
-			setDisabledPaymentMethods( [ PaymentMethods.SOFORT.value ] );
+			addDisabledPaymentMethod( PaymentMethods.SOFORT.value );
 		} else {
-			setDisabledPaymentMethods( [] );
+			removeDisabledPaymentMethod( PaymentMethods.SOFORT.value );
 		}
 	};
 
@@ -60,10 +90,45 @@ export default function DonationFormWithHeaders( props ) {
 		} else {
 			setDisabledIntervals( [] );
 		}
+
+		if ( e.target.value === PaymentMethods.DIRECT_DEBIT.value ) {
+			setDisabledAddressTypes( [ AddressType.EMAIL.value, AddressType.NO.value ] );
+		} else {
+			setDisabledAddressTypes( [] );
+		}
+	};
+
+	const onChangeAddressType = e => {
+		setAddressType( e.target.value );
+
+		if ( e.target.value === AddressType.FULL.value ) {
+			removeDisabledPaymentMethod( PaymentMethods.DIRECT_DEBIT.value );
+		} else {
+			addDisabledPaymentMethod( PaymentMethods.DIRECT_DEBIT.value );
+		}
+	};
+
+	const getButtonText = () => {
+		if ( addressType !== AddressType.NO.value ) {
+			return Translations[ 'submit-label' ];
+		}
+
+		if ( paymentMethod === PaymentMethods.PAYPAL.value ) {
+			return Translations[ 'submit-label-paypal' ];
+		} else if ( paymentMethod === PaymentMethods.CREDIT_CARD.value ) {
+			return Translations[ 'submit-label-credit-card' ];
+		} else if ( paymentMethod === PaymentMethods.SOFORT.value ) {
+			return Translations[ 'submit-label-sofort' ];
+		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
+			return Translations[ 'submit-label-bank-transfer' ];
+		}
+		return Translations[ 'submit-label' ];
+
 	};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element" action={ formAction }>
+		<form method="post" name="donationForm" className="form__element"
+			action={ formAction }>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head"></legend>
@@ -125,9 +190,25 @@ export default function DonationFormWithHeaders( props ) {
 				</div>
 			</fieldset>
 
+			<fieldset className="form__section">
+				<legend className="form__section-head"></legend>
+				<div className="form-field-group">
+					<SelectGroup
+						fieldname="address-option"
+						selectionItems={ props.formItems.addressType }
+						isValid={ isValidOrUnset( addressTypeValidity ) }
+						errorMessage={ Translations[ 'address-type-error-message' ] }
+						currentValue={ addressType }
+						onSelected={ onChangeAddressType }
+						disabledOptions={ disabledAddressTypes }
+					>
+					</SelectGroup>
+				</div>
+			</fieldset>
+
 			<div className="submit-section button-group">
 				<button className="button-group__button" onClick={ validate }>
-					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
+					<span className="button-group__label">{ getButtonText() }</span>
 				</button>
 			</div>
 
@@ -135,6 +216,7 @@ export default function DonationFormWithHeaders( props ) {
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
+				addressType={ addressType }
 			/>
 		</form>
 	</div>;
