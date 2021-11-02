@@ -105,7 +105,6 @@ export default class BannerPresenter {
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 			this.trackingData.viewportDimensionsTrackRatio
 		);
-		console.log( sizeIssueIndicator.hasSizeIssues( bannerElement ) );
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
 			if ( onMediaWiki() ) {
 				mw.centralNotice.setBannerLoadedButHidden();

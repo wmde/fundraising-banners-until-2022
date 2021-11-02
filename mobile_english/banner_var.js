@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles_var/styles.pcss';
 
 import * as formatters from '../shared/number_formatter/en';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -7,10 +7,11 @@ import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
+import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 
-import Banner from './components/Banner';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
+import Banner from './components_var/Banner';
+import DonationForm from './components_var/ui/form/DonationFormWithHeaders';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -38,7 +39,7 @@ bannerPresenter.present(
 		useOfFundsText,
 		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
-		translations: Translations,
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter )
 	},
 	0

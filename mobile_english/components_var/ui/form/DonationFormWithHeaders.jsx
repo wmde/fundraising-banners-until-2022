@@ -1,8 +1,8 @@
 import { h } from 'preact';
-import { useContext, useState, useEffect } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
-import { SelectGroup } from './SelectGroup_var';
+import { SelectGroup } from '../../../../shared/components/ui/form/SelectGroup';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
 import SmsBox from '../../../../shared/components/ui/form/SmsBox';
 
@@ -13,9 +13,13 @@ import usePaymentMethod from '../../../../shared/components/ui/form/hooks/use_pa
 import { amountMessage, validateRequired } from '../../../../shared/components/ui/form/utils';
 import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form/FormItemsBuilder';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
-import { AddressType } from './FormItemsBuilder';
+import Footer from '../../../../shared/components/ui/EasySelectFooter';
 import useAddressType from '../../../use_address_type';
-import useFormAction, { NEW_DONATION_URL, ADD_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
+import useFormAction, {
+	ADD_DONATION_URL,
+	NEW_DONATION_URL
+} from '../../../../shared/components/ui/form/hooks/use_form_action';
+import { AddressType } from '../../../components/ui/form/FormItemsBuilder';
 
 export default function DonationFormWithHeaders( props ) {
 	const Translations = useContext( TranslationContext );
@@ -27,8 +31,9 @@ export default function DonationFormWithHeaders( props ) {
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const [ addressType, setAddressType, addressTypeValidity, setAddressTypeValidity ] = useAddressType( null );
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
-	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
+
 	const [ formAction, setUrl ] = useFormAction( props, { ast: 1, locale: 'en_GB' } );
 
 	useEffect(
@@ -127,11 +132,10 @@ export default function DonationFormWithHeaders( props ) {
 	};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element"
-			action={ formAction }>
+		<form method="post" name="donationForm" className="form__element" action={ formAction }>
 
 			<fieldset className="form__section">
-				<legend className="form__section-head"></legend>
+				<legend className="form__section-head">{ Translations[ 'intervals-header' ]}</legend>
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="select-interval"
@@ -141,12 +145,13 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ paymentInterval }
 						onSelected={ onChangeInterval }
 						disabledOptions={ disabledIntervals }
+						errorPosition={ props.errorPosition }
 					/>
 				</div>
 			</fieldset>
 
 			<fieldset className="form__section">
-				<legend className="form__section-head"></legend>
+				<legend className="form__section-head">{ Translations[ 'amounts-header' ]}</legend>
 				<div className={ 'form-field-group' }>
 					<SelectGroup
 						fieldname="select-amount"
@@ -156,6 +161,7 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ selectedAmount }
 						onSelected={ e => selectAmount( e.target.value ) }
 						disabledOptions={ [] }
+						errorPosition={ props.errorPosition }
 					>
 						<SelectCustomAmount
 							fieldname="select-amount"
@@ -174,7 +180,7 @@ export default function DonationFormWithHeaders( props ) {
 			</fieldset>
 
 			<fieldset className="form__section">
-				<legend className="form__section-head"></legend>
+				<legend className="form__section-head">{ Translations[ 'payments-header' ] }</legend>
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="select-payment-method"
@@ -184,6 +190,7 @@ export default function DonationFormWithHeaders( props ) {
 						currentValue={ paymentMethod }
 						onSelected={ onChangePaymentMethod }
 						disabledOptions={ disabledPaymentMethods }
+						errorPosition={ props.errorPosition }
 					>
 						<SmsBox/>
 					</SelectGroup>
@@ -191,7 +198,7 @@ export default function DonationFormWithHeaders( props ) {
 			</fieldset>
 
 			<fieldset className="form__section">
-				<legend className="form__section-head"></legend>
+				<legend className="form__section-head">{ Translations[ 'address-type-header' ] }</legend>
 				<div className="form-field-group">
 					<SelectGroup
 						fieldname="address-option"
@@ -212,11 +219,21 @@ export default function DonationFormWithHeaders( props ) {
 				</button>
 			</div>
 
+			<div className="smallprint">
+				<span>
+					<a className="application-of-funds-link"
+						href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
+						onClick={ props.toggleFundsModal } >{ Translations[ 'use-of-funds-link' ] }</a>
+				</span>
+			</div>
+
+			<Footer/>
+
 			<SubmitValues
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
-				addressType={ addressType }
+				impressionCounts={ props.impressionCounts }
 			/>
 		</form>
 	</div>;
