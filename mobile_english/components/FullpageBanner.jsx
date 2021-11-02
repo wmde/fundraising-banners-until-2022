@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import classNames from 'classnames';
 
 import ProgressBar from '../../shared/components/ui/ProgressBar';
-import Infobox from '../../shared/components/ui/Infobox';
 import Footer from '../../shared/components/ui/Footer';
+import BannerText from '../BannerText';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
@@ -19,13 +19,8 @@ export default class FullpageBanner extends Component {
 					</div>
 				</header>
 				<div className="close-button" onClick={props.onClose}/>
-				<Infobox
-					formatters={props.formatters}
-					campaignParameters={props.campaignParameters}
-					campaignProjection={props.campaignProjection}
-					bannerText={props.bannerText}
-					propsForText={ { registerStartHighlight: props.registerStartHighlight } }
-				/>
+
+				<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 
 				<div>
 					<ProgressBar
