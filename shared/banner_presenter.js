@@ -103,7 +103,7 @@ export default class BannerPresenter {
 		this.trackingData.tracker.trackViewPortDimensions(
 			VIEWPORT_TRACKING_IDENTIFIER,
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-			this.trackingData.sizeTrackRatio
+			this.trackingData.viewportDimensionsTrackRatio
 		);
 		console.log( sizeIssueIndicator.hasSizeIssues( bannerElement ) );
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
@@ -112,7 +112,7 @@ export default class BannerPresenter {
 			}
 			this.trackingData.tracker.trackSizeIssueEvent(
 				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-				this.trackingData.sizeTrackRatio
+				this.trackingData.sizeIssueTrackRatio
 			);
 			return;
 		}

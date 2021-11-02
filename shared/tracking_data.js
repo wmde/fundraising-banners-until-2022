@@ -10,12 +10,18 @@ function getTracker( bannerName ) {
 
 }
 
-export function createTrackingData( bannerName, bannerClickTrackRatio = 1, bannerCloseTrackRatio = 0.1, sizeTrackRatio = 0.1 ) {
+export function createTrackingData(
+	bannerName,
+	bannerClickTrackRatio = 1,
+	bannerCloseTrackRatio = 0.1,
+	viewportDimensionsTrackRatio = 0.1,
+	sizeIssueTrackRatio = 1 ) {
 	return {
 		tracker: getTracker( bannerName ),
 		bannerClickTrackRatio: bannerClickTrackRatio,
 		bannerCloseTrackRatio: bannerCloseTrackRatio,
-		sizeTrackRatio: sizeTrackRatio
+		sizeIssueTrackRatio: sizeIssueTrackRatio,
+		viewportDimensionsTrackRatio: viewportDimensionsTrackRatio
 	};
 
 }
