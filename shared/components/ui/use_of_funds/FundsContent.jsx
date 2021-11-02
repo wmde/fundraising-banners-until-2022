@@ -23,13 +23,13 @@ export default function FundsContent( props ) {
 		</div>
 
 		<div className="use_of_funds__section use_of_funds__section--two-cols-info">
-			<div className="use_of_funds__column--info" style="display:none">
+			<div className="use_of_funds__column--info">
 				<span>{content.detailedReports.international.intro}</span>
 				<a href={content.detailedReports.international.linkUrl} target="_blank">
 					{content.detailedReports.international.linkName}
 				</a>
 			</div>
-			<div className="use_of_funds__column--info">
+			<div className="use_of_funds__column--info" style="display:none">
 				<span>{content.detailedReports.germany.intro}</span>
 				<a href={content.detailedReports.germany.linkUrl} target="_blank">
 					{content.detailedReports.germany.linkName}
