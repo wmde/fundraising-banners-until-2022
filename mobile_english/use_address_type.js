@@ -1,4 +1,4 @@
-import { UNSET, VALID } from '../../../../../shared/components/ui/form/hooks/validation_states';
+import { UNSET, VALID } from '../shared/components/ui/form/hooks/validation_states';
 import { useState } from 'preact/hooks';
 
 const addressTypeIsValid = method => method === null ? UNSET : VALID;
