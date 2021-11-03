@@ -1,0 +1,79 @@
+.wmde-banner {
+	.banner__navigation {
+		position: relative;
+		z-index: 20;
+		height: 44px;
+		line-height: 44px;
+		display: flex;
+		margin: 0 20px;
+		font-size: 14px;
+	}
+
+	.banner__back,
+	.banner__close {
+		width: 50%;
+	}
+
+	.back__link {
+		display: none;
+		font-weight: bold;
+		text-decoration: none;
+		text-shadow: -1px -1px 1px $color-white, 1px -1px 1px $color-white, -1px 1px 1px $color-white, 1px 1px 1px $color-white;
+	}
+
+	&--content-form .back__link {
+		display: inline;
+	}
+
+	.banner__close {
+		font-weight: bold;
+		text-align: right;
+
+		.close-link {
+			position: relative;
+			display: block;
+			color: $color-gray;
+			text-decoration: none;
+			transition: color 500ms $banner-easing;
+
+			&--large,
+			&--small {
+				display: none;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				.close__link--small {
+					display: inline;
+				}
+			}
+
+			@media ( min-width: $breakpoint_xl ) {
+				.close__link--small {
+					display: none;
+				}
+				.close__link--large {
+					display: inline;
+				}
+			}
+
+			svg {
+				display: block;
+				float: right;
+				height: 23px;
+				width: 22px;
+				margin: 10px 0 0 10px;
+				path {
+					transition: fill 500ms $banner-easing;
+				}
+			}
+
+			&:hover,
+			&:focus {
+				color: $color-primary-light;
+				svg path {
+					fill: $color-primary-light;
+				}
+			}
+		}
+	}
+}
