@@ -1,16 +1,16 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../../shared/banner_slider_keen';
-import debounce from '../../shared/debounce';
+import { Slider } from '../../../shared/banner_slider_keen';
+import debounce from '../../../shared/debounce';
 
-import BannerTransition from '../../shared/components/BannerTransition';
-import MiniBanner from './components/MiniBanner';
-import TranslationContext from '../../shared/components/TranslationContext';
-import FollowupTransition from '../../shared/components/FollowupTransition';
-import FullpageBanner from './components/FullpageBanner';
+import BannerTransition from '../../../shared/components/BannerTransition';
+import MiniBanner from './MiniBanner_var';
+import TranslationContext from '../../../shared/components/TranslationContext';
+import FollowupTransition from '../../../shared/components/FollowupTransition';
+import FullpageBanner from './FullpageBanner_var';
 import PropTypes from 'prop-types';
-import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
+import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
+import FundsDistributionAccordion from '../../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -85,9 +85,10 @@ export default class Banner extends Component {
 		this.props.trackingData.tracker.trackBannerEvent(
 			'mobile-mini-banner-expanded',
 			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide() + 1,
+			this.bannerSlider.getCurrentSlide(),
 			this.props.trackingData.bannerClickTrackRatio
 		);
+		this.bannerSlider.disableAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
@@ -174,7 +175,7 @@ export default class Banner extends Component {
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
 					ref={this.miniBannerTransitionRef}
-					transitionSpeed={100}
+					transitionSpeed={ 1000 }
 				>
 					<MiniBanner
 						{ ...props }
@@ -189,7 +190,7 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
+					onFinish={ () => { this.startProgressBarInFullPageBanner(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ true }
@@ -208,8 +209,8 @@ export default class Banner extends Component {
 				</FollowupTransition>
 			</TranslationContext.Provider>
 			<FundsModal
-				toggleFundsModal={ this.toggleFundsModal }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
+				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
 				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
