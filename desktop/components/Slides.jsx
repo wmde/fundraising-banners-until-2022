@@ -9,8 +9,9 @@ export default function Slides( dynamicCampaignText ) {
 			<p className="headline">
 				<InfoIcon/> An alle, die Wikipedia in Deutschland nutzen
 			</p>
-			<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Zum { overallImpressionCount }.
-				Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit von Wikipedia zu sichern.</p>
+			<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Dies ist der { overallImpressionCount }.
+				Spendenaufruf, den wir Ihnen zeigen. Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
+				sichern.</p>
 		</div> },
 		{ content: <div>
 			<p>{ campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert. Insgesamt spenden 99% nichts
