@@ -64,7 +64,7 @@ export default function DonationFormWithHeaders( props ) {
 	};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element" action={ formAction}>
+		<form method="post" name="donationForm" className="form__element" action={ formAction }>
 
 			<fieldset className="form__section">
 				<legend className="form__section-head">{ Translations[ 'intervals-header' ]}</legend>

@@ -1,30 +1,25 @@
 .wmde-banner {
 	.carousel-cell {
+		p {
+			padding-bottom: 50px;
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+		}
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 0 17px 0 17px;
 		cursor: grab;
-		width: 100%;
-		height: auto;
-		box-sizing: border-box;
-		flex-direction: column;
-		p {
-			font-weight: bold;
-			font-family: $banner-main-font-family;
-			margin: 0;
-		}
-		.goal-headline {
-			margin: 0 0 90px 0;
-		}
 	}
+
 	.mini-banner-carousel {
 		display: flex;
 	}
 
 	.navigation-wrapper {
 		overflow: hidden;
-		padding: 2px;
 		#dots-navigation {
 			display: flex;
 			padding: 10px 0;
@@ -35,8 +30,7 @@
 			border: 0;
 			width: 10px;
 			height: 10px;
-			background: $color-primary;
-			opacity: 0.25;
+			background: $color-gray-medium;
 			border-radius: 50%;
 			margin: 0 5px;
 			padding: 5px;
@@ -48,7 +42,7 @@
 		}
 
 		.dot--active {
-			opacity: 1;
+			background: $color-gray;
 		}
 	}
 }

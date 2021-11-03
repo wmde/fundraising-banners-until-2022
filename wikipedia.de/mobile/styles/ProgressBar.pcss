@@ -1,10 +1,15 @@
 .wmde-banner {
 	.progress_bar {
-		/* remove this when campaign starts */
-		display: none;
-		/* display: flex; */
+		display: flex;
 		margin-right: 1.2em;
 		margin-left: 1.2em;
+	}
+
+	.mini-banner {
+		.progress_bar {
+			position: absolute;
+			width: 100%;
+		}
 	}
 
 	.progress_bar__wrapper {
@@ -15,7 +20,7 @@
 		justify-content: space-between;
 		flex: 1;
 		max-height: 30px;
-		margin: 25px 0 4px;
+		margin: 25px 5px 4px;
 	}
 
 	.progress_bar__donation_fill {

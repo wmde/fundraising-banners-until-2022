@@ -1,0 +1,64 @@
+$progress-label-top-offset: 25px;
+$progress-label-x-padding: 16px;
+
+.wmde-banner {
+	.mini-banner {
+		.progress_bar {
+			position: absolute;
+			width: 100%;
+		}
+	}
+
+	.progress_bar {
+
+		&__wrapper {
+			position: relative;
+			height: 18px;
+			line-height: 18px;
+			width: 100%;
+			margin-top: $progress-label-top-offset;
+		}
+
+		&__donation_fill,
+		&__donation_remaining {
+			position: absolute;
+			height: 100%;
+		}
+
+		&__donation_fill {
+			transition-duration: 3000ms;
+			transition-property: width;
+			text-align: left;
+		}
+
+		&__donation_text,
+		&__donation_remaining {
+			opacity: 0;
+			transition: opacity 200ms ease-in-out;
+		}
+
+		&--finished {
+			.progress_bar__donation_text,
+			.progress_bar__donation_remaining {
+				opacity: 1;
+			}
+		}
+
+		&__donation_text {
+			margin-top: -$progress-label-top-offset;
+			width: 7em;
+			padding-left: $progress-label-x-padding;
+		}
+
+		&__donation_remaining {
+			width: 100%;
+			text-align: right;
+			top: -$progress-label-top-offset;
+			padding-right: $progress-label-x-padding;
+		}
+
+		&__donation_remaining--outer {
+			display: none;
+		}
+	}
+}

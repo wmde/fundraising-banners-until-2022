@@ -1,0 +1,98 @@
+$footer-font-size: 12px;
+
+.wmde-banner {
+	.footer {
+		font-size: $footer-font-size;
+		text-align: center;
+		color: $color-black;
+
+		&__bank {
+			flex: 1 1 auto;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-right: -1em;
+
+			&-item {
+				white-space: nowrap;
+				padding-right: 1em;
+
+				&.account {
+					text-align: left;
+				}
+
+				&.bic {
+					text-align: center;
+				}
+
+				&.iban {
+					text-align: right;
+				}
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&__usage {
+			display: none;
+		}
+	}
+
+	.selection-input {
+		display: inline-block;
+		position: relative;
+		margin-left: 5px;
+
+		&-text,
+		&-input {
+			font-weight: bold;
+			font-size: 12px;
+		}
+		&-input {
+			font-family: $banner-font-family;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			padding: 0;
+			border: 0;
+			outline: 0;
+			background: transparent;
+			color: transparent;
+			z-index: 2;
+		}
+
+		&.focused {
+			.selection-input-text {
+				color: transparent;
+			}
+			.selection-input-input {
+				color: $color-black;
+
+				&::selection {
+					background: $color-primary;
+					color: $color-white;
+				}
+			}
+		}
+	}
+
+	.smallprint {
+		text-align: center;
+		font-size: 12px;
+		margin-bottom: 16px;
+
+		a {
+			color: $color-gray;
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+}

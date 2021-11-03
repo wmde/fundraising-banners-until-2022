@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-export default function Slides( { currentDayName, formattedGoalDonationSumNumeric, progressBar, visitorsVsDonorsSentence } ) {
+export default function Slides( { currentDayName, formattedGoalDonationSumNumeric, progressBar, visitorsVsDonorsSentence, campaignDaySentence, overallImpressionCount } ) {
 	return <div className="navigation-wrapper">
 		<div className="mini-banner-carousel">
 			<div className="carousel-cell keen-slider__slide">
@@ -8,21 +8,29 @@ export default function Slides( { currentDayName, formattedGoalDonationSumNumeri
 				{ progressBar }
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>Liebe Leserinnen und Leser:</p>
-				<p>{ visitorsVsDonorsSentence } Wenn alle, die das
-					jetzt lesen, einen kleinen Beitrag leisten, wäre unsere Spendenkampagne am
-					heutigen { currentDayName } vorbei.</p>
+				<p>An alle, die Wikipedia in Deutschland nutzen:
+					Zum { overallImpressionCount } Mal seit langem möchten wir Sie an
+					diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
+					von Wikipedia zu sichern.</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>An diesem { currentDayName } sind Sie in Deutschland gefragt. Schon der Preis
-					einer Tasse Kaffee würde genügen.</p>
+				<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie
+					jetzt bitte nicht weg! { campaignDaySentence }</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun.</p>
+				<p>Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Schon mit
+					einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
-				<p>Wenn Sie Wikipedia nützlich finden, nehmen Sie sich an diesem { currentDayName } bitte
-					eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück.</p>
+				<p>
+					{ visitorsVsDonorsSentence } Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.
+				</p>
+			</div>
+			<div className="carousel-cell keen-slider__slide">
+				<p>
+					Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann
+					nehmen Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank.
+				</p>
 			</div>
 		</div>
 
