@@ -182,7 +182,7 @@ export default function DonationForm( props ) {
 				amount={ props.formatters.amountForServerFormatter( numericAmount ) }
 				interval={ paymentInterval }
 				paymentType={ paymentMethod }
-				impressionCounts={ props.impressionCounts }
+				addressType={ addressType }
 			/>
 		</form>
 	</div>;

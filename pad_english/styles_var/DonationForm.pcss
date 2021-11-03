@@ -141,9 +141,15 @@
 	.select-group-container--select-amount {
 		.select-group__option {
 			width: 12.5%;
+			@media ( min-width: $breakpoint_m ) {
+				width: 25%;
+			}
 
 			&--amount-other-input {
 				width: 25%;
+				@media ( min-width: $breakpoint_m ) {
+					width: 50%;
+				}
 			}
 		}
 	}
