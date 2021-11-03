@@ -2,6 +2,7 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BannerTransition from '../../shared/components/BannerTransition';
+import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Footer from '../../shared/components/ui/EasySelectFooter';
 import Infobox from '../../shared/components/ui/Infobox';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
@@ -9,16 +10,11 @@ import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/Funds
 import TranslationContext from '../../shared/components/TranslationContext';
 import { CampaignProjection } from '../../shared/campaign_projection';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import LanguageWarningBox from '../../shared/components/ui/LanguageWarningBox';
+import { BannerType } from '../../shared/BannerType';
 
 const PENDING = 0;
 const VISIBLE = 1;
 const CLOSED = 2;
-
-export const BannerType = Object.freeze( {
-	CTRL: Symbol( 'ctrl ' ),
-	VAR: Symbol( 'var' )
-} );
 
 export default class Banner extends Component {
 
@@ -55,7 +51,6 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			showLanguageWarning: false,
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
@@ -76,9 +71,7 @@ export default class Banner extends Component {
 
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		const languageWarningElement = document.querySelector( '.wmde-banner .lang-warning' );
-		languageWarningElement.style.top = bannerElement.offsetHeight;
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight + languageWarningElement.offsetHeight );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -89,6 +82,7 @@ export default class Banner extends Component {
 	}
 
 	onFinishedTransitioning = () => {
+		this.startProgressbar();
 		this.props.onFinishedTransitioning();
 	}
 
@@ -96,10 +90,14 @@ export default class Banner extends Component {
 		e.preventDefault();
 		this.setState( { displayState: CLOSED } );
 		this.props.onClose();
-	};
+	}
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
+	}
+
+	registerStartProgressbar = ( startPb ) => {
+		this.startProgressbar = startPb;
 	}
 
 	toggleFundsModal = () => {
@@ -107,15 +105,21 @@ export default class Banner extends Component {
 			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
 		}
 		this.setState( { isFundsModalVisible: !this.state.isFundsModalVisible } );
-	};
+	}
+
+	fundsModalDonate = () => {
+		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.setState( { isFundsModalVisible: false } );
+	}
 
 	onFormInteraction = () => {
-		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+		this.setState( { formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
+		const campaignProjection = props.campaignProjection;
 		return <div
 			className={ classNames( {
 				'wmde-banner': true,
@@ -147,6 +151,13 @@ export default class Banner extends Component {
 										bannerText={props.bannerText}
 										propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
 									/>
+									<ProgressBar
+										formatters={props.formatters}
+										daysLeft={campaignProjection.getRemainingDays()}
+										donationAmount={campaignProjection.getProjectedDonationSum()}
+										goalDonationSum={campaignProjection.goalDonationSum}
+										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+										setStartAnimation={ this.registerStartProgressbar }/>
 								</div>
 							</div>
 							<div className="banner__form">
@@ -159,19 +170,17 @@ export default class Banner extends Component {
 									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									onSubmit={props.onSubmit}
-									locale="de_DE"
+									locale="en_GB"
 								/>
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
-						<LanguageWarningBox
-							show={state.showLanguageWarning}
-						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
 			<FundsModal
 				toggleFundsModal={ this.toggleFundsModal }
+				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
 				locale='en'>
