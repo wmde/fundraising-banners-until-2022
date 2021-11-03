@@ -8,8 +8,9 @@ export default function BannerText( props ) {
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht
-			weg! { campaignDaySentence } Zum { overallImpressionCount }. Mal seit langem möchten wir Sie
-			an diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit von Wikipedia zu sichern. Insgesamt
+			weg! { campaignDaySentence } Dies ist der { overallImpressionCount }. Spendenaufruf,
+			den wir Ihnen zeigen. Am heutigen { currentDayName } bitten wir Sie bescheiden,
+			die Unabhängigkeit von Wikipedia zu sichern. Insgesamt
 			spenden 99% nichts - sie übergehen diesen Aufruf. Sollten Sie zu dem kleinen
 			Kreis gehören, die bereits gespendet haben, danken wir Ihnen sehr herzlich.
 

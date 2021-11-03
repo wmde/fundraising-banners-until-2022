@@ -9,9 +9,8 @@ export default function Slides( { currentDayName, formattedGoalDonationSumNumeri
 			</div>
 			<div className="carousel-cell keen-slider__slide">
 				<p>An alle, die Wikipedia in Deutschland nutzen:
-					Zum { overallImpressionCount } Mal seit langem möchten wir Sie an
-					diesem { currentDayName } bescheiden darum bitten, die Unabhängigkeit
-					von Wikipedia zu sichern.</p>
+					Dies ist der { overallImpressionCount }. Spendenaufruf, den wir Ihnen zeigen.
+					Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
 			</div>
 			<div className="carousel-cell keen-slider__slide">
 				<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie
