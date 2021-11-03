@@ -6,8 +6,9 @@ import TranslationContext from '../../../../shared/components/TranslationContext
 import { SelectGroup } from '../../../../shared/components/ui/form/SelectGroup';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
+import ChevronLeftIcon from '../ChevronLeftIcon';
 
-import { Intervals, PaymentMethods, AddressType } from './FormItemsBuilder';
+import { Intervals, PaymentMethods, AddressType } from '../FormItemsBuilder';
 import { isValid, isValidOrUnset } from '../../../../shared/components/ui/form/hooks/validation_states';
 import useAmountWithCustom from '../../../../shared/components/ui/form/hooks/use_amount';
 import useInterval from '../../../../shared/components/ui/form/hooks/use_interval';
@@ -34,7 +35,7 @@ export default function DonationForm( props ) {
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
-	const [ formAction, setUrl ] = useFormAction( props, { provadd: 1 } );
+	const [ formAction, setUrl ] = useFormAction( props, { locale: 'en_GB', ast: '1' } );
 
 	useEffect(
 		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
@@ -224,11 +225,10 @@ export default function DonationForm( props ) {
 			</div>
 
 			<div className="form-step-2">
-
+				<a href="#" className="back" onClick={ onFormBack }>
+					<ChevronLeftIcon/>
+				</a>
 				<label className="form-step-2-label">
-					<a href="#" className="back" onClick={ onFormBack }>
-						<i className="back__arrow"></i>
-					</a>
 					<div>
 						{ Translations[ 'address-type-label' ] }
 						<span className="form-step-2-notice"><br/>{ getFormNotice() }</span>

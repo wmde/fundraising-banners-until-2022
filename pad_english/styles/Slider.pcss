@@ -1,0 +1,148 @@
+.wmde-banner {
+	.banner__slideshow {
+		width: 100%;
+	}
+	.keen-slider {
+		flex: 0 0 100%;
+		display: flex;
+		width: 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		-webkit-touch-callout: none;
+		-khtml-user-select: none;
+		touch-action: pan-y;
+		-webkit-tap-highlight-color: transparent;
+		align-items: center;
+	}
+
+	.keen-slider,
+	.keen-slider__slide {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+	}
+
+	.keen-slider__slide {
+		width: 100%;
+		min-height: 100%;
+		min-width: calc( 100% + 0px );
+		max-width: calc( 100% + 0px );
+		box-sizing: border-box;
+		padding: 10px 26px;
+		cursor: grab;
+	}
+
+	.keen-slider__slide-content {
+		position: relative;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: grab;
+		font-family: $banner-text-font-family;
+		font-size: 17px;
+		text-align: center;
+		padding: 0 26px;
+
+		@media ( min-width: $breakpoint_m ) {
+			padding: 0 30px 0 30px;
+		}
+
+		.headline {
+			font-size: 22px;
+			line-height: 41px;
+
+			@media ( min-width: $breakpoint_xs ) {
+				font-size: 26px;
+			}
+		}
+	}
+
+	.keen-slider[ data-keen-slider-v ] {
+		flex-wrap: wrap;
+	}
+
+	.keen-slider[ data-keen-slider-v ] .keen-slider__slide {
+		width: 100%;
+	}
+
+	.keen-slider[ data-keen-slider-moves ] * {
+		pointer-events: none;
+	}
+
+	.slider-navigation-previous,
+	.slider-navigation-next {
+		position: absolute;
+		z-index: 30;
+		height: 40px;
+		line-height: 40px;
+		width: 16px;
+		top: 50%;
+		margin-top: -20px;
+	}
+
+	.slider-navigation-previous {
+		left: 16px;
+		text-align: left;
+	}
+
+	.slider-navigation-next {
+		right: 16px;
+		text-align: right;
+	}
+
+	.slideshow-application-of-funds-link {
+		position: absolute;
+		display: inline-block;
+		bottom: 14px;
+		left: 20px;
+		font-size: 12px;
+
+		@media ( min-width: $breakpoint_xs ) {
+			font-size: 15px;
+		}
+	}
+
+	.slider-container {
+		position: relative;
+		width: 100%;
+		padding-bottom: 28px;
+		@media ( min-width: $breakpoint_xs ) {
+			padding-bottom: 38px;
+		}
+	}
+
+	.pagination {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 38px;
+		margin: 0;
+		list-style: none;
+		text-align: center;
+		line-height: 1;
+
+		&-dot {
+			background: $color-gray-medium;
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			margin: 0 4px;
+			border: 4px solid $color-white;
+			border-radius: 50%;
+			cursor: pointer;
+			padding: 0;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: $color-white;
+				border: 3px solid $color-primary;
+			}
+		}
+	}
+}

@@ -1,10 +1,11 @@
-import FormItemsBuilder, { Intervals, PaymentMethods, AddressType } from './components/ui/form/FormItemsBuilder';
+import FormItemsBuilder, { Intervals, PaymentMethods, AddressType } from './components_var/ui/FormItemsBuilder';
 
 export function createFormItems( translations, amountFormatter ) {
 	const builder = new FormItemsBuilder( translations, amountFormatter );
 	builder.setIntervals(
 		Intervals.ONCE,
 		Intervals.MONTHLY,
+		Intervals.QUARTERLY,
 		Intervals.YEARLY
 	);
 	builder.setAmounts( 5, 10, 20, 25, 50, 100 );

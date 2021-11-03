@@ -1,33 +1,36 @@
 import { h } from 'preact';
+import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
+import ChevronLeftIcon from './ui/ChevronLeftIcon';
+import ChevronRightIcon from './ui/ChevronRightIcon';
 
 export default function BannerText( props ) {
-	const { weekdayPrepPhrase, currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, bannerSliderNext, bannerSliderPrevious, overallImpressionCount } = props;
 
 	return <div className="banner-text">
+		<a href="#" className="banner-slider-previous" onClick={ bannerSliderPrevious }><ChevronLeftIcon/></a>
 
-		<p className="text__headline text__headline--bold">
-			{/* eslint-disable-next-line max-len */}
-			<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" /> To all our readers in Germany.
-		</p>
+		<div className="navigation-wrapper">
+			<div className="mini-banner-carousel">
+				<p>
+					<img className="info-icon" src="https://upload.wikimedia.org/wikipedia/donate/9/99/RedInfoI.svg" alt="info_icon" width="16" height="16" />
+					<span className="text__headline--italic">To all our readers in Germany,</span>
+					<span>It might be a little awkward, but please don't scroll past
+				this. {campaignDaySentence} This {currentDayName}, for
+				the {getEnglishOrdinalSuffixOf( overallImpressionCount )} time
+				recently, we humbly ask you to defend Wikipedia's independence.
+			99% of our readers don't give; they simply look the other way.</span>
+				</p>
+				<p>If you are an exceptional reader who has already donated, we
+			sincerely thank you. We depend on donations averaging
+			about €21.60. {visitorsVsDonorsSentence}</p>
+				<p>If you donate just € 5, Wikipedia could keep thriving for years.
+			If Wikipedia has given you € 5 worth of knowledge this year, take a
+			minute to donate. Show the volunteers who bring you reliable,
+			neutral information that their work matters. Thank you.</p>
+			</div>
+			<div id="dots-navigation"></div>
 
-		<p className="text__paragraph text__paragraph--bold">
-			<span> It's a little awkward, so we'll get straight to the point:</span>
-			<span> { weekdayPrepPhrase } { currentDayName } we humbly ask you to protect Wikipedia's independence.</span>
-			<span> { campaignDaySentence} We depend on donations averaging about €&nbsp;22.81, but 99% of our readers
-				don't give. { visitorsVsDonorsSentence }
-			</span>
-
-			<span className="text__highlight text__headline--bold"> If everyone reading this gave a small amount, we could keep Wikipedia thriving for years to come.</span>
-
-			<span> The price of your { currentDayName } coffee is all we need.
-			When we made Wikipedia a non-profit, people warned us we'd regret it.
-			But if Wikipedia became commercial, it would be a great loss to the world.
-			Wikipedia is a place to learn, not a place for advertising.
-			It unites all of us who love knowledge: contributors, readers and the donors who keep us thriving.
-			The heart and soul of Wikipedia is a community of people working to bring you unlimited access to reliable,
-			neutral information.
-				Please take a minute to help us keep Wikipedia growing. Thank you!</span>
-		</p>
-
+		</div>
+		<a href="#" className="banner-slider-next" onClick={ bannerSliderNext }><ChevronRightIcon/></a>
 	</div>;
 }
