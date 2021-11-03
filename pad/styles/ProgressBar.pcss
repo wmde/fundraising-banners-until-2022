@@ -1,12 +1,13 @@
 .wmde-banner {
 	.progress_bar {
-		/* remove this when campaign starts */
-		display: none;
-		/* display: flex; */
+		display: flex;
 		padding: 0 32px 0;
 		position: absolute;
 		z-index: 10;
 		box-sizing: border-box;
+		bottom: 16px;
+		left: 0;
+		right: 0;
 
 		&__days_left {
 			visibility: hidden;
@@ -122,22 +123,6 @@
 			.progress_bar__wrapper {
 				margin-right: -20px;
 			}
-		}
-	}
-
-	&--ctrl {
-		.progress_bar {
-			bottom: 16px;
-			left: 0;
-			right: 0;
-		}
-	}
-
-	&--var {
-		.progress_bar {
-			bottom: 56px;
-			left: 9px;
-			right: 9px;
 		}
 	}
 }
