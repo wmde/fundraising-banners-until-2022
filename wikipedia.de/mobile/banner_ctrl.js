@@ -10,7 +10,7 @@ import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
-import Banner, { BannerType } from './Banner';
+import Banner, { BannerType } from './components/Banner';
 import Slides from './components/Slides';
 import BannerText from './components/BannerText';
 import DonationForm from './components/ui/form/DonationFormWithHeaders';
