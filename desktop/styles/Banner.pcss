@@ -46,74 +46,11 @@
 		}
 	}
 
-	.banner__close {
-		position: absolute;
-		z-index: 30;
-		top: 25px;
-		right: 15px;
-		font-size: 14px;
-		font-weight: bold;
-
-		@media ( min-width: $breakpoint_m ) {
-			right: 25px;
-		}
-
-		.close__link {
-			position: relative;
-			display: block;
-			color: $color-gray;
-			text-decoration: none;
-			height: 23px;
-			line-height: 24px;
-			padding-right: 30px;
-			transition: color 500ms $banner-easing;
-
-			&--large,
-			&--small {
-				display: none;
-			}
-
-			@media ( min-width: $breakpoint_l ) {
-				.close__link--small {
-					display: inline;
-				}
-			}
-
-			@media ( min-width: $breakpoint_xl ) {
-				.close__link--small {
-					display: none;
-				}
-				.close__link--large {
-					display: inline;
-				}
-			}
-
-			svg {
-				position: absolute;
-				top: 0;
-				right: 0;
-				height: 23px;
-				width: 22px;
-				path {
-					transition: fill 500ms $banner-easing;
-				}
-			}
-
-			&:hover,
-			&:focus {
-				color: $color-primary-light;
-				svg path {
-					fill: $color-primary-light;
-				}
-			}
-		}
-	}
-
 	.banner__inner {
 		position: relative;
 		border: 3px solid $color-primary;
-		border-bottom: 1px;
-		padding: 25px 0 0;
+		border-bottom: 0;
+		padding: 0;
 		overflow: hidden;
 		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Puzzle-compressed.png' ) bottom right;
 
@@ -181,42 +118,148 @@
 		}
 	}
 
-	.banner__slideshow,
-	.banner__content {
+	.content__slideshow,
+	.content__form,
+	.content__minimised {
 		position: relative;
 		z-index: 30;
+	}
+
+	.content__slideshow,
+	.content__form {
 		box-shadow: 0 0 5px rgba( 0, 0, 0, 0.1 );
 	}
 
-	.banner__slideshow {
+	.content__slideshow {
 		background: $color-white;
 	}
 
-	.banner__content {
+	.content__form {
 		display: none;
 		flex-wrap: wrap;
 		background: $color-gray-light;
 	}
 
-	&--form {
-		.banner__slideshow {
-			display: none;
+	.content__minimised {
+		display: none;
+		height: 40px;
+
+		&-text {
+			line-height: 16px;
+			padding: 4px 0;
+			flex-grow: 1;
+			flex-shrink: 1;
+			font-size: 12px;
+			font-family: $banner-serif;
+			text-shadow: -1px -1px 1px $color-white, 1px -1px 1px $color-white, -1px 1px 1px $color-white, 1px 1px 1px $color-white;
+
+			svg {
+				width: 16px;
+				height: 16px;
+				float: left;
+				margin: 8px 6px 0 0;
+			}
+
+			@media ( min-width: $breakpoint_xs ) {
+				line-height: 40px;
+				font-size: 14px;
+				padding: 0;
+
+				.content__minimised-text-break {
+					display: none;
+				}
+
+				svg {
+					margin: 12px 6px 0 0;
+				}
+			}
 		}
 
-		.banner__content {
-			display: flex;
+		&-controls {
+			text-align: right;
+			min-width: 330px;
+
+			&--maximise,
+			&--close {
+				float: left;
+			}
+
+			&--maximise {
+				background: $color-primary;
+				color: $color-white;
+				line-height: 24px;
+				font-weight: bold;
+				border-radius: 10px;
+				border: 0;
+				padding: 0 40px;
+				margin-top: 8px;
+
+				&:hover,
+				&:focus {
+					background: $color-primary-light;
+				}
+			}
+
+			&--close {
+				border: 0;
+				background: 0;
+				height: 40px;
+				width: 40px;
+				padding: 9px 8px;
+				margin-left: 10px;
+
+				@media ( min-width: $breakpoint_m ) {
+					margin-left: 100px;
+				}
+
+				svg {
+					float: right;
+				}
+			}
 		}
 	}
 
-	.banner__back {
-		width: 100%;
-		padding: 10px 20px;
+	&--content-form {
+		.content__slideshow {
+			display: none;
+		}
+
+		.content__form {
+			display: flex;
+		}
+
+		.content__minimised {
+			display: none;
+		}
+	}
+
+	&--content-minimised {
+		.content__slideshow {
+			display: none;
+		}
+
+		.content__form {
+			display: none;
+		}
+
+		.content__minimised {
+			display: flex;
+		}
+
+		.banner__inner-content-size-fitter {
+			margin: 0 20px;
+			background: bottom center url( 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Wikipedia-logo-version-2.png' ) no-repeat;
+		}
+
+		.banner__logo {
+			display: none;
+		}
 	}
 
 	.banner__infobox,
 	.banner__form {
 		position: relative;
-		padding: 0 20px 20px;
+		padding: 20px;
 		width: 100%;
 		@media ( min-width: $breakpoint_m ) {
 			width: 50%;
