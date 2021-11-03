@@ -1,0 +1,105 @@
+.wmde-banner {
+	.banner__navigation {
+		position: relative;
+		z-index: 20;
+		height: 44px;
+		line-height: 44px;
+		display: flex;
+		margin: 0 50px;
+		font-size: 14px;
+
+		@media ( min-width: $breakpoint_m ) {
+			margin: 0 100px;
+		}
+
+		@media ( min-width: $breakpoint_l ) {
+			margin: 0 200px;
+		}
+
+		@media ( min-width: $breakpoint_xl ) {
+			margin: 0 250px;
+		}
+	}
+
+	&--content-minimised {
+		.banner__navigation {
+			display: none;
+		}
+	}
+
+	.banner__back,
+	.banner__close {
+		width: 50%;
+	}
+
+	.back__link {
+		display: none;
+		font-weight: bold;
+		text-decoration: none;
+		text-shadow: -1px -1px 1px $color-white, 1px -1px 1px $color-white, -1px 1px 1px $color-white, 1px 1px 1px $color-white;
+	}
+
+	&--content-form .back__link {
+		display: inline;
+	}
+
+	.banner__close {
+		font-weight: bold;
+		text-align: right;
+
+		.minimise-link {
+			display: inline-block;
+			text-decoration: none;
+			color: $color-primary;
+
+			svg {
+				margin-top: 14px;
+				margin-right: 5px;
+				float: left;
+				path {
+					fill: $color-primary;
+					transition: fill 500ms $banner-easing;
+				}
+			}
+
+			&:hover,
+			&:focus {
+				color: $color-primary-light;
+
+				svg {
+					path {
+						fill: $color-primary-light;
+					}
+				}
+			}
+		}
+
+		.close-link {
+			float: right;
+			display: inline-block;
+			color: $color-gray;
+			text-decoration: none;
+			height: 44px;
+			width: 22px;
+			padding: 10px 0;
+			margin-left: 16px;
+
+			svg {
+				float: right;
+				height: 23px;
+				width: 22px;
+				margin-top: 1px;
+				path {
+					transition: fill 500ms $banner-easing;
+				}
+			}
+
+			&:hover,
+			&:focus {
+				svg path {
+					fill: $color-primary-light;
+				}
+			}
+		}
+	}
+}
