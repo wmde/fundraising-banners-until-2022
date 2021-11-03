@@ -10,15 +10,12 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 
-import Banner, { BannerType } from './components/Banner';
-import Slides from './components/Slides';
-import BannerText from './components/BannerText';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
-import FullpageBanner from './components/FullpageBanner';
+import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
+import { BannerType } from '../shared/BannerType';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -42,10 +39,6 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
-		bannerText: BannerText,
-		slides: Slides,
-		fullpageBanner: FullpageBanner,
-		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),

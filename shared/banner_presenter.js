@@ -65,6 +65,9 @@ export default class BannerPresenter {
 				...props,
 				trackingData: this.trackingData,
 				impressionCounts: this.impressionCounts,
+				getBannerDimensions: () => {
+					return sizeIssueIndicator.getDimensions( bannerElement.offsetHeight );
+				},
 				onClose: () => {
 					this.trackingData.tracker.trackViewPortDimensions(
 						'banner-closed',

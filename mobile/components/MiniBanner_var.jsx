@@ -1,33 +1,52 @@
 import { h } from 'preact';
+import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
-import ChevronRightIcon from './ui/ChevronRightIcon';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
-import Slides from './Slides_var';
-import DayName from '../../shared/day_name';
+import ClockIcon from './ui/ClockIcon';
+import CloseIcon from './ui/CloseIcon';
 import Slider from '../../shared/components/Slider';
+import Slides from './Slides';
 
 export default function MiniBanner( props ) {
-	const dayName = new DayName( new Date() );
-	const currentDayName = props.translations[ dayName.getDayNameMessageKey() ];
+	const campaignProjection = props.campaignProjection;
+	const ProgressBarComponent = <ProgressBar
+		formatters={props.formatters}
+		daysLeft={campaignProjection.getRemainingDays()}
+		donationAmount={campaignProjection.getProjectedDonationSum()}
+		goalDonationSum={campaignProjection.goalDonationSum}
+		missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+		setStartAnimation={props.setStartAnimation}
+		animate={true}
+		amountToShowOnRight={AmountToShowOnRight.MISSING}
+	/>;
+
 	return <div className="mini-banner">
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
-				<button className="close-button" onClick={props.onClose}>schließen</button>
+				<div className="banner__close">
+					<a className="minimise-link" onClick={ props.onMinimise }>
+						<ClockIcon/> <span className="minimise-link-text">{ props.translations[ 'minimise-button' ] }</span>
+					</a>
+					<button className="close-button" onClick={ props.onClose }><CloseIcon/></button>
+				</div>
+
+				<header className="headline">
+					<div className="headline__container">
+						<span className="headline__content">{ props.sliderHeading }</span>
+					</div>
+				</header>
 
 				<div className="banner__slideshow">
 					<Slider
-						slides={ Slides( currentDayName, props.showModal ) }
+						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
 						onSlideChange={ props.onSlideChange }
-						registerAutoplay={ props.registerAutoplayCallbacks }
+						registerAutoplay={ props.registerSliderAutoplayCallbacks }
 						interval={ props.sliderAutoPlaySpeed }
-						previous={ <ChevronLeftIcon/> }
-						next={ <ChevronRightIcon/> }
 					/>
 				</div>
 
 				<div className="mini-banner__tab">
 					<button className="mini-banner__tab-inner mini-banner__button" onClick={props.onExpandFullpage}>
-						Jetzt unterstützen <span className="mini-banner__button-icon"><ChevronRightIcon/></span>
+						Jetzt spenden
 					</button>
 				</div>
 			</div>
@@ -36,11 +55,11 @@ export default function MiniBanner( props ) {
 }
 
 MiniBanner.propTypes = {
+	slides: PropTypes.element,
 	onClose: PropTypes.func,
 	formatters: PropTypes.object,
 	campaignProjection: PropTypes.any,
 	campaignParameters: PropTypes.object,
 	startAnimation: PropTypes.func,
-	onExpandFullpage: PropTypes.func,
-	sliderAutoPlaySpeed: PropTypes.number
+	onExpandFullpage: PropTypes.func
 };
