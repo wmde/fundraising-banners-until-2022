@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 import BannerTransition from '../../shared/components/BannerTransition';
 import ProgressBar from './ui/ProgressBar';
 import CloseIcon from './ui/CloseIcon';
+import ClockIcon from './ui/ClockIcon';
 import FundsDistributionInfo from '../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../shared/components/TranslationContext';
 import debounce from '../../shared/debounce';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import SlideState from '../../shared/slide_state';
 import { BannerType } from '../BannerType';
 import ContentSlideshow from './ui/ContentSlideshow';
 import ContentForm from './ui/ContentForm';
+import ContentMinimised from './ui/ContentMinimised';
+import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
 
 const SLIDESHOW_START_DELAY = 2000;
@@ -26,7 +28,8 @@ const BannerVisibilityState = Object.freeze( {
 
 const BannerContentState = Object.freeze( {
 	SLIDES: Symbol( 'slides' ),
-	FORM: Symbol( 'form' )
+	FORM: Symbol( 'form' ),
+	MINIMISED: Symbol( 'minimised' )
 } );
 
 export class Banner extends Component {
@@ -43,12 +46,13 @@ export class Banner extends Component {
 	bannerRef = createRef();
 	contentSlideshowRef = createRef();
 	contentFormRef = createRef();
+	contentMinimisedRef = createRef();
 
 	constructor( props ) {
 		super( props );
 		this.state = {
-			bannerVisibilityState: BannerVisibilityState.PENDING,
-			bannerContentState: BannerContentState.SLIDES,
+			bannerVisibility: BannerVisibilityState.PENDING,
+			bannerContentState: this.props.minimisedPersistence.isMinimised() ? BannerContentState.MINIMISED : BannerContentState.SLIDES,
 			isFundsModalVisible: false,
 			contentSize: 'auto',
 
@@ -73,6 +77,9 @@ export class Banner extends Component {
 			() => {
 				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
 				this.slideInBanner();
+				if ( this.props.minimisedPersistence.isMinimised() ) {
+					this.trackBannerEventWithViewport( 'restored-to-minimised-' + this.props.bannerName );
+				}
 			}
 		);
 		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
@@ -85,6 +92,14 @@ export class Banner extends Component {
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1,
 			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	trackBannerEventWithViewport( eventName ) {
+		this.props.trackingData.tracker.trackViewportData(
+			eventName,
+			this.props.getBannerDimensions(),
+			1
 		);
 	}
 
@@ -103,9 +118,17 @@ export class Banner extends Component {
 	}
 
 	setContentSize() {
-		let height = this.contentSlideshowRef.current.clientHeight;
-		if ( this.state.bannerContentState === BannerContentState.FORM ) {
-			height = this.contentFormRef.current.clientHeight;
+		let height;
+		switch ( this.state.bannerContentState ) {
+			case BannerContentState.FORM:
+				height = this.contentFormRef.current.clientHeight;
+				break;
+			case BannerContentState.MINIMISED:
+				height = this.contentMinimisedRef.current.clientHeight;
+				break;
+			default:
+				height = this.contentSlideshowRef.current.clientHeight;
+				break;
 		}
 		this.setState( { contentSize: `${height}px` } );
 	}
@@ -127,6 +150,7 @@ export class Banner extends Component {
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.minimisedPersistence.removeMinimised();
 		this.props.onClose(
 			this.slideState.slidesShown,
 			this.slideState.currentSlide
@@ -169,6 +193,20 @@ export class Banner extends Component {
 		this.stopSliderAutoplay();
 	}
 
+	minimiseBanner = e => {
+		e.preventDefault();
+		this.setState( { bannerContentState: BannerContentState.MINIMISED }, this.setContentSize );
+		this.trackBannerEventWithViewport( 'minimised-' + this.props.bannerName );
+		this.props.minimisedPersistence.setMinimised();
+		this.stopSliderAutoplay();
+	}
+
+	maximiseBannerToForm = e => {
+		e.preventDefault();
+		this.setState( { bannerContentState: BannerContentState.FORM }, this.setContentSize );
+		this.trackBannerEventWithViewport( 'maximised-' + this.props.bannerName );
+	}
+
 	showSlides = e => {
 		e.preventDefault();
 		this.setState( { bannerContentState: BannerContentState.SLIDES }, this.setContentSize );
@@ -190,6 +228,7 @@ export class Banner extends Component {
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 				'wmde-banner--content-slides': state.bannerContentState === BannerContentState.SLIDES,
 				'wmde-banner--content-form': state.bannerContentState === BannerContentState.FORM,
+				'wmde-banner--content-minimised': state.bannerContentState === BannerContentState.MINIMISED,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
@@ -211,8 +250,11 @@ export class Banner extends Component {
 									</a>
 								</div>
 								<div className="banner__close">
+									<a className="minimise-link" onClick={ this.minimiseBanner }>
+										<ClockIcon/> <span className="minimise-link-text">{ props.translations[ 'minimise-button' ] }</span>
+									</a>
 									<a className="close-link" onClick={ this.closeBanner }>
-										{ props.translations[ 'close-button' ] } <CloseIcon/>
+										<CloseIcon/>
 									</a>
 								</div>
 							</div>
@@ -222,18 +264,20 @@ export class Banner extends Component {
 							<div className="banner__inner-content-size-fitter" style={ `height:${ state.contentSize }` } onTransitionEnd={ () => {
 								this.onPageResize();
 							} }>
-								<ContentSlideshow
-									ref={ this.contentSlideshowRef }
-									campaignParameters={ props.campaignParameters }
-									campaignProjection={ props.campaignProjection }
-									formatters={ props.formatters }
-									slideshowSlideInterval={ SLIDESHOW_SLIDE_INTERVAL }
-									toggleFundsModal={ this.toggleFundsModal }
-									showDonationForm={ this.showDonationForm }
-									registerAutoplayCallbacks={ this.registerAutoplayCallbacks }
-									onSlideChange={ this.onSlideChange }
-									dynamicCampaignText={ this.dynamicCampaignText }
-								/>
+								{ state.bannerContentState === BannerContentState.SLIDES && (
+									<ContentSlideshow
+										ref={ this.contentSlideshowRef }
+										campaignParameters={ props.campaignParameters }
+										campaignProjection={ props.campaignProjection }
+										formatters={ props.formatters }
+										slideshowSlideInterval={ SLIDESHOW_SLIDE_INTERVAL }
+										toggleFundsModal={ this.toggleFundsModal }
+										showDonationForm={ this.showDonationForm }
+										registerAutoplayCallbacks={ this.registerAutoplayCallbacks }
+										onSlideChange={ this.onSlideChange }
+										dynamicCampaignText={ this.dynamicCampaignText }
+									/>
+								) }
 								<ContentForm
 									ref={ this.contentFormRef }
 									formatters={ props.formatters }
@@ -253,6 +297,11 @@ export class Banner extends Component {
 									onSubmit={ props.onSubmit }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
+								/>
+								<ContentMinimised
+									ref={ this.contentMinimisedRef }
+									maximiseBannerToForm={ this.maximiseBannerToForm }
+									closeBanner={ this.closeBanner }
 								/>
 							</div>
 							<Footer/>

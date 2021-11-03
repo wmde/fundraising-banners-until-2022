@@ -1,9 +1,11 @@
+import hasLocalStorage from './has_local_storage';
+
 export class LocalImpressionCount {
 	constructor( bannerName ) {
 		this.bannerName = bannerName;
 		this.overallCount = 0;
 		this.bannerCount = 0;
-		if ( !this.hasLocalStorage() ) {
+		if ( !hasLocalStorage() ) {
 			return;
 		}
 		let overallCount = this.getItem( 'fundraising.overallCount', 0 );
@@ -35,7 +37,7 @@ export class LocalImpressionCount {
 		this.overallCount++;
 		this.bannerCount++;
 
-		if ( !this.hasLocalStorage() ) {
+		if ( !hasLocalStorage() ) {
 			return;
 		}
 
@@ -45,28 +47,6 @@ export class LocalImpressionCount {
 		} catch ( e ) {
 			// Don't throw localStorage exceptions
 		}
-	}
-
-	/**
-	 * The try/catch is to check for browsers that explicitly have localStorage blocked
-	 * as the window still has the object but throws an exception when we try to use it
-	 *
-	 * @return {boolean}
-	 */
-	hasLocalStorage() {
-		if ( this.localStorageActive !== undefined ) {
-			return this.localStorageActive;
-		}
-
-		try {
-			window.localStorage.setItem( 'mDQcDkrbb2', 'mDQcDkrbb2' );
-			window.localStorage.removeItem( 'mDQcDkrbb2' );
-			this.localStorageActive = true;
-		} catch ( e ) {
-			this.localStorageActive = false;
-		}
-
-		return this.localStorageActive;
 	}
 
 	getOverallCount() {

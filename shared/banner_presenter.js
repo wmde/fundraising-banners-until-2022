@@ -41,13 +41,13 @@ export default class BannerPresenter {
 		}.bind( this );
 	}
 
-	present( Banner, bannerContainer, props, minimumHeight, minimumWidth = 0 ) {
+	present( Banner, bannerContainer, props, sizeIssueThreshold ) {
 		const skinAdjuster = getSkinAdjuster();
 
-		if ( !minimumHeight ) {
-			minimumHeight = skinAdjuster.getSizeIssueThreshold();
+		if ( sizeIssueThreshold === undefined ) {
+			sizeIssueThreshold = skinAdjuster.getSizeIssueThreshold();
 		}
-		const sizeIssueIndicator = new SizeIssueIndicator( minimumHeight, minimumWidth );
+		const sizeIssueIndicator = new SizeIssueIndicator( sizeIssueThreshold );
 
 		if ( onMediaWiki() &&
 			( !mediaWikiIsShowingContentPage() || mediaWikiMainContentIsHiddenByLightbox() ) ) {
@@ -65,6 +65,9 @@ export default class BannerPresenter {
 				...props,
 				trackingData: this.trackingData,
 				impressionCounts: this.impressionCounts,
+				getBannerDimensions: () => {
+					return sizeIssueIndicator.getDimensions( bannerElement.offsetHeight );
+				},
 				onClose: () => {
 					this.trackingData.tracker.trackViewPortDimensions(
 						'banner-closed',
@@ -103,16 +106,16 @@ export default class BannerPresenter {
 		this.trackingData.tracker.trackViewPortDimensions(
 			VIEWPORT_TRACKING_IDENTIFIER,
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-			this.trackingData.viewportDimensionsTrackRatio
+			this.trackingData.sizeTrackRatio
 		);
-		console.log( sizeIssueIndicator.hasSizeIssues( bannerElement ) );
+
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
 			if ( onMediaWiki() ) {
 				mw.centralNotice.setBannerLoadedButHidden();
 			}
 			this.trackingData.tracker.trackSizeIssueEvent(
 				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-				this.trackingData.sizeIssueTrackRatio
+				this.trackingData.sizeTrackRatio
 			);
 			return;
 		}
