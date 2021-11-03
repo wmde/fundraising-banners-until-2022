@@ -1,107 +1,45 @@
-$progress-bar-height: 30px;
-
 .wmde-banner {
 	.progress_bar {
-		display: none;
-		/* switch back when campaign starts
-		display: flex; */
-		font-family: $banner-main-font-family;
-		font-size: 12px;
-		line-height: $progress-bar-height;
+		background: $color-white;
+		border: 3px solid $color-primary;
+		border-top: 0;
+		border-radius: 0 0 10px 10px;
+		font-size: 14px;
 
-		&__days_left,
-		&__donation_text,
-		&__donation_remaining {
-			opacity: 0;
-			visibility: hidden;
-		}
-
-		&__days_left {
-			font-weight: bold;
-			padding-left: 5px;
-
-			display: block;
-			color: $color-white;
-			line-height: 1.9em;
-		}
 		&__wrapper {
 			position: relative;
-			height: $progress-bar-height;
 			display: flex;
-			justify-content: space-between;
-			flex: 1;
-			border-top: 1px solid $color-secondary-light;
-			border-bottom: 1px solid $color-secondary-light;
-			background-color: $color-secondary-lighter;
-		}
-		&__donation_fill {
-			width: 0;
-			min-width: 5em;
-			max-width: 100%;
-			display: flex;
-			justify-content: space-between;
-
-			background: $color-secondary;
-			height: $progress-bar-height;
-			border-radius: 0 15px 15px 0;
-			transition: width 3000ms $banner-easing;
-		}
-		&__donation_text {
-			text-align: right;
-			font-weight: bold;
-			overflow: hidden;
-			padding-right: 16px;
-			flex: 1;
-			color: $color-white;
+			height: 26px;
+			line-height: 26px;
 			white-space: nowrap;
-
-			transition: opacity 300ms $banner-easing;
 		}
+
+		&__donation_fill,
+		&__donation_remaining {
+			height: 100%;
+			transition: width 3000ms $banner-easing, color 250ms $banner-easing;
+			color: transparent;
+		}
+
+		&__donation_fill {
+			background: $progressbar-gradient;
+			min-width: 120px;
+			padding-right: 16px;
+			text-align: right;
+			border-radius: 0 13px 13px 0;
+		}
+
 		&__donation_remaining {
 			padding: 0 10px;
-			text-align: right;
-			font-weight: bold;
-			white-space: nowrap;
-
-			color: $color-black;
-		}
-		&__pointer_tip {
-			width: 5px;
-			height: 5px;
-			background: #000000;
-			float: left;
-			border-radius: 100%;
-
-			margin-top: 9px;
-		}
-
-		&__pointer_line {
-			float: left;
-			width: 25px;
-			background: #000000;
-			margin: 11px 2px 0 0;
-		}
-		&__donation_remaining--outer {
-			display: none;
-			position: relative;
-			font-weight: bold;
-
-			padding-top: 9px;
 		}
 
 		&--finished {
-			.progress_bar__days_left,
-			.progress_bar__donation_text,
-			.progress_bar__donation_remaining {
-				opacity: 1;
-				visibility: visible;
+			.progress_bar__donation_fill {
+				color: $color-white;
 			}
-		}
 
-		@media ( max-width: 600px ) {
-			.progress_bar__days_left,
-			.progress_bar--finished .progress_bar__days_left {
-				display: none;
+			.progress_bar__donation_remaining {
+				color: $color-primary;
 			}
 		}
 	}

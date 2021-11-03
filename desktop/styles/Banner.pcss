@@ -1,6 +1,10 @@
 .wmde-banner {
 	visibility: hidden;
+	font-family: $banner-sans-serif;
+	color: $color-black-light;
 	width: 100%;
+	z-index: 10;
+	box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 
 	* {
 		box-sizing: border-box;
@@ -8,60 +12,353 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	&--visible {
-		visibility: visible;
-	}
 	&--hidden {
 		display: none;
+	}
+	&--minimised {
+		.banner__inner {
+			display: none;
+		}
+	}
+
+	.banner-position--state-finished {
+		max-height: 100%;
+		overflow-y: auto;
 	}
 
 	img {
 		border: 0 none;
 	}
 
-	ul {
-		list-style-image: unset;
+	button {
+		cursor: pointer;
+		transition: background 500ms $banner-easing;
 	}
 
-	.banner__wrapper {
+	a {
+		text-decoration: underline;
+		color: $color-gray;
+		transition: color 500ms $banner-easing;
+
+		&:hover,
+		&:focus {
+			color: $color-primary-light;
+		}
+	}
+
+	.banner__close {
+		position: absolute;
+		z-index: 30;
+		top: 25px;
+		right: 15px;
 		font-size: 14px;
-		font-family: $banner-main-font-family;
-		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
-		background-color: $color-white;
+		font-weight: bold;
+
+		@media ( min-width: $breakpoint_m ) {
+			right: 25px;
+		}
+
+		.close__link {
+			position: relative;
+			display: block;
+			color: $color-gray;
+			text-decoration: none;
+			height: 23px;
+			line-height: 24px;
+			padding-right: 30px;
+			transition: color 500ms $banner-easing;
+
+			&--large,
+			&--small {
+				display: none;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				.close__link--small {
+					display: inline;
+				}
+			}
+
+			@media ( min-width: $breakpoint_xl ) {
+				.close__link--small {
+					display: none;
+				}
+				.close__link--large {
+					display: inline;
+				}
+			}
+
+			svg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 23px;
+				width: 22px;
+				path {
+					transition: fill 500ms $banner-easing;
+				}
+			}
+
+			&:hover,
+			&:focus {
+				color: $color-primary-light;
+				svg path {
+					fill: $color-primary-light;
+				}
+			}
+		}
+	}
+
+	.banner__inner {
+		position: relative;
+		border: 3px solid $color-primary;
+		border-bottom: 1px;
+		padding: 25px 0 0;
+		overflow: hidden;
+		background: url( 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Puzzle-compressed.png' ) bottom right;
+
+		&-content-size-fitter {
+			margin: 0 50px;
+
+			@media ( min-width: $breakpoint_m ) {
+				margin: 0 100px;
+			}
+
+			@media ( min-width: $breakpoint_l ) {
+				margin: 0 200px;
+			}
+
+			@media ( min-width: $breakpoint_xl ) {
+				margin: 0 250px;
+			}
+		}
+	}
+
+	&--visible {
+		visibility: visible;
+		.banner__inner-content-size-fitter {
+			transition: height 500ms $banner-easing;
+		}
+	}
+
+	.banner__logo {
+		display: none;
+		position: absolute;
+		z-index: 10;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		padding-top: 25px;
+		padding-left: 20px;
+		width: 360px;
+		overflow: hidden;
+		background: url( 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAABCAYAAADzaTTzAAABgWlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kb9LQlEUxz9qUZRRUUNDg4Q1VZiC1BKkhAURYgb9WvT5K1B7vGeEtAatQkHU0q+h/oJag+YgKIogmhqai1pKXuepoETeyznnc7/3nsO954I1nFYyeoMLMtmcFgr4HAuLS46mV1rpFLPhiSi6OhEMzlB3fD1gMePdkFmr/rl/R2ssritgaRYeV1QtJzwlPLORU03eFe5WUpGY8LnwoCYXFL439WiZ30xOlvnHZC0c8oO1Q9iRrOFoDSspLSMsL8eZSa8rlfuYL7HHs/NzEvvEetEJEcCHg2km8eNlhDHxXoZwMywr6uS7SvmzrEmuIl4lj8YqSVLkGBR1XarHJSZEj8tMkzf7/7evesLjLle3+6DxxTA++qFpB4oFw/g+NoziCdie4SpbzV87gtFP0QtVzXkI7VtwcV3VontwuQ09T2pEi5Qkm5g1kYD3M2hbhK5baFku96yyz+kjhDflq25g/wAG5Hz7yi8/7WfU3wDDigAAAAlwSFlzAAALEwAACxMBAJqcGAAAANNJREFUOI19lEsWwyAMA4f0JL3/GQPd1K8T1eANxJEt+ZMM4M3PJnABCxjsrXCJr9N+9C5xS7i63+Ieui/lg6c++9OSj7g71/pqHzz13cAr6vP7ueFEGNew037Fs/uSPa8T6em4d/V6JoUdPOdhrXWaq5tn1THj7r7lrjg/8lfsaR+9QzWrrLFwOQv4703WfJr5bqeyV13vMqbbUeu0eU8yZ+WxL7W6D9Zx+kZ3XJ11O5g81prY9Cdf/jc8n+TscuzmvfM77oQpHVlHp6Xbf8dfwPwAw7yCAqYFuBUAAAAASUVORK5CYII=' ) top left repeat-y;
+
+		@media ( min-width: $breakpoint_m ) {
+			display: block;
+		}
+	}
+
+	.footer {
+		position: relative;
+		z-index: 20;
+		bottom: 0;
+		min-height: 40px;
+		line-height: 16px;
+		padding: 12px 0;
+		left: 50px;
+
+		@media ( min-width: $breakpoint_m ) {
+			left: 100px;
+		}
+
+		@media ( min-width: $breakpoint_l ) {
+			left: 200px;
+		}
+
+		@media ( min-width: $breakpoint_xl ) {
+			left: 250px;
+		}
+	}
+
+	.banner__slideshow,
+	.banner__content {
+		position: relative;
+		z-index: 30;
+		box-shadow: 0 0 5px rgba( 0, 0, 0, 0.1 );
+	}
+
+	.banner__slideshow {
+		background: $color-white;
 	}
 
 	.banner__content {
-		display: flex;
-		flex-direction: row;
-		padding: 12px 24px 0;
+		display: none;
+		flex-wrap: wrap;
+		background: $color-gray-light;
+	}
+
+	&--form {
+		.banner__slideshow {
+			display: none;
+		}
+
+		.banner__content {
+			display: flex;
+		}
+	}
+
+	.banner__back {
+		width: 100%;
+		padding: 10px 20px;
+	}
+
+	.banner__infobox,
+	.banner__form {
+		position: relative;
+		padding: 0 20px 20px;
+		width: 100%;
+		@media ( min-width: $breakpoint_m ) {
+			width: 50%;
+		}
 	}
 
 	.banner__form {
-		flex: 0 0 $form-width;
-		display: flex;
-		flex-direction: row;
-		width: $form-width;
+		padding-bottom: 66px;
+
+		@media ( min-width: $breakpoint_m ) {
+			padding-bottom: 20px;
+		}
 	}
 
-	.close {
-		position: absolute;
-		width: 30px;
-		height: 30px;
-		line-height: 30px;
-		text-align: center;
-		top: 8px;
-		right: 8px;
-		z-index: 1;
-
-		&__link {
+	.banner__infobox {
+		display: none;
+		@media ( min-width: $breakpoint_m ) {
 			display: block;
-			width: 100%;
-			font-size: 25px;
-			color: $color-black-light;
-			text-decoration: none;
-			&:hover {
-				text-decoration: none;
-				color: $color-gray-medium;
+		}
+	}
+
+	.back__link {
+		position: relative;
+		padding-left: 8px;
+		svg {
+			position: absolute;
+			left: 0;
+			top: 50%;
+			margin-top: -3px;
+			height: 7px;
+			width: 4px;
+		}
+		path {
+			fill: $color-gray;
+			transition: fill 500ms $banner-easing;
+		}
+
+		&:hover,
+		&:focus {
+			path {
+				fill: $color-primary-light;
+			}
+		}
+	}
+
+	.banner-button__next,
+	.button-group__button {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		font-size: 18px;
+		font-weight: bold;
+		border: 0;
+		border-radius: 10px;
+		height: 44px;
+		line-height: 44px;
+		padding: 0 54px 0 29px;
+		color: $color-white;
+
+		@media ( min-width: $breakpoint_m ) {
+			bottom: -22px;
+			right: -70px;
+		}
+
+		@media ( min-width: $breakpoint_l ) {
+			right: -110px;
+		}
+
+		svg {
+			position: absolute;
+			width: 22px;
+			height: 14px;
+			right: 20px;
+			top: 50%;
+			margin-top: -5px;
+			transition: margin-top 500ms $banner-easing, right 500ms $banner-easing;
+		}
+	}
+
+	.banner-button__next {
+		background: $color-primary;
+		font-size: 14px;
+		bottom: 10px;
+		right: 10px;
+		height: 34px;
+		line-height: 34px;
+		padding: 0 34px 0 10px;
+
+		svg {
+			right: 10px;
+			width: 11px;
+			height: 7px;
+			margin-top: -3px;
+		}
+
+		@media ( min-width: $breakpoint_xs ) {
+			font-size: 18px;
+			height: 44px;
+			line-height: 44px;
+			padding: 0 54px 0 29px;
+
+			svg {
+				width: 22px;
+				height: 14px;
+				right: 20px;
+				margin-top: -5px;
+			}
+		}
+
+		@media ( min-width: $breakpoint_m ) {
+			bottom: -22px;
+			right: -70px;
+		}
+
+		&:hover,
+		&:focus {
+			background: $color-primary-light;
+			svg {
+				margin-top: -3px;
+			}
+		}
+	}
+
+	.button-group__button {
+		background: $color-gray;
+		&.is-valid,
+		&.is-valid:hover,
+		&.is-valid:focus {
+			background: $color-primary;
+		}
+		svg {
+			height: 23px;
+			margin-top: -11px;
+			path {
+				fill: $color-white;
+			}
+		}
+		&:hover,
+		&:focus {
+			background: $color-gray-dark;
+			svg {
+				right: 17px;
 			}
 		}
 	}
