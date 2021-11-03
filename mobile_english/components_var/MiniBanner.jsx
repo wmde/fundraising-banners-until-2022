@@ -27,7 +27,7 @@ export default function MiniBanner( props ) {
 
 				<header className="headline">
 					<div className="headline__container">
-						<span className="headline__content">{ props.sliderHeading }</span>
+						<span className="headline__content">The Wikimedia Fundraising Campaign</span>
 					</div>
 				</header>
 
