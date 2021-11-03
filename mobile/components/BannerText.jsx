@@ -8,7 +8,7 @@ export default function BannerText( props ) {
 		</p>
 		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! { campaignDaySentence }</p>
 		<p>
-			Zum { overallImpressionCount } Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
+			Zum { overallImpressionCount }. Mal seit langem möchten wir Sie an diesem { currentDayName } bescheiden darum bitten,
 			die Unabhängigkeit von Wikipedia zu sichern. Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. Sollten Sie
 			zu dem kleinen Kreis gehören, die bereits gespendet haben, danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden
 			von durchschnittlich 21,60&nbsp;€ finanziert. Schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
