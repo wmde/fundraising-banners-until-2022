@@ -19,7 +19,7 @@ export default function Slides( dynamicCampaignText ) {
 			</p>
 		</div> },
 		{ content: <div>
-			<p>{ visitorsVsDonorsSentence } Die meisten Menschen spenden, weil Sie Wikipedia nützlich finden. Schon mit einer Spende
+			<p>{ visitorsVsDonorsSentence } Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Schon mit einer Spende
 				von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.
 			</p>
 		</div> },
