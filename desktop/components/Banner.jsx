@@ -155,7 +155,7 @@ export class Banner extends Component {
 
 	fundsModalDonate = () => {
 		this.trackBannerEvent( 'funds-modal-donate-clicked' );
-		this.setState( { isFundsModalVisible: false } );
+		this.setState( { isFundsModalVisible: false, bannerContentState: BannerContentState.FORM }, this.setContentSize );
 	};
 
 	onFormInteraction = () => {
