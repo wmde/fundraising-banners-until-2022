@@ -4,6 +4,7 @@ import debounce from '../../shared/debounce';
 
 import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './MiniBanner';
+import MinimisedBanner from './MinimisedBanner';
 import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
@@ -33,6 +34,7 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
+			isMinimised: this.props.minimisedPersistence.isMinimised(),
 			isFullPageVisible: false,
 			isFundsModalVisible: false
 		};
@@ -62,6 +64,9 @@ export default class Banner extends Component {
 			() => {
 				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
+				if ( this.props.minimisedPersistence.isMinimised() ) {
+					this.trackBannerEventWithDimensions( 'restored-to-minimised' );
+				}
 			}
 		);
 
@@ -73,6 +78,14 @@ export default class Banner extends Component {
 			eventName,
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	trackBannerEventWithDimensions( eventName ) {
+		this.props.trackingData.tracker.trackViewPortDimensions(
+			eventName,
+			this.props.getBannerDimensions(),
 			this.props.trackingData.bannerClickTrackRatio
 		);
 	}
@@ -91,9 +104,26 @@ export default class Banner extends Component {
 		}
 	}
 
+	minimiseBanner = e => {
+		e.preventDefault();
+		this.setState( { isMinimised: true }, this.setContentSize );
+		this.trackBannerEventWithDimensions( 'minimised' );
+		this.props.minimisedPersistence.setMinimised();
+	}
+
+	maximiseBannerToForm = e => {
+		e.preventDefault();
+		this.trackBannerEventWithDimensions( 'maximised' );
+		this.showFullPageBanner();
+	}
+
+	showFullPageBannerFromMiniBanner = e => {
+		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
+		this.showFullPageBanner( e );
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
-		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.stopSliderAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
@@ -117,6 +147,7 @@ export default class Banner extends Component {
 
 	fundsModalDonate = e => {
 		e.preventDefault();
+		this.trackBannerEvent( 'funds-modal-donate-clicked' );
 		this.setState( { isFundsModalVisible: false } );
 		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
 		if ( startOfForm ) {
@@ -148,6 +179,7 @@ export default class Banner extends Component {
 			isFullPageVisible: false
 		} );
 		this.props.onClose();
+		this.props.minimisedPersistence.removeMinimised();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -166,7 +198,6 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
-
 		return <div className={classNames( {
 			'wmde-banner': true,
 			'wmde-banner--hidden': state.displayState === CLOSED,
@@ -185,17 +216,21 @@ export default class Banner extends Component {
 					ref={this.miniBannerTransitionRef}
 					transitionSpeed={ 1000 }
 				>
-					<MiniBanner
+					{ state.isMinimised && ( <MinimisedBanner
+						maximiseBannerToForm={ this.maximiseBannerToForm }
+						closeBanner={ this.closeBanner }
+					/> ) }
+					{ !state.isMinimised && ( <MiniBanner
 						{ ...props }
 						onClose={ this.closeBanner }
+						onMinimise={ this.minimiseBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBanner }
+						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
-					/>
-
+					/> ) }
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }

@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
+import ClockIcon from './ui/ClockIcon';
 import CloseIcon from './ui/CloseIcon';
 import Slider from '../../shared/components/Slider';
 import Slides from './Slides';
@@ -22,6 +23,9 @@ export default function MiniBanner( props ) {
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
 				<div className="banner__close">
+					<a className="minimise-link" onClick={ props.onMinimise }>
+						<ClockIcon/> <span className="minimise-link-text">{ props.translations[ 'minimise-button' ] }</span>
+					</a>
 					<button className="close-button" onClick={ props.onClose }><CloseIcon/></button>
 				</div>
 
