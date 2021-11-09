@@ -87,6 +87,10 @@ export default class BannerPresenter {
 						1
 					);
 				},
+				onMaybeLater: () => {
+					skinAdjuster.removeSpace();
+					window.removeEventListener( 'resize', resizeHandler );
+				},
 				onFinishedTransitioning() {
 					window.addEventListener( 'resize', resizeHandler );
 				},
