@@ -37,8 +37,12 @@ export default function DonationForm( props ) {
 	};
 
 	useEffect(
-		() => setUrl( addressType !== AddressType.NO.value ? NEW_DONATION_URL : ADD_DONATION_URL ),
-		[ addressType, setUrl ]
+		() => {
+			const someAddressData = addressType !== AddressType.NO.value;
+			const paymentNeedsAddress = addressType === PaymentMethods.DIRECT_DEBIT;
+			setUrl( someAddressData || paymentNeedsAddress ? NEW_DONATION_URL : ADD_DONATION_URL );
+		},
+		[ addressType, paymentMethod, setUrl ]
 	);
 
 	const validate = e => {
@@ -75,8 +79,8 @@ export default function DonationForm( props ) {
 		} else {
 			setDisabledIntervals( [] );
 		}
-		if ( e.target.value === PaymentMethods.DIRECT_DEBIT ) {
-			setDisabledAddressTypes( [ AddressType.NO, AddressType.EMAIL ] );
+		if ( e.target.value === PaymentMethods.DIRECT_DEBIT.value ) {
+			setDisabledAddressTypes( [ AddressType.NO.value, AddressType.EMAIL.value ] );
 		} else {
 			setDisabledAddressTypes( [] );
 		}
@@ -84,8 +88,10 @@ export default function DonationForm( props ) {
 
 	const onChangeAddressType = e => {
 		setAddressType( e.target.value );
-		if ( e.target.value !== AddressType.FULL ) {
-			setDisabledPaymentMethods( [ PaymentMethods.DIRECT_DEBIT ] );
+		if ( e.target.value !== AddressType.FULL.value ) {
+			setDisabledPaymentMethods( [ PaymentMethods.DIRECT_DEBIT.value ] );
+		} else {
+			setDisabledPaymentMethods( [] );
 		}
 	};
 
