@@ -121,6 +121,18 @@
 					color: $color-black;
 				}
 			}
+
+			&--disabled {
+				cursor: auto;
+				opacity: 0.3;
+
+				&:hover {
+					.select-group__state, {
+						background: $color-white;
+						border-color: $color-gray-medium;
+					}
+				}
+			}
 		}
 
 		&__input {
