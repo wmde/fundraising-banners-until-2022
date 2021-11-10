@@ -4,7 +4,6 @@ import debounce from '../../shared/debounce';
 
 import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './MiniBanner';
-import MinimisedBanner from './MinimisedBanner';
 import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
@@ -34,7 +33,6 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			isMinimised: this.props.minimisedPersistence.isMinimised(),
 			isFullPageVisible: false,
 			isFundsModalVisible: false
 		};
@@ -64,9 +62,6 @@ export default class Banner extends Component {
 			() => {
 				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
-				if ( this.props.minimisedPersistence.isMinimised() ) {
-					this.trackBannerEventWithDimensions( 'restored-to-minimised' );
-				}
 			}
 		);
 
@@ -78,14 +73,6 @@ export default class Banner extends Component {
 			eventName,
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1,
-			this.props.trackingData.bannerClickTrackRatio
-		);
-	}
-
-	trackBannerEventWithDimensions( eventName ) {
-		this.props.trackingData.tracker.trackViewPortDimensions(
-			eventName,
-			this.props.getBannerDimensions(),
 			this.props.trackingData.bannerClickTrackRatio
 		);
 	}
@@ -102,19 +89,6 @@ export default class Banner extends Component {
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
 			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		}
-	}
-
-	minimiseBanner = e => {
-		e.preventDefault();
-		this.setState( { isMinimised: true }, this.setContentSize );
-		this.trackBannerEventWithDimensions( 'minimised' );
-		this.props.minimisedPersistence.setMinimised();
-	}
-
-	maximiseBannerToForm = e => {
-		e.preventDefault();
-		this.trackBannerEventWithDimensions( 'maximised' );
-		this.showFullPageBanner();
 	}
 
 	showFullPageBannerFromMiniBanner = e => {
@@ -179,7 +153,6 @@ export default class Banner extends Component {
 			isFullPageVisible: false
 		} );
 		this.props.onClose();
-		this.props.minimisedPersistence.removeMinimised();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -216,21 +189,16 @@ export default class Banner extends Component {
 					ref={this.miniBannerTransitionRef}
 					transitionSpeed={ 1000 }
 				>
-					{ state.isMinimised && ( <MinimisedBanner
-						maximiseBannerToForm={ this.maximiseBannerToForm }
-						closeBanner={ this.closeBanner }
-					/> ) }
-					{ !state.isMinimised && ( <MiniBanner
+					<MiniBanner
 						{ ...props }
 						onClose={ this.closeBanner }
-						onMinimise={ this.minimiseBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
-					/> ) }
+					/>
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }

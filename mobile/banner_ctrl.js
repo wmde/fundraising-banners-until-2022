@@ -16,7 +16,6 @@ import Banner from './components/Banner';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
-import { createMinimisedPersistence } from './minimised_persistence';
 import { BannerType } from '../shared/BannerType';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -24,7 +23,6 @@ const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
-const minimisedPersistence = createMinimisedPersistence( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
 	bannerContainer.dataset.delay || 5000,
@@ -47,8 +45,7 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
 		sliderHeading: sliderHeading,
-		donationForm: DonationForm,
-		minimisedPersistence: minimisedPersistence
+		donationForm: DonationForm
 	},
 	0
 );
