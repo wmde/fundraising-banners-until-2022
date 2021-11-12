@@ -209,7 +209,7 @@ export default function DonationForm( props ) {
 					>
 						<div className="sms-box">
 							<label className="select-group__option">
-								<a href="sms:81190" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
+								<a href="sms:81190;?&body=WIKI" className="select-group__state">{ Translations[ 'sms-payment-message' ] }</a>
 							</label>
 							<span>{ Translations[ 'sms-info-message' ] }</span>
 						</div>
