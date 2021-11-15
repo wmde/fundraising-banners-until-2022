@@ -1,0 +1,64 @@
+.wmde-banner {
+
+	.banner-text {
+		overflow-x: hidden;
+		margin-right: 38px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+
+		@media ( min-width: $breakpoint_l ) {
+			margin-right: 0;
+		}
+
+		&-inner {
+			display: flex;
+			width: 200%;
+		}
+
+		&-ctrl,
+		&-var {
+			position: relative;
+			flex: 0 0 50%;
+		}
+	}
+
+	&--var {
+		.banner-text-inner {
+			margin-left: -100%;
+		}
+	}
+
+	.banner-headline {
+		display: inline;
+		margin: 0;
+		@media ( min-width: $breakpoint_xl ) {
+			display: block;
+			margin-bottom: 1em;
+		}
+	}
+
+	.optional-text {
+		display: none;
+		@media ( min-width: $breakpoint_m ) {
+			&.text-m {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_l ) {
+			&.text-l {
+				display: inline;
+			}
+		}
+		@media ( min-width: $breakpoint_xl ) {
+			&.text-xl {
+				display: inline;
+			}
+		}
+	}
+
+	.banner-text .info-icon {
+		position: relative;
+		top: -3px;
+		left: 0;
+	}
+}
