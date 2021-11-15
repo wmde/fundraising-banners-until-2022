@@ -13,7 +13,7 @@ export default function Slides( dynamicCampaignText ) {
 			<p className="headline">
 				{ Icon } To all our readers in Germany,
 			</p>
-			<p>It might be a little awkward, but please don't scroll past this. { campaignDaySentence + ' ' }
+			<p>It might be a little awkward, so we'll get straight to the point. { campaignDaySentence + ' ' }
 				This { currentDayName }, for the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently,
 				we humbly ask you to defend Wikipedia's independence. 99% of our readers don't give; they simply look the other way.
 			</p>
