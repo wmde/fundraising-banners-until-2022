@@ -10,9 +10,11 @@ import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/Fu
 import PropTypes from 'prop-types';
 import { BannerType } from '../../../shared/BannerType';
 
-const PENDING = 0;
-const VISIBLE = 1;
-const CLOSED = 2;
+const BannerVisibilityState = Object.freeze( {
+	PENDING: Symbol( 'pending' ),
+	VISIBLE: Symbol( 'visible' ),
+	CLOSED: Symbol( 'closed' )
+} );
 
 export default class Banner extends Component {
 
@@ -28,7 +30,7 @@ export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			displayState: PENDING,
+			bannerVisibilityState: BannerVisibilityState.PENDING,
 			isFundsModalVisible: false,
 			setCookie: false,
 
@@ -45,7 +47,7 @@ export default class Banner extends Component {
 		this.adjustSurroundingSpace();
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
-		this.setState( { displayState: VISIBLE } );
+		this.setState( { displayState:  BannerVisibilityState.VISIBLE } );
 	}
 
 	adjustSurroundingSpace() {
@@ -62,7 +64,7 @@ export default class Banner extends Component {
 
 	closeBanner = e => {
 		e.preventDefault();
-		this.setState( { displayState: CLOSED, setCookie: true } );
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED, setCookie: true } );
 		this.props.onClose();
 	};
 
@@ -92,8 +94,8 @@ export default class Banner extends Component {
 				'wmde-banner',
 				'banner-position',
 				{
-					'wmde-banner--hidden': state.displayState === CLOSED,
-					'wmde-banner--visible': state.displayState === VISIBLE,
+					'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
+					'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 					'wmde-banner--var': props.bannerType === BannerType.VAR
 				}
@@ -141,7 +143,8 @@ export default class Banner extends Component {
 				useOfFundsText={ props.useOfFundsText }
 				locale='de'>
 				<FundsDistributionInfo
-					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData } />
+					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
+				/>
 			</FundsModal>
 		</div>;
 	}

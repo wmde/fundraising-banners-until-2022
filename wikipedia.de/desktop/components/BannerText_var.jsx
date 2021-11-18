@@ -1,32 +1,25 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import InfoIcon from './ui/InfoIcon';
 
 export default function BannerText( props ) {
-	const Translations = useContext( TranslationContext );
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props.dynamicCampaignText;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = props.dynamicCampaignText;
 
 	return <div className="banner-text">
 		<p>
-			<strong>An alle, die Wikipedia in Deutschland nutzen </strong>
+			<strong><InfoIcon/> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
-			Bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur Sache.
-			An diesem { currentDayName } sind Sie gefragt. { campaignDaySentence } Wikipedia wird durch Spenden
-			von durchschnittlich 21,60&nbsp;€ finanziert, aber 99&nbsp;% der Lesenden spenden nicht. <strong>Wenn
-			alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits heute
-			erreicht.</strong> Menschen spenden aus einem einfachen Grund – weil Wikipedia nützlich ist. Schon der
-			Preis einer Tasse Kaffee würde genügen. { visitorsVsDonorsSentence } Wenn Wikipedia eine kommerzielle
-			Seite sein würde, wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit Werbung eine Menge
-			Geld verdienen. Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen. Es ist leicht,
-			diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia nützlich finden,
-			nehmen Sie sich an diesem { currentDayName } bitte eine Minute Zeit und geben Wikipedia mit Ihrer Spende
-			etwas zurück. Vielen Dank!
-		</p>
-		<p>
-			<a onClick={ props.toggleFundsModal }>
-				{ Translations[ 'use-of-funds-link' ] }
-			</a>
+			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
+			Dies ist der { overallImpressionCount }. Spendenaufruf, den wir Ihnen zeigen. Am
+			heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia
+			zu sichern. { campaignDaySentence } Insgesamt
+			spenden 99% nichts – sie übergehen diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die
+			bereits gespendet haben, danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von
+			durchschnittlich 21,60&nbsp;€ finanziert. Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch
+			in Zukunft erfolgreich entwickeln. { visitorsVsDonorsSentence } Die meisten Menschen spenden, weil
+			sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse
+			Kaffee geschenkt? Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie
+			etwas zurück. Vielen Dank
 		</p>
 	</div>;
 }
