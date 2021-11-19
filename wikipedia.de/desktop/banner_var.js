@@ -2,8 +2,8 @@
 import style from './styles/desktop_var/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
+
 import { createCampaignParameters } from '../../shared/campaign_parameters';
-import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
 import Banner from './components/Banner_var';
@@ -17,11 +17,14 @@ import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { createTrackingData } from '../../shared/tracking_data';
+import BannerText from './components/BannerText_var';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
+
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
@@ -38,6 +41,7 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
+		bannerText: BannerText,
 		donationForm: DonationForm,
 		footer: Footer,
 		translations: Object.assign( Translations, LocalTranslations ),

@@ -24,7 +24,7 @@ export default function DonationForm( props ) {
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const disabledIntervals = [];
 	const disabledPaymentMethods = [];
-	const [ formAction ] = useFormAction( props, { ocn: props.showCookieBanner } );
+	const [ formAction ] = useFormAction( props );
 
 	const validate = e => {
 		if ( [

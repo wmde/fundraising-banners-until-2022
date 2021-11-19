@@ -1,7 +1,6 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../../../shared/components/BannerTransition';
 import Infobox from './ui/Infobox';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
@@ -51,16 +50,17 @@ export default class Banner extends Component {
 
 	componentDidMount() {
 		this.props.registerDisplayBanner(
-			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
-				this.slideInBanner();
-			}
+			() => {}
 		);
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
+		this.adjustSurroundingSpace();
+		this.startProgressbar();
+		this.props.onFinishedTransitioning();
+		this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+		const bannerElement = document.querySelector( '.wmde-banner.banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 	}
 
@@ -81,10 +81,6 @@ export default class Banner extends Component {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED, setCookie: true } );
 		this.props.onClose();
 	};
-
-	registerBannerTransition = ( cb ) => {
-		this.slideInBanner = cb;
-	}
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
@@ -124,61 +120,53 @@ export default class Banner extends Component {
 				}
 			) }
 			ref={ this.ref }>
-			<BannerTransition
-				fixed={ true }
-				registerDisplayBanner={ this.registerBannerTransition }
-				onFinish={ this.onFinishedTransitioning }
-				skinAdjuster={ props.skinAdjuster }
-				transitionSpeed={ 1000 }
-			>
-				<TranslationContext.Provider value={props.translations}>
-					<div className="banner__wrapper">
-						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
-							{ state.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
-						</div>
-						<div className="banner__content">
-							<div className="banner__infobox">
-								<div className="infobox-bubble">
-									<Infobox
-										formatters={props.formatters}
-										campaignParameters={props.campaignParameters}
-										campaignProjection={props.campaignProjection}
-										bannerText={props.bannerText}
-										dynamicCampaignText={ this.dynamicCampaignText }
-										propsForText={ {
-											overallImpressionCount: props.impressionCounts.getOverallCount(),
-											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
-										} }/>
-								</div>
-							</div>
-							<div className="banner__form">
-								<DonationForm
-									formItems={props.formItems}
-									bannerName={props.bannerName}
-									campaignName={props.campaignName}
-									formatters={props.formatters}
-									impressionCounts={props.impressionCounts}
-									onFormInteraction={this.onFormInteraction}
-									onSubmit={props.onSubmit}
-									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-									buttonText={ props.buttonText }
-									errorPosition={ props.errorPosition }
-									bannerType={ props.bannerType }
-								/>
-							</div>
-						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
-						<ProgressBar
-							formatters={props.formatters}
-							daysLeft={campaignProjection.getRemainingDays()}
-							donationAmount={campaignProjection.getProjectedDonationSum()}
-							goalDonationSum={campaignProjection.goalDonationSum}
-							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={this.registerStartProgressbar}/>
+			<TranslationContext.Provider value={ props.translations }>
+				<div className="banner__wrapper">
+					<div className="close">
+						<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+						{ state.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
 					</div>
-				</TranslationContext.Provider>
-			</BannerTransition>
+					<div className="banner__content">
+						<div className="banner__infobox">
+							<div className="infobox-bubble">
+								<Infobox
+									formatters={props.formatters}
+									campaignParameters={props.campaignParameters}
+									campaignProjection={props.campaignProjection}
+									bannerText={props.bannerText}
+									dynamicCampaignText={ this.dynamicCampaignText }
+									propsForText={ {
+										overallImpressionCount: props.impressionCounts.getOverallCount(),
+										millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
+									} }/>
+							</div>
+						</div>
+						<div className="banner__form">
+							<DonationForm
+								formItems={props.formItems}
+								bannerName={props.bannerName}
+								campaignName={props.campaignName}
+								formatters={props.formatters}
+								impressionCounts={props.impressionCounts}
+								onFormInteraction={this.onFormInteraction}
+								onSubmit={props.onSubmit}
+								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+								buttonText={ props.buttonText }
+								errorPosition={ props.errorPosition }
+								bannerType={ props.bannerType }
+							/>
+						</div>
+					</div>
+					<Footer showFundsModal={ this.toggleFundsModal }/>
+					<ProgressBar
+						formatters={props.formatters}
+						daysLeft={campaignProjection.getRemainingDays()}
+						donationAmount={campaignProjection.getProjectedDonationSum()}
+						goalDonationSum={campaignProjection.goalDonationSum}
+						missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+						setStartAnimation={this.registerStartProgressbar}/>
+				</div>
+			</TranslationContext.Provider>
 			<FundsModal
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }

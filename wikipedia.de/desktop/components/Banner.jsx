@@ -47,7 +47,7 @@ export default class Banner extends Component {
 		this.adjustSurroundingSpace();
 		this.startProgressbar();
 		this.props.onFinishedTransitioning();
-		this.setState( { displayState:  BannerVisibilityState.VISIBLE } );
+		this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
 	}
 
 	adjustSurroundingSpace() {
