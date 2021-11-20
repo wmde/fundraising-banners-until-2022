@@ -11,9 +11,6 @@ export default function FullPageBanner( props ) {
 	return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible && props.bannerVisible } ) }>
 		<button className="fullpage-banner__close" onClick={ props.onClose }><CloseIcon/></button>
 		<div className="fullpage-banner__info">
-			<div className="fullpage-banner__heading">
-				Jetzt spenden
-			</div>
 			<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 			<ProgressBar
 				formatters={props.formatters}

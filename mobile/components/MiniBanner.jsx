@@ -37,6 +37,7 @@ export default function MiniBanner( props ) {
 						onSlideChange={ props.onSlideChange }
 						registerAutoplay={ props.registerSliderAutoplayCallbacks }
 						interval={ props.sliderAutoPlaySpeed }
+						sliderOptions={ { loop: false } }
 					/>
 				</div>
 
