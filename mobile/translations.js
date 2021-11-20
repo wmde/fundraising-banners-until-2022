@@ -3,7 +3,7 @@ const Translations = {
 	'amounts-header': 'Betrag wählen',
 	'payments-header': 'Zahlweise wählen',
 	'minimise-button': 'Vielleicht später',
-	'global-error': 'Bitte behebe die obigen Fehler'
+	'global-error': 'Bitte oben die Formularfelder ausfüllen.'
 };
 
 export default Translations;
