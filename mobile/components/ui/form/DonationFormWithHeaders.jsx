@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useContext, useState } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
 import { SelectGroup } from '../../../../shared/components/ui/form/SelectGroup';
@@ -27,6 +27,11 @@ export default function DonationFormWithHeaders( props ) {
 	const [ disabledIntervals, setDisabledIntervals ] = useState( [] );
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ formAction ] = useFormAction( props );
+	const [ isFormValid, setFormValidity ] = useState( true );
+
+	useEffect( () => {
+		setFormValidity( isValidOrUnset( intervalValidity ) && isValidOrUnset( amountValidity ) && isValidOrUnset( paymentMethodValidity ) );
+	}, [ intervalValidity, amountValidity, paymentMethodValidity ] );
 
 	const validate = e => {
 		if ( [
@@ -38,6 +43,11 @@ export default function DonationFormWithHeaders( props ) {
 			return;
 		}
 		e.preventDefault();
+	};
+
+	const scrollToFirstError = e => {
+		e.preventDefault();
+		document.getElementsByClassName( 'select-group-container--with-error' )[ 0 ]?.scrollIntoView( { behavior: 'smooth', block: 'center', inline: 'nearest' } );
 	};
 
 	const onChangeInterval = e => {
@@ -117,7 +127,7 @@ export default function DonationFormWithHeaders( props ) {
 					<SelectGroup
 						fieldname="select-payment-method"
 						selectionItems={ props.formItems.paymentMethods }
-						isValid={ isValidOrUnset( paymentMethodValidity )}
+						isValid={ isValidOrUnset( paymentMethodValidity ) }
 						errorMessage={ Translations[ 'no-payment-type-message' ] }
 						currentValue={ paymentMethod }
 						onSelected={ onChangePaymentMethod }
@@ -133,6 +143,9 @@ export default function DonationFormWithHeaders( props ) {
 				<button className="button-group__button" onClick={ validate }>
 					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
 				</button>
+				{ !isFormValid && (
+					<button className="button-group__error" onClick={ scrollToFirstError }>{ Translations[ 'global-error' ] }</button>
+				) }
 			</div>
 
 			<div className="smallprint">

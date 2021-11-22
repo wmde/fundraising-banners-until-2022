@@ -146,6 +146,15 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
+	submitBanner = () => {
+		this.props.trackingData.tracker.trackBannerEvent(
+			'submit',
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			1
+		);
+	};
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( {
@@ -214,7 +223,7 @@ export default class Banner extends Component {
 						{...props}
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
-						onSubmit={props.onSubmit}
+						onSubmit={ this.submitBanner }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }

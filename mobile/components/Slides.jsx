@@ -29,7 +29,7 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 		},
 		{
 			content: <div>
-				<p>{ visitorsVsDonorsSentence } Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.</p>
+				<p><strong>{ visitorsVsDonorsSentence }</strong> Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.</p>
 			</div>
 		},
 		{

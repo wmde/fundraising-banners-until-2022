@@ -1,31 +1,13 @@
 import { h } from 'preact';
-import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
-import ClockIcon from './ui/ClockIcon';
 import CloseIcon from './ui/CloseIcon';
 import Slider from '../../shared/components/Slider';
-import Slides from './Slides';
 
 export default function MiniBanner( props ) {
-	const campaignProjection = props.campaignProjection;
-	const ProgressBarComponent = <ProgressBar
-		formatters={props.formatters}
-		daysLeft={campaignProjection.getRemainingDays()}
-		donationAmount={campaignProjection.getProjectedDonationSum()}
-		goalDonationSum={campaignProjection.goalDonationSum}
-		missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-		setStartAnimation={props.setStartAnimation}
-		animate={true}
-		amountToShowOnRight={AmountToShowOnRight.MISSING}
-	/>;
-
 	return <div className="mini-banner">
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
 				<div className="banner__close">
-					<a className="minimise-link" onClick={ props.onMinimise }>
-						<ClockIcon/> <span className="minimise-link-text">{ props.translations[ 'minimise-button' ] }</span>
-					</a>
 					<button className="close-button" onClick={ props.onClose }><CloseIcon/></button>
 				</div>
 
@@ -37,10 +19,11 @@ export default function MiniBanner( props ) {
 
 				<div className="banner__slideshow">
 					<Slider
-						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
+						slides={ props.slides }
 						onSlideChange={ props.onSlideChange }
 						registerAutoplay={ props.registerSliderAutoplayCallbacks }
 						interval={ props.sliderAutoPlaySpeed }
+						sliderOptions={ { loop: false } }
 					/>
 				</div>
 

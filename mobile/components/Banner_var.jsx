@@ -4,7 +4,7 @@ import debounce from '../../shared/debounce';
 
 import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './MiniBanner_var';
-import FullpageBanner from './FullpageBanner_var';
+import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
@@ -13,6 +13,8 @@ import FundsDistributionAccordion from '../../shared/components/ui/use_of_funds/
 import { BannerType } from '../../shared/BannerType';
 import SlideState from '../../shared/slide_state';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
+import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
+import Slides from './Slides';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -34,7 +36,9 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			isFullPageVisible: false,
-			isFundsModalVisible: false
+			isFundsModalVisible: false,
+			slideCount: 0,
+			isLastSlide: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -62,9 +66,6 @@ export default class Banner extends Component {
 			() => {
 				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
-				if ( this.props.minimisedPersistence.isMinimised() ) {
-					this.trackBannerEventWithDimensions( 'restored-from-maybe-later' );
-				}
 			}
 		);
 
@@ -77,14 +78,6 @@ export default class Banner extends Component {
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1,
 			this.props.trackingData.bannerClickTrackRatio
-		);
-	}
-
-	trackBannerEventWithDimensions( eventName ) {
-		this.props.trackingData.tracker.trackViewPortDimensions(
-			eventName,
-			this.props.getBannerDimensions(),
-			1
 		);
 	}
 
@@ -102,22 +95,13 @@ export default class Banner extends Component {
 		}
 	}
 
-	closeBannerWithReminder = e => {
-		e.preventDefault();
-		this.props.minimisedPersistence.setMinimised();
-		this.setState( {
-			displayState: CLOSED,
-			isFullPageVisible: false
-		} );
-		this.props.onMaybeLater();
-	}
-
 	showFullPageBannerFromMiniBanner = e => {
 		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.showFullPageBanner( e );
 	}
 
-	showFullPageBanner = () => {
+	// eslint-disable-next-line no-unused-vars
+	showFullPageBanner = e => {
 		this.stopSliderAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
@@ -159,6 +143,7 @@ export default class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
+		this.setState( { isLastSlide: index + 1 === this.state.slideCount } );
 	}
 
 	registerSliderAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
@@ -172,13 +157,16 @@ export default class Banner extends Component {
 			displayState: CLOSED,
 			isFullPageVisible: false
 		} );
-		this.props.minimisedPersistence.removeMinimised();
 		this.props.onClose();
 	};
 
 	submitBanner = () => {
-		const restoredPostfix = this.props.minimisedPersistence.isMinimised() ? '-from-maybe-later' : '';
-		this.trackBannerEventWithDimensions( 'submit' + restoredPostfix );
+		this.props.trackingData.tracker.trackBannerEvent(
+			'submit',
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			1
+		);
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -197,12 +185,26 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
+		const ProgressBarComponent = <ProgressBar
+			formatters={props.formatters}
+			daysLeft={campaignProjection.getRemainingDays()}
+			donationAmount={campaignProjection.getProjectedDonationSum()}
+			goalDonationSum={campaignProjection.goalDonationSum}
+			missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+			setStartAnimation={ this.registerStartProgressBarInMiniBanner }
+			animate={true}
+			amountToShowOnRight={AmountToShowOnRight.MISSING}
+		/>;
+		const slides = Slides( this.dynamicCampaignText, ProgressBarComponent );
+		state.slideCount = slides.length;
+
 		return <div className={classNames( {
 			'wmde-banner': true,
 			'wmde-banner--hidden': state.displayState === CLOSED,
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
 			'wmde-banner--full-page': state.isFullPageVisible,
+			'wmde-banner--last-slide': state.isLastSlide,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
@@ -218,13 +220,11 @@ export default class Banner extends Component {
 					<MiniBanner
 						{ ...props }
 						onClose={ this.closeBanner }
-						onMinimise={ this.closeBannerWithReminder }
 						campaignProjection={ campaignProjection }
-						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
-						dynamicCampaignText={ this.dynamicCampaignText }
+						slides={ slides }
 					/>
 				</BannerTransition>
 				<FollowupTransition
@@ -240,10 +240,9 @@ export default class Banner extends Component {
 					<FullpageBanner
 						{...props}
 						onClose={ this.closeBanner }
-						onMinimise={ this.closeBannerWithReminder }
 						campaignProjection={ campaignProjection }
 						onSubmit={ this.submitBanner }
-						donationForm={ props.donationForm }
+						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
 						dynamicCampaignText={ this.dynamicCampaignText }
