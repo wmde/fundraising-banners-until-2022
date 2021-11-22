@@ -1,209 +1,78 @@
+$banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
+
 .wmde-banner {
-	.form__section {
-		position: relative;
-		padding: 0 0 0 120px;
-		margin: 0;
-		border: 0;
-		color: $color-gray-dark;
-		&-head {
-			position: absolute;
-			padding: 5px 0 0;
-			top: 0;
-			left: 0;
-			width: 110px;
-			text-align: right;
-			font-size: 15px;
-			font-weight: bold;
-		}
-	}
-
-	.select-group {
+	.form {
+		overflow: hidden;
+		align-items: center;
 		display: flex;
-		flex-wrap: wrap;
-		margin: 0 -4px 8px;
+		margin: 0;
 
-		&__errormessage {
-			display: none;
-			color: $color-warning;
-			font-size: 14px;
-			text-align: center;
-			margin-top: -14px;
-			margin-bottom: 14px;
-		}
+		&__element {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-end;
 
-		&-container--with-error .select-group__errormessage {
-			display: block;
-		}
-
-		&__state,
-		&__custom-input {
-			display: block;
-			float: left;
-			height: 35px;
-			line-height: 29px;
-			width: 100%;
-			font-size: 15px;
-			background: $color-white;
-			border: 3px solid $color-gray-medium;
-			color: $color-gray-dark;
-			border-radius: 10px;
-			text-align: center;
-			transition: background 200ms $banner-easing, border-color 200ms $banner-easing, color 200ms $banner-easing;
-		}
-
-		&__custom-input {
-			position: relative;
-			&--input {
-				position: absolute;
-				top: 0;
-				left: 0;
-				display: inline-block;
-				color: $color-gray-dark;
-				background-color: transparent;
-				outline: 0;
-				width: 100%;
-				height: 100%;
-				margin: 0;
-				padding: 0 1em;
-				font-size: 15px;
-				border: 0 none;
-				text-align: center;
-			}
-
-			&--euro-symbol,
-			&--edit-icon {
-				position: absolute;
+			@media ( min-width: $breakpoint_l ) {
 				display: block;
-				height: 100%;
-				width: 20px;
-				line-height: 27px;
-				right: 0;
-				top: 0;
-				text-align: center;
-			}
-
-			&--edit-icon {
-				padding-top: 4px;
-				padding-right: 4px;
-			}
-
-			&--value-entered,
-			&--focused {
-				background: $color-secondary;
-				border-color: $color-primary;
-				color: $color-black;
-
-				.select-group__custom-input--input {
-					border: 0 none;
-					outline: 0 none;
-					border-radius: 0;
-				}
+				margin: 0;
+				width: 100%; /* For IE11 */
 			}
 		}
-
-		&__option {
-			width: 50%;
-			padding: 0 4px 8px;
-			cursor: pointer;
-
-			&:hover,
-			&:focus {
-				.select-group__state,
-				.select-group__custom-input {
-					background: $color-gray-light;
-					border-color: $color-gray;
-				}
-
-				.select-group__custom-input--value-entered,
-				.select-group__custom-input--focused {
-					background: $color-secondary;
-					border-color: $color-primary;
-					color: $color-black;
-				}
-			}
+		&-field-group {
+			display: block;
+			flex: 1 1 auto;
+			flex-wrap: nowrap;
+			padding: 0 0 10px;
 		}
-
-		&__input {
-			display: none;
-
-			&:checked + .select-group__state {
-				background: $color-secondary;
-				border-color: $color-primary;
-				color: $color-black;
-			}
-		}
-	}
-
-	.select-group-container--select-interval {
-		.select-group__option {
-			width: 25%;
-
-			@media ( min-width: $breakpoint_m ) {
-				width: 50%;
-			}
-		}
-	}
-
-	.select-group-container--select-amount {
-		.select-group__option {
-			width: 25%;
-
-			&--amount-other-input {
-				width: 50%;
-			}
-		}
-	}
-
-	.select-group-container--select-payment-method {
-		.direct-debit,
-		.bank-transfer,
-		.credit-card,
-		.paypal {
+		&__section-head {
+			visibility: hidden;
+			font-family: 'Montserrat', sans-serif;
+			width: 100%;
+			font-size: 12px;
+			line-height: 13px;
+			color: $color-black-light;
 			position: relative;
-			display: inline-block;
-			vertical-align: bottom;
-			height: 29px;
-			&:before {
-				position: absolute;
-				top: 2px;
-				left: 0;
-				height: 22px;
-			}
+			padding-left: 0;
 		}
+	}
 
-		.direct-debit {
-			width: 26px;
-			&:before {
-				content: $icon-direct-debit;
-				width: 23px;
-			}
-		}
-		.bank-transfer {
-			width: 28px;
-			&:before {
-				content: $icon-bank-transfer;
-				top: 3px;
-				width: 28px;
-			}
-		}
-		.credit-card {
-			width: 30px;
-			&:before {
-				content: $icon-credit-card;
-				width: 26px;
-			}
-		}
-		.paypal {
-			width: 19px;
-			&:before {
-				content: $icon-paypal;
-				top: 3px;
-				width: 15px;
+	.button-group {
+		display: block;
+		border: 0;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		flex-wrap: wrap;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+
+		&__button {
+			min-width: 240px;
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			cursor: pointer;
+			color: $color-white;
+			background-color: $color-primary;
+			border: 0 none;
+			border-radius: 18px;
+			font-size: 14px;
+			line-height: 35px;
+			height: 35px;
+			font-weight: bold;
+			text-align: center;
+			white-space: nowrap;
+			transition: background-color 500ms $banner-easing;
+			&:hover {
+				background-color: $color-primary-light;
 			}
 		}
 	}
 
-	.sms-box {
+	.sms-box,
+	.form__section-head {
 		display: none;
 	}
 }
