@@ -5,19 +5,31 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		font-size: 12px;
-		line-height: 1.6em;
+		line-height: 20px;
 		color: $color-black;
-		text-shadow: -1px -1px 0 $color-white, 1px -1px 0 $color-white, -1px 1px 0 $color-white, 1px 1px 0 $color-white;
+		padding: 0 10px;
+		margin-top: -10px;
+
+		@media ( min-width: $breakpoint_xs ) {
+			padding: 0 24px;
+			margin-top: 0;
+		}
+
+		&__bank,
+		&__usage {
+			padding: 10px 0;
+		}
 
 		&__bank {
 			flex: 1 1 auto;
 			display: flex;
 			flex-wrap: wrap;
-			padding: 0 20px;
 
-			@media ( min-width: $breakpoint_l ) {
+			@media ( min-width: $breakpoint_xs ) {
+				border-right: 1px solid $color-secondary-light;
 				display: block;
 				flex-wrap: nowrap;
+				margin-right: 30px;
 			}
 			&-item {
 				white-space: nowrap;
@@ -31,7 +43,13 @@
 		}
 
 		&__usage {
-			display: none;
+			flex-grow: 1;
+			text-align: right;
+			@media ( min-width: $breakpoint_xs ) {
+				flex: 0 0 $form-width;
+				text-align: center;
+				width: $form-width;
+			}
 		}
 	}
 
@@ -46,7 +64,7 @@
 			font-size: 12px;
 		}
 		&-input {
-			font-family: $banner-sans-serif;
+			font-family: $banner-main-font-family;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -76,6 +94,7 @@
 	}
 
 	.application-of-funds-link {
-		display: none;
+		color: $color-black;
+		cursor: pointer;
 	}
 }
