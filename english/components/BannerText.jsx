@@ -7,10 +7,12 @@ export default function BannerText( props ) {
 	return <div className="banner-text">
 
 		<p>
-			<span className="banner-headline">
-				<img className="info-icon" height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
-				<strong> To all our readers in Germany, </strong>
-			</span>
+			<p>
+				<span className="banner-headline">
+					<img className="info-icon" height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg" alt="info_icon" />
+					<strong> To all our readers in Germany, </strong>
+				</span>
+			</p>
 			It might be a little awkward, so we'll get straight to the point.{ ' ' }
 			{ campaignDaySentence } This { currentDayName }, for the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently, we humbly
 			ask you to defend Wikipedia's independence. 99% of our readers don't give; they simply look

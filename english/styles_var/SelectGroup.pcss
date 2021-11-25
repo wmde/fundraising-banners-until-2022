@@ -1,0 +1,254 @@
+$select-group-line-height: 30px;
+
+.wmde-banner {
+
+	.select-group {
+		border: 0;
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+		font-size: 0.9em;
+		font-weight: bold;
+		width: 100%;
+		line-height: $select-group-line-height;
+
+		@media ( min-width: $breakpoint_l ) {
+			flex-wrap: wrap;
+			line-height: 25px;
+		}
+
+		&-container {
+			border: 1px solid $color-secondary-light;
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			padding: 0 10px;
+
+			@media ( min-width: $breakpoint_l ) {
+				margin-bottom: 0;
+				margin-top: 0;
+				line-height: inherit;
+				border: 0;
+				padding: 0;
+			}
+		}
+
+		&__errormessage {
+			display: none;
+			height: 16px;
+			line-height: 16px;
+			color: $color-black;
+			font-weight: bold;
+			text-align: left;
+			width: 100%;
+			margin-bottom: 0.2em;
+			font-size: 0.8em;
+		}
+
+		&-container--with-error {
+			.select-group__erroricon {
+				position: relative;
+				padding-left: 20px;
+				display: block;
+
+				&:before {
+					content: $errorIcon;
+					width: 16px;
+					height: 16px;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.select-group__errormessage {
+				display: block;
+				color: $color-error;
+			}
+		}
+
+		&__option {
+			flex: 1 1 auto;
+			margin: 0;
+			padding: 3px 10px 0 25px;
+			box-sizing: border-box;
+			display: flex;
+			position: relative;
+			cursor: pointer;
+
+			@media ( min-width: $breakpoint_l ) {
+				height: 25px;
+			}
+
+			&--amount-other-input {
+				height: 35px;
+				@media ( min-width: $breakpoint_l ) {
+					height: auto;
+				}
+			}
+		}
+
+		&__state,
+		&__custom-input {
+			box-sizing: border-box;
+			display: inline-block;
+			color: $color-black;
+			border: 0 none;
+			text-align: center;
+			font-size: 0.95em;
+			white-space: nowrap;
+
+			&:before {
+				box-sizing: border-box;
+				top: calc( $select-group-line-height / 2 );
+				left: 0;
+				content: '';
+				position: absolute;
+				height: 16px;
+				width: 16px;
+				margin-top: -5px;
+				background: $color-white;
+				border-radius: 50%;
+				border: 1px solid #bbbbbb;
+
+				@media ( min-width: $breakpoint_l ) {
+					top: 50%;
+				}
+			}
+		}
+
+		&__custom-input:before {
+			top: 45%;
+			left: -25px;
+			margin-top: -6px;
+		}
+
+		&__custom-input + .select-group__state {
+			position: absolute;
+			top: 0;
+			right: 1em;
+			border-color: transparent;
+			background: transparent;
+		}
+
+		&__input {
+			display: none;
+
+			&:checked + .select-group__state {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+
+			&:checked + .select-group__state:before,
+			&:checked + .select-group__custom-input:before {
+				border: 6px solid $color-primary;
+				box-shadow: none;
+			}
+		}
+
+		&__custom-input {
+			position: relative;
+			border: 1px solid $color-gray-light;
+			box-sizing: border-box;
+			width: 100%;
+			min-width: 110px;
+			margin: 2px 0;
+			line-height: 25px;
+			height: 26px;
+
+			@media ( min-width: $breakpoint_l ) {
+				margin: -2px 0 0;
+			}
+
+			&--input {
+				display: inline-block;
+				color: $color-black;
+				background-color: transparent;
+				padding: 0 1em;
+				width: 100%;
+				height: 25px;
+				margin: 0;
+				font-size: 0.95em;
+				font-weight: bold;
+				border: 0 none;
+				box-sizing: border-box;
+				text-align: left;
+
+				@media ( min-width: $breakpoint_l ) {
+					&:focus,
+					&:active {
+						border: 1px solid $color-secondary;
+					}
+				}
+			}
+
+			&--euro-symbol {
+				display: block;
+				position: absolute;
+				box-sizing: border-box;
+				height: 20px;
+				width: 10px;
+				line-height: 21px;
+				text-align: center;
+				top: 50%;
+				right: 0;
+				margin-top: -10px;
+			}
+
+			&--value-entered,
+			&--focused {
+				border: 1px solid $color-secondary;
+
+				.select-group__custom-input--input {
+					border: 0 none;
+					outline: 0 none;
+					border-radius: 0;
+				}
+			}
+		}
+	}
+
+	.select-group-container--select-amount {
+		.select-group__option {
+			@media ( min-width: $breakpoint_l ) {
+				width: 25%;
+			}
+		}
+
+		.select-group__option--amount-other-input {
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
+		}
+		@media ( min-width: $breakpoint_l ) {
+			margin-top: 0;
+		}
+	}
+
+	.select-group-container--select-interval {
+		.select-group__option {
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
+		}
+	}
+
+	.select-group-container--select-payment-method {
+		.select-group__option {
+			@media ( min-width: $breakpoint_l ) {
+				width: 50%;
+			}
+		}
+	}
+
+	.select-group__option--select-interval-6 {
+		display: none;
+		@media ( min-width: $breakpoint_l ) {
+			display: flex;
+		}
+	}
+}

@@ -153,7 +153,7 @@ tracking = "wpde-mob01-211103-var"
 [english]
 campaign_tracking = "en03-ba-211126"
 preview_link = "/wiki/Wikipedia:Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
