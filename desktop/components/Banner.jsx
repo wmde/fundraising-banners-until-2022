@@ -160,7 +160,7 @@ export class Banner extends Component {
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
-									showCookieBanner={ props.showCookieBanner }
+									formActionProps={ props.formActionProps }
 								/>
 							</div>
 						</div>
