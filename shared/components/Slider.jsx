@@ -85,7 +85,7 @@ export default function Slider( props ) {
 	return (
 		<div className="slider-container">
 			<div className="navigation-wrapper">
-				<div ref={ sliderRef } className="keen-slider" onMouseDown={ stopAutoplay }>
+				<div ref={ sliderRef } className="keen-slider" onMouseDown={ stopAutoplay } onTouchStart={ stopAutoplay }>
 					{ slides.map( ( slide, idx ) => (
 						<div key={ idx } className="keen-slider__slide">
 							<div className="keen-slider__slide-content">
