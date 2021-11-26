@@ -28,7 +28,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob06-ba-211120"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -50,7 +50,7 @@ orientation = [ "portrait", "landscape"]
 # Mobile English Campaign
 [mobile_english]
 campaign_tracking = "mob_en01-ba-211103"
-preview_link = "/wiki/Wikipedia:Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -152,7 +152,7 @@ tracking = "wpde-mob01-211103-var"
 # English Campaign
 [english]
 campaign_tracking = "en02-ba-211112"
-preview_link = "/wiki/Wikipedia:Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
