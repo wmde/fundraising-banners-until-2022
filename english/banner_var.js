@@ -12,6 +12,7 @@ import Translations from '../shared/messages/en';
 import LocalTranslations from './translations';
 import DonationForm from './components_var/ui/form/DonationForm';
 import BannerText from './components_var/BannerText';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -39,6 +40,7 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
+		footer: Footer,
 		bannerText: BannerText,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),

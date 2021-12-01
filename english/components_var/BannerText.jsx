@@ -1,15 +1,14 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
-import TranslationContext from '../../shared/components/TranslationContext';
 import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
+import InfoIcon from './ui/InfoIcon';
 
 export default function BannerText( props ) {
-	const Translations = useContext( TranslationContext );
 	const { currentDayName, campaignDaySentence, overallImpressionCount, visitorsVsDonorsSentence } = props.dynamicCampaignText;
 
 	return <div className="banner-text">
 		<p>
-			<strong>To all our readers in Germany, </strong>
+			<InfoIcon/>
+			<strong> To all our readers in Germany, </strong>
 		</p>
 		<p>
 			It might be a little awkward, so we'll get straight to the point. { campaignDaySentence + ' ' }
@@ -19,11 +18,6 @@ export default function BannerText( props ) {
 			averaging about €21.60. { visitorsVsDonorsSentence } If you donate just €5, Wikipedia could keep thriving for years.
 			If Wikipedia has given you €5 worth of knowledge this year, take a minute to donate. Show the volunteers who bring you
 			reliable, neutral information that their work matters. Thank you.
-		</p>
-		<p>
-			<a onClick={ props.toggleFundsModal }>
-				{ Translations[ 'use-of-funds-link' ] }
-			</a>
 		</p>
 	</div>;
 }
