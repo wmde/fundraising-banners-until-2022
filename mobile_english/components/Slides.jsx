@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import getEnglishOrdinalSuffixOf from '../shared/english_ordinal';
+import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
 
 export default function Slides( dynamicCampaignText, progressBar ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = dynamicCampaignText;

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
-import Slides from '../Slides';
+import Slides from './Slides';
 import Slider from '../../shared/components/Slider';
 
 export default function MiniBanner( props ) {

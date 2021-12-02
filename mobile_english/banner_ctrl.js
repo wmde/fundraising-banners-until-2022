@@ -15,6 +15,7 @@ import DonationForm from './components/ui/form/DonationFormWithHeaders';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
+import { BannerType } from '../shared/BannerType';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -39,7 +40,8 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Translations,
-		formItems: createFormItems( Translations, formatters.amountInputFormatter )
+		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
+		bannerType: BannerType.CTRL
 	},
 	0
 );
