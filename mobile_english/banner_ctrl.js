@@ -7,6 +7,7 @@ import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
+import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 
 import Banner from './components/Banner';
@@ -39,7 +40,7 @@ bannerPresenter.present(
 		useOfFundsText,
 		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
-		translations: Translations,
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL
 	},

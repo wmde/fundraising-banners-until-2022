@@ -7,14 +7,14 @@ import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
-import LocalTranslations from './translations';
+import LocalTranslations from './translations_var';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 
 import Banner from './components/Banner';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
+import DonationForm from './components_var/ui/form/DonationFormWithHeaders';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { BannerType } from '../shared/BannerType';
 
