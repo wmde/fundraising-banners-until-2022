@@ -98,15 +98,6 @@ export class Banner extends Component {
 		this.props.onClose();
 	};
 
-	submitBanner = () => {
-		this.props.trackingData.tracker.trackBannerEvent(
-			'submit',
-			this.slideState.slidesShown,
-			this.slideState.currentSlide + 1,
-			1
-		);
-	};
-
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
 	}
@@ -213,7 +204,7 @@ export class Banner extends Component {
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									onSubmit={ this.submitBanner }
+									onSubmit={ props.onSubmit }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
