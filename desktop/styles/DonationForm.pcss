@@ -3,11 +3,15 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 .wmde-banner {
 	.form {
 		overflow: hidden;
-		margin: 0 -5px;
+		align-items: center;
+		display: flex;
+		margin: 0;
 
+		@media ( min-width: $breakpoint_m ) {
+			margin-top: 25px;
+			margin-bottom: 25px;
+		}
 		@media ( min-width: $breakpoint_l ) {
-			align-items: center;
-			display: flex;
 			margin: 0;
 		}
 
@@ -27,24 +31,12 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-
-			@media ( min-width: $breakpoint_l ) {
-				padding-left: 1em;
-			}
+			padding-left: 1em;
 
 			&-content {
 				width: 100%;
-				display: flex;
+				display: block;
 				flex-wrap: wrap;
-
-				@media ( min-width: $breakpoint_m ) {
-					flex-wrap: nowrap;
-				}
-
-				@media ( min-width: $breakpoint_l ) {
-					display: block;
-					flex-wrap: wrap;
-				}
 			}
 
 			&-field {
@@ -59,18 +51,13 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			&-label {
 				position: relative;
 				width: 100%;
-				display: flex;
 				align-items: center;
-				padding-left: 30px;
 				margin-bottom: 10px;
 				min-height: 34px;
 				font-weight: bold;
-
-				@media ( min-width: $breakpoint_l ) {
-					display: block;
-					height: auto;
-					padding-left: 0;
-				}
+				display: block;
+				height: auto;
+				padding-left: 0;
 			}
 
 			&-notice {
@@ -79,10 +66,7 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			}
 
 			.select-group {
-				padding-bottom: 8px;
-				@media ( min-width: $breakpoint_l ) {
-					padding-bottom: 0;
-				}
+				padding-bottom: 0;
 			}
 
 			.select-group__errormessage {
@@ -101,29 +85,20 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 		}
 
 		&__element {
-			display: flex;
+			display: block;
 			flex-direction: row;
 			flex-wrap: wrap;
 			justify-content: flex-end;
-
-			@media ( min-width: $breakpoint_l ) {
-				display: block;
-				margin: 0;
-				width: 100%; /* For IE11 */
-			}
+			margin: 0;
+			width: 100%; /* For IE11 */
 		}
 		&-field-group {
-			display: flex;
-			flex: 1 1 auto;
-			flex-wrap: wrap;
-			padding: 0 5px 10px;
-
-			@media ( min-width: $breakpoint_m ) {
-				flex-wrap: nowrap;
-			}
-
+			display: block;
+			padding: 10px 0 10px;
 			@media ( min-width: $breakpoint_l ) {
-				display: block;
+				padding: 15px 0 10px;
+			}
+			@media ( min-width: $breakpoint_l ) {
 				padding: 0 0 10px;
 			}
 		}
@@ -134,12 +109,8 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			font-size: 12px;
 			line-height: 13px;
 			color: $color-black-light;
-			position: fixed;
-			padding: 0 0 0 10px;
-			@media ( min-width: $breakpoint_l ) {
-				position: relative;
-				padding-left: 0;
-			}
+			position: relative;
+			padding: 0;
 		}
 	}
 
@@ -150,12 +121,11 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 0 1 auto;
-		padding: 0 5px 10px;
-
+		width: 100%;
+		padding: 0;
+		margin-top: 15px;
+		margin-bottom: 15px;
 		@media ( min-width: $breakpoint_l ) {
-			flex-wrap: wrap;
-			width: 100%;
-			padding: 0;
 			margin: 0;
 		}
 

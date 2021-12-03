@@ -46,6 +46,6 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
-		formActionProps: { ocn: '0', ast: '0' }
+		showCookieBanner: '0'
 	}
 );

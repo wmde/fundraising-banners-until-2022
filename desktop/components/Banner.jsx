@@ -9,12 +9,20 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
 import ProgressBar from '../../shared/components/ui/ProgressBar';
+import Slider from '../../shared/components/Slider';
+import Slides from './Slides';
+import SlideState from '../../shared/slide_state';
+import ChevronLeftIcon from './ui/ChevronLeftIcon';
+import ChevronRightIcon from './ui/ChevronRightIcon';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
 	CLOSED: Symbol( 'closed' )
 } );
+
+const SLIDESHOW_START_DELAY = 2000;
+const SLIDESHOW_SLIDE_INTERVAL = 10000;
 
 export class Banner extends Component {
 
@@ -28,6 +36,7 @@ export class Banner extends Component {
 	}
 
 	ref = createRef();
+	slideshowRef = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -36,9 +45,14 @@ export class Banner extends Component {
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
-			formInteractionSwitcher: false
+			formInteractionSwitcher: false,
+			bannerWidth: 0
 		};
 		this.slideInBanner = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
+
 		this.dynamicCampaignText = createDynamicCampaignText(
 			props.campaignParameters,
 			props.campaignProjection,
@@ -55,12 +69,14 @@ export class Banner extends Component {
 				this.slideInBanner();
 			}
 		);
+		this.storeBannerWidth();
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
 	}
 
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		this.storeBannerWidth();
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -73,6 +89,7 @@ export class Banner extends Component {
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
 		this.startProgressbar();
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 	}
 
 	closeBanner = e => {
@@ -81,12 +98,26 @@ export class Banner extends Component {
 		this.props.onClose();
 	};
 
+	submitBanner = () => {
+		this.props.trackingData.tracker.trackBannerEvent(
+			'submit',
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			1
+		);
+	};
+
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
 	}
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
+	};
+
+	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
+		this.startSliderAutoplay = onStartAutoplay;
+		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
 	toggleFundsModal = () => {
@@ -102,7 +133,17 @@ export class Banner extends Component {
 	};
 
 	onFormInteraction = () => {
+		this.stopSliderAutoplay();
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
+	}
+
+	onSlideChange = ( index ) => {
+		this.slideState.onSlideChange( index );
+	}
+
+	storeBannerWidth = () => {
+		// requirement for test #14
+		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -135,16 +176,33 @@ export class Banner extends Component {
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
-									<Infobox
-										formatters={props.formatters}
-										campaignParameters={props.campaignParameters}
-										campaignProjection={props.campaignProjection}
-										bannerText={props.bannerText}
-										dynamicCampaignText={ this.dynamicCampaignText }
-										propsForText={ {
-											overallImpressionCount: props.impressionCounts.getOverallCount(),
-											millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
-										} }/>
+									{ state.bannerWidth <= 1300 && (
+										<div className="banner__slideshow" ref={ this.slideshowRef }>
+											<Slider
+												slides={ Slides( this.dynamicCampaignText ) }
+												onSlideChange={ this.onSlideChange }
+												registerAutoplay={ this.registerAutoplayCallbacks }
+												interval={ SLIDESHOW_SLIDE_INTERVAL }
+												previous={ <ChevronLeftIcon/> }
+												next={ <ChevronRightIcon/> }
+												dynamicCampaignText={ this.dynamicCampaignText }
+												sliderOptions={ { loop: false } }
+											/>
+										</div>
+									) }
+
+									{ state.bannerWidth > 1300 && (
+										<Infobox
+											formatters={ props.formatters }
+											campaignParameters={ props.campaignParameters }
+											campaignProjection={ props.campaignProjection }
+											bannerText={ props.bannerText }
+											dynamicCampaignText={ this.dynamicCampaignText }
+											propsForText={ {
+												overallImpressionCount: props.impressionCounts.getOverallCount(),
+												millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
+											} } />
+									) }
 								</div>
 							</div>
 							<div className="banner__form">
@@ -155,12 +213,12 @@ export class Banner extends Component {
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									onSubmit={props.onSubmit}
+									onSubmit={ this.submitBanner }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
-									formActionProps={ props.formActionProps }
+									showCookieBanner={ props.showCookieBanner }
 								/>
 							</div>
 						</div>

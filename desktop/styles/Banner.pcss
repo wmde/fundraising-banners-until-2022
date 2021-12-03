@@ -31,14 +31,10 @@
 	}
 
 	.banner__content {
-		padding: 10px 10px 0;
-
-		@media ( min-width: $breakpoint_l ) {
-			display: flex;
-			flex-direction: row;
-			order: 1;
-			padding: 12px 24px 0;
-		}
+		display: flex;
+		flex-direction: row;
+		order: 1;
+		padding: 12px 24px 0;
 	}
 
 	.banner__infobox {
@@ -46,29 +42,23 @@
 		flex-direction: column;
 		justify-content: space-between;
 		flex: 1 1 auto;
-		margin-bottom: 10px;
-		@media ( min-width: $breakpoint_l ) {
-			margin-bottom: 0;
-		}
+		margin-bottom: 0;
+		overflow-y: hidden;
 	}
 
 	.banner__form {
 		order: 2;
-		@media ( min-width: $breakpoint_l ) {
-			flex: 0 0 $form-width;
-			display: flex;
-			flex-direction: row;
+		flex: 0 0 $form-width;
+		display: flex;
+		flex-direction: row;
+		width: $form-width;
+		.form {
 			width: $form-width;
-			.form {
-				width: $form-width;
-			}
 		}
 	}
 
 	.banner__footer {
-		@media ( min-width: $breakpoint_l ) {
-			order: 2;
-		}
+		order: 2;
 	}
 
 	.close {
@@ -92,5 +82,12 @@
 				color: $color-gray-medium;
 			}
 		}
+	}
+
+	.banner__slideshow {
+		background: $color-white;
+		display: flex;
+		height: 100%;
+		font-family: $banner-text-font-family;
 	}
 }

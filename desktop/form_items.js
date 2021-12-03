@@ -10,10 +10,10 @@ export function createFormItems( translations, amountFormatter ) {
 	);
 	builder.setAmounts( 5, 10, 20, 25, 50, 100 );
 	builder.setPaymentMethods(
-		PaymentMethods.DIRECT_DEBIT,
+		PaymentMethods.PAYPAL,
 		PaymentMethods.BANK_TRANSFER,
-		PaymentMethods.CREDIT_CARD,
-		PaymentMethods.PAYPAL
+		PaymentMethods.DIRECT_DEBIT,
+		PaymentMethods.CREDIT_CARD
 	);
 	return builder.getItems();
 }
