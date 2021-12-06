@@ -12,6 +12,7 @@ $progress-bar-height: 30px;
 		&__donation_remaining {
 			opacity: 0;
 			visibility: hidden;
+			transition: opacity 300ms $banner-easing;
 		}
 
 		&__days_left {
@@ -20,8 +21,8 @@ $progress-bar-height: 30px;
 
 			display: block;
 			color: $color-white;
-			line-height: 1.9em;
 		}
+
 		&__wrapper {
 			position: relative;
 			height: $progress-bar-height;
@@ -52,8 +53,6 @@ $progress-bar-height: 30px;
 			flex: 1;
 			color: $color-white;
 			white-space: nowrap;
-
-			transition: opacity 300ms $banner-easing;
 		}
 		&__donation_remaining {
 			padding: 0 10px;

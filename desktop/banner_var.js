@@ -11,12 +11,12 @@ import { BannerType } from './BannerType';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
-import DonationForm from './components/ui/form/MultiStepDonationForm';
+import DonationForm from './components/ui/form/DonationForm';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import BannerText from './components/BannerText';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );

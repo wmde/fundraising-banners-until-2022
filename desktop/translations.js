@@ -2,7 +2,7 @@ const Translations = {
 	'intervals-header': 'Ich spende:',
 	'amounts-header': 'Betrag:',
 	'payments-header': 'Zahlweise:',
-	'next-button': 'Jetzt unterstützen',
+	'next-button': 'Weiter',
 	'back-button': 'Zurück',
 	'close-button': 'Jetzt nicht unterstützen',
 	'minimise-button': 'Vielleicht später',

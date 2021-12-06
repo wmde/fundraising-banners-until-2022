@@ -8,12 +8,12 @@ import FundsModal from '../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import ProgressBar from '../../shared/components/ui/ProgressBar';
 import Slider from '../../shared/components/Slider';
 import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
+import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -220,7 +220,9 @@ export class Banner extends Component {
 							donationAmount={campaignProjection.getProjectedDonationSum()}
 							goalDonationSum={campaignProjection.goalDonationSum}
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={this.registerStartProgressbar}/>
+							setStartAnimation={this.registerStartProgressbar}
+							amountToShowOnRight={AmountToShowOnRight.TOTAL}
+						/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
