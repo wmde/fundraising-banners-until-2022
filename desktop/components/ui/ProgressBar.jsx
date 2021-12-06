@@ -46,6 +46,9 @@ export default class ProgressBar extends Component {
 		 */
 		setStartAnimation: PropTypes.func.isRequired,
 
+		/** Callback when progress has finished animating */
+		onEndProgress: PropTypes.func,
+
 		/**
 		 * If the progress bar should be animated. Default: true
 		 * If it's not animated you can set setStartAnimation to an empty function like this: () => {}
@@ -81,6 +84,9 @@ export default class ProgressBar extends Component {
 	// eslint-disable-next-line no-unused-vars
 	progressAnimationEnded = ( e ) => {
 		this.setState( { animation: ENDED } );
+		if ( this.props.onEndProgress ) {
+			this.props.onEndProgress();
+		}
 	};
 
 	startAnimation() {
