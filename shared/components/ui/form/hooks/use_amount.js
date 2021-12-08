@@ -9,7 +9,7 @@ function validateAmount( amount ) {
 	if ( amount < 1.0 ) {
 		return AMOUNT_TOO_LOW;
 	}
-	if ( amount > 100000 ) {
+	if ( amount >= 100000 ) {
 		return AMOUNT_TOO_HIGH;
 	}
 	return VALID;
