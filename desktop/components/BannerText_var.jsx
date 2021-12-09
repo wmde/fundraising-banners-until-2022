@@ -19,8 +19,7 @@ export default function BannerText( props ) {
 			in Zukunft erfolgreich entwickeln. <span className="text-animated-highlight">{ visitorsVsDonorsSentence }</span> Die meisten Menschen spenden, weil
 			sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse
 			Kaffee geschenkt? Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie
-			etwas zurück. Vielen Dank!
-			<span style="visibility:hidden;">Zeigen Sie, dass Ihnen der Zugang zu verlässlichen und neutralen Informationen wichtig ist.</span>
+			etwas zurück. Zeigen Sie, dass Ihnen der Zugang zu verlässlichen und neutralen Informationen wichtig ist. Vielen Dank!
 		</p>
 	</div>;
 }
