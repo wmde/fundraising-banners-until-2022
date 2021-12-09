@@ -1,24 +1,21 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/desktop_var/styles.pcss';
+import style from './styles/styles_ctrl.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import Banner from './components/Banner_var';
+import Banner from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
-import LocalTranslations from './translations';
-import DonationForm from './components/ui/form/DonationForm';
-import Footer from '../../shared/components/ui/EasySelectFooter';
+import BannerText from './components/BannerText';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { createTrackingData } from '../../shared/tracking_data';
-import BannerText from './components/BannerText_var';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -28,7 +25,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 0,
+	0,
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
@@ -42,11 +39,8 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		bannerText: BannerText,
-		donationForm: DonationForm,
-		footer: Footer,
-		translations: Object.assign( Translations, LocalTranslations ),
+		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
-		addressFormType: 2
+		bannerType: BannerType.VAR
 	}
 );

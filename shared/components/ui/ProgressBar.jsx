@@ -107,9 +107,6 @@ export default class ProgressBar extends Component {
 		const Translations = context;
 		const getMillion = n => this.props.formatters.millionFormatter( n / 1000000 );
 		const getDaysLeft = daysLeft => {
-			if ( props.daysLeft > 14 ) {
-				return '';
-			}
 			return Translations[ 'prefix-days-left' ] +
 				' ' + daysLeft + ' ' +
 				( daysLeft === 1 ? Translations[ 'day-singular' ] : Translations[ 'day-plural' ] ) + ' ' +
