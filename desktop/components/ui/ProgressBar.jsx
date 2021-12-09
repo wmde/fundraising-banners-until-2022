@@ -18,7 +18,7 @@ export const AmountToShowOnRight = Object.freeze( {
  *
  * @type {boolean}
  */
-const IS_LATE_PROGRESS = false;
+const IS_LATE_PROGRESS = true;
 
 export default class ProgressBar extends Component {
 	static contextType = TranslationContext;
@@ -45,6 +45,9 @@ export default class ProgressBar extends Component {
 		 * See https://stackoverflow.com/a/45582558/130121
 		 */
 		setStartAnimation: PropTypes.func.isRequired,
+
+		/** Callback when progress has finished animating */
+		onEndProgress: PropTypes.func,
 
 		/**
 		 * If the progress bar should be animated. Default: true
@@ -81,7 +84,9 @@ export default class ProgressBar extends Component {
 	// eslint-disable-next-line no-unused-vars
 	progressAnimationEnded = ( e ) => {
 		this.setState( { animation: ENDED } );
-
+		if ( this.props.onEndProgress ) {
+			this.props.onEndProgress();
+		}
 	};
 
 	startAnimation() {
@@ -95,16 +100,13 @@ export default class ProgressBar extends Component {
 	}
 
 	calculateWidth() {
-		return ( this.props.donationAmount * 100 ) / this.props.goalDonationSum;
+		return Math.min( ( this.props.donationAmount * 100 ) / this.props.goalDonationSum, 100 );
 	}
 
 	render( props, state, context ) {
 		const Translations = context;
 		const getMillion = n => this.props.formatters.millionFormatter( n / 1000000 );
 		const getDaysLeft = daysLeft => {
-			if ( props.daysLeft > 14 ) {
-				return '';
-			}
 			return Translations[ 'prefix-days-left' ] +
 				' ' + daysLeft + ' ' +
 				( daysLeft === 1 ? Translations[ 'day-singular' ] : Translations[ 'day-plural' ] ) + ' ' +

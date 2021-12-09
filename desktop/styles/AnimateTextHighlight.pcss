@@ -1,0 +1,26 @@
+$textHighlightColor: rgba( 255, 222, 103, 1 );
+$transparentColor: rgba( 255, 255, 255, 0 );
+
+.wmde-banner {
+
+	/* No animated highlight in slides */
+	.banner__slideshow .text-animated-highlight {
+		padding: 0 5px;
+		background: $textHighlightColor;
+	}
+
+	/* Animate highlight banner text */
+	.banner-text {
+		.text-animated-highlight {
+			padding: 0 5px;
+			background: linear-gradient( 270deg, $transparentColor 0%, $transparentColor 50%, $textHighlightColor 50%, $textHighlightColor 100% );
+			background-size: 201% 100%;
+			background-position: 100% 0;
+			transition: background-position 2s;
+		}
+	}
+
+	&--animate-highlight .banner-text .text-animated-highlight {
+		background-position: 0 0;
+	}
+}
