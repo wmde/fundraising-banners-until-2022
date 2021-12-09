@@ -9,12 +9,12 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
+import DonationForm from './components/ui/form/DonationFormWithAddress';
 
-import Banner from './components/Banner_var';
+import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { BannerType } from '../shared/BannerType';
 
