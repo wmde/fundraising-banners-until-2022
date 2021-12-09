@@ -26,6 +26,10 @@ export default class Vector extends Skin {
 		this.pageBase.css( { paddingTop: bannerHeight, transition: 'unset' } );
 	}
 
+	addSpaceToSidebarInstantly( bannerHeight ) {
+		this.panel.css( { top: bannerHeight, transition: 'unset' } );
+	}
+
 	removeSpace() {
 		this.panel.css( { top: 0, transition: 'unset' } );
 		this.head.css( { top: 0, transition: 'unset' } );
