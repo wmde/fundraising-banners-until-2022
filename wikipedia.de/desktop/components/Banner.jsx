@@ -3,7 +3,6 @@ import TranslationContext from '../../../shared/components/TranslationContext';
 import classNames from 'classnames';
 import Infobox from '../../../shared/components/ui/Infobox';
 import ProgressBar from '../../../shared/components/ui/ProgressBar';
-import DonationForm from '../../../shared/components/ui/form/DonationForm';
 import Footer from '../../../shared/components/ui/Footer';
 import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
@@ -89,6 +88,7 @@ export default class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
+		const DonationForm = props.donationForm;
 		return <div
 			className={ classNames(
 				'wmde-banner',

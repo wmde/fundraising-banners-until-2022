@@ -15,17 +15,14 @@
 		}
 		align-items: center;
 		min-width: inherit;
-		&__form {
-			margin: 0.8em;
-		}
 
 		&__element {
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: row;
 			justify-content: flex-end;
-			flex: 1 1 100%;
 			width: 100%;
+			flex: 1 1 100%;
 			@media ( min-width: $breakpoint-s ) {
 				display: block;
 				margin: 0;
@@ -44,6 +41,16 @@
 		}
 	}
 
+	.banner__form {
+		margin: 0.8em;
+		display: flex;
+		overflow-x: hidden;
+
+		@media ( min-width: $breakpoint-s ) {
+			width: $form-width;
+		}
+	}
+
 	.button-group {
 		display: block;
 		border: 0;
@@ -52,7 +59,7 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-		flex: 0 1 auto;
+		flex: 1 1 auto;
 		@media ( min-width: $breakpoint-form-right ) {
 			flex-wrap: wrap;
 			margin-left: 0.5em;
