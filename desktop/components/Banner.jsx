@@ -21,8 +21,15 @@ const BannerVisibilityState = Object.freeze( {
 	CLOSED: Symbol( 'closed' )
 } );
 
+const HighlightState = Object.freeze( {
+	WAITING: Symbol( 'waiting' ),
+	ANIMATE: Symbol( 'animate' )
+} );
+
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
+
+const SHOW_SLIDE_BREAKPOINT = 1300;
 
 export class Banner extends Component {
 
@@ -46,7 +53,8 @@ export class Banner extends Component {
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
-			bannerWidth: 0
+			bannerWidth: 0,
+			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
@@ -60,6 +68,7 @@ export class Banner extends Component {
 			props.formatters,
 			props.translations
 		);
+		this.triggerTextHighlight = this.triggerTextHighlight.bind( this );
 	}
 
 	componentDidMount() {
@@ -130,6 +139,16 @@ export class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
+		this.triggerTextHighlight();
+	}
+
+	triggerTextHighlight() {
+		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
+			return;
+		}
+		if ( this.state.bannerWidth > SHOW_SLIDE_BREAKPOINT ) {
+			this.setState( { textHighlight: HighlightState.ANIMATE } );
+		}
 	}
 
 	storeBannerWidth = () => {
@@ -148,6 +167,7 @@ export class Banner extends Component {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
+				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
@@ -167,7 +187,7 @@ export class Banner extends Component {
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
-									{ state.bannerWidth <= 1300 && (
+									{ state.bannerWidth <= SHOW_SLIDE_BREAKPOINT && (
 										<div className="banner__slideshow" ref={ this.slideshowRef }>
 											<Slider
 												slides={ Slides( this.dynamicCampaignText ) }
@@ -182,7 +202,7 @@ export class Banner extends Component {
 										</div>
 									) }
 
-									{ state.bannerWidth > 1300 && (
+									{ state.bannerWidth > SHOW_SLIDE_BREAKPOINT && (
 										<Infobox
 											formatters={ props.formatters }
 											campaignParameters={ props.campaignParameters }
@@ -222,6 +242,7 @@ export class Banner extends Component {
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 							setStartAnimation={this.registerStartProgressbar}
 							amountToShowOnRight={AmountToShowOnRight.TOTAL}
+							onEndProgress={ this.triggerTextHighlight }
 						/>
 					</div>
 				</TranslationContext.Provider>
