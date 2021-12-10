@@ -1,0 +1,47 @@
+.wmde-banner {
+	.keen-slider__slide {
+		align-items: center;
+		justify-content: center;
+		padding: 0 17px 0 17px;
+		cursor: grab;
+		p {
+			padding-bottom: 16px;
+
+			&:last-child {
+				padding-bottom: 0;
+			}
+		}
+	}
+
+	.navigation-wrapper {
+		overflow: hidden;
+		position: relative;
+		padding-bottom: 60px;
+	}
+
+	.pagination {
+		display: flex;
+		padding: 25px 0;
+		height: 60px;
+		justify-content: center;
+
+		&-dot {
+			border: 0;
+			width: 10px;
+			height: 10px;
+			background: $color-gray-medium;
+			border-radius: 50%;
+			margin: 0 5px;
+			padding: 5px;
+			cursor: pointer;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: $color-gray;
+			}
+		}
+	}
+}
