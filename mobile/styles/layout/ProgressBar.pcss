@@ -24,21 +24,33 @@ $progress-label-x-padding: 16px;
 		}
 
 		&__donation_text,
-		&__donation_remaining {
+		&__donation_remaining,
+		&__days_left {
 			opacity: 0;
 			transition: opacity 200ms ease-in-out;
 		}
 
 		&--finished {
 			.progress_bar__donation_text,
-			.progress_bar__donation_remaining {
+			.progress_bar__donation_remaining,
+			.progress_bar__days_left {
 				opacity: 1;
 			}
 		}
 
 		&__donation_text {
+			color: $color-white;
+			float: right;
+			height: 12px;
+			line-height: 12px;
+			white-space: nowrap;
+			font-size: 12px;
+			padding-right: 10px;
+		}
+
+		&__days_left {
 			margin-top: -$progress-label-top-offset;
-			width: 7em;
+			width: 100%;
 			padding-left: $progress-label-x-padding;
 		}
 

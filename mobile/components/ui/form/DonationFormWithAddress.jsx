@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../../../shared/components/TranslationContext';
-import { SelectGroup } from './SelectGroup_var';
+import { SelectGroup } from './SelectGroup';
 import SelectCustomAmount from '../../../../shared/components/ui/form/SelectCustomAmount';
 import SmsBox from '../../../../shared/components/ui/form/SmsBox';
 
@@ -15,7 +15,7 @@ import { Intervals, PaymentMethods } from '../../../../shared/components/ui/form
 import SubmitValues from '../../../../shared/components/ui/form/SubmitValues';
 import Footer from '../../../../shared/components/ui/EasySelectFooter';
 import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from '../../../../shared/components/ui/form/hooks/use_form_action';
-import { AddressType } from './FormItemsBuilder';
+import { AddressType } from '../../../FormItemsBuilder';
 import useAddressType from './hooks/use_address_type';
 
 export default function DonationFormWithHeaders( props ) {
