@@ -133,9 +133,7 @@ export default function MultiStepDonationForm( props ) {
 		setAlternative( e.target.value );
 
 		if ( e.target.value === Alternatives.YES ) {
-			setInterval( Intervals.MONTHLY.value );
-			updateCustomAmount( '2' );
-			validateCustomAmount( '2' );
+			setInterval( Intervals.YEARLY.value );
 		}
 	};
 
@@ -205,8 +203,9 @@ export default function MultiStepDonationForm( props ) {
 
 				<div className="form-step-label">
 					<a href="#" className="back" onClick={ onFormBack }>
-						<ChevronLeftIcon/> { Translations[ 'form-step-2-header' ] }
+						<ChevronLeftIcon/>
 					</a>
+					{ Translations[ 'form-step-2-header' ].replace( '{{amount}}', secondPageAmount ) }
 				</div>
 				<div className="form-step-2-notice">{ Translations[ 'form-step-2-copy' ] }</div>
 
@@ -234,7 +233,7 @@ export default function MultiStepDonationForm( props ) {
 									name="alternative"
 									value={ Alternatives.YES }
 									className="select-group__input"/>
-								<span className="select-group__state">{ Translations[ 'form-step-2-yes' ] }</span>
+								<span className="select-group__state">{ Translations[ 'form-step-2-yes' ].replace( '{{amount}}', secondPageAmount ) }</span>
 							</label>
 						</div>
 						<span className="select-group__errormessage">
