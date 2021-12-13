@@ -139,7 +139,7 @@ export default function MultiStepDonationForm( props ) {
 
 	return <div className="form">
 		<form method="post" name="donationForm" className={ classNames(
-			'banner__form',
+			'form__element',
 			{ 'is-step-2': formStep === formSteps.TWO }
 		) } onClick={ onFormInteraction } action={ formAction }>
 

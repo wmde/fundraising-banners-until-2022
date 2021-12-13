@@ -1,70 +1,43 @@
 .wmde-banner {
 	.form {
-		padding: 0 0 0 0.2em;
-		display: flex;
-		justify-content: space-between;
-		flex-direction: row;
-		margin: 0.5em 0.5em 0 0.25em;
-		@media ( min-width: $breakpoint-s ) {
-			flex: 0 0 $form-width;
-			width: $form-width;
-			justify-content: center;
-			flex-direction: column;
-			margin: 0 2em 0 0.25em;
-			padding: 0 0 0 0.5em;
-		}
+		display: block;
+		flex: 0 0 $form-width;
+		width: $form-width;
+		justify-content: center;
+		flex-direction: column;
+		margin: 0 2em 0 0.25em;
+		padding: 10px 0 12px 0.5em;
 		align-items: center;
 		min-width: inherit;
 
 		&__element {
 			display: flex;
-			flex-wrap: wrap;
+			flex-wrap: nowrap;
 			flex-direction: row;
-			justify-content: flex-end;
 			width: 100%;
 			flex: 1 1 100%;
-			@media ( min-width: $breakpoint-s ) {
-				display: block;
-				margin: 0;
-			}
+			margin: 0;
+			overflow: hidden;
 		}
 
 		&-field-group {
-			display: flex;
+			display: block;
 			flex-wrap: wrap;
 			flex: 1 1 auto;
 			min-width: 19em;
 			width: 50%;
-			@media ( min-width: $breakpoint-s ) {
-				display: block;
-			}
-		}
-	}
-
-	.banner__form {
-		margin: 0.8em;
-		display: flex;
-		overflow-x: hidden;
-
-		@media ( min-width: $breakpoint-s ) {
-			width: $form-width;
 		}
 	}
 
 	.button-group {
 		display: block;
 		border: 0;
-		margin: 0;
-		padding: 0.6em 0.5em 0 0;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
 		flex: 1 1 auto;
-		@media ( min-width: $breakpoint-form-right ) {
-			flex-wrap: wrap;
-			margin-left: 0.5em;
-			padding: 0.3em 0.5em 0.3em 0;
-		}
+		margin-left: 0.5em;
+		padding: 0.3em 0.5em 0.3em 0;
 
 		&__button {
 			flex: 1 1 auto;
@@ -87,30 +60,25 @@
 			border: 0 none;
 			border-radius: $banner-border-radius;
 			padding: 2px 5px;
-			line-height: 2em;
+			line-height: 3em;
 			font-size: 0.85em;
 			font-weight: bold;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
-			@media ( min-width: $breakpoint-form-right ) {
-				line-height: 3em;
-			}
 			&:hover {
 				background-color: $color-secondary-light;
 			}
 		}
 	}
 
-	@media ( min-width: $breakpoint-form-right ) {
-		&.WMDE-Banner-submit {
-			display: block;
-			flex-grow: 0;
-			justify-content: center;
+	&.WMDE-Banner-submit {
+		display: block;
+		flex-grow: 0;
+		justify-content: center;
 
-			.button-group__button {
-				width: 100%;
-			}
+		.button-group__button {
+			width: 100%;
 		}
 	}
 

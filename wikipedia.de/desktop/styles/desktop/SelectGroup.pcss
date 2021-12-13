@@ -4,13 +4,9 @@
 		border: 0;
 		margin: 0 auto;
 		display: flex;
-		flex-wrap: nowrap;
-		flex: 1 1 auto;
-		@media ( min-width: $breakpoint-s ) {
-			flex-wrap: wrap;
-			flex: 1 0 auto;
-			padding: 0.4em 0.5em 0 0.5em;
-		}
+		flex-wrap: wrap;
+		flex: 1 0 auto;
+		padding: 0.4em 0.5em 0 0.5em;
 		flex-direction: row;
 		justify-content: space-between;
 		font-weight: bold;
@@ -22,9 +18,7 @@
 			flex-direction: column;
 			border: 0;
 			margin-right: 3px;
-			@media ( min-width: $breakpoint-s ) {
-				margin-left: 6px;
-			}
+			margin-left: 6px;
 		}
 
 		&:first-child {
@@ -69,14 +63,10 @@
 		}
 
 		&__state {
-			display: flex;
+			display: block;
+			padding: 0.6em 0;
 			height: 100%;
 			white-space: nowrap;
-			padding: 0.2em 5px 0 5px;
-			@media ( min-width: $breakpoint-s ) {
-				display: block;
-				padding: 0.6em 0;
-			}
 			background: $color-bright;
 			border: 0 none;
 			border-radius: 2px;
@@ -98,11 +88,11 @@
 
 		&__custom-input {
 			background: $color-bright;
-			padding: 0.4em;
+			padding-top: 10px;
 			width: 100%;
 			min-width: 100px;
 			min-height: 25px;
-			height: 25px;
+			height: 36px;
 			margin: 0;
 			font-size: 0.9em;
 			font-weight: bold;
@@ -110,11 +100,6 @@
 			border: 0 none;
 			border-radius: $banner-border-radius;
 			box-sizing: border-box;
-
-			@media ( min-width: $breakpoint-form-right ) {
-				height: 36px;
-				padding-top: 10px;
-			}
 			&--input {
 				border-color: transparent;
 				background: transparent;
@@ -173,28 +158,6 @@
 				background-color: $color-gray-medium;
 				border-color: $color-gray;
 			}
-			@media ( min-width: $breakpoint-xs ) {
-				border-right: 0;
-				border-radius: 0;
-				&:first-child {
-					border-radius: $banner-border-radius 0 0 $banner-border-radius;
-				}
-				&:last-of-type {
-					border-radius: 0 $banner-border-radius $banner-border-radius 0;
-					border-right: 1px solid $color-light-dark;
-				}
-			}
-			@media ( min-width: $breakpoint-form-right ) {
-				margin: 3px 0 0;
-				border: 1px solid $color-light-dark;
-				border-radius: $banner-border-radius;
-				&:first-child {
-					border-radius: $banner-border-radius;
-				}
-				&:last-of-type {
-					border-radius: $banner-border-radius;
-				}
-			}
 		}
 	}
 
@@ -231,9 +194,7 @@
 		}
 		.select-group__option:first-child {
 			width: 100%;
-			@media ( min-width: $breakpoint-s ) {
-				flex-basis: 100%;
-			}
+			flex-basis: 100%;
 		}
 	}
 }

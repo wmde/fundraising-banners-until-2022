@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props.dynamicCampaignText;
 
 	return <div className="banner-text">
 		<p className="text__headline">
