@@ -1,38 +1,26 @@
 import { h } from 'preact';
+import InfoIcon from './ui/InfoIcon';
+import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
 
 export default function Slides( dynamicCampaignText ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = dynamicCampaignText;
-	const Icon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<circle cx="8" cy="8" r="8" fill="#2B6DA0"/>
-		<path d="M8.80003 5.73332V11.7173H10.2667V13.0667H5.96937V11.7173H7.33337V7.19999H5.8667V5.73332H8.80003ZM7.33337 2.79999H8.80003V4.26665H7.33337V2.79999Z" fill="white"/>
-	</svg>;
 
 	return [
 		{ content: <div>
 			<p className="headline">
-				{ Icon } <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
+				<InfoIcon/> <strong>To all our readers in Germany,</strong>
 			</p>
-			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte
-				nicht weg! Dies ist der { overallImpressionCount }. Spendenaufruf, den wir Ihnen zeigen. Am heutigen { currentDayName } bitten
-				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
+			<p>It might be a little awkward, so we'll get straight to the point. { campaignDaySentence } This { currentDayName }, for
+				the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently, we humbly ask you to defend Wikipedia's independence.</p>
 		</div> },
 		{ content: <div>
-			<p>{ campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen
-				diesen Aufruf. Sollten Sie zu dem kleinen Kreis gehören, die bereits gespendet
-				haben, danken wir Ihnen sehr herzlich.</p>
+			<p>99% of our readers don't give; they simply look the
+				other way. If you are an exceptional reader who has already donated, we sincerely thank you. We depend on donations
+				averaging about €21.60. <span className="text-animated-highlight">{ visitorsVsDonorsSentence }</span></p>
 		</div> },
 		{ content: <div>
-			<p>
-				Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert. Doch schon mit
-				einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
-				erfolgreich entwickeln. <span className="text-animated-highlight">{ visitorsVsDonorsSentence }</span>
-			</p>
-		</div> },
-		{ content: <div>
-			<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in
-				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann nehmen Sie sich
-				doch bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank!</p>
+			<p>If you donate just €5, Wikipedia could keep thriving for years. If Wikipedia has given you €5 worth of knowledge
+				this year, take a minute to donate. Show the volunteers who bring you reliable, neutral information that their work matters. Thank you.</p>
 		</div> }
 	];
 }

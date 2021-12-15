@@ -70,7 +70,7 @@ const Translations = {
 	'address-type-option-full': 'Full address data',
 	'address-type-notice-full': 'You will receive a donation receipt by mail. You will also receive an e-mail confirmation of your donation.',
 	'address-type-option-email': 'Only e-mail address',
-	'address-type-notice-email': 'for e-mail confirmation',
+	'address-type-notice-email': 'You waive the donation receipt, but receive an e-mail confirmation of your donation.',
 	'address-type-option-none': 'No address data',
 	'address-type-notice-none': 'You waive the donation receipt and an e-mail confirmation of your donation. We will not contact you when Wikipedia needs help again.',
 	'address-type-notice-direct-debit': 'A postal address is necessary for donating by direct-debit.',

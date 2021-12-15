@@ -10,12 +10,12 @@ import { Banner } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
 import LocalTranslations from './translations';
-import DonationForm from './components/ui/form/DonationForm';
+import DonationForm from './components/ui/form/DonationForm_var';
 import BannerText from './components/BannerText';
 import Footer from '../shared/components/ui/EasySelectFooter';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { BannerType } from '../shared/BannerType';
 
@@ -45,6 +45,6 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
-		formProps: { ast: 2 }
+		formProps: { ast: 2, locale: 'en_GB' }
 	}
 );

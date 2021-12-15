@@ -13,7 +13,7 @@ import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
-import ProgressBar, { AmountToShowOnRight } from '../../shared/components/ui/ProgressBar';
+import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -21,8 +21,14 @@ const BannerVisibilityState = Object.freeze( {
 	CLOSED: Symbol( 'closed' )
 } );
 
+const HighlightState = Object.freeze( {
+	WAITING: Symbol( 'waiting' ),
+	ANIMATE: Symbol( 'animate' )
+} );
+
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
+const SHOW_SLIDE_BREAKPOINT = 1300;
 
 export class Banner extends Component {
 
@@ -32,7 +38,9 @@ export class Banner extends Component {
 		/** callback when banner gets submitted */
 		onSubmit: PropTypes.func,
 		/** */
-		registerDisplayBanner: PropTypes.func.isRequired
+		registerDisplayBanner: PropTypes.func.isRequired,
+		bannerWidth: 0,
+		textHighlight: HighlightState.WAITING
 	}
 
 	ref = createRef();
@@ -130,10 +138,19 @@ export class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
+		this.triggerTextHighlight();
+	}
+
+	triggerTextHighlight() {
+		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
+			return;
+		}
+		if ( this.state.bannerWidth > SHOW_SLIDE_BREAKPOINT ) {
+			this.setState( { textHighlight: HighlightState.ANIMATE } );
+		}
 	}
 
 	storeBannerWidth = () => {
-		// requirement for test #14
 		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
 	}
 
@@ -148,6 +165,7 @@ export class Banner extends Component {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
+				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
@@ -167,7 +185,7 @@ export class Banner extends Component {
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
-									{ state.bannerWidth <= 1300 && (
+									{ state.bannerWidth <= SHOW_SLIDE_BREAKPOINT && (
 										<div className="banner__slideshow" ref={ this.slideshowRef }>
 											<Slider
 												slides={ Slides( this.dynamicCampaignText ) }
@@ -182,7 +200,7 @@ export class Banner extends Component {
 										</div>
 									) }
 
-									{ state.bannerWidth > 1300 && (
+									{ state.bannerWidth > SHOW_SLIDE_BREAKPOINT && (
 										<Infobox
 											formatters={ props.formatters }
 											campaignParameters={ props.campaignParameters }
@@ -203,7 +221,7 @@ export class Banner extends Component {
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
-									onFormInteraction={this.onFormInteraction}
+									onFormInteraction={ this.onFormInteraction }
 									onSubmit={ props.onSubmit }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
@@ -223,6 +241,7 @@ export class Banner extends Component {
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 							setStartAnimation={this.registerStartProgressbar}
 							amountToShowOnRight={AmountToShowOnRight.TOTAL}
+							onEndProgress={ () => this.triggerTextHighlight() }
 						/>
 					</div>
 				</TranslationContext.Provider>

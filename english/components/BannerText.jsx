@@ -15,9 +15,10 @@ export default function BannerText( props ) {
 			This { currentDayName }, for the { getEnglishOrdinalSuffixOf( overallImpressionCount ) } time recently,
 			we humbly ask you to defend Wikipedia's independence. 99% of our readers don't give; they simply look the
 			other way. If you are an exceptional reader who has already donated, we sincerely thank you. We depend on donations
-			averaging about €21.60. { visitorsVsDonorsSentence } If you donate just €5, Wikipedia could keep thriving for years.
-			If Wikipedia has given you €5 worth of knowledge this year, take a minute to donate. Show the volunteers who bring you
-			reliable, neutral information that their work matters. Thank you.
+			averaging about €21.60. <span className="text-animated-highlight">{ visitorsVsDonorsSentence }</span> If you donate
+			just €5, Wikipedia could keep thriving for years. If Wikipedia has given you €5 worth of knowledge this year,
+			take a minute to donate. Show the volunteers who bring you reliable, neutral information that their work matters.
+			Thank you.
 		</p>
 	</div>;
 }

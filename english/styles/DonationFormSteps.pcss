@@ -40,6 +40,8 @@
 		&-notice {
 			font-size: 12px;
 			font-weight: bold;
+			max-height: 0;
+			transition: max-height 500ms $banner-easing;
 		}
 
 		.select-group__errormessage {
@@ -99,6 +101,10 @@
 		}
 		.form-step-2 {
 			opacity: 1;
+
+			&-notice {
+				max-height: 30px;
+			}
 		}
 	}
 }

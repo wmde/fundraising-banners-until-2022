@@ -17,6 +17,7 @@ import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from '../../../../s
 import { AddressType, Intervals, PaymentMethods } from './FormItemsBuilder';
 import classNames from 'classnames';
 import ChevronLeftIcon from '../ChevronLeftIcon';
+import TextTruncator from '../TextTruncator';
 
 const formSteps = Object.freeze( {
 	ONE: Symbol( 'one' ),
@@ -51,6 +52,7 @@ export default function MultiStepDonationForm( props ) {
 			[ paymentMethodValidity, setPaymentMethodValidity ]
 		].map( validateRequired ).every( isValid ) ) {
 			setFormStep( formSteps.TWO );
+			setTimeout( props.onFormInteraction, 500 );
 		}
 	};
 
@@ -69,6 +71,7 @@ export default function MultiStepDonationForm( props ) {
 
 	const onFormBack = () => {
 		setFormStep( formSteps.ONE );
+		setTimeout( props.onFormInteraction, 500 );
 	};
 
 	const addDisabledPaymentMethod = paymentMethodToDisable => {
@@ -249,7 +252,14 @@ export default function MultiStepDonationForm( props ) {
 									className="select-group__input"/>
 								<span className="select-group__state">
 									{ label || value }
-									{ notice ? <span className="select-group__notice"><br/>({ notice })</span> : null }
+									{ notice ? <span className="select-group__notice"><br/>(
+										<TextTruncator
+											text={ notice }
+											showLabel={ Translations[ 'show-more' ] }
+											hideLabel={ Translations[ 'show-less' ] }
+											maxLength={ 85 }
+										/>
+									)</span> : null }
 								</span>
 							</label>
 						) ) }

@@ -45,6 +45,6 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
-		formProps: { ast: 0 }
+		formProps: { ast: 0, locale: 'en_GB' }
 	}
 );
