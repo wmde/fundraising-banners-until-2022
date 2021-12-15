@@ -14,7 +14,7 @@ import DonationForm from './components/ui/form/DonationFormWithAddress';
 import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../shared/campaign_projection';
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
 import { BannerType } from '../shared/BannerType';
 

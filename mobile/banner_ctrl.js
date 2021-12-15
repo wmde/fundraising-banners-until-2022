@@ -9,7 +9,7 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
+import DonationForm from './components/ui/form/DonationFormWithAddress';
 
 import Banner from './components/Banner';
 
