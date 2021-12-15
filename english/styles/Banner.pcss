@@ -25,22 +25,19 @@
 
 	.banner__wrapper {
 		font-size: 14px;
-		padding: 0.5em;
-
 		font-family: $banner-main-font-family;
 		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
 		background-color: $color-white;
-
-		@media ( min-width: $breakpoint_l ) {
-			padding: 0.8em 2em 0.8em 2em;
-		}
 	}
 
 	.banner__content {
+		padding: 10px 10px 0;
+
 		@media ( min-width: $breakpoint_l ) {
 			display: flex;
 			flex-direction: row;
 			order: 1;
+			padding: 12px 24px 0;
 		}
 	}
 
@@ -48,7 +45,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		flex: 0 1 100%;
+		flex: 1 1;
 		margin-bottom: 10px;
 		@media ( min-width: $breakpoint_l ) {
 			margin-bottom: 0;
@@ -58,8 +55,10 @@
 	.banner__form {
 		order: 2;
 		@media ( min-width: $breakpoint_l ) {
+			flex: 0 0 $form-width;
 			display: flex;
 			flex-direction: row;
+			width: $form-width;
 			.form {
 				width: $form-width;
 			}
@@ -78,23 +77,15 @@
 		height: 30px;
 		line-height: 30px;
 		text-align: center;
-		top: 1em;
-		right: 1em;
-		opacity: 0.8;
+		top: 8px;
+		right: 8px;
 		z-index: 1;
 
-		@media ( min-width: $breakpoint_l ) {
-			top: 0.5em;
-			right: 0.5em;
-			opacity: 0.5;
-		}
-
 		&__link {
+			display: block;
+			width: 100%;
 			font-size: 25px;
-			color: $color-white;
-			@media ( min-width: $breakpoint_l ) {
-				color: $color-gray;
-			}
+			color: $color-black-light;
 			text-decoration: none;
 			&:hover {
 				text-decoration: none;

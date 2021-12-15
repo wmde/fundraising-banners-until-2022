@@ -8,7 +8,6 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 		@media ( min-width: $breakpoint_l ) {
 			align-items: center;
 			display: flex;
-			padding-left: 1em;
 			margin: 0;
 		}
 
@@ -37,7 +36,6 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 				width: 100%;
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: flex-end;
 
 				@media ( min-width: $breakpoint_m ) {
 					flex-wrap: nowrap;
@@ -156,9 +154,9 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 
 		@media ( min-width: $breakpoint_l ) {
 			flex-wrap: wrap;
+			width: 100%;
 			padding: 0;
 			margin: 0;
-			width: 100%;
 		}
 
 		&__button {
@@ -168,22 +166,24 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			box-sizing: border-box;
 			cursor: pointer;
 			color: $color-white;
-			background-color: $color-secondary;
+			background-color: $color-primary;
 			border: 0 none;
-			border-radius: 0.4em;
-			font-size: 0.85em;
+			border-radius: 18px;
+			font-size: 14px;
 			line-height: 35px;
 			height: 35px;
 			font-weight: bold;
 			text-align: center;
 			white-space: nowrap;
+			transition: background-color 500ms $banner-easing;
 			&:hover {
-				background-color: $color-secondary-hover;
+				background-color: $color-primary-light;
 			}
 		}
 	}
 
-	.sms-box {
+	.sms-box,
+	.form__section-head {
 		display: none;
 	}
 }
