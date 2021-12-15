@@ -6,7 +6,7 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './components/Banner';
+import { Banner } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
 import LocalTranslations from './translations';
@@ -44,6 +44,7 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR
+		bannerType: BannerType.VAR,
+		formProps: { ast: 2 }
 	}
 );

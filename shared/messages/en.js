@@ -68,10 +68,11 @@ const Translations = {
 	// This is for the forms with address type
 	'address-type-label': 'Do you want to provide your address data?',
 	'address-type-option-full': 'Full address data',
+	'address-type-notice-full': 'You will receive a donation receipt by mail. You will also receive an e-mail confirmation of your donation.',
 	'address-type-option-email': 'Only e-mail address',
-	'address-type-option-none': 'No address data',
-	'address-type-notice-full': 'for postal donation receipt and e-mail confirmation',
 	'address-type-notice-email': 'for e-mail confirmation',
+	'address-type-option-none': 'No address data',
+	'address-type-notice-none': 'You waive the donation receipt and an e-mail confirmation of your donation. We will not contact you when Wikipedia needs help again.',
 	'address-type-notice-direct-debit': 'A postal address is necessary for donating by direct-debit.',
 	'address-type-error-message': 'Please choose an option.',
 	'submit-label-paypal': 'Proceed with PayPal',

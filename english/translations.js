@@ -3,7 +3,7 @@ const Translations = {
 	'amounts-header': 'Amount:',
 	'payments-header': 'Using:',
 	'next-button': 'Support now',
-	'back-button': 'Back'
+	'back-button': 'Back',
 };
 
 export default Translations;
