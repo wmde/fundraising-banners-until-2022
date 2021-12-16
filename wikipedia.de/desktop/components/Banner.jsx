@@ -2,6 +2,7 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Infobox from './ui/Infobox';
+import Footer from '../../../shared/components/ui/Footer';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../../shared/components/TranslationContext';
@@ -203,6 +204,7 @@ export class Banner extends Component {
 							/>
 						</div>
 					</div>
+					<Footer showFundsModal={ this.toggleFundsModal }/>
 				</div>
 			</TranslationContext.Provider>
 			<FundsModal
