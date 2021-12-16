@@ -9,7 +9,7 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
 import Slider from '../../shared/components/Slider';
-import Slides from './Slides';
+import Slides from './Slides_var';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
