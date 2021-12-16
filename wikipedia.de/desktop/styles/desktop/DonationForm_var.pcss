@@ -9,22 +9,20 @@
 		padding: 10px 0 12px 0.5em;
 		align-items: center;
 		min-width: inherit;
-		&__form {
-			margin: 0.8em;
-		}
 
 		&__element {
 			display: flex;
-			flex-wrap: wrap;
+			flex-wrap: nowrap;
 			flex-direction: row;
-			justify-content: flex-end;
 			width: 100%;
-			flex: 0 1;
+			flex: 1 1 100%;
 			margin: 0;
+			overflow: hidden;
 		}
 
 		&-field-group {
 			display: block;
+			flex-wrap: wrap;
 			flex: 1 1 auto;
 			min-width: 19em;
 			width: 50%;
@@ -37,10 +35,9 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: flex-start;
-		flex: 0 1 auto;
+		flex: 1 1 auto;
 		margin-left: 0.5em;
 		padding: 0.3em 0.5em 0.3em 0;
-		width: 100%;
 
 		&__button {
 			flex: 1 1 auto;
@@ -63,27 +60,25 @@
 			border: 0 none;
 			border-radius: $banner-border-radius;
 			padding: 2px 5px;
+			line-height: 3em;
 			font-size: 0.85em;
 			font-weight: bold;
 			text-align: center;
 			box-sizing: border-box;
 			white-space: nowrap;
-			line-height: 3em;
 			&:hover {
 				background-color: $color-secondary-light;
 			}
 		}
 	}
 
-	@media ( min-width: $breakpoint-form-right ) {
-		&.WMDE-Banner-submit {
-			display: block;
-			flex-grow: 0;
-			justify-content: center;
+	&.WMDE-Banner-submit {
+		display: block;
+		flex-grow: 0;
+		justify-content: center;
 
-			.button-group__button {
-				width: 100%;
-			}
+		.button-group__button {
+			width: 100%;
 		}
 	}
 

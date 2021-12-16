@@ -26,10 +26,7 @@
 
 	.banner__content {
 		display: flex;
-		flex-direction: column;
-		@media ( min-width: $breakpoint-s ) {
-			flex-direction: row;
-		}
+		flex-direction: row;
 	}
 
 	.banner__infobox {
@@ -42,31 +39,28 @@
 		background-color: $color-bright;
 		padding: 0 0.5em 0.25em 0;
 		position: relative;
-		margin: 0.7em 0.5em 0.2em 0.5em;
-		@media ( min-width: $breakpoint-s ) {
-			margin: 0.7em 0.5em 0.2em 0.9em;
-		}
+		margin: 0.7em 0.5em 0.2em 0.9em;
+		overflow-y: hidden;
+	}
+
+	.banner__slideshow {
+		display: flex;
+		height: 100%;
 	}
 
 	.banner__footer {
 		order: 2;
-		@media ( min-width: $breakpoint-m ) {
-			padding: 0 0 0 60px;
-		}
+		padding: 0 0 0 60px;
 	}
 
 	.close {
 		position: absolute;
 		width: 18px;
 		margin: 0.25em 0.5em 0.25em 0;
-		top: 15px;
-		right: 15px;
+		top: 0;
+		right: 0;
 		opacity: 0.5;
 		cursor: pointer;
-		@media ( min-width: $breakpoint-s ) {
-			top: -10px;
-			right: 0;
-		}
 		&__link {
 			background-color: transparent;
 			color: $color-black;
