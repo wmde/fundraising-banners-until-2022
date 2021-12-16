@@ -9,16 +9,24 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
 import Slider from '../../shared/components/Slider';
-import Slides from './Slides_var';
+import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
 import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
+import CloseIcon from './ui/CloseIcon';
+import MinimisedBanner from './MinimisedBanner';
+import { createMinimisedPersistence } from '../../shared/minimised_persistence';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
 	CLOSED: Symbol( 'closed' )
+} );
+
+const BannerContentState = Object.freeze( {
+	FULL: Symbol( 'full' ),
+	MINIMISED: Symbol( 'minimised' )
 } );
 
 const HighlightState = Object.freeze( {
@@ -53,13 +61,17 @@ export class Banner extends Component {
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
+			// needed for the width-based "component breakpoint" (slider or infobox)
 			bannerWidth: 0,
-			textHighlight: HighlightState.WAITING
+			textHighlight: HighlightState.WAITING,
+			bannerContentState: BannerContentState.FULL
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
+		// Only used to track minimization, not used to restore state on banner load
+		this.minimizedPersistence = createMinimisedPersistence( props.bannerName );
 
 		this.dynamicCampaignText = createDynamicCampaignText(
 			props.campaignParameters,
@@ -85,6 +97,10 @@ export class Banner extends Component {
 	adjustSurroundingSpace() {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		if ( this.state.bannerContentState === BannerContentState.MINIMISED ) {
+			const miniBannerElement = document.querySelector( '.wmde-banner .minimised-banner--button-wrapper' );
+			this.props.skinAdjuster.addSpaceToSidebarInstantly( miniBannerElement.offsetHeight );
+		}
 		this.storeBannerWidth();
 	}
 
@@ -142,6 +158,15 @@ export class Banner extends Component {
 		this.triggerTextHighlight();
 	}
 
+	onSubmit = () => {
+		if ( this.minimizedPersistence.isMinimised() ) {
+			this.minimizedPersistence.removeMinimised();
+			this.trackBannerEventWithViewport( 'submit-after-minimise' + this.props.bannerName );
+			return;
+		}
+		this.props.onSubmit();
+	}
+
 	triggerTextHighlight() {
 		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
 			return;
@@ -152,8 +177,35 @@ export class Banner extends Component {
 	}
 
 	storeBannerWidth = () => {
-		// requirement for test #14
 		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
+	}
+
+	trackBannerEventWithViewport( eventName ) {
+		this.props.trackingData.tracker.trackViewportData(
+			eventName,
+			this.props.getBannerDimensions(),
+			1
+		);
+	}
+
+	minimiseBanner = e => {
+		e.preventDefault();
+		this.setState( {
+			bannerContentState: BannerContentState.MINIMISED,
+			formInteractionSwitcher: !this.state.formInteractionSwitcher
+		} );
+		this.trackBannerEventWithViewport( 'minimised-' + this.props.bannerName );
+		this.stopSliderAutoplay();
+		this.minimizedPersistence.setMinimised();
+	}
+
+	maximiseBanner = e => {
+		e.preventDefault();
+		this.setState( {
+			bannerContentState: BannerContentState.FULL,
+			formInteractionSwitcher: !this.state.formInteractionSwitcher
+		} );
+		this.trackBannerEventWithViewport( 'maximised-' + this.props.bannerName );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -168,10 +220,13 @@ export class Banner extends Component {
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
+				'wmde-banner--content-full': state.bannerContentState === BannerContentState.FULL,
+				'wmde-banner--content-minimised': state.bannerContentState === BannerContentState.MINIMISED,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
-			ref={this.ref}>
+			ref={this.ref}
+		>
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
@@ -182,12 +237,14 @@ export class Banner extends Component {
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
 						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+							<a className="close-link" onClick={ this.minimiseBanner }>
+								{ props.translations[ 'close-button' ] } <CloseIcon/>
+							</a>
 						</div>
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
-									{ state.bannerWidth <= SHOW_SLIDE_BREAKPOINT && (
+									{ state.bannerWidth <= SHOW_SLIDE_BREAKPOINT && state.bannerContentState !== BannerContentState.MINIMISED && (
 										<div className="banner__slideshow" ref={ this.slideshowRef }>
 											<Slider
 												slides={ Slides( this.dynamicCampaignText ) }
@@ -224,7 +281,7 @@ export class Banner extends Component {
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									onSubmit={ props.onSubmit }
+									onSubmit={ this.onSubmit }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
@@ -245,6 +302,13 @@ export class Banner extends Component {
 							onEndProgress={ this.triggerTextHighlight }
 						/>
 					</div>
+
+					<MinimisedBanner
+						maximiseBanner={ this.maximiseBanner }
+						closeBanner={ this.closeBanner }
+
+					/>
+
 				</TranslationContext.Provider>
 			</BannerTransition>
 			<FundsModal

@@ -23,6 +23,14 @@ export default class Skin {
 	}
 
 	/**
+	 * Children might implement this if they have an absolutely-positioned sidebar element
+	 *
+	 * @param {number} bannerHeight
+	 */
+	addSpaceToSidebarInstantly( bannerHeight ) { // eslint-disable-line no-unused-vars
+	}
+
+	/**
 	 * Children might implement this
 	 */
 	removeSpace() {
