@@ -29,7 +29,7 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Wie viel ist Ihnen Wikipedia wert?';
+const sliderHeading = 'Ist Ihnen Wikipedia 5 € wert?';
 
 bannerPresenter.present(
 	Banner,

@@ -74,17 +74,7 @@ export default function DonationFormWithHeaders( props ) {
 	};
 
 	const getButtonText = () => {
-		if ( paymentMethod === PaymentMethods.PAYPAL.value ) {
-			return Translations[ 'submit-label-paypal' ];
-		} else if ( paymentMethod === PaymentMethods.CREDIT_CARD.value ) {
-			return Translations[ 'submit-label-credit-card' ];
-		} else if ( paymentMethod === PaymentMethods.SOFORT.value ) {
-			return Translations[ 'submit-label-sofort' ];
-		} else if ( paymentMethod === PaymentMethods.BANK_TRANSFER.value ) {
-			return Translations[ 'submit-label-bank-transfer' ];
-		}
-
-		return Translations[ 'submit-label-default' ];
+		return Translations[ 'submit-label' ];
 	};
 
 	return <div className="form">
