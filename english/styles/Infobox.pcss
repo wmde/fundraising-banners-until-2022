@@ -5,37 +5,36 @@
 		height: 100%;
 		border: 0 none;
 		border-radius: 0.4em;
-		background-color: $color-primary;
 		position: relative;
-		padding: 1em;
-		@media ( min-width: $breakpoint_m ) {
-			padding: 1.2em;
+		font-family: $banner-text-font-family;
+		font-size: 1.3em;
+		line-height: 1.3em;
+		text-align: left;
+
+		padding-right: 30px;
+		margin-right: 30px;
+
+		&:after {
+			position: absolute;
+			content: '';
+			width: 1px;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			height: 100%;
+			background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
 		}
 
 		p {
-			margin: 0 0 0.5em;
+			margin: 0 0 1em;
 
 			&:last-child {
 				margin-bottom: 0;
 			}
 		}
 	}
-	.infobox {
-		/* overwrites existing infobox on en wikipedia */
-		border: 0 none;
-		border-spacing: 0;
-		padding: 0;
-		margin: 0;
-		float: none;
-		width: auto;
-		background-color: $color-primary;
-		color: $color-white;
-		font-family: $banner-main-font-family;
-		font-size: 1em;
-		line-height: 1.3em;
-		@media ( min-width: $breakpoint_m ) {
-			font-family: $banner-text-font-family;
-			font-size: 1.3em;
-		}
+
+	.banner-infobox {
+		position: relative;
 	}
 }

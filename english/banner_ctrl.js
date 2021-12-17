@@ -6,11 +6,13 @@ import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
 
-import Banner from './components/Banner';
+import { Banner } from './components/Banner';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/en';
+import LocalTranslations from './translations';
 import DonationForm from './components/ui/form/DonationForm';
 import BannerText from './components/BannerText';
+import Footer from '../shared/components/ui/EasySelectFooter';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -38,9 +40,11 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
+		footer: Footer,
 		bannerText: BannerText,
-		translations: Translations,
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL
+		bannerType: BannerType.CTRL,
+		formProps: { ast: 0, locale: 'en_GB' }
 	}
 );

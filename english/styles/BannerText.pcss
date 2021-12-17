@@ -2,12 +2,29 @@
 
 	.banner-text {
 		overflow-x: hidden;
-		padding-right: 30px;
+		margin-right: 38px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+
 		@media ( min-width: $breakpoint_l ) {
-			padding-bottom: 1em;
+			margin-right: 0;
 		}
-		@media ( min-width: $breakpoint_xl ) {
-			padding-bottom: 1.5em;
+
+		&-inner {
+			display: flex;
+			width: 200%;
+		}
+
+		&-ctrl,
+		&-var {
+			position: relative;
+			flex: 0 0 50%;
+		}
+	}
+
+	&--var {
+		.banner-text-inner {
+			margin-left: -100%;
 		}
 	}
 
@@ -22,10 +39,12 @@
 
 	.optional-text {
 		display: none;
-		@media ( min-width: $breakpoint_l ) {
+		@media ( min-width: $breakpoint_m ) {
 			&.text-m {
 				display: inline;
 			}
+		}
+		@media ( min-width: $breakpoint_l ) {
 			&.text-l {
 				display: inline;
 			}
