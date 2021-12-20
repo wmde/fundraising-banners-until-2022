@@ -242,7 +242,7 @@ export default class Banner extends Component {
 										</a>
 									</div>
 									<div className="banner__infobox">
-										<BannerText dynamicCampaignText={this.dynamicCampaignText} />
+										<BannerText dynamicCampaignText={this.dynamicCampaignText} toggleFundsModal={ this.toggleFundsModal } />
 									</div>
 									<div className="banner__form">
 										<DonationForm
