@@ -16,7 +16,6 @@ import ChevronRightIcon from './ui/ChevronRightIcon';
 import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
 import CloseIcon from './ui/CloseIcon';
 import MinimisedBanner from './MinimisedBanner';
-import { createMinimisedPersistence } from '../../shared/minimised_persistence';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -24,6 +23,15 @@ const BannerVisibilityState = Object.freeze( {
 	CLOSED: Symbol( 'closed' )
 } );
 
+/**
+ * State enum if the banner should display the full banner or the micro banner.
+ *
+ * ATTENTION: This state interacts with the BannerVisibility state,
+ * the `visibility` settings influencing/contradicting each other.
+ * If this banner is reused beyond C21_WMDE_Test_20, please refactor.
+ *
+ * @type {Readonly<{MINIMISED: symbol, FULL: symbol}>}
+ */
 const BannerContentState = Object.freeze( {
 	FULL: Symbol( 'full' ),
 	MINIMISED: Symbol( 'minimised' )
@@ -47,7 +55,10 @@ export class Banner extends Component {
 		/** callback when banner gets submitted */
 		onSubmit: PropTypes.func,
 		/** */
-		registerDisplayBanner: PropTypes.func.isRequired
+		registerDisplayBanner: PropTypes.func.isRequired,
+
+		/** MimimisedPersistence instance */
+		minimisedPersistence: PropTypes.object.isRequired
 	}
 
 	ref = createRef();
@@ -55,6 +66,7 @@ export class Banner extends Component {
 
 	constructor( props ) {
 		super( props );
+		const initialContentState = props.minimisedPersistence.isMinimised() ? BannerContentState.MINIMISED : BannerContentState.FULL;
 		this.state = {
 			bannerVisibilityState: BannerVisibilityState.PENDING,
 			isFundsModalVisible: false,
@@ -64,14 +76,14 @@ export class Banner extends Component {
 			// needed for the width-based "component breakpoint" (slider or infobox)
 			bannerWidth: 0,
 			textHighlight: HighlightState.WAITING,
-			bannerContentState: BannerContentState.FULL
+			bannerContentState: initialContentState,
+			initialContentState,
+			hasBeenMinimised: initialContentState === BannerContentState.MINIMISED
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
-		// Only used to track minimization, not used to restore state on banner load
-		this.minimizedPersistence = createMinimisedPersistence( props.bannerName );
 
 		this.dynamicCampaignText = createDynamicCampaignText(
 			props.campaignParameters,
@@ -86,8 +98,13 @@ export class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
-				this.slideInBanner();
+				if ( this.props.minimisedPersistence.isMinimised() ) {
+					this.adjustSurroundingSpace();
+					this.props.trackingData.tracker.trackBannerEvent( 'micro-banner-displayed', 0, 0, 1 );
+				} else {
+					this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
+					this.slideInBanner();
+				}
 			}
 		);
 		this.storeBannerWidth();
@@ -98,10 +115,15 @@ export class Banner extends Component {
 		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
 		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
 		if ( this.state.bannerContentState === BannerContentState.MINIMISED ) {
-			const miniBannerElement = document.querySelector( '.wmde-banner .minimised-banner--button-wrapper' );
-			this.props.skinAdjuster.addSpaceToSidebarInstantly( miniBannerElement.offsetHeight );
+			this.props.skinAdjuster.addSpaceToSidebarInstantly( this.getMiniBannerHeight() );
 		}
 		this.storeBannerWidth();
+	}
+
+	getMiniBannerHeight() {
+		const miniBannerElement = document.querySelector( '.wmde-banner .minimised-banner--button-wrapper' );
+		return miniBannerElement.offsetHeight;
+
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -159,12 +181,12 @@ export class Banner extends Component {
 	}
 
 	onSubmit = () => {
-		if ( this.minimizedPersistence.isMinimised() ) {
-			this.minimizedPersistence.removeMinimised();
-			this.trackBannerEventWithViewport( 'submit-after-minimise' + this.props.bannerName );
-			return;
+		let prefix = 'submit-';
+		if ( this.state.hasBeenMinimised || this.state.initialContentState === BannerContentState.MINIMISED ) {
+			prefix += 'after-minimise-';
 		}
-		this.props.onSubmit();
+		this.props.minimisedPersistence.removeMinimised();
+		this.trackBannerEventWithViewport( prefix + this.props.bannerName );
 	}
 
 	triggerTextHighlight() {
@@ -192,20 +214,33 @@ export class Banner extends Component {
 		e.preventDefault();
 		this.setState( {
 			bannerContentState: BannerContentState.MINIMISED,
+			hasBeenMinimised: true,
 			formInteractionSwitcher: !this.state.formInteractionSwitcher
 		} );
 		this.trackBannerEventWithViewport( 'minimised-' + this.props.bannerName );
 		this.stopSliderAutoplay();
-		this.minimizedPersistence.setMinimised();
+		this.props.onMaybeLater();
+		this.props.minimisedPersistence.setMinimised();
 	}
 
 	maximiseBanner = e => {
 		e.preventDefault();
-		this.setState( {
+		this.props.minimisedPersistence.removeMinimised();
+		const newState = {
 			bannerContentState: BannerContentState.FULL,
-			formInteractionSwitcher: !this.state.formInteractionSwitcher
-		} );
-		this.trackBannerEventWithViewport( 'maximised-' + this.props.bannerName );
+			bannerVisibilityState: BannerVisibilityState.VISIBLE
+		};
+		let onStateChangeFinished = () => { this.trackBannerEventWithViewport( 'maximised-' + this.props.bannerName ); };
+		if ( this.state.initialContentState === BannerContentState.MINIMISED ) {
+			onStateChangeFinished = () => {
+				this.trackBannerEventWithViewport( 'maximised-' + this.props.bannerName );
+				this.slideInBanner();
+			};
+		} else {
+			// Force immediate space reservation instead of transitioning
+			newState.formInteractionSwitcher = !this.state.formInteractionSwitcher;
+		}
+		this.setState( newState, onStateChangeFinished );
 	}
 
 	// eslint-disable-next-line no-unused-vars

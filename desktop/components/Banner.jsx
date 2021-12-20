@@ -14,6 +14,7 @@ import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
 import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
+import CloseIcon from './ui/CloseIcon';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -53,6 +54,7 @@ export class Banner extends Component {
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
+			// needed for the width-based "component breakpoint" (slider or infobox)
 			bannerWidth: 0,
 			textHighlight: HighlightState.WAITING
 		};
@@ -152,8 +154,15 @@ export class Banner extends Component {
 	}
 
 	storeBannerWidth = () => {
-		// requirement for test #14
 		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
+	}
+
+	trackBannerEventWithViewport( eventName ) {
+		this.props.trackingData.tracker.trackViewportData(
+			eventName,
+			this.props.getBannerDimensions(),
+			1
+		);
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -171,7 +180,8 @@ export class Banner extends Component {
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
-			ref={this.ref}>
+			ref={this.ref}
+		>
 			<BannerTransition
 				fixed={ true }
 				registerDisplayBanner={ this.registerBannerTransition }
@@ -182,7 +192,7 @@ export class Banner extends Component {
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner__wrapper">
 						<div className="close">
-							<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
+							<a className="close-link" onClick={ this.closeBanner }><CloseIcon/></a>
 						</div>
 						<div className="banner__content">
 							<div className="banner__infobox">
@@ -245,6 +255,7 @@ export class Banner extends Component {
 							onEndProgress={ this.triggerTextHighlight }
 						/>
 					</div>
+
 				</TranslationContext.Provider>
 			</BannerTransition>
 			<FundsModal

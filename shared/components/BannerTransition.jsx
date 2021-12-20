@@ -58,9 +58,9 @@ export default class BannerTransition extends Component {
 		this.props.skinAdjuster.addSpace( this.ref.current.offsetHeight, this.transition );
 	};
 
-	onTransitionEnd = () => {
-		// TODO: Discover why this is being called multiple times
-		if ( this.state.transitionPhase === FINISHED ) {
+	onTransitionEnd = ( e ) => {
+		// Ignore all transition events that bubble up from child elements
+		if ( this.state.transitionPhase === FINISHED || e.target !== this.ref.current ) {
 			return;
 		}
 		this.setState( { transitionPhase: FINISHED } );
