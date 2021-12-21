@@ -19,7 +19,8 @@ export class HtmlDataCampaignParameters {
 				baseDonationSum: Number( data.donationsCollectedBase ),
 				donorsBase: Number( data.donorsBase ),
 				donationAmountPerMinute: Number( data.donationsPerMinute ),
-				donorsPerMinute: Number( data.donorsPerMinute )
+				donorsPerMinute: Number( data.donorsPerMinute ),
+				averageAmountPerDonation: Number( data.averageAmountPerDonation )
 			},
 			millionImpressionsPerDay: data.millionImpressionsPerDay,
 			startDate: data.campaignStartDate,
@@ -42,7 +43,8 @@ export class WindowCampaignParameters {
 				baseDonationSum: window.GlobalBannerSettings[ 'donations-collected-base' ],
 				donorsBase: window.GlobalBannerSettings[ 'donators-base' ],
 				donationAmountPerMinute: window.GlobalBannerSettings[ 'appr-donations-per-minute' ],
-				donorsPerMinute: window.GlobalBannerSettings[ 'appr-donators-per-minute' ]
+				donorsPerMinute: window.GlobalBannerSettings[ 'appr-donators-per-minute' ],
+				averageAmountPerDonation: window.GlobalBannerSettings[ 'average-amount-per-donation' ]
 			},
 			millionImpressionsPerDay: window.GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 			startDate: window.GlobalBannerSettings[ 'campaign-start-date' ],
@@ -67,7 +69,8 @@ export class DevCampaignParameters {
 				baseDonationSum: DevGlobalBannerSettings[ 'donations-collected-base' ],
 				donorsBase: DevGlobalBannerSettings[ 'donators-base' ],
 				donationAmountPerMinute: DevGlobalBannerSettings[ 'appr-donations-per-minute' ],
-				donorsPerMinute: DevGlobalBannerSettings[ 'appr-donators-per-minute' ]
+				donorsPerMinute: DevGlobalBannerSettings[ 'appr-donators-per-minute' ],
+				averageAmountPerDonation: DevGlobalBannerSettings[ 'average-amount-per-donation' ]
 			},
 			millionImpressionsPerDay: DevGlobalBannerSettings[ 'impressions-per-day-in-million' ],
 			startDate: DevGlobalBannerSettings[ 'campaign-start-date' ],

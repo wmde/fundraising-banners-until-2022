@@ -2,7 +2,7 @@ import { h } from 'preact';
 import InfoIcon from './ui/InfoIcon';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props.dynamicCampaignText;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, donorsNeededSentence } = props.dynamicCampaignText;
 
 	return <div className="banner-text">
 		<p>
@@ -11,7 +11,7 @@ export default function BannerText( props ) {
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
 			Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia
-			zu sichern. { campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf.
+			zu sichern. { campaignDaySentence } {donorsNeededSentence} Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf.
 			Sollten Sie zu dem kleinen Kreis derjenigen gehören, die bereits gespendet haben, danken wir Ihnen sehr herzlich.
 			Wikipedia wird durch Spenden von
 			durchschnittlich 21,60&nbsp;€ finanziert. Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch

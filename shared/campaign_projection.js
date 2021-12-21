@@ -28,6 +28,7 @@ export function CampaignProjection( campaignDays, options ) {
 	this.donorsBase = options.donorsBase || 0;
 	this.donorsPerMinute = options.donorsPerMinute || 0;
 	this.goalDonationSum = options.goalDonationSum || 0;
+	this.averageAmountPerDonation = options.averageAmountPerDonation || 21; // a very rough value based on past campaigns
 }
 
 CampaignProjection.prototype.getProjectedDonationSum = function () {
@@ -45,6 +46,10 @@ CampaignProjection.prototype.getProjectedNumberOfDonors = function () {
 
 CampaignProjection.prototype.getRemainingDays = function () {
 	return this.campaignDays.getNumberOfDaysUntilCampaignEnd();
+};
+
+CampaignProjection.prototype.getRemainingDonorsNeeded = function () {
+	return Math.round( this.getProjectedRemainingDonationSum() / this.averageAmountPerDonation );
 };
 
 export function createCampaignProjection( campaignParameters ) {

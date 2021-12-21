@@ -37,8 +37,10 @@ const Translations = {
 	'campaign-day-before-campaign': 'Heute bitten wir Sie um Ihre Unterstützung.',
 	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
 	'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
-	'campaign-day-only-n-days': 'Es bleiben nur noch {{days}} Tage, um Wikipedia in diesem Jahr zu unterstützen.',
+	'campaign-day-only-n-days': 'In {{days}} Tagen endet unsere Spendenkampagne.',
 	'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um Wikipedia in diesem Jahr zu unterstützen.',
+	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
+		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
 
 	'interval-once': 'einmalig',
 	'interval-monthly': 'monatlich',
@@ -75,23 +77,8 @@ const Translations = {
 	'submit-label-default': 'Weiter zur Adresseingabe',
 	'address-type-notice-negative': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
 		'Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
-	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
+	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
 	// End of 2 forms with address type
-
-	// For the collage banner
-	'bank-account-tooltip': 'Kontoinhaberin ist die Wikimedia Fördergesellschaft. Sie ist die unabhängige ' +
-		'gemeinnützige Organisation, die in Deutschland Spenden für Wikipedia und andere Wikimedia-Projekte sammelt.',
-
-	// for B20_WPDE_desktop_01_var, B20_WMDE_mobile_en_01 text test, remove if not used anymore
-	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
-		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
-
-	// for C20_WMDE_Test_13 var banner
-	'visitors-vs-donors-sentence-var': 'Bis heute haben {{totalNumberOfDonors}} Menschen gespendet – das sind noch sehr wenige,' +
-		' wenn man bedenkt, dass unser Aufruf jeden Tag {{millionImpressionsPerDay}} Millionen Mal gezeigt wird.',
-
-	// for C20_WMDE_Test_16_var
-	'use-of-funds-link2': 'Warum wir nur 8,7 Mio. € brauchen'
 };
 
 export default Translations;

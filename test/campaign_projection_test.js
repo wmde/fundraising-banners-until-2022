@@ -14,7 +14,8 @@ describe( 'CampaignProjection', function () {
 			baseDonationSum: 0,
 			donationAmountPerMinute: DONATION_SUM_PER_MINUTE,
 			donorsBase: 0,
-			donorsPerMinute: DONORS_PER_MINUTE
+			donorsPerMinute: DONORS_PER_MINUTE,
+			goalDonationSum: 9_000_000
 		};
 
 	let campaignDays = new CampaignDays(
@@ -136,6 +137,19 @@ describe( 'CampaignProjection', function () {
 			assert.equal( campaignProjection.getProjectedNumberOfDonors(), 263520 );
 		} );
 
+	} );
+
+	describe( '#getRemainingDonorsNeeded', function () {
+		it( 'should project donors needed based on the remaining amount, donation target and average donation per donor', function () {
+			const campaignProjection = new CampaignProjection( campaignDays, {
+				...defaultOptions,
+				averageAmountPerDonation: 23.42
+			} );
+			// we stub here to be independent of campaignDays
+			sandbox.stub( campaignProjection, 'getProjectedDonationSum' ).returns( 8_400_000 );
+
+			assert.equal( campaignProjection.getRemainingDonorsNeeded(), 25619 ); // 600000 remaining, divided by 23.42 and rounded
+		} );
 	} );
 
 } );
