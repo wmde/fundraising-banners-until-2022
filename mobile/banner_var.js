@@ -9,7 +9,7 @@ import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from './components/ui/form/DonationFormWithAddress';
+import DonationForm from './components/ui/form/DonationForm';
 
 import Banner from './components/Banner';
 
@@ -29,7 +29,7 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Wie viel ist Ihnen Wikipedia wert?';
+const sliderHeading = 'Ist Ihnen Wikipedia 5 € wert?';
 
 bannerPresenter.present(
 	Banner,

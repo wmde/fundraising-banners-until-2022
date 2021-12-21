@@ -24,8 +24,7 @@ export default class FormItemsBuilder {
 		this.formItems = {
 			intervals: [],
 			amounts: [],
-			paymentMethods: [],
-			addressType: []
+			paymentMethods: []
 		};
 
 		this.translate = ( { value, label, notice } ) => {
