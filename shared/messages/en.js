@@ -39,6 +39,8 @@ const Translations = {
 	'campaign-day-nth-day': 'This is the {{days}} day of our campaign.',
 	'campaign-day-only-n-days': 'Only {{days}} days left to donate for Wikipedia this year.',
 	'campaign-day-last-day': 'Today is the final day of our donation campaign.',
+	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million ' +
+		'times a day, but currently only {{totalNumberOfDonors}} people have donated.',
 
 	'interval-once': 'one-time',
 	'interval-monthly': 'monthly',
@@ -57,13 +59,6 @@ const Translations = {
 	// the following 2 lines are only for the ipad var test, remove if not in use anymore
 	'give-address-statement-positive': 'Yes',
 	'give-address-statement-negative': 'No',
-
-	// For the collage banner
-	'bank-account-tooltip': '',
-
-	// for B20_WMDE_en_01_var text test, B20_WMDE_mobile_en_01 remove if not used anymore
-	'visitors-vs-donors-sentence': 'Our fundraising appeal is displayed over {{millionImpressionsPerDay}} million ' +
-		'times a day, but currently only {{totalNumberOfDonors}} people have donated.',
 
 	// This is for the forms with address type
 	'address-type-label': 'Do you want to provide your address data?',
