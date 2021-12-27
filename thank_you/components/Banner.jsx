@@ -3,8 +3,9 @@ import { onMediaWiki } from '../../shared/mediawiki_checks';
 import classNames from 'classnames';
 
 import ExpandButton from './ExpandButton';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from './ProgressBar';
 import TranslationContext from '../../shared/components/TranslationContext';
+import InfoIcon from './InfoIcon';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -32,7 +33,10 @@ export class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { displayState: VISIBLE } );
+				this.setState(
+					{ displayState: VISIBLE, topPosition: 0 },
+					() => this.adjustSurroundingSpace()
+				);
 			}
 		);
 		this.props.registerResizeBanner( this.onResizePage.bind( this ) );
@@ -46,17 +50,19 @@ export class Banner extends Component {
 	}
 
 	setTopPosition() {
-		const bannerElement = document.querySelector( '.skin-minerva .wmde-banner--expanded .banner-position' );
-		if ( !bannerElement ) {
-			this.setState( { topPosition: 0 } );
-			return;
+		let topState = { topPosition: 0 };
+
+		if ( this.state.displayState !== VISIBLE && this.ref.current ) {
+			topState = { topPosition: this.ref.current.offsetHeight * -1 };
 		}
-		this.setState( { topPosition: bannerElement.offsetHeight * -1 } );
+
+		this.setState( topState );
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		if ( this.state.displayState === VISIBLE && this.ref.current ) {
+			this.props.skinAdjuster.addSpaceInstantly( this.ref.current.offsetHeight );
+		}
 	}
 
 	onFinishedTransitioning = () => {
@@ -103,10 +109,17 @@ export class Banner extends Component {
 		} );
 	};
 
+	onSubmit = ( formId, e ) => {
+		const eventName = formId === 'banner-membership-form-with-amount' ? 'submit-amount' : 'submit';
+		this.props.trackingData.tracker.trackBannerEvent( eventName, this.props.impressionCounts.bannerCount, 0, 1 );
+		this.props.onSubmit( e );
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		const MoreInfo = props.moreInfo;
 		const campaignProjection = props.campaignProjection;
+		const Translations = props.translations;
+		const MembershipMoreInfo = props.moreInfo;
 
 		return <div
 			className={classNames(
@@ -117,22 +130,17 @@ export class Banner extends Component {
 					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 					'wmde-banner--var': props.bannerType === BannerType.VAR
 				},
-			)}
-			ref={this.ref}>
-			<div className="banner-position" style={ { top: state.topPosition + 'px' } }>
+			)}>
+			<div className="banner-position" style={ { top: state.topPosition + 'px' } } ref={this.ref}>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="banner-wrapper">
 						<div className={'small-banner'}>
 							<div className="small-banner__inner" onClick={ this.expandBanner }>
-								<img className="info-icon"
-									height="16" width="16"
-									src="https://upload.wikimedia.org/wikipedia/commons/9/93/Info-icon-black-on-yellow.svg"
-									alt="info_icon" />
-								<div className="thankyou-message">Lesen Sie unsere Dankesbotschaft</div>
+								<InfoIcon/>
+								<div className="thankyou-message">{Translations[ 'thank-you-main-message' ]}</div>
 								<div className="small-banner__content">
 									<ProgressBar
 										goalDonationSum={ props.formatters.millionFormatter( campaignProjection.goalDonationSum / 1000000 ) }/>
-									<div className="thankyou-image"/>
 								</div>
 							</div>
 							<div className="close" onClick={this.closeBanner}>
@@ -148,14 +156,11 @@ export class Banner extends Component {
 							/>
 						</div>
 						<div className={classNames( 'more-info', state.infoVisible ? 'more-info--expanded' : 'more-info--collapsed', 'more-info--' + props.bannerVariant )}>
-							<MoreInfo
-								{...props}
-							/>
+							<MembershipMoreInfo {...props} onSubmit={this.onSubmit} />
 						</div>
 						<div className={classNames( 'secondary-expand-wrapper', state.infoVisible ? 'secondary-expand-wrapper--expanded' : 'secondary-expand-wrapper--collapsed' )}>
 							<ExpandButton
 								expanded={state.infoVisible}
-								expandText={props.expandText}
 								toggleExpansion={ e => this.expandBanner( e ) }
 							/>
 						</div>

@@ -2,170 +2,123 @@
 # Example: "B18WMDE_"
 # See https://github.com/wmde/fundraising-infrastructure/wiki/How-to-manage-banners-on-de.wikipedia.org
 
-# A Campaign with global settings
-[desktop]
-campaign_tracking = "21-ba-211222"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+
+# Thank You Campaign
+[thank_you]
+campaign_tracking = "ty01-220101"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
-# Banners of the campaign, key after "banners" can be anything
-[desktop.banners.ctrl]
-filename = "./desktop/banner_ctrl.js"
-pagename = "B21_WMDE_Test_21_ctrl"
-tracking = "org-21-211222-ctrl"
+[thank_you.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B21_WMDE_thankyou_desktop_de_ctrl"
+tracking = "org-ty-220101-ctrl"
 
-[desktop.banners.var]
-filename = "./desktop/banner_var.js"
-pagename = "B21_WMDE_Test_21_var"
-tracking = "org-21-211222-var"
-
-[desktop.test_matrix]
-platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
-resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
+[thank_you.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B21_WMDE_thankyou_desktop_de_var"
+tracking = "org-ty-220101-var"
 
 
-# Mobile Campaign
-[mobile]
-campaign_tracking = "mob09-ba-211218"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+[thank_you_en]
+campaign_tracking = "ty01-220101"
+preview_link = "/wiki/Wikipedia:Hauptseite?banner=B17WMDE_webpack_prototype&devbanner={{banner}}"
 wrapper_template = "wikipedia_org"
 
-[mobile.banners.ctrl]
-filename = "./mobile/banner_ctrl.js"
-pagename = "B21_WMDE_Mobile_Test_09_ctrl"
-tracking = "org-mob09-211218-ctrl"
+[thank_you_en.banners.ctrl]
+filename = "./thank_you/banner_ctrl_en.js"
+pagename = "B21_WMDE_thankyou_desktop_en_ctrl"
+tracking = "org-ty-220101-en-ctrl"
 
-[mobile.banners.var]
-filename = "./mobile/banner_var.js"
-pagename = "B21_WMDE_Mobile_Test_09_var"
-tracking = "org-mob09-211218-var"
-
-[mobile.test_matrix]
-device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
-orientation = [ "portrait", "landscape"]
+[thank_you_en.banners.var]
+filename = "./thank_you/banner_var_en.js"
+pagename = "B21_WMDE_thankyou_desktop_en_var"
+tracking = "org-ty-220101-en-var"
 
 
-# Mobile English Campaign
-[mobile_english]
-campaign_tracking = "mob_en02-ba-211203"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+# Thank you campaign mobile wp.org
+[thank_you_mobile]
+campaign_tracking = "ty01-mob-220101"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[mobile_english.banners.ctrl]
-filename = "./mobile_english/banner_ctrl.js"
-pagename = "B21_WMDE_Mobile_EN_Test_02_ctrl"
-tracking = "org-mob_en02-211203-ctrl"
+[thank_you_mobile.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B21_WMDE_thankyou_mobile_de_ctrl"
+tracking = "org-mob-ty-220101-ctrl"
 
-[mobile_english.banners.var]
-filename = "./mobile_english/banner_var.js"
-pagename = "B21_WMDE_Mobile_EN_Test_02_var"
-tracking = "org-mob_en02-211203-var"
-
-[mobile_english.test_matrix]
-device = [ 'samsung_s10', 'nexus_6', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max" ]
-orientation = [ "portrait", "landscape" ]
+[thank_you_mobile.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B21_WMDE_thankyou_mobile_de_var"
+tracking = "org-mob-ty-220101-var"
 
 
-# iPad campaign
-[pad]
-campaign_tracking = "pad02-ba-211119"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+# English Thank you campaign mobile wp.org
+[thank_you_mobile_en]
+campaign_tracking = "ty01-mob-en-220101"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[pad.banners.ctrl]
-filename = "./pad/banner_ctrl.js"
-pagename = "B21_WMDE_ipad_02_211119_ctrl"
-tracking = "org-pad01-211119-ctrl"
+[thank_you_mobile_en.banners.ctrl]
+filename = "./thank_you/banner_ctrl_en.js"
+pagename = "B21_WMDE_thankyou_mobile_en_ctrl"
+tracking = "org-mob-ty-220101-en-ctrl"
 
-[pad.banners.pad]
-filename = "./pad/banner_var.js"
-pagename = "B21_WMDE_ipad_02_211119_var"
-tracking = "org-pad01-211119-var"
-
-[pad.test_matrix]
-device = [ 'ipad_mini', 'ipad', 'ipad_pro_9_7_inch', 'ipad_pro_12_inch' ]
-orientation = [ "portrait", "landscape"]
+[thank_you_mobile_en.banners.var]
+filename = "./thank_you/banner_var_en.js"
+pagename = "B21_WMDE_thankyou_mobile_en_var"
+tracking = "org-mob-ty-220101-en-var"
 
 
-# iPad English campaign
-[pad_en]
-campaign_tracking = "en-ipad01-211103"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+# Thank you campaign ipad wp.org
+[thank_you_ipad]
+campaign_tracking = "ty01-ipad-220101"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 wrapper_template = "wikipedia_org"
 
-[pad_en.banners.ctrl]
-filename = "./pad_english/banner_ctrl.js"
-pagename = "B21_WMDE_ipad_en_01_211103_ctrl"
-tracking = "org-en-ipad-211103-ctrl"
+[thank_you_ipad.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B21_WMDE_thankyou_ipad_de_ctrl"
+tracking = "org-ipad-ty-220101-ctrl"
 
-[pad_en.banners.var]
-filename = "./pad_english/banner_var.js"
-pagename = "B21_WMDE_ipad_en_01_211103_var"
-tracking = "org-en-ipad-211103-var"
-
-[pad_en.test_matrix]
-device = [ 'ipad_mini', 'ipad', 'ipad_pro_9_7_inch', 'ipad_pro_12_inch']
-orientation = [ "portrait", "landscape"]
+[thank_you_ipad.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B21_WMDE_thankyou_ipad_de_var"
+tracking = "org-ipad-ty-220101-var"
 
 
-
-# Wikipedia.de Campaign
-[wikipediade]
-campaign_tracking = "wpde-02-211119"
+# Thank you campaign wp.de
+[thank_you_wpde]
+campaign_tracking = "ty01-wpde-220101"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
-[wikipediade.banners.ctrl]
-filename = "./wikipedia.de/desktop/banner_ctrl.js"
-pagename = "B21WPDE_02-211119_ctrl"
-tracking = "wpde-02-211119-ctrl"
+[thank_you_wpde.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B21WPDE_ty01_220101_ctrl"
+tracking = "de-wpde-ty-220101-ctrl"
 
-[wikipediade.banners.var]
-filename = "./wikipedia.de/desktop/banner_var.js"
-pagename = "B21WPDE_02-211119_var"
-tracking = "wpde-02-211119-var"
-
-# Wikipedia.de Mobile Campaign
-[wikipediade_mobile]
-campaign_tracking = "wpde-mob01-211103"
-preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
-wrapper_template = "wikipedia_de"
-wrap_in_wikitext = false
-
-[wikipediade_mobile.banners.ctrl]
-filename = "./wikipedia.de/mobile/banner_ctrl.js"
-pagename = "B21WPDE_mob01-211103_ctrl"
-tracking = "wpde-mob01-211103-ctrl"
-
-[wikipediade_mobile.banners.var]
-filename = "./wikipedia.de/mobile/banner_var.js"
-pagename = "B21WPDE_mob01-211103_var"
-tracking = "wpde-mob01-211103-var"
+[thank_you_wpde.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B21WPDE_ty01_220101_var"
+tracking = "de-wpde-ty-220101-var"
 
 
-# English Campaign
-[english]
-campaign_tracking = "en04-ba-211215"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
-preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEHOLDER}}'
-wrapper_template = "wikipedia_org"
-
-[english.banners.ctrl]
-filename = "./english/banner_ctrl.js"
-pagename = "B21_WMDE_Test_EN_04_ctrl"
-tracking = "org-en04-211215-ctrl"
-
-[english.banners.var]
-filename = "./english/banner_var.js"
-pagename = "B21_WMDE_Test_EN_04_var"
-tracking = "org-en04-211215-var"
-
-[english.test_matrix]
-platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
-resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
+# # Thank you campaign wp.de mobile
+# [thank_you_wpde_mobile]
+# campaign_tracking = "ty01-wpde-mob-220101"
+# preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+# wrapper_template = "wikipedia_de"
+# wrap_in_wikitext = false
+#
+# [thank_you_wpde_mobile.banners.ctrl]
+# filename = "./thank_you/banner_ctrl.js"
+# pagename = "B21WPDE_ty01_mob_220101_ctrl"
+# tracking = "org-wpde-ty-mob-220101-ctrl"
+#
+# [thank_you_wpde_mobile.banners.var]
+# filename = "./thank_you/banner_var.js"
+# pagename = "B21WPDE_ty01_mob_220101_var"
+# tracking = "org-wpde-ty-mob-220101-var"
+#
