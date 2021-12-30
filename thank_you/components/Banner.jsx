@@ -50,9 +50,15 @@ export class Banner extends Component {
 	}
 
 	setTopPosition() {
+		const isMobile = this.props.skinAdjuster.getName() === 'minerva';
 		let topState = { topPosition: 0 };
 
-		if ( this.state.displayState !== VISIBLE && this.ref.current ) {
+		if (
+			// Banner is not visible - pull outside viewport
+			( this.state.displayState !== VISIBLE && this.ref.current ) ||
+			// Expanded mobile banner positioned absolute (instead of fixed), inside pushed-down content and needs to be pulled up
+			( isMobile && this.state.infoVisible && this.ref.current )
+		) {
 			topState = { topPosition: this.ref.current.offsetHeight * -1 };
 		}
 
@@ -60,9 +66,15 @@ export class Banner extends Component {
 	}
 
 	adjustSurroundingSpace() {
-		if ( this.state.displayState === VISIBLE && this.ref.current ) {
-			this.props.skinAdjuster.addSpaceInstantly( this.ref.current.offsetHeight );
+		const isMobile = this.props.skinAdjuster.getName() === 'minerva';
+		if ( this.state.displayState !== VISIBLE || !this.ref.current ) {
+			return;
 		}
+		// Expanded mobile banner is no longer fixed and should push content down
+		if ( isMobile && this.state.infoVisible ) {
+			this.props.skinAdjuster.removeSpace();
+		}
+		this.props.skinAdjuster.addSpaceInstantly( this.ref.current.offsetHeight );
 	}
 
 	onFinishedTransitioning = () => {
