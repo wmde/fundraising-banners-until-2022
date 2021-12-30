@@ -54,7 +54,7 @@ export default function MembershipMoreInfo( props ) {
 			<p>
 				Which makes it all the more important that many more people support us on a regular basis. In Germany,
 				around 90,000 people currently show their commitment to Wikipedia with a supporting membership and an
-				average contribution of TBD euros – which are still not that many considering how popular Wikipedia is
+				average contribution of 52.70&nbsp;euros – which are still not that many considering how popular Wikipedia is
 				and how much it contributes to general knowledge. You can change this today: I invite you to join this
 				circle of extraordinary people as a new supporting member. You can take part with a contribution of just
 				2 euros per month. Please help us to strengthen the institution that is Wikipedia and secure its ongoing
