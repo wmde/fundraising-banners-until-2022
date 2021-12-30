@@ -23,7 +23,7 @@ export default function MembershipMoreInfo( props ) {
 		</div>
 		<div className="more-info__text">
 			<ImageWithCopyright/>
-			<p> {numberOfDonors} wonderful people have reacted to our fundraising appeal over the past 59 days and
+			<p> {numberOfDonors} wonderful people have reacted to our fundraising appeal over the past weeks and
 				showed their appreciation of this project. I would like to thank every single one of you with all my
 				heart! To be frank, though, this time it was considerably more difficult than usual. We only reached
 				our fundraising target in the final days of the campaign. This makes me pause and reflect.

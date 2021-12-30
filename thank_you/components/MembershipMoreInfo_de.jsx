@@ -22,7 +22,7 @@ export default function MembershipMoreInfo( props ) {
 		</div>
 		<div className="more-info__text">
 			<ImageWithCopyright/>
-			<p> {numberOfDonors} großartige Menschen haben in den letzten 59 Tagen auf unsere Spendenbitte reagiert
+			<p> {numberOfDonors} großartige Menschen haben in den letzten Wochen auf unsere Spendenbitte reagiert
 				und diesem Projekt ihre Wertschätzung erwiesen. <strong>Ihnen allen danke ich von ganzem Herzen! </strong>
 				Doch ich bin ganz offen: Es war diesmal deutlich schwieriger als sonst. Unser Spendenziel haben wir
 				erst in den letzten Tagen erreicht. Das macht mich nachdenklich.
