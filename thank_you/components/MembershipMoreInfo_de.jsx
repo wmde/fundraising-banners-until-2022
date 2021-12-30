@@ -22,7 +22,7 @@ export default function MembershipMoreInfo( props ) {
 		</div>
 		<div className="more-info__text">
 			<ImageWithCopyright/>
-			<p> {numberOfDonors} großartige Menschen haben in den letzten 59 Tagen auf unsere Spendenbitte reagiert
+			<p> {numberOfDonors} großartige Menschen haben in den letzten Wochen auf unsere Spendenbitte reagiert
 				und diesem Projekt ihre Wertschätzung erwiesen. <strong>Ihnen allen danke ich von ganzem Herzen! </strong>
 				Doch ich bin ganz offen: Es war diesmal deutlich schwieriger als sonst. Unser Spendenziel haben wir
 				erst in den letzten Tagen erreicht. Das macht mich nachdenklich.
@@ -51,8 +51,8 @@ export default function MembershipMoreInfo( props ) {
 
 			<p>
 				Umso wichtiger, dass noch viel mehr Menschen uns regelmäßig unterstützen. In Deutschland engagieren
-				sich bisher rund 90.000 Menschen mit einer Fördermitgliedschaft und einem
-				Durchschnittsbeitrag von TBD € – noch recht wenige angesichts der Beliebtheit von Wikipedia und
+				sich bisher rund 90.000 Menschen mit einer Fördermitgliedschaft und einem jährlichen Durchschnittsbeitrag
+				von 52,70&nbsp;€ – noch recht wenige angesichts der Beliebtheit von Wikipedia und
 				ihres Beitrags zur Allgemeinbildung. Sie können das heute ändern: Ich lade Sie herzlich ein, diesem
 				Kreis von außergewöhnlichen Menschen als neues Fördermitglied beizutreten.
 				Bereits mit 2 Euro im Monat sind Sie dabei. Helfen Sie, die Institution Wikipedia zu stärken und ihre
