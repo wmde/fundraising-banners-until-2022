@@ -104,6 +104,22 @@ filename = "./thank_you/banner_var.js"
 pagename = "B21WPDE_ty01_220101_var"
 tracking = "de-wpde-ty-220101-var"
 
+[thank_you_wpde_mobile]
+campaign_tracking = "ty01-wpde-mob-220101"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+
+[thank_you_wpde_mobile.banners.ctrl]
+filename = "./thank_you/banner_ctrl.js"
+pagename = "B21WPDE_ty01_mob_220101_ctrl"
+tracking = "de-wpde-mob-ty-220101-ctrl"
+
+[thank_you_wpde_mobile.banners.var]
+filename = "./thank_you/banner_var.js"
+pagename = "B21WPDE_ty01_mob_220101_var"
+tracking = "de-wpde-mob-ty-220101-var"
+
 
 # # Thank you campaign wp.de mobile
 # [thank_you_wpde_mobile]

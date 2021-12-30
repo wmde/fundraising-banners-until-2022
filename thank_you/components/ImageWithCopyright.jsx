@@ -11,7 +11,7 @@ export default function ImageWithCopyright() {
 				src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Christian_Humborg_cropped.jpg/349px-Christian_Humborg_cropped.jpg"/>
 		</div>
 		<div className="image-wrapper__legend">
-			Christian Humborg<br/>
+			Dr. Christian Humborg<br/>
 			Wikimedia Deutschland e.V.
 		</div>
 		<div className="image-wrapper__copyright">
