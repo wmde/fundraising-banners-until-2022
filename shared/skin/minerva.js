@@ -44,4 +44,8 @@ export default class Minerva extends Skin {
 	addEditorObserver( onEdit ) {
 		$( '#ca-ve-edit, .mw-editsection-visualeditor' ).click( onEdit );
 	}
+
+	getName() {
+		return 'minerva';
+	}
 }

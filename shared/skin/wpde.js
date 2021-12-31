@@ -19,4 +19,8 @@ export default class Wpde extends Skin {
 	removeSpace() {
 		this.container.css( 'margin-top', 0 );
 	}
+
+	getName() {
+		return 'wpde';
+	}
 }

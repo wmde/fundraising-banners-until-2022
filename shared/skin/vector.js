@@ -55,4 +55,8 @@ export default class Vector extends Skin {
 	hidePopup() {
 		$( 'head' ).prepend( '<style>.mw-notification-area-overlay { display: none; }</style>' );
 	}
+
+	getName() {
+		return 'vector';
+	}
 }
