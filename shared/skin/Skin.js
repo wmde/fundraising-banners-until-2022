@@ -60,7 +60,7 @@ export default class Skin {
 	}
 
 	getName() {
-		return this.constructor.name.toLowerCase();
+		throw new Error( 'Subclasses must implement skin name!' );
 	}
 
 	getSizeIssueThreshold() {

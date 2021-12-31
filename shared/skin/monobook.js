@@ -19,4 +19,8 @@ export default class Monobook extends Skin {
 	removeSpace() {
 		this.globalWrapper.css( 'top', 0 );
 	}
+
+	getName() {
+		return 'monobook';
+	}
 }
