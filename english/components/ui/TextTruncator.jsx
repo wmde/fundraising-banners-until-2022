@@ -8,7 +8,7 @@ export default function TextTruncator( props ) {
 	if ( text.length <= maxLength ) {
 		return text;
 	}
-	const truncatedText = text.substring( 0, maxLength );
+	const truncatedText = text.slice( 0, maxLength );
 
 	const showMore = e => {
 		e.preventDefault();

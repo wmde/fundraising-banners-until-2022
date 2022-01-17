@@ -51,7 +51,7 @@ export default class CampaignDays {
 function getDateParts( dateStr ) {
 	const result = dateStr.match( /^(\d{4})-(\d{2})-(\d{2})$/ );
 	if ( result === null ) {
-		throw Error( 'Wrong date string format' );
+		throw new Error( 'Wrong date string format' );
 	}
 	result.shift();
 	return result;

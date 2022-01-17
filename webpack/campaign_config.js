@@ -80,7 +80,7 @@ CampaignConfig.prototype.getCampaignTracking = function ( pageName ) {
 	}.bind( this ) );
 
 	if ( trackingData === undefined ) {
-		throw Error( 'No tracking data found for page name ' + pageName );
+		throw new Error( 'No tracking data found for page name ' + pageName );
 	}
 	return trackingData;
 };
