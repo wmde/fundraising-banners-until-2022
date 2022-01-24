@@ -14,10 +14,12 @@ $banner-easing: cubic-bezier( 0.63, 0.155, 0.38, 0.885 );
 			flex-wrap: wrap;
 			justify-content: flex-end;
 
-			@media ( min-width: $breakpoint_l ) {
+			@media ( min-width: $breakpoint-l ) {
 				display: block;
 				margin: 0;
-				width: 100%; /* For IE11 */
+
+				/* For IE11 */
+				width: 100%;
 			}
 		}
 		&-field-group {

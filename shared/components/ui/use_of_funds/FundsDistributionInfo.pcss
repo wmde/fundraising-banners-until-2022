@@ -8,17 +8,20 @@
 		font-size: 14px;
 		margin-bottom: 14px;
 		max-width: 635px;
-		min-height: 130px; /* TODO only needed for responsiveness on desktop */
+
+		/* TODO only needed for responsiveness on desktop */
+		min-height: 130px;
 	}
+
 	/* 1st child is the graph */
 	&__text:nth-child( 2 ) {
-		margin: 0 auto 14px 0;
+		margin: 0 auto 14px;
 	}
 	&__text:nth-child( 3 ) {
 		margin: 0 auto 14px 60px;
 	}
 	&__text:nth-child( 4 ) {
-		margin: 0 auto 14px auto;
+		margin: 0 auto 14px;
 	}
 	&__text:nth-child( 5 ) {
 		margin: 0 60px 14px auto;
@@ -36,10 +39,12 @@
 		font-weight: bold;
 		margin-bottom: 2px;
 		white-space: nowrap;
-		font-size: 9px; /* For IE */
+
+		/* For IE */
+		font-size: 9px;
 		font-size: max( 1.15vw, 9px );
 
-		@media ( min-width: $use_of_funds_breakpoint_l ) {
+		@media ( min-width: $use-of-funds-breakpoint-l ) {
 			font-size: 100%;
 		}
 	}

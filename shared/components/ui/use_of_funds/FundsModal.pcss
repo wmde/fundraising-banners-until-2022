@@ -18,7 +18,7 @@
 	}
 	&__background {
 		display: none;
-		@media ( min-width: $use_of_funds_breakpoint_s ) {
+		@media ( min-width: $use-of-funds-breakpoint-s ) {
 			display: block;
 			background-color: #000000;
 			opacity: 0.6;
@@ -31,28 +31,33 @@
 		width: 100%;
 		height: 100%;
 
-		@media ( min-width: $use_of_funds_breakpoint_s ) {
+		@media ( min-width: $use-of-funds-breakpoint-s ) {
 			height: 80vh;
 			position: absolute;
-			min-width: 700px; /* for IE */
+
+			/* for IE */
+			min-width: 700px;
+
 			/* stylelint-disable-next-line function-parentheses-space-inside */
 			min-width: max(90vw, 700px);
 			top: 50%;
 			left: 50%;
+
 			/* stylelint-disable-next-line function-parentheses-space-inside */
 			transform: translate(-50%, -50%);
+
 			/* IE11 does not support spaces in CSS function calls, do not add spaces! */
 		}
-		@media ( min-width: $use_of_funds_breakpoint_l ) {
+		@media ( min-width: $use-of-funds-breakpoint-l ) {
 			width: 1024px;
 			max-width: 1024px;
 			min-width: 800px;
 		}
-		@media ( min-width: $use_of_funds_breakpoint_xl ) {
+		@media ( min-width: $use-of-funds-breakpoint-xl ) {
 			width: 1200px;
 			max-width: 1200px;
 		}
-		@media ( min-width: $use_of_funds_breakpoint_xxl ) {
+		@media ( min-width: $use-of-funds-breakpoint-xxl ) {
 			width: 1500px;
 			max-width: 1500px;
 		}
@@ -80,7 +85,7 @@
 		border-radius: 20px;
 		z-index: 2;
 
-		@media ( min-width: $use_of_funds_breakpoint_l ) {
+		@media ( min-width: $use-of-funds-breakpoint-l ) {
 			top: 22px;
 			right: 32px;
 		}
