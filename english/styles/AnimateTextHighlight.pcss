@@ -12,8 +12,15 @@ $transparent-color: rgba( 255 255 255 / 0% );
 	.banner-text {
 		.text-animated-highlight {
 			padding: 0 5px;
-			background: linear-gradient( 270deg, $transparent-color 0%, $transparent-color 50%, \
-			$text-highlight-color 50%, $text-highlight-color 100% );
+			/* stylelint-disable */
+			background: linear-gradient(
+				270deg,
+				$transparent-color 0%,
+				$transparent-color 50%,
+				$text-highlight-color 50%,
+				$text-highlight-color 100% 
+			);
+			/* stylelint-enable */
 			background-size: 201% 100%;
 			background-position: 100% 0;
 			transition: background-position 2s;
