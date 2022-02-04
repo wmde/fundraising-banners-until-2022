@@ -14,7 +14,7 @@
 		z-index: 1000;
 		background: $color-primary-lighter;
 		border: 8px solid $color-primary;
-		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		box-shadow: 0 7px 22px 0 rgba( 0 0 0 / 35% );
 		border-radius: 15px;
 		padding: 5px;
 		margin: 5px 0 0;
@@ -32,7 +32,9 @@
 		display: block;
 		position: absolute;
 		left: 50%;
-		/* Solving border aliasing issue on some Webkit mobile devices by moving up the element 1px and applying 2px white top border on inner element */
+
+		/* Solving border aliasing issue on some Webkit mobile devices
+		by moving up the element 1px and applying 2px white top border on inner element */
 		top: 100%;
 		top: calc( 100% - 1px );
 		font-size: 0.9em;
@@ -51,7 +53,7 @@
 			font-weight: bold;
 			width: 170px;
 			margin: 0 auto;
-			padding: 5px 15px 4px 15px;
+			padding: 5px 15px 4px;
 			transform: translate3d( 0, 0, 0 );
 		}
 	}
@@ -70,7 +72,7 @@
 		line-height: 39px;
 		font-size: 40px;
 		font-weight: bold;
-		@media ( min-width: $breakpoint_phone_m ) {
+		@media ( min-width: $breakpoint-phone-m ) {
 			font-size: 50px;
 		}
 		&:before {
@@ -117,7 +119,7 @@
 			padding: 0 5px;
 			background-color: $color-primary-lighter;
 
-			@media ( min-width: $breakpoint_phone_m ) {
+			@media ( min-width: $breakpoint-phone-m ) {
 				font-size: 14px;
 				padding: 0 15px;
 				margin-left: 35px;

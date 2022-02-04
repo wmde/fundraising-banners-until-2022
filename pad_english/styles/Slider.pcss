@@ -6,12 +6,8 @@
 		flex: 0 0 100%;
 		display: flex;
 		width: 100%;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
 		-webkit-touch-callout: none;
-		-khtml-user-select: none;
+		user-select: none;
 		touch-action: pan-y;
 		-webkit-tap-highlight-color: transparent;
 		align-items: center;
@@ -46,15 +42,15 @@
 		text-align: center;
 		padding: 0 26px;
 
-		@media ( min-width: $breakpoint_m ) {
-			padding: 0 30px 0 30px;
+		@media ( min-width: $breakpoint-m ) {
+			padding: 0 30px;
 		}
 
 		.headline {
 			font-size: 22px;
 			line-height: 41px;
 
-			@media ( min-width: $breakpoint_xs ) {
+			@media ( min-width: $breakpoint-xs ) {
 				font-size: 26px;
 			}
 		}
@@ -100,7 +96,7 @@
 		left: 20px;
 		font-size: 12px;
 
-		@media ( min-width: $breakpoint_xs ) {
+		@media ( min-width: $breakpoint-xs ) {
 			font-size: 15px;
 		}
 	}
@@ -109,7 +105,7 @@
 		position: relative;
 		width: 100%;
 		padding-bottom: 28px;
-		@media ( min-width: $breakpoint_xs ) {
+		@media ( min-width: $breakpoint-xs ) {
 			padding-bottom: 38px;
 		}
 	}

@@ -25,24 +25,24 @@
 
 	.small-banner__inner {
 		background-color: $color-primary;
-		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_s;
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner-bg-s;
 		background-position: left top, right -2px top;
 		background-repeat: no-repeat, no-repeat;
 		background-size: contain;
 		box-sizing: border-box;
 		border-radius: 6px;
 		padding: 14px;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint-m ) {
 			padding: 32px;
-			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_m;
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner-bg-m;
 		}
-		@media ( min-width: $breakpoint_l ) {
-			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner_bg_l;
+		@media ( min-width: $breakpoint-l ) {
+			background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/5/57/Background-bubbles.svg' ), $banner-bg-l;
 		}
 	}
 
 	.small-banner__content {
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint-m ) {
 			display: flex;
 			align-items: flex-end;
 		}
@@ -53,11 +53,11 @@
 		color: $color-white;
 		text-align: center;
 		margin-top: 24px;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint-m ) {
 			font-size: 26px;
 			margin-top: 0;
 		}
-		@media ( min-width: $breakpoint_l ) {
+		@media ( min-width: $breakpoint-l ) {
 			font-size: 42px;
 		}
 	}
@@ -69,7 +69,7 @@
 		box-sizing: border-box;
 		width: 100%;
 		height: 85px;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint-m ) {
 			width: 203px;
 			background-position: left top;
 		}
@@ -90,7 +90,7 @@
 		background: $color-accent;
 		color: $color-white;
 		font-weight: bold;
-		@media ( min-width: $breakpoint_m ) {
+		@media ( min-width: $breakpoint-m ) {
 			top: 24px;
 			left: 32px;
 			width: 32px;

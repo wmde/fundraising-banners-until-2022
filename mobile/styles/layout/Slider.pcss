@@ -3,12 +3,8 @@
 		display: flex;
 		height: 100%;
 		width: 100%;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
 		-webkit-touch-callout: none;
-		-khtml-user-select: none;
+		user-select: none;
 		touch-action: pan-y;
 		-webkit-tap-highlight-color: transparent;
 		align-items: center;
@@ -46,15 +42,15 @@
 		transform: translate3d( 0, 0, 0 );
 
 		.goal-headline {
-			margin: 0 0 18vw 0;
-			@media ( min-width: $breakpoint_phone_s ) {
-				margin: 0 0 12vw 0;
+			margin: 0 0 18vw;
+			@media ( min-width: $breakpoint-phone-s ) {
+				margin: 0 0 12vw;
 			}
-			@media ( min-width: $breakpoint_phone_m ) {
-				margin: 0 0 8vw 0;
+			@media ( min-width: $breakpoint-phone-m ) {
+				margin: 0 0 8vw;
 			}
-			@media ( min-width: $breakpoint_phone_l ) {
-				margin: 0 0 4vw 0;
+			@media ( min-width: $breakpoint-phone-l ) {
+				margin: 0 0 4vw;
 			}
 		}
 	}

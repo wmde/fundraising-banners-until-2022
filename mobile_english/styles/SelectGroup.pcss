@@ -133,7 +133,7 @@
 		line-height: 12pt;
 		margin-right: 0;
 		width: 100%;
-		padding: 0 0 15px 0;
+		padding: 0 0 15px;
 		color: $color-secondary-dark;
 	}
 
@@ -154,7 +154,7 @@
 			display: block;
 
 			&:before {
-				content: $errorIcon;
+				content: $error-icon;
 				width: 16px;
 				height: 16px;
 				position: absolute;
@@ -175,7 +175,7 @@
 		.select-group__option {
 			width: 100%;
 			flex: 1 1 auto;
-			@media ( min-width: $breakpoint_phone_l ) {
+			@media ( min-width: $breakpoint-phone-l ) {
 				width: 31%;
 				flex: 0 1 31%;
 			}
@@ -186,7 +186,7 @@
 		.select-group__option {
 			width: 49%;
 			flex: 0 1 49%;
-			@media ( min-width: $breakpoint_phone_s ) {
+			@media ( min-width: $breakpoint-phone-s ) {
 				width: 31%;
 				flex: 0 1 31%;
 			}
@@ -201,7 +201,7 @@
 		.select-group__option {
 			width: 100%;
 			flex: 1 1 auto;
-			@media ( min-width: $breakpoint_phone_l ) {
+			@media ( min-width: $breakpoint-phone-l ) {
 				width: 49%;
 				flex: 0 1 49%;
 			}
