@@ -30,7 +30,7 @@
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-transform-react-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.16.9",
+    "@babel/register": "^7.17.0",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
