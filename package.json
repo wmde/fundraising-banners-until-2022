@@ -38,7 +38,7 @@
     "core-js": "^3.21.0",
     "css-loader": "^5.2.7",
     "eslint": "^7.32.0",
-    "eslint-config-wikimedia": "^0.21.0",
+    "eslint-config-wikimedia": "^0.22.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "handlebars": "^4.7.7",
