@@ -5,16 +5,6 @@ import classNames from 'classnames';
 
 const DEFAULT_INTERVAL = 5000;
 
-/**
- * Return an array with numbers from 0 to size
- *
- * @param {number} size
- * @return {number[]}
- */
-function arrayRange( size ) {
-	return [ ...Array( size ).keys() ];
-}
-
 const SliderPlayingStates = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	PLAYING: Symbol( 'playing' ),
@@ -25,29 +15,36 @@ export default function Slider( props ) {
 	const { slides, previous, next, onSlideChange, registerAutoplay, registerGoToSlide, interval, sliderOptions } = props;
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	const [ timer, setTimer ] = useState( 0 );
+	const [ loaded, setLoaded ] = useState( false );
 
 	// NOTE: We can't use useState for this as the banner doesn't always re-render fast enough
 	let sliderPlayingState = SliderPlayingStates.PENDING;
 
-	const [ sliderRef, slider ] = useKeenSlider( {
+	const sliderOptionsCombined = {
 		...{
 			initial: 0,
 			loop: true,
 			slideChanged( s ) {
-				setCurrentSlide( s.details().relativeSlide );
+				setCurrentSlide( s.track.details.rel );
+				s.options = sliderOptionsCombined;
 				if ( typeof onSlideChange === 'function' ) {
-					onSlideChange( s.details().relativeSlide );
+					onSlideChange( s.track.details.rel );
 				}
+			},
+			created() {
+				setLoaded( true );
 			}
 		},
 		...sliderOptions
-	} );
+	};
+
+	const [ sliderRef, slider ] = useKeenSlider( sliderOptionsCombined );
 
 	const startAutoplay = () => {
 		if ( sliderPlayingState !== SliderPlayingStates.PENDING ) {
 			return;
 		}
-		setTimer( setInterval( slider.next, interval || DEFAULT_INTERVAL ) );
+		setTimer( setInterval( () => slider.current.next(), interval || DEFAULT_INTERVAL ) );
 		sliderPlayingState = SliderPlayingStates.PLAYING;
 	};
 
@@ -59,18 +56,18 @@ export default function Slider( props ) {
 	const gotoNextSlide = e => {
 		e.stopPropagation();
 		stopAutoplay();
-		slider.next();
+		slider.current.next();
 	};
 
 	const gotoPreviousSlide = e => {
 		e.stopPropagation();
 		stopAutoplay();
-		slider.prev();
+		slider.current.prev();
 	};
 
 	const goToSlide = idx => {
 		stopAutoplay();
-		slider.moveToSlideRelative( idx );
+		slider.current.moveToIdx( idx );
 	};
 
 	useEffect( () => {
@@ -94,15 +91,15 @@ export default function Slider( props ) {
 						</div>
 					) ) }
 				</div>
-				{ slider && previous && (
+				{ loaded && previous && (
 					<a href="#" className="slider-navigation-previous" onClick={ gotoPreviousSlide }>{ previous }</a>
 				) }
-				{ slider && next && (
+				{ loaded && next && (
 					<a href="#" className="slider-navigation-next" onClick={ gotoNextSlide }>{ next }</a>
 				) }
-				{ slider && (
+				{ loaded && (
 					<div className="pagination">
-						{ arrayRange( slider.details().size ).map( ( idx ) => {
+						{ [ ...Array( slider.current.track.details.slides.length ).keys() ].map( ( idx ) => {
 							return (
 								<button
 									className={ classNames( 'pagination-dot', { 'is-active': currentSlide === idx } ) }
