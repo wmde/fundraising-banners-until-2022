@@ -64,7 +64,7 @@
     "sinon": "^14.0.0",
     "style-loader": "^2.0.0",
     "stylelint": "^14.8.5",
-    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-config-wikimedia": "^0.13.0",
     "toml": "^3.0.0",
     "url": "^0.11.0",
