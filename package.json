@@ -22,7 +22,7 @@
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
     "keen-slider": "^5.5.1",
     "npm-check-updates": "^13.1.4",
-    "preact": "^10.8.0",
+    "preact": "^10.8.1",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
