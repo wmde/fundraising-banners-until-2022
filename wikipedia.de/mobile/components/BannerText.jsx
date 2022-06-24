@@ -1,7 +1,13 @@
 import { h } from 'preact';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = props;
+	const {
+		currentDayName,
+		campaignDaySentence,
+		visitorsVsDonorsSentence,
+		overallImpressionCount
+	} = props.dynamicCampaignText;
+
 	return <div className="banner-text">
 		<p className="text__headline">
 			An alle, die Wikipedia in Deutschland nutzen

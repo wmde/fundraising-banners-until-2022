@@ -1,6 +1,5 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
-import { Slider } from '../../../shared/banner_slider_keen';
 import debounce from '../../../shared/debounce';
 
 import BannerTransition from '../../../shared/components/BannerTransition';
@@ -11,6 +10,8 @@ import FullpageBanner from './FullpageBanner';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionAccordion from '../../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
+import SlideState from '../../../shared/slide_state';
+import createDynamicCampaignText from '../../../mobile/create_dynamic_campaign_text';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -45,15 +46,22 @@ export default class Banner extends Component {
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
 		this.startProgressBarInMiniBanner = () => {};
+		this.startSliderAutoplay = () => {};
+		this.stopSliderAutoplay = () => {};
+		this.slideState = new SlideState();
+		this.dynamicCampaignText = createDynamicCampaignText(
+			props.campaignParameters,
+			props.campaignProjection,
+			props.impressionCounts,
+			props.formatters,
+			props.translations
+		);
 	}
 
 	miniBannerTransitionRef = createRef();
 	fullBannerTransitionRef = createRef();
 
 	componentDidMount() {
-		this.bannerSlider = new Slider( this.props.sliderAutoPlaySpeed );
-		this.bannerSlider.initialize();
-
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
@@ -74,7 +82,6 @@ export default class Banner extends Component {
 			this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
 			this.fullPageBannerReRender();
 		} else {
-			this.bannerSlider.resize();
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
 			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		}
@@ -84,8 +91,8 @@ export default class Banner extends Component {
 	showFullPageBanner = e => {
 		this.props.trackingData.tracker.trackBannerEvent(
 			'mobile-mini-banner-expanded',
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide() + 1,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
 			this.props.trackingData.bannerClickTrackRatio
 		);
 		window.scrollTo( 0, 0 );
@@ -134,8 +141,8 @@ export default class Banner extends Component {
 			isFullPageVisible: false
 		} );
 		this.props.onClose(
-			this.bannerSlider.getViewedSlides(),
-			this.bannerSlider.getCurrentSlide()
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1
 		);
 	};
 
@@ -147,9 +154,7 @@ export default class Banner extends Component {
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
 	onMiniBannerSlideInFinished = () => {
-		if ( this.props.sliderAutoPlay !== false ) {
-			this.bannerSlider.enableAutoplayAfter( SLIDESHOW_START_DELAY );
-		}
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 		this.startProgressBarInMiniBanner();
@@ -182,7 +187,8 @@ export default class Banner extends Component {
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBanner }/>
+						onExpandFullpage={ this.showFullPageBanner }
+						dynamicCampaignText={ this.dynamicCampaignText }/>
 
 				</BannerTransition>
 				<FollowupTransition
@@ -204,6 +210,7 @@ export default class Banner extends Component {
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
+						dynamicCampaignText={ this.dynamicCampaignText }
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

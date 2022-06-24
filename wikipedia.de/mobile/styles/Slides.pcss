@@ -1,5 +1,34 @@
 .wmde-banner {
-	.carousel-cell {
+
+	.banner__slideshow {
+		width: 100%;
+	}
+
+	.keen-slider {
+		display: flex;
+		height: 100%;
+		width: 100%;
+		-webkit-touch-callout: none;
+		user-select: none;
+		touch-action: pan-y;
+		-webkit-tap-highlight-color: transparent;
+		align-items: center;
+	}
+
+	.keen-slider,
+	.keen-slider__slide {
+		overflow: hidden;
+		position: relative;
+		height: 100%;
+		text-align: center;
+
+		&-content {
+			width: 100%;
+		}
+	}
+
+	.carousel-cell,
+	.keen-slider__slide {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -18,37 +47,31 @@
 			margin: 0 0 20px;
 		}
 	}
-	.mini-banner-carousel {
+
+	.pagination,
+	#dots-navigation {
 		display: flex;
+		padding: 10px 0;
+		justify-content: center;
 	}
 
-	.navigation-wrapper {
-		overflow: hidden;
-		padding: 2px;
-		#dots-navigation {
-			display: flex;
-			padding: 10px 0;
-			justify-content: center;
-		}
+	.pagination-dot {
+		border: 0;
+		width: 10px;
+		height: 10px;
+		background: $color-primary;
+		opacity: 0.25;
+		border-radius: 50%;
+		margin: 0 5px;
+		padding: 5px;
+		cursor: pointer;
+	}
 
-		.dot {
-			border: 0;
-			width: 10px;
-			height: 10px;
-			background: $color-primary;
-			opacity: 0.25;
-			border-radius: 50%;
-			margin: 0 5px;
-			padding: 5px;
-			cursor: pointer;
-		}
+	.pagination-dot:focus {
+		outline: 0;
+	}
 
-		.dot:focus {
-			outline: 0;
-		}
-
-		.dot--active {
-			opacity: 1;
-		}
+	.pagination-dot.is-active {
+		opacity: 1;
 	}
 }

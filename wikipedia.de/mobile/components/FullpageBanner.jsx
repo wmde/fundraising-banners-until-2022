@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import Infobox from '../../../shared/components/ui/Infobox';
 import ProgressBar from '../../../shared/components/ui/ProgressBar';
+import BannerText from './BannerText';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class FullpageBanner extends Component {
@@ -16,13 +16,9 @@ export default class FullpageBanner extends Component {
 				<div className="close" onClick={ props.onClose }>
 					{ props.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
 				</div>
-				<Infobox
-					formatters={props.formatters}
-					campaignParameters={props.campaignParameters}
-					campaignProjection={props.campaignProjection}
-					bannerText={props.bannerText}
-					propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
-				/>
+				<div className="infobox">
+					<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
+				</div>
 				<ProgressBar
 					formatters={props.formatters}
 					daysLeft={campaignProjection.getRemainingDays()}
