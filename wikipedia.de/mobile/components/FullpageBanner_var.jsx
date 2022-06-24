@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
 
-import Infobox from '../../../shared/components/ui/Infobox';
 import ProgressBar from '../../../shared/components/ui/ProgressBar';
+import BannerText from './BannerText';
 
 export default class FullpageBanner extends Component {
 	render( props ) {
@@ -19,13 +19,9 @@ export default class FullpageBanner extends Component {
 				<div className="fullpage-banner__heading">
 					Jetzt spenden
 				</div>
-				<Infobox
-					formatters={props.formatters}
-					campaignParameters={props.campaignParameters}
-					campaignProjection={props.campaignProjection}
-					bannerText={props.bannerText}
-					propsForText={ { overallImpressionCount: props.impressionCounts.getOverallCount() } }
-				/>
+				<div className="infobox">
+					<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
+				</div>
 				<ProgressBar
 					formatters={props.formatters}
 					daysLeft={campaignProjection.getRemainingDays()}
