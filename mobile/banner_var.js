@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
@@ -29,8 +29,6 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Ist Ihnen Wikipedia 5 € wert?';
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -44,7 +42,6 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
-		sliderHeading: sliderHeading,
 		donationForm: DonationForm
 	},
 	0
