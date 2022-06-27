@@ -20,6 +20,22 @@ filename = "./desktop/banner_var.js"
 pagename = "B22_WMDE_Test_01_var"
 tracking = "org-01-220701-var"
 
+[desktop_monobook]
+campaign_tracking = "01-ba-220701"
+preview_link = "/wiki/Wikipedia:Hauptseite?useskin=monobook&devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?useskin=monobook&banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+[desktop_monobook.banners.ctrl]
+filename = "./desktop/banner_ctrl.js"
+pagename = "B22_WMDE_Test_01_ctrl_monobook"
+tracking = "org-01-220701-var"
+
+[desktop_monobook.banners.var]
+filename = "./desktop/banner_var.js"
+pagename = "B22_WMDE_Test_01_var_monobook"
+tracking = "org-01-220701-var"
+
 [desktop.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
