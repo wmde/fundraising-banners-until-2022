@@ -9,7 +9,7 @@ export default function BannerText( props ) {
 		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 			heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
 			sichern. Sollten Sie zu dem kleinen Kreis derjenigen gehören, die bereits gespendet haben,
-			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€
+			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€
 			finanziert. Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
 			erfolgreich entwickeln. <strong>Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden
 			nicht – sie übergehen diesen Aufruf.</strong> Die meisten Menschen spenden, weil sie
