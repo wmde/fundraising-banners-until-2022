@@ -18,18 +18,15 @@ import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de
 import { createCampaignProjection } from '../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../shared/local_impression_count';
-import { createMinimisedPersistence } from '../shared/minimised_persistence';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
-const minimisedPersistence = createMinimisedPersistence( trackingIds.bannerName );
-const appearanceDelay = minimisedPersistence.isMinimised() ? 0 : ( bannerContainer.dataset.delay || 7500 );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	appearanceDelay,
+	bannerContainer.dataset.delay || 7500,
 	new LocalImpressionCount( trackingIds.bannerName ),
 	mw.centralNotice.internal.hide.setHideWithCloseButtonCookies
 );
@@ -43,7 +40,6 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
-		minimisedPersistence,
 		donationForm: DonationForm,
 		footer: Footer,
 		bannerText: BannerText,

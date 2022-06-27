@@ -43,7 +43,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		footer: Footer,
 		bannerText: BannerText,
-		translations: Object.assign( Translations, LocalTranslations, { 'remaining-donors-needed-sentence': '' } ),
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
 		showCookieBanner: '0'
