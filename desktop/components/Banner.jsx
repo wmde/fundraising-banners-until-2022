@@ -13,7 +13,6 @@ import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
-import ProgressBar, { AmountToShowOnRight } from './ui/ProgressBar';
 import CloseIcon from './ui/CloseIcon';
 
 const BannerVisibilityState = Object.freeze( {
@@ -99,8 +98,8 @@ export class Banner extends Component {
 
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
-		this.startProgressbar();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
+		this.triggerTextHighlight();
 	}
 
 	closeBanner = e => {
@@ -112,10 +111,6 @@ export class Banner extends Component {
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
 	}
-
-	registerStartProgressbar = ( startPb ) => {
-		this.startProgressbar = startPb;
-	};
 
 	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
 		this.startSliderAutoplay = onStartAutoplay;
@@ -168,7 +163,6 @@ export class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
-		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
 
 		return <div
@@ -197,7 +191,7 @@ export class Banner extends Component {
 						<div className="banner__content">
 							<div className="banner__infobox">
 								<div className="infobox-bubble">
-									{ state.bannerWidth <= SHOW_SLIDE_BREAKPOINT && (
+									{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
 										<div className="banner__slideshow" ref={ this.slideshowRef }>
 											<Slider
 												slides={ Slides( this.dynamicCampaignText ) }
@@ -212,7 +206,7 @@ export class Banner extends Component {
 										</div>
 									) }
 
-									{ state.bannerWidth > SHOW_SLIDE_BREAKPOINT && (
+									{ state.bannerWidth >= SHOW_SLIDE_BREAKPOINT && (
 										<Infobox
 											formatters={ props.formatters }
 											campaignParameters={ props.campaignParameters }
@@ -244,16 +238,6 @@ export class Banner extends Component {
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
-						<ProgressBar
-							formatters={props.formatters}
-							daysLeft={campaignProjection.getRemainingDays()}
-							donationAmount={campaignProjection.getProjectedDonationSum()}
-							goalDonationSum={campaignProjection.goalDonationSum}
-							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-							setStartAnimation={this.registerStartProgressbar}
-							amountToShowOnRight={AmountToShowOnRight.TOTAL}
-							onEndProgress={ this.triggerTextHighlight }
-						/>
 					</div>
 
 				</TranslationContext.Provider>
