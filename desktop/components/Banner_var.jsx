@@ -84,10 +84,9 @@ export class Banner extends Component {
 	}
 
 	adjustSurroundingSpace() {
-		this.storeBannerWidth( () => {
-			const bannerElement = document.querySelector( '.wmde-banner' );
-			this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
-		} );
+		const bannerElement = document.querySelector( '.wmde-banner' );
+		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		this.storeBannerWidth();
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -139,8 +138,8 @@ export class Banner extends Component {
 		}
 	}
 
-	storeBannerWidth = ( callback = () => {} ) => {
-		this.setState( { bannerWidth: this.ref.current.offsetWidth }, callback );
+	storeBannerWidth = () => {
+		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
 	}
 
 	trackBannerEventWithViewport( eventName ) {
