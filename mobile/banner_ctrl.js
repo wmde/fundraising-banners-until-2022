@@ -29,8 +29,6 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Wie viel ist Ihnen Wikipedia wert?';
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -44,7 +42,6 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
-		sliderHeading: sliderHeading,
 		donationForm: DonationForm
 	},
 	0

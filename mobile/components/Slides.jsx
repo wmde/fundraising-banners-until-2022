@@ -1,41 +1,36 @@
 import { h } from 'preact';
 
-export default function Slides( dynamicCampaignText, progressBar ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = dynamicCampaignText;
+export default function Slides( dynamicCampaignText ) {
+	const { currentDayName } = dynamicCampaignText;
 
 	return [
 		{
-			content: <div className="carousel-cell-first">
-				<p>Unser Spendenziel: 9,2 Millionen Euro</p>
-				{ progressBar }
+			content: <div>
+				<p>An alle, die Wikipedia in Deutschland nutzen. Vielleicht kommen wir gerade ungelegen,
+					aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>An alle, die Wikipedia in Deutschland nutzen: Dies ist der { overallImpressionCount }. Spendenaufruf, den wir
-					Ihnen zeigen. Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
+				<p>Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! { campaignDaySentence }</p>
+				<p>Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert. <strong>Doch schon mit einer
+					Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.</strong></p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>Insgesamt spenden 99% nichts - sie übergehen diesen Aufruf. <strong>Schon mit einer Spende von 5&nbsp;€ kann
-					Wikipedia sich auch in Zukunft erfolgreich entwickeln.</strong></p>
+				<p><strong>Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen
+					Aufruf.</strong> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p><strong>{ visitorsVsDonorsSentence }</strong> Wikipedia wird durch Spenden von durchschnittlich 21,60&nbsp;€ finanziert.</p>
-			</div>
-		},
-		{
-			content: <div>
-				<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann nehmen Sie sich
-					doch bitte eine Minute Zeit und geben Sie etwas zurück.</strong> Vielen Dank.</p>
+				<p>Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann nehmen
+					Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank!</strong></p>
 			</div>
 		}
 	];
