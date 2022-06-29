@@ -40,7 +40,7 @@
     "eslint": "^7.32.0",
     "eslint-config-wikimedia": "^0.22.1",
     "eslint-plugin-jsdoc": "^39.3.3",
-    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unicorn": "^40.1.0",
     "eslint-plugin-yml": "^1.0.0",
