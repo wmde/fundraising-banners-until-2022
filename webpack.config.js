@@ -6,7 +6,6 @@ const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 
 module.exports = merge( CommonConfig, {
-	devtool: 'source-map',
 	mode: 'development',
 	entry: {
 		loader: './webpack/loader.js'
@@ -18,15 +17,17 @@ module.exports = merge( CommonConfig, {
 		} )
 	],
 	devServer: {
-		port: 8084,
-		allowedHosts: 'all',
-		static: {
-			directory: path.resolve( __dirname, 'dist' )
+		'port': 8084,
+		'allowedHosts': 'all',
+		'static': {
+			directory: path.resolve( __dirname, 'dist' ),
+			publicPath: '/',
+			serveIndex: false
 		},
-		headers: {
+		'headers': {
 			'Access-Control-Allow-Origin': '*'
 		},
-		proxy: [
+		'proxy': [
 			{
 				context: [ '/mobile' ],
 				pathRewrite: { '^/mobile': '' },

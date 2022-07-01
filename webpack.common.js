@@ -2,7 +2,7 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 const toml = require( 'toml' );
 const webpack = require( 'webpack' );
-const WrapperPlugin = require( 'wrapper-webpack-plugin' );
+// const WrapperPlugin = require( 'wrapper-webpack-plugin' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
@@ -10,6 +10,7 @@ const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_inf
 module.exports = {
 	entry: campaigns.getEntryPoints(),
 	output: {
+		publicPath: '',
 		filename: '[name].js',
 		path: path.resolve( __dirname, 'dist' )
 	},
@@ -65,7 +66,13 @@ module.exports = {
 	plugins: [
 		new webpack.ProvidePlugin( {
 			jQuery: 'jquery'
-		} ),
+		} )
+		// TODO: the wrapper plugin is not compatible with webpack 5, see https://github.com/levp/wrapper-webpack-plugin/issues/15
+		//       Options:
+		//         * Write our own plugin that injects the code
+		//         * Use fork of wrapper plugin
+		//         * use different mechanism to determine tracking data in compiled banner on WPDE
+		/*
 		new WrapperPlugin( {
 			test: /B\d{2}WPDE.*.js$/,
 			header: function ( pageName ) {
@@ -79,5 +86,6 @@ module.exports = {
 				`;
 			}
 		} )
+		*/
 	]
 };
