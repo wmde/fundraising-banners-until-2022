@@ -1,4 +1,5 @@
 const fs = require( 'fs' );
+const path = require( 'path' );
 const toml = require( 'toml' );
 const { merge } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
@@ -18,8 +19,10 @@ module.exports = merge( CommonConfig, {
 	],
 	devServer: {
 		port: 8084,
-		hot: true,
-		contentBase: './dist',
+		allowedHosts: 'all',
+		static: {
+			directory: path.resolve( __dirname, 'dist' )
+		},
 		headers: {
 			'Access-Control-Allow-Origin': '*'
 		},
