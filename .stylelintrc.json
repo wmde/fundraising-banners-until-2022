@@ -16,6 +16,9 @@
 		"declaration-property-unit-disallowed-list": null,
 		"selector-class-pattern": null,
 		"scss/dollar-variable-empty-line-before": null,
-		"scss/at-import-partial-extension": null
+		"scss/at-import-partial-extension": null,
+		"color-function-notation": null,
+		"alpha-value-notation": null,
+		"scss/operator-no-unspaced": null
 	}
 }
