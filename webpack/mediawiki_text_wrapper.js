@@ -18,49 +18,56 @@ function MediaWikiTextWrapper( options ) {
 
 MediaWikiTextWrapper.prototype.apply = function ( compiler ) {
 	const self = this;
-	compiler.hooks.emit.tapAsync( 'MediaWikiTextWrapper', function ( compilation, callback ) {
-		const mm = new Minimatch( self.filePattern, { matchBase: true } );
-		const wrappedFiles = {};
+	const { webpack } = compiler;
+	const { Compilation } = webpack;
+	const { RawSource } = webpack.sources;
+	const pluginName = 'MediaWikiTextWrapper';
 
-		for ( let filename in compilation.assets ) {
-			if ( !mm.match( filename ) || filename.indexOf( 'hot-update' ) > -1 ) {
-				continue;
-			}
+	compiler.hooks.compilation.tap( pluginName, function ( compilation ) {
+		compilation.hooks.processAssets.tap(
+			{
+				name: pluginName,
+				stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING
+			},
+			function ( assets ) {
+				const mm = new Minimatch( self.filePattern, { matchBase: true } );
+				for ( let filename in assets ) {
+					if ( !mm.match( filename ) || filename.indexOf( 'hot-update' ) > -1 ) {
+						continue;
+					}
 
-			let pagename = filename.replace( /\.js$/, '' );
+					const pagename = filename.replace( /\.js$/, '' );
 
-			if ( !self.campaignConfig[ pagename ] ) {
-				throw new Error( 'Unconfigured JavaScript output: ' + filename );
-			}
+					if ( !self.campaignConfig[ pagename ] ) {
+						throw new Error( 'Unconfigured JavaScript output: ' + filename );
+					}
 
-			if ( self.campaignConfig[ pagename ].wrap_in_wikitext === false ) {
-				continue;
-			}
+					// WPDE campaign configuration must prevent WikiText wrapping
+					if ( self.campaignConfig[ pagename ].wrap_in_wikitext === false ) {
+						continue;
+					}
 
-			let template = self.templates[ pagename ];
-			const buildDate = new Date().toISOString()
-				.replace( 'T', ' ' )
-				.replace( /\.\d+Z$/, '' );
-			wrappedFiles[ filename ] = template( Object.assign( {
-				banner: compilation.assets[ filename ].source(),
-				campaignConfig: self.campaignConfig[ pagename ] || {},
-				build_date: buildDate
-			}, self.context ) );
-		}
+					const template = self.templates[ pagename ];
+					const buildDate = new Date().toISOString()
+						.replace( 'T', ' ' )
+						.replace( /\.\d+Z$/, '' );
+					const compiledSource = compilation.assets[ filename ].source();
+					const templateContext = {
+						banner: compiledSource.replace( /\/\*! For license information please see.*?\*\/\s*/, '' ),
+						campaignConfig: self.campaignConfig[ pagename ] || {},
+						build_date: buildDate,
+						...self.context
+					};
+					const wrappedFile = template( templateContext );
 
-		for ( let filename in wrappedFiles ) {
-			compilation.assets[ filename + '.wikitext' ] = {
-				source: function () {
-					return wrappedFiles[ filename ];
-				},
-				size: function () {
-					return wrappedFiles[ filename ].length;
+					compilation.emitAsset(
+						filename + '.wikitext',
+						new RawSource( wrappedFile )
+					);
+					compilation.deleteAsset( filename );
 				}
-			};
-			delete compilation.assets[ filename ];
-		}
-
-		callback();
+			}
+		);
 	} );
 };
 
