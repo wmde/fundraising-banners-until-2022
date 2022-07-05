@@ -1,4 +1,5 @@
 const fs = require( 'fs' );
+const rimraf = require( 'rimraf' );
 const toml = require( 'toml' );
 const { merge } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
@@ -23,6 +24,15 @@ module.exports = merge( CommonConfig, {
 			},
 			filePattern: '{B,WMDE}*.js',
 			campaignConfig: campaigns.getConfigForPages()
-		} )
+		} ),
+		// Remove generated license files
+		// See https://stackoverflow.com/a/72237744/130121
+		new ( class {
+			apply( compiler ) {
+				compiler.hooks.done.tap( 'Remove LICENSE', () => {
+					rimraf.sync( './dist/*.LICENSE.txt' );
+				} );
+			}
+		} )()
 	]
 } );
