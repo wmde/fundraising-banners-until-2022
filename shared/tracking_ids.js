@@ -1,5 +1,5 @@
 export function getTrackingIds( element ) {
-	// banners on wp.de rely on the WrapperPlugin to inject global variables
+	// banners on wp.de rely on the wpde_loader to inject global variables with the tracking IDs
 	if ( window.BannerName && window.CampaignName ) {
 		return {
 			campaignName: window.CampaignName,
