@@ -1,4 +1,5 @@
 const assert = require( 'assert' );
+const path = require( 'path' );
 const CampaignConfig = require( '../webpack/campaign_config' );
 
 describe( 'CampaignConfig', function () {
@@ -132,5 +133,53 @@ describe( 'CampaignConfig', function () {
 				}
 			} );
 		} );
+	} );
+
+	describe( '#getCampaignTrackingForEntryPoint', function () {
+		const config = new CampaignConfig( {
+			desktop: {
+				campaign_tracking: 'campaign_01',
+				banners: {
+					'ctrl': {
+						filename: './foo/bar.js',
+						pagename: 'B17WMDE_test_ctrl',
+						tracking: 'tracking----ctrl'
+					},
+					'var': {
+						filename: './foo/var.js',
+						pagename: 'B17WMDE_test_var',
+						tracking: 'tracking----var'
+					}
+				}
+			}
+		} );
+
+		it( 'should return tracking data for entry points', function () {
+			assert.deepEqual(
+				config.getCampaignTrackingForEntryPoint( './foo/bar.js' ),
+				{
+					bannerTracking: 'tracking----ctrl',
+					campaignTracking: 'campaign_01'
+				}
+			);
+			assert.deepEqual(
+				config.getCampaignTrackingForEntryPoint( './foo/var.js' ),
+				{
+					bannerTracking: 'tracking----var',
+					campaignTracking: 'campaign_01'
+				}
+			);
+		} );
+
+		it( 'should return tracking data for absolute entry points', function () {
+			assert.deepEqual(
+				config.getCampaignTrackingForEntryPoint( path.resolve( './foo/bar.js' ) ),
+				{
+					bannerTracking: 'tracking----ctrl',
+					campaignTracking: 'campaign_01'
+				}
+			);
+		} );
+
 	} );
 } );

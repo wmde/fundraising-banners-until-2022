@@ -2,7 +2,6 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 const toml = require( 'toml' );
 const webpack = require( 'webpack' );
-// const WrapperPlugin = require( 'wrapper-webpack-plugin' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
@@ -20,6 +19,17 @@ module.exports = {
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				use: 'babel-loader'
+			},
+			// Inject tracking IDs into WPDE banner entry points
+			{
+				test: /wikipedia\.de.*banner(_ctrl|_var)\.js/,
+				use: [
+					'babel-loader',
+					{
+						loader: path.resolve( './webpack/wpde_loader.js' ),
+						options: { campaigns }
+					}
+				]
 			},
 			{
 				test: /\.js$/,
@@ -58,6 +68,9 @@ module.exports = {
 		alias: {
 			'react': 'preact/compat',
 			'react-dom': 'preact/compat'
+		},
+		fallback: {
+			path: false
 		}
 	},
 	externals: {
@@ -67,25 +80,5 @@ module.exports = {
 		new webpack.ProvidePlugin( {
 			jQuery: 'jquery'
 		} )
-		// TODO: the wrapper plugin is not compatible with webpack 5, see https://github.com/levp/wrapper-webpack-plugin/issues/15
-		//       Options:
-		//         * Write our own plugin that injects the code
-		//         * Use fork of wrapper plugin
-		//         * use different mechanism to determine tracking data in compiled banner on WPDE
-		/*
-		new WrapperPlugin( {
-			test: /B\d{2}WPDE.*.js$/,
-			header: function ( pageName ) {
-				if ( pageName.indexOf( 'hot-update' ) !== -1 ) {
-					return '';
-				}
-				const trackingData = campaigns.getCampaignTracking( pageName.replace( '.js', '' ) );
-				return `var BannerName = '${trackingData.bannerTracking}';
-					var CampaignName = '${trackingData.campaignTracking}';
-					var BuildDate = '${new Date().toISOString().replace( 'T', ' ' ).replace( /\.\d+Z$/, '' )}';
-				`;
-			}
-		} )
-		*/
 	]
 };
