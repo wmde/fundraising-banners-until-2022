@@ -2,7 +2,7 @@ import { h } from 'preact';
 import classNames from 'classnames';
 
 import CloseIcon from './ui/CloseIcon';
-import BannerText from './BannerText';
+import BannerText from './BannerText_var';
 
 export default function FullPageBanner( props ) {
 	const DonationForm = props.donationForm;

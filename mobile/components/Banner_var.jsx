@@ -2,8 +2,8 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import debounce from '../../shared/debounce';
 
-import MiniBanner from './MiniBanner';
-import FullpageBanner from './FullpageBanner';
+import MiniBanner from './MiniBanner_var';
+import FullpageBanner from './FullpageBanner_var';
 import TranslationContext from '../../shared/components/TranslationContext';
 import FollowupTransition from '../../shared/components/FollowupTransition';
 import PropTypes from 'prop-types';
