@@ -2,7 +2,6 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import debounce from '../../shared/debounce';
 
-import BannerTransition from '../../shared/components/BannerTransition';
 import MiniBanner from './MiniBanner';
 import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../shared/components/TranslationContext';
@@ -54,18 +53,22 @@ export default class Banner extends Component {
 		);
 	}
 
-	miniBannerTransitionRef = createRef();
+	miniBannerRef = createRef();
 	fullBannerTransitionRef = createRef();
 
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState( { displayState: VISIBLE } );
-				this.slideInBanner();
+				this.setContentSize();
 			}
 		);
 
 		this.props.registerResizeBanner( debounce( this.setContentSize.bind( this ), 200 ) );
+		setTimeout( () => { this.startSliderAutoplay(); }, SLIDESHOW_START_DELAY );
+		this.adjustFollowupBannerHeight( this.getMiniBannerHeight() );
+		this.startProgressBarInMiniBanner();
+		this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
 	}
 
 	trackBannerEvent( eventName ) {
@@ -87,7 +90,7 @@ export default class Banner extends Component {
 			this.fullPageBannerReRender();
 		} else {
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
-			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
+			this.adjustFollowupBannerHeight( this.getMiniBannerHeight() );
 		}
 	}
 
@@ -130,7 +133,7 @@ export default class Banner extends Component {
 	}
 
 	getMiniBannerHeight() {
-		return this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
+		return this.miniBannerRef.current ? this.miniBannerRef.current.base.offsetHeight : 0;
 	}
 
 	getFullBannerHeight() {
@@ -164,18 +167,11 @@ export default class Banner extends Component {
 		this.props.onClose();
 	};
 
-	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
-	onMiniBannerSlideInFinished = () => {
-		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
-		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
-		this.props.onFinishedTransitioning();
-		this.startProgressBarInMiniBanner();
-	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -190,25 +186,17 @@ export default class Banner extends Component {
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
 			<TranslationContext.Provider value={ props.translations }>
-				<BannerTransition
-					fixed={ true }
-					registerDisplayBanner={ this.registerBannerTransition }
-					onFinish={ this.onMiniBannerSlideInFinished }
-					skinAdjuster={ props.skinAdjuster }
-					ref={this.miniBannerTransitionRef}
-					transitionSpeed={ 1000 }
-				>
-					<MiniBanner
-						{ ...props }
-						onClose={ this.closeBanner }
-						campaignProjection={ campaignProjection }
-						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
-						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
-						onSlideChange={ this.onSlideChange }
-						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
-						dynamicCampaignText={ this.dynamicCampaignText }
-					/>
-				</BannerTransition>
+				<MiniBanner
+					{ ...props }
+					onClose={ this.closeBanner }
+					campaignProjection={ campaignProjection }
+					setStartAnimation={ this.registerStartProgressBarInMiniBanner }
+					onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
+					onSlideChange={ this.onSlideChange }
+					registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
+					dynamicCampaignText={ this.dynamicCampaignText }
+					ref={this.miniBannerRef}
+				/>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }

@@ -5,7 +5,7 @@ import * as formatters from '../shared/number_formatter/de';
 import { createCampaignParameters } from '../shared/campaign_parameters';
 import { createTrackingData } from '../shared/tracking_data';
 import { getTrackingIds } from '../shared/tracking_ids';
-import BannerPresenter from '../shared/banner_presenter';
+import BannerPresenter from '../shared/banner_presenter_immediate';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
@@ -25,7 +25,6 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 5000,
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
