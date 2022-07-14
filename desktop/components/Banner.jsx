@@ -153,6 +153,19 @@ export class Banner extends Component {
 		this.setState( { bannerWidth: this.ref.current.offsetWidth }, callback );
 	}
 
+	trackBannerEvent( eventName ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			eventName,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	onPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -227,6 +240,7 @@ export class Banner extends Component {
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
 									showCookieBanner={ props.showCookieBanner }
+									onPage2={ this.onPage2 }
 								/>
 							</div>
 						</div>
