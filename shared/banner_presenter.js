@@ -88,6 +88,11 @@ export default class BannerPresenter {
 					);
 				},
 				onMaybeLater: () => {
+					this.trackingData.tracker.trackViewPortDimensions(
+						'banner-closed-maybelater',
+						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
+						this.trackingData.bannerCloseTrackRatio,
+					);
 					skinAdjuster.removeSpace();
 					window.removeEventListener( 'resize', resizeHandler );
 				},
