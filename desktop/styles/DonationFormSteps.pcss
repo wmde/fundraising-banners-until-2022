@@ -1,0 +1,122 @@
+.wmde-banner {
+	.banner__form {
+		overflow: hidden;
+	}
+	.form-step-1,
+	.form-step-2 {
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		min-width: calc( 100% + 0 );
+		max-width: calc( 100% + 0 );
+		transform: translate3d( 0, 0, 0 );
+
+		transition: transform 500ms $banner-easing, opacity 300ms linear;
+	}
+	.form-step-1 {
+		justify-content: flex-end;
+
+		.select-group-container {
+			padding-bottom: 10px;
+		}
+	}
+
+	.form-step-2 {
+		opacity: 0;
+		justify-content: center;
+
+		&-options {
+			width: 100%;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
+
+		&-button {
+			margin-top: auto;
+		}
+
+		&-field {
+			flex-grow: 1;
+		}
+
+		&-notice {
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		&-custom {
+			font-size: 12px;
+			padding-left: 25px;
+			font-weight: bold;
+			a {
+				color: #2a4b8d;
+				&:hover,
+				&:focus {
+					text-decoration: underline;
+				}
+			}
+		}
+
+		.select-group__errormessage {
+			padding: 8px 0;
+			height: auto;
+		}
+
+		.select-group__option {
+			height: auto;
+			padding: 8px 0 0 25px;
+		}
+
+		.select-group__state {
+			white-space: normal;
+			text-align: left;
+			line-height: 1.5;
+
+			&:before {
+				top: 8px;
+				margin-top: 0;
+			}
+		}
+	}
+	.form-step-label {
+		flex: 0 0 100%;
+		width: 100%;
+		display: block;
+		padding: 0;
+		height: 16px;
+		line-height: 16px;
+		margin: 5px 0 10px;
+		text-align: left;
+
+		a {
+			color: $color-black;
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				color: $color-black;
+				text-decoration: underline;
+			}
+		}
+
+		svg {
+			float: left;
+			margin-right: 6px;
+		}
+	}
+	.is-step-2 {
+		.form-step-1,
+		.form-step-2 {
+			transform: translate3d( -$form-width, 0, 0 );
+		}
+		.form-step-1 {
+			opacity: 0;
+		}
+		.form-step-2 {
+			opacity: 1;
+		}
+	}
+}
