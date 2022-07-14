@@ -153,14 +153,6 @@ export class Banner extends Component {
 		this.setState( { bannerWidth: this.ref.current.offsetWidth }, callback );
 	}
 
-	trackBannerEventWithViewport( eventName ) {
-		this.props.trackingData.tracker.trackViewportData(
-			eventName,
-			this.props.getBannerDimensions(),
-			1
-		);
-	}
-
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
