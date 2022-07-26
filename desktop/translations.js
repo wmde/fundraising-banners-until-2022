@@ -4,7 +4,7 @@ const Translations = {
 	'payments-header': 'Zahlweise:',
 	'remaining-donors-needed-sentence': 'Noch benötigen wir die Unterstützung von weiteren {{donorsNeeded}} Menschen.',
 	'form-step-2-header': 'Könnten Sie auch {{amount}} € jährlich spenden?',
-	'form-step-2-copy': 'Jedes Jahr sind wir auf die Unterstützung von Menschen wie Sie angewiesen.' +
+	'form-step-2-copy': 'Jedes Jahr sind wir auf die Unterstützung von Menschen wie Ihnen angewiesen.' +
 		' Jährliche Spenden helfen uns nachhaltig und ermöglichen langfristige Weiterentwicklungen.',
 	'form-step-2-no': 'Nein, danke! Ich möchte eine einmalige Spende von {{amount}} € machen.',
 	'form-step-2-yes': 'Ja, ich möchte {{amount}} € jährlich spenden.',
