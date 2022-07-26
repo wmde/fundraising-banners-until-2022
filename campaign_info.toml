@@ -43,7 +43,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob02-ba-220725"
+campaign_tracking = "mob02-ba-220726"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
@@ -51,12 +51,12 @@ wrapper_template = "wikipedia_org"
 [mobile.banners.ctrl]
 filename = "./mobile/banner_ctrl.js"
 pagename = "B22_WMDE_Mobile_Test_02_ctrl"
-tracking = "org-mob02-220725-ctrl"
+tracking = "org-mob02-220726-ctrl"
 
 [mobile.banners.var]
 filename = "./mobile/banner_var.js"
 pagename = "B22_WMDE_Mobile_Test_02_var"
-tracking = "org-mob02-220725-var"
+tracking = "org-mob02-220726-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
