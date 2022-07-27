@@ -9,7 +9,6 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../create_dynamic_campaign_text';
 import Slider from '../../shared/components/Slider';
-import Slides from './Slides';
 import SlideState from '../../shared/slide_state';
 import ChevronLeftIcon from './ui/ChevronLeftIcon';
 import ChevronRightIcon from './ui/ChevronRightIcon';
@@ -200,7 +199,7 @@ export class Banner extends Component {
 									{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
 										<div className="banner__slideshow" ref={ this.slideshowRef }>
 											<Slider
-												slides={ Slides( this.dynamicCampaignText ) }
+												slides={ props.slides( this.dynamicCampaignText ) }
 												onSlideChange={ this.onSlideChange }
 												registerAutoplay={ this.registerAutoplayCallbacks }
 												interval={ SLIDESHOW_SLIDE_INTERVAL }
