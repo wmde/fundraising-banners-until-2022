@@ -8,6 +8,7 @@ import { getTrackingIds } from '../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
 import { BannerType } from './BannerType';
+import Slides from './components/Slides';
 import BannerPresenter from '../shared/banner_presenter';
 import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
@@ -43,6 +44,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		footer: Footer,
 		bannerText: BannerText,
+		slides: Slides,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,

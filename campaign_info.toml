@@ -4,7 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "02-ba-220718"
+campaign_tracking = "03-ba-220801"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
@@ -12,29 +12,29 @@ wrapper_template = "wikipedia_org"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B22_WMDE_Test_02_ctrl"
-tracking = "org-02-220718-ctrl"
+pagename = "B22_WMDE_Test_03_ctrl"
+tracking = "org-03-220801-ctrl"
 
 [desktop.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B22_WMDE_Test_02_var"
-tracking = "org-02-220718-var"
+pagename = "B22_WMDE_Test_03_var"
+tracking = "org-03-220801-var"
 
 [desktop_monobook]
-campaign_tracking = "02-ba-220718"
+campaign_tracking = "03-ba-220801"
 preview_link = "/wiki/Wikipedia:Hauptseite?useskin=monobook&devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?useskin=monobook&banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [desktop_monobook.banners.ctrl]
 filename = "./desktop/banner_ctrl.js"
-pagename = "B22_WMDE_Test_02_ctrl_monobook"
-tracking = "org-02-220718-var"
+pagename = "B22_WMDE_Test_03_ctrl_monobook"
+tracking = "org-03-220801-var"
 
 [desktop_monobook.banners.var]
 filename = "./desktop/banner_var.js"
-pagename = "B22_WMDE_Test_02_var_monobook"
-tracking = "org-02-220718-var"
+pagename = "B22_WMDE_Test_03_var_monobook"
+tracking = "org-03-220801-var"
 
 [desktop.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
