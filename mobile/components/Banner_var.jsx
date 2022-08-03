@@ -27,7 +27,7 @@ export default class Banner extends Component {
 		onClose: PropTypes.func,
 		/** callback when banner gets submitted */
 		onSubmit: PropTypes.func
-	}
+	};
 
 	constructor( props ) {
 		super( props );
@@ -94,7 +94,7 @@ export default class Banner extends Component {
 	showFullPageBannerFromMiniBanner = e => {
 		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.showFullPageBanner( e );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
@@ -127,7 +127,7 @@ export default class Banner extends Component {
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
 		}
-	}
+	};
 
 	getMiniBannerHeight() {
 		return this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
@@ -139,7 +139,7 @@ export default class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-	}
+	};
 
 	registerSliderAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
 		this.startSliderAutoplay = onStartAutoplay;

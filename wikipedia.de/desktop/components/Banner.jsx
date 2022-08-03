@@ -33,7 +33,7 @@ export class Banner extends Component {
 		onSubmit: PropTypes.func,
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired
-	}
+	};
 
 	ref = createRef();
 	slideshowRef = createRef();
@@ -95,7 +95,7 @@ export class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
@@ -121,15 +121,15 @@ export class Banner extends Component {
 	onFormInteraction = () => {
 		this.stopSliderAutoplay();
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
+	};
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-	}
+	};
 
 	storeBannerWidth = () => {
 		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

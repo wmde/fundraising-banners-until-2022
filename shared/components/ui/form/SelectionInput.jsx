@@ -16,11 +16,11 @@ export default class SelectionInput extends Component {
 		e.preventDefault();
 		setTimeout( () => this.ref.current.setSelectionRange( 0, 9999 ), 1 );
 		this.setState( { focused: true } );
-	}
+	};
 
 	handleBlur = () => {
 		this.setState( { focused: false } );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

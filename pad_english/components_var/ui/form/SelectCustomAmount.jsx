@@ -24,7 +24,7 @@ export default class SelectCustomAmount extends Component {
 		if ( this.ref.current ) {
 			this.ref.current.focus();
 		}
-	}
+	};
 
 	onBlur = ( e ) => {
 		this.setState( { focused: false } );

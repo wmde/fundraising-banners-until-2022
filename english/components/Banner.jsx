@@ -41,7 +41,7 @@ export class Banner extends Component {
 		registerDisplayBanner: PropTypes.func.isRequired,
 		bannerWidth: 0,
 		textHighlight: HighlightState.WAITING
-	}
+	};
 
 	ref = createRef();
 	slideshowRef = createRef();
@@ -98,7 +98,7 @@ export class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		this.startProgressbar();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -108,7 +108,7 @@ export class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
@@ -134,12 +134,12 @@ export class Banner extends Component {
 	onFormInteraction = () => {
 		this.stopSliderAutoplay();
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
+	};
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
 		this.triggerTextHighlight();
-	}
+	};
 
 	triggerTextHighlight() {
 		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
@@ -152,7 +152,7 @@ export class Banner extends Component {
 
 	storeBannerWidth = () => {
 		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
