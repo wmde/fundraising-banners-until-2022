@@ -80,7 +80,7 @@ export class Banner extends Component {
 	onFinishedTransitioning = () => {
 		this.props.onFinishedTransitioning();
 		this.startProgressbar();
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -125,7 +125,7 @@ export class Banner extends Component {
 		const eventName = formId === 'banner-membership-form-with-amount' ? 'submit-amount' : 'submit';
 		this.props.trackingData.tracker.trackBannerEvent( eventName, this.props.impressionCounts.bannerCount, 0, 1 );
 		this.props.onSubmit( e );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

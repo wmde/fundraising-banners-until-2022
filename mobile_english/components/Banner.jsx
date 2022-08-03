@@ -112,7 +112,7 @@ export default class Banner extends Component {
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
 		}
-	}
+	};
 
 	getMiniBannerHeight() {
 		return this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
@@ -124,7 +124,7 @@ export default class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();

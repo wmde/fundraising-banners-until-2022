@@ -51,7 +51,7 @@ export default class Banner extends Component {
 		onClose: PropTypes.func,
 		/** Callback to register a displayBanner function with the BannerPresenter */
 		registerDisplayBanner: PropTypes.func.isRequired
-	}
+	};
 
 	ref = createRef();
 
@@ -113,7 +113,7 @@ export default class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.onPageResize();
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -126,7 +126,7 @@ export default class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
@@ -152,15 +152,15 @@ export default class Banner extends Component {
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
 		this.stopSliderAutoplay();
-	}
+	};
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-	}
+	};
 
 	onSubmit = () => {
 		this.trackBannerEvent( 'submit', 1 );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

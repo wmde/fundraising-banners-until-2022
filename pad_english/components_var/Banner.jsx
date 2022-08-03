@@ -49,7 +49,7 @@ export default class Banner extends Component {
 		bannerText: PropTypes.elementType,
 		donationForm: PropTypes.elementType,
 		translations: PropTypes.object
-	}
+	};
 
 	bannerRef = createRef();
 	slideshowRef = createRef();
@@ -127,7 +127,7 @@ export default class Banner extends Component {
 		this.startProgressbar();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.onPageResize();
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -140,7 +140,7 @@ export default class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerStartProgressbar = ( startPb ) => {
 		this.startProgressbar = startPb;
@@ -165,23 +165,23 @@ export default class Banner extends Component {
 
 	onFormInteraction = () => {
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
+	};
 
 	showDonationForm = e => {
 		e.preventDefault();
 		this.trackBannerEvent( 'desktop-banner-expanded' );
 		this.setState( { bannerContentState: BannerContentState.FORM }, this.setContentSize );
 		this.stopSliderAutoplay();
-	}
+	};
 
 	showSlides = e => {
 		e.preventDefault();
 		this.setState( { bannerContentState: BannerContentState.SLIDES }, this.setContentSize );
-	}
+	};
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

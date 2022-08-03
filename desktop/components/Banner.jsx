@@ -39,7 +39,7 @@ export class Banner extends Component {
 		onSubmit: PropTypes.func,
 		/** */
 		registerDisplayBanner: PropTypes.func.isRequired
-	}
+	};
 
 	ref = createRef();
 	slideshowRef = createRef();
@@ -100,7 +100,7 @@ export class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.triggerTextHighlight();
-	}
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -110,7 +110,7 @@ export class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	}
+	};
 
 	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
 		this.startSliderAutoplay = onStartAutoplay;
@@ -132,12 +132,12 @@ export class Banner extends Component {
 	onFormInteraction = () => {
 		this.stopSliderAutoplay();
 		this.setState( { showLanguageWarning: true, formInteractionSwitcher: !this.state.formInteractionSwitcher } );
-	}
+	};
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
 		this.triggerTextHighlight();
-	}
+	};
 
 	triggerTextHighlight() {
 		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
@@ -150,7 +150,7 @@ export class Banner extends Component {
 
 	storeBannerWidth = ( callback = () => {} ) => {
 		this.setState( { bannerWidth: this.ref.current.offsetWidth }, callback );
-	}
+	};
 
 	trackBannerEvent( eventName ) {
 		this.props.trackingData.tracker.trackBannerEvent(
@@ -163,7 +163,7 @@ export class Banner extends Component {
 
 	onPage2 = () => {
 		this.trackBannerEvent( 'second-form-page-shown' );
-	}
+	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {

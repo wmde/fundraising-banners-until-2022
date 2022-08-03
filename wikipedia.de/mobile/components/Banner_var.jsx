@@ -31,7 +31,7 @@ export default class Banner extends Component {
 		onClose: PropTypes.func,
 		/** callback when banner gets submitted */
 		onSubmit: PropTypes.func
-	}
+	};
 
 	constructor( props ) {
 		super( props );
@@ -124,7 +124,7 @@ export default class Banner extends Component {
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
 		}
-	}
+	};
 
 	getMiniBannerHeight() {
 		return this.miniBannerTransitionRef.current ? this.miniBannerTransitionRef.current.base.offsetHeight : 0;
