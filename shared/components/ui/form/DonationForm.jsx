@@ -40,7 +40,14 @@ export default function DonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => this.props.onFormInteraction( e ) : () => {};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
+		<form
+			method="post"
+			name="donationForm"
+			className="form__element"
+			onClick={ onFormInteraction }
+			action={ formAction }
+			onSubmit={ validate }
+		>
 
 			<div className="form-field-group">
 				<SelectGroup
@@ -70,13 +77,14 @@ export default function DonationForm( props ) {
 						fieldname="select-amount"
 						value={ customAmount }
 						selectedAmount={ selectedAmount }
-						onInput={ e => updateCustomAmount( e.target.value ) }
-						onBlur={ e => validateCustomAmount( e.target.value ) }
+						onInput={ e => { updateCustomAmount( e.target.value ); validateCustomAmount( e.target.value ); } }
+						onBlur={ e => { validateCustomAmount( e.target.value ); } }
 						placeholder={ props.customAmountPlaceholder }
 						language={
 							/* eslint-disable-next-line dot-notation */
 							Translations[ 'LANGUAGE' ]
 						}
+						o
 					/>
 				</SelectGroup>
 			</div>
@@ -97,7 +105,7 @@ export default function DonationForm( props ) {
 			</div>
 
 			<div className="submit-section button-group">
-				<button className="button-group__button" onClick={ validate }>
+				<button className="button-group__button" type="submit">
 					<span className="button-group__label">{ Translations[ 'submit-label' ] }</span>
 				</button>
 			</div>

@@ -153,11 +153,19 @@ export default function DonationForm( props ) {
 
 	};
 
+	const onFormSubmit = e => {
+		if ( formStep === formSteps.ONE ) {
+			onSubmitStep1( e );
+		} else {
+			onSubmitStep2( e );
+		}
+	};
+
 	return <div className={ classNames(
 		'form',
 		{ 'is-step-2': formStep === formSteps.TWO }
 	) }>
-		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction }>
+		<form method="post" name="donationForm" className="form__element" onClick={ onFormInteraction } action={ formAction } onSubmit={ onFormSubmit } >
 
 			<div className="form-step-1">
 
@@ -186,7 +194,7 @@ export default function DonationForm( props ) {
 						<SelectCustomAmount
 							value={ customAmount }
 							selectedAmount={ selectedAmount }
-							onInput={ e => updateCustomAmount( e.target.value ) }
+							onInput={ e => { updateCustomAmount( e.target.value ); validateCustomAmount( e.target.value ); } }
 							onBlur={ e => validateCustomAmount( e.target.value ) }
 							placeholder={ Translations[ 'custom-amount-placeholder' ] }
 							language={
@@ -217,7 +225,7 @@ export default function DonationForm( props ) {
 				</div>
 
 				<div className="submit-section button-group">
-					<button className="button-group__button" onClick={ onSubmitStep1 }>
+					<button className="button-group__button" type="submit">
 						<span className="button-group__label">{ Translations[ 'submit-label-short' ] }</span>
 					</button>
 				</div>
@@ -279,7 +287,7 @@ export default function DonationForm( props ) {
 					</div>
 
 					<div className="submit-section button-group form-step-2-button">
-						<button className="button-group__button" onClick={ onSubmitStep2 }>
+						<button className="button-group__button" type="submit">
 							<span className="button-group__label">{ getButtonText() }</span>
 						</button>
 					</div>
