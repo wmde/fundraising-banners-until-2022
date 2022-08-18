@@ -78,7 +78,7 @@ export default function DonationFormWithHeaders( props ) {
 	};
 
 	return <div className="form">
-		<form method="post" name="donationForm" className="form__element" action={ formAction }>
+		<form method="post" name="donationForm" className="form__element" action={ formAction } onSubmit={ validate } >
 
 			<fieldset className="form__section">
 				<legend className="form__section-head">{ Translations[ 'intervals-header' ]}</legend>
@@ -113,7 +113,7 @@ export default function DonationFormWithHeaders( props ) {
 							fieldname="select-amount"
 							value={ customAmount }
 							selectedAmount={ selectedAmount }
-							onInput={ e => updateCustomAmount( e.target.value ) }
+							onInput={ e => { updateCustomAmount( e.target.value ); validateCustomAmount( e.target.value ); } }
 							onBlur={ e => validateCustomAmount( e.target.value ) }
 							placeholder={ props.customAmountPlaceholder }
 							language={
@@ -144,7 +144,7 @@ export default function DonationFormWithHeaders( props ) {
 			</fieldset>
 
 			<div className="submit-section button-group">
-				<button className="button-group__button" onClick={ validate }>
+				<button className="button-group__button" type="submit">
 					<span className="button-group__label">{ getButtonText() }</span>
 				</button>
 				{ !isFormValid && (

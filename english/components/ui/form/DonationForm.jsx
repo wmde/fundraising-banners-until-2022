@@ -156,10 +156,18 @@ export default function MultiStepDonationForm( props ) {
 		return Translations[ 'submit-label-default' ];
 	};
 
+	const onFormSubmit = e => {
+		if ( formStep === formSteps.ONE ) {
+			onSubmitStep1( e );
+		} else {
+			onSubmitStep2( e );
+		}
+	};
+
 	return <form method="post" name="donationForm" className={ classNames(
 		'banner__form',
 		{ 'is-step-2': formStep === formSteps.TWO }
-	) } onClick={ onFormInteraction } action={ formAction }>
+	) } onClick={ onFormInteraction } action={ formAction } onSubmit={ onFormSubmit }>
 
 		<div className="form-step-1">
 			<SelectGroup
@@ -187,7 +195,7 @@ export default function MultiStepDonationForm( props ) {
 					fieldname="select-amount"
 					value={ customAmount }
 					selectedAmount={ selectedAmount }
-					onInput={ e => updateCustomAmount( e.target.value ) }
+					onInput={ e => { updateCustomAmount( e.target.value ); validateCustomAmount( e.target.value ); } }
 					onBlur={ e => validateCustomAmount( e.target.value ) }
 					placeholder={ props.customAmountPlaceholder }
 					language={
@@ -211,7 +219,7 @@ export default function MultiStepDonationForm( props ) {
 			</SelectGroup>
 
 			<div className="submit-section button-group">
-				<button className="button-group__button" onClick={ onSubmitStep1 }>
+				<button className="button-group__button" type="submit">
 					<span className="button-group__label">{ Translations[ 'next-button' ] }</span>
 				</button>
 			</div>
@@ -265,7 +273,7 @@ export default function MultiStepDonationForm( props ) {
 			</div>
 
 			<div className="submit-section button-group form-step-2-button">
-				<button className="button-group__button" onClick={ onSubmitStep2 }>
+				<button className="button-group__button" type="submit">
 					<span className="button-group__label">{ getButtonText() }</span>
 				</button>
 			</div>
