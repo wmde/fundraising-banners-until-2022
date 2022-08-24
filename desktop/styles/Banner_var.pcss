@@ -1,0 +1,111 @@
+.wmde-banner {
+	visibility: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 10000;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	&--visible {
+		visibility: visible;
+	}
+	&--hidden {
+		display: none;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	ul {
+		list-style-image: unset;
+	}
+
+	.banner__wrapper {
+		font-size: 14px;
+		font-family: $banner-main-font-family;
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		background-color: $color-white;
+
+		/* Set z-index to hide the animation of mini banner after expanding from mini banner */
+		position: relative;
+		z-index: 200;
+	}
+
+	.banner__content {
+		display: flex;
+		flex-direction: row;
+		order: 1;
+		padding: 12px 24px 0;
+	}
+
+	.banner__infobox {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1 1 auto;
+		margin-bottom: 0;
+		overflow-y: hidden;
+	}
+
+	.banner__form {
+		order: 2;
+		flex: 0 0 $form-width;
+		display: flex;
+		flex-direction: row;
+		width: $form-width;
+		min-height: 243px;
+		margin-top: 30px;
+
+		.form {
+			width: $form-width;
+		}
+	}
+
+	.banner__footer {
+		order: 2;
+	}
+
+	.close {
+		position: absolute;
+		height: 30px;
+		line-height: 23px;
+		text-align: center;
+		top: 8px;
+		right: 8px;
+		z-index: 1;
+
+		&-link {
+			padding: 8px 8px 0 0;
+			display: block;
+			color: $color-gray-medium;
+			font-size: 14px;
+			font-weight: bold;
+			&:hover {
+				text-decoration: underline;
+			}
+
+			svg {
+				float: right;
+				margin-left: 6px;
+			}
+		}
+	}
+
+	&--content-minimised {
+		.banner__wrapper {
+			display: none;
+		}
+	}
+
+	.banner__slideshow {
+		background: $color-white;
+		display: flex;
+		height: 100%;
+		font-family: $banner-text-font-family;
+	}
+}
