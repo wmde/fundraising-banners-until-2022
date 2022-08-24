@@ -4,9 +4,9 @@ export default function BannerText( props ) {
 	const { currentDayName } = props.dynamicCampaignText;
 	return <div className="banner-text">
 		<p className="banner-text-title">
-			<strong>An alle, die Wikipedia in Deutschland nutzen</strong>
+			<strong>Hi,</strong>
 		</p>
-		<p>Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
+		<p>vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 			heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
 			sichern. Sollten Sie zu dem kleinen Kreis derjenigen gehören, die bereits gespendet haben,
 			danken wir Ihnen sehr herzlich. Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€

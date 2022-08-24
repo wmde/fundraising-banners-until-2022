@@ -1,14 +1,15 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 
-import CloseIcon from './ui/CloseIcon';
-import BannerText from './BannerText_var';
+import BannerText from './BannerText';
 
 export default function FullPageBanner( props ) {
 	const DonationForm = props.donationForm;
 
 	return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible } ) }>
-		<button className="fullpage-banner__close" onClick={ props.onMaybeLater }><CloseIcon/></button>
+		<div className="fullpage-banner__close">
+			<button className="close-button" onClick={ props.onMaybeLater }>schließen</button>
+		</div>
 		<div className="fullpage-banner__info">
 			<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 		</div>
