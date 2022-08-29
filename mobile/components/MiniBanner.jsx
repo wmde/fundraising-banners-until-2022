@@ -2,9 +2,10 @@ import { h } from 'preact';
 import * as PropTypes from 'prop-types';
 import CloseIcon from './ui/CloseIcon';
 import Slider from '../../shared/components/Slider';
-import Slides from './Slides';
 
 export default function MiniBanner( props ) {
+	const Slides = props.slides;
+
 	return <div className="mini-banner">
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">

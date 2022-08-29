@@ -10,6 +10,8 @@ import Translations from '../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import DonationForm from './components/ui/form/DonationForm';
+import BannerText from './components/BannerText_var';
+import Slides from './components/Slides_var';
 
 import Banner from './components/Banner';
 
@@ -42,7 +44,9 @@ bannerPresenter.present(
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
-		donationForm: DonationForm
+		donationForm: DonationForm,
+		bannerText: BannerText,
+		slides: Slides
 	},
 	0
 );
