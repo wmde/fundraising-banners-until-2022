@@ -6,7 +6,7 @@ export default function Slides( dynamicCampaignText ) {
 	return [
 		{
 			content: <div>
-				<p>Hi,<br/>
+				<p>An alle, die Wikipedia in Deutschland nutzen:<br/>
 					vielleicht kommen wir gerade ungelegen,
 					aber dennoch: Klicken Sie jetzt bitte nicht weg!</p>
 			</div>
