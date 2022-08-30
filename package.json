@@ -34,7 +34,7 @@
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "core-js": "^3.24.1",
+    "core-js": "^3.25.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.23.0",
     "eslint-config-wikimedia": "^0.23.0",
