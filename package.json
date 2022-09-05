@@ -52,7 +52,7 @@
     "postcss-calc": "^8.2.4",
     "postcss-combine-duplicated-selectors": "^10.0.3",
     "postcss-custom-properties": "^12.1.8",
-    "postcss-import": "^14.1.0",
+    "postcss-import": "^15.0.0",
     "postcss-load-config": "^4.0.1",
     "postcss-loader": "^7.0.0",
     "postcss-nested": "5.0.6",
