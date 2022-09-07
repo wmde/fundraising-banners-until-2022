@@ -33,24 +33,24 @@ export default class SelectCustomAmount extends Component {
 	render( props, state ) {
 		const anyAmountWasSelected = props.selectedAmount === null && props.value !== null;
 		const showEuro = ( props.value !== null && props.value !== '' ) || state.focused;
-		return <label className="select-group__option select-group__option--amount-other-input">
+		return <label className={
+			classNames( "wmde-banner-select-custom-amount",
+				{
+					'value-entered': props.value,
+					'focused': state.focused
+				}
+			) }>
 			<input type="radio"
 				name={ props.fieldname }
-				className="select-group__input"
+				className="wmde-banner-select-custom-amount-radio"
 				value=""
 				checked={ state.focused || anyAmountWasSelected }
 				onClick={ this.onRadioClicked }
 			/>
 
-			<div className={ classNames(
-				'select-group__custom-input',
-				{
-					'select-group__custom-input--value-entered': props.value,
-					'select-group__custom-input--focused': state.focused
-				} ) }
-			>
+			<div className="wmde-banner-select-custom-amount-input-container">
 
-				{ showEuro ? <span className="select-group__custom-input--euro-symbol">&euro;</span> : null }
+				{ showEuro ? <span className="wmde-banner-select-custom-amount-euro-symbol">&euro;</span> : null }
 
 				<input type="text"
 					value={ props.value || '' }
@@ -62,7 +62,7 @@ export default class SelectCustomAmount extends Component {
 					autoComplete="off"
 					placeholder={ state.focused ? '' : props.placeholder }
 					ref={ this.ref }
-					className="select-group__custom-input--input" />
+					className="wmde-banner-select-custom-amount-input" />
 			</div>
 		</label>;
 	}
