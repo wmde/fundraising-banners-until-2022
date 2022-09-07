@@ -1,0 +1,82 @@
+.wmde-banner {
+	&-slider-container {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+	&-navigation-wrapper {
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+	&-slider {
+		display: flex;
+		overflow: hidden;
+		position: relative;
+	}
+	&-slide {
+		cursor: grab;
+		width: 100%;
+		min-height: 100%;
+		min-width: calc( 100% + 0 );
+		max-width: calc( 100% + 0 );
+		transform: translate3d( 0, 0, 0 );
+
+		&-content {
+			display: flex;
+			align-items: center;
+			height: 100%;
+
+			> div {
+				width: 100%;
+			}
+		}
+	}
+	&-slider-navigation-next,
+	&-slider-navigation-previous {
+		position: absolute;
+		display: block;
+		height: 30px;
+		width: 30px;
+		padding: 5px 8px;
+		line-height: 30px;
+		top: 50%;
+		margin-top: -15px;
+	}
+
+	&-slider-navigation-previous {
+		left: 0;
+		text-align: left;
+	}
+	&-slider-navigation-next {
+		right: 0;
+		text-align: right;
+	}
+
+	&-slider-pagination {
+		position: absolute;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		z-index: 999;
+		width: 100%;
+		height: 15px;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		line-height: 1;
+
+		&-dot {
+			display: inline-block;
+			cursor: pointer;
+			padding: 0;
+		}
+	}
+
+	.headline {
+		font-weight: bold;
+	}
+}
