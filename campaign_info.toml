@@ -11,12 +11,12 @@ wrapper_template = "wikipedia_org"
 
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
-filename = "./desktop/banner_ctrl.js"
+filename = "./banners/desktop/banner_ctrl.js"
 pagename = "B22_WMDE_Test_04_ctrl"
 tracking = "org-04-220815-ctrl"
 
 [desktop.banners.var]
-filename = "./desktop/banner_var.js"
+filename = "./banners/desktop/banner_var.js"
 pagename = "B22_WMDE_Test_04_var"
 tracking = "org-04-220815-var"
 
@@ -27,12 +27,12 @@ preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?useskin=monobo
 wrapper_template = "wikipedia_org"
 
 [desktop_monobook.banners.ctrl]
-filename = "./desktop/banner_ctrl.js"
+filename = "./banners/desktop/banner_ctrl.js"
 pagename = "B22_WMDE_Test_04_ctrl_monobook"
 tracking = "org-04-220815-var"
 
 [desktop_monobook.banners.var]
-filename = "./desktop/banner_var.js"
+filename = "./banners/desktop/banner_var.js"
 pagename = "B22_WMDE_Test_04_var_monobook"
 tracking = "org-04-220815-var"
 
@@ -49,12 +49,12 @@ preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLA
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
-filename = "./mobile/banner_ctrl.js"
+filename = "./banners/mobile/banner_ctrl.js"
 pagename = "B22_WMDE_Mobile_Test_03_ctrl"
 tracking = "org-mob03-220815-ctrl"
 
 [mobile.banners.var]
-filename = "./mobile/banner_var.js"
+filename = "./banners/mobile/banner_var.js"
 pagename = "B22_WMDE_Mobile_Test_03_var"
 tracking = "org-mob03-220815-var"
 
@@ -71,12 +71,12 @@ preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLA
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
-filename = "./mobile_english/banner_ctrl.js"
+filename = "./banners/mobile_english/banner_ctrl.js"
 pagename = "B21_WMDE_Mobile_EN_Test_02_ctrl"
 tracking = "org-mob_en02-211203-ctrl"
 
 [mobile_english.banners.var]
-filename = "./mobile_english/banner_var.js"
+filename = "./banners/mobile_english/banner_var.js"
 pagename = "B21_WMDE_Mobile_EN_Test_02_var"
 tracking = "org-mob_en02-211203-var"
 
@@ -93,12 +93,12 @@ preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACE
 wrapper_template = "wikipedia_org"
 
 [pad.banners.ctrl]
-filename = "./pad/banner_ctrl.js"
+filename = "./banners/pad/banner_ctrl.js"
 pagename = "B21_WMDE_ipad_02_211119_ctrl"
 tracking = "org-pad01-211119-ctrl"
 
 [pad.banners.pad]
-filename = "./pad/banner_var.js"
+filename = "./banners/pad/banner_var.js"
 pagename = "B21_WMDE_ipad_02_211119_var"
 tracking = "org-pad01-211119-var"
 
@@ -115,12 +115,12 @@ preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACE
 wrapper_template = "wikipedia_org"
 
 [pad_en.banners.ctrl]
-filename = "./pad_english/banner_ctrl.js"
+filename = "./banners/pad_english/banner_ctrl.js"
 pagename = "B21_WMDE_ipad_en_01_211103_ctrl"
 tracking = "org-en-ipad-211103-ctrl"
 
 [pad_en.banners.var]
-filename = "./pad_english/banner_var.js"
+filename = "./banners/pad_english/banner_var.js"
 pagename = "B21_WMDE_ipad_en_01_211103_var"
 tracking = "org-en-ipad-211103-var"
 
@@ -138,12 +138,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade.banners.ctrl]
-filename = "./wikipedia.de/desktop/banner_ctrl.js"
+filename = "./banners/wikipedia.de/desktop/banner_ctrl.js"
 pagename = "B21WPDE_02-211119_ctrl"
 tracking = "wpde-02-211119-ctrl"
 
 [wikipediade.banners.var]
-filename = "./wikipedia.de/desktop/banner_var.js"
+filename = "./banners/wikipedia.de/desktop/banner_var.js"
 pagename = "B21WPDE_02-211119_var"
 tracking = "wpde-02-211119-var"
 
@@ -155,12 +155,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade_mobile.banners.ctrl]
-filename = "./wikipedia.de/mobile/banner_ctrl.js"
+filename = "./banners/wikipedia.de/mobile/banner_ctrl.js"
 pagename = "B21WPDE_mob01-211103_ctrl"
 tracking = "wpde-mob01-211103-ctrl"
 
 [wikipediade_mobile.banners.var]
-filename = "./wikipedia.de/mobile/banner_var.js"
+filename = "./banners/wikipedia.de/mobile/banner_var.js"
 pagename = "B21WPDE_mob01-211103_var"
 tracking = "wpde-mob01-211103-var"
 
@@ -173,12 +173,12 @@ preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEH
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
-filename = "./english/banner_ctrl.js"
+filename = "./banners/english/banner_ctrl.js"
 pagename = "B21_WMDE_Test_EN_04_ctrl"
 tracking = "org-en04-211215-ctrl"
 
 [english.banners.var]
-filename = "./english/banner_var.js"
+filename = "./banners/english/banner_var.js"
 pagename = "B21_WMDE_Test_EN_04_var"
 tracking = "org-en04-211215-var"
 
