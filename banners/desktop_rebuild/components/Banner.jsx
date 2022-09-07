@@ -1,7 +1,7 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../../../shared/components/BannerTransition';
+import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import Message from '../../../components/Message/Message';
 import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
