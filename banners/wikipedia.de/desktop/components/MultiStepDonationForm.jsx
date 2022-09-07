@@ -252,7 +252,12 @@ export default function MultiStepDonationForm( props ) {
 					</div>
 				</div>
 
-				<a href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" className="form-step-2-custom" onClick={ onFormBackToYearly }>{ Translations[ 'form-step-2-link' ] }</a>
+				<a
+					href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#"
+					className="form-step-2-custom"
+					onClick={ onFormBackToYearly }>
+					{ Translations[ 'form-step-2-link' ] }
+				</a>
 
 				<div className="submit-section button-group form-step-2-button">
 					<button className="button-group__button" type="submit">

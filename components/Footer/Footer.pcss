@@ -1,0 +1,28 @@
+.wmde-banner {
+	&-footer {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		&-bank,
+		&-usage {
+			padding: 10px 0;
+		}
+
+		&-bank {
+			flex: 1 1 auto;
+			display: block;
+			flex-wrap: nowrap;
+
+			&-item {
+				float: left;
+			}
+		}
+
+		&-usage {
+			flex: 0 0 $footer-column-right-width;
+			width: $footer-column-right-width;
+		}
+	}
+}
