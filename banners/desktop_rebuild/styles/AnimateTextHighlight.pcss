@@ -1,0 +1,33 @@
+$text-highlight-color: rgba( 255, 222, 103 );
+$transparent-color: rgba( 255, 255, 255, 0 );
+
+.wmde-banner {
+	/* No animated highlight in slides */
+	.banner__slideshow .text-animated-highlight {
+		padding: 0 5px;
+		background: $text-highlight-color;
+	}
+
+	/* Animate highlight banner text */
+	.banner-text {
+		.text-animated-highlight {
+			padding: 0 5px;
+			/* stylelint-disable */
+			background: linear-gradient(
+				270deg,
+				$transparent-color 0%,
+				$transparent-color 50%,
+				$text-highlight-color 50%,
+				$text-highlight-color 100%
+			);
+			/* stylelint-enable */
+			background-size: 201% 100%;
+			background-position: 100% 0;
+			transition: background-position 2s;
+		}
+	}
+
+	&--animate-highlight .banner-text .text-animated-highlight {
+		background-position: 0 0;
+	}
+}
