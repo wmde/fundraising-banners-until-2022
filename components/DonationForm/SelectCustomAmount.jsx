@@ -34,7 +34,7 @@ export default class SelectCustomAmount extends Component {
 		const anyAmountWasSelected = props.selectedAmount === null && props.value !== null;
 		const showEuro = ( props.value !== null && props.value !== '' ) || state.focused;
 		return <label className={
-			classNames( "wmde-banner-select-custom-amount",
+			classNames( 'wmde-banner-select-custom-amount',
 				{
 					'value-entered': props.value,
 					'focused': state.focused
