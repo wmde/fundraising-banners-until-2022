@@ -1,0 +1,42 @@
+.wmde-banner {
+	&-form {
+		display: flex;
+		height: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		margin: 0;
+		width: 100%; /* For IE11 */
+
+		&-field-group {
+			border: 0;
+			margin: 0;
+			display: block;
+			width: 100%; /* For IE11 */
+
+			&-legend {
+				width: 100%;
+				position: relative;
+				padding: 0;
+			}
+		}
+
+		&-button-container {
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: flex-start;
+			flex: 0 1 auto;
+			width: 100%;
+			margin-top: auto;
+		}
+
+		&-button {
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			cursor: pointer;
+			border: 0 none;
+			white-space: nowrap;
+		}
+	}
+}
