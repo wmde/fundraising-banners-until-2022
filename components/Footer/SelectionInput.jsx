@@ -24,10 +24,10 @@ export default class SelectionInput extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		return <div className={ classNames( 'selection-input', { focused: state.focused } ) }>
-			<span className="selection-input-text">{ props.value }</span>
+		return <div className={ classNames( 'wmde-banner-selection-input', { focused: state.focused } ) }>
+			<span className="wmde-banner-selection-input-text">{ props.value }</span>
 			<input
-				className="selection-input-input"
+				className="wmde-banner-selection-input-input"
 				type="text"
 				readOnly={ true }
 				value={ props.focusedValue || props.value }
