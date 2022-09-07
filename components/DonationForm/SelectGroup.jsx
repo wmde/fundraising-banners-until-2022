@@ -10,29 +10,29 @@ export function SelectGroup( props ) {
 
 	const errorPosition = props.errorPosition || ErrorPosition.BOTTOM;
 
-	const error = <span className="select-group__errormessage">
-		<span className="select-group__erroricon">
+	const error = <span className="wmde-banner-select-group-error-message">
+		<span className="wmde-banner-error-icon">
 			{ props.errorMessage }
 		</span>
 	</span>;
 
 	return <div
 		className={ classNames(
-			`select-group-container--${ props.fieldname }`,
+			props.fieldname,
 			{
-				'select-group-container': true,
-				'select-group-container--with-error': !props.isValid
+				'wmde-banner-select-group-container': true,
+				'wmde-banner-select-group-container--with-error': !props.isValid
 			}
 		) }>
 
 		{ errorPosition === ErrorPosition.TOP ? error : null }
 
-		<div className="select-group">
+		<div className="wmde-banner-select-group">
 			{ props.selectionItems.map( ( { value, label } ) => (
 				<label key={ value } className={ classNames(
-					'select-group__option',
-					`select-group__option--${ props.fieldname }-${value.replace( ' ', '-' )}`,
-					{ 'select-group__disabled': props.disabledOptions.indexOf( value ) > -1 }
+					'wmde-banner-select-group-option',
+					`${ props.fieldname }-${value.replace( ' ', '-' )}`,
+					{ 'wmde-banner-disabled': props.disabledOptions.indexOf( value ) > -1 }
 				) }>
 					<input
 						type="radio"
@@ -41,8 +41,8 @@ export function SelectGroup( props ) {
 						name={ props.fieldname }
 						value={ value }
 						disabled={ props.disabledOptions.indexOf( value ) > -1 }
-						className="select-group__input"/>
-					<span className="select-group__state">{ label || value }</span>
+						className="wmde-banner-select-group-input"/>
+					<span className="wmde-banner-select-group-label">{ label || value }</span>
 				</label> ) )
 			}
 			{ props.children }

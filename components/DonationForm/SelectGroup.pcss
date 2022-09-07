@@ -1,0 +1,81 @@
+.wmde-banner {
+
+	&-select-group {
+		border: 0;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		flex: 0 1 auto;
+		width: 100%;
+		flex-wrap: wrap;
+
+		&-container {
+			display: flex;
+			flex: 1 1 auto;
+			width: 100%; /* For IE11 */
+			flex-direction: column;
+			margin-bottom: 0;
+			margin-top: 0;
+			border: 0;
+			padding: 0;
+		}
+
+		&-error-message {
+			display: none;
+			width: 100%;
+		}
+
+		&-container--with-error {
+			.wmde-banner-error-icon {
+				position: relative;
+				display: block;
+
+				&:before {
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.wmde-banner-select-group-error-message {
+				display: block;
+			}
+		}
+
+		&-option {
+			flex: 1 1 auto;
+			margin: 0;
+			box-sizing: border-box;
+			display: flex;
+			position: relative;
+			cursor: pointer;
+
+			@media ( min-width: $breakpoint-m ) {
+				height: 29px;
+			}
+			@media ( min-width: $breakpoint-l ) {
+				height: 25px;
+			}
+		}
+
+		&-label {
+			box-sizing: border-box;
+			display: inline-block;
+			white-space: nowrap;
+
+			/* This positions the "radio button" shape */
+			&:before {
+				box-sizing: border-box;
+				top: 50%;
+				left: 0;
+				content: '';
+				position: absolute;
+			}
+		}
+
+		&-input {
+			display: none;
+		}
+	}
+}
