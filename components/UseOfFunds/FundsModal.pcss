@@ -1,0 +1,114 @@
+.banner_modal {
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	&.is-visible {
+		display: flex;
+	}
+	&__background {
+		display: none;
+		@media ( min-width: $use-of-funds-breakpoint-s ) {
+			display: block;
+			background-color: #000000;
+			opacity: 0.6;
+			width: 100vw;
+			height: 100vh;
+		}
+	}
+	&__container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+
+		@media ( min-width: $use-of-funds-breakpoint-s ) {
+			height: 80vh;
+			position: absolute;
+
+			/* for IE */
+			min-width: 700px;
+
+			/* stylelint-disable-next-line function-parentheses-space-inside */
+			min-width: max(90vw, 700px);
+			top: 50%;
+			left: 50%;
+
+			/* stylelint-disable-next-line function-parentheses-space-inside */
+			transform: translate(-50%, -50%);
+
+			/* IE11 does not support spaces in CSS function calls, do not add spaces! */
+		}
+		@media ( min-width: $use-of-funds-breakpoint-l ) {
+			width: 1024px;
+			max-width: 1024px;
+			min-width: 800px;
+		}
+		@media ( min-width: $use-of-funds-breakpoint-xl ) {
+			width: 1200px;
+			max-width: 1200px;
+		}
+		@media ( min-width: $use-of-funds-breakpoint-xxl ) {
+			width: 1500px;
+			max-width: 1500px;
+		}
+	}
+
+	&__content {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #ffffff;
+		overflow-y: scroll;
+		z-index: 1;
+	}
+
+	&_close {
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		top: 10px;
+		right: 16px;
+		padding: 4px;
+		background: #ffffff;
+		border-radius: 20px;
+		z-index: 2;
+
+		@media ( min-width: $use-of-funds-breakpoint-l ) {
+			top: 22px;
+			right: 32px;
+		}
+
+		button {
+			display: block;
+			height: 32px;
+			width: 32px;
+		}
+
+		&__link {
+			display: block;
+			background-color: transparent;
+			border: 0;
+			padding: 0;
+			cursor: pointer;
+			&:hover {
+				background-color: transparent;
+			}
+		}
+
+		&:hover .banner_modal_close__link {
+			opacity: 0.75;
+		}
+	}
+}
