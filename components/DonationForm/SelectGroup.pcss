@@ -44,12 +44,15 @@
 		}
 
 		&-option {
-			flex: 1 1 auto;
-			margin: 0;
-			box-sizing: border-box;
-			display: flex;
-			position: relative;
-			cursor: pointer;
+
+			label {
+				flex: 1 1 auto;
+				margin: 0;
+				box-sizing: border-box;
+				display: flex;
+				position: relative;
+				cursor: pointer;
+			}
 
 			@media ( min-width: $breakpoint-m ) {
 				height: 29px;
@@ -76,6 +79,11 @@
 
 		&-input {
 			display: none;
+		}
+
+		/* The optional span element for giving hints for specific items (e.g. payment type requiring address) */
+		&-notice {
+			display: block;
 		}
 	}
 }

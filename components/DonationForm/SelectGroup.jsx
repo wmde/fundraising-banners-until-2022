@@ -28,22 +28,30 @@ export function SelectGroup( props ) {
 		{ errorPosition === ErrorPosition.TOP ? error : null }
 
 		<div className="wmde-banner-select-group">
-			{ props.selectionItems.map( ( { value, label } ) => (
-				<label key={ value } className={ classNames(
+			{ props.selectionItems.map( ( { value, label, notice } ) => (
+				<div key={ value } className={ classNames(
 					'wmde-banner-select-group-option',
 					`${ props.fieldname }-${value.replace( ' ', '-' )}`,
 					{ 'wmde-banner-disabled': props.disabledOptions.indexOf( value ) > -1 }
 				) }>
-					<input
-						type="radio"
-						onClick={ props.onSelected }
-						checked={ value === props.currentValue }
-						name={ props.fieldname }
-						value={ value }
-						disabled={ props.disabledOptions.indexOf( value ) > -1 }
-						className="wmde-banner-select-group-input"/>
-					<span className="wmde-banner-select-group-label">{ label || value }</span>
-				</label>
+					<label>
+						<input
+							type="radio"
+							onClick={ props.onSelected }
+							checked={ value === props.currentValue }
+							name={ props.fieldname }
+							value={ value }
+							disabled={ props.disabledOptions.indexOf( value ) > -1 }
+							className="wmde-banner-select-group-input"/>
+						<span className="wmde-banner-select-group-label">{ label || value }</span>
+					</label>
+					{ notice ? <span className={ classNames(
+						'wmde-banner-select-group-notice',
+						{
+							selected: value === props.currentValue
+						}
+					) }>{ notice }</span> : null }
+				</div>
 			) ) }
 			{ props.children }
 		</div>
