@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import * as PropTypes from 'prop-types';
-import CloseIcon from './ui/CloseIcon';
+import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
 import Slider from '../../../shared/components/Slider';
 
 export default function MiniBanner( props ) {
@@ -10,7 +10,7 @@ export default function MiniBanner( props ) {
 		<div className="mini-banner__box">
 			<div className="mini-banner__content">
 				<div className="banner__close">
-					<button className="close-button" onClick={ props.onClose }><CloseIcon/></button>
+					<button className="close-button" onClick={ props.onClose }><CloseIconMobile/></button>
 				</div>
 
 				<header className="headline">
