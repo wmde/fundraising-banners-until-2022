@@ -1,0 +1,110 @@
+.wmde-banner {
+
+	&-select-group {
+		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+
+		&-container {
+			margin-bottom: 16px;
+		}
+
+		&-option {
+			font-size: $radio-font-size;
+			font-weight: bold;
+			line-height: $form-radio-height;
+		}
+
+		&-input {
+			display: none;
+		}
+
+		&-label {
+			display: block;
+			width: 100%;
+			border: 1px solid $radio-border-color;
+			border-radius: 2px;
+			background: $radio-background;
+			height: $form-radio-height;
+		}
+
+		.sms-box {
+			a {
+				color: $color-black;
+				&:hover,
+				&:focus {
+					color: $color-black;
+					text-decoration: none;
+				}
+			}
+
+			&__hint {
+				color: $color-gray;
+				font-size: 11px;
+			}
+		}
+
+		&-option:hover .wmde-banner-select-group-label,
+		&-option:focus .wmde-banner-select-group-label {
+			color: $color-black;
+			border-color: $radio-border-color-hover;
+			background: $radio-background-hover;
+		}
+
+		&-option:active .wmde-banner-select-group-label {
+			color: $color-black;
+			border-color: $radio-border-color-active;
+			background: $radio-background-active;
+		}
+
+		&-input:checked + .wmde-banner-select-group-label {
+			color: $radio-color-checked;
+			border-color: $radio-border-color-checked;
+			background: $radio-background-checked;
+		}
+
+		&-error-message {
+			font-size: 14px;
+			font-weight: bold;
+			text-align: center;
+			color: $color-error;
+		}
+	}
+
+	&-disabled {
+		opacity: 0.3;
+	}
+
+	.wmde-banner-select-group-container.select-interval .wmde-banner-select-group {
+		flex-wrap: nowrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 auto;
+			width: 33.3333%;
+		}
+	}
+
+	.wmde-banner-select-group-container.select-amount .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 auto;
+			width: 48%;
+		}
+	}
+
+	.wmde-banner-select-group-container.select-payment-method .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 auto;
+			width: 100%;
+		}
+	}
+
+	.wmde-banner-select-group-container.select-address-option .wmde-banner-select-group {
+		flex-wrap: wrap;
+		.wmde-banner-select-group-option {
+			flex: 1 1 auto;
+			width: 100%;
+		}
+	}
+}
