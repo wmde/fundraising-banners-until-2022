@@ -29,8 +29,8 @@ export default class FormItemsBuilder {
 			addressType: []
 		};
 
-		this.translate = ( { value, label } ) => {
-			return { value, label: translations[ label ] };
+		this.translate = ( { value, label, notice } ) => {
+			return { value, label: translations[ label ], notice: notice ? translations[ notice ] : null };
 		};
 		this.formatAmounts = amount => {
 			return { value: String( amount ), label: amountFormatter( amount ) };

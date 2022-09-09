@@ -35,14 +35,14 @@ export default function FullPageBanner( props ) {
 			scrollToFirstError={ scrollToFirstError }
 		/>
 		<div className="smallprint">
-                <span>
-                    <a className="application-of-funds-link"
-                        href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
-                        onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
-                </span>
-            </div>
+			<span>
+				<a className="application-of-funds-link"
+					href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
+					onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
+			</span>
+		</div>
 
-        <Footer/>
+		<Footer/>
 
 	</div>;
 }
