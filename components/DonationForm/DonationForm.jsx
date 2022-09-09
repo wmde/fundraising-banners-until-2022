@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../shared/components/TranslationContext';
 import { SelectGroup } from './SelectGroup';
@@ -25,6 +25,11 @@ export default function DonationForm( props ) {
 	const disabledIntervals = [];
 	const disabledPaymentMethods = [];
 	const [ formAction ] = useFormAction( props );
+	const [ isFormValid, setFormValidity ] = useState( true );
+
+	useEffect( () => {
+		setFormValidity( isValidOrUnset( intervalValidity ) && isValidOrUnset( amountValidity ) && isValidOrUnset( paymentMethodValidity ) );
+	}, [ intervalValidity, amountValidity, paymentMethodValidity ] );
 
 	const validate = e => {
 		if ( [
@@ -115,6 +120,9 @@ export default function DonationForm( props ) {
 			<button className="wmde-banner-form-button" type="submit">
 				{ Translations[ 'submit-label' ] }
 			</button>
+			{ !isFormValid && props.scrollToFirstError && (
+				<button className="wmde-banner-form-button-error" onClick={ props.scrollToFirstError }>{ Translations[ 'global-error' ] }</button>
+			) }
 		</div>
 
 		<SubmitValues

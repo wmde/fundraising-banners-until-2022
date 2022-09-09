@@ -43,8 +43,8 @@ export function SelectGroup( props ) {
 						disabled={ props.disabledOptions.indexOf( value ) > -1 }
 						className="wmde-banner-select-group-input"/>
 					<span className="wmde-banner-select-group-label">{ label || value }</span>
-				</label> ) )
-			}
+				</label>
+			) ) }
 			{ props.children }
 		</div>
 

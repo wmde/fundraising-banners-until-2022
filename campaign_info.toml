@@ -57,6 +57,22 @@ tracking = "org-05-220902-var"
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
+[mobile_rebuild]
+campaign_tracking = "mob04-ba-220905"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+[mobile_rebuild.banners.ctrl]
+filename = "./banners/mobile_rebuild/banner_ctrl.js"
+pagename = "B22_WMDE_Mobile_Test_04_rebuild_ctrl"
+tracking = "org-mob04-220905-ctrl"
+
+[mobile_rebuild.banners.var]
+filename = "./banners/mobile_rebuild/banner_var.js"
+pagename = "B22_WMDE_Mobile_Test_04_rebuild_var"
+tracking = "org-mob04-220905-var"
+
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob04-ba-220905"
