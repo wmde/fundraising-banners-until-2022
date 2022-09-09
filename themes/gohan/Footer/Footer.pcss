@@ -1,0 +1,39 @@
+$footer-font-size: 12px;
+
+.wmde-banner {
+	&-footer {
+		font-size: $footer-font-size;
+		text-align: center;
+		color: $color-black;
+		padding: 16px;
+
+		&-bank {
+			flex: 1 1 auto;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-right: -1em;
+
+			&-item {
+				white-space: nowrap;
+				padding-right: 1em;
+
+				&.account {
+					text-align: left;
+				}
+
+				&.bic {
+					text-align: center;
+				}
+
+				&.iban {
+					text-align: right;
+				}
+			}
+		}
+
+		&-usage {
+			display: none;
+		}
+	}
+}

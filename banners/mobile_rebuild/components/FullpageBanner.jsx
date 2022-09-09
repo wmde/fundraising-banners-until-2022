@@ -2,6 +2,7 @@ import { h } from 'preact';
 import classNames from 'classnames';
 
 import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
+import Footer from '../../../components/Footer/Footer';
 
 export default function FullPageBanner( props ) {
 	const DonationForm = props.donationForm;
@@ -33,5 +34,15 @@ export default function FullPageBanner( props ) {
 			toggleFundsModal={props.toggleFundsModal}
 			scrollToFirstError={ scrollToFirstError }
 		/>
+		<div className="smallprint">
+                <span>
+                    <a className="application-of-funds-link"
+                        href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
+                        onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
+                </span>
+            </div>
+
+        <Footer/>
+
 	</div>;
 }
