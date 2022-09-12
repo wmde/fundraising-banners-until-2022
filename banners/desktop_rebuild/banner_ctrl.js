@@ -8,13 +8,13 @@ import { getTrackingIds } from '../../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
 import { BannerType } from './BannerType';
-import Slides from './components/Slides';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import DonationForm from '../../components/DonationForm/DonationForm';
 import Footer from '../../components/Footer/Footer';
-import BannerText from './components/BannerText';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
