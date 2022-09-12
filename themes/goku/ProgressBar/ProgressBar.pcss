@@ -1,0 +1,68 @@
+.wmde-banner {
+	&-progress_bar {
+		font-family: $banner-main-font-family;
+		font-size: 12px;
+		line-height: 30px;
+
+		&-days_left,
+		&-donation-text,
+		&-donation-remaining {
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 300ms $banner-easing;
+		}
+		&-days-left {
+			font-weight: bold;
+			color: $color-white;
+		}
+
+		&-wrapper {
+			height: $progress-bar-height;
+			border-top: 1px solid $color-secondary-light;
+			border-bottom: 1px solid $color-secondary-light;
+			background-color: $color-secondary-lighter;
+		}
+		&-donation-fill {
+			background: $color-secondary;
+			height: $progress-bar-height;
+			border-radius: 0 15px 15px 0;
+			transition: width 3000ms $banner-easing;
+		}
+		&-donation-text {
+			font-weight: bold;
+			color: $color-white;
+		}
+		&-donation-remaining {
+			text-align: right;
+			font-weight: bold;
+			color: $color-black;
+		}
+		&-pointer-tip {
+			background: $color-black;
+			border-radius: 100%;
+		}
+
+		&-pointer-line {
+			background: $color-black;
+		}
+		&-donation-remaining-outer {
+			font-weight: bold;
+		}
+
+		&-finished {
+			.progress-bar-days-left,
+			.progress-bar-donation-text,
+			.progress-bar-donation-remaining {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+
+		@media ( max-width: 600px ) {
+			.progress-bar-days-left,
+			.progress-bar-finished .progress-bar-days-left {
+				display: none;
+			}
+		}
+	}
+}

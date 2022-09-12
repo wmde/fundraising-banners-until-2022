@@ -1,0 +1,45 @@
+.wmde-banner {
+	&-progress_bar {
+		font-family: $banner-main-font-family;
+
+		&-days-left {
+			padding-left: 5px;
+			display: block;
+		}
+		&-wrapper {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			flex: 1;
+		}
+		&-donation-fill {
+			width: 0;
+			min-width: 5em;
+			max-width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+		&-donation-text {
+			text-align: right;
+			overflow: hidden;
+			padding-right: 16px;
+			flex: 1;
+			white-space: nowrap;
+		}
+		&-donation-remaining {
+			padding: 0 10px;
+			white-space: nowrap;
+		}
+		&-pointer-tip {
+			width: 5px;
+			height: 5px;
+			float: left;
+			margin-top: 9px;
+		}
+		&-pointer-line {
+			float: left;
+			width: 25px;
+			margin: 11px 2px 0 0;
+		}
+	}
+}

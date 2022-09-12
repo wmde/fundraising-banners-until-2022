@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Component } from 'preact/compat';
 import classNames from 'classnames';
-import TranslationContext from '../../../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;
@@ -118,17 +118,17 @@ export default class ProgressBar extends Component {
 			}
 			return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
 		};
-		return <div className={ classNames( 'progress_bar', {
-			'progress_bar--finished': state.animation === ENDED,
-			'progress_bar--animating': state.animation === STARTED,
-			'progress_bar--lateprogress': IS_LATE_PROGRESS
+		return <div className={ classNames( 'wmde-banner-progress-bar', {
+			'wmde-banner-progress-bar--finished': state.animation === ENDED,
+			'wmde-banner-progress-bar--animating': state.animation === STARTED,
+			'wmde-banner-progress-bar--lateprogress': IS_LATE_PROGRESS
 		} ) }>
-			<div className="progress_bar__wrapper">
-				<div className="progress_bar__donation_fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
-					<span className="progress_bar__days_left">{ getDaysLeft( props.daysLeft ) }</span>
-					<span className="progress_bar__donation_text">{ getMillion( props.donationAmount ) }</span>
+			<div className="wmde-banner-progress-bar-wrapper">
+				<div className="wmde-banner-progress-bar-donation-fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
+					<span className="wmde-banner-progress-bar-days-left">{ getDaysLeft( props.daysLeft ) }</span>
+					<span className="wmde-banner-progress-bar-donation-text">{ getMillion( props.donationAmount ) }</span>
 				</div>
-				<div className="progress_bar__donation_remaining progress_bar__donation_remaining--inner" style={ 'width:' + ( 100 - state.width ) + '%' }>
+				<div className="wmde-banner-progress-bar-donation-remaining wmde-banner-progress-bar-donation-remaining-inner" style={ 'width:' + ( 100 - state.width ) + '%' }>
 					{ rightText() }
 				</div>
 			</div>
