@@ -1,0 +1,52 @@
+.wmde-banner {
+	&-slider-container {
+		font-family: $banner-font-family;
+		font-size: 16px;
+	}
+	&-navigation-wrapper {
+		padding-bottom: 60px;
+	}
+	&-slide {
+		cursor: grab;
+
+		&-content {
+			text-align: center;
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	&-slider-pagination {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		display: flex;
+		padding: 25px 0;
+		height: 60px;
+		justify-content: center;
+
+		&-dot {
+			border: 0;
+			width: 10px;
+			height: 10px;
+			background: $color-gray-medium;
+			border-radius: 50%;
+			margin: 0 5px;
+			padding: 5px;
+			cursor: pointer;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: $color-gray;
+			}
+		}
+	}
+
+	.headline {
+		font-weight: bold;
+	}
+}

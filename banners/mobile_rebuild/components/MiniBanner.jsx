@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import * as PropTypes from 'prop-types';
 import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
-import Slider from '../../../shared/components/Slider';
+import Slider from '../../../components/Slider/Slider';
 
 export default function MiniBanner( props ) {
 	const Slides = props.slides;
