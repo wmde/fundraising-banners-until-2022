@@ -5,7 +5,7 @@ import debounce from '../../../shared/debounce';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
-import FullpageBanner from './FullpageBanner';
+import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
@@ -112,7 +112,7 @@ export default class Banner extends Component {
 		}
 		this.setState( { isFundsModalVisible: !currentlyVisible } );
 		if ( currentlyVisible ) {
-			const link = document.querySelector( '.smallprint .application-of-funds-link' );
+			const link = document.querySelector( '.wmde-banner-full-small-print .application-of-funds-link' );
 			if ( link ) {
 				link.scrollIntoView( false );
 			}
@@ -123,7 +123,7 @@ export default class Banner extends Component {
 		e.preventDefault();
 		this.trackBannerEvent( 'funds-modal-donate-clicked' );
 		this.setState( { isFundsModalVisible: false } );
-		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
+		const startOfForm = document.querySelector( '.wmde-banner-full-call-to-action' );
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
 		}
@@ -220,7 +220,7 @@ export default class Banner extends Component {
 					hasStaticParent={ false }
 					ref={this.fullBannerTransitionRef}
 				>
-					<FullpageBanner
+					<FullBanner
 						{...props}
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }

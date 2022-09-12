@@ -1,14 +1,34 @@
 .wmde-banner {
-	.mini-banner {
+	&-mini {
+		padding: 16px;
+		position: relative;
 		border: 2px solid $color-primary;
 		background: $color-white;
 
-		.banner__close {
+		&-close {
 			position: relative;
 			height: 16px;
 			line-height: 16px;
 			text-align: right;
 			margin-bottom: 10px;
+
+			&-button {
+				float: right;
+				height: 16px;
+				width: 16px;
+				margin-left: 10px;
+				background: $color-white;
+				z-index: 2;
+
+				svg {
+					height: 16px;
+					width: 16px;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
 		}
 
 		.minimise-link {
@@ -22,26 +42,13 @@
 				}
 			}
 		}
-		.close-button {
-			float: right;
-			height: 16px;
-			width: 16px;
-			margin-left: 10px;
-			background: $color-white;
-			z-index: 2;
 
-			svg {
-				height: 16px;
-				width: 16px;
-			}
+		&-headline {
+			height: 25px;
+			text-align: center;
+			margin-bottom: 16px;
 
-			&:hover {
-				cursor: pointer;
-			}
-		}
-
-		.headline {
-			&__container {
+			&-background {
 				position: relative;
 				text-align: left;
 
@@ -62,7 +69,7 @@
 				}
 			}
 
-			&__content {
+			&-content {
 				position: relative;
 				display: inline-block;
 				font-weight: bold;
@@ -83,7 +90,10 @@
 			}
 		}
 
-		&__button {
+		&-button {
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
 			border-radius: 20px;
 			font-weight: bold;
 			color: $color-white;
