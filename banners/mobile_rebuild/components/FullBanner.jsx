@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
 import Footer from '../../../components/Footer/Footer';
 
-export default function FullPageBanner( props ) {
+export default function FullBanner( props ) {
 	const DonationForm = props.donationForm;
 	const BannerText = props.bannerText;
 
@@ -15,13 +15,13 @@ export default function FullPageBanner( props ) {
 		);
 	};
 
-	return <div className={ classNames( 'fullpage-banner', { visible: props.isFullPageVisible } ) }>
-		<button className="fullpage-banner__close" onClick={ props.onMaybeLater }><CloseIconMobile/></button>
-		<div className="fullpage-banner__info">
+	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
+		<button className="wmde-banner-full-close" onClick={ props.onMaybeLater }><CloseIconMobile/></button>
+		<div className="wmde-banner-full-info">
 			<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 		</div>
-		<div className="call-to-action">
-			Jetzt sind Sie <span className="call-to-action__optional-text">in Deutschland</span> gefragt.
+		<div className="wmde-banner-full-call-to-action">
+			Jetzt sind Sie <span className="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 		</div>
 		<DonationForm
 			formItems={props.formItems}
@@ -34,7 +34,7 @@ export default function FullPageBanner( props ) {
 			toggleFundsModal={props.toggleFundsModal}
 			scrollToFirstError={ scrollToFirstError }
 		/>
-		<div className="smallprint">
+		<div className="wmde-banner-full-small-print">
 			<span>
 				<a className="application-of-funds-link"
 					href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}

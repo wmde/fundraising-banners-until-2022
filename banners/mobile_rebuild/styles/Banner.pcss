@@ -1,25 +1,34 @@
 .wmde-banner {
 	visibility: hidden;
 	width: 100%;
+	font-size: 16px;
 
 	* {
 		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.text-highlight {
+		font-weight: bold;
 	}
 
 	&--visible {
 		visibility: visible;
 	}
+
 	&--hidden {
 		display: none;
 	}
+
 	&--mini-banner {
-		.fullpage-banner {
+		.wmde-banner-full {
 			visibility: hidden;
 		}
 	}
 
 	&--full-page {
-		.mini-banner {
+		.wmde-banner-mini {
 			visibility: hidden;
 		}
 	}

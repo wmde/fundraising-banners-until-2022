@@ -1,5 +1,5 @@
 .wmde-banner {
-	.fullpage-banner {
+	&-full {
 		border: 2px solid $color-primary;
 		background: $color-white;
 
@@ -7,7 +7,10 @@
 			padding-bottom: 16px;
 		}
 
-		&__close {
+		&-close {
+			position: absolute;
+			top: 16px;
+			right: 16px;
 			height: 25px;
 			background: $color-white;
 
@@ -20,18 +23,26 @@
 			}
 		}
 
-		&__heading {
-			font-weight: bold;
-			font-size: 18px;
-			color: $color-black;
-			background: $color-white;
+		&-info {
+			padding: 16px;
 		}
 
-		.call-to-action {
+		&-call-to-action {
 			position: relative;
 			color: $color-white;
 			background: $color-primary;
 			font-weight: bold;
+			height: 31px;
+			line-height: 31px;
+			text-align: center;
+
+			&-optional-text {
+				display: none;
+
+				@media ( min-width: $breakpoint-tablet-portrait ) {
+					display: inline;
+				}
+			}
 
 			&:after {
 				content: '';
@@ -47,9 +58,14 @@
 			}
 		}
 
-		.smallprint {
+		.banner-text-title {
+			margin-right: 30px;
+		}
+
+		&-small-print {
 			text-align: center;
 			font-size: 12px;
+			margin-bottom: 16px;
 
 			a {
 				color: $color-gray;
