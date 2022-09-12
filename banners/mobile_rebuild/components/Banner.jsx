@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import debounce from '../../../shared/debounce';
 
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
-import FollowupTransition from '../../../shared/components/FollowupTransition';
+import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
 import FullpageBanner from './FullpageBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
