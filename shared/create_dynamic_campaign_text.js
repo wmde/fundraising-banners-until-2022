@@ -1,7 +1,7 @@
-import DayName from '../../shared/day_name';
-import CampaignDays, { endOfDay, startOfDay } from '../../shared/campaign_days';
-import CampaignDaySentence from '../../shared/campaign_day_sentence';
-import VisitorsVsDonorsSentence from '../../shared/visitors_vs_donors_sentence';
+import DayName from './day_name';
+import CampaignDays, { endOfDay, startOfDay } from './campaign_days';
+import CampaignDaySentence from './campaign_day_sentence';
+import VisitorsVsDonorsSentence from './visitors_vs_donors_sentence';
 import DonorsNeededSentence from './DonorsNeededSentence';
 
 export default function createDynamicCampaignText( campaignParameters, campaignProjection, impressionCounts, formatters, translations ) {
