@@ -12,7 +12,7 @@ import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDistributionAccordion';
 import { BannerType } from '../../../shared/BannerType';
 import SlideState from '../../../shared/slide_state';
-import createDynamicCampaignText from '../create_dynamic_campaign_text';
+import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 
 const PENDING = 0;
 const VISIBLE = 1;
