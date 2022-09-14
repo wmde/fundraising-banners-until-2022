@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import FundsModal from '../../../../shared/components/ui/use_of_funds/FundsModal';
 import FundsDistributionAccordion from '../../../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
 import SlideState from '../../../../shared/slide_state';
-import createDynamicCampaignText from '../../../mobile/create_dynamic_campaign_text';
+import createDynamicCampaignText from '../../../../shared/create_dynamic_campaign_text';
 
 const PENDING = 0;
 const VISIBLE = 1;

@@ -2,7 +2,7 @@ import { h } from 'preact';
 import ProgressBar, { AmountToShowOnRight } from '../../../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
 import Slider from '../../../../shared/components/Slider';
-import Slides from '../../../mobile/components/Slides';
+import Slides from './Slides';
 
 export default function MiniBanner( props ) {
 	const campaignProjection = props.campaignProjection;

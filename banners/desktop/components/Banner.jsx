@@ -1,18 +1,18 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../../../shared/components/BannerTransition';
-import Infobox from './ui/Infobox';
-import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
+import BannerTransition from '../../../components/BannerTransition/BannerTransition';
+import Message from '../../../components/Message/Message';
+import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
+import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import { BannerType } from '../BannerType';
-import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import Slider from '../../../shared/components/Slider';
-import SlideState from '../../../shared/slide_state';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
-import ChevronRightIcon from './ui/ChevronRightIcon';
-import CloseIcon from './ui/CloseIcon';
+import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
+import Slider from '../../../components/Slider/Slider';
+import SlideState from '../../../components/Slider/slide_state';
+import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
+import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -169,6 +169,7 @@ export class Banner extends Component {
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
 		const Footer = props.footer;
+		const BannerText = props.bannerText;
 
 		return <div
 			className={ classNames( {
@@ -189,43 +190,30 @@ export class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<div className="banner__wrapper">
-						<div className="close">
-							<a className="close-link" onClick={ this.closeBanner }><CloseIcon/></a>
-						</div>
-						<div className="banner__content">
-							<div className="banner__infobox">
-								<div className="infobox-bubble">
-									{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
-										<div className="banner__slideshow" ref={ this.slideshowRef }>
-											<Slider
-												slides={ props.slides( this.dynamicCampaignText ) }
-												onSlideChange={ this.onSlideChange }
-												registerAutoplay={ this.registerAutoplayCallbacks }
-												interval={ SLIDESHOW_SLIDE_INTERVAL }
-												previous={ <ChevronLeftIcon/> }
-												next={ <ChevronRightIcon/> }
-												dynamicCampaignText={ this.dynamicCampaignText }
-												sliderOptions={ { loop: false } }
-											/>
-										</div>
-									) }
+					<div className="wmde-banner-wrapper">
+						<ButtonClose onClick={ this.closeBanner }/>
+						<div className="wmde-banner-content">
+							<div className="wmde-banner-column-left">
+								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
+									<Slider
+										slides={ props.slides( this.dynamicCampaignText ) }
+										onSlideChange={ this.onSlideChange }
+										registerAutoplay={ this.registerAutoplayCallbacks }
+										interval={ SLIDESHOW_SLIDE_INTERVAL }
+										previous={ <ChevronLeftIcon/> }
+										next={ <ChevronRightIcon/> }
+										dynamicCampaignText={ this.dynamicCampaignText }
+										sliderOptions={ { loop: false } }
+									/>
+								) }
 
-									{ state.bannerWidth >= SHOW_SLIDE_BREAKPOINT && (
-										<Infobox
-											formatters={ props.formatters }
-											campaignParameters={ props.campaignParameters }
-											campaignProjection={ props.campaignProjection }
-											bannerText={ props.bannerText }
-											dynamicCampaignText={ this.dynamicCampaignText }
-											propsForText={ {
-												overallImpressionCount: props.impressionCounts.getOverallCount(),
-												millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
-											} } />
-									) }
-								</div>
+								{ state.bannerWidth >= SHOW_SLIDE_BREAKPOINT && (
+									<Message>
+										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
+									</Message>
+								) }
 							</div>
-							<div className="banner__form">
+							<div className="wmde-banner-column-right">
 								<DonationForm
 									formItems={props.formItems}
 									bannerName={props.bannerName}
