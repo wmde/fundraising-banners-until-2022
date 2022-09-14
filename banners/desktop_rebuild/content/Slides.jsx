@@ -18,15 +18,11 @@ export default function Slides( dynamicCampaignText ) {
 				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
 		</div> },
 		{ content: <div>
-			<p>{donorsNeededSentence} Sollten Sie zu dem kleinen Kreis derjenigen gehören,
-				die bereits gespendet haben, danken wir Ihnen sehr herzlich.</p>
-		</div> },
-		{ content: <div>
 			<p>
 				Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit
 				einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
 				erfolgreich entwickeln. <span className="text-animated-highlight">Millionen Menschen nutzen Wikipedia,
-				aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>
+			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>
 			</p>
 		</div> },
 		{ content: <div>
