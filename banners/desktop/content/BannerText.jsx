@@ -2,7 +2,7 @@ import { h } from 'preact';
 import InfoIcon from '../../../components/Icons/InfoIcon';
 
 export default function BannerText( props ) {
-	const { currentDayName, donorsNeededSentence } = props.dynamicCampaignText;
+	const { currentDayName } = props.dynamicCampaignText;
 
 	return <div>
 		<p>

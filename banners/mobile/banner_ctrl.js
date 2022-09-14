@@ -9,9 +9,9 @@ import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from './components/ui/form/DonationForm';
-import BannerText from './components/BannerText';
-import Slides from './components/Slides';
+import DonationForm from '../../components/DonationForm/DonationForm';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 
 import Banner from './components/Banner';
 
