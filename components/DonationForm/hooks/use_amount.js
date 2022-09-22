@@ -74,10 +74,11 @@ function createAction( name, dispatch ) {
 }
 
 export default function useAmountWithCustom( initial, customAmountFormatter ) {
+	const initialNumericAmount = initial ? Number( initial ) : 0;
 	const [ state, dispatch ] = useReducer( amountReducer, {
 		selectedAmount: initial,
 		customAmount: null,
-		numericAmount: 0,
+		numericAmount: initialNumericAmount,
 		amountValidity: validateAmount( initial )
 	} );
 	return [

@@ -27,9 +27,14 @@ export default function MiniBanner( props ) {
 			/>
 		</div>
 
-		<button className="wmde-banner-mini-button" onClick={ props.onExpandFullpage }>
-			Jetzt spenden
-		</button>
+		<div className="wmde-banner-mini-amount-preselection">
+			<button className="wmde-banner-mini-button" onClick={ props.onExpandFullpageWithAmountPreselection }>
+				Jetzt 5 € spenden
+			</button>
+			<a onClick={props.onExpandFullpage}>
+				Jetzt anderen Betrag spenden
+			</a>
+		</div>
 	</div>;
 }
 

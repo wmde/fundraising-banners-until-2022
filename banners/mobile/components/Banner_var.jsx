@@ -4,7 +4,7 @@ import debounce from '../../../shared/debounce';
 
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
-import MiniBanner from './MiniBanner';
+import MiniBanner from './MiniBanner_var';
 import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
@@ -34,7 +34,8 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			isFullPageVisible: false,
-			isFundsModalVisible: false
+			isFundsModalVisible: false,
+			preselectedAmount: null
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -94,6 +95,13 @@ export default class Banner extends Component {
 	showFullPageBannerFromMiniBanner = e => {
 		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		this.showFullPageBanner( e );
+	};
+
+	// introduced in C22_WMDE_Mobile_Test_05
+	showFullPageBannerFromMiniBannerWithAmountPreselection = e => {
+		this.trackBannerEvent( 'mobile-banner-amount-button-clicked' );
+		this.showFullPageBanner( e );
+		this.setState( { preselectedAmount: '5' } );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -205,6 +213,7 @@ export default class Banner extends Component {
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
+						onExpandFullpageWithAmountPreselection={ this.showFullPageBannerFromMiniBannerWithAmountPreselection }
 						onSlideChange={ this.onSlideChange }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
@@ -229,6 +238,7 @@ export default class Banner extends Component {
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
 						dynamicCampaignText={ this.dynamicCampaignText }
+						preselectedAmount={this.state.preselectedAmount}
 					/>
 				</FollowupTransition>
 			</TranslationContext.Provider>

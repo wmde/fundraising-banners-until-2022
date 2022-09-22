@@ -39,13 +39,12 @@
 		font-weight: bold;
 		margin-bottom: 2px;
 		white-space: nowrap;
-
-		/* For IE */
-		font-size: 9px;
-		font-size: max( 1.15vw, 9px );
+		font-size: 100%;
 
 		@media ( min-width: $use-of-funds-breakpoint-l ) {
-			font-size: 100%;
+			/* For IE */
+			font-size: 9px;
+			font-size: max( 1.15vw, 9px );
 		}
 	}
 	&__box {
