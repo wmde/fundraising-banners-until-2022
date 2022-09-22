@@ -13,13 +13,14 @@ export default function Slides( dynamicCampaignText ) {
 				{ Icon } <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
 			</p>
 			<p>
-				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte
-				nicht weg! Am heutigen { currentDayName } bitten
-				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
+				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
+					Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.
+			</p>
 		</div> },
 		{ content: <div>
 			<p>
-				Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit
+				Auf Wikipedia gibt es keine Werbung oder Bezahlschranken; sie
+				finanziert sich durch Spenden von durchschnittlich 22,66&nbsp;€. Doch schon mit
 				einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
 				erfolgreich entwickeln. <span className="wmde-banner-text-animated-highlight">Millionen Menschen nutzen Wikipedia,
 			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>

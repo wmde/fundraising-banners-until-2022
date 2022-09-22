@@ -143,7 +143,9 @@ export class Banner extends Component {
 		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
 			return;
 		}
-		this.setState( { textHighlight: HighlightState.ANIMATE } );
+		if ( this.state.bannerWidth > SHOW_SLIDE_BREAKPOINT ) {
+			this.setState( { textHighlight: HighlightState.ANIMATE } );
+		}
 	}
 
 	storeBannerWidth = ( callback = () => {} ) => {

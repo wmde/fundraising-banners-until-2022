@@ -13,8 +13,8 @@ import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import DonationForm from '../../components/DonationForm/DonationForm';
 import Footer from '../../components/Footer/Footer';
-import BannerText from './content/BannerText_var';
-import Slides from './content/Slides_var';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -47,7 +47,7 @@ bannerPresenter.present(
 		slides: Slides,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
+		bannerType: BannerType.CTRL,
 		showCookieBanner: '0',
 		initialBannerWidth: window.innerWidth
 	}

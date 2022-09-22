@@ -21,7 +21,7 @@ export default function Slides( dynamicCampaignText ) {
 			<p>
 				Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit
 				einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
-				erfolgreich entwickeln. <span className="wmde-banner-text-animated-highlight">Millionen Menschen nutzen Wikipedia,
+				erfolgreich entwickeln. <span className="text-animated-highlight">Millionen Menschen nutzen Wikipedia,
 			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>
 			</p>
 		</div> },
