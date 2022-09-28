@@ -23,6 +23,7 @@ export default function Slides( dynamicCampaignText ) {
 				einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
 				erfolgreich entwickeln. <span className="wmde-banner-text-animated-highlight">Millionen Menschen nutzen Wikipedia,
 			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>
+				Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits in wenigen Stunden erreicht.
 			</p>
 		</div> },
 		{ content: <div>
