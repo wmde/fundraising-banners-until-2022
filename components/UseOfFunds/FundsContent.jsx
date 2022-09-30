@@ -22,19 +22,8 @@ export default function FundsContent( props ) {
 			{props.children}
 		</div>
 
-		<div className="use_of_funds__section use_of_funds__section--two-cols-info">
-			<div className="use_of_funds__column--info">
-				<span>{content.detailedReports.international.intro}</span>
-				<a href={content.detailedReports.international.linkUrl} target="_blank">
-					{content.detailedReports.international.linkName}
-				</a>
-			</div>
-			<div className="use_of_funds__column--info">
-				<span>{content.detailedReports.germany.intro}</span>
-				<a href={content.detailedReports.germany.linkUrl} target="_blank">
-					{content.detailedReports.germany.linkName}
-				</a>
-			</div>
+		<div className="use_of_funds__section">
+			<p className="use_of_funds__info_text" dangerouslySetInnerHTML={ { __html: content.detailedReports.mixed.text } }></p>
 		</div>
 		<div className="use_of_funds__section use_of_funds__section--two-cols">
 			<div className="use_of_funds__column">
