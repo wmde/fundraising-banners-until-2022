@@ -61,7 +61,7 @@
     "rimraf": "^3.0.2",
     "sinon": "^14.0.0",
     "style-loader": "^3.3.0",
-    "stylelint": "^14.12.1",
+    "stylelint": "^14.13.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-config-wikimedia": "^0.13.1",
     "toml": "^3.0.0",
