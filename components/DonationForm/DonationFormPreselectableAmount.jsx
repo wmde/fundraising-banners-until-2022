@@ -5,14 +5,15 @@ import TranslationContext from '../../shared/components/TranslationContext';
 import { SelectGroup } from './SelectGroup';
 import SelectCustomAmount from './SelectCustomAmount';
 import SmsBox from './SmsBox';
+import SubmitValues from './SubmitValues';
 
-import { isValid, isValidOrUnset } from './hooks/validation_states';
 import useAmountWithCustom from './hooks/use_amount';
 import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
-import { amountMessage, validateRequired } from './utils';
-import SubmitValues from './SubmitValues';
 import useFormAction from './hooks/use_form_action';
+import { isValid, isValidOrUnset } from './hooks/validation_states';
+import { useDisabledFormValues } from './hooks/use_disabled_form_values';
+import { amountMessage, validateRequired } from './utils';
 
 export default function DonationFormPreselectableAmount( props ) {
 	const Translations = useContext( TranslationContext );
@@ -22,8 +23,7 @@ export default function DonationFormPreselectableAmount( props ) {
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( props.preselectedAmount, props.formatters.customAmountInputFormatter );
-	const disabledIntervals = [];
-	const disabledPaymentMethods = [];
+	const [ disabledIntervals, disabledPaymentMethods ] = useDisabledFormValues( paymentInterval, paymentMethod );
 	const [ formAction ] = useFormAction( props );
 	const [ isFormValid, setFormValidity ] = useState( true );
 
@@ -35,7 +35,7 @@ export default function DonationFormPreselectableAmount( props ) {
 		if ( props.preselectedAmount ) {
 			selectAmount( props.preselectedAmount );
 		}
-	}, [ props.preselectedAmount ] );
+	}, [ props.preselectedAmount, selectAmount ] );
 
 	const validate = e => {
 		if ( [
