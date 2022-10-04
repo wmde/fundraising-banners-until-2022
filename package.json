@@ -59,7 +59,7 @@
     "postcss-simple-vars": "^7.0.0",
     "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
-    "sinon": "^14.0.0",
+    "sinon": "^14.0.1",
     "style-loader": "^3.3.0",
     "stylelint": "^14.13.0",
     "stylelint-config-standard-scss": "^5.0.0",
