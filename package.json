@@ -25,7 +25,7 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
+    "@babel/core": "^7.19.3",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
     "@babel/plugin-transform-react-jsx": "^7.19.0",
@@ -59,7 +59,7 @@
     "postcss-simple-vars": "^7.0.0",
     "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
-    "sinon": "^14.0.0",
+    "sinon": "^14.0.1",
     "style-loader": "^3.3.0",
     "stylelint": "^14.12.1",
     "stylelint-config-standard-scss": "^5.0.0",
