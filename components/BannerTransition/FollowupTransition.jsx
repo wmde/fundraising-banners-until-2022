@@ -10,6 +10,14 @@ const SLIDING_FIRST_PART = 2;
 const SLIDING_SECOND_PART = 3;
 const FINISHED = 4;
 
+const STATE_NAMES = new Map( [
+	[ PAGELOADING, 'loading' ],
+	[ READY, 'ready' ],
+	[ SLIDING_FIRST_PART, 'sliding-first-part' ],
+	[ SLIDING_SECOND_PART, 'sliding-second-part' ],
+	[ FINISHED, 'finished' ]
+] );
+
 /*
  * The FollowupTransition is a second transition that takes place when
  * displaying a full page banner that replaces a mini banner. The mini
@@ -190,9 +198,12 @@ export default class BannerTransition extends Component {
 		}
 		return <div style={ bannerStyle }
 			ref={this.ref}
-			className={ classNames( {
-				'wmde-banner-followup-banner-position': true
-			} ) }
+			className={ classNames(
+				`wmde-banner-followup-banner-position--state-${STATE_NAMES.get( state.transitionPhase ) }`,
+				{
+					'wmde-banner-followup-banner-position': true
+				}
+			) }
 			onTransitionEnd={ this.onTransitionEnd }
 		>
 			{ props.children }
