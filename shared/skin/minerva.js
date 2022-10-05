@@ -8,25 +8,23 @@ export default class Minerva extends Skin {
 		super();
 
 		this.viewport = $( '#mw-mf-viewport' );
+		this.navigation = $( '#mw-mf-page-left' );
 		this.searchField = $( '#searchInput, input.search' );
 	}
 
 	addSpace( bannerHeight, transition ) {
-		this.viewport.css( {
-			top: bannerHeight,
-			transition: transition.createTransitionValue( 'top' )
-		} );
+		this.viewport.css( { top: bannerHeight, transition: transition.createTransitionValue( 'top' ) } );
+		this.navigation.css( { top: bannerHeight, transition: transition.createTransitionValue( 'top' ) } );
 	}
 
 	addSpaceInstantly( bannerHeight ) {
-		this.viewport.css( {
-			top: bannerHeight,
-			transition: 'unset'
-		} );
+		this.viewport.css( { top: bannerHeight, transition: 'unset' } );
+		this.navigation.css( { top: bannerHeight, transition: 'unset' } );
 	}
 
 	removeSpace() {
 		this.viewport.css( { top: 0, marginTop: 0, transition: 'unset' } );
+		this.navigation.css( { top: 0, marginTop: 0, transition: 'unset' } );
 	}
 
 	addSearchObserver( onSearchFocusWhenBannerIsLoading, onSearchFocusWhenBannerIsVisible ) {
