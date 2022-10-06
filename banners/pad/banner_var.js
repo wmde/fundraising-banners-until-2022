@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles_var/styles.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import Banner from './components/Banner_var';
+import Banner from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
@@ -15,7 +15,7 @@ import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import DonationForm from '../../shared/components/ui/form/DonationForm';
+import DonationForm from '../../components/DonationForm/DonationForm';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
