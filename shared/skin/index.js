@@ -1,10 +1,11 @@
 import Minerva from './minerva';
 import Monobook from './monobook';
 import Vector from './vector';
+import Vector2022 from './vector-2022';
 import Wpde from './wpde';
 import { onMediaWiki } from '../mediawiki_checks';
 
-export { Minerva, Monobook, Vector };
+export { Minerva, Monobook, Vector, Vector2022 };
 export { default as Wpde } from './wpde';
 
 export function getSkinAdjuster() {
@@ -20,6 +21,8 @@ export function getSkinAdjuster() {
 			return new Monobook();
 		case 'vector':
 			return new Vector();
+		case 'vector-2022':
+			return new Vector2022();
 		default:
 			return new Vector();
 	}
