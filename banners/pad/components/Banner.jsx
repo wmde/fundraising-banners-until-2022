@@ -6,7 +6,7 @@ import { LocalImpressionCount } from '../../../shared/local_impression_count';
 import { CampaignProjection } from '../../../shared/campaign_projection';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
 import { BannerType } from '../../../shared/BannerType';
-import createDynamicCampaignText from '../create_dynamic_campaign_text';
+import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import debounce from '../../../shared/debounce';
 import SlideState from '../../../shared/slide_state';
 import Slides from '../content/Slides';
@@ -14,7 +14,7 @@ import Slides from '../content/Slides';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import Slider from '../../../components/Slider/Slider';
-import ProgressBar from '../../../components/ProgressBar/LegacyProgressBar';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import Footer from '../../../components/Footer/Footer';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
@@ -192,12 +192,14 @@ export default class Banner extends Component {
 									next={ <ChevronRightIcon fill={ '#990a00' }/> }
 								/>
 								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
+									formatters={ props.formatters }
+									daysLeft={ campaignProjection.getRemainingDays() }
+									donationAmount={ campaignProjection.getProjectedDonationSum() }
+									goalDonationSum={ campaignProjection.goalDonationSum }
+									missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+									setStartAnimation={ this.registerStartProgressbar }
+									isLateProgress={ props.campaignParameters.isLateProgress }
+									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
@@ -221,6 +223,7 @@ export default class Banner extends Component {
 				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionInfo
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData } />
