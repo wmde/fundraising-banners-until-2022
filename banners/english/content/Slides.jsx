@@ -3,6 +3,7 @@ import InfoIcon from '../../../components/Icons/InfoIcon';
 
 export default function Slides( dynamicCampaignText ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = dynamicCampaignText;
+	const animatedVisitorsVsDonorsSentence = visitorsVsDonorsSentence ? <span className="wmde-banner-slider-text-animated-highlight">{ visitorsVsDonorsSentence }</span> : '';
 
 	return [
 		{
@@ -16,7 +17,7 @@ export default function Slides( dynamicCampaignText ) {
 			content: <div>
 				<p>
 					{ campaignDaySentence } 99% of our readers don't give; they simply look the other way. We
-					depend on donations averaging about €22.66. { visitorsVsDonorsSentence }
+					depend on donations averaging about €22.66. { animatedVisitorsVsDonorsSentence }
 				</p>
 			</div>
 		},
