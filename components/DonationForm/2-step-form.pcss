@@ -1,0 +1,78 @@
+/*
+This is an addon to the DonationForm and should be included in
+your styles after the component DonationForm.scss when you want
+to use a 2 step form.
+*/
+.wmde-banner {
+	&-form-steps {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		overflow: hidden;
+	}
+
+	&-form-step-1,
+	&-form-step-2 {
+		min-width: calc( 100% + 0 );
+		max-width: calc( 100% + 0 );
+		transform: translate3d( 0, 0, 0 );
+	}
+
+	&-form-step-2 {
+		opacity: 0;
+
+		&-title {
+			width: 100%;
+			display: block;
+		}
+
+		&-options {
+			width: 100%;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
+
+		&-field {
+			flex-grow: 1;
+		}
+
+		.wmde-banner-select-group {
+			display: flex;
+			width: 100%;
+		}
+
+		.wmde-banner-select-group-notice {
+			height: auto;
+		}
+
+		.wmde-banner-select-group-option {
+			display: block;
+			height: auto;
+			width: 100%;
+		}
+
+		.wmde-banner-select-group-label {
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-content: center;
+			align-items: stretch;
+		}
+	}
+
+	.wmde-banner-form--is-step-2 {
+		.wmde-banner-form-step-1,
+		.wmde-banner-form-step-2 {
+			transform: translate3d( -100%, 0, 0 );
+		}
+		.wmde-banner-form-step-1 {
+			opacity: 0;
+		}
+		.wmde-banner-form-step-2 {
+			opacity: 1;
+		}
+	}
+}
