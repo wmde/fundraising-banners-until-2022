@@ -34,5 +34,25 @@
         &-columns {
         	padding: 8px 27px;
         }
+
+        &-countdown-bar{
+            height: 3px;
+            /* stylelint-disable */
+            background: linear-gradient(
+                    270deg,
+                    $transparent-color 0%,
+                    $transparent-color 50%,
+                    $color-primary 50%,
+                    $color-primary 100%
+            );
+            background-size: 201% 100%;
+            background-position: 100% 0;
+            /* stylelint-enable */
+            transition: background-position 15s;
+        }
+
+        &-countdown-bar--progressing{
+            background-position: 0 0;
+        }
     }
 }
