@@ -133,12 +133,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade.banners.ctrl]
-filename = "./banners/wikipedia.de/desktop/banner_ctrl.js"
+filename = "./banners/wpde_desktop/banner_ctrl.js"
 pagename = "B21WPDE_02-211119_ctrl"
 tracking = "wpde-02-211119-ctrl"
 
 [wikipediade.banners.var]
-filename = "./banners/wikipedia.de/desktop/banner_var.js"
+filename = "./banners/wpde_desktop/banner_var.js"
 pagename = "B21WPDE_02-211119_var"
 tracking = "wpde-02-211119-var"
 
@@ -150,12 +150,12 @@ wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade_mobile.banners.ctrl]
-filename = "./banners/wikipedia.de/mobile/banner_ctrl.js"
+filename = "./banners/wpde_mobile/banner_ctrl.js"
 pagename = "B21WPDE_mob01-211103_ctrl"
 tracking = "wpde-mob01-211103-ctrl"
 
 [wikipediade_mobile.banners.var]
-filename = "./banners/wikipedia.de/mobile/banner_var.js"
+filename = "./banners/wpde_mobile/banner_var.js"
 pagename = "B21WPDE_mob01-211103_var"
 tracking = "wpde-mob01-211103-var"
 
