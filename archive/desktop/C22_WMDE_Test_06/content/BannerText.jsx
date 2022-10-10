@@ -15,9 +15,7 @@ export default function BannerText( props ) {
 			durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit einer
 			Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich
 			entwickeln. <span className="wmde-banner-text-animated-highlight">Millionen Menschen nutzen Wikipedia,
-			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span>
-			Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser Spendenziel bereits in wenigen Stunden erreicht.
-			Die meisten Menschen spenden, weil
+			aber 99 % spenden nicht – sie übergehen diesen Aufruf.</span> Die meisten Menschen spenden, weil
 			sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr Wissen im Wert einer Tasse
 			Kaffee geschenkt? Dann nehmen Sie sich doch bitte eine Minute Zeit und geben Sie
 			etwas zurück. Vielen Dank!
