@@ -1,0 +1,61 @@
+.wmde-banner {
+	visibility: hidden;
+	width: 100%;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	&--visible {
+		visibility: visible;
+	}
+	&--hidden {
+		display: none;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	&-wrapper {
+		font-size: 16px;
+
+		font-family: $banner-main-font-family;
+		box-shadow: 0 3px 0.6em rgba( 60, 60, 60, 0.4 );
+		background-color: $color-white;
+	}
+
+	&-content {
+		display: flex;
+		flex-direction: row;
+		padding: 8px $banner-padding 0;
+	}
+
+	&-column-left {
+		display: flex;
+		align-items: center;
+		border: 8px solid $color-primary;
+		border-radius: 15px;
+		background-color: $color-white-off;
+		padding: 20px 30px 90px 20px;
+		position: relative;
+		margin-right: $banner-padding;
+		overflow-y: hidden;
+	}
+
+	&-column-right {
+		flex: 0 0 auto;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		width: $form-width;
+	}
+
+	.banner__footer {
+		order: 2;
+		padding: 4px $banner-padding;
+	}
+}

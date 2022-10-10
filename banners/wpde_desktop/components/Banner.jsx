@@ -1,19 +1,21 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import Infobox from './ui/Infobox';
-import Footer from '../../../shared/components/ui/Footer';
-import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import { BannerType } from '../../../shared/BannerType';
-import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import ProgressBar from '../../../shared/components/ui/ProgressBar';
-import Slider from '../../../shared/components/Slider';
-import Slides from './Slides';
-import SlideState from '../../../shared/slide_state';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
-import ChevronRightIcon from './ui/ChevronRightIcon';
+import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
+
+import BannerTransition from '../../../components/BannerTransition/BannerTransition';
+import FundsModal from '../../../components/UseOfFunds/FundsModal';
+import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
+import Message from '../../../components/Message/Message';
+import Slider from '../../../components/Slider/Slider';
+import SlideState from '../../../components/Slider/slide_state';
+import ProgressBar from '../../../components/ProgressBar/LegacyProgressBar';
+import Footer from '../../../components/Footer/Footer';
+import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
+import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -21,8 +23,15 @@ const BannerVisibilityState = Object.freeze( {
 	CLOSED: Symbol( 'closed' )
 } );
 
+const HighlightState = Object.freeze( {
+	WAITING: Symbol( 'waiting' ),
+	ANIMATE: Symbol( 'animate' )
+} );
+
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
+
+const SHOW_SLIDE_BREAKPOINT = 1300;
 
 export class Banner extends Component {
 
@@ -46,11 +55,14 @@ export class Banner extends Component {
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
-			bannerWidth: 0
+			// needed for the width-based "component breakpoint" (slider or infobox)
+			bannerWidth: 0,
+			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
+		this.startProgressbar = () => {};
 		this.slideState = new SlideState();
 
 		this.dynamicCampaignText = createDynamicCampaignText(
@@ -60,24 +72,25 @@ export class Banner extends Component {
 			props.formatters,
 			props.translations
 		);
+		this.triggerTextHighlight = this.triggerTextHighlight.bind( this );
 	}
 
 	componentDidMount() {
-		this.props.registerDisplayBanner( () => {} );
-		this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
-		this.slideInBanner();
+		this.props.registerDisplayBanner(
+			() => {
+				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
+				this.slideInBanner();
+			}
+		);
 		this.storeBannerWidth();
-		this.props.onFinishedTransitioning();
-		this.startProgressbar();
-		setTimeout( () => this.startSliderAutoplay(), SLIDESHOW_START_DELAY );
 		this.props.registerResizeBanner( this.adjustSurroundingSpace.bind( this ) );
-		this.adjustSurroundingSpace();
 	}
 
 	adjustSurroundingSpace() {
-		const bannerElement = document.querySelector( '.wmde-banner' );
-		this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
-		this.storeBannerWidth();
+		this.storeBannerWidth( () => {
+			const bannerElement = document.querySelector( '.wmde-banner .banner-position' );
+			this.props.skinAdjuster.addSpaceInstantly( bannerElement.offsetHeight );
+		} );
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -86,6 +99,13 @@ export class Banner extends Component {
 			this.adjustSurroundingSpace();
 		}
 	}
+
+	onFinishedTransitioning = () => {
+		this.startProgressbar();
+		this.props.onFinishedTransitioning();
+		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
+		this.triggerTextHighlight();
+	};
 
 	closeBanner = e => {
 		e.preventDefault();
@@ -125,36 +145,65 @@ export class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
+		this.triggerTextHighlight();
 	};
 
-	storeBannerWidth = () => {
-		this.setState( { bannerWidth: this.ref.current.offsetWidth } );
+	triggerTextHighlight() {
+		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
+			return;
+		}
+		this.setState( { textHighlight: HighlightState.ANIMATE } );
+	}
+
+	storeBannerWidth = ( callback = () => {} ) => {
+		this.setState( { bannerWidth: this.ref.current.offsetWidth }, callback );
+	};
+
+	trackBannerEvent( eventName ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			eventName,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	onPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
+		const BannerText = props.bannerText;
 		const campaignProjection = props.campaignProjection;
 
 		return <div
-			className={ classNames( 'wmde-banner', 'banner-position', {
+			className={ classNames( {
+				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
+				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
 			} ) }
-			ref={this.ref}>
-			<TranslationContext.Provider value={props.translations}>
-				<div className="banner__wrapper">
-					<div className="close">
-						<a className="close__link" onClick={this.closeBanner}>&#x2715;</a>
-					</div>
-					<div className="banner__content">
-						<div className="banner__infobox">
-							{ state.bannerWidth <= 1300 && (
-								<div className="banner__slideshow" ref={ this.slideshowRef }>
+			ref={this.ref}
+		>
+			<BannerTransition
+				fixed={ true }
+				registerDisplayBanner={ this.registerBannerTransition }
+				onFinish={ this.onFinishedTransitioning }
+				skinAdjuster={ props.skinAdjuster }
+				transitionSpeed={ 1000 }
+			>
+				<TranslationContext.Provider value={props.translations}>
+					<div className="wmde-banner-wrapper">
+						<ButtonClose onClick={ this.closeBanner }/>
+						<div className="wmde-banner-content">
+							<div className="wmde-banner-column-left">
+								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
 									<Slider
-										slides={ Slides( this.dynamicCampaignText ) }
+										slides={ props.slides( this.dynamicCampaignText ) }
 										onSlideChange={ this.onSlideChange }
 										registerAutoplay={ this.registerAutoplayCallbacks }
 										interval={ SLIDESHOW_SLIDE_INTERVAL }
@@ -163,50 +212,44 @@ export class Banner extends Component {
 										dynamicCampaignText={ this.dynamicCampaignText }
 										sliderOptions={ { loop: false } }
 									/>
-								</div>
-							) }
+								) }
 
-							{ state.bannerWidth > 1300 && (
-								<Infobox
-									formatters={ props.formatters }
-									campaignParameters={ props.campaignParameters }
-									campaignProjection={ props.campaignProjection }
-									bannerText={ props.bannerText }
-									dynamicCampaignText={ this.dynamicCampaignText }
-									propsForText={ {
-										overallImpressionCount: props.impressionCounts.getOverallCount(),
-										millionImpressionsPerDay: props.campaignParameters.millionImpressionsPerDay
-									} } />
-							) }
-
-							<ProgressBar
-								formatters={props.formatters}
-								daysLeft={campaignProjection.getRemainingDays()}
-								donationAmount={campaignProjection.getProjectedDonationSum()}
-								goalDonationSum={campaignProjection.goalDonationSum}
-								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-								setStartAnimation={this.registerStartProgressbar}/>
+								{ state.bannerWidth >= SHOW_SLIDE_BREAKPOINT && (
+									<Message>
+										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
+									</Message>
+								) }
+								<ProgressBar
+									formatters={props.formatters}
+									daysLeft={campaignProjection.getRemainingDays()}
+									donationAmount={campaignProjection.getProjectedDonationSum()}
+									goalDonationSum={campaignProjection.goalDonationSum}
+									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+									setStartAnimation={this.registerStartProgressbar}/>
+							</div>
+							<div className="wmde-banner-column-right">
+								<DonationForm
+									formItems={props.formItems}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+									formatters={props.formatters}
+									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
+									onSubmit={ props.onSubmit }
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									buttonText={ props.buttonText }
+									errorPosition={ props.errorPosition }
+									bannerType={ props.bannerType }
+									showCookieBanner={ props.showCookieBanner }
+									onPage2={ this.onPage2 }
+								/>
+							</div>
 						</div>
-						<div className="banner__form">
-							<DonationForm
-								formItems={props.formItems}
-								bannerName={props.bannerName}
-								campaignName={props.campaignName}
-								formatters={props.formatters}
-								impressionCounts={props.impressionCounts}
-								onFormInteraction={this.onFormInteraction}
-								onSubmit={ props.onSubmit }
-								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-								buttonText={ props.buttonText }
-								errorPosition={ props.errorPosition }
-								bannerType={ props.bannerType }
-								showCookieBanner={ props.showCookieBanner }
-							/>
-						</div>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
-					<Footer showFundsModal={ this.toggleFundsModal }/>
-				</div>
-			</TranslationContext.Provider>
+
+				</TranslationContext.Provider>
+			</BannerTransition>
 			<FundsModal
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
