@@ -1,0 +1,49 @@
+.wmde-banner {
+	&-footer {
+		order: 2;
+		font-size: 0.8em;
+		line-height: 1.6em;
+		color: $color-black;
+		width: 100%;
+		padding: 4px $banner-padding;
+
+		&-bank,
+		&-usage {
+			padding: 0;
+		}
+
+		&-bank {
+			@media ( min-width: $breakpoint-l ) {
+				display: block;
+				flex-wrap: nowrap;
+			}
+
+			&-item {
+				white-space: nowrap;
+
+				@media ( min-width: $breakpoint-xs ) {
+					padding-right: 2em;
+				}
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-usage {
+			flex-grow: 0;
+			text-align: center;
+
+			@media ( min-width: $breakpoint-xs ) {
+				width: $form-width;
+			}
+
+			&-link {
+				color: $color-black;
+				cursor: pointer;
+			}
+		}
+	}
+}

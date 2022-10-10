@@ -1,0 +1,60 @@
+.wmde-banner {
+	&-select-custom-amount {
+		position: relative;
+		padding: 0 4px 8px;
+
+		&-input-container {
+			width: 100%;
+			line-height: 2em;
+			margin: 0;
+			border: 1px solid $color-gray-medium-light;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		&-input {
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 0.4em;
+			line-height: $donation-form-select-option-line-height;
+			font-size: 0.74em;
+			text-align: center;
+			outline: 0;
+			background: transparent;
+			border: 0;
+			font-weight: bold;
+		}
+
+		&-euro-symbol {
+			display: block;
+			position: absolute;
+			width: 15px;
+			height: 30px;
+			top: 50%;
+			right: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				background: $color-secondary;
+				border-color: $color-gray-medium;
+			}
+			.wmde-banner-select-custom-amount-input,
+			.wmde-banner-select-custom-amount-euro-symbol {
+				color: $color-white;
+			}
+		}
+	}
+
+	&-input-container + .wmde-banner-select-custom-amount-euro-symbol {
+		position: absolute;
+		top: 0;
+		right: 1em;
+		border-color: transparent;
+		background: transparent;
+	}
+}
