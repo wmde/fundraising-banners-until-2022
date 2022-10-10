@@ -11,7 +11,7 @@ import { isValid, isValidOrUnset } from './hooks/validation_states';
 import useAmountWithCustom from './hooks/use_amount';
 import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
-import useAlternate, { Alternatives } from './hooks/use_alternative';
+import useAlternative, { Alternatives } from './hooks/use_alternative';
 import useFormAction from './hooks/use_form_action';
 import { amountMessage, validateRequired } from './utils';
 import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
@@ -27,7 +27,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const Translations = useContext( TranslationContext );
 	const [ paymentInterval, setInterval, intervalValidity, setIntervalValidity ] = useInterval( null );
 	const [ paymentMethod, setPaymentMethod, paymentMethodValidity, setPaymentMethodValidity ] = usePaymentMethod( null );
-	const [ alternative, setAlternative, alternativeValidity, setAlternativeValidity ] = useAlternate( null );
+	const [ alternative, setAlternative, alternativeValidity, setAlternativeValidity ] = useAlternative( null );
 	const [
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
@@ -68,6 +68,11 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			[ paymentMethodValidity, setPaymentMethodValidity ],
 			[ alternativeValidity, setAlternativeValidity ]
 		].map( validateRequired ).every( isValid ) ) {
+			if ( alternative === Alternatives.YES ) {
+				props.onSubmitRecurring?.call();
+			} else {
+				props.onSubmitNonRecurring?.call();
+			}
 			props.onSubmit();
 			return;
 		}
@@ -89,6 +94,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 
 	const onFormBackToYearly = e => {
 		setInterval( Intervals.YEARLY.value );
+		props.onSubmitChangeToYearly?.call();
 		onFormBack( e );
 	};
 
