@@ -3,7 +3,29 @@
 		display: none;
 		z-index: 20000;
 		width: 100%;
-		background: #ffffff;
+
+		&-columns {
+			display: flex;
+		}
+
+		&-column {
+			flex: 1 1 100%;
+		}
+
+		&-button,
+		&-prompt {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+		}
+
+		&-countdown-text {
+			display: none;
+
+			@media ( min-width: $breakpoint-l ) {
+				display: block;
+			}
+		}
 	}
 
 	&--soft-closing {
