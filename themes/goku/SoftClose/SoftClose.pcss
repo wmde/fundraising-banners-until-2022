@@ -2,6 +2,10 @@
     &-soft-close {
     	box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
 
+        &-columns {
+            padding: 8px 27px;
+        }
+
         &-button {
             border: 0 none;
             min-width: 150px;
@@ -31,28 +35,12 @@
             text-align: right;
         }
 
-        &-columns {
-        	padding: 8px 27px;
-        }
-
-        &-countdown-bar{
+        &-countdown-bar {
             height: 3px;
-            /* stylelint-disable */
-            background: linear-gradient(
-                    270deg,
-                    $transparent-color 0%,
-                    $transparent-color 50%,
-                    $color-primary 50%,
-                    $color-primary 100%
-            );
-            background-size: 201% 100%;
-            background-position: 100% 0;
-            /* stylelint-enable */
-            transition: background-position 15s;
         }
 
-        &-countdown-bar--progressing{
-            background-position: 0 0;
+        &-countdown-bar-fill {
+            background-color: $color-primary;
         }
     }
 }

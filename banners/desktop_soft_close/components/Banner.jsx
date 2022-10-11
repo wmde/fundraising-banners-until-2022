@@ -45,6 +45,7 @@ export class Banner extends Component {
 
 	ref = createRef();
 	slideshowRef = createRef();
+	softCloseRef = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -56,8 +57,7 @@ export class Banner extends Component {
 			formInteractionSwitcher: false,
 			// needed for the width-based "component breakpoint" (slider or infobox)
 			bannerWidth: 0,
-			textHighlight: HighlightState.WAITING,
-			softCloseTimeout: null
+			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
@@ -77,7 +77,7 @@ export class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING } );
+				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
 				this.slideInBanner();
 			}
 		);
@@ -107,14 +107,11 @@ export class Banner extends Component {
 
 	onSoftCloseBanner = e => {
 		e.preventDefault();
+		this.softCloseRef.current?.startProgress();
 		this.setState(
 			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
 			() => this.adjustSurroundingSpace()
 		);
-		// Start timer
-		this.state.softCloseTimeout = setTimeout( () => {
-			this.finallyCloseBanner();
-		}, 15 * 1000 );
 	};
 
 	onMaybeLater = e => {
@@ -123,7 +120,6 @@ export class Banner extends Component {
 
 	onCloseBanner = e => {
 		e.preventDefault();
-		clearTimeout( this.state.softCloseTimeout );
 		this.finallyCloseBanner();
 	};
 
@@ -216,6 +212,7 @@ export class Banner extends Component {
 					<SoftClose
 						onMaybeLater={ this.onMaybeLater }
 						onCloseBanner={ this.onCloseBanner }
+						ref={this.softCloseRef}
 					/>
 					<div className="wmde-banner-wrapper">
 						<ButtonClose onClick={ this.onSoftCloseBanner }/>
