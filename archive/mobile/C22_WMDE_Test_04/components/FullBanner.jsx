@@ -33,7 +33,6 @@ export default function FullBanner( props ) {
 			onSubmit={props.onSubmit}
 			toggleFundsModal={props.toggleFundsModal}
 			scrollToFirstError={ scrollToFirstError }
-			preselectedAmount={ props.preselectedAmount }
 		/>
 		<div className="wmde-banner-full-small-print">
 			<span>
