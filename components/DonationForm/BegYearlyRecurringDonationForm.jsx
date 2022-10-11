@@ -16,7 +16,6 @@ import useFormAction from './hooks/use_form_action';
 import { amountMessage, validateRequired } from './utils';
 import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
 import classNames from 'classnames';
-import ChevronLeftIcon from '../Icons/ChevronLeftIcon';
 
 const formSteps = Object.freeze( {
 	ONE: Symbol( 'one' ),
@@ -38,6 +37,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const [ step1ButtonText, setStep1ButtonText ] = useState( Translations[ 'submit-label' ] );
 	const [ secondPageAmount, setSecondPageAmount ] = useState( '0' );
 	const [ formAction ] = useFormAction( props );
+	const FormStep2 = props.formStep2;
 
 	useEffect(
 		() => setStep1ButtonText( paymentInterval === Intervals.ONCE.value ? Translations[ 'submit-label-short' ] : Translations[ 'submit-label' ] ),
@@ -228,69 +228,14 @@ export default function BegYearlyRecurringDonationForm( props ) {
 				</div>
 			</div>
 
-			<div className="wmde-banner-form-step-2">
-
-				<div className="wmde-banner-form-step-2-title">
-					<a href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" className="back" onClick={ onFormBack }>
-						<ChevronLeftIcon/>
-					</a>
-					{ Translations[ 'form-step-2-header' ].replace( '{{amount}}', secondPageAmount ) }
-				</div>
-				<div className="wmde-banner-form-step-2-notice">{ Translations[ 'form-step-2-copy' ] }</div>
-
-				<div className="wmde-banner-form-step-2-options">
-					<div className={ classNames(
-						'wmde-banner-select-group-container',
-						{ 'wmde-banner-select-group-container--with-error': !isValidOrUnset( alternativeValidity ) }
-					) }>
-						<div className="wmde-banner-select-group">
-							<div className="wmde-banner-select-group-option wmde-banner-select-group-option-no">
-								<label>
-									<input
-										type="radio"
-										onClick={ onChangeAlternative }
-										checked={ alternative === Alternatives.NO }
-										name="alternative"
-										value={ Alternatives.NO }
-										className="wmde-banner-select-group-input"/>
-									<span className="wmde-banner-select-group-label">{ Translations[ 'form-step-2-no' ].replace( '{{amount}}', secondPageAmount ) }</span>
-								</label>
-							</div>
-							<div className="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
-								<label>
-									<input
-										type="radio"
-										onClick={ onChangeAlternative }
-										checked={ alternative === Alternatives.YES }
-										name="alternative"
-										value={ Alternatives.YES }
-										className="wmde-banner-select-group-input"/>
-									<span className="wmde-banner-select-group-label">{ Translations[ 'form-step-2-yes' ].replace( '{{amount}}', secondPageAmount ) }</span>
-								</label>
-							</div>
-						</div>
-						<span className="wmde-banner-select-group-error-message">
-							<span className="wmde-banner-error-icon">
-								{ Translations[ 'form-step-2-error' ] }
-							</span>
-						</span>
-					</div>
-				</div>
-
-				<a
-					href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#"
-					className="wmde-banner-form-step-2-custom"
-					onClick={ onFormBackToYearly }>
-					{ Translations[ 'form-step-2-link' ] }
-				</a>
-
-				<div className="wmde-banner-form-button-container form-step-2-button">
-					<button className="wmde-banner-form-button" type="submit">
-						{ Translations[ 'form-step-2-button' ] }
-					</button>
-				</div>
-
-			</div>
+			<FormStep2
+				onFormBack={ onFormBack }
+				onChangeAlternative={ onChangeAlternative }
+				onFormBackToYearly={ onFormBackToYearly }
+				secondPageAmount={ secondPageAmount }
+				alternative={ alternative }
+				isValid={ isValidOrUnset( alternativeValidity ) }
+			/>
 		</div>
 
 		<SubmitValues
