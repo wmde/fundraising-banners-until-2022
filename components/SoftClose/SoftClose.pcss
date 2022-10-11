@@ -1,6 +1,10 @@
 @keyframes wmde-countdown-bar {
-	0% { width: 0; }
-	100% { width: 100%; }
+	0% {
+		transform: translateX( -100% );
+	}
+	100% {
+		transform: translateX( 0% );
+	}
 }
 
 .wmde-banner {
@@ -11,6 +15,9 @@
 		}
 		.wmde-banner-wrapper {
 			display: none;
+		}
+		.wmde-banner-soft-close-countdown-bar-fill {
+			animation: wmde-countdown-bar 15s linear;
 		}
 	}
 
@@ -34,6 +41,10 @@
 			margin: 0;
 		}
 
+		&-button {
+			cursor: pointer;
+		}
+
 		&-countdown-text {
 			display: none;
 
@@ -44,21 +55,15 @@
 
 		&-countdown-bar {
 			position: relative;
+			overflow: hidden;
 		}
 
 		&-countdown-bar-fill {
 			position: absolute;
 			height: 100%;
-			width: 0;
+			width: 100%;
 			top: 0;
 			left: 0;
 		}
 	}
-
-	&--soft-closing {
-		.wmde-banner-soft-close-countdown-bar-fill {
-			animation: wmde-countdown-bar 15s linear;
-		}
-	}
-
 }

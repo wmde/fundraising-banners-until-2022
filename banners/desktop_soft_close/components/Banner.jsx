@@ -116,16 +116,19 @@ export class Banner extends Component {
 
 	onMaybeLater = e => {
 		e.preventDefault();
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onMaybeLater();
 	};
 
 	onCloseBanner = e => {
 		e.preventDefault();
-		this.finallyCloseBanner();
-	};
-
-	finallyCloseBanner = () => {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose();
+	};
+
+	onTimeOutClose = () => {
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onClose( 'micro-banner-ignored' );
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -212,6 +215,7 @@ export class Banner extends Component {
 					<SoftClose
 						onMaybeLater={ this.onMaybeLater }
 						onCloseBanner={ this.onCloseBanner }
+						onTimeOutClose={ this.onTimeOutClose }
 						ref={this.softCloseRef}
 					/>
 					<div className="wmde-banner-wrapper">

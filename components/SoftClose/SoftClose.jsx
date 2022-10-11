@@ -15,6 +15,7 @@ export default class SoftClose extends Component {
 				this.setState( { secondsRemaining: this.state.secondsRemaining - 1 } );
 				if ( this.state.secondsRemaining === 0 ) {
 					clearInterval( this.state.timer );
+					this.props.onTimeOutClose();
 				}
 			}, 1000 )
 		} );
@@ -30,14 +31,28 @@ export default class SoftClose extends Component {
 				<div className="wmde-banner-soft-close-countdown-bar-fill"></div>
 			</div>
 			<div className="wmde-banner-soft-close-columns">
+
 				<div className="wmde-banner-soft-close-column">
 					<span className="wmde-banner-soft-close-prompt">Vielleicht möchten Sie Wikipedia später unterstützen?</span>
-					<button className="wmde-banner-soft-close-button">Ja</button>
-					<button className="wmde-banner-soft-close-button">Erstmal nicht</button>
 				</div>
+
+				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-column-buttons">
+					<button
+						className="wmde-banner-soft-close-button"
+						onClick={ props.onMaybeLater }>
+						Ja
+					</button>
+					<button
+						className="wmde-banner-soft-close-button"
+						onClick={ props.onCloseBanner }>
+						Erstmal nicht
+					</button>
+				</div>
+
 				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text">
 					Diese Mitteilung wird automatisch in <strong> { state.secondsRemaining } Sekunden</strong> ausgeblendet.
 				</div>
+
 			</div>
 		</div> );
 	}

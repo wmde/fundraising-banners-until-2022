@@ -68,9 +68,9 @@ export default class BannerPresenter {
 				getBannerDimensions: () => {
 					return sizeIssueIndicator.getDimensions( bannerElement.offsetHeight );
 				},
-				onClose: () => {
+				onClose: ( actionName ) => {
 					this.trackingData.tracker.trackViewPortDimensions(
-						'banner-closed',
+						actionName ?? 'banner-closed',
 						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 						this.trackingData.bannerCloseTrackRatio,
 					);
