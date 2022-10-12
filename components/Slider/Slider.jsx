@@ -87,7 +87,10 @@ export default function Slider( props ) {
 			<div className="wmde-banner-navigation-wrapper">
 				<div ref={ sliderRef } className="keen-slider wmde-banner-slider" onMouseDown={ stopAutoplay } onTouchStart={ stopAutoplay }>
 					{ slides.map( ( slide, idx ) => (
-						<div key={ idx } className="keen-slider__slide wmde-banner-slide">
+						<div key={ idx } className={ classNames(
+							'keen-slider__slide wmde-banner-slide',
+							{ 'wmde-banner-slide--current': currentSlide === idx }
+						) }>
 							<div className="keen-slider__slide-content wmde-banner-slide-content">
 								{ slide.content }
 							</div>
