@@ -5,7 +5,7 @@ import debounce from '../../../shared/debounce';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
-import FullBanner from './FullBanner';
+import FullBanner from './FullBanner_var';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
@@ -169,6 +169,14 @@ export default class Banner extends Component {
 		this.startProgressBarInMiniBanner();
 	};
 
+	onDonationFormPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
+	};
+
+	onDonationFormChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -213,9 +221,13 @@ export default class Banner extends Component {
 				>
 					<FullBanner
 						{...props}
+						onPage2={ this.onDonationFormPage2 }
+						onSubmit={ props.onSubmit }
+						onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+						onChangeToYearly={ this.onDonationFormChangeToYearly }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
-						onSubmit={ props.onSubmit }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
