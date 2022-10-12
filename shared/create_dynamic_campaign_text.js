@@ -17,13 +17,13 @@ export default function createDynamicCampaignText( campaignParameters, campaignP
 		campaignParameters.millionImpressionsPerDay,
 		formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() ),
 		campaignDays.getDaysSinceCampaignStart(),
-		translations[ 'visitors-vs-donors-sentence' ]
+		translations[ 'visitors-vs-donors-sentence' ] ?? ''
 	);
 	const donorsNeeded = campaignProjection.getRemainingDonorsNeeded();
 	const donorsNeededRoundedUp = donorsNeeded > 100 ? Math.round( campaignProjection.getRemainingDonorsNeeded() / 100 ) * 100 : donorsNeeded;
 	const donorsNeededSentence = new DonorsNeededSentence(
 		formatters.integerFormatter( donorsNeededRoundedUp ),
-		translations[ 'remaining-donors-needed-sentence' ]
+		translations[ 'remaining-donors-needed-sentence' ] ?? ''
 	);
 
 	return {
