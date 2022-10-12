@@ -69,11 +69,10 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			[ alternativeValidity, setAlternativeValidity ]
 		].map( validateRequired ).every( isValid ) ) {
 			if ( alternative === Alternatives.YES ) {
-				props.onSubmitRecurring?.call();
+				props.onSubmitRecurring();
 			} else {
-				props.onSubmitNonRecurring?.call();
+				props.onSubmitNonRecurring();
 			}
-			props.onSubmit();
 			return;
 		}
 		e.preventDefault();
@@ -94,7 +93,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 
 	const onFormBackToYearly = e => {
 		setInterval( Intervals.YEARLY.value );
-		props.onSubmitChangeToYearly?.call();
+		props.onChangeToYearly();
 		onFormBack( e );
 	};
 
