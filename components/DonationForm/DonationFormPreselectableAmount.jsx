@@ -35,7 +35,8 @@ export default function DonationFormPreselectableAmount( props ) {
 		if ( props.preselectedAmount ) {
 			selectAmount( props.preselectedAmount );
 		}
-	}, [ props.preselectedAmount, selectAmount ] );
+		/* eslint-disable-next-line */
+	}, [ props.preselectedAmount ] );
 
 	const validate = e => {
 		if ( [
