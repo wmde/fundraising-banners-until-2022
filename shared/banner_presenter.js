@@ -80,9 +80,9 @@ export default class BannerPresenter {
 						this.mwCloseHandler();
 					}
 				},
-				onSubmit: () => {
+				onSubmit: ( identifier = null ) => {
 					this.trackingData.tracker.trackViewPortDimensions(
-						VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER,
+						identifier ?? VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER,
 						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 						1
 					);
