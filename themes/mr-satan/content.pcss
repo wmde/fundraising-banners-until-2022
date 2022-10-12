@@ -1,20 +1,6 @@
 .wmde-banner {
-	&-message {
-		font-family: $banner-main-font-family;
-		font-size: 18px;
-		line-height: 1.3em;
-		text-align: left;
-
-		p {
-			margin: 0 0 1em;
-
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
-
-	&-text-animated-highlight {
+	&-text-animated-highlight,
+	&-slider-text-animated-highlight {
 		padding: 0 5px;
 		/* stylelint-disable */
 		background: linear-gradient(
@@ -28,9 +14,5 @@
 		background-position: 100% 0;
 		/* stylelint-enable */
 		transition: background-position 2s;
-	}
-
-	&--animate-highlight .wmde-banner-text-animated-highlight {
-		background-position: 0 0;
 	}
 }

@@ -1,0 +1,42 @@
+.wmde-banner {
+	&-form {
+		flex: 0 0 auto;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		width: $form-width;
+		padding: $donation-form-padding;
+
+		&-field-group {
+			display: block;
+			margin: 0;
+			padding: 0;
+			&-legend {
+				display: none;
+				visibility: hidden;
+			}
+		}
+
+		&-button-container {
+			border: 0;
+			margin: 0 auto;
+			padding: 0 0 0.3em;
+		}
+
+		&-button {
+			flex: 1 1 auto;
+			line-height: $donation-form-select-option-button-height;
+			font-size: 0.7em;
+			font-weight: bold;
+			text-align: center;
+			background: $donation-form-button-colour;
+			color: $donation-form-button-label-colour;
+			border: 0;
+			border-radius: 2px;
+			padding: 0;
+			width: 100%;
+			margin: 0;
+		}
+	}
+}
