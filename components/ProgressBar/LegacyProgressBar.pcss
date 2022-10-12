@@ -1,0 +1,91 @@
+.wmde-banner {
+	&-progress-bar {
+		display: flex;
+		position: absolute;
+		z-index: 10;
+		box-sizing: border-box;
+		left: 0;
+		right: 0;
+
+		&-donation-text {
+			visibility: hidden;
+			display: block;
+		}
+		&-wrapper {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			flex: 1;
+		}
+		&-donation-fill {
+			width: 0;
+			transition-duration: 3000ms;
+			transition-property: width;
+
+			/* minimum width for '0,1M €' */
+			min-width: 5em;
+			display: flex;
+			justify-content: space-between;
+		}
+		&-days-left {
+			text-align: left;
+			overflow: hidden;
+			white-space: nowrap;
+			position: relative;
+			top: auto;
+			left: auto;
+		}
+
+		&-donation-remaining {
+			position: absolute;
+			right: 0;
+			visibility: hidden;
+			white-space: nowrap;
+		}
+
+		&-pointer-tip {
+			display: none;
+		}
+
+		&-pointer_line {
+			display: none;
+		}
+
+		&-donation-remaining-outer {
+			display: none;
+			position: relative;
+		}
+
+		&--finished {
+			.wmde-banner-progress-bar-days-left,
+			.wmde-banner-progress-bar-donation-text,
+			.wmde-banner-progress-bar-donation-remaining {
+				visibility: visible;
+			}
+		}
+
+		@media ( max-width: 600px ) {
+			.wmde-banner-progress-bar-days-left,
+			.wmde-banner-progress-bar--finished .wmde-banner-progress-bar-days-left {
+				display: none;
+			}
+		}
+
+		&--lateprogress {
+			.wmde-banner-progress-bar-donation-remaining-inner {
+				display: none;
+			}
+
+			.wmde-banner-progress-bar-donation-remaining-outer {
+				display: block;
+			}
+
+			.wmde-banner-progress-bar-donation-fill {
+				margin-right: 0;
+			}
+			.wmde-banner-progress-bar-wrapper {
+				margin-right: -20px;
+			}
+		}
+	}
+}
