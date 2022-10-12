@@ -13,7 +13,7 @@ export default class SoftClose extends Component {
 		this.setState( {
 			timer: setInterval( () => {
 				this.setState( { secondsRemaining: this.state.secondsRemaining - 1 } );
-				if ( this.state.secondsRemaining === 0 ) {
+				if ( this.state.secondsRemaining <= 1 ) {
 					clearInterval( this.state.timer );
 					this.props.onTimeOutClose();
 				}
