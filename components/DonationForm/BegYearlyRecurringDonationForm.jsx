@@ -54,6 +54,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 				props.onSubmit();
 				return;
 			}
+			props.onPage2();
 			setSecondPageAmount( customAmount ?? selectedAmount );
 			setAlternative( null );
 			setFormStep( formSteps.TWO );
