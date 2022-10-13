@@ -1,0 +1,34 @@
+.wmde-banner {
+	&-full {
+		position: relative;
+		background: $color-primary-lighter;
+		width: 98%;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		text-align: center;
+		display: block;
+		margin: 0 auto;
+		border-radius: 15px;
+		border: 8px solid $color-primary;
+		padding: 5px 5px 15px;
+
+		&-info {
+			.banner-text {
+				margin: 20px;
+				font-size: 20px;
+				line-height: 1.3;
+				text-align: left;
+				font-weight: bold;
+
+				@media ( min-width: $breakpoint-tablet-portrait ) {
+					font-size: 24px;
+					line-height: 1.4;
+					padding: 0 50px;
+				}
+
+				&-title {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+}

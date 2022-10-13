@@ -1,10 +1,10 @@
 import { h } from 'preact';
-import getEnglishOrdinalSuffixOf from '../../shared/english_ordinal';
+import getEnglishOrdinalSuffixOf from '../../../shared/english_ordinal';
 
 export default function BannerText( props ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, overallImpressionCount } = props.dynamicCampaignText;
 	return <div className="banner-text">
-		<p className="text__headline">
+		<p className="banner-text-title">
 			To all our readers in Germany,
 		</p>
 		<p>

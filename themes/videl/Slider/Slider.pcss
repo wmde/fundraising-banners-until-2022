@@ -1,0 +1,57 @@
+.wmde-banner {
+	&-navigation-wrapper {
+		position: relative;
+		height: 100%;
+		padding-bottom: 28px;
+		@media ( min-width: $breakpoint-phone-s ) {
+			padding-bottom: 38px;
+		}
+	}
+
+	&-slide {
+		cursor: grab;
+		padding: 10px;
+
+		&-content {
+			font-family: $banner-main-font-family;
+			font-size: 17px;
+			text-align: center;
+			padding: 0 10px;
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	&-slider-pagination {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 38px;
+		margin: 0;
+		list-style: none;
+		text-align: center;
+		line-height: 1;
+
+		&-dot {
+			background: $color-gray-medium;
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			padding: 0;
+			margin: 0 4px;
+			border: 4px solid $color-white;
+			border-radius: 50%;
+			cursor: pointer;
+
+			&:focus {
+				outline: 0;
+			}
+
+			&.is-active {
+				background: $color-white;
+				border: 3px solid $color-primary;
+			}
+		}
+	}
+}

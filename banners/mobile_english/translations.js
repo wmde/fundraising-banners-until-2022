@@ -1,9 +1,8 @@
 const Translations = {
-	'intervals-header': 'I will donate:',
-	'amounts-header': 'Amount:',
-	'payments-header': 'Using:',
-	'address-type-header': 'With address:',
-
+	'intervals-header': '',
+	'amounts-header': '',
+	'payments-header': '',
+	'address-type-header': '',
 	'address-type-notice-full': 'Only with address data we are able to send you a donation receipt by mail. You will' +
 		' also receive an e-mail confirmation of your donation.',
 	'address-type-notice-email': 'You waive the donation receipt, but receive an e-mail confirmation of your donation.',
