@@ -40,8 +40,12 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const FormStep2 = props.formStep2;
 
 	useEffect(
-		() => setStep1ButtonText( paymentInterval === Intervals.ONCE.value ? Translations[ 'submit-label-short' ] : Translations[ 'submit-label' ] ),
-		[ paymentInterval, Translations ]
+		() => {
+			setStep1ButtonText( paymentInterval === Intervals.ONCE.value && paymentMethod !== PaymentMethods.SOFORT.value ?
+				Translations[ 'submit-label-short' ] :
+				Translations[ 'submit-label' ] );
+		},
+		[ paymentInterval, paymentMethod, Translations ]
 	);
 
 	const onSubmitStep1 = e => {
@@ -50,7 +54,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			[ amountValidity, setAmountValidity ],
 			[ paymentMethodValidity, setPaymentMethodValidity ]
 		].map( validateRequired ).every( isValid ) ) {
-			if ( paymentInterval !== Intervals.ONCE.value ) {
+			if ( paymentInterval !== Intervals.ONCE.value || paymentMethod === PaymentMethods.SOFORT.value ) {
 				props.onSubmit();
 				return;
 			}
