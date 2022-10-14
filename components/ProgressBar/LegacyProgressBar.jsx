@@ -115,12 +115,12 @@ export default class ProgressBar extends Component {
 		const rightText = () => {
 			if ( props.amountToShowOnRight === AmountToShowOnRight.MISSING ) {
 				return <div>
-					<span className="progress_bar__right_text">{ Translations[ 'amount-missing' ] }</span>
+					<span className="wmde-banner-progress-bar-right-text">{ Translations[ 'amount-missing' ] }</span>
 					{ ' ' } { getMillion( props.missingAmount ) }
 				</div>;
 			}
 			return <div>
-				<span className="progress_bar__right_text">{ Translations[ 'amount-total' ] }</span>
+				<span className="wmde-banner-progress-bar-right-text">{ Translations[ 'amount-total' ] }</span>
 				{ ' ' } { getMillion( props.goalDonationSum ) }
 			</div>;
 		};
@@ -144,8 +144,6 @@ export default class ProgressBar extends Component {
 				</div>
 			</div>
 			<div className="wmde-banner-progress-bar-donation-remaining wmde-banner-progress-bar-donation-remaining-outer">
-				<div className="wmde-banner-progress-bar-pointer-tip"></div>
-				<hr className="wmde-banner-progress-bar-pointer-line" />
 				{ rightText() }
 			</div>
 		</div>;

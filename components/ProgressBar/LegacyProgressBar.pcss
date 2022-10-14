@@ -1,11 +1,6 @@
 .wmde-banner {
 	&-progress-bar {
 		display: flex;
-		position: absolute;
-		z-index: 10;
-		box-sizing: border-box;
-		left: 0;
-		right: 0;
 
 		&-donation-text {
 			visibility: hidden;
@@ -28,12 +23,7 @@
 			justify-content: space-between;
 		}
 		&-days-left {
-			text-align: left;
-			overflow: hidden;
-			white-space: nowrap;
-			position: relative;
-			top: auto;
-			left: auto;
+			visibility: hidden;
 		}
 
 		&-donation-remaining {
@@ -41,14 +31,6 @@
 			right: 0;
 			visibility: hidden;
 			white-space: nowrap;
-		}
-
-		&-pointer-tip {
-			display: none;
-		}
-
-		&-pointer_line {
-			display: none;
 		}
 
 		&-donation-remaining-outer {
