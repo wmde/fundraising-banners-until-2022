@@ -14,7 +14,7 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 		},
 		{
 			content: <div className="carousel-cell-first">
-				<p><strong>To all our readers in Germany: </strong></p>
+				<p><strong>Hi, </strong></p>
 				<p>This { currentDayName }, we humbly ask you to defend Wikipedia's independence.</p>
 			</div>
 		},

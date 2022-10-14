@@ -6,7 +6,7 @@ export default function BannerText( props ) {
 
 	return <div className="banner-text">
 		<p className="banner-text-title">
-			To all our readers in Germany,
+			Hi,
 		</p>
 		<p>
 			This { currentDayName } we humbly ask you to defend Wikipedia's independence. { campaignDaySentence } 99%

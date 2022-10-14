@@ -10,8 +10,8 @@ import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import DonationForm from '../../components/DonationForm/DonationForm';
-import BannerText from './content/BannerText';
-import Slides from './content/Slides';
+import BannerText from './content/BannerText_var';
+import Slides from './content/Slides_var';
 
 import Banner from './components/Banner';
 
