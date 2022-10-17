@@ -47,7 +47,7 @@
     "handlebars-loader": "^1.7.2",
     "jquery": "^3.6.1",
     "minimatch": "^5.1.0",
-    "mocha": "^10.0.0",
+    "mocha": "^10.1.0",
     "postcss": "^8.4.17",
     "postcss-calc": "^8.2.4",
     "postcss-combine-duplicated-selectors": "^10.0.3",
