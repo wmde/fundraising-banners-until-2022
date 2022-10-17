@@ -42,5 +42,6 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		slides: Slides,
 		bannerType: BannerType.CTRL,
+		formActionProps: { locale: 'en_GB' }
 	}
 );

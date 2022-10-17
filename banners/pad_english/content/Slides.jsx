@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import InfoIcon from '../../../components/Icons/InfoIcon'
+import InfoIcon from '../../../components/Icons/InfoIcon';
 
 export default function Slides( dynamicCampaignText ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = dynamicCampaignText;
