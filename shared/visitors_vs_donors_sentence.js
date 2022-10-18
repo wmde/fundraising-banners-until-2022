@@ -5,24 +5,21 @@ export default class VisitorsVsDonorsSentence {
 	/**
 	 * @param {number} millionImpressionsPerDay
 	 * @param {string} projectedNumberOfDonors
-	 * @param {number} daysSinceCampaignStart
 	 * @param {string} text
+	 * @param {string} textNoImpressions
 	 */
-	constructor( millionImpressionsPerDay, projectedNumberOfDonors, daysSinceCampaignStart, text ) {
+	constructor( millionImpressionsPerDay, projectedNumberOfDonors, text, textNoImpressions ) {
 		this.millionImpressionsPerDay = millionImpressionsPerDay;
 		this.projectedNumberOfDonors = projectedNumberOfDonors;
-		this.daysSinceCampaignStart = daysSinceCampaignStart;
 		this.text = text;
+		this.textNoImpressions = textNoImpressions;
 	}
 
 	getSentence() {
-		if ( this.daysSinceCampaignStart >= 1 ) {
-			return this.text
-				.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay.toString() )
-				.replace( '{{totalNumberOfDonors}}', this.projectedNumberOfDonors );
-		}
-		return '';
-
+		const text = this.millionImpressionsPerDay === 0 ? this.textNoImpressions : this.text;
+		return text
+			.replace( '{{millionImpressionsPerDay}}', this.millionImpressionsPerDay.toString() )
+			.replace( '{{totalNumberOfDonors}}', this.projectedNumberOfDonors );
 	}
 
 }
