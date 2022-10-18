@@ -39,12 +39,12 @@ export default class SoftClose extends Component {
 				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-column-buttons">
 					<button
 						className="wmde-banner-soft-close-button"
-						onClick={ props.onMaybeLater }>
+						onClick={ () => { clearInterval( state.timer ); props.onMaybeLater(); } }>
 						Ja
 					</button>
 					<button
 						className="wmde-banner-soft-close-button"
-						onClick={ props.onCloseBanner }>
+						onClick={ () => { clearInterval( state.timer ); props.onCloseBanner(); } }>
 						Erstmal nicht
 					</button>
 				</div>
