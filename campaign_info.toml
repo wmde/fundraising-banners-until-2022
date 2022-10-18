@@ -127,20 +127,20 @@ orientation = [ "portrait", "landscape"]
 
 # Wikipedia.de Campaign
 [wikipediade]
-campaign_tracking = "wpde-02-211119"
+campaign_tracking = "wpde-01-221103"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
 
 [wikipediade.banners.ctrl]
 filename = "./banners/wpde_desktop/banner_ctrl.js"
-pagename = "B21WPDE_02-211119_ctrl"
-tracking = "wpde-02-211119-ctrl"
+pagename = "B22WPDE_01_ctrl"
+tracking = "wpde-01-221103-ctrl"
 
 [wikipediade.banners.var]
 filename = "./banners/wpde_desktop/banner_var.js"
-pagename = "B21WPDE_02-211119_var"
-tracking = "wpde-02-211119-var"
+pagename = "B22WPDE_01_var"
+tracking = "wpde-01-221103-var"
 
 # Wikipedia.de Mobile Campaign
 [wikipediade_mobile]

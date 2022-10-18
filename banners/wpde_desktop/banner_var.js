@@ -48,6 +48,7 @@ bannerPresenter.present(
 		donationFormStep2: FormStep2,
 		translations: Object.assign( Translations, localTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR
+		bannerType: BannerType.VAR,
+		initialBannerWidth: window.innerWidth
 	}
 );

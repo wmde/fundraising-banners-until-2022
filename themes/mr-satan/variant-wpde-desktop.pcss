@@ -4,6 +4,11 @@
 			padding-bottom: 0;
 		}
 	}
+	&-select-group-container--with-error.select-payment-method {
+		.wmde-banner-select-group {
+			padding-bottom: 8px;
+		}
+	}
 	&-select-group-container.select-interval {
 		.wmde-banner-select-group-option {
 			width: 50%;
@@ -11,5 +16,35 @@
 		.wmde-banner-select-group-option.select-interval-0 {
 			width: 100%;
 		}
+	}
+
+	/*
+	These styles are added because the WPDE desktop form is tall and weird
+	The layout for the element positioning might also be better for other banners
+	and might eventually be moved into the theme from this variant
+	*/
+	&-form-step-2 {
+		&-notice {
+			margin-bottom: auto;
+		}
+		&-options {
+			flex-grow: 0;
+		}
+	}
+
+	&-form {
+		&-button-container {
+			margin-top: auto;
+		}
+	}
+
+	&-form-step-2-custom,
+	&-form-step-2-custom:hover,
+	&-form-step-2-custom:focus,
+	&-form-step-2-custom:link,
+	&-form-step-2-custom:visited,
+	&-form-step-2-custom:visited:hover,
+	&-form-step-2-custom:visited:focus {
+		color: #3366cc;
 	}
 }

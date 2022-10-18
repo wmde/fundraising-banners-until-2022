@@ -45,6 +45,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		translations: Translations,
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL
+		bannerType: BannerType.CTRL,
+		initialBannerWidth: window.innerWidth
 	}
 );
