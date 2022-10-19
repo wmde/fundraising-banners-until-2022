@@ -1,0 +1,59 @@
+.wmde-banner {
+	&-soft-close {
+		background: $color-white;
+		border: 2px solid $color-primary;
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		text-align: center;
+		font-weight: bold;
+
+		&-columns {
+			padding: 8px 27px;
+			flex-wrap: wrap;
+		}
+
+		&-column {
+			flex: 1 1 100%;
+		}
+
+		&-column-buttons {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 10px;
+		}
+
+		&-button {
+			border: 0 none;
+			min-width: 150px;
+			color: $color-white;
+			background-color: $color-secondary;
+			border-radius: 18px;
+			font-size: 14px;
+			line-height: 40px;
+			height: 40px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0 4px;
+		}
+
+		&-prompt {
+			line-height: 32px;
+			height: 32px;
+			padding: 0 10px;
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-family: $banner-font-family;
+		}
+
+		&-countdown-text {
+			display: none;
+		}
+
+		&-countdown-bar {
+			height: 3px;
+		}
+
+		&-countdown-bar-fill {
+			background-color: $color-secondary;
+		}
+	}
+}

@@ -75,6 +75,23 @@ tracking = "org-mob06-221020-var"
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
 orientation = [ "portrait", "landscape"]
 
+# Mobile Campaign
+[mobile_07]
+campaign_tracking = "mob07-ba-221103"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+[mobile_07.banners.ctrl]
+filename = "./banners/mobile_07/banner_ctrl.js"
+pagename = "B22_WMDE_Mobile_Test_07_ctrl"
+tracking = "org-mob07-221103-ctrl"
+
+[mobile_07.banners.var]
+filename = "./banners/mobile_07/banner_var.js"
+pagename = "B22_WMDE_Mobile_Test_07_var"
+tracking = "org-mob07-221103-var"
+
 
 # Mobile English Campaign
 [mobile_english]
