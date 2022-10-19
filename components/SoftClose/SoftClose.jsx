@@ -1,5 +1,6 @@
 import { Component, h } from 'preact';
 import PropTypes from 'prop-types';
+import TranslationContext from '../../shared/components/TranslationContext';
 
 /**
  * A "mini banner" that displays when the user clicks on the regular "close" button.
@@ -55,7 +56,8 @@ export default class SoftClose extends Component {
 		clearInterval( this.state.timer );
 	}
 
-	render( props, state ) {
+	render( props, state, context ) {
+		const Translations = context;
 		return ( <div className="wmde-banner-soft-close">
 			<div className="wmde-banner-soft-close-countdown-bar">
 				<div className="wmde-banner-soft-close-countdown-bar-fill"></div>
@@ -63,28 +65,30 @@ export default class SoftClose extends Component {
 			<div className="wmde-banner-soft-close-columns">
 
 				<div className="wmde-banner-soft-close-column">
-					<span className="wmde-banner-soft-close-prompt">Vielleicht möchten Sie Wikipedia später unterstützen?</span>
+					<span className="wmde-banner-soft-close-prompt">{ Translations[ 'soft-close-prompt' ] }</span>
 				</div>
 
 				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-column-buttons">
 					<button
 						className="wmde-banner-soft-close-button"
 						onClick={ () => { clearInterval( state.timer ); props.onMaybeLater(); } }>
-						Ja
+						{ Translations[ 'soft-close-button-1' ] }
 					</button>
 					<button
 						className="wmde-banner-soft-close-button"
 						onClick={ () => { clearInterval( state.timer ); props.onCloseBanner(); } }>
-						Erstmal nicht
+						{ Translations[ 'soft-close-button-2' ] }
 					</button>
 				</div>
 
-				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text">
-					Diese Mitteilung wird automatisch in <strong> { state.secondsRemaining } Sekunden</strong> ausgeblendet.
-				</div>
+				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text" dangerouslySetInnerHTML={ {
+					__html: Translations[ 'soft-close-countdown-text' ].replace( '{{seconds}}', state.secondsRemaining )
+				} }></div>
 
 			</div>
 		</div> );
 	}
 
 }
+
+SoftClose.contextType = TranslationContext;
