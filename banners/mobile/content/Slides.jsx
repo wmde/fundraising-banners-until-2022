@@ -24,8 +24,8 @@ export default function Slides( dynamicCampaignText ) {
 		},
 		{
 			content: <div>
-				<p><strong>Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen
-					Aufruf.</strong> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
+				<p><span className="wmde-banner-slider-text-animated-highlight">Millionen Menschen nutzen Wikipedia, aber 99&nbsp;% spenden nicht – sie übergehen diesen
+					Aufruf.</span> Die meisten Menschen spenden, weil sie Wikipedia nützlich finden.</p>
 			</div>
 		},
 		{

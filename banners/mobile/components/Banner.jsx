@@ -20,6 +20,11 @@ const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 
+const HighlightState = Object.freeze( {
+	WAITING: Symbol( 'waiting' ),
+	ANIMATE: Symbol( 'animate' )
+} );
+
 export default class Banner extends Component {
 
 	static propTypes = {
@@ -34,7 +39,8 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			isFullPageVisible: false,
-			isFundsModalVisible: false
+			isFundsModalVisible: false,
+			textHighlight: HighlightState.WAITING
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -169,6 +175,18 @@ export default class Banner extends Component {
 		this.startProgressBarInMiniBanner();
 	};
 
+	onFullBannerSlideInFinished = () => {
+		this.startProgressBarInFullPageBanner();
+		this.triggerTextHighlight();
+	};
+
+	triggerTextHighlight() {
+		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
+			return;
+		}
+		this.setState( { textHighlight: HighlightState.ANIMATE } );
+	}
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -178,6 +196,7 @@ export default class Banner extends Component {
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
 			'wmde-banner--full-page': state.isFullPageVisible,
+			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
@@ -205,7 +224,7 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startProgressBarInFullPageBanner(); } }
+					onFinish={ this.onFullBannerSlideInFinished }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
