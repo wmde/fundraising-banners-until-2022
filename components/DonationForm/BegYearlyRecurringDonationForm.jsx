@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { createRef, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../shared/components/TranslationContext';
@@ -63,7 +63,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			setAlternative( null );
 			setFormStep( formSteps.TWO );
 		}
-		e.preventDefault();
+		e?.preventDefault();
 	};
 
 	const onSubmitStep2 = e => {
@@ -80,7 +80,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			}
 			return;
 		}
-		e.preventDefault();
+		e?.preventDefault();
 	};
 
 	const onFormSubmit = e => {
@@ -155,12 +155,15 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		}
 	};
 
+	const formRef = createRef();
+
 	return <form
 		method="post"
 		name="donationForm"
 		onClick={ onFormInteraction }
 		onSubmit={ onFormSubmit }
 		action={ formAction }
+		ref={ formRef }
 		className={ classNames(
 			'wmde-banner-form',
 			{ 'wmde-banner-form--is-step-2': formStep === formSteps.TWO }
@@ -234,6 +237,8 @@ export default function BegYearlyRecurringDonationForm( props ) {
 
 			<FormStep2
 				onFormBack={ onFormBack }
+				onSubmit={ onFormSubmit }
+				formRef={ formRef }
 				onChangeAlternative={ onChangeAlternative }
 				onFormBackToYearly={ onFormBackToYearly }
 				secondPageAmount={ secondPageAmount }

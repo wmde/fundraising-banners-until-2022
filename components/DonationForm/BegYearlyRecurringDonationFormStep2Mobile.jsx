@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useContext, useEffect } from 'preact/hooks';
 import CloseIcon from '../Icons/CloseIconMobile';
 import { Alternatives } from './hooks/use_alternative';
 import TranslationContext from '../../shared/components/TranslationContext';
@@ -7,12 +7,19 @@ import TranslationContext from '../../shared/components/TranslationContext';
 export default function BegYearlyRecurringDonationFormStep2( props ) {
 	const Translations = useContext( TranslationContext );
 
+	// 1. The button clicks update the value of alternative.
+	// 2. We watch the value of alternative for changes
+	// 3. If the value is not null we know the user clicked a button so we submit the form
+	useEffect( () => {
+		if ( props.alternative !== null ) {
+			props.onSubmit();
+			props.formRef.current.submit();
+		}
+	}, [ props.alternative ] );
+
 	const onClickAlternativeButton = e => {
 		e.preventDefault();
 		props.onChangeAlternative( e );
-		// setTimeout is used to wait one tick before submitting
-		// the form to ensure the value in submitValues gets set
-		setTimeout( () => e.target.form.submit() );
 	};
 
 	return <div className="wmde-banner-form-step-2">
