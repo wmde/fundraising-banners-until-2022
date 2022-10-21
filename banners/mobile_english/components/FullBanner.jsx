@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 import Footer from '../../../components/Footer/Footer';
 import ProgressBar from '../../../components/ProgressBar/LegacyProgressBar';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
+import CloseIconChunky from '../../../components/Icons/CloseIconChunky';
 
 export default function FullBanner( props ) {
 	const DonationForm = props.donationForm;
@@ -16,8 +18,7 @@ export default function FullBanner( props ) {
 	};
 
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
-
-		<button className="wmde-banner-close" onClick={ props.onClose }></button>
+		<ButtonClose onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
 
 		<header className="wmde-banner-headline">
 			<span className="wmde-banner-headline-content">the wikimedia fundraising campaign</span>
@@ -50,6 +51,7 @@ export default function FullBanner( props ) {
 			toggleFundsModal={props.toggleFundsModal}
 			scrollToFirstError={ scrollToFirstError }
 			preselectedAmount={ props.preselectedAmount }
+			formActionProps={ props.formActionProps }
 		/>
 		<Footer/>
 

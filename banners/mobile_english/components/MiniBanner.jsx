@@ -2,6 +2,8 @@ import { h } from 'preact';
 import * as PropTypes from 'prop-types';
 import Slider from '../../../components/Slider/Slider';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/LegacyProgressBar';
+import CloseIconChunky from '../../../components/Icons/CloseIconChunky';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 
 export default function MiniBanner( props ) {
 	const Slides = props.slides;
@@ -18,7 +20,7 @@ export default function MiniBanner( props ) {
 	/>;
 
 	return <div className="wmde-banner-mini">
-		<button className="wmde-banner-close" onClick={ props.onClose }></button>
+		<ButtonClose onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
 
 		<header className="wmde-banner-headline">
 			<span className="wmde-banner-headline-content">the wikimedia fundraising campaign</span>

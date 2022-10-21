@@ -46,7 +46,8 @@ bannerPresenter.present(
 		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
 		bannerText: BannerText,
-		slides: Slides
+		slides: Slides,
+		formActionProps: { locale: 'en_GB' }
 	},
-	0
+	95
 );

@@ -1,26 +1,26 @@
 import { h } from 'preact';
 
 export default function Slides( dynamicCampaignText, progressBar ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = dynamicCampaignText;
+	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence, goalDonationSum } = dynamicCampaignText;
 
 	const animatedVisitorsVsDonorsSentence = visitorsVsDonorsSentence ? <span className="wmde-banner-slider-text-animated-highlight">{ visitorsVsDonorsSentence }</span> : '';
 
 	return [
 		{
 			content: <div>
-				<p><strong>Our donation target: n million euros</strong></p>
+				<p><strong>Our donation target: { goalDonationSum } million euros</strong></p>
 				{ progressBar }
 			</div>
 		},
 		{
 			content: <div className="carousel-cell-first">
 				<p><strong>Hi, </strong></p>
-				<p>This { currentDayName }, we humbly ask you to defend Wikipedia's independence.</p>
+				<p>This { currentDayName }, we humbly ask you to defend Wikipedia's independence. { campaignDaySentence }</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>{ campaignDaySentence } 99% of our readers don't give; they simply look the other way. We depend on
+				<p>99% of our readers don't give; they simply look the other way. We depend on
 					donations averaging about €22.66.</p>
 			</div>
 		},
