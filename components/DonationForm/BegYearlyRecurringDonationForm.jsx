@@ -36,7 +36,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ step1ButtonText, setStep1ButtonText ] = useState( Translations[ 'submit-label' ] );
 	const [ secondPageAmount, setSecondPageAmount ] = useState( '0' );
-	const [ formAction ] = useFormAction( props );
+	const [ formAction ] = useFormAction( props, props.formActionProps ?? {} );
 	const FormStep2 = props.formStep2;
 
 	useEffect(

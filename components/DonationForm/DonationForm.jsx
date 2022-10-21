@@ -24,7 +24,7 @@ export default function DonationForm( props ) {
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
 	] = useAmountWithCustom( null, props.formatters.customAmountInputFormatter );
 	const [ disabledIntervals, disabledPaymentMethods ] = useDisabledFormValues( paymentInterval, paymentMethod );
-	const [ formAction ] = useFormAction( props );
+	const [ formAction ] = useFormAction( props, props.formActionProps ?? {} );
 	const [ isFormValid, setFormValidity ] = useState( true );
 
 	useEffect( () => {
