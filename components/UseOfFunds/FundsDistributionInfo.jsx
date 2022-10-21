@@ -43,8 +43,8 @@ export default class FundsDistributionInfo extends Component {
 
 			{applicationOfFundsData.map( fundsItem => <div
 				key={fundsItem.id}
-				className={classNames( 'funds_distribution_info__text', { active: isActive( fundsItem.id ) } ) }>
-				{fundsItem.text}
+				className={classNames( 'funds_distribution_info__text', { active: isActive( fundsItem.id ) } ) }
+				dangerouslySetInnerHTML={ { __html: fundsItem.text } }>
 			</div> )}
 
 		</div>;

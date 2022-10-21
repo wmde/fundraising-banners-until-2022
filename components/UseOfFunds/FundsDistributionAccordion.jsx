@@ -37,7 +37,7 @@ export default class FundsDistributionAccordion extends Component {
 				>
 					{fundsItem.title} {fundsItem.percentage}%
 				</div>
-				<div className="funds_distribution_info_item__text">{fundsItem.text}</div>
+				<div className="funds_distribution_info_item__text" dangerouslySetInnerHTML={ { __html: fundsItem.text } }></div>
 			</div> )}
 
 		</div>;
