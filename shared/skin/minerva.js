@@ -10,6 +10,7 @@ export default class Minerva extends Skin {
 		this.viewport = $( '#mw-mf-viewport' );
 		this.navigation = $( '#mw-mf-page-left' );
 		this.searchField = $( '#searchInput, input.search' );
+		this.searchButton = $( '#searchIcon' );
 	}
 
 	addSpace( bannerHeight, transition ) {
@@ -37,6 +38,10 @@ export default class Minerva extends Skin {
 				onSearchFocusWhenBannerIsVisible();
 			} );
 		}
+		this.searchButton.on( 'click', () => {
+			onSearchFocusWhenBannerIsLoading();
+			onSearchFocusWhenBannerIsVisible();
+		} );
 	}
 
 	addEditorObserver( onEdit ) {
