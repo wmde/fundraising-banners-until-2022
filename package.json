@@ -51,7 +51,7 @@
     "postcss": "^8.4.17",
     "postcss-calc": "^8.2.4",
     "postcss-combine-duplicated-selectors": "^10.0.3",
-    "postcss-custom-properties": "^12.1.9",
+    "postcss-custom-properties": "^12.1.10",
     "postcss-import": "^15.0.0",
     "postcss-load-config": "^4.0.1",
     "postcss-loader": "^7.0.0",
