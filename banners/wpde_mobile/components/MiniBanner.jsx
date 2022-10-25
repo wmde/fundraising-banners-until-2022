@@ -1,50 +1,48 @@
 import { h } from 'preact';
-import ProgressBar, { AmountToShowOnRight } from '../../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
-import Slider from '../../../shared/components/Slider';
-import Slides from './Slides';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
+import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
+import Slider from '../../../components/Slider/Slider';
 
 export default function MiniBanner( props ) {
+	const Slides = props.slides;
 	const campaignProjection = props.campaignProjection;
 	const ProgressBarComponent = <ProgressBar
-		formatters={props.formatters}
-		daysLeft={campaignProjection.getRemainingDays()}
-		donationAmount={campaignProjection.getProjectedDonationSum()}
-		goalDonationSum={campaignProjection.goalDonationSum}
-		missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-		setStartAnimation={props.setStartAnimation}
-		animate={true}
-		amountToShowOnRight={AmountToShowOnRight.MISSING}
+		formatters={ props.formatters }
+		daysLeft={ campaignProjection.getRemainingDays() }
+		donationAmount={ campaignProjection.getProjectedDonationSum() }
+		goalDonationSum={ campaignProjection.goalDonationSum }
+		missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+		setStartAnimation={ props.setStartAnimation }
+		animate={ true }
+		amountToShowOnRight={ AmountToShowOnRight.TOTAL }
+		isLateProgress={ props.campaignParameters.isLateProgress }
 	/>;
-	return <div className="mini-banner">
-		<div className="mini-banner__box">
-			<div className="mini-banner__content">
-				<header className="headline">
-					<div className="headline__container">
-						<span className="headline__content">Die Wikimedia-Spendenkampagne</span>
-					</div>
-				</header>
-				<div className="close-button" onClick={props.onClose}>
-					{ props.setCookie ? <img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/> : '' }
-				</div>
 
-				<div className="banner__slideshow">
-					<Slider
-						slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
-						onSlideChange={ props.onSlideChange }
-						registerAutoplay={ props.registerSliderAutoplayCallbacks }
-						interval={ props.sliderAutoPlaySpeed }
-						sliderOptions={ { loop: false } }
-					/>
-				</div>
-
-				<div className="mini-banner__tab">
-					<div className="mini-banner__tab-inner" onClick={props.onExpandFullpage}>
-						Jetzt spenden
-					</div>
-				</div>
-			</div>
+	return <div className="wmde-banner-mini">
+		<div className="wmde-banner-mini-close">
+			<button className="wmde-banner-mini-close-button" onClick={ props.onClose }><CloseIconMobile/></button>
 		</div>
+
+		<header className="wmde-banner-mini-headline">
+			<div className="wmde-banner-mini-headline-background">
+				<span className="wmde-banner-mini-headline-content">Ist Ihnen Wikipedia 5&nbsp;€ wert?</span>
+			</div>
+		</header>
+
+		<div className="wmde-banner-mini-banner-slideshow">
+			<Slider
+				slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
+				onSlideChange={ props.onSlideChange }
+				registerAutoplay={ props.registerSliderAutoplayCallbacks }
+				interval={ props.sliderAutoPlaySpeed }
+				sliderOptions={ { loop: false } }
+			/>
+		</div>
+
+		<button className="wmde-banner-mini-button" onClick={ props.onExpandFullpage }>
+			Jetzt spenden
+		</button>
 	</div>;
 }
 
@@ -54,6 +52,6 @@ MiniBanner.propTypes = {
 	formatters: PropTypes.object,
 	campaignProjection: PropTypes.any,
 	campaignParameters: PropTypes.object,
-	setStartAnimation: PropTypes.func,
+	startAnimation: PropTypes.func,
 	onExpandFullpage: PropTypes.func
 };

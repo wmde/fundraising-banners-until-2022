@@ -1,4 +1,4 @@
-import FormItemsBuilder, { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
+import FormItemsBuilder, { Intervals, PaymentMethods } from '../../components/DonationForm/FormItemsBuilder';
 
 export function createFormItems( translations, amountFormatter ) {
 	const builder = new FormItemsBuilder( translations, amountFormatter );
@@ -11,7 +11,7 @@ export function createFormItems( translations, amountFormatter ) {
 	builder.setPaymentMethods(
 		PaymentMethods.PAYPAL,
 		PaymentMethods.CREDIT_CARD,
-		PaymentMethods.DIRECT_DEBIT,
+		{ ...PaymentMethods.DIRECT_DEBIT, notice: 'address-type-notice-direct-debit' },
 		PaymentMethods.BANK_TRANSFER,
 		PaymentMethods.SOFORT
 	);

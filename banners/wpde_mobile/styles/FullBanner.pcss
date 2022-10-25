@@ -1,0 +1,82 @@
+.wmde-banner {
+	&-full {
+		border: 2px solid $color-primary;
+		background: $color-white;
+
+		p {
+			margin: 0;
+			padding-bottom: 16px;
+			line-height: 1.5;
+		}
+
+		&-close {
+			position: absolute;
+			top: 16px;
+			right: 16px;
+			height: 25px;
+			background: $color-white;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			.close-button {
+				text-decoration: underline;
+			}
+		}
+
+		&-info {
+			padding: 16px;
+		}
+
+		&-call-to-action {
+			position: relative;
+			color: $color-white;
+			background: $color-primary;
+			font-weight: bold;
+			height: 31px;
+			line-height: 31px;
+			text-align: center;
+
+			&-optional-text {
+				display: none;
+
+				@media ( min-width: $breakpoint-tablet-portrait ) {
+					display: inline;
+				}
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: -4px;
+				left: 50%;
+				margin-left: -4px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 4px 4px 0;
+				border-color: $color-primary transparent transparent transparent;
+			}
+		}
+
+		.banner-text-title {
+			margin-right: 30px;
+		}
+
+		&-small-print {
+			text-align: center;
+			font-size: 12px;
+			margin-bottom: 16px;
+
+			a {
+				color: $color-gray;
+
+				&:hover,
+				&:focus {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

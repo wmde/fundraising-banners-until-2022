@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles_var/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
@@ -8,16 +8,18 @@ import { getTrackingIds } from '../../shared/tracking_ids';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
-import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
+import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
+import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2Mobile';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 
-import Banner, { BannerType } from './components/Banner_var';
-import Slides from './components/Slides';
-import BannerText from './components/BannerText';
-import DonationForm from './components/ui/form/DonationFormWithHeaders_var';
+import Banner from './components/Banner_var';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { BannerType } from '../../shared/BannerType';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -30,8 +32,6 @@ const bannerPresenter = new BannerPresenter(
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
-const sliderHeading = 'Wie viel ist Ihnen Wikipedia wert?';
-
 bannerPresenter.present(
 	Banner,
 	bannerContainer,
@@ -41,14 +41,14 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
-		bannerText: BannerText,
-		slides: Slides,
-		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
-		sliderHeading: sliderHeading
+		donationForm: DonationForm,
+		donationFormStep2: FormStep2,
+		bannerText: BannerText,
+		slides: Slides
 	},
 	0
 );
