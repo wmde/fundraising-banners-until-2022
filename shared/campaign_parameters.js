@@ -25,7 +25,8 @@ export class HtmlDataCampaignParameters {
 			millionImpressionsPerDay: data.millionImpressionsPerDay,
 			startDate: data.campaignStartDate,
 			endDate: data.campaignEndDate,
-			numberOfMembers: Number( data.numberOfMembers )
+			numberOfMembers: Number( data.numberOfMembers ),
+			isLateProgress: data.isLateProgress
 		};
 	}
 }
@@ -49,7 +50,8 @@ export class WindowCampaignParameters {
 			millionImpressionsPerDay: window.GlobalBannerSettings[ 'impressions-per-day-in-million' ],
 			startDate: window.GlobalBannerSettings[ 'campaign-start-date' ],
 			endDate: window.GlobalBannerSettings[ 'campaign-end-date' ],
-			numberOfMembers: window.GlobalBannerSettings.numberOfMembers
+			numberOfMembers: window.GlobalBannerSettings.numberOfMembers,
+			isLateProgress: window.GlobalBannerSettings[ 'is-late-progress' ]
 		};
 	}
 }
@@ -75,7 +77,8 @@ export class DevCampaignParameters {
 			millionImpressionsPerDay: DevGlobalBannerSettings[ 'impressions-per-day-in-million' ],
 			startDate: DevGlobalBannerSettings[ 'campaign-start-date' ],
 			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ],
-			numberOfMembers: DevGlobalBannerSettings.numberOfMembers
+			numberOfMembers: DevGlobalBannerSettings.numberOfMembers,
+			isLateProgress: DevGlobalBannerSettings[ 'is-late-progress' ]
 		};
 	}
 }

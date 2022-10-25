@@ -10,5 +10,6 @@ module.exports = {
 	'campaign-start-date': '2022-11-03',
 	'campaign-end-date': '2022-12-31',
 	'banner-close-track-ratio': 1,
-	'average-amount-per-donation': 21.6
+	'average-amount-per-donation': 21.6,
+	'is-late-progress': false
 };
