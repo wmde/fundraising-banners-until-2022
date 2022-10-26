@@ -195,6 +195,9 @@ export class Banner extends Component {
 			<TranslationContext.Provider value={props.translations}>
 				<div className="wmde-banner-wrapper">
 					<ButtonClose onClick={ this.closeBanner }/>
+					{ state.bannerVisibilityState === BannerVisibilityState.CLOSED && (
+						<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
+					) }
 					<div className="wmde-banner-content">
 						<div className="wmde-banner-column-left">
 							{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
