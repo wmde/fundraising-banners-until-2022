@@ -32,6 +32,9 @@ export default function DonationForm( props ) {
 	}, [ intervalValidity, amountValidity, paymentMethodValidity ] );
 
 	const validate = e => {
+		if ( customAmount ) {
+			validateCustomAmount( customAmount );
+		}
 		if ( [
 			[ intervalValidity, setIntervalValidity ],
 			[ amountValidity, setAmountValidity ],
@@ -83,19 +86,13 @@ export default function DonationForm( props ) {
 					fieldname="select-amount"
 					value={ customAmount }
 					selectedAmount={ selectedAmount }
-					onInput={ e => {
-						updateCustomAmount( e.target.value );
-						validateCustomAmount( e.target.value );
-					} }
-					onBlur={ e => {
-						validateCustomAmount( e.target.value );
-					} }
+					onInput={ e => updateCustomAmount( e.target.value ) }
+					onBlur={ e => validateCustomAmount( e.target.value ) }
 					placeholder={ props.customAmountPlaceholder }
 					language={
 						/* eslint-disable-next-line dot-notation */
 						Translations[ 'LANGUAGE' ]
 					}
-					o
 				/>
 			</SelectGroup>
 		</fieldset>
