@@ -81,9 +81,6 @@ export default class BannerTransition extends Component {
 	}
 
 	adjustPositionForFirstBanner = ( firstBannerHeight ) => {
-		if ( this.props.hasStaticParent ) {
-			return;
-		}
 		this.setState( { miniBannerHeight: firstBannerHeight } );
 	};
 

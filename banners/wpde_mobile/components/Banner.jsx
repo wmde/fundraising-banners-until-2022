@@ -230,7 +230,7 @@ export default class Banner extends Component {
 					onFinish={ this.onFullBannerSlideInFinished }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
-					hasStaticParent={ false }
+					hasStaticParent={ true }
 					ref={ this.fullBannerTransitionRef }
 				>
 					<FullBanner
