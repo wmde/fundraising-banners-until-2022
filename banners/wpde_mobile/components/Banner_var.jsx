@@ -215,6 +215,9 @@ export default class Banner extends Component {
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
+			{ state.displayState === CLOSED && (
+				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
+			) }
 			<TranslationContext.Provider value={ props.translations }>
 				<BannerTransition
 					fixed={ true }

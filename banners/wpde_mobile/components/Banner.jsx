@@ -38,7 +38,6 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			setCookie: false,
 			isFullPageVisible: false,
 			isFundsModalVisible: false,
 			textHighlight: HighlightState.WAITING
@@ -154,7 +153,6 @@ export default class Banner extends Component {
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
-			setCookie: true,
 			isFullPageVisible: false
 		} );
 		this.props.onClose(
@@ -202,6 +200,9 @@ export default class Banner extends Component {
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
+			{ state.displayState === CLOSED && (
+				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
+			) }
 			<TranslationContext.Provider value={ props.translations }>
 				<BannerTransition
 					fixed={ true }
@@ -213,7 +214,6 @@ export default class Banner extends Component {
 				>
 					<MiniBanner
 						{ ...props }
-						setCookie={ state.setCookie }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
@@ -236,7 +236,6 @@ export default class Banner extends Component {
 					<FullBanner
 						{...props}
 						onSubmit={ props.onSubmit }
-						setCookie={ state.setCookie }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						donationForm={ props.donationForm }
