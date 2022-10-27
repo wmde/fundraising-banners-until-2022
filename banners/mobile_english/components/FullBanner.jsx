@@ -2,7 +2,7 @@ import { h } from 'preact';
 import classNames from 'classnames';
 
 import Footer from '../../../components/Footer/Footer';
-import ProgressBar from '../../../components/ProgressBar/LegacyProgressBar';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import CloseIconChunky from '../../../components/Icons/CloseIconChunky';
 
@@ -35,8 +35,8 @@ export default function FullBanner( props ) {
 					goalDonationSum={ props.campaignProjection.goalDonationSum }
 					missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
 					setStartAnimation={ props.setStartAnimation }
-					animate={ true }
-				/>
+					isLateProgress={ props.campaignParameters.isLateProgress }
+					amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 			</div>
 		</div>
 		<div className="wmde-banner-full-call-to-action"></div>
