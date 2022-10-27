@@ -22,11 +22,11 @@ export class HtmlDataCampaignParameters {
 				donorsPerMinute: Number( data.donorsPerMinute ),
 				averageAmountPerDonation: Number( data.averageAmountPerDonation )
 			},
-			millionImpressionsPerDay: data.millionImpressionsPerDay,
+			millionImpressionsPerDay: Number( data.millionImpressionsPerDay ),
 			startDate: data.campaignStartDate,
 			endDate: data.campaignEndDate,
 			numberOfMembers: Number( data.numberOfMembers ),
-			isLateProgress: data.isLateProgress
+			isLateProgress: data.isLateProgress === 'true'
 		};
 	}
 }
