@@ -5,7 +5,7 @@ import debounce from '../../../shared/debounce';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
-import FullBanner from './FullBanner_var';
+import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
@@ -19,11 +19,6 @@ const VISIBLE = 1;
 const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
-
-const HighlightState = Object.freeze( {
-	WAITING: Symbol( 'waiting' ),
-	ANIMATE: Symbol( 'animate' )
-} );
 
 export default class Banner extends Component {
 
@@ -39,8 +34,7 @@ export default class Banner extends Component {
 		this.state = {
 			displayState: PENDING,
 			isFullPageVisible: false,
-			isFundsModalVisible: false,
-			textHighlight: HighlightState.WAITING
+			isFundsModalVisible: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -152,6 +146,15 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
+	submitBanner = () => {
+		this.props.trackingData.tracker.trackBannerEvent(
+			'submit',
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			1
+		);
+	};
+
 	closeBanner = e => {
 		e.preventDefault();
 		this.setState( {
@@ -175,26 +178,6 @@ export default class Banner extends Component {
 		this.startProgressBarInMiniBanner();
 	};
 
-	onDonationFormPage2 = () => {
-		this.trackBannerEvent( 'second-form-page-shown' );
-	};
-
-	onDonationFormChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
-	};
-
-	onFullBannerSlideInFinished = () => {
-		this.startProgressBarInFullPageBanner();
-		this.triggerTextHighlight();
-	};
-
-	triggerTextHighlight() {
-		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
-			return;
-		}
-		this.setState( { textHighlight: HighlightState.ANIMATE } );
-	}
-
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -204,7 +187,6 @@ export default class Banner extends Component {
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
 			'wmde-banner--full-page': state.isFullPageVisible,
-			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
@@ -232,7 +214,7 @@ export default class Banner extends Component {
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ this.onFullBannerSlideInFinished }
+					onFinish={ () => { this.startProgressBarInFullPageBanner(); } }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ false }
@@ -240,13 +222,9 @@ export default class Banner extends Component {
 				>
 					<FullBanner
 						{...props}
-						onPage2={ this.onDonationFormPage2 }
-						onSubmit={ props.onSubmit }
-						onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
-						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-						onChangeToYearly={ this.onDonationFormChangeToYearly }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
+						onSubmit={ this.submitBanner }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }

@@ -9,8 +9,7 @@ import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
-import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2Mobile';
+import DonationForm from '../../components/DonationForm/DonationFormPreselectableAmount';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 
@@ -46,7 +45,6 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
-		donationFormStep2: FormStep2,
 		bannerText: BannerText,
 		slides: Slides
 	},
