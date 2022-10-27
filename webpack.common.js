@@ -22,7 +22,7 @@ module.exports = {
 			},
 			// Inject tracking IDs into WPDE banner entry points
 			{
-				test: /wikipedia\.de.*banner(_ctrl|_var)\.js/,
+				test: /(wpde_desktop|wpde_mobile)\/banner(_ctrl|_var)\.js/,
 				use: [
 					'babel-loader',
 					{
