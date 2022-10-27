@@ -1,72 +1,84 @@
 .wmde-banner {
 	&-progress-bar {
-		&-wrapper {
-			position: relative;
-			height: 26px;
-			line-height: 26px;
-			width: 100%;
-			margin-top: $progress-label-top-offset;
+		font-family: $banner-font-family;
 
-			border: 2px solid $color-primary;
-			border-radius: 13px;
+		&-text {
+			display: flex;
+			justify-content: space-between;
+			font-size: 14px;
 			font-weight: bold;
-			font-size: 12px;
+			margin-bottom: 6px;
 
 			@media ( min-width: 360px ) {
-				font-size: 14px;
+				font-size: 16px;
+			}
+
+			&-left,
+			&-right {
+				height: 18px;
+				line-height: 18px;
+				opacity: 0;
+				transition: opacity 200ms ease-in-out;
+			}
+
+			&-left {
+				padding-left: 16px;
+			}
+
+			&-right {
+				padding-right: 16px;
 			}
 		}
 
-		&-donation-fill,
-		&-donation-remaining {
-			position: absolute;
-			height: 100%;
+		&-fill-wrapper {
+			height: 18px;
+			line-height: 18px;
+			width: 100%;
+			border: 2px solid $color-primary;
+			border-radius: 13px;
 		}
 
-		&-donation_fill {
-			transition-duration: 3000ms;
-			transition-property: width;
-			text-align: left;
+		&-fill {
+			transition: width 3000ms;
 			background: $color-primary;
 			border-radius: 11px;
-		}
+			text-align: right;
+			color: $color-white;
+			font-size: 12px;
+			font-weight: bold;
+			padding-right: 12px;
 
-		&-donation-text,
-		&-donation-remaining,
-		&-days-left {
-			opacity: 0;
-			transition: opacity 200ms ease-in-out;
+			&-text {
+				display: none;
+				opacity: 0;
+				transition: opacity 200ms ease-in-out;
+			}
 		}
 
 		&--finished {
-			.progress-bar-donation_text,
-			.progress-bar-donation_remaining,
-			.progress-bar-days_left {
+			.wmde-banner-progress-bar-text-left,
+			.wmde-banner-progress-bar-text-right,
+			.wmde-banner-progress-bar-fill-text {
 				opacity: 1;
 			}
 		}
 
-		&-donation-text {
-			color: $color-white;
-			float: right;
-			height: 18px;
-			line-height: 18px;
-			white-space: nowrap;
-			font-size: 12px;
-			padding-right: 10px;
-		}
+		&--late-progress {
+			.wmde-banner-progress-bar-text {
+				margin-bottom: 0;
+				font-size: 12px;
 
-		&-days-left {
-			margin-top: -$progress-label-top-offset;
-			width: 100%;
-			padding-left: $progress-label-x-padding;
-		}
-
-		&-donation-remaining {
-			width: 100%;
-			text-align: right;
-			top: -$progress-label-top-offset;
-			padding-right: $progress-label-x-padding;
+				@media ( min-width: 360px ) {
+					font-size: 14px;
+				}
+			}
+			.wmde-banner-progress-bar-fill-wrapper {
+				height: 26px;
+				line-height: 22px;
+			}
+			.wmde-banner-progress-bar-fill-text {
+				display: inline;
+			}
 		}
 	}
 }

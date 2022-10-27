@@ -1,19 +1,18 @@
 .wmde-banner {
 	&-progress-bar {
 		position: relative;
-		font-family: $banner-main-font-family;
-		font-size: 12px;
-		height: $progress-bar-height;
-		line-height: $progress-bar-height;
+		font-size: 0.9em;
 		font-weight: bold;
+		margin-top: 28px;
 
 		&-text {
 			position: absolute;
-			z-index: 2;
 			top: 0;
 			left: 0;
+			z-index: 2;
 			width: 100%;
-			height: 100%;
+			height: 32px;
+			line-height: 32px;
 			display: flex;
 			justify-content: space-between;
 
@@ -25,28 +24,25 @@
 
 			&-left {
 				visibility: hidden;
-				color: $color-white;
 				padding-left: 10px;
 			}
-
 			&-right {
 				padding-right: 10px;
 			}
 		}
 
 		&-fill-wrapper {
-			position: relative;
-			background: $color-secondary-lighter;
-			border-top: 1px solid $color-secondary-light;
-			border-bottom: 1px solid $color-secondary-light;
-			height: $progress-bar-height;
+			border: 2px solid $color-primary;
+			border-radius: 8px;
+			height: 32px;
+			line-height: 28px;
 		}
 
 		&-fill {
-			min-width: 200px;
-			max-width: 100%;
-			background: $color-secondary;
-			border-radius: 0 15px 15px 0;
+			background: $color-primary;
+			min-width: 5em;
+			height: 100%;
+			border-radius: 5px 16px 16px 5px;
 			transition: width 3000ms $banner-easing;
 			color: $color-white;
 			text-align: right;
@@ -67,6 +63,13 @@
 		}
 
 		&--late-progress {
+			margin-top: 0;
+
+			.wmde-banner-progress-bar-text {
+				position: static;
+				height: 24px;
+				line-height: 24px;
+			}
 			.wmde-banner-progress-bar-text-left {
 				@media ( min-width: 600px ) {
 					visibility: visible;

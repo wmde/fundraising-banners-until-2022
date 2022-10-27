@@ -13,15 +13,12 @@ export const AmountToShowOnRight = Object.freeze( {
 	MISSING: Symbol( 'missing' )
 } );
 
-/**
- * When set to true, the "late progress" design will be used
- *
- * @type {boolean}
- */
-const IS_LATE_PROGRESS = true;
-
 export default class ProgressBar extends Component {
 	static contextType = TranslationContext;
+
+	static defaultProps = {
+		isLateProgress: false
+	};
 
 	static propTypes = {
 		/** Locale 'EN' or 'DE', defaults to 'EN' */
@@ -58,7 +55,12 @@ export default class ProgressBar extends Component {
 		/**
 		 * Show the total amount required or amount remaining on the right side
 		 */
-		amountToShowOnRight: PropTypes.string
+		amountToShowOnRight: PropTypes.string,
+
+		/**
+		 * Set the progress bar to late progress layout
+		 */
+		isLateProgress: PropTypes.bool
 	};
 
 	constructor( props ) {
@@ -100,7 +102,8 @@ export default class ProgressBar extends Component {
 	}
 
 	calculateWidth() {
-		return Math.min( ( this.props.donationAmount * 100 ) / this.props.goalDonationSum, 100 );
+		const max = Math.max( ( this.props.donationAmount * 100 ) / this.props.goalDonationSum, 20 );
+		return Math.min( max, 100 );
 	}
 
 	render( props, state, context ) {
@@ -118,18 +121,34 @@ export default class ProgressBar extends Component {
 			}
 			return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
 		};
+		const leftText = () => {
+			if ( props.isLateProgress ) {
+				return getDaysLeft( props.daysLeft );
+			}
+			return getMillion( props.donationAmount );
+		};
+		const innerText = () => {
+			return getMillion( props.donationAmount );
+		};
+
 		return <div className={ classNames( 'wmde-banner-progress-bar', {
-			'wmde-banner-progress-bar--finished': state.animation === ENDED,
 			'wmde-banner-progress-bar--animating': state.animation === STARTED,
-			'wmde-banner-progress-bar--lateprogress': IS_LATE_PROGRESS
+			'wmde-banner-progress-bar--finished': state.animation === ENDED,
+			'wmde-banner-progress-bar--late-progress': props.isLateProgress
 		} ) }>
-			<div className="wmde-banner-progress-bar-wrapper">
-				<div className="wmde-banner-progress-bar-donation-fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
-					<span className="wmde-banner-progress-bar-days-left">{ getDaysLeft( props.daysLeft ) }</span>
-					<span className="wmde-banner-progress-bar-donation-text">{ getMillion( props.donationAmount ) }</span>
+			<div className="wmde-banner-progress-bar-text">
+				<div className="wmde-banner-progress-bar-text-left">
+					{ leftText() }
 				</div>
-				<div className="wmde-banner-progress-bar-donation-remaining wmde-banner-progress-bar-donation-remaining-inner" style={ 'width:' + ( 100 - state.width ) + '%' }>
+				<div className="wmde-banner-progress-bar-text-right">
 					{ rightText() }
+				</div>
+			</div>
+			<div className="wmde-banner-progress-bar-fill-wrapper">
+				<div className="wmde-banner-progress-bar-fill" style={ 'width:' + state.width + '%' } onTransitionEnd={ this.progressAnimationEnded }>
+					<span className="wmde-banner-progress-bar-fill-text">
+						{ innerText() }
+					</span>
 				</div>
 			</div>
 		</div>;

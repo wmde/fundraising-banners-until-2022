@@ -1,5 +1,5 @@
 .wmde-banner {
-	&-progress-bar {
+	&-legacy-progress-bar {
 		display: flex;
 
 		&-donation-text {
@@ -39,33 +39,33 @@
 		}
 
 		&--finished {
-			.wmde-banner-progress-bar-days-left,
-			.wmde-banner-progress-bar-donation-text,
-			.wmde-banner-progress-bar-donation-remaining {
+			.wmde-banner-legacy-progress-bar-days-left,
+			.wmde-banner-legacy-progress-bar-donation-text,
+			.wmde-banner-legacy-progress-bar-donation-remaining {
 				visibility: visible;
 			}
 		}
 
 		@media ( max-width: 600px ) {
-			.wmde-banner-progress-bar-days-left,
-			.wmde-banner-progress-bar--finished .wmde-banner-progress-bar-days-left {
+			.wmde-banner-legacy-progress-bar-days-left,
+			.wmde-banner-legacy-progress-bar--finished .wmde-banner-legacy-progress-bar-days-left {
 				display: none;
 			}
 		}
 
 		&--lateprogress {
-			.wmde-banner-progress-bar-donation-remaining-inner {
+			.wmde-banner-legacy-progress-bar-donation-remaining-inner {
 				display: none;
 			}
 
-			.wmde-banner-progress-bar-donation-remaining-outer {
+			.wmde-banner-legacy-progress-bar-donation-remaining-outer {
 				display: block;
 			}
 
-			.wmde-banner-progress-bar-donation-fill {
+			.wmde-banner-legacy-progress-bar-donation-fill {
 				margin-right: 0;
 			}
-			.wmde-banner-progress-bar-wrapper {
+			.wmde-banner-legacy-progress-bar-wrapper {
 				margin-right: -20px;
 			}
 		}
