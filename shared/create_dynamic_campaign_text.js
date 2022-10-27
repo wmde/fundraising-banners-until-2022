@@ -33,6 +33,7 @@ export default function createDynamicCampaignText( campaignParameters, campaignP
 		donorsNeededSentence: donorsNeededSentence.getSentence(),
 		// FIXME: impressionCounts is not a reactive property this variable doesn't get
 		//        incremented when the banner presenter updates it, we need to figure that out
-		overallImpressionCount: impressionCounts.getOverallCount() + 1
+		overallImpressionCount: impressionCounts.getOverallCount() + 1,
+		goalDonationSum: formatters.millionFormatter( campaignProjection.goalDonationSum / 1000000 )
 	};
 }
