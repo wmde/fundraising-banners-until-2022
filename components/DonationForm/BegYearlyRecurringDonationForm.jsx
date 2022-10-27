@@ -26,7 +26,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const Translations = useContext( TranslationContext );
 	const [ paymentInterval, setInterval, intervalValidity, setIntervalValidity ] = useInterval( null );
 	const [ paymentMethod, setPaymentMethod, paymentMethodValidity, setPaymentMethodValidity ] = usePaymentMethod( null );
-	const [ alternative, setAlternative, alternativeValidity, setAlternativeValidity ] = useAlternative( null );
+	const [ upgradeToYearly, setUpgradeToYearly, upgradeToYearlyValidity, setUpgradeToYearlyValidity ] = useAlternative( null );
 	const [
 		{ numericAmount, amountValidity, selectedAmount, customAmount },
 		{ selectAmount, updateCustomAmount, validateCustomAmount, setAmountValidity }
@@ -63,7 +63,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			}
 			props.onPage2();
 			setSecondPageAmount( customAmount ?? selectedAmount );
-			setAlternative( null );
+			setUpgradeToYearly( null );
 			setFormStep( formSteps.TWO );
 		}
 		e?.preventDefault();
@@ -74,9 +74,9 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			[ intervalValidity, setIntervalValidity ],
 			[ amountValidity, setAmountValidity ],
 			[ paymentMethodValidity, setPaymentMethodValidity ],
-			[ alternativeValidity, setAlternativeValidity ]
+			[ upgradeToYearlyValidity, setUpgradeToYearlyValidity ]
 		].map( validateRequired ).every( isValid ) ) {
-			if ( alternative === Alternatives.YES ) {
+			if ( upgradeToYearly === Alternatives.YES ) {
 				props.onSubmitRecurring();
 			} else {
 				props.onSubmitNonRecurring();
@@ -150,8 +150,8 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		}
 	};
 
-	const onChangeAlternative = e => {
-		setAlternative( e.target.value );
+	const onChooseUpgradeToYearly = e => {
+		setUpgradeToYearly( e.target.value );
 
 		if ( e.target.value === Alternatives.YES ) {
 			setInterval( Intervals.YEARLY.value );
@@ -242,11 +242,11 @@ export default function BegYearlyRecurringDonationForm( props ) {
 				onFormBack={ onFormBack }
 				onSubmit={ onFormSubmit }
 				formRef={ formRef }
-				onChangeAlternative={ onChangeAlternative }
+				onChooseUpgradeToYearly={ onChooseUpgradeToYearly }
 				onFormBackToYearly={ onFormBackToYearly }
 				secondPageAmount={ secondPageAmount }
-				alternative={ alternative }
-				isValid={ isValidOrUnset( alternativeValidity ) }
+				upgradeToYearly={ upgradeToYearly }
+				isValid={ isValidOrUnset( upgradeToYearlyValidity ) }
 			/>
 		</div>
 

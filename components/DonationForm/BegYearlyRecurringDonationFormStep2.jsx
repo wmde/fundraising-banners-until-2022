@@ -28,8 +28,8 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 						<label>
 							<input
 								type="radio"
-								onClick={ props.onChangeAlternative }
-								checked={ props.alternative === Alternatives.NO }
+								onClick={ props.onChooseUpgradeToYearly }
+								checked={ props.upgradeToYearly === Alternatives.NO }
 								name="alternative"
 								value={ Alternatives.NO }
 								className="wmde-banner-select-group-input"/>
@@ -40,8 +40,8 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 						<label>
 							<input
 								type="radio"
-								onClick={ props.onChangeAlternative }
-								checked={ props.alternative === Alternatives.YES }
+								onClick={ props.onChooseUpgradeToYearly }
+								checked={ props.upgradeToYearly === Alternatives.YES }
 								name="alternative"
 								value={ Alternatives.YES }
 								className="wmde-banner-select-group-input"/>

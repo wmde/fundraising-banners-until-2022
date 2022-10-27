@@ -11,15 +11,15 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 	// 2. We watch the value of alternative for changes
 	// 3. If the value is not null we know the user clicked a button so we submit the form
 	useEffect( () => {
-		if ( props.alternative !== null ) {
+		if ( props.upgradeToYearly !== null ) {
 			props.onSubmit();
 			props.formRef.current.submit();
 		}
-	}, [ props.alternative ] );
+	}, [ props.upgradeToYearly ] );
 
 	const onClickAlternativeButton = e => {
 		e.preventDefault();
-		props.onChangeAlternative( e );
+		props.onChooseUpgradeToYearly( e );
 	};
 
 	return <div className="wmde-banner-form-step-2">
