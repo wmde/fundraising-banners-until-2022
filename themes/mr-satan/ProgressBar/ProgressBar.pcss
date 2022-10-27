@@ -1,0 +1,80 @@
+.wmde-banner {
+	&-progress-bar {
+		position: relative;
+		font-size: 0.9em;
+		font-weight: bold;
+		margin-top: 28px;
+
+		&-text {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+			width: 100%;
+			height: 32px;
+			line-height: 32px;
+			display: flex;
+			justify-content: space-between;
+
+			&-left,
+			&-right {
+				opacity: 0;
+				transition: opacity 300ms $banner-easing;
+			}
+
+			&-left {
+				visibility: hidden;
+				padding-left: 10px;
+			}
+			&-right {
+				padding-right: 10px;
+			}
+		}
+
+		&-fill-wrapper {
+			border: 2px solid $color-primary;
+			border-radius: 8px;
+			height: 32px;
+			line-height: 28px;
+		}
+
+		&-fill {
+			background: $color-primary;
+			min-width: 5em;
+			height: 100%;
+			border-radius: 5px 16px 16px 5px;
+			transition: width 3000ms $banner-easing;
+			color: $color-white;
+			text-align: right;
+			padding-right: 16px;
+
+			&-text {
+				opacity: 0;
+				transition: opacity 300ms $banner-easing;
+			}
+		}
+
+		&--finished {
+			.wmde-banner-progress-bar-text-left,
+			.wmde-banner-progress-bar-text-right,
+			.wmde-banner-progress-bar-fill-text {
+				opacity: 1;
+			}
+		}
+
+		&--late-progress {
+			margin-top: 0;
+
+			.wmde-banner-progress-bar-text {
+				position: static;
+				height: 24px;
+				line-height: 24px;
+			}
+			.wmde-banner-progress-bar-text-left {
+				@media ( min-width: 600px ) {
+					visibility: visible;
+				}
+			}
+		}
+	}
+}
