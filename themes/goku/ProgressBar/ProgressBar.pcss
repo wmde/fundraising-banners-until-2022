@@ -1,67 +1,76 @@
 .wmde-banner {
-	&-progress_bar {
+	&-progress-bar {
+		position: relative;
 		font-family: $banner-main-font-family;
 		font-size: 12px;
-		line-height: 30px;
+		height: $progress-bar-height;
+		line-height: $progress-bar-height;
+		font-weight: bold;
 
-		&-days_left,
-		&-donation-text,
-		&-donation-remaining {
-			opacity: 0;
-			visibility: hidden;
-			transition: opacity 300ms $banner-easing;
-		}
-		&-days-left {
-			font-weight: bold;
-			color: $color-white;
-		}
+		&-text {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: space-between;
 
-		&-wrapper {
-			height: $progress-bar-height;
-			border-top: 1px solid $color-secondary-light;
-			border-bottom: 1px solid $color-secondary-light;
-			background-color: $color-secondary-lighter;
-		}
-		&-donation-fill {
-			background: $color-secondary;
-			height: $progress-bar-height;
-			border-radius: 0 15px 15px 0;
-			transition: width 3000ms $banner-easing;
-		}
-		&-donation-text {
-			font-weight: bold;
-			color: $color-white;
-		}
-		&-donation-remaining {
-			text-align: right;
-			font-weight: bold;
-			color: $color-black;
-		}
-		&-pointer-tip {
-			background: $color-black;
-			border-radius: 100%;
-		}
+			&-left,
+			&-right {
+				opacity: 0;
+				transition: opacity 300ms $banner-easing;
+			}
 
-		&-pointer-line {
-			background: $color-black;
-		}
-		&-donation-remaining-outer {
-			font-weight: bold;
-		}
+			&-left {
+				visibility: hidden;
+				color: $color-white;
+				padding-left: 10px;
+			}
 
-		&-finished {
-			.progress-bar-days-left,
-			.progress-bar-donation-text,
-			.progress-bar-donation-remaining {
-				opacity: 1;
-				visibility: visible;
+			&-right {
+				padding-right: 10px;
 			}
 		}
 
-		@media ( max-width: 600px ) {
-			.progress-bar-days-left,
-			.progress-bar-finished .progress-bar-days-left {
-				display: none;
+		&-fill-wrapper {
+			position: relative;
+			background: $color-secondary-lighter;
+			border-top: 1px solid $color-secondary-light;
+			border-bottom: 1px solid $color-secondary-light;
+			height: $progress-bar-height;
+		}
+
+		&-fill {
+			min-width: 200px;
+			max-width: 100%;
+			background: $color-secondary;
+			border-radius: 0 15px 15px 0;
+			transition: width 3000ms $banner-easing;
+			color: $color-white;
+			text-align: right;
+			padding-right: 16px;
+
+			&-text {
+				opacity: 0;
+				transition: opacity 300ms $banner-easing;
+			}
+		}
+
+		&--finished {
+			.wmde-banner-progress-bar-text-left,
+			.wmde-banner-progress-bar-text-right,
+			.wmde-banner-progress-bar-fill-text {
+				opacity: 1;
+			}
+		}
+
+		&--late-progress {
+			.wmde-banner-progress-bar-text-left {
+				@media ( min-width: 600px ) {
+					visibility: visible;
+				}
 			}
 		}
 	}
