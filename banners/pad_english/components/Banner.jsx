@@ -14,7 +14,7 @@ import Slides from '../content/Slides';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import Slider from '../../../components/Slider/Slider';
-import ProgressBar from '../../../components/ProgressBar/LegacyProgressBar';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import Footer from '../../../components/Footer/Footer';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
@@ -193,12 +193,14 @@ export default class Banner extends Component {
 									sliderOptions={ { loop: false } }
 								/>
 								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}/>
+									formatters={ props.formatters }
+									daysLeft={ campaignProjection.getRemainingDays() }
+									donationAmount={ campaignProjection.getProjectedDonationSum() }
+									goalDonationSum={ campaignProjection.goalDonationSum }
+									missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+									setStartAnimation={ this.registerStartProgressbar }
+									isLateProgress={ props.campaignParameters.isLateProgress }
+									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
