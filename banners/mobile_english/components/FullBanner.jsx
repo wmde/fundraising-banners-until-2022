@@ -56,14 +56,6 @@ export default function FullBanner( props ) {
 		<Footer/>
 
 		<div className="wmde-banner-footer-small-print">
-			<a href={`https://spenden.wikimedia.de/spenden/Impressum?${ props.trackingParams }`} target="_blank">
-				Legal Details
-			</a>
-			<span className="separator"> | </span>
-			<a href={`https://spenden.wikimedia.de/spenden/Datenschutz?${ props.trackingParams }`} target="_blank">
-				Privacy Policy
-			</a>
-			<span className="separator"> | </span>
 			<a className="application-of-funds-link" href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`} onClick={ props.toggleFundsModal } >
 				Where does my donation go?
 			</a>
