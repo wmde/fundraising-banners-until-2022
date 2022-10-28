@@ -2,6 +2,11 @@
 	&-soft-close {
 		background: $color-white;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		text-align: center;
+
+		@media ( min-width: $breakpoint-s ) {
+			text-align: left;
+		}
 
 		&-columns {
 			padding: 8px 27px;
@@ -9,11 +14,24 @@
 		}
 
 		&-column {
-			flex: 1 1 30%;
+			flex: 1 1 100%;
+
+			@media ( min-width: $breakpoint-s ) {
+				flex: 1 1 30%;
+			}
 		}
 
 		&-column-buttons {
 			display: flex;
+			justify-content: center;
+
+			@media ( min-width: $breakpoint-s ) {
+				justify-content: flex-end;
+			}
+
+			@media ( min-width: $breakpoint-l ) {
+				justify-content: flex-start;
+			}
 		}
 
 		&-button {
