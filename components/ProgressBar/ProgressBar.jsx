@@ -102,8 +102,7 @@ export default class ProgressBar extends Component {
 	}
 
 	calculateWidth() {
-		const max = Math.max( ( this.props.donationAmount * 100 ) / this.props.goalDonationSum, 20 );
-		return Math.min( max, 100 );
+		return Math.min( ( this.props.donationAmount * 100 ) / this.props.goalDonationSum, 100 );
 	}
 
 	render( props, state, context ) {
