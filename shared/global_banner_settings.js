@@ -11,5 +11,12 @@ module.exports = {
 	'campaign-end-date': '2022-12-31',
 	'banner-close-track-ratio': 1,
 	'average-amount-per-donation': 21.6,
-	'is-late-progress': false
+	'is-late-progress': false,
+	'use-of-funds-figures': {
+		software: 18,
+		international: 37,
+		communities: 14,
+		society: 11,
+		operative: 20
+	}
 };

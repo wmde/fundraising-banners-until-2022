@@ -26,7 +26,14 @@ export class HtmlDataCampaignParameters {
 			startDate: data.campaignStartDate,
 			endDate: data.campaignEndDate,
 			numberOfMembers: Number( data.numberOfMembers ),
-			isLateProgress: data.isLateProgress === 'true'
+			isLateProgress: data.isLateProgress === 'true',
+			useOfFundsFigures: {
+				software: Number( data.useOfFundsSoftware ),
+				international: Number( data.useOfFundsInternational ),
+				communities: Number( data.useOfFundsCommunities ),
+				society: Number( data.useOfFundsSociety ),
+				operative: Number( data.useOfFundsOperative )
+			}
 		};
 	}
 }
@@ -51,7 +58,8 @@ export class WindowCampaignParameters {
 			startDate: window.GlobalBannerSettings[ 'campaign-start-date' ],
 			endDate: window.GlobalBannerSettings[ 'campaign-end-date' ],
 			numberOfMembers: window.GlobalBannerSettings.numberOfMembers,
-			isLateProgress: window.GlobalBannerSettings[ 'is-late-progress' ]
+			isLateProgress: window.GlobalBannerSettings[ 'is-late-progress' ],
+			useOfFundsFigures: window.GlobalBannerSettings[ 'use-of-funds-figures' ]
 		};
 	}
 }
@@ -78,7 +86,8 @@ export class DevCampaignParameters {
 			startDate: DevGlobalBannerSettings[ 'campaign-start-date' ],
 			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ],
 			numberOfMembers: DevGlobalBannerSettings.numberOfMembers,
-			isLateProgress: DevGlobalBannerSettings[ 'is-late-progress' ]
+			isLateProgress: DevGlobalBannerSettings[ 'is-late-progress' ],
+			useOfFundsFigures: DevGlobalBannerSettings[ 'use-of-funds-figures' ]
 		};
 	}
 }
