@@ -20,6 +20,7 @@ import useOfFundsText from 'fundraising-frontend-content/i18n/en_GB/data/use_of_
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import overrideUseOfFundsFigures from '../../shared/override_use_of_funds_figures';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -41,7 +42,7 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		useOfFundsText,
+		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		donationForm: DonationForm,
 		donationFormStep2: DonationFormStep2,
 		footer: Footer,
