@@ -27,6 +27,7 @@ export class HtmlDataCampaignParameters {
 			endDate: data.campaignEndDate,
 			numberOfMembers: Number( data.numberOfMembers ),
 			isLateProgress: data.isLateProgress === 'true',
+			useOfFundsProvisional: data.useOfFundsProvisional === 'true',
 			useOfFundsFigures: {
 				software: Number( data.useOfFundsSoftware ),
 				international: Number( data.useOfFundsInternational ),
@@ -59,6 +60,7 @@ export class WindowCampaignParameters {
 			endDate: window.GlobalBannerSettings[ 'campaign-end-date' ],
 			numberOfMembers: window.GlobalBannerSettings.numberOfMembers,
 			isLateProgress: window.GlobalBannerSettings[ 'is-late-progress' ],
+			useOfFundsProvisional: window.GlobalBannerSettings[ 'use-of-funds-provisional' ],
 			useOfFundsFigures: window.GlobalBannerSettings[ 'use-of-funds-figures' ]
 		};
 	}
@@ -87,6 +89,7 @@ export class DevCampaignParameters {
 			endDate: DevGlobalBannerSettings[ 'campaign-end-date' ],
 			numberOfMembers: DevGlobalBannerSettings.numberOfMembers,
 			isLateProgress: DevGlobalBannerSettings[ 'is-late-progress' ],
+			useOfFundsProvisional: DevGlobalBannerSettings[ 'use-of-funds-provisional' ],
 			useOfFundsFigures: DevGlobalBannerSettings[ 'use-of-funds-figures' ]
 		};
 	}

@@ -12,6 +12,7 @@ module.exports = {
 	'banner-close-track-ratio': 1,
 	'average-amount-per-donation': 21.6,
 	'is-late-progress': false,
+	'use-of-funds-provisional': false,
 	'use-of-funds-figures': {
 		software: 18,
 		international: 37,

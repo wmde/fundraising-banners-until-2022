@@ -16,7 +16,7 @@ export default function FundsContent( props ) {
 	return <div className="use_of_funds">
 		<div className="use_of_funds__section">
 			<div className="use_of_funds__section_intro">
-				<h2>{content.intro.headline}</h2>
+				<h2>{content.intro.headline}{ props.figuresAreProvisional && ( <span>*</span> ) }</h2>
 				<div>{content.intro.text}</div>
 			</div>
 			{props.children}
@@ -68,6 +68,7 @@ export default function FundsContent( props ) {
 		<div className="banner_model__section use_of_funds__section--call_to_action">
 			<button className="use_of_funds__button" onClick={onCallToAction}>{content.callToAction}</button>
 		</div>
+		{ props.figuresAreProvisional && ( <div style="text-align: left; font-size: small; padding-bottom: 16px;">*) vorläufig</div> ) }
 	</div>;
 }
 
