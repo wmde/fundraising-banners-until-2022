@@ -11,7 +11,7 @@ import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
-import DonationForm from '../../components/DonationForm/DonationForm';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
 import Footer from '../../components/Footer/Footer';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';

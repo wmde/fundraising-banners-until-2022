@@ -13,6 +13,8 @@ import SlideState from '../../../components/Slider/slide_state';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
+import BegYearlyRecurringDonationFormStep2 from '../../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -57,6 +59,7 @@ export class Banner extends Component {
 			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
+		this.startProgressbar = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
@@ -100,6 +103,7 @@ export class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.triggerTextHighlight();
+		this.startProgressbar();
 	};
 
 	closeBanner = e => {
@@ -110,6 +114,10 @@ export class Banner extends Component {
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
+	};
+
+	registerStartProgressbar = ( startPb ) => {
+		this.startProgressbar = startPb;
 	};
 
 	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
@@ -163,6 +171,10 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
+	onChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -213,23 +225,35 @@ export class Banner extends Component {
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
+									onPage2={ this.onPage2 }
+									onSubmit={ props.onSubmit }
+									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+									onChangeToYearly={ this.onChangeToYearly }
 									formItems={props.formItems}
+									formStep2={ BegYearlyRecurringDonationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									onSubmit={ props.onSubmit }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
 									showCookieBanner={ props.showCookieBanner }
-									onPage2={ this.onPage2 }
 								/>
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={ props.formatters }
+							daysLeft={ props.campaignProjection.getRemainingDays() }
+							donationAmount={ props.campaignProjection.getProjectedDonationSum() }
+							goalDonationSum={ props.campaignProjection.goalDonationSum }
+							missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
+							setStartAnimation={ this.registerStartProgressbar }
+							isLateProgress={ props.campaignParameters.isLateProgress }/>
 					</div>
 
 				</TranslationContext.Provider>
