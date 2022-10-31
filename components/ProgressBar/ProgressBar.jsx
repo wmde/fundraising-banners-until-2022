@@ -10,7 +10,8 @@ const ENDED = 2;
 
 export const AmountToShowOnRight = Object.freeze( {
 	TOTAL: Symbol( 'total' ),
-	MISSING: Symbol( 'missing' )
+	MISSING: Symbol( 'missing' ),
+	NONE: Symbol( 'none' )
 } );
 
 export default class ProgressBar extends Component {
@@ -115,10 +116,14 @@ export default class ProgressBar extends Component {
 				Translations[ 'suffix-days-left' ];
 		};
 		const rightText = () => {
-			if ( props.amountToShowOnRight === AmountToShowOnRight.MISSING ) {
-				return Translations[ 'amount-missing' ] + ' ' + getMillion( props.missingAmount );
+			switch ( props.amountToShowOnRight ) {
+				case AmountToShowOnRight.TOTAL:
+					return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
+				case AmountToShowOnRight.MISSING:
+					return Translations[ 'amount-missing' ] + ' ' + getMillion( props.missingAmount );
+				default:
+					return '';
 			}
-			return Translations[ 'amount-total' ] + ' ' + getMillion( props.goalDonationSum );
 		};
 		const leftText = () => {
 			if ( props.isLateProgress ) {
