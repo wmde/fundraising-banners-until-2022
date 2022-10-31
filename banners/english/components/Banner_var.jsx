@@ -13,7 +13,7 @@ import SlideState from '../../../components/Slider/slide_state';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
-import ProgressBar from '../../../components/ProgressBar/ProgressBar';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -254,7 +254,8 @@ export class Banner extends Component {
 							goalDonationSum={campaignProjection.goalDonationSum}
 							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 							setStartAnimation={this.registerStartProgressbar}
-							isLateProgress={ props.campaignParameters.isLateProgress }/>
+							isLateProgress={ props.campaignParameters.isLateProgress }
+							amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 					</div>
 
 				</TranslationContext.Provider>
