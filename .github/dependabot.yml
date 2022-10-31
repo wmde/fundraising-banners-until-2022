@@ -14,4 +14,7 @@ updates:
         # Remove and re-investigate after Jan 2022
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
-      
+
+    # Temporarily disable automated update PRs for this repository
+    open-pull-requests-limit: 0
+
