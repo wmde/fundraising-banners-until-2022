@@ -259,6 +259,7 @@ export default class Banner extends Component {
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionAccordion
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
