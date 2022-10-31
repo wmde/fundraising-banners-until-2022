@@ -20,22 +20,21 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 		},
 		{
 			content: <div>
-				<p>{ campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf. Wikipedia
-					wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit einer Spende
-					von 5&nbsp;€ kann Wikipedia sich auch in Zukunft erfolgreich entwickeln.</p>
+				<p>{ campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen diesen Aufruf.
+					Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert.</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>{ animatedVisitorsVsDonorsSentence } Wenn alle, die das jetzt lesen, einen kleinen Beitrag
-					leisten, wäre unser Spendenziel bereits in wenigen Stunden erreicht.</p>
+				<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
+					erfolgreich entwickeln. { animatedVisitorsVsDonorsSentence }</p>
 			</div>
 		},
 		{
 			content: <div>
-				<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in
-					diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann nehmen Sie sich doch
-						bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank!</strong></p>
+				<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia
+					Ihnen in diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? <strong>Dann nehmen
+					Sie sich doch bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank!</strong></p>
 			</div>
 		}
 	];

@@ -40,7 +40,8 @@ export default class Banner extends Component {
 			displayState: PENDING,
 			isFullPageVisible: false,
 			isFundsModalVisible: false,
-			textHighlight: HighlightState.WAITING
+			textHighlight: HighlightState.WAITING,
+			setCookie: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -149,16 +150,26 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
-	closeBanner = e => {
+	closeMiniBanner = e => {
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
-			isFullPageVisible: false
+			isFullPageVisible: false,
+			setCookie: true
 		} );
 		this.props.onClose(
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1
 		);
+	};
+
+	closeFullPageBanner = e => {
+		e.preventDefault();
+		this.setState( {
+			displayState: CLOSED,
+			isFullPageVisible: false
+		} );
+		this.props.onMaybeLater();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -200,7 +211,7 @@ export default class Banner extends Component {
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
-			{ state.displayState === CLOSED && (
+			{ state.setCookie && (
 				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
 			) }
 			<TranslationContext.Provider value={ props.translations }>
@@ -214,7 +225,7 @@ export default class Banner extends Component {
 				>
 					<MiniBanner
 						{ ...props }
-						onClose={ this.closeBanner }
+						onClose={ this.closeMiniBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBanner }
@@ -236,7 +247,7 @@ export default class Banner extends Component {
 					<FullBanner
 						{...props}
 						onSubmit={ props.onSubmit }
-						onClose={ this.closeBanner }
+						onClose={ this.closeFullPageBanner }
 						campaignProjection={ campaignProjection }
 						donationForm={ props.donationForm }
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }

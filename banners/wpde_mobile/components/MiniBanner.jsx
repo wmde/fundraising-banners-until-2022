@@ -15,7 +15,7 @@ export default function MiniBanner( props ) {
 		missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
 		setStartAnimation={ props.setStartAnimation }
 		animate={ true }
-		amountToShowOnRight={ AmountToShowOnRight.TOTAL }
+		amountToShowOnRight={ AmountToShowOnRight.NONE }
 		isLateProgress={ props.campaignParameters.isLateProgress }
 	/>;
 

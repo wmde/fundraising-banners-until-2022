@@ -38,10 +38,10 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			setCookie: false,
 			isFullPageVisible: false,
 			isFundsModalVisible: false,
-			textHighlight: HighlightState.WAITING
+			textHighlight: HighlightState.WAITING,
+			setCookie: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
@@ -155,17 +155,26 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
-	closeBanner = e => {
+	closeMiniBanner = e => {
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
-			setCookie: true,
-			isFullPageVisible: false
+			isFullPageVisible: false,
+			setCookie: true
 		} );
 		this.props.onClose(
 			this.slideState.slidesShown,
 			this.slideState.currentSlide + 1
 		);
+	};
+
+	closeFullPageBanner = e => {
+		e.preventDefault();
+		this.setState( {
+			displayState: CLOSED,
+			isFullPageVisible: false
+		} );
+		this.props.onMaybeLater();
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -215,7 +224,7 @@ export default class Banner extends Component {
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
-			{ state.displayState === CLOSED && (
+			{ state.setCookie && (
 				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
 			) }
 			<TranslationContext.Provider value={ props.translations }>
@@ -229,8 +238,7 @@ export default class Banner extends Component {
 				>
 					<MiniBanner
 						{ ...props }
-						setCookie={ state.setCookie }
-						onClose={ this.closeBanner }
+						onClose={ this.closeMiniBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
@@ -251,13 +259,12 @@ export default class Banner extends Component {
 				>
 					<FullBanner
 						{...props}
-						setCookie={ state.setCookie }
 						onPage2={ this.onDonationFormPage2 }
 						onSubmit={ props.onSubmit }
 						onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
 						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
 						onChangeToYearly={ this.onDonationFormChangeToYearly }
-						onClose={ this.closeBanner }
+						onClose={ this.closeFullPageBanner }
 						campaignProjection={ campaignProjection }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
