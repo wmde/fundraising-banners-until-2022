@@ -2,36 +2,34 @@
 	&-soft-close {
 		background: $color-white;
 		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
-		text-align: center;
-
-		@media ( min-width: $breakpoint-s ) {
-			text-align: left;
-		}
 
 		&-columns {
-			padding: 8px 27px;
-			flex-wrap: wrap;
-		}
-
-		&-column {
-			flex: 1 1 100%;
-
-			@media ( min-width: $breakpoint-s ) {
-				flex: 1 1 30%;
-			}
-		}
-
-		&-column-buttons {
-			display: flex;
+			padding: 8px;
+			flex-wrap: nowrap;
 			justify-content: center;
 
-			@media ( min-width: $breakpoint-s ) {
-				justify-content: flex-end;
-			}
-
 			@media ( min-width: $breakpoint-l ) {
-				justify-content: flex-start;
+				padding: 8px 27px;
+				justify-content: space-between;
 			}
+		}
+
+		&-actions {
+			justify-content: center;
+		}
+
+		&-prompt {
+			text-align: center;
+			line-height: 32px;
+			height: 32px;
+			margin-right: 20px;
+			font-size: 18px;
+			font-family: $banner-text-font-family;
+			white-space: nowrap;
+		}
+
+		&-buttons {
+			text-align: center;
 		}
 
 		&-button {
@@ -46,15 +44,6 @@
 			font-weight: bold;
 			text-align: center;
 			margin: 0 4px;
-		}
-
-		&-prompt {
-			line-height: 32px;
-			height: 32px;
-			margin-right: 20px;
-			font-size: 18px;
-			font-family: $banner-text-font-family;
-			white-space: nowrap;
 		}
 
 		&-countdown-text {
