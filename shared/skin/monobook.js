@@ -16,7 +16,7 @@ export default class Monobook extends Skin {
 		this.globalWrapper.css( 'top', bannerHeight );
 	}
 
-	removeSpace() {
+	removeSpaceInstantly() {
 		this.globalWrapper.css( 'top', 0 );
 	}
 

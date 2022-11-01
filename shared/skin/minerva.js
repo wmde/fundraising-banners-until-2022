@@ -23,7 +23,12 @@ export default class Minerva extends Skin {
 		this.navigation.css( { top: bannerHeight, transition: 'unset' } );
 	}
 
-	removeSpace() {
+	removeSpace( transition ) {
+		this.viewport.css( { top: 0, marginTop: 0, transition: transition.createTransitionValue( 'top' ) } );
+		this.navigation.css( { top: 0, marginTop: 0, transition: transition.createTransitionValue( 'top' ) } );
+	}
+
+	removeSpaceInstantly() {
 		this.viewport.css( { top: 0, marginTop: 0, transition: 'unset' } );
 		this.navigation.css( { top: 0, marginTop: 0, transition: 'unset' } );
 	}

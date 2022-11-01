@@ -16,7 +16,7 @@ export default class Wpde extends Skin {
 		this.container.css( 'margin-top', bannerHeight );
 	}
 
-	removeSpace() {
+	removeSpaceInstantly() {
 		this.container.css( 'margin-top', 0 );
 	}
 

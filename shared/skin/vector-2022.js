@@ -20,7 +20,11 @@ export default class Vector2022 extends Skin {
 		this.container.css( { paddingTop: bannerHeight, transition: 'unset' } );
 	}
 
-	removeSpace() {
+	removeSpace( transition ) {
+		this.container.css( { paddingTop: 0, transition: transition.createTransitionValue( 'padding-top' ) } );
+	}
+
+	removeSpaceInstantly() {
 		this.container.css( { paddingTop: 0, transition: 'unset' } );
 	}
 

@@ -68,13 +68,17 @@ export default class BannerPresenter {
 				getBannerDimensions: () => {
 					return sizeIssueIndicator.getDimensions( bannerElement.offsetHeight );
 				},
-				onClose: ( actionName ) => {
+				onClose: ( actionName, closeTransition ) => {
 					this.trackingData.tracker.trackViewPortDimensions(
 						actionName ?? 'banner-closed',
 						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
-						this.trackingData.bannerCloseTrackRatio,
+						this.trackingData.bannerCloseTrackRatio
 					);
-					skinAdjuster.removeSpace();
+					if ( closeTransition !== undefined ) {
+						skinAdjuster.removeSpace( closeTransition );
+					} else {
+						skinAdjuster.removeSpaceInstantly();
+					}
 					window.removeEventListener( 'resize', resizeHandler );
 					if ( onMediaWiki() ) {
 						this.mwCloseHandler();
@@ -93,7 +97,7 @@ export default class BannerPresenter {
 						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 						this.trackingData.bannerCloseTrackRatio,
 					);
-					skinAdjuster.removeSpace();
+					skinAdjuster.removeSpaceInstantly();
 					window.removeEventListener( 'resize', resizeHandler );
 				},
 				onFinishedTransitioning() {
