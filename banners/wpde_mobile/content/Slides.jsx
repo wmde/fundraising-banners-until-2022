@@ -6,7 +6,7 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 
 	return [
 		{
-			content: <div>
+			content: <div className="wmde-banner-slide-content-first">
 				<p>Unser Spendenziel: { goalDonationSum } Millionen Euro</p>
 				{ progressBar }
 			</div>
