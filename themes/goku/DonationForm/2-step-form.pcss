@@ -25,6 +25,10 @@
 		}
 		.wmde-banner-select-group-label {
 			white-space: normal;
+
+			&:before {
+				top: 8px;
+			}
 		}
 
 		.wmde-banner-select-group {
@@ -32,13 +36,10 @@
 		}
 
 		.wmde-banner-select-group-option {
+			margin-bottom: 8px;
 			label {
 				height: auto;
 			}
-		}
-
-		.wmde-banner-select-group-option-no {
-			margin-bottom: 16px;
 		}
 
 		&-title {
@@ -60,11 +61,23 @@
 		&-notice {
 			font-weight: bold;
 			font-size: 12px;
+			margin-bottom: auto;
+		}
+
+		&-options {
+			flex-grow: 0;
 		}
 
 		&-custom {
-			text-align: center;
-			margin-bottom: 10px;
+			font-size: 12px;
+			text-align: left;
+			margin-bottom: 8px;
+			font-weight: bold;
+			padding-left: 25px;
+		}
+
+		&-button {
+			margin-top: auto;
 		}
 	}
 
