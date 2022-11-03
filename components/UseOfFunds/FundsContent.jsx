@@ -68,7 +68,7 @@ export default function FundsContent( props ) {
 		<div className="banner_model__section use_of_funds__section--call_to_action">
 			<button className="use_of_funds__button" onClick={onCallToAction}>{content.callToAction}</button>
 		</div>
-		{ props.figuresAreProvisional && ( <div style="text-align: left; font-size: small; padding-bottom: 16px;">*) vorläufig</div> ) }
+		{ props.figuresAreProvisional && ( <div style="text-align: left; font-size: small; padding-bottom: 16px;">{ content.provisional }</div> ) }
 	</div>;
 }
 
