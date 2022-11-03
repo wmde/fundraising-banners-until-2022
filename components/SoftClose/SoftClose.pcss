@@ -1,0 +1,72 @@
+@keyframes wmde-countdown-bar {
+	0% {
+		transform: translateX( 0% );
+	}
+	100% {
+		transform: translateX( -100% );
+	}
+}
+
+.wmde-banner {
+
+	&--soft-closing {
+		.wmde-banner-soft-close {
+			display: block;
+		}
+		.wmde-banner-wrapper,
+		.wmde-banner-mini,
+		.wmde-banner-full {
+			display: none;
+		}
+		.wmde-banner-soft-close-countdown-bar-fill {
+			animation: wmde-countdown-bar 15s linear;
+		}
+	}
+
+	&-soft-close {
+		display: none;
+		z-index: 20000;
+		width: 100%;
+
+		&-columns {
+			display: flex;
+		}
+
+		&-actions {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		&-button,
+		&-prompt {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+		}
+
+		&-button {
+			cursor: pointer;
+		}
+
+		&-countdown-text {
+			display: none;
+
+			@media ( min-width: $breakpoint-l ) {
+				display: block;
+			}
+		}
+
+		&-countdown-bar {
+			position: relative;
+			overflow: hidden;
+		}
+
+		&-countdown-bar-fill {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0;
+		}
+	}
+}
