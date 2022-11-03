@@ -32,8 +32,15 @@ export default class Skin {
 
 	/**
 	 * Children might implement this
+	 * @param {CssTransition} transition
 	 */
-	removeSpace() {
+	removeSpace( transition ) { // eslint-disable-line no-unused-vars
+	}
+
+	/**
+	 * Children might implement this
+	 */
+	removeSpaceInstantly() {
 	}
 
 	/**

@@ -30,7 +30,13 @@ export default class Vector extends Skin {
 		this.panel.css( { top: bannerHeight, transition: 'unset' } );
 	}
 
-	removeSpace() {
+	removeSpace( transition ) {
+		this.panel.css( { top: 0, transition: transition.createTransitionValue( 'top' ) } );
+		this.head.css( { top: 0, transition: transition.createTransitionValue( 'top' ) } );
+		this.pageBase.css( { paddingTop: 0, transition: transition.createTransitionValue( 'padding-top' ) } );
+	}
+
+	removeSpaceInstantly() {
 		this.panel.css( { top: 0, transition: 'unset' } );
 		this.head.css( { top: 0, transition: 'unset' } );
 		this.pageBase.css( { paddingTop: 0, transition: 'unset' } );
