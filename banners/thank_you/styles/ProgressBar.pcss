@@ -1,0 +1,49 @@
+@keyframes progress {
+	from {
+		width: 1%;
+	}
+
+	to {
+		width: 100%;
+	}
+}
+
+.wmde-banner {
+	&-progress-bar {
+		border: 3px solid $color-secondary-light;
+		border-radius: 10px;
+		position: relative;
+		height: 38px;
+		line-height: 32px;
+
+		&-fill {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			display: flex;
+			justify-content: space-between;
+			padding: 0 10px;
+			color: $color-white;
+			font-weight: bold;
+			border-radius: 7px;
+			background: $color-secondary;
+			animation-name: progress;
+			animation-duration: 3s;
+			animation-fill-mode: forwards;
+		}
+
+		&-days-left,
+		&-donation-remaining {
+			opacity: 0;
+			transition: opacity 500ms ease-in-out;
+		}
+
+		&--finished {
+			.wmde-banner-progress-bar-days-left,
+			.wmde-banner-progress-bar-donation-remaining {
+				opacity: 1;
+			}
+		}
+	}
+}
