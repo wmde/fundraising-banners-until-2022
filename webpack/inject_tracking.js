@@ -4,7 +4,7 @@
 import CampaignConfig from './campaign_config';
 
 // eslint-disable-next-line no-undef
-const campaigns = new CampaignConfig( CAMPAIGNS );
+const campaigns = new CampaignConfig( Object.assign( CAMPAIGNS, THANK_YOU ) );
 const pages = campaigns.getConfigForPages();
 const currentUrl = new URL( window.location.href );
 const currentBanner = currentUrl.searchParams.get( 'devbanner' );

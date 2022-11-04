@@ -3,7 +3,6 @@ import { useEffect, useState } from 'preact/hooks';
 import BannerActions from './BannerActions';
 import IconShutterbug from './IconShutterbug';
 import IconGit from './IconGit';
-import IconRefresh from './IconRefresh';
 import IconCog from './IconCog';
 import IconCommand from './IconCommand';
 import { parseCompileInfo } from '../util';
@@ -37,11 +36,6 @@ export default function Dashboard( props ) {
 		branchName = props.gitBranch.replace( gitFailurePrefix, '' );
 	}
 
-	const refresh = e => {
-		e.preventDefault();
-		window.location.reload();
-	};
-
 	return ( <div>
 		<header className="header">
 			<div className="header-left">
@@ -53,9 +47,10 @@ export default function Dashboard( props ) {
 				</a>
 			</div>
 			<div className="header-right">
+				<a href="http://localhost:8084/" className="header-link">Main</a>
+				<a href="http://localhost:8084/thank_you" className="header-link">TY</a>
 				<a href="https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice" className="header-link">CN</a>
 				<a href="https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners" className="header-link">CN Banners</a>
-				<a href="#" onClick={ refresh } className="header-link header-link-refresh"><IconRefresh/></a>
 			</div>
 		</header>
 

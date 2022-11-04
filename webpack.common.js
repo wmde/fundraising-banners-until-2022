@@ -4,7 +4,9 @@ const toml = require( 'toml' );
 const webpack = require( 'webpack' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
-const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
+const campaignData = toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) );
+const thankYouData = toml.parse( fs.readFileSync( 'campaign_info_thank_you.toml', 'utf8' ) );
+const campaigns = new CampaignConfig( Object.assign( campaignData, thankYouData ) );
 
 module.exports = {
 	entry: campaigns.getEntryPoints(),
@@ -22,7 +24,7 @@ module.exports = {
 			},
 			// Inject tracking IDs into WPDE banner entry points
 			{
-				test: /(wpde_desktop|wpde_mobile)\/banner(_ctrl|_var)\.js/,
+				test: /(wpde_desktop|wpde_mobile)\/banner(_ctrl|_var)\.js|banner_wpde(_ctrl|_var)\.js/,
 				use: [
 					'babel-loader',
 					{

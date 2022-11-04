@@ -1,0 +1,29 @@
+.wmde-banner {
+	&-more-info {
+		padding-top: 10px;
+		background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Background-bubbles-expanded.svg' );
+		background-repeat: no-repeat;
+
+		@media ( min-width: $breakpoint-s ) {
+			padding-top: 30px;
+		}
+
+		&-columns {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-bottom: 24px;
+
+			@media ( min-width: $breakpoint-m ) {
+				flex-wrap: nowrap;
+			}
+		}
+
+		&-cta {
+			width: 280px;
+			@media ( min-width: $breakpoint-m ) {
+				width: 400px;
+			}
+		}
+	}
+}

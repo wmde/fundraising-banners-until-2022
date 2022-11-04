@@ -1,0 +1,26 @@
+.wmde-banner {
+	&-image {
+		font-size: 12px;
+		text-align: center;
+		position: relative;
+		padding: 0;
+		width: 156px;
+		margin: 0 auto;
+
+		@media ( min-width: $breakpoint-s ) {
+			margin: 40px 30px 10px 0;
+			float: left;
+		}
+
+		&-copyright {
+			position: absolute;
+			top: 0;
+			left: -10px;
+			width: 210px;
+			height: 210px;
+			font-size: 6px;
+			float: left;
+			transform: rotate( 270deg );
+		}
+	}
+}

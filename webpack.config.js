@@ -21,10 +21,14 @@ const getBranch = () => new Promise( ( resolve ) => {
 const readCampaignFile = () => fs.readFile( 'campaign_info.toml', 'utf8' )
 	.then( contents => toml.parse( contents ) );
 
+const readThankYouFile = () => fs.readFile( 'campaign_info_thank_you.toml', 'utf8' )
+	.then( contents => toml.parse( contents ) );
+
 module.exports = () => Promise.all( [
 	getBranch(),
-	readCampaignFile()
-] ).then( ( [ currentBranch, campaignConfig ] ) => merge(
+	readCampaignFile(),
+	readThankYouFile()
+] ).then( ( [ currentBranch, campaignConfig, thankYouConfig ] ) => merge(
 	CommonConfig,
 	{
 		mode: 'development',
@@ -36,6 +40,7 @@ module.exports = () => Promise.all( [
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.DefinePlugin( {
 				CAMPAIGNS: JSON.stringify( campaignConfig ),
+				THANK_YOU: JSON.stringify( thankYouConfig ),
 				GIT_BRANCH: JSON.stringify( currentBranch )
 			} )
 		],
@@ -50,6 +55,11 @@ module.exports = () => Promise.all( [
 				{
 					directory: path.resolve( __dirname, 'dashboard' ),
 					publicPath: '/',
+					serveIndex: false
+				},
+				{
+					directory: path.resolve( __dirname, 'dashboard' ),
+					publicPath: '/thank_you',
 					serveIndex: false
 				}
 			],
