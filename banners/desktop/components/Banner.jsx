@@ -272,6 +272,7 @@ export class Banner extends Component {
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
 									showCookieBanner={ props.showCookieBanner }
+									formActionProps={ props.formActionProps }
 								/>
 							</div>
 						</div>
