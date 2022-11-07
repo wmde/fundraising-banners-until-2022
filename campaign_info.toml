@@ -4,7 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
-campaign_tracking = "08-ba-221020"
+campaign_tracking = "09-ba-221103"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
@@ -12,13 +12,13 @@ wrapper_template = "wikipedia_org"
 # Banners of the campaign, key after "banners" can be anything
 [desktop.banners.ctrl]
 filename = "./banners/desktop/banner_ctrl.js"
-pagename = "B22_WMDE_Test_08_ctrl"
-tracking = "org-08-221020-ctrl"
+pagename = "B22_WMDE_Test_09_ctrl"
+tracking = "org-09-221103-ctrl"
 
 [desktop.banners.var]
 filename = "./banners/desktop/banner_var.js"
-pagename = "B22_WMDE_Test_08_var"
-tracking = "org-08-221020-var"
+pagename = "B22_WMDE_Test_09_var"
+tracking = "org-09-221103-var"
 
 [desktop.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
@@ -35,6 +35,24 @@ wrapper_template = "wikipedia_org"
 filename = "./banners/desktop/banner_ctrl.js"
 pagename = "B22_WMDE_Test_06_ctrl_desktop_vector_2022"
 tracking = "org-06-220916-ctrl"
+
+# A Campaign with global settings
+[desktop_soft_close]
+campaign_tracking = "07-ba-221004"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_soft_close.banners.ctrl]
+filename = "./banners/desktop_soft_close/banner_ctrl.js"
+pagename = "B22_WMDE_Test_07_soft_close_ctrl"
+tracking = "org-07-221004-ctrl"
+
+[desktop_soft_close.banners.var]
+filename = "./banners/desktop_soft_close/banner_var.js"
+pagename = "B22_WMDE_Test_07_soft_close_var"
+tracking = "org-07-221004-var"
 
 # Mobile Campaign
 [mobile]

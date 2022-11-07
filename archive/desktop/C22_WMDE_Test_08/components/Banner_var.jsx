@@ -14,13 +14,10 @@ import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import BegYearlyRecurringDonationFormStep2 from '../../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
-import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
-import SoftClose from '../../../components/SoftClose/SoftClose';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
 	CLOSED: Symbol( 'closed' )
 } );
 
@@ -47,7 +44,6 @@ export class Banner extends Component {
 
 	ref = createRef();
 	slideshowRef = createRef();
-	softCloseRef = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -62,7 +58,6 @@ export class Banner extends Component {
 			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
-		this.startProgressbar = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
@@ -106,41 +101,16 @@ export class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.triggerTextHighlight();
-		this.startProgressbar();
 	};
 
-	onSoftCloseBanner = e => {
-		e.preventDefault();
-		this.softCloseRef.current?.startProgress();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.adjustSurroundingSpace()
-		);
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater();
-	};
-
-	onCloseBanner = e => {
+	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose();
 	};
 
-	onTimeOutClose = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'micro-banner-ignored' );
-	};
-
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
-	};
-
-	registerStartProgressbar = ( startPb ) => {
-		this.startProgressbar = startPb;
 	};
 
 	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
@@ -209,7 +179,6 @@ export class Banner extends Component {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
-				'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
 				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
@@ -224,14 +193,8 @@ export class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<SoftClose
-						onMaybeLater={ this.onMaybeLater }
-						onCloseBanner={ this.onCloseBanner }
-						onTimeOutClose={ this.onTimeOutClose }
-						ref={this.softCloseRef}
-					/>
 					<div className="wmde-banner-wrapper">
-						<ButtonClose onClick={ this.onSoftCloseBanner }/>
+						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
@@ -276,15 +239,6 @@ export class Banner extends Component {
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
-						<ProgressBar
-							formatters={ props.formatters }
-							daysLeft={ props.campaignProjection.getRemainingDays() }
-							donationAmount={ props.campaignProjection.getProjectedDonationSum() }
-							goalDonationSum={ props.campaignProjection.goalDonationSum }
-							missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
-							setStartAnimation={ this.registerStartProgressbar }
-							isLateProgress={ props.campaignParameters.isLateProgress }
-							amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 					</div>
 
 				</TranslationContext.Provider>
@@ -294,7 +248,6 @@ export class Banner extends Component {
 				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
-				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionInfo
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
