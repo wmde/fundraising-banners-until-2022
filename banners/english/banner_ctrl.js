@@ -7,17 +7,19 @@ import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
+import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
-import DonationForm from './components/ui/form/DonationForm';
-import BannerText from './components/BannerText';
-import Footer from '../../shared/components/ui/EasySelectFooter';
+import DonationForm from '../../components/DonationForm/DonationForm';
+import Footer from '../../components/Footer/Footer';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 import useOfFundsText from 'fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import { BannerType } from '../../shared/BannerType';
+import overrideUseOfFundsFigures from '../../shared/override_use_of_funds_figures';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -27,7 +29,8 @@ const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
 	bannerContainer.dataset.delay || 7500,
-	new LocalImpressionCount( trackingIds.bannerName )
+	new LocalImpressionCount( trackingIds.bannerName ),
+	mw.centralNotice.internal.hide.setHideWithCloseButtonCookies
 );
 
 bannerPresenter.present(
@@ -38,13 +41,16 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		useOfFundsText,
+		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		donationForm: DonationForm,
 		footer: Footer,
 		bannerText: BannerText,
+		slides: Slides,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
-		formProps: { ast: 0, locale: 'en_GB' }
+		showCookieBanner: '0',
+		initialBannerWidth: window.innerWidth,
+		formActionProps: { locale: 'en_GB' }
 	}
 );
