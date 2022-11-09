@@ -175,6 +175,14 @@ export default class Banner extends Component {
 		this.startProgressBarInMiniBanner();
 	};
 
+	onDonationFormPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
+	};
+
+	onDonationFormChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
+	};
+
 	onFullBannerSlideInFinished = () => {
 		this.startProgressBarInFullPageBanner();
 		this.triggerTextHighlight();
@@ -232,9 +240,13 @@ export default class Banner extends Component {
 				>
 					<FullBanner
 						{...props}
+						onPage2={ this.onDonationFormPage2 }
+						onSubmit={ props.onSubmit }
+						onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+						onChangeToYearly={ this.onDonationFormChangeToYearly }
 						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
-						onSubmit={ props.onSubmit }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
@@ -247,6 +259,7 @@ export default class Banner extends Component {
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionAccordion
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }

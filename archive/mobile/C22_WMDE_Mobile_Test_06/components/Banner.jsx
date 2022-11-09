@@ -13,16 +13,10 @@ import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDist
 import { BannerType } from '../../../shared/BannerType';
 import SlideState from '../../../shared/slide_state';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
-import SoftClose from '../../../components/SoftClose/SoftClose';
-import CssTransition from '../../../shared/css_transition';
 
-const BannerVisibilityState = Object.freeze( {
-	PENDING: Symbol( 'pending' ),
-	MINI_VISIBLE: Symbol( 'mini-visible' ),
-	FULL_VISIBLE: Symbol( 'full-visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
-	CLOSED: Symbol( 'closed' )
-} );
+const PENDING = 0;
+const VISIBLE = 1;
+const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 
@@ -43,7 +37,8 @@ export default class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			bannerVisibilityState: BannerVisibilityState.PENDING,
+			displayState: PENDING,
+			isFullPageVisible: false,
 			isFundsModalVisible: false,
 			textHighlight: HighlightState.WAITING
 		};
@@ -67,13 +62,11 @@ export default class Banner extends Component {
 
 	miniBannerTransitionRef = createRef();
 	fullBannerTransitionRef = createRef();
-	softCloseTransitionRef = createRef();
-	softCloseRef = createRef();
 
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.MINI_VISIBLE } );
+				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
 			}
 		);
@@ -91,18 +84,16 @@ export default class Banner extends Component {
 	}
 
 	setContentSize() {
-		switch ( this.state.bannerVisibilityState ) {
-			case BannerVisibilityState.MINI_VISIBLE:
-				this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
-				this.adjustFollowupBannerHeight( this.getMiniBannerHeight() );
-				break;
-			case BannerVisibilityState.FULL_VISIBLE:
-				this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
-				this.fullPageBannerReRender();
-				break;
-			case BannerVisibilityState.SOFT_CLOSING:
-				this.props.skinAdjuster.addSpaceInstantly( this.getSoftCloseBannerHeight() );
-				break;
+		if ( this.state.displayState !== VISIBLE ) {
+			return;
+		}
+
+		if ( this.state.isFullPageVisible ) {
+			this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
+			this.fullPageBannerReRender();
+		} else {
+			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
+			this.adjustFollowupBannerHeight( this.getMiniBannerHeight() );
 		}
 	}
 
@@ -111,11 +102,12 @@ export default class Banner extends Component {
 		this.showFullPageBanner( e );
 	};
 
-	showFullPageBanner = () => {
+	// eslint-disable-next-line no-unused-vars
+	showFullPageBanner = e => {
 		this.stopSliderAutoplay();
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
-		this.setState( { bannerVisibilityState: BannerVisibilityState.FULL_VISIBLE } );
+		this.setState( { isFullPageVisible: true } );
 	};
 
 	toggleFundsModal = e => {
@@ -151,10 +143,6 @@ export default class Banner extends Component {
 		return this.fullBannerTransitionRef.current ? this.fullBannerTransitionRef.current.base.offsetHeight : 0;
 	}
 
-	getSoftCloseBannerHeight() {
-		return this.softCloseTransitionRef.current ? this.softCloseTransitionRef.current.offsetHeight : 0;
-	}
-
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
 	};
@@ -164,30 +152,13 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay = onStopAutoplay;
 	};
 
-	onSoftCloseBanner = e => {
+	closeBanner = e => {
 		e.preventDefault();
-		this.softCloseRef.current?.startProgress();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.setContentSize()
-		);
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater();
-	};
-
-	onCloseBanner = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.setState( {
+			displayState: CLOSED,
+			isFullPageVisible: false
+		} );
 		this.props.onClose();
-	};
-
-	onTimeOutClose = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'micro-banner-ignored', new CssTransition( 1000 ) );
 	};
 
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
@@ -202,14 +173,6 @@ export default class Banner extends Component {
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 		this.startProgressBarInMiniBanner();
-	};
-
-	onDonationFormPage2 = () => {
-		this.trackBannerEvent( 'second-form-page-shown' );
-	};
-
-	onDonationFormChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
 	};
 
 	onFullBannerSlideInFinished = () => {
@@ -229,28 +192,15 @@ export default class Banner extends Component {
 		const campaignProjection = props.campaignProjection;
 		return <div className={classNames( {
 			'wmde-banner': true,
-			'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
-			'wmde-banner--visible': state.bannerVisibilityState !== BannerVisibilityState.CLOSED && state.bannerVisibilityState !== BannerVisibilityState.PENDING,
-			'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
-			'wmde-banner--mini-banner': state.bannerVisibilityState === BannerVisibilityState.MINI_VISIBLE,
-			'wmde-banner--full-page': state.bannerVisibilityState === BannerVisibilityState.FULL_VISIBLE,
+			'wmde-banner--hidden': state.displayState === CLOSED,
+			'wmde-banner--visible': state.displayState === VISIBLE,
+			'wmde-banner--mini-banner': !state.isFullPageVisible,
+			'wmde-banner--full-page': state.isFullPageVisible,
 			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
 			<TranslationContext.Provider value={ props.translations }>
-				<div
-					ref={ this.softCloseTransitionRef }
-					className="soft-close-container banner-position--state-finished banner-position banner-position--fixed"
-					style="top: 0px"
-				>
-					<SoftClose
-						onMaybeLater={ this.onMaybeLater }
-						onCloseBanner={ this.onCloseBanner }
-						onTimeOutClose={ this.onTimeOutClose }
-						ref={ this.softCloseRef }
-					/>
-				</div>
 				<BannerTransition
 					fixed={ true }
 					registerDisplayBanner={ this.registerBannerTransition }
@@ -261,7 +211,7 @@ export default class Banner extends Component {
 				>
 					<MiniBanner
 						{ ...props }
-						onClose={ this.onSoftCloseBanner }
+						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
@@ -282,13 +232,9 @@ export default class Banner extends Component {
 				>
 					<FullBanner
 						{...props}
-						onPage2={ this.onDonationFormPage2 }
-						onSubmit={ props.onSubmit }
-						onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
-						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-						onChangeToYearly={ this.onDonationFormChangeToYearly }
-						onClose={ this.onSoftCloseBanner }
+						onClose={ this.closeBanner }
 						campaignProjection={ campaignProjection }
+						onSubmit={ props.onSubmit }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
@@ -301,7 +247,6 @@ export default class Banner extends Component {
 				toggleFundsModal={ this.toggleFundsModal }
 				onCallToAction={ this.fundsModalDonate }
 				useOfFundsText={ props.useOfFundsText }
-				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionAccordion
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
