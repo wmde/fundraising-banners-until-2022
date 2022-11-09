@@ -56,20 +56,20 @@ tracking = "org-07-221004-var"
 
 # Mobile Campaign
 [mobile]
-campaign_tracking = "mob07-ba-221103"
+campaign_tracking = "mob08-ba-221109"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [mobile.banners.ctrl]
 filename = "./banners/mobile/banner_ctrl.js"
-pagename = "B22_WMDE_Mobile_Test_07_ctrl"
-tracking = "org-mob07-221103-ctrl"
+pagename = "B22_WMDE_Mobile_Test_08_ctrl"
+tracking = "org-mob08-221109-ctrl"
 
 [mobile.banners.var]
 filename = "./banners/mobile/banner_var.js"
-pagename = "B22_WMDE_Mobile_Test_07_var"
-tracking = "org-mob07-221103-var"
+pagename = "B22_WMDE_Mobile_Test_08_var"
+tracking = "org-mob08-221109-var"
 
 [mobile.test_matrix]
 device = [ 'samsung_s10', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max"]
