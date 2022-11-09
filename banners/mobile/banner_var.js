@@ -7,7 +7,7 @@ import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
-import LocalTranslations from './translations';
+import LocalTranslations from './translations_var';
 import TranslationsSoftClose from './translations_soft_close';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
