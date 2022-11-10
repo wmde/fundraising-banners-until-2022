@@ -2,10 +2,10 @@ import { createRef, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../shared/components/TranslationContext';
-import { SelectGroup } from './SelectGroup';
-import SelectCustomAmount from './SelectCustomAmount';
-import SubmitValues from './SubmitValues';
-import SmsBox from './SmsBox';
+import { SelectGroup } from './subcomponents/SelectGroup';
+import SelectCustomAmount from './subcomponents/SelectCustomAmount';
+import SubmitValues from './subcomponents/SubmitValues';
+import SmsBox from './subcomponents/SmsBox';
 
 import { isValid, isValidOrUnset } from './hooks/validation_states';
 import useAmountWithCustom from './hooks/use_amount';

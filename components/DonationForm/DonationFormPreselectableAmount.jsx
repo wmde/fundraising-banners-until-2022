@@ -2,10 +2,10 @@ import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
 import TranslationContext from '../../shared/components/TranslationContext';
-import { SelectGroup } from './SelectGroup';
-import SelectCustomAmount from './SelectCustomAmount';
-import SmsBox from './SmsBox';
-import SubmitValues from './SubmitValues';
+import { SelectGroup } from './subcomponents/SelectGroup';
+import SelectCustomAmount from './subcomponents/SelectCustomAmount';
+import SmsBox from './subcomponents/SmsBox';
+import SubmitValues from './subcomponents/SubmitValues';
 
 import useAmountWithCustom from './hooks/use_amount';
 import useInterval from './hooks/use_interval';
