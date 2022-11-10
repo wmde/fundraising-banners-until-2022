@@ -11,7 +11,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 	return <div className="wmde-banner-form-step-2">
 
 		<div className="wmde-banner-form-step-2-title">
-			<a href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" className="back" onClick={ props.onFormBack }>
+			<a href="#" className="back" onClick={ props.onFormBack }>
 				<ChevronLeftIcon/>
 			</a>
 			{ Translations[ 'form-step-2-header' ].replace( '{{amount}}', props.secondPageAmount ) }
@@ -58,7 +58,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 		</div>
 
 		<a
-			href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#"
+			href="#"
 			className="wmde-banner-form-step-2-custom"
 			onClick={ props.onFormBackToYearly }>
 			{ Translations[ 'form-step-2-link' ] }
