@@ -50,7 +50,6 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
-		initialBannerWidth: window.innerWidth,
-		formActionProps: { ast: 1 }
+		initialBannerWidth: window.innerWidth
 	}
 );
