@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import { Banner } from './components/Banner_var';
+import { Banner } from './components/Banner';
 import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
@@ -50,6 +50,7 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
-		initialBannerWidth: window.innerWidth
+		initialBannerWidth: window.innerWidth,
+		formActionProps: { ast: 1 }
 	}
 );

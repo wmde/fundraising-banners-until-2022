@@ -13,12 +13,12 @@ import SlideState from '../../../components/Slider/slide_state';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
-import SoftClose from '../../../components/SoftClose/SoftClose';
+import BegYearlyRecurringDonationFormStep2 from '../../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
 	CLOSED: Symbol( 'closed' )
 } );
 
@@ -56,10 +56,10 @@ export class Banner extends Component {
 			formInteractionSwitcher: false,
 			// needed for the width-based "component breakpoint" (slider or infobox)
 			bannerWidth: 0,
-			textHighlight: HighlightState.WAITING,
-			softCloseTimeout: null
+			textHighlight: HighlightState.WAITING
 		};
 		this.slideInBanner = () => {};
+		this.startProgressbar = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
@@ -77,7 +77,7 @@ export class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING } );
+				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
 				this.slideInBanner();
 			}
 		);
@@ -103,37 +103,21 @@ export class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.triggerTextHighlight();
+		this.startProgressbar();
 	};
 
-	onSoftCloseBanner = e => {
+	closeBanner = e => {
 		e.preventDefault();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.adjustSurroundingSpace()
-		);
-		// Start timer
-		this.state.softCloseTimeout = setTimeout( () => {
-			this.finallyCloseBanner();
-		}, 15 * 1000 );
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-	};
-
-	onCloseBanner = e => {
-		e.preventDefault();
-		clearTimeout( this.state.softCloseTimeout );
-		this.finallyCloseBanner();
-	};
-
-	finallyCloseBanner = () => {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose();
 	};
 
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
+	};
+
+	registerStartProgressbar = ( startPb ) => {
+		this.startProgressbar = startPb;
 	};
 
 	registerAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
@@ -187,6 +171,10 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
+	onChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -198,7 +186,6 @@ export class Banner extends Component {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
-				'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
 				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
@@ -213,12 +200,8 @@ export class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<SoftClose
-						onMaybeLater={ this.onMaybeLater }
-						onCloseBanner={ this.onCloseBanner }
-					/>
 					<div className="wmde-banner-wrapper">
-						<ButtonClose onClick={ this.onSoftCloseBanner }/>
+						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
@@ -242,23 +225,36 @@ export class Banner extends Component {
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
+									onPage2={ this.onPage2 }
+									onSubmit={ props.onSubmit }
+									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+									onChangeToYearly={ this.onChangeToYearly }
 									formItems={props.formItems}
+									formStep2={ BegYearlyRecurringDonationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
-									onSubmit={ props.onSubmit }
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
 									showCookieBanner={ props.showCookieBanner }
-									onPage2={ this.onPage2 }
 								/>
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={ props.formatters }
+							daysLeft={ props.campaignProjection.getRemainingDays() }
+							donationAmount={ props.campaignProjection.getProjectedDonationSum() }
+							goalDonationSum={ props.campaignProjection.goalDonationSum }
+							missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
+							setStartAnimation={ this.registerStartProgressbar }
+							isLateProgress={ props.campaignParameters.isLateProgress }
+							amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 					</div>
 
 				</TranslationContext.Provider>
@@ -268,6 +264,7 @@ export class Banner extends Component {
 				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionInfo
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
