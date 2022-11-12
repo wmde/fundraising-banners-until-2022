@@ -210,6 +210,7 @@ export default function BegYearlyRecurringDonation3StepForm( props ) {
 		ref={ formRef }
 		className={ classNames(
 			'wmde-banner-form',
+			{ 'wmde-banner-form--is-step-1': formStep === formSteps.ONE },
 			{ 'wmde-banner-form--is-step-2': formStep === formSteps.TWO },
 			{ 'wmde-banner-form--is-step-3': formStep === formSteps.THREE }
 		) }
