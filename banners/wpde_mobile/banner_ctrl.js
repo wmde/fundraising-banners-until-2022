@@ -8,16 +8,17 @@ import { getTrackingIds } from '../../shared/tracking_ids';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
-import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
+import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
+import DonationForm from '../../components/DonationForm/DonationForm';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 
-import Banner, { BannerType } from './components/Banner';
-import Slides from './components/Slides';
-import BannerText from './components/BannerText';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
+import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import { BannerType } from '../../shared/BannerType';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -39,13 +40,13 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
-		bannerText: BannerText,
-		slides: Slides,
-		donationForm: DonationForm,
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL
+		bannerType: BannerType.CTRL,
+		donationForm: DonationForm,
+		bannerText: BannerText,
+		slides: Slides
 	},
 	0
 );

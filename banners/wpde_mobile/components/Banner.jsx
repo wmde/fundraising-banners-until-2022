@@ -2,14 +2,15 @@ import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import debounce from '../../../shared/debounce';
 
-import BannerTransition from '../../../shared/components/BannerTransition';
+import BannerTransition from '../../../components/BannerTransition/BannerTransition';
+import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
+import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
-import FollowupTransition from '../../../shared/components/FollowupTransition';
-import FullpageBanner from './FullpageBanner';
 import PropTypes from 'prop-types';
-import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
-import FundsDistributionAccordion from '../../../shared/components/ui/use_of_funds/FundsDistributionAccordion';
+import FundsModal from '../../../components/UseOfFunds/FundsModal';
+import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDistributionAccordion';
+import { BannerType } from '../../../shared/BannerType';
 import SlideState from '../../../shared/slide_state';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 
@@ -19,9 +20,9 @@ const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 
-export const BannerType = Object.freeze( {
-	CTRL: Symbol( 'ctrl ' ),
-	VAR: Symbol( 'var' )
+const HighlightState = Object.freeze( {
+	WAITING: Symbol( 'waiting' ),
+	ANIMATE: Symbol( 'animate' )
 } );
 
 export default class Banner extends Component {
@@ -37,15 +38,17 @@ export default class Banner extends Component {
 		super( props );
 		this.state = {
 			displayState: PENDING,
-			setCookie: false,
 			isFullPageVisible: false,
-			isFundsModalVisible: false
+			isFundsModalVisible: false,
+			textHighlight: HighlightState.WAITING,
+			setCookie: false
 		};
 		this.transitionToFullpage = () => {};
 		this.startHighlight = () => {};
 		this.adjustFollowupBannerHeight = () => {};
 		this.fullPageBannerReRender = () => {};
 		this.startProgressBarInMiniBanner = () => {};
+		this.startProgressBarInFullPageBanner = () => {};
 		this.startSliderAutoplay = () => {};
 		this.stopSliderAutoplay = () => {};
 		this.slideState = new SlideState();
@@ -70,10 +73,19 @@ export default class Banner extends Component {
 		);
 
 		this.props.skinAdjuster.addSpaceInstantly( this.miniBannerTransitionRef.current.getHeight() );
-		this.props.registerResizeBanner( debounce( this.onPageResize.bind( this ), 200 ) );
+		this.props.registerResizeBanner( debounce( this.setContentSize.bind( this ), 200 ) );
 	}
 
-	onPageResize() {
+	trackBannerEvent( eventName ) {
+		this.props.trackingData.tracker.trackBannerEvent(
+			eventName,
+			this.slideState.slidesShown,
+			this.slideState.currentSlide + 1,
+			this.props.trackingData.bannerClickTrackRatio
+		);
+	}
+
+	setContentSize() {
 		if ( this.state.displayState !== VISIBLE ) {
 			return;
 		}
@@ -83,18 +95,14 @@ export default class Banner extends Component {
 			this.fullPageBannerReRender();
 		} else {
 			this.props.skinAdjuster.addSpaceInstantly( this.getMiniBannerHeight() );
-			this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
+			this.adjustFollowupBannerHeight( this.getMiniBannerHeight() );
 		}
 	}
 
 	// eslint-disable-next-line no-unused-vars
 	showFullPageBanner = e => {
-		this.props.trackingData.tracker.trackBannerEvent(
-			'mobile-mini-banner-expanded',
-			this.slideState.slidesShown,
-			this.slideState.currentSlide + 1,
-			this.props.trackingData.bannerClickTrackRatio
-		);
+		this.stopSliderAutoplay();
+		this.trackBannerEvent( 'mobile-mini-banner-expanded' );
 		window.scrollTo( 0, 0 );
 		this.transitionToFullpage( this.getMiniBannerHeight() );
 		this.setState( { isFullPageVisible: true } );
@@ -104,11 +112,11 @@ export default class Banner extends Component {
 		e.preventDefault();
 		const currentlyVisible = this.state.isFundsModalVisible;
 		if ( !currentlyVisible ) {
-			this.props.trackingData.tracker.trackBannerEvent( 'application-of-funds-shown', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+			this.trackBannerEvent( 'application-of-funds-shown' );
 		}
 		this.setState( { isFundsModalVisible: !currentlyVisible } );
 		if ( currentlyVisible ) {
-			const link = document.querySelector( '.smallprint .application-of-funds-link' );
+			const link = document.querySelector( '.wmde-banner-full-small-print .application-of-funds-link' );
 			if ( link ) {
 				link.scrollIntoView( false );
 			}
@@ -117,9 +125,9 @@ export default class Banner extends Component {
 
 	fundsModalDonate = e => {
 		e.preventDefault();
-		this.props.trackingData.tracker.trackBannerEvent( 'funds-modal-donate-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		this.trackBannerEvent( 'funds-modal-donate-clicked' );
 		this.setState( { isFundsModalVisible: false } );
-		const startOfForm = document.querySelector( '.fullpage-banner .call-to-action' );
+		const startOfForm = document.querySelector( '.wmde-banner-full-call-to-action' );
 		if ( startOfForm ) {
 			startOfForm.scrollIntoView( true );
 		}
@@ -133,12 +141,21 @@ export default class Banner extends Component {
 		return this.fullBannerTransitionRef.current ? this.fullBannerTransitionRef.current.base.offsetHeight : 0;
 	}
 
-	closeBanner = e => {
+	onSlideChange = ( index ) => {
+		this.slideState.onSlideChange( index );
+	};
+
+	registerSliderAutoplayCallbacks = ( onStartAutoplay, onStopAutoplay ) => {
+		this.startSliderAutoplay = onStartAutoplay;
+		this.stopSliderAutoplay = onStopAutoplay;
+	};
+
+	closeMiniBanner = e => {
 		e.preventDefault();
 		this.setState( {
 			displayState: CLOSED,
-			setCookie: true,
-			isFullPageVisible: false
+			isFullPageVisible: false,
+			setCookie: true
 		} );
 		this.props.onClose(
 			this.slideState.slidesShown,
@@ -146,19 +163,40 @@ export default class Banner extends Component {
 		);
 	};
 
+	closeFullPageBanner = e => {
+		e.preventDefault();
+		this.setState( {
+			displayState: CLOSED,
+			isFullPageVisible: false
+		} );
+		this.props.onMaybeLater();
+	};
+
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
-	registerStartHighlight = cb => { this.startHighlight = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
 	registerFullPageBannerReRender = cb => { this.fullPageBannerReRender = cb; };
 	registerStartProgressBarInMiniBanner = cb => { this.startProgressBarInMiniBanner = cb; };
 	registerStartProgressBarInFullPageBanner = cb => { this.startProgressBarInFullPageBanner = cb; };
+
 	onMiniBannerSlideInFinished = () => {
-		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
+		setTimeout( () => this.startSliderAutoplay(), SLIDESHOW_START_DELAY );
 		this.adjustFollowupBannerHeight( this.miniBannerTransitionRef.current.getHeight() );
 		this.props.onFinishedTransitioning();
 		this.startProgressBarInMiniBanner();
 	};
+
+	onFullBannerSlideInFinished = () => {
+		this.startProgressBarInFullPageBanner();
+		this.triggerTextHighlight();
+	};
+
+	triggerTextHighlight() {
+		if ( this.state.textHighlight === HighlightState.ANIMATE ) {
+			return;
+		}
+		this.setState( { textHighlight: HighlightState.ANIMATE } );
+	}
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
@@ -169,45 +207,49 @@ export default class Banner extends Component {
 			'wmde-banner--visible': state.displayState === VISIBLE,
 			'wmde-banner--mini-banner': !state.isFullPageVisible,
 			'wmde-banner--full-page': state.isFullPageVisible,
+			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR
 		} )}>
+			{ state.setCookie && (
+				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
+			) }
 			<TranslationContext.Provider value={ props.translations }>
 				<BannerTransition
 					fixed={ true }
 					registerDisplayBanner={ this.registerBannerTransition }
 					onFinish={ this.onMiniBannerSlideInFinished }
 					skinAdjuster={ props.skinAdjuster }
-					ref={this.miniBannerTransitionRef}
-					transitionSpeed={100}
+					ref={ this.miniBannerTransitionRef }
+					transitionSpeed={ 1 }
 				>
 					<MiniBanner
 						{ ...props }
-						setCookie={ state.setCookie }
-						onClose={ this.closeBanner }
+						onClose={ this.closeMiniBanner }
 						campaignProjection={ campaignProjection }
 						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBanner }
-						dynamicCampaignText={ this.dynamicCampaignText }/>
-
+						onSlideChange={ this.onSlideChange }
+						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
+						dynamicCampaignText={ this.dynamicCampaignText }
+					/>
 				</BannerTransition>
 				<FollowupTransition
 					registerDisplayBanner={ this.registerFullpageBannerTransition }
 					registerFirstBannerFinished={ this.registerAdjustFollowupBannerHeight }
 					registerFullPageBannerReRender={ this.registerFullPageBannerReRender }
-					onFinish={ () => { this.startHighlight(); this.startProgressBarInFullPageBanner(); } }
+					onFinish={ this.onFullBannerSlideInFinished }
 					transitionDuration={ 1250 }
 					skinAdjuster={ props.skinAdjuster }
 					hasStaticParent={ true }
-					ref={this.fullBannerTransitionRef}
+					ref={ this.fullBannerTransitionRef }
 				>
-					<FullpageBanner
+					<FullBanner
 						{...props}
-						setCookie={ state.setCookie }
-						registerStartHighlight={this.registerStartHighlight}
-						onClose={ this.closeBanner }
-						onSubmit={props.onSubmit}
-						donationForm={props.donationForm}
+						onSubmit={ props.onSubmit }
+						onClose={ this.closeFullPageBanner }
+						campaignProjection={ campaignProjection }
+						donationForm={ props.donationForm }
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
 						dynamicCampaignText={ this.dynamicCampaignText }
@@ -219,6 +261,7 @@ export default class Banner extends Component {
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				onCallToAction={ this.fundsModalDonate }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionAccordion
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData }
