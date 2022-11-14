@@ -13,7 +13,6 @@ import SlideState from '../../../components/Slider/slide_state';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
-import BegYearlyRecurringDonationFormStep2 from '../../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
 
@@ -194,8 +193,8 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
-	onChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
+	onPage3 = () => {
+		this.trackBannerEvent( 'third-form-page-shown' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -256,12 +255,16 @@ export class Banner extends Component {
 							<div className="wmde-banner-column-right">
 								<DonationForm
 									onPage2={ this.onPage2 }
+									onPage3={ this.onPage3 }
 									onSubmit={ props.onSubmit }
 									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
 									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-									onChangeToYearly={ this.onChangeToYearly }
+									onSubmitStep3={ () => props.onSubmit( 'submit-different-amount' ) }
+									onStep3Increased={ () => this.trackBannerEvent( 'increased-amount' ) }
+									onStep3Decreased={ () => this.trackBannerEvent( 'decreased-amount' ) }
 									formItems={props.formItems}
-									formStep2={ BegYearlyRecurringDonationFormStep2 }
+									formStep2={ props.donationFormStep2 }
+									formStep3={ props.donationFormStep3 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}

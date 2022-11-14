@@ -18,7 +18,7 @@ export default function BegYearlyRecurringDonationFormStep3CustomAmount( props )
 	return <div className="wmde-banner-form-step-3">
 
 		<div className="wmde-banner-form-step-3-title">
-			<a href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" className="back"
+			<a tabIndex="-1" href="banners/wikipedia.de/desktop/components/MultiStepDonationForm#" className="back"
 				onClick={ props.onFormBack }>
 				<ChevronLeftIcon/>
 			</a>
@@ -34,6 +34,7 @@ export default function BegYearlyRecurringDonationFormStep3CustomAmount( props )
 			<div className="wmde-banner-select-custom-amount-input-container wmde-banner-form-step-3-input-container">
 				<span className="wmde-banner-select-custom-amount-euro-symbol">&euro;</span>
 				<input type="text"
+					tabIndex="-1"
 					value={ props.amount || '' }
 					onInput={ onInput }
 					onBlur={ onBlur }
@@ -50,7 +51,7 @@ export default function BegYearlyRecurringDonationFormStep3CustomAmount( props )
 		</div>
 
 		<div className="wmde-banner-form-button-container form-step-3-button">
-			<button className="wmde-banner-form-button" type="submit">
+			<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
 				{ props.numericAmount > 0 ?
 					Translations[ 'form-step-3-button' ].replace( '{{amount}}', props.amount ) :
 					Translations[ 'form-step-3-button-blank' ] }

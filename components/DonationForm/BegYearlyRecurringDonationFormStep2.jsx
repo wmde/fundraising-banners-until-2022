@@ -11,7 +11,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 	return <div className="wmde-banner-form-step-2">
 
 		<div className="wmde-banner-form-step-2-title">
-			<a href="#" className="back" onClick={ props.onFormBack }>
+			<a tabIndex="-1" href="#" className="back" onClick={ props.onFormBack }>
 				<ChevronLeftIcon/>
 			</a>
 			{ Translations[ 'form-step-2-header' ].replace( '{{amount}}', props.secondPageAmount ) }
@@ -27,6 +27,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-no">
 						<label>
 							<input
+								tabIndex="-1"
 								type="radio"
 								onClick={ props.onChooseUpgradeToYearly }
 								checked={ props.upgradeToYearly === Alternatives.NO }
@@ -39,6 +40,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
 						<label>
 							<input
+								tabIndex="-1"
 								type="radio"
 								onClick={ props.onChooseUpgradeToYearly }
 								checked={ props.upgradeToYearly === Alternatives.YES }
@@ -58,6 +60,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 		</div>
 
 		<a
+			tabIndex="-1"
 			href="#"
 			className="wmde-banner-form-step-2-custom"
 			onClick={ props.onFormBackToYearly }>
@@ -65,7 +68,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 		</a>
 
 		<div className="wmde-banner-form-button-container form-step-2-button">
-			<button className="wmde-banner-form-button" type="submit">
+			<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
 				{ Translations[ 'form-step-2-button' ] }
 			</button>
 		</div>

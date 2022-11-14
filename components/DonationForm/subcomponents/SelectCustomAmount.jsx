@@ -52,7 +52,9 @@ export default class SelectCustomAmount extends Component {
 
 				{ showEuro ? <span className="wmde-banner-select-custom-amount-euro-symbol">&euro;</span> : null }
 
-				<input type="text"
+				<input
+					tabIndex="-1"
+					type="text"
 					value={ props.value || '' }
 					onInput={ props.onInput }
 					size="3"
@@ -62,7 +64,8 @@ export default class SelectCustomAmount extends Component {
 					autoComplete="off"
 					placeholder={ state.focused ? '' : props.placeholder }
 					ref={ this.ref }
-					className="wmde-banner-select-custom-amount-input" />
+					className="wmde-banner-select-custom-amount-input"
+				/>
 			</div>
 		</label>;
 	}
