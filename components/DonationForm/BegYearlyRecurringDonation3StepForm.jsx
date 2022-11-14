@@ -216,7 +216,7 @@ export default function BegYearlyRecurringDonation3StepForm( props ) {
 		) }
 	>
 		<div className="wmde-banner-form-steps">
-			<div className="wmde-banner-form-step-1" tabindex="-1">
+			<div className="wmde-banner-form-step-1">
 				<fieldset className="wmde-banner-form-field-group">
 					<legend className="wmde-banner-form-field-group-legend">{ Translations[ 'intervals-header' ]}</legend>
 					<SelectGroup

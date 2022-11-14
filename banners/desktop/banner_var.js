@@ -1,17 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import { Banner } from './components/Banner';
+import { Banner } from './components/Banner_var';
 import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from './translations_soft_close';
+import TranslationsSubscriptionForm from './translations_subscription_form';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonation3StepForm';
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
@@ -50,7 +51,7 @@ bannerPresenter.present(
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,
-		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose ),
+		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose, TranslationsSubscriptionForm ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
