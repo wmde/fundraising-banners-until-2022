@@ -1,0 +1,76 @@
+.wmde-banner {
+	/*
+	The layout settings of this element should be similar to wmde-banner-select-group-option
+	because the custom amount is presented as an "option" inside the amount select group
+	In the future, we might use tools of the CSS framework (e.g. SCSS mixins)
+	to keep the styles in sync
+	 */
+	&-select-custom-amount {
+		flex: 0 0 33.3333%;
+		width: 33.3333%;
+		padding: 0 4px;
+
+		&-input-container {
+			display: block;
+			border: 1px solid $radio-border-color;
+			border-radius: 2px;
+			background: $radio-background;
+			height: $form-radio-height;
+			position: relative;
+		}
+
+		&-input {
+			display: block;
+			height: $form-radio-height;
+			background: transparent;
+			border: 0;
+			width: 100%;
+			font-size: $radio-font-size;
+			text-align: center;
+			outline: 0;
+
+			&::placeholder {
+				opacity: 1;
+				color: $color-black;
+			}
+		}
+
+		&-euro-symbol {
+			position: absolute;
+			top: 0;
+			right: 0;
+			line-height: $form-radio-height;
+			width: 18px;
+			z-index: 10;
+		}
+	}
+
+	.wmde-banner-select-custom-amount-input-container:hover,
+	.wmde-banner-select-custom-amount-input-container:focus {
+		color: $color-black;
+		border-color: $radio-border-color-hover;
+		background: $radio-background-hover;
+	}
+
+	.wmde-banner-select-custom-amount:hover .wmde-banner-select-custom-amount-input::placeholder,
+	.wmde-banner-select-custom-amount:focus .wmde-banner-select-custom-amount-input::placeholder,
+	&-select-custom-amount.focused .wmde-banner-select-custom-amount-input::placeholder {
+		opacity: 0.5;
+	}
+
+	&-select-custom-amount.focused .wmde-banner-select-custom-amount-input-container {
+		color: $color-black;
+		border-color: $radio-border-color-active;
+		background: $radio-background-active;
+	}
+
+	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-input {
+		color: $radio-color-checked;
+	}
+
+	&-select-custom-amount.value-entered .wmde-banner-select-custom-amount-input-container {
+		color: $radio-color-checked;
+		border-color: $radio-border-color-checked;
+		background: $radio-background-checked;
+	}
+}

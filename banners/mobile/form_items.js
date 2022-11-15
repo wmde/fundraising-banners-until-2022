@@ -11,7 +11,7 @@ export function createFormItems( translations, amountFormatter ) {
 	builder.setPaymentMethods(
 		PaymentMethods.PAYPAL,
 		PaymentMethods.CREDIT_CARD,
-		{ ...PaymentMethods.DIRECT_DEBIT, notice: 'address-type-notice-direct-debit' },
+		PaymentMethods.DIRECT_DEBIT,
 		PaymentMethods.BANK_TRANSFER,
 		PaymentMethods.SOFORT
 	);
