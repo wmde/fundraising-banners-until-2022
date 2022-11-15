@@ -91,9 +91,9 @@ export default class BannerPresenter {
 						1
 					);
 				},
-				onMaybeLater: () => {
+				onMaybeLater: ( identifier = null ) => {
 					this.trackingData.tracker.trackViewPortDimensions(
-						'banner-closed-maybelater',
+						identifier ?? 'banner-closed-maybelater',
 						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 						this.trackingData.bannerCloseTrackRatio,
 					);
