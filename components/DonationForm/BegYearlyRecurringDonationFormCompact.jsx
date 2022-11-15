@@ -56,6 +56,12 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		[ paymentInterval, paymentMethod, Translations ]
 	);
 
+	const scrollToTopOfStep2 = () => {
+		document.getElementsByClassName( 'wmde-banner-form-steps' )[ 0 ]?.scrollIntoView(
+			{ behavior: 'smooth', block: 'center', inline: 'nearest' }
+		);
+	};
+
 	const onSubmitStep1 = e => {
 		if ( customAmount ) {
 			validateCustomAmount( customAmount );
@@ -73,6 +79,7 @@ export default function BegYearlyRecurringDonationForm( props ) {
 			setSecondPageAmount( customAmount ?? selectedAmount );
 			setUpgradeToYearly( null );
 			setFormStep( formSteps.TWO );
+			scrollToTopOfStep2();
 		}
 		e?.preventDefault();
 	};
