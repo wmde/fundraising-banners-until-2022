@@ -11,8 +11,7 @@ import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
-import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
-import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import DonationForm from '../../components/DonationForm/DonationForm';
 import Footer from '../../components/Footer/Footer';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
@@ -44,7 +43,6 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		donationForm: DonationForm,
-		donationFormStep2: DonationFormStep2,
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,
