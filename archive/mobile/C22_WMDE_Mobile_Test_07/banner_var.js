@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
@@ -15,7 +15,7 @@ import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationF
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 
-import Banner from './components/Banner';
+import Banner from './components/Banner_var';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -45,7 +45,7 @@ bannerPresenter.present(
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL,
+		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
 		donationFormStep2: FormStep2,
 		bannerText: BannerText,
