@@ -7,7 +7,7 @@ import SelectCustomAmount from './subcomponents/SelectCustomAmount';
 import SubmitValues from './subcomponents/SubmitValues';
 import SmsBox from './subcomponents/SmsBox';
 
-import { isValid, isValidOrUnset } from './hooks/validation_states';
+import { isValid, isValidOrUnset, UNSET } from './hooks/validation_states';
 import useAmountWithCustom from './hooks/use_amount';
 import useInterval from './hooks/use_interval';
 import usePaymentMethod from './hooks/use_payment_method';
@@ -16,13 +16,15 @@ import useFormAction from './hooks/use_form_action';
 import { amountMessage, validateRequired } from './utils';
 import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
 import classNames from 'classnames';
+import useCustomAmount from './hooks/use_custom_amount';
 
 const formSteps = Object.freeze( {
 	ONE: Symbol( 'one' ),
-	TWO: Symbol( 'two' )
+	TWO: Symbol( 'two' ),
+	THREE: Symbol( 'three' )
 } );
 
-export default function BegYearlyRecurringDonationForm( props ) {
+export default function BegYearlyRecurringDonation3StepForm( props ) {
 	const Translations = useContext( TranslationContext );
 	const [ paymentInterval, setInterval, intervalValidity, setIntervalValidity ] = useInterval( null );
 	const [ paymentMethod, setPaymentMethod, paymentMethodValidity, setPaymentMethodValidity ] = usePaymentMethod( null );
@@ -36,8 +38,11 @@ export default function BegYearlyRecurringDonationForm( props ) {
 	const [ disabledPaymentMethods, setDisabledPaymentMethods ] = useState( [] );
 	const [ step1ButtonText, setStep1ButtonText ] = useState( Translations[ 'submit-label' ] );
 	const [ secondPageAmount, setSecondPageAmount ] = useState( '0' );
+	const [ thirdPageAmount, numericThirdPageAmount, setThirdPageAmount, thirdPageAmountValidity, setThirdPageAmountValidity ] = useCustomAmount( '' );
 	const [ formAction ] = useFormAction( props, props.formActionProps ?? {} );
 	const FormStep2 = props.formStep2;
+	const FormStep3 = props.formStep3;
+	const formRef = createRef();
 
 	useEffect(
 		() => {
@@ -48,15 +53,21 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		[ paymentInterval, paymentMethod, Translations ]
 	);
 
+	// check with side effects
+	const paymentDataIsValid = () => [
+		[ intervalValidity, setIntervalValidity ],
+		[ amountValidity, setAmountValidity ],
+		[ paymentMethodValidity, setPaymentMethodValidity ]
+	].map( validateRequired ).every( isValid );
+
+	const upgradeToYearIsValid = () => isValid( validateRequired( [ upgradeToYearlyValidity, setUpgradeToYearlyValidity ] ) );
+	const thirdPageAmountIsValid = () => isValid( validateRequired( [ thirdPageAmountValidity, setThirdPageAmountValidity ] ) );
+
 	const onSubmitStep1 = e => {
 		if ( customAmount ) {
 			validateCustomAmount( customAmount );
 		}
-		if ( [
-			[ intervalValidity, setIntervalValidity ],
-			[ amountValidity, setAmountValidity ],
-			[ paymentMethodValidity, setPaymentMethodValidity ]
-		].map( validateRequired ).every( isValid ) ) {
+		if ( paymentDataIsValid() ) {
 			if ( paymentInterval !== Intervals.ONCE.value || paymentMethod === PaymentMethods.SOFORT.value ) {
 				props.onSubmit();
 				return;
@@ -69,13 +80,15 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		e?.preventDefault();
 	};
 
+	const onFormChangeToYearly = () => {
+		props.onPage3();
+		setInterval( Intervals.YEARLY.value );
+		setUpgradeToYearly( Alternatives.YES );
+		setFormStep( formSteps.THREE );
+	};
+
 	const onSubmitStep2 = e => {
-		if ( [
-			[ intervalValidity, setIntervalValidity ],
-			[ amountValidity, setAmountValidity ],
-			[ paymentMethodValidity, setPaymentMethodValidity ],
-			[ upgradeToYearlyValidity, setUpgradeToYearlyValidity ]
-		].map( validateRequired ).every( isValid ) ) {
+		if ( paymentDataIsValid() && upgradeToYearIsValid() ) {
 			if ( upgradeToYearly === Alternatives.YES ) {
 				props.onSubmitRecurring();
 			} else {
@@ -86,23 +99,45 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		e?.preventDefault();
 	};
 
+	const onSubmitStep3 = e => {
+		if ( thirdPageAmountIsValid() && paymentDataIsValid() && upgradeToYearIsValid() ) {
+			props.onSubmitStep3();
+			if ( parseFloat( numericThirdPageAmount ) > parseFloat( numericAmount ) ) {
+				props.onStep3Increased();
+			}
+			if ( parseFloat( numericThirdPageAmount ) < parseFloat( numericAmount ) ) {
+				props.onStep3Decreased();
+			}
+			return;
+		}
+		e?.preventDefault();
+	};
+
 	const onFormSubmit = e => {
-		if ( formStep === formSteps.ONE ) {
-			onSubmitStep1( e );
-		} else {
-			onSubmitStep2( e );
+		switch ( formStep ) {
+			case formSteps.ONE:
+				onSubmitStep1( e );
+				break;
+			case formSteps.TWO:
+				onSubmitStep2( e );
+				break;
+			case formSteps.THREE:
+				onSubmitStep3( e );
+				break;
 		}
 	};
 
 	const onFormBack = e => {
 		e.preventDefault();
-		setFormStep( formSteps.ONE );
-	};
-
-	const onFormBackToYearly = e => {
-		setInterval( Intervals.YEARLY.value );
-		props.onChangeToYearly();
-		onFormBack( e );
+		if ( formStep === formSteps.THREE ) {
+			setThirdPageAmount( '' );
+			setThirdPageAmountValidity( UNSET );
+			setInterval( Intervals.ONCE.value );
+			setUpgradeToYearly( null );
+			setFormStep( formSteps.TWO );
+		} else if ( formStep === formSteps.TWO ) {
+			setFormStep( formSteps.ONE );
+		}
 	};
 
 	const addDisabledPaymentMethod = paymentMethodToDisable => {
@@ -158,7 +193,13 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		}
 	};
 
-	const formRef = createRef();
+	const getSubmitAmount = () => {
+		if ( thirdPageAmount !== '' ) {
+			return props.formatters.amountForServerFormatter( numericThirdPageAmount );
+		}
+
+		return props.formatters.amountForServerFormatter( numericAmount );
+	};
 
 	return <form
 		method="post"
@@ -169,7 +210,9 @@ export default function BegYearlyRecurringDonationForm( props ) {
 		ref={ formRef }
 		className={ classNames(
 			'wmde-banner-form',
-			{ 'wmde-banner-form--is-step-2': formStep === formSteps.TWO }
+			{ 'wmde-banner-form--is-step-1': formStep === formSteps.ONE },
+			{ 'wmde-banner-form--is-step-2': formStep === formSteps.TWO },
+			{ 'wmde-banner-form--is-step-3': formStep === formSteps.THREE }
 		) }
 	>
 		<div className="wmde-banner-form-steps">
@@ -240,18 +283,27 @@ export default function BegYearlyRecurringDonationForm( props ) {
 
 			<FormStep2
 				onFormBack={ onFormBack }
-				onSubmit={ onFormSubmit }
+				onSubmit={ onSubmitStep2 }
 				formRef={ formRef }
 				onChooseUpgradeToYearly={ onChooseUpgradeToYearly }
-				onFormBackToYearly={ onFormBackToYearly }
+				onFormBackToYearly={ onFormChangeToYearly }
 				secondPageAmount={ secondPageAmount }
 				upgradeToYearly={ upgradeToYearly }
 				isValid={ isValidOrUnset( upgradeToYearlyValidity ) }
 			/>
-		</div>
 
+			<FormStep3
+				onFormBack={ onFormBack }
+				onSubmit={ onSubmitStep3 }
+				amount={ thirdPageAmount }
+				numericAmount={ numericThirdPageAmount }
+				setAmount={ setThirdPageAmount }
+				isValid={ isValidOrUnset( thirdPageAmountValidity ) }
+				formatter={ props.formatters.customAmountInputFormatter }
+			/>
+		</div>
 		<SubmitValues
-			amount={ props.formatters.amountForServerFormatter( numericAmount ) }
+			amount={ getSubmitAmount() }
 			interval={ paymentInterval }
 			paymentType={ paymentMethod }
 		/>

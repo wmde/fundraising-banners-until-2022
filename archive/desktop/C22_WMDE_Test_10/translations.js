@@ -10,12 +10,7 @@ const Translations = {
 	'form-step-2-yes': 'Ja, ich möchte {{amount}} € jährlich spenden.',
 	'form-step-2-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
 	'form-step-2-button': 'Weiter, um Spende abzuschließen',
-	'form-step-2-error': 'Bitte wählen Sie eine der Optionen aus.',
-	'form-step-3-header': 'Vielen Dank für Ihre Unterstützung!',
-	'form-step-3-copy': 'Geben Sie Ihren jährlichen Spendenbetrag an.',
-	'form-step-3-button-blank': 'Jährlich spenden',
-	'form-step-3-button': 'Jährlich {{amount}} € spenden',
-	'form-step-3-error': 'Bitte wählen Sie einen Betrag aus.'
+	'form-step-2-error': 'Bitte wählen Sie eine der Optionen aus.'
 };
 
 export default Translations;
