@@ -11,8 +11,7 @@ import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
-import TranslationsSoftClose from './translations_soft_close';
-import TranslationsSubscriptionForm from './translations_subscription_form';
+import TranslationsSoftClose from '../../components/SoftClose/translations/de';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonation3StepForm';
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
@@ -51,7 +50,7 @@ bannerPresenter.present(
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,
-		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose, TranslationsSubscriptionForm ),
+		translations: Object.assign( Translations, TranslationsSoftClose, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
