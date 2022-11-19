@@ -1,0 +1,35 @@
+.wmde-banner {
+	&-footer {
+		font-size: 12px;
+		line-height: 20px;
+		color: $color-black;
+		padding: 0 24px;
+		margin-top: 0;
+
+		&-bank,
+		&-usage {
+			padding: 5px 0;
+		}
+
+		&-bank {
+			margin-right: 30px;
+
+			&-item {
+				padding-right: 2em;
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-usage {
+			text-align: center;
+			&-link {
+				color: $color-black;
+				cursor: pointer;
+			}
+		}
+	}
+}

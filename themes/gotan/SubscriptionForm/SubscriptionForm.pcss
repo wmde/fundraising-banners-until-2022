@@ -1,0 +1,128 @@
+.wmde-banner {
+	&-subscription-form {
+		height: 40px;
+		&-link {
+			display: block;
+			font-size: 14px;
+			line-height: 40px;
+			text-align: center;
+			font-weight: bold;
+			color: $color-secondary;
+
+			&:visited {
+				color: $color-secondary;
+			}
+		}
+
+		&-modal {
+			left: -52px;
+			right: 0;
+			background: $color-white;
+			padding: 32px 32px 10px;
+			box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2 );
+			border-radius: 5px;
+			opacity: 0;
+			transform: scale( 0.8 );
+			transition: transform 300ms $banner-easing, opacity 200ms $banner-easing;
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: -5px;
+				left: 197px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 5px 5px;
+				border-color: transparent transparent $color-white transparent;
+			}
+
+			&-close {
+				position: absolute;
+				top: 0;
+				right: 0;
+				border: 0;
+				background: none;
+				height: 42px;
+				width: 42px;
+				padding: 16px;
+				cursor: pointer;
+			}
+
+			&-content {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+
+		&-input {
+			margin-bottom: 9px;
+			input {
+				border: 1px solid $color-gray-medium;
+				border-radius: 2px;
+				width: 100%;
+				line-height: 32px;
+				height: 32px;
+				padding: 0 9px;
+				margin-top: 12px;
+			}
+		}
+
+		&-checkbox {
+			position: relative;
+			padding-left: 28px;
+			font-size: 12px;
+			margin-bottom: 16px;
+			color: $color-black-light;
+
+			input {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}
+
+		&-error {
+			color: $color-error;
+			text-align: center;
+			font-weight: bold;
+			font-size: 12px;
+			line-height: 1.5;
+			margin-bottom: 16px;
+		}
+
+		&-submit {
+			line-height: 32px;
+			padding: 0 16px;
+			margin-bottom: 10px;
+			border-radius: 16px;
+			color: $color-white;
+			background: $color-secondary;
+			border: 0;
+			cursor: pointer;
+			font-weight: bold;
+			transition: background-color 500ms $banner-easing;
+
+			&:hover {
+				background-color: $color-secondary-light;
+			}
+		}
+
+		&-privacy {
+			display: block;
+			text-align: center;
+			font-size: 11px;
+			color: $color-gray-medium;
+			&:visited {
+				color: $color-gray-medium;
+			}
+		}
+
+		&--modal-visible {
+			.wmde-banner-subscription-form-modal {
+				opacity: 1;
+				transform: scale( 1 );
+			}
+		}
+	}
+}

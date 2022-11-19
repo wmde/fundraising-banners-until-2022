@@ -1,0 +1,112 @@
+.wmde-banner {
+
+	&-select-group {
+		font-size: 0.9em;
+		font-weight: bold;
+		line-height: 25px;
+
+		&-container {
+			line-height: inherit;
+		}
+
+		&-error-message {
+			height: 16px;
+			line-height: 16px;
+			color: $color-black;
+			font-weight: bold;
+			text-align: left;
+			margin-bottom: 0.2em;
+			font-size: 0.8em;
+		}
+
+		&-container--with-error {
+			.wmde-banner-error-icon {
+				padding-left: 20px;
+
+				&:before {
+					content: $error-icon;
+					width: 16px;
+					height: 16px;
+				}
+			}
+
+			.wmde-banner-select-group-error-message {
+				color: $color-error;
+			}
+		}
+
+		&-option label {
+			padding: 3px 10px 0 25px;
+			cursor: pointer;
+			height: 25px;
+
+			@media ( min-width: $breakpoint-m ) {
+				height: 29px;
+			}
+			@media ( min-width: $breakpoint-l ) {
+				height: 25px;
+			}
+		}
+
+		&-label {
+			color: $color-black;
+			border: 0 none;
+			font-size: 0.95em;
+
+			/* This creates the "radio button" shape */
+			&:before {
+				height: 16px;
+				width: 16px;
+				margin-top: -5px;
+				background: $color-white;
+				border-radius: 50%;
+				border: 1px solid #bbbbbb;
+			}
+		}
+
+		&-input {
+			display: none;
+
+			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
+			&:checked + .wmde-banner-select-group-label {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+
+			/* This creates the "selected radio button" shape */
+			&:checked + .wmde-banner-select-group-label:before {
+				border: 6px solid $color-primary;
+				box-shadow: none;
+			}
+		}
+
+		.wmde-banner-disabled {
+			opacity: 0.3;
+		}
+	}
+
+	/**
+	 This section is for defining the column widths of the individual select groups
+	 Use 50% for 2 columns, use 25% for 4 columns
+	 */
+
+	&-select-group-container.select-amount {
+		.wmde-banner-select-group-option {
+			width: 25%;
+		}
+		margin-top: 0;
+	}
+
+	&-select-group-container.select-interval {
+		.wmde-banner-select-group-option {
+			width: 50%;
+		}
+	}
+
+	&-select-group-container.select-payment-method {
+		.wmde-banner-select-group-option {
+			width: 50%;
+		}
+	}
+}

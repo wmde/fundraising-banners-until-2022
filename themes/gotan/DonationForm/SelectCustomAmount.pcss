@@ -1,0 +1,86 @@
+.wmde-banner {
+	/*
+	The layout settings of this element should be similar to wmde-banner-select-group-option
+	because the custom amount is presented as an "option" inside the amount select group
+	In the future, we might use tools of the CSS framework (e.g. SCSS mixins)
+	to keep the styles in sync
+	 */
+	&-select-custom-amount {
+		padding: 3px 10px 0 25px;
+		cursor: pointer;
+		height: auto;
+
+		/* This width determines the "column span" of the custom amount */
+		width: 50%;
+
+		&-radio {
+			/* Unclear if we need this or what it does. Probably browser fixes for text in focused elements? */
+			&:checked + .wmde-banner-select-custom-amount-input-container {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+
+			/* This style must be in sync with the "radio button shape" style of SelectGroup */
+			&:checked + .wmde-banner-select-custom-amount-input-container:before {
+				border: 6px solid $color-primary;
+				box-shadow: none;
+			}
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				border: 1px solid $color-secondary;
+			}
+
+			.wmde-banner-select-custom-amount-input {
+				border: 0 none;
+				outline: 0 none;
+				border-radius: 0;
+			}
+		}
+
+		&-input-container {
+			border: 1px solid $color-gray-light;
+			min-width: 110px;
+			margin: -2px 0 0;
+			line-height: 25px;
+			height: 26px;
+
+			/* This style must be in sync with the "radio button shape" style of SelectGroup */
+			&:before {
+				height: 16px;
+				width: 16px;
+				margin-top: -6px;
+				background: $color-white;
+				border-radius: 50%;
+				border: 1px solid #bbbbbb;
+			}
+		}
+
+		&-euro-symbol {
+			height: 20px;
+			width: 10px;
+			line-height: 21px;
+			text-align: center;
+			margin-top: -10px;
+		}
+
+		&-input {
+			color: $color-black;
+			background-color: transparent;
+			padding: 0 1em;
+			height: 25px;
+			font-size: 0.9em;
+			font-weight: bold;
+			border: 0 none;
+			text-align: left;
+
+			&:focus,
+			&:active {
+				border: 1px solid $color-secondary;
+			}
+		}
+	}
+}
