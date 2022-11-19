@@ -13,9 +13,9 @@ import SlideState from '../../../components/Slider/slide_state';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
+import BegYearlyRecurringDonationFormStep2 from '../../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
-import SubscriptionForm from '../../../components/SubscriptionForm/SubscriptionForm';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -135,11 +135,6 @@ export class Banner extends Component {
 		this.props.onClose( 'micro-banner-ignored' );
 	};
 
-	onSubmitSubscription = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'subscription-form-submitted' );
-	};
-
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
 	};
@@ -199,8 +194,8 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
-	onPage3 = () => {
-		this.trackBannerEvent( 'third-form-page-shown' );
+	onChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -257,21 +252,16 @@ export class Banner extends Component {
 										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
 									</Message>
 								) }
-								<Footer showFundsModal={ this.toggleFundsModal }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
 									onPage2={ this.onPage2 }
-									onPage3={ this.onPage3 }
 									onSubmit={ props.onSubmit }
 									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
 									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-									onSubmitStep3={ () => props.onSubmit( 'submit-different-amount' ) }
-									onStep3Increased={ () => this.trackBannerEvent( 'increased-amount' ) }
-									onStep3Decreased={ () => this.trackBannerEvent( 'decreased-amount' ) }
+									onChangeToYearly={ this.onChangeToYearly }
 									formItems={props.formItems}
-									formStep2={ props.donationFormStep2 }
-									formStep3={ props.donationFormStep3 }
+									formStep2={ BegYearlyRecurringDonationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
@@ -284,13 +274,9 @@ export class Banner extends Component {
 									showCookieBanner={ props.showCookieBanner }
 									formActionProps={ props.formActionProps }
 								/>
-								<SubscriptionForm
-									onSubmit={ this.onSubmitSubscription }
-									bannerName={ props.bannerName }
-									campaignName={ props.campaignName }
-								/>
 							</div>
 						</div>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 						<ProgressBar
 							formatters={ props.formatters }
 							daysLeft={ props.campaignProjection.getRemainingDays() }

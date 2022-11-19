@@ -1,0 +1,17 @@
+.wmde-banner {
+	&-subscription-form {
+		position: relative;
+
+		&-modal {
+			z-index: 99;
+			position: absolute;
+			visibility: hidden;
+		}
+
+		&--modal-visible {
+			.wmde-banner-subscription-form-modal {
+				visibility: visible;
+			}
+		}
+	}
+}

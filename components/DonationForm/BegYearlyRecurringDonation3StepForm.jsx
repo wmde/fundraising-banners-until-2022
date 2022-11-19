@@ -275,7 +275,7 @@ export default function BegYearlyRecurringDonation3StepForm( props ) {
 				</fieldset>
 
 				<div className="wmde-banner-form-button-container">
-					<button className="wmde-banner-form-button" type="submit">
+					<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
 						{ step1ButtonText }
 					</button>
 				</div>
