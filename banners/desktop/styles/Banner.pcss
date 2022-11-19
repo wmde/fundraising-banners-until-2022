@@ -67,20 +67,26 @@
 		}
 	}
 
+	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+
 	&-column-right {
 		order: 2;
 		flex: 0 0 $form-width;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		width: $form-width;
-		min-height: 273px;
+		min-height: 313px;
 
 		@media ( min-width: $breakpoint-l ) {
-			min-height: 284px;
+			min-height: 324px;
 		}
 
 		@media ( min-width: 1415px ) {
-			min-height: 273px;
+			min-height: 313px;
 		}
 	}
 }
