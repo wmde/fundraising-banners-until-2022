@@ -1,0 +1,152 @@
+.wmde-banner {
+
+	&-mini {
+		.wmde-banner-subscription-form-link {
+			margin-top: 10px;
+		}
+	}
+
+	&-full {
+		.wmde-banner-subscription-form-link {
+			margin-bottom: 10px;
+		}
+	}
+
+	&-subscription-form {
+
+		.wmde-banner-subscription-form-link {
+			display: block;
+			text-align: center;
+			color: $color-secondary;
+			font-weight: bold;
+			font-size: 14px;
+		}
+
+		.wmde-banner-subscription-form-modal {
+			display: none;
+			transform: scale( 1.1 );
+			transition: transform 500ms $banner-easing;
+		}
+
+		&-modal {
+			&-close {
+				position: absolute;
+				top: 0;
+				right: 0;
+				border: 0;
+				background: none;
+				height: 42px;
+				width: 42px;
+				padding: 16px;
+				cursor: pointer;
+			}
+
+			&-content {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+
+		&-input {
+			margin-bottom: 9px;
+
+			input {
+				border: 1px solid $color-gray-medium;
+				border-radius: 2px;
+				width: 100%;
+				line-height: 32px;
+				height: 32px;
+				padding: 0 9px;
+				margin-top: 12px;
+			}
+		}
+
+		&-checkbox {
+			position: relative;
+			padding-left: 28px;
+			font-size: 12px;
+			margin-bottom: 16px;
+			color: $color-black-light;
+
+			input {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}
+
+		&-error {
+			color: $color-error;
+			text-align: center;
+			font-weight: bold;
+			font-size: 12px;
+			line-height: 1.5;
+			margin-bottom: 16px;
+		}
+
+		&-submit {
+			line-height: 32px;
+			padding: 0 16px;
+			margin-bottom: 10px;
+			border-radius: 16px;
+			color: $color-white;
+			background: $color-secondary;
+			border: 0;
+			cursor: pointer;
+			font-weight: bold;
+			transition: background-color 500ms $banner-easing;
+
+			&:hover {
+				background-color: $color-secondary-hover;
+			}
+		}
+
+		&-privacy {
+			display: block;
+			text-align: center;
+			font-size: 11px;
+			color: $color-gray-medium;
+
+			&:visited {
+				color: $color-gray-medium;
+			}
+		}
+
+		/**
+		 * Need to use the class as a modifier and can't use &--modal-visible nesting.
+		 * Otherwise the generated classes for modal and link would have the same specificity
+		 * (e.g. '.wmde-banner-subscription-form--modal-visible wmde-banner-subscription-form-modal' would
+		 * override '.wmde-banner-subscription-form wmde-banner-subscription-form-modal' and vice versa)
+		 */
+		&.wmde-banner-subscription-form--modal-visible {
+
+			display: flex;
+			opacity: 1;
+			position: fixed;
+			z-index: 20000;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			flex-direction: column;
+			justify-content: center;
+			background: rgba( 0, 0, 0, 0.6 );
+			transition: opacity 500ms $banner-easing;
+
+			.wmde-banner-subscription-form-link {
+				display: none;
+			}
+
+			.wmde-banner-subscription-form-modal {
+				display: block;
+				position: relative;
+				background: $color-white;
+				border-radius: 5px;
+				box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2 );
+				margin: 16px;
+				padding: 16px;
+				transform: scale( 1 );
+			}
+		}
+	}
+}
