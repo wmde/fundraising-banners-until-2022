@@ -11,7 +11,7 @@ import LocalTranslations from './translations_var';
 import TranslationsSoftClose from './translations_soft_close';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
-import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2Mobile';
+import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2MobileModal';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 
