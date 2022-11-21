@@ -176,7 +176,7 @@ export default class Banner extends Component {
 	onCloseFullBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater( 'banner-closed-full' );
+		this.props.onClose( 'banner-closed-full' );
 	};
 
 	onMaybeLater = e => {

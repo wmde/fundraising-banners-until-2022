@@ -1,0 +1,91 @@
+.wmde-banner {
+	&-form-step-1,
+	&-form-step-2 {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	&-form-step-2 {
+		display: flex;
+		visibility: hidden;
+		opacity: 1;
+		position: fixed;
+		z-index: 20000;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		flex-direction: column;
+		justify-content: center;
+		background: rgba( 0, 0, 0, 0.6 );
+		transition: opacity 500ms $banner-easing;
+
+		&-content {
+			position: relative;
+			background: $color-white;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2 );
+			margin: 16px;
+			padding: 16px;
+			transform: scale( 1.1 );
+			transition: transform 500ms $banner-easing;
+		}
+
+		&-back {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 50px;
+			width: 46px;
+			padding: 17px 15px;
+			svg {
+				height: 16px;
+				width: 16px;
+			}
+		}
+
+		&-title {
+			font-weight: bold;
+			margin-bottom: 14px;
+			padding-right: 34px;
+		}
+
+		&-notice {
+			margin-bottom: 14px;
+		}
+
+		&-buttons {
+			.wmde-banner-form-button {
+				white-space: normal;
+				font-size: 14px;
+				line-height: 1.5;
+				font-weight: bold;
+				margin-bottom: 14px;
+				padding: 10px 20px;
+				height: auto;
+				min-height: 48px;
+			}
+		}
+
+		&-custom {
+			display: block;
+			font-weight: bold;
+			text-align: center;
+			font-size: 14px;
+		}
+	}
+
+	.wmde-banner-form--is-step-2 {
+		.wmde-banner-form-step-1 {
+			opacity: 1;
+		}
+		.wmde-banner-form-step-2 {
+			visibility: visible;
+
+			&-content {
+				transform: scale( 1 );
+			}
+		}
+	}
+}
