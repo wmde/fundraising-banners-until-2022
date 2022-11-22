@@ -52,31 +52,35 @@
 		margin-bottom: 0;
 		overflow-y: hidden;
 		margin-right: 30px;
-		padding: 0 15px;
-		border: 5px solid $color-primary;
-		border-radius: 9px;
-	}
+		padding-right: 30px;
+		position: relative;
 
-	&-message {
-		height: 100%;
-		display: flex;
-		align-items: center;
+		&:after {
+			position: absolute;
+			content: '';
+			width: 1px;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			height: 100%;
+			background: linear-gradient( 0deg, $color-secondary-light 0%, $color-white 100% );
+		}
 	}
 
 	&-column-right {
 		order: 2;
 		flex: 0 0 $form-width;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		width: $form-width;
-		min-height: 313px;
+		min-height: 273px;
 
 		@media ( min-width: $breakpoint-l ) {
-			min-height: 324px;
+			min-height: 284px;
 		}
 
 		@media ( min-width: 1415px ) {
-			min-height: 313px;
+			min-height: 273px;
 		}
 	}
 }

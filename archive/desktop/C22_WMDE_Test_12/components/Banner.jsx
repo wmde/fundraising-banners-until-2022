@@ -15,7 +15,6 @@ import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
-import SubscriptionForm from '../../../components/SubscriptionForm/SubscriptionForm';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -135,11 +134,6 @@ export class Banner extends Component {
 		this.props.onClose( 'micro-banner-ignored' );
 	};
 
-	onSubmitSubscription = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'subscription-form-submitted' );
-	};
-
 	registerBannerTransition = ( cb ) => {
 		this.slideInBanner = cb;
 	};
@@ -257,7 +251,6 @@ export class Banner extends Component {
 										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
 									</Message>
 								) }
-								<Footer showFundsModal={ this.toggleFundsModal }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
@@ -284,13 +277,9 @@ export class Banner extends Component {
 									showCookieBanner={ props.showCookieBanner }
 									formActionProps={ props.formActionProps }
 								/>
-								<SubscriptionForm
-									onSubmit={ this.onSubmitSubscription }
-									bannerName={ props.bannerName }
-									campaignName={ props.campaignName }
-								/>
 							</div>
 						</div>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 						<ProgressBar
 							formatters={ props.formatters }
 							daysLeft={ props.campaignProjection.getRemainingDays() }

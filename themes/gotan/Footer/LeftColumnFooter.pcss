@@ -1,0 +1,32 @@
+.wmde-banner {
+	&-footer {
+		font-size: 12px;
+		line-height: 20px;
+		color: $color-black;
+		padding: 0;
+		margin-top: auto;
+		justify-content: space-between;
+
+		&-bank {
+			&-item {
+				padding-right: 2em;
+
+				&.account .selection-input-text,
+				&.account .selection-input-input {
+					text-transform: none;
+				}
+			}
+		}
+
+		&-usage {
+			flex: 1 1 auto;
+			width: auto;
+			white-space: nowrap;
+			text-align: right;
+			&-link {
+				color: $color-black;
+				cursor: pointer;
+			}
+		}
+	}
+}
