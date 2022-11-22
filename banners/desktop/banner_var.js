@@ -17,8 +17,8 @@ import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonati
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
 import Footer from '../../components/Footer/Footer';
-import BannerText from './content/BannerText';
-import Slides from './content/Slides';
+import BannerText from './content/BannerText_var';
+import Slides from './content/Slides_var';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
