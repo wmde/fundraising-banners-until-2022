@@ -14,12 +14,10 @@ import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
-import SoftClose from '../../../components/SoftClose/SoftClose';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
 	VISIBLE: Symbol( 'visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
 	CLOSED: Symbol( 'closed' )
 } );
 
@@ -46,7 +44,6 @@ export class Banner extends Component {
 
 	ref = createRef();
 	slideshowRef = createRef();
-	softCloseRef = createRef();
 
 	constructor( props ) {
 		super( props );
@@ -108,30 +105,10 @@ export class Banner extends Component {
 		this.startProgressbar();
 	};
 
-	onSoftCloseBanner = e => {
-		e.preventDefault();
-		this.softCloseRef.current?.startProgress();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.adjustSurroundingSpace()
-		);
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater();
-	};
-
-	onCloseBanner = e => {
+	closeBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose();
-	};
-
-	onTimeOutClose = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'micro-banner-ignored' );
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -209,7 +186,6 @@ export class Banner extends Component {
 				'wmde-banner': true,
 				'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
-				'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
 				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 				'wmde-banner--var': props.bannerType === BannerType.VAR
@@ -224,14 +200,8 @@ export class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<SoftClose
-						onMaybeLater={ this.onMaybeLater }
-						onCloseBanner={ this.onCloseBanner }
-						onTimeOutClose={ this.onTimeOutClose }
-						ref={this.softCloseRef}
-					/>
 					<div className="wmde-banner-wrapper">
-						<ButtonClose onClick={ this.onSoftCloseBanner }/>
+						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
