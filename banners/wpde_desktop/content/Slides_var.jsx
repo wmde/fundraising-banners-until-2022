@@ -11,29 +11,22 @@ export default function Slides( dynamicCampaignText ) {
 				{ Icon } <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
 			</p>
 			<p>
-				Bitte verzeihen Sie die Störung. Es ist ein bisschen unangenehm, daher kommen wir gleich zur
-				Sache. An diesem { currentDayName } sind Sie gefragt: { campaignDaySentence }</p>
+				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte
+				nicht weg! Am heutigen { currentDayName } bitten
+				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
 		</div> },
 		{ content: <div>
-			<p>Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert, aber 99&nbsp;% der
-				Lesenden spenden nicht. <strong>Wenn alle, die das jetzt lesen, einen kleinen Beitrag leisten, wäre unser
-					Spendenziel bereits heute erreicht.</strong></p>
+			<p>{ campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen
+				diesen Aufruf. Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€ finanziert.</p>
 		</div> },
 		{ content: <div>
-			<p>
-				Menschen spenden aus einem einfachen Grund – weil Wikipedia nützlich ist.
-				Schon der Preis einer Tasse Kaffee würde genügen. { animatedVisitorsVsDonorsSentence }
-			</p>
+			<p>Doch schon mit einer Spende von 5&nbsp;€ kann Wikipedia sich auch in Zukunft
+				erfolgreich entwickeln. { animatedVisitorsVsDonorsSentence }</p>
 		</div> },
 		{ content: <div>
-			<p>Wenn Wikipedia eine kommerzielle Seite
-				sein würde, wäre das ein riesiger Verlust für die Welt. Sicher könnten wir mit Werbung eine Menge Geld verdienen.
-				Aber dann wäre Wikipedia komplett anders. Wir könnten ihr nicht vertrauen.</p>
-		</div> },
-		{ content: <div>
-			<p>Es ist leicht, diese Nachricht zu ignorieren und die meisten werden das wohl tun. Wenn Sie Wikipedia
-				nützlich finden, nehmen Sie sich an diesem { currentDayName } bitte
-				eine Minute Zeit und geben Wikipedia mit Ihrer Spende etwas zurück. <em>Vielen Dank!</em></p>
+			<p>Die meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in
+				diesem Jahr Wissen im Wert einer Tasse Kaffee geschenkt? Dann nehmen Sie sich
+				doch bitte eine Minute Zeit und geben Sie etwas zurück. Vielen Dank!</p>
 		</div> }
 	];
 }
