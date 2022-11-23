@@ -1,0 +1,72 @@
+.wmde-banner {
+	/*
+	The layout settings of this element should be similar to wmde-banner-select-group-option
+	because the custom amount is presented as an "option" inside the amount select group
+	In the future, we might use tools of the CSS framework (e.g. SCSS mixins)
+	to keep the styles in sync
+	 */
+	&-select-custom-amount {
+		width: 49%;
+		flex: 0 1 49%;
+
+		@media ( min-width: $breakpoint-phone-s ) {
+			width: 31%;
+			flex: 0 1 31%;
+		}
+
+		&-input-container {
+			border-radius: $form-element-border-radius;
+			min-height: 54px;
+			display: block;
+			background-color: $color-gray-medium-bright;
+			padding: 15px 2px;
+			height: 60px;
+			outline: 0;
+			cursor: pointer;
+		}
+
+		&-input {
+			width: 100%;
+			line-height: 32px;
+			color: $color-black-light;
+			text-align: center;
+			font-weight: bold;
+			font-family: inherit;
+			outline: 0;
+			font-size: 18px;
+
+			@media ( min-width: $breakpoint-phone-s ) {
+				font-size: 24px;
+			}
+		}
+
+		&-euro-symbol {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			top: 50%;
+			left: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 24px;
+			color: $color-white;
+		}
+
+		&.value-entered,
+		&.focused {
+			.wmde-banner-select-custom-amount-input-container {
+				background-color: $color-primary;
+				border-color: $color-gray-medium;
+				color: $color-white;
+			}
+			.wmde-banner-select-custom-amount-input {
+				color: $color-white;
+			}
+			.wmde-banner-select-custom-amount-euro-symbol {
+				color: $color-white;
+			}
+		}
+	}
+}

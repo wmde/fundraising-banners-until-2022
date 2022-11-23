@@ -60,20 +60,20 @@ orientation = [ "portrait", "landscape"]
 
 # Mobile English Campaign
 [mobile_english]
-campaign_tracking = "mob_en02-ba-211203"
+campaign_tracking = "mob_en01-ba-221103"
 preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [mobile_english.banners.ctrl]
 filename = "./banners/mobile_english/banner_ctrl.js"
-pagename = "B21_WMDE_Mobile_EN_Test_02_ctrl"
-tracking = "org-mob_en02-211203-ctrl"
+pagename = "B22_WMDE_Mobile_EN_Test_01_ctrl"
+tracking = "org-mob_en01-221103-ctrl"
 
 [mobile_english.banners.var]
 filename = "./banners/mobile_english/banner_var.js"
-pagename = "B21_WMDE_Mobile_EN_Test_02_var"
-tracking = "org-mob_en02-211203-var"
+pagename = "B22_WMDE_Mobile_EN_Test_01_var"
+tracking = "org-mob_en01-221103-var"
 
 [mobile_english.test_matrix]
 device = [ 'samsung_s10', 'nexus_6', 'iphone_xs_max', 'iphone_5s', 'iphone_se', "iphone_8", "iphone_12_mini", "iphone_7_plus", "iphone_11_pro_max" ]

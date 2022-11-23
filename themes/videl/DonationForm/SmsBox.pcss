@@ -1,0 +1,32 @@
+.wmde-banner {
+	&-sms-box {
+		width: 100%;
+
+		&-label {
+			display: block;
+			font-family: inherit;
+			font-size: 18px;
+			font-weight: bold;
+			color: $color-black-light;
+			background-color: $color-gray-medium-bright;
+			border-radius: $form-element-border-radius;
+			margin-bottom: 6px;
+			padding: 18px 2px;
+			min-height: 54px;
+
+			@media ( min-width: $breakpoint-phone-s ) {
+				font-size: 24px;
+			}
+		}
+
+		&-notice {
+			display: block;
+			font-size: 9pt;
+			line-height: 12pt;
+			margin-right: 0;
+			width: 100%;
+			padding: 0 0 15px;
+			color: $color-secondary-dark;
+		}
+	}
+}

@@ -8,15 +8,18 @@ import { getTrackingIds } from '../../shared/tracking_ids';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
-import useOfFundsText from 'fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
+import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
+import DonationForm from '../../components/DonationForm/DonationForm';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 
 import Banner from './components/Banner';
-import DonationForm from './components/ui/form/DonationFormWithHeaders';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
+import overrideUseOfFundsFigures from '../../shared/override_use_of_funds_figures';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -37,12 +40,15 @@ bannerPresenter.present(
 		campaignParameters,
 		campaignProjection,
 		formatters,
-		useOfFundsText,
-		donationForm: DonationForm,
+		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		sliderAutoPlaySpeed: 5000,
 		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL
+		bannerType: BannerType.CTRL,
+		donationForm: DonationForm,
+		bannerText: BannerText,
+		slides: Slides,
+		formActionProps: { locale: 'en_GB' }
 	},
-	0
+	95
 );

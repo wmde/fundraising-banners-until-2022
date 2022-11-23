@@ -57,7 +57,7 @@ export default function DonationForm( props ) {
 		onSubmit={ validate }
 	>
 		<fieldset className="wmde-banner-form-field-group">
-			<legend className="wmde-banner-form-field-group-legend">{ Translations[ 'intervals-header' ]}</legend>
+			<legend className="wmde-banner-form-field-group-legend">{ Translations[ 'intervals-header' ] }</legend>
 			<SelectGroup
 				fieldname="select-interval"
 				selectionItems={ props.formItems.intervals }

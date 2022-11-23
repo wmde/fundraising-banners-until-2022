@@ -1,47 +1,43 @@
 import { h } from 'preact';
-import ProgressBar, { AmountToShowOnRight } from '../../../shared/components/ui/ProgressBar';
 import * as PropTypes from 'prop-types';
-import Slides from './Slides';
-import Slider from '../../../shared/components/Slider';
+import Slider from '../../../components/Slider/Slider';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar';
+import CloseIconChunky from '../../../components/Icons/CloseIconChunky';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 
 export default function MiniBanner( props ) {
+	const Slides = props.slides;
 	const campaignProjection = props.campaignProjection;
 	const ProgressBarComponent = <ProgressBar
-		formatters={props.formatters}
-		daysLeft={campaignProjection.getRemainingDays()}
-		donationAmount={campaignProjection.getProjectedDonationSum()}
-		goalDonationSum={campaignProjection.goalDonationSum}
-		missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-		setStartAnimation={props.setStartAnimation}
-		animate={true}
-		amountToShowOnRight={AmountToShowOnRight.MISSING}
+		formatters={ props.formatters }
+		daysLeft={ campaignProjection.getRemainingDays() }
+		donationAmount={ campaignProjection.getProjectedDonationSum() }
+		goalDonationSum={ campaignProjection.goalDonationSum }
+		missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+		setStartAnimation={ props.setStartAnimation }
+		isLateProgress={ props.campaignParameters.isLateProgress }
 	/>;
 
-	return <div className="mini-banner">
-		<div className="mini-banner__box">
-			<div className="mini-banner__content">
-				<header className="headline">
-					<div className="headline__container">
-						<span className="headline__content">the wikimedia fundraising campaign</span>
-					</div>
-				</header>
-				<div className="close-button" onClick={props.onClose}/>
+	return <div className="wmde-banner-mini">
+		<ButtonClose onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
 
-				<Slider
-					slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
-					onSlideChange={ props.onSlideChange }
-					registerAutoplay={ props.registerSliderAutoplayCallbacks }
-					interval={ props.sliderAutoPlaySpeed }
-					sliderOptions={ { loop: false } }
-				/>
+		<header className="wmde-banner-headline">
+			<span className="wmde-banner-headline-content">the wikimedia fundraising campaign</span>
+		</header>
 
-				<div className="mini-banner__tab">
-					<div className="mini-banner__tab-inner" onClick={ props.onExpandFullpage }>
-						Donate now
-					</div>
-				</div>
-			</div>
+		<div className="wmde-banner-mini-slideshow">
+			<Slider
+				slides={ Slides( props.dynamicCampaignText, ProgressBarComponent ) }
+				onSlideChange={ props.onSlideChange }
+				registerAutoplay={ props.registerSliderAutoplayCallbacks }
+				interval={ props.sliderAutoPlaySpeed }
+				sliderOptions={ { loop: false } }
+			/>
 		</div>
+
+		<button className="wmde-banner-mini-button" onClick={ props.onExpandFullpage }>
+			Donate now
+		</button>
 	</div>;
 }
 
