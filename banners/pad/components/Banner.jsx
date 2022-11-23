@@ -1,22 +1,24 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BannerTransition from '../../../shared/components/BannerTransition';
-import ProgressBar from '../../../shared/components/ui/ProgressBar';
-import Footer from '../../../shared/components/ui/EasySelectFooter';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import { LocalImpressionCount } from '../../../shared/local_impression_count';
 import { CampaignProjection } from '../../../shared/campaign_projection';
 import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
-import FundsModal from '../../../shared/components/ui/use_of_funds/FundsModal';
-import Slider from '../../../shared/components/Slider';
 import { BannerType } from '../../../shared/BannerType';
-import createDynamicCampaignText from '../create_dynamic_campaign_text';
-import Slides from './Slides';
-import ChevronLeftIcon from './ui/ChevronLeftIcon';
-import ChevronRightIcon from './ui/ChevronRightIcon';
-import SlideState from '../../../shared/slide_state';
+import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import debounce from '../../../shared/debounce';
+import SlideState from '../../../shared/slide_state';
+import Slides from '../content/Slides';
+
+import BannerTransition from '../../../components/BannerTransition/BannerTransition';
+import FundsModal from '../../../components/UseOfFunds/FundsModal';
+import Slider from '../../../components/Slider/Slider';
+import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
+import Footer from '../../../components/Footer/Footer';
+import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
+import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 
 const PENDING = 0;
 const VISIBLE = 1;
@@ -177,40 +179,41 @@ export default class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<div className="banner__wrapper">
-						<div className="banner__content">
-							<div className="banner__infobox">
-								<div className="banner__slideshow">
-									<Slider
-										slides={ Slides( this.dynamicCampaignText ) }
-										onSlideChange={ this.onSlideChange }
-										registerAutoplay={ this.registerAutoplayCallbacks }
-										interval={ SLIDESHOW_SLIDE_INTERVAL }
-										previous={ <ChevronLeftIcon/> }
-										next={ <ChevronRightIcon/> }
-									/>
-									<ProgressBar
-										formatters={props.formatters}
-										daysLeft={campaignProjection.getRemainingDays()}
-										donationAmount={campaignProjection.getProjectedDonationSum()}
-										goalDonationSum={campaignProjection.goalDonationSum}
-										missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-										setStartAnimation={this.registerStartProgressbar}/>
-								</div>
+					<div className="wmde-banner-wrapper">
+						<ButtonClose onClick={ this.closeBanner }/>
+						<div className="wmde-banner-content">
+							<div className="wmde-banner-column-left">
+								<Slider
+									slides={ Slides( this.dynamicCampaignText ) }
+									onSlideChange={ this.onSlideChange }
+									registerAutoplay={ this.registerAutoplayCallbacks }
+									interval={ SLIDESHOW_SLIDE_INTERVAL }
+									previous={ <ChevronLeftIcon fill={ '#990a00' }/> }
+									next={ <ChevronRightIcon fill={ '#990a00' }/> }
+									sliderOptions={ { loop: false } }
+								/>
+								<ProgressBar
+									formatters={ props.formatters }
+									daysLeft={ campaignProjection.getRemainingDays() }
+									donationAmount={ campaignProjection.getProjectedDonationSum() }
+									goalDonationSum={ campaignProjection.goalDonationSum }
+									missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+									setStartAnimation={ this.registerStartProgressbar }
+									isLateProgress={ props.campaignParameters.isLateProgress }
+									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 							</div>
-							<DonationForm
-								formItems={props.formItems}
-								bannerName={props.bannerName}
-								campaignName={props.campaignName}
-								formatters={props.formatters}
-								impressionCounts={props.impressionCounts}
-								onFormInteraction={this.onFormInteraction}
-								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-								onSubmit={ props.onSubmit }
-							/>
-						</div>
-						<div className="close">
-							<a className="close__link" onClick={ this.closeBanner }>&#x2715;</a>
+							<div className="wmde-banner-column-right">
+								<DonationForm
+									formItems={props.formItems}
+									bannerName={props.bannerName}
+									campaignName={props.campaignName}
+									formatters={props.formatters}
+									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									onSubmit={ props.onSubmit }
+								/>
+							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
@@ -221,6 +224,7 @@ export default class Banner extends Component {
 				onCallToAction={ this.fundsModalDonate }
 				isFundsModalVisible={ this.state.isFundsModalVisible }
 				useOfFundsText={ props.useOfFundsText }
+				figuresAreProvisional={ props.campaignParameters.useOfFundsProvisional }
 				locale='de'>
 				<FundsDistributionInfo
 					applicationOfFundsData={ props.useOfFundsText.applicationOfFundsData } />

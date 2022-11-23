@@ -14,7 +14,7 @@ import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import DonationForm from '../../shared/components/ui/form/DonationForm';
+import DonationForm from '../../components/DonationForm/DonationForm';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
