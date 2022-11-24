@@ -257,15 +257,7 @@ export class Banner extends Component {
 										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
 									</Message>
 								) }
-								<ProgressBar
-									formatters={ props.formatters }
-									daysLeft={ props.campaignProjection.getRemainingDays() }
-									donationAmount={ props.campaignProjection.getProjectedDonationSum() }
-									goalDonationSum={ props.campaignProjection.goalDonationSum }
-									missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
-									setStartAnimation={ this.registerStartProgressbar }
-									isLateProgress={ props.campaignParameters.isLateProgress }
-									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
+								<Footer showFundsModal={ this.toggleFundsModal }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
@@ -299,7 +291,15 @@ export class Banner extends Component {
 								/>
 							</div>
 						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={ props.formatters }
+							daysLeft={ props.campaignProjection.getRemainingDays() }
+							donationAmount={ props.campaignProjection.getProjectedDonationSum() }
+							goalDonationSum={ props.campaignProjection.goalDonationSum }
+							missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
+							setStartAnimation={ this.registerStartProgressbar }
+							isLateProgress={ props.campaignParameters.isLateProgress }
+							amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 					</div>
 
 				</TranslationContext.Provider>

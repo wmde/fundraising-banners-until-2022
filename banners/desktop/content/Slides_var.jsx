@@ -8,7 +8,7 @@ export default function Slides( dynamicCampaignText ) {
 	return [
 		{ content: <div>
 			<p className="headline">
-				<InfoIcon fill={ '#990a00' }/> <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
+				<InfoIcon fill={ '#990a00' }/> <strong> Ist Ihnen Wikipedia 5 € wert? </strong>
 			</p>
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte

@@ -7,7 +7,7 @@ export default function BannerText( props ) {
 
 	return <div>
 		<p>
-			<strong><InfoIcon fill={ '#990a00' }/> Ist Ihnen Wikipedia 5 € wert? </strong>
+			<strong><InfoIcon/> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
