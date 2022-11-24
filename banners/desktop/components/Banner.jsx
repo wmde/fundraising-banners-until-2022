@@ -6,7 +6,7 @@ import Message from '../../../components/Message/Message';
 import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import TranslationContext from '../../../shared/components/TranslationContext';
-import { BannerType } from '../BannerType';
+import { BannerType } from '../../../shared/BannerType';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import Slider from '../../../components/Slider/Slider';
 import SlideState from '../../../components/Slider/slide_state';
