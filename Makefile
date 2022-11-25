@@ -25,6 +25,9 @@ ci: test lint ## Run continuous integration tasks (linting, testing)
 clean: ## Clean up dist directory
 	docker-compose run js-build npm run clean
 
+update-content:
+	docker-compose run js-build npm update fundraising-frontend-content
+
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
