@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/en';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
-import { Banner } from './components/Banner_var';
+import { Banner } from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
@@ -15,8 +15,8 @@ import TranslationsSoftClose from './translations_soft_close';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import Footer from '../../components/Footer/Footer';
-import BannerText from './content/BannerText';
-import Slides from './content/Slides';
+import BannerText from './content/BannerText_var';
+import Slides from './content/Slides_var';
 import useOfFundsText from 'fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
