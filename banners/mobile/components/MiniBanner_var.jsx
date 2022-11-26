@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import CloseIconMobile from '../../../components/Icons/CloseIconMobile';
 import Slider from '../../../components/Slider/Slider';
+import SubscriptionForm from '../../../components/SubscriptionForm/SubscriptionForm';
 
 export default function MiniBanner( props ) {
 	const Slides = props.slides;
@@ -43,9 +44,11 @@ export default function MiniBanner( props ) {
 			Jetzt spenden
 		</button>
 
-		{ /* Subscription form link placeholder for same height */ }
-		<a href="#" style="visibility:hidden; display:block; margin-top:10px; font-size:14px; font-weight: bold;" aria-hidden="true" tabIndex="-1">Erinnerung per E-Mail</a>
-
+		<SubscriptionForm
+			onSubmit={ props.onSubmitSubscription }
+			bannerName={ props.bannerName }
+			campaignName={ props.campaignName }
+		/>
 	</div>;
 }
 

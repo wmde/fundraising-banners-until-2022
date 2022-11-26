@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
@@ -9,14 +9,13 @@ import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from './translations_soft_close';
-import TranslationsSubscriptionForm from '../../components/SubscriptionForm/translations/de';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationFormCompact';
-import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2MobileCompact';
+import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2Mobile';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 
-import Banner from './components/Banner_var';
+import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -44,9 +43,9 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		sliderAutoPlaySpeed: 5000,
-		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsSubscriptionForm, LocalTranslations ),
+		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
+		bannerType: BannerType.CTRL,
 		donationForm: DonationForm,
 		donationFormStep2: FormStep2,
 		bannerText: BannerText,
