@@ -26,6 +26,7 @@ export default class SubscriptionForm extends Component {
 	toggleModal( e ) {
 		e.preventDefault();
 		this.setState( { modalVisible: !this.state.modalVisible } );
+		this.props.pauseCountdown( e );
 	}
 
 	hideModal( e ) {

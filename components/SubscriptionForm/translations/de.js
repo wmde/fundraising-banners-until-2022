@@ -1,5 +1,5 @@
 const Translations = {
-	'subscription-form-toggle-link': 'Erinnerung per e-Mail',
+	'subscription-form-toggle-link': 'Erinnerung per E-Mail',
 	'subscription-form-input-label': 'Erinnerung per E-Mail:',
 	'subscription-form-input-placeholder': 'E-Mail-Adresse',
 	'subscription-form-checkbox-label': 'Ja, ich möchte in Zukunft informiert werden, wenn Wikipedia meine Hilfe braucht. ' +

@@ -195,6 +195,11 @@ export default class Banner extends Component {
 		this.props.onClose( 'micro-banner-ignored', new CssTransition( 1000 ) );
 	};
 
+	onSubmitSubscription = () => {
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onClose( 'subscription-form-submitted' );
+	};
+
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
@@ -299,6 +304,9 @@ export default class Banner extends Component {
 						onCloseBanner={ this.onCloseBanner }
 						onTimeOutClose={ this.onTimeOutClose }
 						ref={ this.softCloseRef }
+						onSubmitSubscription={ this.onSubmitSubscription }
+						bannerName={ props.bannerName }
+						campaignName={ props.campaignName }
 					/>
 				</div>
 			</TranslationContext.Provider>
