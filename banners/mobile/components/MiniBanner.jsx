@@ -43,9 +43,6 @@ export default function MiniBanner( props ) {
 			Jetzt spenden
 		</button>
 
-		{ /* Subscription form link placeholder for same height */ }
-		<a href="#" style="visibility:hidden; display:block; margin-top:10px; font-size:14px; font-weight: bold;" aria-hidden="true" tabIndex="-1">Erinnerung per E-Mail</a>
-
 	</div>;
 }
 
