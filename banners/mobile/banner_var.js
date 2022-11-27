@@ -23,15 +23,17 @@ import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
+import BannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
+const bannerDelay = new BannerDelay( bannerContainer );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 5000,
+	bannerDelay.getBannerDelay( 5000 ),
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 

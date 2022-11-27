@@ -17,15 +17,17 @@ import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import DonationForm from '../../components/DonationForm/DonationForm';
 import Slides from './content/Slides';
+import BannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
+const bannerDelay = new BannerDelay( bannerContainer );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 7500,
+	bannerDelay.getBannerDelay( 7500 ),
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
