@@ -16,6 +16,13 @@ Handlebars.registerHelper( 'bannerlink', function ( campaign, bannername ) {
 	return campaign.preview_link.replace( '{{banner}}', bannername );
 } );
 
+Handlebars.registerHelper( 'centralNoticeLink', function ( campaign, bannername ) {
+	if ( bannername.includes( 'WPDE' ) ) {
+		return 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml';
+	}
+	return 'https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/{{banner}}'.replace( '{{banner}}', bannername );
+} );
+
 if ( !currentUrl.query.devbanner ) {
 
 	$( 'body' ).html( bannerSelectionListTemplate( { campaigns: CAMPAIGNS } ) );
