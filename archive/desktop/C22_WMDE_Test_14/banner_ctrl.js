@@ -7,7 +7,7 @@ import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
-import { BannerType } from '../../shared/BannerType';
+import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';

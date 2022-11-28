@@ -10,8 +10,7 @@ export default function BannerText( props ) {
 			<strong><InfoIcon fill={ '#990a00' }/> An alle, die Wikipedia in Deutschland nutzen </strong>
 		</p>
 		<p>
-			Falls wir gerade ungelegen kommen, <a href="#" onClick={props.onClose}>können Sie unseren
-			Spendenaufruf später lesen</a>. Ansonsten kommen wir gleich zur Sache:
+			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg!
 			Am heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia
 			zu sichern. { campaignDaySentence } Wikipedia wird durch Spenden von
 			durchschnittlich 22,66&nbsp;€ finanziert. Doch schon mit einer

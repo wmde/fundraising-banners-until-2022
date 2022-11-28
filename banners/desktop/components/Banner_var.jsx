@@ -124,6 +124,12 @@ export class Banner extends Component {
 		this.props.onMaybeLater();
 	};
 
+	onMaybeLaterFromLink = e => {
+		e.preventDefault();
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onMaybeLater( 'banner-closed-maybelater-link' );
+	};
+
 	onCloseBanner = e => {
 		e.preventDefault();
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
@@ -241,7 +247,7 @@ export class Banner extends Component {
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
 									<Slider
-										slides={ props.slides( this.dynamicCampaignText ) }
+										slides={ props.slides( this.dynamicCampaignText, this.onMaybeLaterFromLink ) }
 										onSlideChange={ this.onSlideChange }
 										registerAutoplay={ this.registerAutoplayCallbacks }
 										interval={ SLIDESHOW_SLIDE_INTERVAL }
@@ -254,7 +260,7 @@ export class Banner extends Component {
 
 								{ state.bannerWidth >= SHOW_SLIDE_BREAKPOINT && (
 									<Message>
-										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
+										<BannerText dynamicCampaignText={ this.dynamicCampaignText } onClose={ this.onMaybeLaterFromLink }/>
 									</Message>
 								) }
 								<ProgressBar

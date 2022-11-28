@@ -1,18 +1,18 @@
 import { h } from 'preact';
 import InfoIcon from '../../../components/Icons/InfoIcon';
 
-export default function Slides( dynamicCampaignText, onClose ) {
+export default function Slides( dynamicCampaignText ) {
 	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = dynamicCampaignText;
 	const animatedVisitorsVsDonorsSentence = visitorsVsDonorsSentence ? <span className="wmde-banner-slider-text-animated-highlight">{ visitorsVsDonorsSentence }</span> : '';
 
 	return [
 		{ content: <div>
 			<p className="headline">
-				<InfoIcon fill={ '#990a00' }/> <strong> An alle, die Wikipedia in Deutschland nutzen </strong>
+				<InfoIcon fill={ '#990a00' }/> <strong> Ist Ihnen Wikipedia 5 € wert? </strong>
 			</p>
 			<p>
-				Falls wir gerade ungelegen kommen, <a href="#" onClick={onClose}> können Sie unseren
-				Spendenaufruf später lesen</a>. Ansonsten kommen wir gleich zur Sache: Am heutigen { currentDayName } bitten
+				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte
+				nicht weg! Am heutigen { currentDayName } bitten
 				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
 		</div> },
 		{ content: <div>

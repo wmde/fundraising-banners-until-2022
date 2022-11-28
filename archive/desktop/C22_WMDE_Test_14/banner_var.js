@@ -7,7 +7,7 @@ import { createTrackingData } from '../../shared/tracking_data';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
-import { BannerType } from '../../shared/BannerType';
+import { BannerType } from './BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
@@ -17,8 +17,8 @@ import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonati
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
 import Footer from '../../components/Footer/Footer';
-import BannerText from './content/BannerText';
-import Slides from './content/Slides';
+import BannerText from './content/BannerText_var';
+import Slides from './content/Slides_var';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -53,7 +53,7 @@ bannerPresenter.present(
 		slides: Slides,
 		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsSubscriptionsForm, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL,
+		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
 		initialBannerWidth: window.innerWidth
 	}
