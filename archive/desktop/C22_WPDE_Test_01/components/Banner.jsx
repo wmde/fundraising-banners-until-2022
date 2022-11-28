@@ -145,7 +145,6 @@ export class Banner extends Component {
 
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
-		this.triggerTextHighlight();
 	};
 
 	triggerTextHighlight() {
@@ -168,14 +167,6 @@ export class Banner extends Component {
 		);
 	}
 
-	onPage2 = () => {
-		this.trackBannerEvent( 'second-form-page-shown' );
-	};
-
-	onChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
-	};
-
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -195,9 +186,9 @@ export class Banner extends Component {
 			<TranslationContext.Provider value={props.translations}>
 				<div className="wmde-banner-wrapper">
 					<ButtonClose onClick={ this.closeBanner }/>
-					{ state.bannerVisibilityState === BannerVisibilityState.CLOSED && (
+					{ state.bannerVisibilityState === BannerVisibilityState.CLOSED &&
 						<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>
-					) }
+					}
 					<div className="wmde-banner-content">
 						<div className="wmde-banner-column-left">
 							{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
@@ -219,29 +210,24 @@ export class Banner extends Component {
 								</Message>
 							) }
 							<ProgressBar
-								formatters={props.formatters}
-								daysLeft={campaignProjection.getRemainingDays()}
-								donationAmount={campaignProjection.getProjectedDonationSum()}
-								goalDonationSum={campaignProjection.goalDonationSum}
-								missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-								setStartAnimation={this.registerStartProgressbar}
+								formatters={ props.formatters }
+								daysLeft={ campaignProjection.getRemainingDays() }
+								donationAmount={ campaignProjection.getProjectedDonationSum() }
+								goalDonationSum={ campaignProjection.goalDonationSum }
+								missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+								setStartAnimation={ this.registerStartProgressbar }
 								amountToShowOnRight={ AmountToShowOnRight.TOTAL }
 								isLateProgress={ props.campaignParameters.isLateProgress }/>
 						</div>
 						<div className="wmde-banner-column-right">
 							<DonationForm
-								onPage2={ this.onPage2 }
-								onSubmit={ props.onSubmit }
-								onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
-								onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-								onChangeToYearly={ this.onChangeToYearly }
-								onFormInteraction={ this.onFormInteraction }
 								formItems={props.formItems}
-								formStep2={ props.donationFormStep2 }
 								bannerName={props.bannerName}
 								campaignName={props.campaignName}
 								formatters={props.formatters}
 								impressionCounts={props.impressionCounts}
+								onFormInteraction={this.onFormInteraction}
+								onSubmit={ props.onSubmit }
 								customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 								buttonText={ props.buttonText }
 								errorPosition={ props.errorPosition }

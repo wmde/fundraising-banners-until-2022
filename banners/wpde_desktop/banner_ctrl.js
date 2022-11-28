@@ -7,10 +7,12 @@ import { createCampaignParameters } from '../../shared/campaign_parameters';
 import { getTrackingIds } from '../../shared/tracking_ids';
 
 import { Banner } from './components/Banner';
-import DonationForm from '../../components/DonationForm/DonationForm';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
+import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
+import localTranslations from './translations';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -43,7 +45,8 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		slides: Slides,
 		donationForm: DonationForm,
-		translations: Translations,
+		donationFormStep2: FormStep2,
+		translations: Object.assign( Translations, localTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.CTRL,
 		initialBannerWidth: window.innerWidth
