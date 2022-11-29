@@ -1,0 +1,55 @@
+.wmde-banner {
+	&-form {
+		display: flex;
+		height: 100%;
+		width: 100%;
+
+		&-slider {
+			display: flex;
+			overflow: hidden;
+		}
+
+		&-field-group {
+			border: 0;
+			margin: 0;
+			display: block;
+			width: 100%; /* For IE11 */
+
+			&-legend {
+				width: 100%;
+				position: relative;
+				padding: 0;
+			}
+		}
+
+		&-button-container {
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: flex-start;
+			flex: 0 1 auto;
+			width: 100%;
+			margin-top: auto;
+		}
+
+		&-button {
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			cursor: pointer;
+			border: 0 none;
+			white-space: nowrap;
+		}
+	}
+
+	&-sub-form {
+		display: flex;
+		height: 100%;
+		width: 100%; /* For IE11 */
+
+		&-donation {
+			.wmde-banner-form-button-container {
+				margin-top: 0;
+			}
+		}
+	}
+}
