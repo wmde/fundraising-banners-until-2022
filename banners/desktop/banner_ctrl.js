@@ -13,9 +13,10 @@ import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from '../../components/SoftClose/translations/de';
 import TranslationsSubscriptionsForm from '../../components/SubscriptionForm/translations/de';
-import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonation3StepForm';
-import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
-import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
+import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
+import Donation from '../../components/MultistepDonationForm/forms/Donation';
+import UpgradeToYearly from '../../components/MultistepDonationForm/forms/UpgradeToYearly';
+import CustomAmount from '../../components/MultistepDonationForm/forms/CustomAmount';
 import Footer from '../../components/Footer/Footer';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
@@ -23,6 +24,7 @@ import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import createFormController from './FormController';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -46,8 +48,8 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
-		donationFormStep2: DonationFormStep2,
-		donationFormStep3: DonationFormStep3,
+		donationForms: [ Donation, UpgradeToYearly, CustomAmount ],
+		createFormController: createFormController,
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,
