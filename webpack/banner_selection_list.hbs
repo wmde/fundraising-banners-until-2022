@@ -5,7 +5,16 @@
 		<h2>{{ @key }}</h2>
 		<ul>
 			{{#each banners }}
-				<li><a href="{{ bannerlink ../this pagename }}" target="_blank">{{ pagename }}</a></li>
+				<li>
+					<a href="{{ bannerlink ../this pagename }}"
+							target="_blank"
+							title="preview banner locally">
+						{{ pagename }}
+					</a>
+					( <a href="{{ centralNoticeLink ../this pagename }}"
+						target="_blank"
+						title="Edit banner settings on CentralNotice or github (WPDE)">▶️️</a> )
+				</li>
 			{{/each}}
 		</ul>
 	{{/each}}
