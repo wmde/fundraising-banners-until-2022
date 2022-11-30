@@ -18,17 +18,16 @@ import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
 import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
-import BannerDelay from '../../shared/banner_delay';
+import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
 const campaignProjection = createCampaignProjection( campaignParameters );
 const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
-const bannerDelay = new BannerDelay( bannerContainer );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerDelay.getBannerDelay( 7500 ),
+	getBannerDelay( 7500 ),
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
