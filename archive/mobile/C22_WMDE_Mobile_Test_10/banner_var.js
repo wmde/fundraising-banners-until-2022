@@ -15,7 +15,6 @@ import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonati
 import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2MobileCompact';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
-import SoftClose from '../../components/SoftClose/SoftCloseWithSubscriptionsButton';
 
 import Banner from './components/Banner_var';
 
@@ -51,8 +50,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		donationFormStep2: FormStep2,
 		bannerText: BannerText,
-		slides: Slides,
-		softClose: SoftClose
+		slides: Slides
 	},
 	0
 );

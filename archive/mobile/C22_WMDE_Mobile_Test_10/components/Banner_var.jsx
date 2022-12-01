@@ -4,8 +4,8 @@ import debounce from '../../../shared/debounce';
 
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
-import MiniBanner from './MiniBanner';
-import FullBanner from './FullBanner';
+import MiniBanner from './MiniBanner_var';
+import FullBanner from './FullBanner_var';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
@@ -13,6 +13,7 @@ import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDist
 import { BannerType } from '../../../shared/BannerType';
 import SlideState from '../../../shared/slide_state';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
+import SoftClose from '../../../components/SoftClose/SoftClose';
 import CssTransition from '../../../shared/css_transition';
 
 const BannerVisibilityState = Object.freeze( {
@@ -236,7 +237,6 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		const SoftClose = props.softClose;
 		const campaignProjection = props.campaignProjection;
 		return <div className={classNames( {
 			'wmde-banner': true,
@@ -261,6 +261,7 @@ export default class Banner extends Component {
 					<MiniBanner
 						{ ...props }
 						onClose={ this.onSoftCloseMiniBanner }
+						onSubmitSubscription={ this.onSubmitSubscription }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
 						campaignProjection={ campaignProjection }
@@ -287,6 +288,7 @@ export default class Banner extends Component {
 						onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
 						onChangeToYearly={ this.onDonationFormChangeToYearly }
 						onClose={ this.onCloseFullBanner }
+						onSubmitSubscription={ this.onSubmitSubscription }
 						campaignProjection={ campaignProjection }
 						donationForm={props.donationForm}
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
@@ -304,9 +306,6 @@ export default class Banner extends Component {
 						onCloseBanner={ this.onCloseBanner }
 						onTimeOutClose={ this.onTimeOutClose }
 						ref={ this.softCloseRef }
-						onSubmitSubscription={ this.onSubmitSubscription }
-						bannerName={ props.bannerName }
-						campaignName={ props.campaignName }
 					/>
 				</div>
 			</TranslationContext.Provider>

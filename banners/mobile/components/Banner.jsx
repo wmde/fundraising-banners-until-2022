@@ -13,7 +13,6 @@ import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDist
 import { BannerType } from '../../../shared/BannerType';
 import SlideState from '../../../shared/slide_state';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
-import SoftClose from '../../../components/SoftClose/SoftClose';
 import CssTransition from '../../../shared/css_transition';
 
 const BannerVisibilityState = Object.freeze( {
@@ -232,6 +231,7 @@ export default class Banner extends Component {
 
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
+		const SoftClose = props.softClose;
 		const campaignProjection = props.campaignProjection;
 		return <div className={classNames( {
 			'wmde-banner': true,
@@ -256,10 +256,10 @@ export default class Banner extends Component {
 					<MiniBanner
 						{ ...props }
 						onClose={ this.onSoftCloseMiniBanner }
-						campaignProjection={ campaignProjection }
-						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
+						campaignProjection={ campaignProjection }
+						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
 					/>
