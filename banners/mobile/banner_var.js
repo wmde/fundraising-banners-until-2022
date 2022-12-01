@@ -45,7 +45,7 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		sliderAutoPlaySpeed: 5000,
-		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose, TranslationsSubscriptionForm ),
+		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsSubscriptionForm, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		donationForm: DonationForm,

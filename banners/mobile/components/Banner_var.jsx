@@ -261,10 +261,10 @@ export default class Banner extends Component {
 					<MiniBanner
 						{ ...props }
 						onClose={ this.onSoftCloseMiniBanner }
-						campaignProjection={ campaignProjection }
-						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						onExpandFullpage={ this.showFullPageBannerFromMiniBanner }
 						onSlideChange={ this.onSlideChange }
+						campaignProjection={ campaignProjection }
+						setStartAnimation={ this.registerStartProgressBarInMiniBanner }
 						registerSliderAutoplayCallbacks={ this.registerSliderAutoplayCallbacks }
 						dynamicCampaignText={ this.dynamicCampaignText }
 					/>
