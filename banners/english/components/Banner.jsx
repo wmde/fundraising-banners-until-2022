@@ -193,8 +193,8 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
-	onChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
+	onPage3 = () => {
+		this.trackBannerEvent( 'third-form-page-shown' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -264,12 +264,16 @@ export class Banner extends Component {
 							<div className="wmde-banner-column-right">
 								<DonationForm
 									onPage2={ this.onPage2 }
+									onPage3={ this.onPage3 }
 									onSubmit={ props.onSubmit }
 									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
 									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-									onChangeToYearly={ this.onChangeToYearly }
+									onSubmitStep3={ () => props.onSubmit( 'submit-different-amount' ) }
+									onStep3Increased={ () => this.trackBannerEvent( 'increased-amount' ) }
+									onStep3Decreased={ () => this.trackBannerEvent( 'decreased-amount' ) }
 									formItems={props.formItems}
 									formStep2={ props.donationFormStep2 }
+									formStep3={ props.donationFormStep3 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
