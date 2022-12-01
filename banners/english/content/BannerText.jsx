@@ -15,7 +15,7 @@ export default function BannerText( props ) {
 			provide resources to the groups who build local communities of contributors to create our millions
 			of articles and images. They also help us advocate for public policy to advance the cause of free knowledge
 			worldwide and defend information access in countries
-			struggling with censorship. <span className="wmde-banner-text-animated-hihlight"> Today, we invite you to
+			struggling with censorship. <span className="wmde-banner-text-animated-highlight"> Today, we invite you to
 			donate €5 or whatever seems right to you.</span> Show the world that free access
 			to independent and unbiased information matters to you.
 			Thank you for your help. — <i>Wikimedia Fördergesellschaft</i>
