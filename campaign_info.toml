@@ -162,20 +162,20 @@ tracking = "wpde-mob01-221103-var"
 
 # English Campaign
 [english]
-campaign_tracking = "en04-ba-221124"
+campaign_tracking = "en05-ba-221129"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
 preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./banners/english/banner_ctrl.js"
-pagename = "B22_WMDE_Test_EN_04_ctrl"
-tracking = "org-en04-221124-ctrl"
+pagename = "B22_WMDE_Test_EN_05_ctrl"
+tracking = "org-en05-221129-ctrl"
 
 [english.banners.var]
 filename = "./banners/english/banner_var.js"
-pagename = "B22_WMDE_Test_EN_04_var"
-tracking = "org-en04-221124-var"
+pagename = "B22_WMDE_Test_EN_05_var"
+tracking = "org-en05-221129-var"
 
 [english.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]

@@ -200,6 +200,7 @@ export class Banner extends Component {
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
+		const campaignProjection = props.campaignProjection;
 		const Footer = props.footer;
 		const BannerText = props.bannerText;
 
@@ -251,15 +252,6 @@ export class Banner extends Component {
 										<BannerText dynamicCampaignText={ this.dynamicCampaignText }/>
 									</Message>
 								) }
-								<ProgressBar
-									formatters={ props.formatters }
-									daysLeft={ props.campaignProjection.getRemainingDays() }
-									donationAmount={ props.campaignProjection.getProjectedDonationSum() }
-									goalDonationSum={ props.campaignProjection.goalDonationSum }
-									missingAmount={ props.campaignProjection.getProjectedRemainingDonationSum() }
-									setStartAnimation={ this.registerStartProgressbar }
-									isLateProgress={ props.campaignParameters.isLateProgress }
-									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
@@ -268,13 +260,13 @@ export class Banner extends Component {
 									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
 									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
 									onChangeToYearly={ this.onChangeToYearly }
+									onFormInteraction={this.onFormInteraction}
 									formItems={props.formItems}
 									formStep2={ props.donationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
-									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
@@ -285,6 +277,15 @@ export class Banner extends Component {
 							</div>
 						</div>
 						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<ProgressBar
+							formatters={props.formatters}
+							daysLeft={campaignProjection.getRemainingDays()}
+							donationAmount={campaignProjection.getProjectedDonationSum()}
+							goalDonationSum={campaignProjection.goalDonationSum}
+							missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
+							setStartAnimation={this.registerStartProgressbar}
+							isLateProgress={ props.campaignParameters.isLateProgress }
+							amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 					</div>
 
 				</TranslationContext.Provider>

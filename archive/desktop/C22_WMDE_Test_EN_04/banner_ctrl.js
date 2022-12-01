@@ -51,7 +51,7 @@ bannerPresenter.present(
 		slides: Slides,
 		translations: Object.assign( Translations, LocalTranslations, TranslationsSoftClose ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
+		bannerType: BannerType.CTRL,
 		showCookieBanner: '0',
 		initialBannerWidth: window.innerWidth,
 		formActionProps: { locale: 'en_GB' }
