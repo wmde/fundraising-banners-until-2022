@@ -15,7 +15,6 @@ import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
-import SubscriptionForm from '../../../components/SubscriptionForm/SubscriptionForm';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -133,11 +132,6 @@ export class Banner extends Component {
 	onTimeOutClose = () => {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose( 'micro-banner-ignored' );
-	};
-
-	onSubmitSubscription = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'subscription-form-submitted' );
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -291,11 +285,6 @@ export class Banner extends Component {
 									bannerType={ props.bannerType }
 									showCookieBanner={ props.showCookieBanner }
 									formActionProps={ props.formActionProps }
-								/>
-								<SubscriptionForm
-									onSubmit={ this.onSubmitSubscription }
-									bannerName={ props.bannerName }
-									campaignName={ props.campaignName }
 								/>
 							</div>
 						</div>
