@@ -84,6 +84,20 @@ export default class BannerPresenter {
 						this.mwCloseHandler();
 					}
 				},
+				onCloseBecauseDonated: ( identifier ) => {
+					this.trackingData.tracker.trackViewPortDimensions(
+						identifier ?? 'banner-closed-for-campaign',
+						sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
+						this.trackingData.bannerCloseTrackRatio
+					);
+					skinAdjuster.removeSpaceInstantly();
+					window.removeEventListener( 'resize', resizeHandler );
+					if ( onMediaWiki() ) {
+						const endOfYear = new Date( new Date().getFullYear(), 11, 31, 23, 59, 59 );
+						const secondsToEndOfYear = Math.abs( ( endOfYear - Date.now() ) / 1000 );
+						mw.centralNotice.customHideBanner( 'donate', secondsToEndOfYear );
+					}
+				},
 				onSubmit: ( identifier = null ) => {
 					this.trackingData.tracker.trackViewPortDimensions(
 						identifier ?? VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER,
