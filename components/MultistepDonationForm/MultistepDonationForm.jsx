@@ -1,9 +1,10 @@
 import { h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { useKeenSlider } from 'keen-slider/react';
-import useFormAction from './hooks/use_form_action';
+import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL} from './hooks/use_form_action';
 import { createFormModel } from './formModel';
 import SubmitValues from './SubmitValues';
+import { AddressTypes } from '../DonationForm/FormItemsBuilder';
 
 export default function MultistepDonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => props.onFormInteraction( e ) : () => {};
@@ -11,7 +12,7 @@ export default function MultistepDonationForm( props ) {
 	const formController = props.createFormController( formModel );
 	const submitFormRef = useRef();
 
-	const [ formAction ] = useFormAction( props, props.formActionProps ?? {} );
+	const [ formAction, setUrl ] = useFormAction( props, props.formActionProps ?? {} );
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	const [ submitForm, setSubmitForm ] = useState( false );
 	const [ submitValues, setSubmitValues ] = useState( formModel.initialState );
@@ -27,7 +28,6 @@ export default function MultistepDonationForm( props ) {
 
 	useEffect( () => {
 		if ( submitForm ) {
-			setSubmitValues( formController.getSubmitValues() );
 			submitFormRef.current.submit();
 		}
 	}, [ submitForm ] );
@@ -36,8 +36,28 @@ export default function MultistepDonationForm( props ) {
 	formController.onBack( () => slider.prev() );
 	formController.onGoToStep( ( step ) => slider.moveToSlide( step - 1 ) );
 	formController.onSubmit( ( eventName ) => {
-		props.onSubmit( eventName );
-		setSubmitForm( true );
+		// The following timeouts are ugly hack to get around the asynchronous state change of the store
+		// and the asynchronous rendering of SubmitValues before the form is submitted
+		// See https://blog.logrocket.com/why-react-doesnt-update-state-immediately/
+
+		// Wait for a few ms until P(React) has updated the store
+		setTimeout( () => {
+			const finalSubmitValues = formController.getSubmitValues();
+
+			// TODO Move form address generation to FormController
+			if ( finalSubmitValues.addressType === AddressTypes.NO.value ) {
+				setUrl( ADD_DONATION_URL );
+			} else {
+				setUrl( NEW_DONATION_URL );
+			}
+			setSubmitValues( finalSubmitValues );
+			// wait for the submit values to be rendered,
+			// then trigger the effect (which submits the form) by changing submitForm to true
+			setTimeout( () => {
+				props.onSubmit( eventName );
+				setSubmitForm( true );
+			}, 100 );
+		}, 50 );
 	} );
 
 	const onSubmitStep = ( step, extraData = {} ) => formController.submitStep( step, extraData );

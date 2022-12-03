@@ -15,7 +15,6 @@ import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
-import SubscriptionForm from '../../../components/SubscriptionForm/SubscriptionForm';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -275,11 +274,6 @@ export class Banner extends Component {
 									donationForms={ props.donationForms }
 									createFormController={ props.createFormController }
 									trackBannerEvent={ ( eventName ) => this.trackBannerEvent( eventName ) }
-								/>
-								<SubscriptionForm
-									onSubmit={ this.onSubmitSubscription }
-									bannerName={ props.bannerName }
-									campaignName={ props.campaignName }
 								/>
 							</div>
 						</div>

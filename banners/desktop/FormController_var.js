@@ -1,5 +1,4 @@
 import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
-import { Alternatives } from '../../components/DonationForm/hooks/use_alternative';
 
 let formModel = {};
 let submitCallback = () => {};
@@ -16,24 +15,22 @@ const submitStep = ( step, extraData ) => {
 	switch ( step ) {
 		case 1:
 			if ( paymentInterval !== Intervals.ONCE.value || paymentMethod === PaymentMethods.SOFORT.value ) {
-				submitCallback();
+				goToStepCallback( 4 );
 				return;
 			}
 			nextCallback();
 			break;
 		case 2:
-			if ( extraData.upgradeToYearly === Alternatives.YES ) {
-				setPaymentInterval( Intervals.YEARLY.value );
-				submitCallback( 'submit-recurring' );
-			} else {
-				submitCallback( 'submit-non-recurring' );
-			}
+			setPaymentInterval( Intervals.YEARLY.value );
+			goToStepCallback( 4 );
 			break;
 		case 3:
 			thirdPageAmount = extraData.numericThirdPageAmount;
 			setPaymentInterval( Intervals.YEARLY.value );
-			console.log(`paymentInterval is now ${paymentInterval}`)
-			submitCallback( 'submit-different-amount' );
+			goToStepCallback( 4 );
+			break;
+		case 4:
+			submitCallback();
 			break;
 	}
 };
@@ -48,6 +45,10 @@ const goBack = ( step ) => {
 		case 2:
 			setPaymentInterval( Intervals.ONCE.value );
 			break;
+		case 4:
+			// Going back to step 1 is probably the best for all 3 possible user flows
+			goToStepCallback( 1 );
+			return;
 	}
 	backCallback();
 };

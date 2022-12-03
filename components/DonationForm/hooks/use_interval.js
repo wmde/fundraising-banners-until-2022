@@ -7,6 +7,7 @@ export default function useInterval( initial ) {
 	const [ interval, setInterval ] = useState( initial );
 	const [ validity, setValidity ] = useState( intervalIsValid( initial ) );
 	const update = newInterval => {
+		console.log("interval set to ", newInterval)
 		setInterval( newInterval );
 		setValidity( intervalIsValid( newInterval ) );
 	};
