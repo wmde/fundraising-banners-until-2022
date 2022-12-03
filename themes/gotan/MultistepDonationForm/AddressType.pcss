@@ -1,0 +1,38 @@
+.wmde-banner {
+	&-form-address-type {
+		&-title {
+			position: relative;
+			line-height: 16px;
+			padding-left: 20px;
+			padding-right: 20px;
+			margin-bottom: 10px;
+
+			.back {
+				position: absolute;
+				display: block;
+				height: 16px;
+				width: 16px;
+				top: 0;
+				left: 0;
+			}
+		}
+
+		&-notice {
+			font-weight: bold;
+			font-size: 12px;
+			margin-bottom: auto;
+
+			/* min-height is to reserve space and prevent 1st page from "jumping",
+				because the last page has the largest height
+			 */
+			min-height: 28px;
+		}
+
+		.wmde-banner-select-group-notice {
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 1.5;
+			padding-left: 25px;
+		}
+	}
+}

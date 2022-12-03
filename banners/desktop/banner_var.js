@@ -10,22 +10,23 @@ import { Banner } from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
-import LocalTranslations from './translations';
+import LocalTranslations from './translations_var';
 import TranslationsSoftClose from '../../components/SoftClose/translations/de';
 import TranslationsAlreadyDonated from '../../components/AlreadyDonatedModal/translations/de';
 import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
 import Donation from '../../components/MultistepDonationForm/forms/Donation';
 import UpgradeToYearly from '../../components/MultistepDonationForm/forms/UpgradeToYearly';
 import CustomAmount from '../../components/MultistepDonationForm/forms/CustomAmount';
+import AddressType from '../../components/MultistepDonationForm/forms/AddressType';
 import Footer from '../../components/Footer/FooterAlreadyDonated';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 import AlreadyDonated from './content/AlreadyDonated';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
-import { createFormItems } from './form_items';
+import { createFormItems } from './form_items_var';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import createFormController from './FormController';
+import createFormController from './FormController_var';
 import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -50,7 +51,7 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
-		donationForms: [ Donation, UpgradeToYearly, CustomAmount ],
+		donationForms: [ Donation, UpgradeToYearly, CustomAmount, AddressType ],
 		createFormController: createFormController,
 		footer: Footer,
 		bannerText: BannerText,
@@ -60,6 +61,7 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
-		initialBannerWidth: window.innerWidth
+		initialBannerWidth: window.innerWidth,
+		formActionProps: { ast: 1 }
 	}
 );

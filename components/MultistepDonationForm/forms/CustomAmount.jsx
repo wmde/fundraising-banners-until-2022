@@ -30,6 +30,7 @@ export default function CustomAmount( props ) {
 		} else {
 			onExited();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ props.active ] );
 
 	const paymentDataIsValid = () => [

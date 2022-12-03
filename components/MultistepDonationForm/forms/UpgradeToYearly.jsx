@@ -27,6 +27,7 @@ export default function UpgradeToYearly( props ) {
 		if ( props.active ) {
 			onEntered();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ props.active ] );
 
 	const onChooseUpgradeToYearly = e => {
@@ -47,6 +48,11 @@ export default function UpgradeToYearly( props ) {
 
 	const onSubmit = e => {
 		e.preventDefault();
+		if ( upgradeToYearly === Alternatives.YES ) {
+			props.trackBannerEvent( 'upgraded-to-yearly' );
+		} else {
+			props.trackBannerEvent( 'not-upgraded-to-yearly' );
+		}
 		if ( paymentDataIsValid() ) {
 			props.onSubmit( props.step, { upgradeToYearly } );
 		}
