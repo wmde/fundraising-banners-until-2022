@@ -15,6 +15,7 @@ import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
+import AlreadyDonatedModal from '../../../components/AlreadyDonatedModal/AlreadyDonatedModal';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -53,6 +54,7 @@ export class Banner extends Component {
 		this.state = {
 			bannerVisibilityState: BannerVisibilityState.PENDING,
 			isFundsModalVisible: false,
+			isAlreadyDonatedModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
@@ -197,6 +199,29 @@ export class Banner extends Component {
 		this.trackBannerEvent( 'third-form-page-shown' );
 	};
 
+	showAlreadyDonated = ( e ) => {
+		e.preventDefault();
+		this.trackBannerEvent( 'clicked-already-donated' );
+		this.setState( { isAlreadyDonatedModalVisible: true } );
+	};
+
+	hideAlreadyDonated = ( e ) => {
+		e.preventDefault();
+		this.setState( { isAlreadyDonatedModalVisible: false } );
+	};
+
+	onAlreadyDonatedMaybeLater = e => {
+		e.preventDefault();
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onMaybeLater( 'banner-closed-already-donated-maybelater' );
+	};
+
+	onAlreadyDonatedGoAway = e => {
+		e.preventDefault();
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.props.onCloseBecauseDonated( 'banner-closed-already-donated' );
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const DonationForm = props.donationForm;
@@ -231,6 +256,13 @@ export class Banner extends Component {
 					/>
 					<div className="wmde-banner-wrapper">
 						<ButtonClose onClick={ this.onSoftCloseBanner }/>
+						<AlreadyDonatedModal
+							content={ props.alreadyDonatedContent }
+							isVisible={ state.isAlreadyDonatedModalVisible }
+							onHide={ this.hideAlreadyDonated }
+							onMaybeLater={ this.onAlreadyDonatedMaybeLater }
+							onGoAway={ this.onAlreadyDonatedGoAway }
+						/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
@@ -288,7 +320,10 @@ export class Banner extends Component {
 								/>
 							</div>
 						</div>
-						<Footer showFundsModal={ this.toggleFundsModal }/>
+						<Footer
+							showFundsModal={ this.toggleFundsModal }
+							showAlreadyDonated={ this.showAlreadyDonated }
+						/>
 					</div>
 
 				</TranslationContext.Provider>

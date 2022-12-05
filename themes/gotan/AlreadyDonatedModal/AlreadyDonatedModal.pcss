@@ -1,0 +1,57 @@
+.wmde-banner {
+	&-already-donated {
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 300ms $banner-easing;
+		z-index: 9999;
+		background: rgba( 0, 0, 0, 0.6 );
+		font-size: 18px;
+		text-align: center;
+		font-family: $banner-text-font-family;
+
+		&-content {
+			transform: scale( 1.1 );
+			position: relative;
+			max-width: 800px;
+			margin: 0 10px;
+			background: $color-white;
+			border-radius: 6px;
+			padding: 30px 30px 20px;
+			transition: transform 300ms $banner-easing;
+		}
+
+		&-buttons {
+			text-align: center;
+			margin-top: 30px;
+		}
+
+		&-button {
+			display: inline-block;
+			border: 0 none;
+			min-width: 220px;
+			color: $color-white;
+			background-color: $color-primary;
+			border-radius: 18px;
+			font-size: 14px;
+			line-height: 32px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0 16px 10px;
+			cursor: pointer;
+			transition: border-radius 300ms $banner-easing;
+
+			&:hover,
+			&:focus {
+				border-radius: 8px;
+			}
+		}
+
+		&--is-visible {
+			visibility: visible;
+			opacity: 1;
+			.wmde-banner-already-donated-content {
+				transform: scale( 1 );
+			}
+		}
+	}
+}
