@@ -1,0 +1,83 @@
+.wmde-banner {
+	visibility: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 10000;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	&--visible,
+	&--soft-closing {
+		visibility: visible;
+	}
+	&--hidden {
+		display: none;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	ul {
+		list-style-image: unset;
+	}
+
+	&-wrapper {
+		font-size: 14px;
+		font-family: $banner-main-font-family;
+		box-shadow: 0 3px 0.6em rgba( 60 60 60 / 40% );
+		background-color: $color-white;
+
+		/* Set z-index to hide the animation of mini banner after expanding from mini banner */
+		position: relative;
+		z-index: 200;
+	}
+
+	&-content {
+		display: flex;
+		flex-direction: row;
+		order: 1;
+		padding: 12px 24px 0;
+	}
+
+	&-column-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		flex: 1 1 auto;
+		margin-bottom: 0;
+		overflow-y: hidden;
+		margin-right: 30px;
+		padding: 0 15px;
+		border: 5px solid $color-primary;
+		border-radius: 9px;
+	}
+
+	&-message {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+
+	&-column-right {
+		order: 2;
+		flex: 0 0 $form-width;
+		display: flex;
+		flex-direction: column;
+		width: $form-width;
+		min-height: 313px;
+		padding: 20px 0;
+
+		@media ( min-width: $breakpoint-l ) {
+			min-height: 324px;
+		}
+
+		@media ( min-width: 1415px ) {
+			min-height: 313px;
+		}
+	}
+}
