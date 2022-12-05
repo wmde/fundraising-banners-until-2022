@@ -42,6 +42,7 @@ export default function FullBanner( props ) {
 			onSubmitNonRecurring={ props.onSubmitNonRecurring }
 			onChangeToYearly={ props.onChangeToYearly }
 			formItems={props.formItems}
+			formStep2={ props.donationFormStep2 }
 			bannerName={props.bannerName}
 			campaignName={props.campaignName}
 			formatters={props.formatters}
