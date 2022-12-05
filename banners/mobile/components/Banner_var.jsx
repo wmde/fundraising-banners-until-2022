@@ -5,7 +5,7 @@ import debounce from '../../../shared/debounce';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
-import FullBanner from './FullBanner';
+import FullBanner from './FullBanner_var';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
@@ -195,11 +195,6 @@ export default class Banner extends Component {
 		this.props.onClose( 'micro-banner-ignored', new CssTransition( 1000 ) );
 	};
 
-	onSubmitSubscription = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'subscription-form-submitted' );
-	};
-
 	registerBannerTransition = cb => { this.slideInBanner = cb; };
 	registerFullpageBannerTransition = cb => { this.transitionToFullpage = cb; };
 	registerAdjustFollowupBannerHeight = cb => { this.adjustFollowupBannerHeight = cb; };
@@ -304,9 +299,6 @@ export default class Banner extends Component {
 						onCloseBanner={ this.onCloseBanner }
 						onTimeOutClose={ this.onTimeOutClose }
 						ref={ this.softCloseRef }
-						onSubmitSubscription={ this.onSubmitSubscription }
-						bannerName={ props.bannerName }
-						campaignName={ props.campaignName }
 					/>
 				</div>
 			</TranslationContext.Provider>
