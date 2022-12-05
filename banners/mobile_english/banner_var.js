@@ -8,12 +8,14 @@ import { getTrackingIds } from '../../shared/tracking_ids';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
+import TranslationsSoftClose from './translations_soft_close';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import DonationForm from '../../components/DonationForm/DonationForm';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
+import SoftClose from '../../components/SoftClose/SoftClose';
 
-import Banner from './components/Banner';
+import Banner from './components/Banner_var';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
@@ -43,13 +45,14 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		sliderAutoPlaySpeed: 5000,
-		translations: Object.assign( Translations, LocalTranslations ),
+		translations: Object.assign( Translations, TranslationsSoftClose, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
 		bannerText: BannerText,
 		slides: Slides,
-		formActionProps: { locale: 'en_GB' }
+		formActionProps: { locale: 'en_GB' },
+		softClose: SoftClose
 	},
 	95
 );
