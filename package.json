@@ -19,10 +19,11 @@
   "dependencies": {
     "classnames": "^2.3.2",
     "format-number": "^3.0.0",
-    "keen-slider": "^5.5.1",
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
+    "keen-slider": "^5.5.1",
     "preact": "^10.11.0",
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "zustand": "^4.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
