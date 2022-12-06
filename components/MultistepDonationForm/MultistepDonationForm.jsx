@@ -2,21 +2,21 @@ import { h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { useKeenSlider } from 'keen-slider/react';
 import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from './hooks/use_form_action';
-import { createFormModel } from './formModel';
 import SubmitValues from './SubmitValues';
-import { AddressTypes } from '../DonationForm/FormItemsBuilder';
+import { AddressTypes, Intervals } from '../DonationForm/FormItemsBuilder';
+import { createDonationStore } from './store/createStore';
 
 export default function MultistepDonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => props.onFormInteraction( e ) : () => {};
-	const formModel = createFormModel( props.formatters.customAmountInputFormatter );
-	const formController = props.createFormController( formModel );
+	const store = createDonationStore( props.formatters.customAmountInputFormatter );
+	const formController = props.createFormController( store.getState() );
 	const submitFormRef = useRef();
 
 	const [ formAction, setUrl ] = useFormAction( props, props.formActionProps ?? {} );
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	// Trigger value for submitting the form
 	const [ submitForm, setSubmitForm ] = useState( 0 );
-	const [ submitValues, setSubmitValues ] = useState( formModel.initialState );
+	const [ submitValues, setSubmitValues ] = useState( {} );
 	const [ sliderRef, slider ] = useKeenSlider( {
 		initial: 0,
 		loop: false,
@@ -82,7 +82,7 @@ export default function MultistepDonationForm( props ) {
 						onBack={ onBack }
 						onNext={ onNext }
 						trackBannerEvent={ props.trackBannerEvent }
-						formModel={ formModel }
+						store={ store.getState() }
 						active={ currentSlide === idx }
 						onClick={ onFormInteraction }
 						formatters={ props.formatters }

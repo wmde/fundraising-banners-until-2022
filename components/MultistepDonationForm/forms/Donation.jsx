@@ -11,19 +11,15 @@ import { Intervals, PaymentMethods } from '../../../shared/components/ui/form/Fo
 
 export default function Donation( props ) {
 	const Translations = useContext( TranslationContext );
-	const [ paymentInterval, setInterval, intervalValidity, setIntervalValidity ] = props.formModel.interval;
-	const [ paymentMethod, setPaymentMethod, paymentMethodValidity, setPaymentMethodValidity ] = props.formModel.paymentMethod;
-	const [ {
-		amountValidity,
-		selectedAmount,
-		customAmount
-	}, {
-		selectAmount,
-		updateCustomAmount,
-		validateCustomAmount,
-		setAmountValidity
-	} ] = props.formModel.amount;
-	const [ disabledIntervals, disabledPaymentMethods ] = props.formModel.disabled;
+
+	const {
+		interval, setInterval, intervalValidity, setIntervalValidity,
+		paymentMethod, setPaymentMethod, paymentMethodValidity, setPaymentMethodValidity,
+		amountValidity, selectedAmount, customAmount,
+		selectAmount, updateCustomAmount, validateAndSetCustomAmount, setAmountValidity,
+		disabledIntervals, disabledPaymentMethods
+	} = props.store;
+
 	const [ isFormValid, setFormValidity ] = useState( true );
 	const [ buttonText, setButtonText ] = useState( Translations[ 'submit-label' ] );
 
@@ -33,11 +29,11 @@ export default function Donation( props ) {
 
 	useEffect(
 		() => {
-			setButtonText( paymentInterval === Intervals.ONCE.value && paymentMethod !== PaymentMethods.SOFORT.value ?
+			setButtonText( interval === Intervals.ONCE.value && paymentMethod !== PaymentMethods.SOFORT.value ?
 				Translations[ 'submit-label-short' ] :
 				Translations[ 'submit-label' ] );
 		},
-		[ paymentInterval, paymentMethod, Translations ]
+		[ interval, paymentMethod, Translations ]
 	);
 
 	// check with side effects
@@ -67,7 +63,7 @@ export default function Donation( props ) {
 				selectionItems={ props.formItems.intervals }
 				isValid={ isValidOrUnset( intervalValidity ) }
 				errorMessage={ Translations[ 'no-interval-message' ] }
-				currentValue={ paymentInterval }
+				currentValue={ interval }
 				onSelected={ e => setInterval( e.target.value ) }
 				disabledOptions={ disabledIntervals }
 				errorPosition={ props.errorPosition }
@@ -91,7 +87,7 @@ export default function Donation( props ) {
 					value={ customAmount }
 					selectedAmount={ selectedAmount }
 					onInput={ e => updateCustomAmount( e.target.value ) }
-					onBlur={ e => validateCustomAmount( e.target.value ) }
+					onBlur={ e => validateAndSetCustomAmount( e.target.value ) }
 					placeholder={ Translations[ 'custom-amount-placeholder' ] }
 					language={
 						/* eslint-disable-next-line dot-notation */

@@ -11,10 +11,14 @@ import { isValid, isValidOrUnset } from '../../DonationForm/hooks/validation_sta
 
 export default function UpgradeToYearly( props ) {
 	const Translations = useContext( TranslationContext );
-	const [ , setInterval, intervalValidity, setIntervalValidity ] = props.formModel.interval;
-	const [ , , paymentMethodValidity, setPaymentMethodValidity ] = props.formModel.paymentMethod;
-	const [ { amountValidity, customAmount, selectedAmount }, { setAmountValidity } ] = props.formModel.amount;
-	const [ upgradeToYearly, setUpgradeToYearly, upgradeToYearlyValidity, setUpgradeToYearlyValidity ] = useAlternative( null );
+
+	const {
+		setInterval, intervalValidity, setIntervalValidity,
+		paymentMethodValidity, setPaymentMethodValidity,
+		amountValidity, customAmount, selectedAmount, setAmountValidity,
+		upgradeToYearly, setUpgradeToYearly, upgradeToYearlyValidity, setUpgradeToYearlyValidity
+	} = props.store;
+
 	const [ secondPageAmount, setSecondPageAmount ] = useState( '0' );
 
 	const onEntered = () => {

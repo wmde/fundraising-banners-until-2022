@@ -10,9 +10,13 @@ import useCustomAmount from '../../DonationForm/hooks/use_custom_amount';
 
 export default function CustomAmount( props ) {
 	const Translations = useContext( TranslationContext );
-	const [ , , intervalValidity, setIntervalValidity ] = props.formModel.interval;
-	const [ , , paymentMethodValidity, setPaymentMethodValidity ] = props.formModel.paymentMethod;
-	const [ { numericAmount, amountValidity }, { setAmountValidity } ] = props.formModel.amount;
+
+	const {
+		intervalValidity, setIntervalValidity,
+		paymentMethodValidity, setPaymentMethodValidity,
+		numericAmount, amountValidity, setAmountValidity
+	} = props.store;
+
 	const [ thirdPageAmount, numericThirdPageAmount, setThirdPageAmount, thirdPageAmountValidity, setThirdPageAmountValidity ] = useCustomAmount( '' );
 
 	const onEntered = () => {

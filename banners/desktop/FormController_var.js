@@ -1,7 +1,7 @@
 import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
 import { Alternatives } from '../../components/DonationForm/hooks/use_alternative';
 
-let formModel = {};
+let store = {};
 let submitCallback = () => {};
 let nextCallback = () => {};
 let backCallback = () => {};
@@ -10,8 +10,7 @@ let goToStepCallback = () => {};
 let thirdPageAmount = '';
 
 const submitStep = ( step, extraData ) => {
-	const [ paymentInterval, setPaymentInterval, , ] = formModel.interval;
-	const [ paymentMethod, , , ] = formModel.paymentMethod;
+	const { paymentInterval, setPaymentInterval, paymentMethod } = store;
 
 	switch ( step ) {
 		case 1:
@@ -43,7 +42,7 @@ const goNext = () => {
 };
 
 const goBack = ( step ) => {
-	const [ , setPaymentInterval, , ] = formModel.interval;
+	const { setPaymentInterval } = store;
 	switch ( step ) {
 		case 2:
 			setPaymentInterval( Intervals.ONCE.value );
@@ -61,10 +60,7 @@ const goToStep = ( step ) => {
 };
 
 const getSubmitValues = () => {
-	const [ addressType, , , ] = formModel.addressType;
-	const [ { numericAmount } ] = formModel.amount;
-	const [ paymentInterval, , , ] = formModel.interval;
-	const [ paymentMethod, , , ] = formModel.paymentMethod;
+	const { addressType, numericAmount, paymentInterval, paymentMethod } = store;
 
 	return {
 		addressType: addressType,
@@ -90,8 +86,8 @@ const onGoToStep = callback => {
 	goToStepCallback = callback;
 };
 
-export default function createFormController( withFormModel ) {
-	formModel = withFormModel;
+export default function createFormController( withStore ) {
+	store = withStore;
 
 	return {
 		onNext,

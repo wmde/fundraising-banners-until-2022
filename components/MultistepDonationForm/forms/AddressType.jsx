@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useState, useEffect, useContext } from 'preact/hooks';
+import { useEffect, useContext } from 'preact/hooks';
 import { propTypes } from './propTypes';
 import { SelectGroup } from '../../DonationForm/subcomponents/SelectGroup';
 import { isValid, isValidOrUnset } from '../../DonationForm/hooks/validation_states';
@@ -10,9 +10,12 @@ import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
 
 export default function AddressType( props ) {
 	const Translations = useContext( TranslationContext );
-	const [ addressType, setAddressType, addressTypeValidity, setAddressTypeValidity ] = props.formModel.addressType;
-	const [ paymentMethod, , , ] = props.formModel.paymentMethod;
-	const [ disabledAddressTypes, setDisabledAddressTypes ] = useState( [] );
+
+	const {
+		addressType, setAddressType, addressTypeValidity, setAddressTypeValidity,
+		paymentMethod,
+		disabledAddressTypes, setDisabledAddressTypes
+	} = props.store;
 
 	const onEntered = () => {
 		props.trackBannerEvent( 'address-type-form-page-shown' );

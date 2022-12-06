@@ -9,7 +9,7 @@ export const propTypes = {
 	trackBannerEvent: PropTypes.func.isRequired,
 	formatters: PropTypes.object,
 	formItems: PropTypes.array,
-	formModel: PropTypes.object,
+	store: PropTypes.object,
 	errorPosition: PropTypes.symbol,
 	scrollToFirstError: PropTypes.func
 };
