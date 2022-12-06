@@ -20,6 +20,7 @@ import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
 import overrideUseOfFundsFigures from '../../shared/override_use_of_funds_figures';
+import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -28,7 +29,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 5000,
+	getBannerDelay( 5000 ),
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 

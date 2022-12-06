@@ -5,7 +5,7 @@
 # A Campaign with global settings
 [desktop]
 campaign_tracking = "18-ba-221202"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -26,7 +26,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 
 [desktop_vector_2022]
 campaign_tracking = "06-ba-220916"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=vector-2022&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=vector-2022&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -39,7 +39,7 @@ tracking = "org-06-220916-ctrl"
 # Mobile Campaign
 [mobile]
 campaign_tracking = "mob11-ba-221128"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -61,7 +61,7 @@ orientation = [ "portrait", "landscape"]
 # Mobile English Campaign
 [mobile_english]
 campaign_tracking = "mob_en01-ba-221103"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype"
+preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -83,7 +83,7 @@ orientation = [ "portrait", "landscape" ]
 # iPad campaign
 [pad]
 campaign_tracking = "pad01-ba-221103"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -105,7 +105,7 @@ orientation = [ "portrait", "landscape"]
 # iPad English campaign
 [pad_en]
 campaign_tracking = "en-ipad01-221103"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -163,7 +163,7 @@ tracking = "wpde-mob01-221103-var"
 # English Campaign
 [english]
 campaign_tracking = "en05-ba-221129"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype"
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 

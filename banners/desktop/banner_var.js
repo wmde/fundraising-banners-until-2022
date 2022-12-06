@@ -24,6 +24,7 @@ import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
+import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -32,7 +33,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 7500,
+	getBannerDelay( 7500 ),
 	new LocalImpressionCount( trackingIds.bannerName ),
 	mw.centralNotice.internal.hide.setHideWithCloseButtonCookies
 );

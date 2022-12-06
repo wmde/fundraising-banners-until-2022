@@ -16,6 +16,7 @@ import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import DonationForm from '../../components/DonationForm/DonationForm';
 import Slides from './content/Slides';
+import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -24,7 +25,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	bannerContainer.dataset.delay || 7500,
+	getBannerDelay( 7500 ),
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
