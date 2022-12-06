@@ -5,7 +5,7 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 	return [
 		{
 			content: <div>
-				<p><strong>Our donation target: { goalDonationSum } million euros</strong></p>
+				<p><strong>Our donation target: €{ goalDonationSum } million</strong></p>
 				{ progressBar }
 			</div>
 		},
@@ -23,7 +23,9 @@ export default function Slides( dynamicCampaignText, progressBar ) {
 		},
 		{
 			content: <div>
-				<p>If Wikipedia matters and is useful to you too, please join them and donate €5 today. Give
+				<p>
+					<span className="wmde-banner-slider-text-animated-highlight">If Wikipedia matters and is
+						useful to you too, please join them and donate €5 today.</span> Give
 					only what you can comfortably give: what matters is your support, not the size of your gift.</p>
 			</div>
 		},

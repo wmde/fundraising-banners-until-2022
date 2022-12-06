@@ -231,7 +231,7 @@ export default class Banner extends Component {
 			'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 			'wmde-banner--visible': state.bannerVisibilityState !== BannerVisibilityState.CLOSED && state.bannerVisibilityState !== BannerVisibilityState.PENDING,
 			'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
-			'wmde-banner--mini-banner': state.bannerVisibilityState === BannerVisibilityState.MINI_VISIBLE,
+			'wmde-banner--mini-banner': state.bannerVisibilityState !== BannerVisibilityState.FULL_VISIBLE,
 			'wmde-banner--full-page': state.bannerVisibilityState === BannerVisibilityState.FULL_VISIBLE,
 			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,

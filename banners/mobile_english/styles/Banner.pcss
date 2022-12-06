@@ -16,6 +16,14 @@
 	}
 
 	&--mini-banner {
+		.banner-position {
+			/**
+			Add padding equal to the approximate height of .mini-banner-tab,
+			which is positioned absolutely and does not add height to the container
+			*/
+			padding-bottom: 40px;
+		}
+
 		.wmde-banner-full {
 			visibility: hidden;
 		}

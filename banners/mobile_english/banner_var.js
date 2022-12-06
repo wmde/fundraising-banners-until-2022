@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../../shared/number_formatter/en';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
