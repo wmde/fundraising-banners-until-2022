@@ -27,7 +27,7 @@ const formSteps = Object.freeze( {
  * is that the SMS notice needed to be moved under the select options.
  *
  * @param props
- * @returns {JSX.Element}
+ * @return {JSX.Element}
  * @constructor
  */
 export default function BegYearlyRecurringDonationForm( props ) {
