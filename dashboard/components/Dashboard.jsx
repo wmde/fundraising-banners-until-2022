@@ -1,9 +1,9 @@
 import { h } from 'preact';
+import BannerActions from './BannerActions';
 
 export default function Dashboard( props ) {
 	return <div>
-		<h1>FUN Banner Dashboard</h1>
-		<p>We have { props.campaigns?.length } banners</p>
+		<h1>FUN Forge</h1>
 
 		<table>
 			{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ] ) => (
@@ -13,10 +13,12 @@ export default function Dashboard( props ) {
 						{ campaignName }
 					</td>
 					<td>
-						{ campaign.banners.ctrl.pagename }
+						<BannerActions campaign={campaign} banner={ campaign.banners.ctrl } />
 					</td>
 					<td>
-						{ campaign.banners.var?.pagename }
+						{ campaign.banners.var ?
+							<BannerActions campaign={campaign} banner={ campaign.banners.var } />
+							: '' }
 					</td>
 				</tr>
 			)
