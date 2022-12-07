@@ -1,0 +1,41 @@
+/**
+The order in which imports happen is important because component ones
+can be overridden by the theme and the individual banners. The variable
+weight should be component < theme < banner.
+ */
+
+/* COMPONENT VARIABLES */
+@import '../../../components/ButtonClose/ButtonCloseVariables.pcss';
+@import '../../../components/Footer/FooterVariables.pcss';
+@import '../../../shared/components/ui/use_of_funds/variables.pcss';
+
+@import '../../../themes/mr-satan/theme-variables.pcss';
+@import './variables.pcss';
+
+@import './Banner_var.pcss';
+
+/* COMPONENTS */
+@import '../../../components/BannerTransition/BannerTransition.pcss';
+@import '../../../components/ButtonClose/ButtonClose.pcss';
+@import '../../../components/UseOfFunds/UseOfFunds.pcss';
+@import '../../../components/Slider/Slider.pcss';
+@import '../../../components/ProgressBar/ProgressBar.pcss';
+@import '../../../components/DonationForm/DonationForm.pcss';
+@import '../../../components/DonationForm/subcomponents/SelectGroup.pcss';
+@import '../../../components/DonationForm/subcomponents/SelectCustomAmount.pcss';
+@import '../../../components/DonationForm/2-step-form.pcss';
+@import '../../../components/Footer/Footer.pcss';
+@import '../../../components/Footer/SelectionInput.pcss';
+
+/* THEME */
+@import '../../../themes/mr-satan/animated-text-highlight.pcss';
+@import '../../../themes/mr-satan/ButtonClose/ButtonClose.pcss';
+@import '../../../themes/mr-satan/Slider/Slider.pcss';
+@import '../../../themes/mr-satan/ProgressBar/ProgressBar.pcss';
+@import '../../../themes/mr-satan/DonationForm/DonationForm.pcss';
+@import '../../../themes/mr-satan/DonationForm/SelectGroup.pcss';
+@import '../../../themes/mr-satan/DonationForm/SelectCustomAmount.pcss';
+@import '../../../themes/mr-satan/DonationForm/SmsBox.pcss';
+@import '../../../themes/mr-satan/DonationForm/2-step-form.pcss';
+@import '../../../themes/mr-satan/Footer/Footer.pcss';
+@import '../../../themes/mr-satan/Footer/SelectionInput.pcss';

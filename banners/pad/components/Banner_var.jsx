@@ -167,6 +167,7 @@ export default class Banner extends Component {
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
 		const DonationForm = props.donationForm;
+
 		return <div
 			className={ classNames(
 				'wmde-banner',
@@ -190,6 +191,11 @@ export default class Banner extends Component {
 						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
+								<div className="wmde-banner-content-headline">
+									<span className="wmde-banner-content-headline-text" dangerouslySetInnerHTML={
+										{ __html: props.translations[ 'content-headline' ] }
+									}></span>
+								</div>
 								<Slider
 									slides={ props.slides( this.dynamicCampaignText ) }
 									onSlideChange={ this.onSlideChange }

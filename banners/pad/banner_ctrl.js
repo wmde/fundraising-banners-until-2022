@@ -18,6 +18,7 @@ import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
 import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import Slides from './content/Slides';
 import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -40,6 +41,7 @@ bannerPresenter.present(
 		campaignProjection,
 		formatters,
 		useOfFundsText,
+		slides: Slides,
 		donationForm: DonationForm,
 		donationFormStep2: FormStep2,
 		translations: Object.assign( Translations, LocalTranslations, TwoStepTranslations ),
