@@ -8,15 +8,15 @@ export default function Dashboard( props ) {
 		<table>
 			{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ] ) => (
 				<tr key={campaignName}>
-					<td>
+					<td className='campaign-column'>
 						{ /* TODO put icon here maybe */ }
-						<a href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}>📷 </a>
+						<a className='shutterbug-preview' target='_blank' href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}>📷 </a>
 						{ campaignName }
 					</td>
-					<td>
+					<td className='banner-column'>
 						<BannerActions campaign={campaign} banner={ campaign.banners.ctrl } />
 					</td>
-					<td>
+					<td className='banner-column'>
 						{ campaign.banners.var ?
 							<BannerActions campaign={campaign} banner={ campaign.banners.var } /> :
 							'' }
