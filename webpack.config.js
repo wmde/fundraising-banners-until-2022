@@ -8,7 +8,7 @@ const webpack = require( 'webpack' );
 module.exports = merge( CommonConfig, {
 	mode: 'development',
 	entry: {
-		loader: './webpack/loader.js'
+		main: './dashboard/main.js'
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
