@@ -156,6 +156,14 @@ export default class Banner extends Component {
 		this.slideState.onSlideChange( index );
 	};
 
+	onPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
+	};
+
+	onChangeToYearly = () => {
+		this.trackBannerEvent( 'changed-to-yearly' );
+	};
+
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -204,14 +212,19 @@ export default class Banner extends Component {
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
+									onPage2={ this.onPage2 }
+									onSubmit={ props.onSubmit }
+									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+									onChangeToYearly={ this.onChangeToYearly }
+									onFormInteraction={ this.onFormInteraction }
 									formItems={props.formItems}
+									formStep2={ props.donationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
-									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-									onSubmit={ props.onSubmit }
 								/>
 							</div>
 						</div>
