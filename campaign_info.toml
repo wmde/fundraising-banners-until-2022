@@ -24,17 +24,6 @@ tracking = "org-19-221207-var"
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
-[desktop_vector_2022]
-campaign_tracking = "06-ba-220916"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=vector-2022&banner=B17WMDE_webpack_prototype&devMode"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
-wrapper_template = "wikipedia_org"
-
-# Banners of the campaign, key after "banners" can be anything
-[desktop_vector_2022.banners.ctrl]
-filename = "./banners/desktop/banner_ctrl.js"
-pagename = "B22_WMDE_Test_06_ctrl_desktop_vector_2022"
-tracking = "org-06-220916-ctrl"
 
 # Mobile Campaign
 [mobile]
@@ -131,6 +120,7 @@ campaign_tracking = "wpde-02-221124"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 
 [wikipediade.banners.ctrl]
 filename = "./banners/wpde_desktop/banner_ctrl.js"
@@ -148,6 +138,7 @@ campaign_tracking = "wpde-mob01-221103"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 
 [wikipediade_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/banner_ctrl.js"

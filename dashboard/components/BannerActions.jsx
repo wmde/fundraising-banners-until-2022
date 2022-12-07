@@ -25,7 +25,7 @@ export default function BannerActions( props ) {
 			</span>
 			<span className="banner-actions-icon banner-actions-live-preview">
 				<a target='_blank'
-					href={ editLink }
+					href={ props.campaign.preview_url.replace( '{{PLACEHOLDER}}', bannerName) }
 					title="Preview in prod environment"
 				>👁️️️ </a>
 			</span>
