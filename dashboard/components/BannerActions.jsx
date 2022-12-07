@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 const CENTRAL_NOTICE_EDIT_URL = 'https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/{{banner}}';
-const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml'
+const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml';
 
 export default function BannerActions( props ) {
 	const bannerName = props.banner.pagename;
@@ -25,7 +25,7 @@ export default function BannerActions( props ) {
 			</span>
 			<span className="banner-actions-icon banner-actions-live-preview">
 				<a target='_blank'
-					href={ props.campaign.preview_url.replace( '{{PLACEHOLDER}}', bannerName) }
+					href={ props.campaign.preview_url.replace( '{{PLACEHOLDER}}', bannerName ) }
 					title="Preview in prod environment"
 				>👁️️️ </a>
 			</span>
