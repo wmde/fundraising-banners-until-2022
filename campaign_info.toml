@@ -92,7 +92,7 @@ filename = "./banners/pad/banner_ctrl.js"
 pagename = "B22_WMDE_ipad_Test_01_ctrl"
 tracking = "org-pad01-221103-ctrl"
 
-[pad.banners.pad]
+[pad.banners.var]
 filename = "./banners/pad/banner_var.js"
 pagename = "B22_WMDE_ipad_Test_01_var"
 tracking = "org-pad01-221103-var"
