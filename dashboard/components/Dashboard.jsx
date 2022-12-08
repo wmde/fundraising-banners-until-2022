@@ -41,31 +41,34 @@ export default function Dashboard( props ) {
 
 		<section className="content">
 			<div className="campaigns">
-				{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ], index ) => (
-					<div key={ campaignName } className="campaign" style={ '--index: ' + index }>
+				{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ], index ) => {
+					const isWPDE = campaign.banners.ctrl.pagename.includes( 'WPDE' );
+					return <div key={ campaignName } className="campaign" style={ '--index: ' + index }>
 						<div className="campaign-title">
 							<span>{ campaignName }</span>
-							<a href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}
+							<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
 								className="link-icon link-icon-large"
 								data-tooltip="View in Shutterbug">
 								<IconShutterbug/>
 							</a>
-							<a href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}
-								className="link-icon link-icon-large"
-								data-tooltip="View Central Notice Settings">
-								<IconCog/>
-							</a>
+							{ !isWPDE && (
+								<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
+									className="link-icon link-icon-large"
+									data-tooltip="View Central Notice Settings">
+									<IconCog/>
+								</a>
+							) }
 						</div>
 						<div className="campaign-banners">
 							<div className="campaign-banner">
-								<BannerActions campaign={campaign} banner={ campaign.banners.ctrl } />
+								<BannerActions campaign={ campaign } banner={ campaign.banners.ctrl } isWPDE={ isWPDE }/>
 							</div>
 							<div className="campaign-banner">
-								<BannerActions campaign={campaign} banner={ campaign.banners.var } />
+								<BannerActions campaign={ campaign } banner={ campaign.banners.var } isWPDE={ isWPDE }/>
 							</div>
 						</div>
 					</div>
-				) ) }
+				} ) }
 			</div>
 		</section>
 

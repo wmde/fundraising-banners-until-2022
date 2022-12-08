@@ -19,8 +19,7 @@ const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/mast
 
 export default function BannerActions( props ) {
 	const bannerName = props.banner.pagename;
-	const isWPDE = bannerName.includes( 'WPDE' );
-	let editLink = isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerName );
+	let editLink = props.isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerName );
 
 	return <div className="banner-actions">
 		<a className="banner-actions-title"
@@ -48,7 +47,7 @@ export default function BannerActions( props ) {
 				<IconBuild fill={ '#141414' }/>
 			</a>
 
-			{ !isWPDE && (
+			{ !props.isWPDE && (
 				<a className="banner-actions-icon"
 					target="_blank"
 					href="#"
@@ -62,8 +61,8 @@ export default function BannerActions( props ) {
 			<a className="banner-actions-icon"
 				target="_blank"
 				href={ editLink }
-				title={ isWPDE ? 'Edit WPDE Banner Settings' : 'Edit Banner Settings on CentralNotice' }
-				data-tooltip={ isWPDE ? 'Edit WPDE Banner Settings' : 'Edit Banner Settings on CentralNotice' }
+				title={ props.isWPDE ? 'Edit WPDE Banner Settings' : 'Edit Banner Settings on CentralNotice' }
+				data-tooltip={ props.isWPDE ? 'Edit WPDE Banner Settings' : 'Edit Banner Settings on CentralNotice' }
 			>
 				<IconEdit fill={ '#141414' }/>
 			</a>
