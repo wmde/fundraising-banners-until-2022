@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles.pcss';
+import style from './styles/styles_var.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
@@ -9,19 +9,20 @@ import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from './translations_soft_close';
+import TranslationsSubscriptionForm from '../../components/SubscriptionForm/translations/de';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from '../../components/DonationForm/DonationForm';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationFormCompact';
+import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2MobileCompact';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
-import SoftClose from '../../components/SoftClose/SoftClose';
+import SoftClose from '../../components/SoftClose/SoftCloseWithSubscriptionsButton';
 
-import Banner from './components/Banner';
+import Banner from './components/Banner_var';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
-import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -30,7 +31,7 @@ const trackingIds = getTrackingIds( bannerContainer );
 const trackingData = createTrackingData( trackingIds.bannerName );
 const bannerPresenter = new BannerPresenter(
 	trackingData,
-	getBannerDelay( 5000 ),
+	bannerContainer.dataset.delay || 5000,
 	new LocalImpressionCount( trackingIds.bannerName )
 );
 
@@ -44,10 +45,11 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		sliderAutoPlaySpeed: 5000,
-		translations: Object.assign( Translations, TranslationsSoftClose, LocalTranslations ),
+		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsSubscriptionForm, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.CTRL,
+		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
+		donationFormStep2: FormStep2,
 		bannerText: BannerText,
 		slides: Slides,
 		softClose: SoftClose

@@ -5,7 +5,7 @@ import debounce from '../../../shared/debounce';
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
-import FullBanner from './FullBanner_var';
+import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
