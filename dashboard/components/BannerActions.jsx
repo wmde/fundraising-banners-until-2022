@@ -40,13 +40,21 @@ export default function BannerActions( props ) {
 	const onCopyBannerToClipBoard = ( e ) => {
 		e.preventDefault();
 
-		const bannerFileName = `${bannerName}.js.wikitext`;
+		const bannerFileName = `/compiled-banners/${bannerName}.js.wikitext`;
 
 		// TODO start spinner state for copy
-		fetch( `/${bannerFileName}` ).then( async response => {
+		fetch( bannerFileName ).then( async response => {
+			// TODO unset spinner state for copy/ show confirmation
+			if ( !response.ok ) {
+				if ( response.status === 404 ) {
+					alert( `${bannerName}.js.wikitext not found, maybe you need to compile first?` );
+				} else {
+					alert( response.statusText );
+				}
+				return;
+			}
 			const bannerCode = await response.text();
 			await navigator.clipboard.writeText( bannerCode );
-			// TODO unset spinner state for copy/ show confirmation
 		} );
 	};
 

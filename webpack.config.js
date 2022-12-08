@@ -41,11 +41,17 @@ module.exports = () => Promise.all( [
 		devServer: {
 			'port': 8084,
 			'allowedHosts': 'all',
-			'static': {
-				directory: path.resolve( __dirname, 'dist' ),
-				publicPath: '/',
-				serveIndex: false
-			},
+			'static': [
+				{
+					directory: path.resolve( __dirname, 'dist' ),
+					publicPath: '/compiled-banners/'
+				},
+				{
+					directory: path.resolve( __dirname, 'dashboard' ),
+					publicPath: '/',
+					serveIndex: false
+				}
+			],
 			'headers': {
 				'Access-Control-Allow-Origin': '*'
 			},
