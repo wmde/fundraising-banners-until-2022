@@ -6,10 +6,11 @@ const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 const { exec } = require( 'child_process' );
 
-const getBranch = () => new Promise( ( resolve, reject ) => {
+const getBranch = () => new Promise( ( resolve ) => {
 	return exec( 'git rev-parse --abbrev-ref HEAD', ( err, stdout ) => {
 		if ( err ) {
-			reject( `getBranch Error: ${err}` );
+			console.log( `getBranch Error: ${err}` );
+			resolve( `UNKNOWN - ${err}` );
 		} else if ( typeof stdout === 'string' ) {
 			resolve( stdout.trim() );
 		}
