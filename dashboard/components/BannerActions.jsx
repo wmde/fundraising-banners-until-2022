@@ -21,6 +21,35 @@ export default function BannerActions( props ) {
 	const bannerName = props.banner.pagename;
 	let editLink = props.isWPDE ? WPDE_GITHUB_REPO : CENTRAL_NOTICE_EDIT_URL.replace( '{{banner}}', bannerName );
 
+	function onCompileBanner( e ) {
+		e.preventDefault();
+
+		// TODO start spinner state for compile
+
+		// TODO find out why fetching triggers a Re-Render in React even if we don't change state
+		fetch( `/compile-banner/${bannerName}` ).then( async response => {
+			const result = await response.json();
+			// TODO unset spinner state for compile
+			if ( result.err ) {
+				alert( result.err );
+			}
+			console.log( `Compiled in ${result.stats.compileTime}` );
+		} );
+	}
+
+	const onCopyBannerToClipBoard = ( e ) => {
+		e.preventDefault();
+
+		const bannerFileName = `${bannerName}.js.wikitext`;
+
+		// TODO start spinner state for copy
+		fetch( `/${bannerFileName}` ).then( async response => {
+			const bannerCode = await response.text();
+			await navigator.clipboard.writeText( bannerCode );
+			// TODO unset spinner state for copy/ show confirmation
+		} );
+	};
+
 	return <div className="banner-actions">
 		<a className="banner-actions-title"
 			target="_blank"
@@ -43,6 +72,7 @@ export default function BannerActions( props ) {
 				href="#"
 				title="Build Banner"
 				data-tooltip="Build Banner"
+				onClick={onCompileBanner}
 			>
 				<IconBuild fill={ '#141414' }/>
 			</a>
@@ -53,6 +83,7 @@ export default function BannerActions( props ) {
 					href="#"
 					title="Copy Banner Code"
 					data-tooltip="Copy Banner Code"
+					onClick={onCopyBannerToClipBoard}
 				>
 					<IconCopy fill={ '#141414' }/>
 				</a>
