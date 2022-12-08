@@ -3,6 +3,7 @@ import BannerActions from './BannerActions';
 import IconShutterbug from './IconShutterbug';
 import IconGit from './IconGit';
 import IconRefresh from './IconRefresh';
+import IconCog from './IconCog';
 
 export default function Dashboard( props ) {
 	const gitFailurePrefix = /^UNKNOWN -/;
@@ -43,12 +44,17 @@ export default function Dashboard( props ) {
 				{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ], index ) => (
 					<div key={ campaignName } className="campaign" style={ '--index: ' + index }>
 						<div className="campaign-title">
+							<span>{ campaignName }</span>
 							<a href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}
 								className="link-icon link-icon-large"
 								data-tooltip="View in Shutterbug">
 								<IconShutterbug/>
 							</a>
-							<span>{ campaignName }</span>
+							<a href={`https://shutterbug.wikimedia.de/#/slides/${campaign.campaign_tracking}`}
+								className="link-icon link-icon-large"
+								data-tooltip="View Central Notice Settings">
+								<IconCog/>
+							</a>
 						</div>
 						<div className="campaign-banners">
 							<div className="campaign-banner">
