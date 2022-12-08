@@ -25,8 +25,8 @@ export default function Slides( dynamicCampaignText ) {
 		},
 		{
 			content: <div>
-				<p><span className="wmde-banner-slider-text-animated-highlight">Today, we invite you to donate €5 or
-					whatever seems right to you.</span> Show the world that free access to independent and unbiased
+				<p><span className="wmde-banner-slider-text-animated-highlight">Today, we invite you to donate
+					€5, €25, €50 or whatever seems right to you.</span> Show the world that free access to independent and unbiased
 					information matters to you. Thank you for your help — <i>Wikimedia Fördergesellschaft</i></p>
 			</div>
 		}

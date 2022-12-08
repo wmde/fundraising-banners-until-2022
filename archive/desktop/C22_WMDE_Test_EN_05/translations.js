@@ -13,13 +13,7 @@ const Translations = {
 	'form-step-2-yes': 'Yes, I\'ll donate €{{amount}} each year.',
 	'form-step-2-link': 'Yes, I\'ll donate yearly, but for a different amount.',
 	'form-step-2-button': 'Proceed with the donation',
-	'form-step-2-error': 'Please choose one of the above options.',
-
-	'form-step-3-header': 'Thank you for your support!',
-	'form-step-3-copy': 'Enter your annual donation amount.',
-	'form-step-3-button-blank': 'Donate annually',
-	'form-step-3-button': 'Donate €{{amount}} annually',
-	'form-step-3-error': 'Please choose an amount.'
+	'form-step-2-error': 'Please choose one of the above options.'
 };
 
 export default Translations;

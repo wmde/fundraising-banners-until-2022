@@ -12,8 +12,9 @@ import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from './translations_soft_close';
-import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationForm';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonation3StepForm';
 import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
 import Footer from '../../components/Footer/Footer';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
@@ -47,6 +48,7 @@ bannerPresenter.present(
 		useOfFundsText: overrideUseOfFundsFigures( useOfFundsText, campaignParameters.useOfFundsFigures ),
 		donationForm: DonationForm,
 		donationFormStep2: DonationFormStep2,
+		donationFormStep3: DonationFormStep3,
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,

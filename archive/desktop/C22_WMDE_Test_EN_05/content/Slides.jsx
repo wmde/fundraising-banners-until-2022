@@ -8,9 +8,9 @@ export default function Slides( dynamicCampaignText ) {
 		{
 			content: <div>
 				<p className="headline"><InfoIcon/> <strong> To all our readers in Germany, </strong></p>
-				<p>This { currentDayName } your support is requested by the nonprofit that collects donations
-					on Wikipedia to support free knowledge. If Wikipedia has given you €5 worth of knowledge
-					this year, please join the readers who donate.</p>
+				<p>This { currentDayName } your support is requested by the nonprofit that collects donations on
+					Wikipedia to support Free Knowledge. If you can comfortably afford it this year, please
+					join the readers who donate.</p>
 			</div>
 		},
 		{
@@ -27,7 +27,7 @@ export default function Slides( dynamicCampaignText ) {
 			content: <div>
 				<p><span className="wmde-banner-slider-text-animated-highlight">Today, we invite you to donate €5 or
 					whatever seems right to you.</span> Show the world that free access to independent and unbiased
-					information matters to you. Thank you for your help — <i>Wikimedia Fördergesellschaft</i></p>
+					information matters to you. Thank you for your help. — Wikimedia Fördergesellschaft</p>
 			</div>
 		}
 	];
