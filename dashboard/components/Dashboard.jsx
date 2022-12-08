@@ -2,6 +2,7 @@ import { h } from 'preact';
 import BannerActions from './BannerActions';
 
 export default function Dashboard( props ) {
+	const gitFailurePrefix = /^UNKNOWN -/;
 
 	const onDoScreenshots = ( e ) => {
 		e.preventDefault();
@@ -11,12 +12,19 @@ export default function Dashboard( props ) {
 			} );
 	};
 
-	return <div>
-		<h1>FUN Forge</h1>
+	let branchInfo = (
 		<div>
 			Current branch {props.gitBranch}
 			<a className='do-screenshots' title="Copy SSH command for screenshots to clipboard" onClick={onDoScreenshots} href="#">📷 </a>
 		</div>
+	);
+	if ( props.gitBranch.match( gitFailurePrefix ) ) {
+		branchInfo = ( <div className="error">Could not get git branch: {props.gitBranch.replace( gitFailurePrefix, '' ) } </div> );
+	}
+
+	return <div>
+		<h1>FUN Forge</h1>
+		{ branchInfo }
 		<table>
 			{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ] ) => (
 				<tr key={campaignName}>
