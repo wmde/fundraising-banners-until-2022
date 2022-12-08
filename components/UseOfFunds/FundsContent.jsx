@@ -23,6 +23,7 @@ export default function FundsContent( props ) {
 		</div>
 
 		<div className="use_of_funds__section">
+			{/* eslint-disable-next-line react/no-danger */}
 			<p className="use_of_funds__info_text" dangerouslySetInnerHTML={ { __html: content.detailedReports.mixed.text } }></p>
 		</div>
 		<div className="use_of_funds__section use_of_funds__section--two-cols">

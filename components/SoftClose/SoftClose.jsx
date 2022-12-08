@@ -80,6 +80,7 @@ export default class SoftClose extends Component {
 					</div>
 				</div>
 
+				{/* eslint-disable-next-line react/no-danger */}
 				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text" dangerouslySetInnerHTML={ {
 					__html: Translations[ 'soft-close-countdown-text' ].replace( '{{seconds}}', state.secondsRemaining )
 				} }></div>

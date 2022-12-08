@@ -20,7 +20,8 @@ module.exports = exports = {
 		mocha: true
 	},
 	'globals': {
-		mw: false
+		mw: false,
+		JSX: true
 	},
 	'plugins': [
 		'react'

@@ -9,13 +9,17 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 
 	// 1. The button clicks update the value of alternative.
 	// 2. We watch the value of alternative for changes
-	// 3. If the value is not null we know the user clicked a button so we submit the form
-	useEffect( () => {
-		if ( props.upgradeToYearly !== null ) {
-			props.onSubmit();
-			props.formRef.current.submit();
-		}
-	}, [ props.upgradeToYearly ] );
+	// 3. If the value is not null we know the user clicked a button, so we submit the form
+	useEffect(
+		() => {
+			if ( props.upgradeToYearly !== null ) {
+				props.onSubmit();
+				props.formRef.current.submit();
+			}
+		},
+		/* eslint-disable-next-line react-hooks/exhaustive-deps  */
+		[ props.upgradeToYearly ]
+	);
 
 	const onClickAlternativeButton = e => {
 		e.preventDefault();

@@ -267,6 +267,7 @@ export default class Banner extends Component {
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								<div className="wmde-banner-content-headline">
+									{ /* eslint-disable-next-line react/no-danger */ }
 									<span className="wmde-banner-content-headline-text" dangerouslySetInnerHTML={
 										{ __html: props.translations[ 'content-headline' ] }
 									}></span>

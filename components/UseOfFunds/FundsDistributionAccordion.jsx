@@ -37,6 +37,7 @@ export default class FundsDistributionAccordion extends Component {
 				>
 					{fundsItem.title} {fundsItem.percentage}%
 				</div>
+				{/* eslint-disable-next-line react/no-danger */}
 				<div className="funds_distribution_info_item__text" dangerouslySetInnerHTML={ { __html: fundsItem.text } }></div>
 			</div> )}
 
