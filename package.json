@@ -7,7 +7,7 @@
     "test": "mocha --require @babel/register",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.production.js",
-    "start": "webpack serve --host 0.0.0.0",
+    "start": "nodemon",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint:js": "eslint --ext .jsx --ext .js --cache --cache-location .eslintcache --ignore-path .gitignore .",
     "lint:css": "stylelint '**/*.pcss'"
@@ -19,8 +19,8 @@
   "dependencies": {
     "classnames": "^2.3.2",
     "format-number": "^3.0.0",
-    "keen-slider": "^5.5.1",
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
+    "keen-slider": "^5.5.1",
     "preact": "^10.11.0",
     "prop-types": "^15.8.1"
   },
@@ -48,6 +48,7 @@
     "jquery": "^3.6.1",
     "minimatch": "^5.1.0",
     "mocha": "^10.0.0",
+    "nodemon": "^2.0.20",
     "postcss": "^8.4.17",
     "postcss-calc": "^8.2.4",
     "postcss-combine-duplicated-selectors": "^10.0.3",
