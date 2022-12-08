@@ -9,9 +9,9 @@ import IconCommand from './IconCommand';
 export default function Dashboard( props ) {
 	const gitFailurePrefix = /^UNKNOWN -/;
 
-	const onDoScreenshots = ( e ) => {
+	const onDoScreenshots = ( campaignName, e ) => {
 		e.preventDefault();
-		navigator.clipboard.writeText( 'ssh -t funweb-deploy "./queue_screenshots.sh C22_WMDE_Test_18"' )
+		navigator.clipboard.writeText( `ssh -t funweb3-deploy "queue_screenshots ${campaignName}"` )
 			.then( () => {
 				// TODO indicate the the copying was successful by making something flash
 			} );
@@ -33,7 +33,6 @@ export default function Dashboard( props ) {
 				<h1>FUN Forge</h1> <a className="header-link header-git" target="_blank" href="https://github.com/wmde/fundraising-banners"><IconGit/> { branchInfo }</a>
 			</div>
 			<div className="header-right">
-				<a className="header-link" title="Copy SSH command for screenshots to clipboard" onClick={onDoScreenshots} href="#">Shutterbug Command</a>
 				<a href="https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice" className="header-link">CN</a>
 				<a href="https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners" className="header-link">CN Banners</a>
 				<a href="#" onClick={ refresh } className="header-link header-link-refresh"><IconRefresh/></a>
@@ -61,7 +60,8 @@ export default function Dashboard( props ) {
 							</a>
 							<a href="#"
 								className="link-icon link-icon-large"
-								data-tooltip="Copy Shutterbug Command">
+								data-tooltip="Copy Shutterbug Command"
+								onClick={ ( e ) => onDoScreenshots( campaignName, e ) }>
 								<IconCommand/>
 							</a>
 						</div>
