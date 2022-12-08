@@ -3,6 +3,7 @@ import IconPreview from './IconPreview';
 import IconEdit from './IconEdit';
 import IconCopy from './IconCopy';
 import IconBuild from './IconBuild';
+import classNames from 'classnames';
 
 const CENTRAL_NOTICE_EDIT_URL = 'https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/{{banner}}';
 const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml';
@@ -37,7 +38,7 @@ export default function BannerActions( props ) {
 		} );
 	}
 
-	const onCopyBannerToClipBoard = ( e ) => {
+	const bannerCopyHandler = ( e ) => {
 		e.preventDefault();
 
 		const bannerFileName = `/compiled-banners/${bannerName}.js.wikitext`;
@@ -58,7 +59,32 @@ export default function BannerActions( props ) {
 		} );
 	};
 
-	return <div className="banner-actions">
+	const isCompiled = !!props.compileInfo;
+	let bannerCopyLink = null;
+	if ( !props.isWPDE ) {
+		let onCopyBannerToClipBoard = e => e.preventDefault();
+		let bannerCopyTooltip = 'Banner not compiled';
+		if ( props.compileInfo ) {
+			const compiledSizeInKb = Math.round( props.compileInfo.size / 1024 );
+			onCopyBannerToClipBoard = bannerCopyHandler;
+			bannerCopyTooltip = `Copy ${compiledSizeInKb} KB Banner Code, last compiled on ${props.compileInfo.date}`;
+		}
+		bannerCopyLink = (
+			<a className={ classNames( {
+				'banner-actions-icon': true,
+				'uncompiled': !isCompiled
+			} ) }
+			href="#"
+			title="Copy Banner Code"
+			data-tooltip={bannerCopyTooltip}
+			onClick={onCopyBannerToClipBoard}
+			>
+				<IconCopy fill={ '#141414' }/>
+			</a>
+		);
+	}
+
+	return ( <div className="banner-actions">
 		<a className="banner-actions-title"
 			target="_blank"
 			href={ props.campaign.preview_link.replace( '{{banner}}', bannerName ) }
@@ -76,7 +102,6 @@ export default function BannerActions( props ) {
 			</a>
 
 			<a className="banner-actions-icon"
-				target="_blank"
 				href="#"
 				title="Build Banner"
 				data-tooltip="Build Banner"
@@ -85,17 +110,7 @@ export default function BannerActions( props ) {
 				<IconBuild fill={ '#141414' }/>
 			</a>
 
-			{ !props.isWPDE && (
-				<a className="banner-actions-icon"
-					target="_blank"
-					href="#"
-					title="Copy Banner Code"
-					data-tooltip="Copy Banner Code"
-					onClick={onCopyBannerToClipBoard}
-				>
-					<IconCopy fill={ '#141414' }/>
-				</a>
-			) }
+			{ bannerCopyLink }
 
 			<a className="banner-actions-icon"
 				target="_blank"
@@ -107,5 +122,5 @@ export default function BannerActions( props ) {
 			</a>
 
 		</div>
-	</div>;
+	</div> );
 }

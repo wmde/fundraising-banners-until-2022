@@ -1,12 +1,26 @@
 import { h } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 import BannerActions from './BannerActions';
 import IconShutterbug from './IconShutterbug';
 import IconGit from './IconGit';
 import IconRefresh from './IconRefresh';
 import IconCog from './IconCog';
 import IconCommand from './IconCommand';
+import { parseCompileInfo } from '../util';
 
 export default function Dashboard( props ) {
+
+	const [ compileInfo, setCompileInfo ] = useState( {} );
+	useEffect( () => {
+		fetch( '/compiled-banners/' ).then( async res => {
+			if ( !res.ok ) {
+				return;
+			}
+			const fileList = await res.text();
+			setCompileInfo( parseCompileInfo( fileList ) );
+		} );
+	}, [] );
+
 	const gitFailurePrefix = /^UNKNOWN -/;
 
 	const onDoScreenshots = ( campaignName, e ) => {
@@ -27,7 +41,7 @@ export default function Dashboard( props ) {
 		window.location.reload();
 	};
 
-	return <div>
+	return ( <div>
 		<header className="header">
 			<div className="header-left">
 				<h1>FUN Forge</h1> <a className="header-link header-git" target="_blank" href="https://github.com/wmde/fundraising-banners"><IconGit/> { branchInfo }</a>
@@ -67,10 +81,19 @@ export default function Dashboard( props ) {
 						</div>
 						<div className="campaign-banners">
 							<div className="campaign-banner">
-								<BannerActions campaign={ campaign } banner={ campaign.banners.ctrl } isWPDE={ isWPDE }/>
+								<BannerActions
+									campaign={ campaign }
+									banner={ campaign.banners.ctrl }
+									compileInfo={ compileInfo[ campaign.banners.ctrl.pagename ]}
+									isWPDE={ isWPDE }
+								/>
 							</div>
 							<div className="campaign-banner">
-								<BannerActions campaign={ campaign } banner={ campaign.banners.var } isWPDE={ isWPDE }/>
+								<BannerActions
+									campaign={ campaign }
+									banner={ campaign.banners.var }
+									compileInfo={ compileInfo[ campaign.banners.var.pagename ]}
+									isWPDE={ isWPDE }/>
 							</div>
 						</div>
 					</div>
@@ -85,5 +108,5 @@ export default function Dashboard( props ) {
 			</div>
 		</footer>
 
-	</div>;
+	</div> );
 }
