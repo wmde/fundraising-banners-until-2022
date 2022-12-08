@@ -44,7 +44,12 @@ export default function Dashboard( props ) {
 	return ( <div>
 		<header className="header">
 			<div className="header-left">
-				<h1>FUN Forge</h1> <a className="header-link header-git" target="_blank" href="https://github.com/wmde/fundraising-banners"><IconGit/> { branchInfo }</a>
+				<h1>FUN Forge</h1>
+				<a className="header-link header-git"
+					target="_blank"
+					href={`https://github.com/wmde/fundraising-banners/tree/${branchInfo}`}>
+					<IconGit/> { branchInfo }
+				</a>
 			</div>
 			<div className="header-right">
 				<a href="https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice" className="header-link">CN</a>
