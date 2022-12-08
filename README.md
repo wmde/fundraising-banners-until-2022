@@ -42,6 +42,14 @@ To build a minified version of the banner into the `dist` directory run
 
     make
 
+### Building a single banner
+
+Currently not possible with the Docker-based Makefile, only with the `npm` executable:
+
+  npm run build -- --env banner=<BANNER_NAME>
+
+Replace `<BANNER_NAME>` with the `pagename` of the banner from `campaign_info.toml`.
+
 ## Using the compiled JavaScript on CentralNotice
 
 After the assets are compiled, the `dist` directory contains `.wikitext` files that can be inserted 1:1 in CentralNotice.
@@ -75,6 +83,4 @@ The changes to the code depend on which kind of test you are running.
   * [B17WMDE_webpack_prototype](https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/B17WMDE_webpack_prototype) on CentralNotice
   * [dev-mode-wpde](https://github.com/wmde/wikipedia.de-banners/blob/master/dev-mode-wpde.js) on the [`wmde/wikipedia.de-banners` repository](https://github.com/wmde/wikipedia.de-banners) on GitHub.
 
-## Planned Features of the dev environment
-- [ ] Create upload plugin for webpack uses the campaign information from `campaign_info.toml` to upload the generated `.wikitext` file to the appropriate page on meta.wikimedia.org / GS-Wiki.
 
