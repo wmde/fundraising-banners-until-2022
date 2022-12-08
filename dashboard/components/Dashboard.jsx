@@ -4,6 +4,7 @@ import IconShutterbug from './IconShutterbug';
 import IconGit from './IconGit';
 import IconRefresh from './IconRefresh';
 import IconCog from './IconCog';
+import IconCommand from './IconCommand';
 
 export default function Dashboard( props ) {
 	const gitFailurePrefix = /^UNKNOWN -/;
@@ -46,11 +47,6 @@ export default function Dashboard( props ) {
 					return <div key={ campaignName } className="campaign" style={ '--index: ' + index }>
 						<div className="campaign-title">
 							<span>{ campaignName }</span>
-							<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
-								className="link-icon link-icon-large"
-								data-tooltip="View in Shutterbug">
-								<IconShutterbug/>
-							</a>
 							{ !isWPDE && (
 								<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
 									className="link-icon link-icon-large"
@@ -58,6 +54,16 @@ export default function Dashboard( props ) {
 									<IconCog/>
 								</a>
 							) }
+							<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
+								className="link-icon link-icon-large"
+								data-tooltip="View in Shutterbug">
+								<IconShutterbug/>
+							</a>
+							<a href="#"
+								className="link-icon link-icon-large"
+								data-tooltip="Copy Shutterbug Command">
+								<IconCommand/>
+							</a>
 						</div>
 						<div className="campaign-banners">
 							<div className="campaign-banner">
