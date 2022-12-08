@@ -109,8 +109,12 @@ a {
 	}
 
 	&-banner {
-		flex: 0 0 50%;
+		flex: 0 0 100%;
 		font-size: 16px;
+
+		@media screen and ( min-width: 1100px ) {
+			flex: 0 0 50%;
+		}
 	}
 }
 
@@ -122,8 +126,15 @@ a {
 
 .banner-actions {
 	display: flex;
+	flex-wrap: nowrap;
+
+	&-title {
+		color: $color-dark;
+	}
 
 	&-links {
+		display: flex;
+		flex-wrap: nowrap;
 		height: 40px;
 		padding: 6px 0;
 	}
@@ -133,10 +144,6 @@ a {
 		margin: 0 8px;
 		height: 28px;
 		width: 28px;
-	}
-
-	&-title {
-		color: $color-dark;
 	}
 }
 
