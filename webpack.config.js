@@ -5,6 +5,7 @@ const { merge } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const webpack = require( 'webpack' );
 const { exec } = require( 'child_process' );
+const webpackBuildApiRoute = require( './webpack/build_api' );
 
 const getBranch = () => new Promise( ( resolve ) => {
 	return exec( 'git rev-parse --abbrev-ref HEAD', ( err, stdout ) => {
@@ -77,6 +78,15 @@ module.exports = () => Promise.all( [
 					target: 'https://de.wikipedia.org',
 					changeOrigin: true
 				}
-			]
+			],
+			'setupMiddlewares': ( middlewares, devServer ) => {
+				if ( !devServer ) {
+					throw new Error( 'webpack-dev-server is not defined' );
+				}
+
+				devServer.app.get( '/compile-banner/:bannerName', webpackBuildApiRoute );
+
+				return middlewares;
+			}
 		}
 	} ) );
