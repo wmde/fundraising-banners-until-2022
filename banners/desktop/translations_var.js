@@ -9,7 +9,7 @@ const Translations = {
 	'form-step-2-no': 'Nein, danke! Ich möchte eine einmalige Spende von {{amount}} € machen.',
 	'form-step-2-yes': 'Ja, ich möchte {{amount}} € jährlich spenden.',
 	'form-step-2-link': 'Ja, ich möchte jährlich spenden, aber einen anderen Betrag.',
-	'form-step-2-button': 'Weiter, um Spende abzuschließen',
+	'form-step-2-button': 'Weiter',
 	'form-step-2-error': 'Bitte wählen Sie eine der Optionen aus.',
 	'form-step-3-header': 'Vielen Dank für Ihre Unterstützung!',
 	'form-step-3-copy': 'Geben Sie Ihren jährlichen Spendenbetrag an.',

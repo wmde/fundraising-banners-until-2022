@@ -1,4 +1,4 @@
-import FormItemsBuilder, { Intervals, PaymentMethods } from '../../components/DonationForm/FormItemsBuilder';
+import FormItemsBuilder, { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
 
 export function createFormItems( translations, amountFormatter ) {
 	const builder = new FormItemsBuilder( translations, amountFormatter );

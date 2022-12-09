@@ -15,7 +15,6 @@ import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
 import SoftClose from '../../../components/SoftClose/SoftClose';
-import AlreadyDonatedModal from '../../../components/AlreadyDonatedModal/AlreadyDonatedModal';
 
 const BannerVisibilityState = Object.freeze( {
 	PENDING: Symbol( 'pending' ),
@@ -54,7 +53,6 @@ export class Banner extends Component {
 		this.state = {
 			bannerVisibilityState: BannerVisibilityState.PENDING,
 			isFundsModalVisible: false,
-			isAlreadyDonatedModalVisible: false,
 
 			// trigger for banner resize events
 			formInteractionSwitcher: false,
@@ -191,27 +189,12 @@ export class Banner extends Component {
 		);
 	}
 
-	showAlreadyDonated = ( e ) => {
-		e.preventDefault();
-		this.trackBannerEvent( 'clicked-already-donated' );
-		this.setState( { isAlreadyDonatedModalVisible: true } );
+	onPage2 = () => {
+		this.trackBannerEvent( 'second-form-page-shown' );
 	};
 
-	hideAlreadyDonated = ( e ) => {
-		e.preventDefault();
-		this.setState( { isAlreadyDonatedModalVisible: false } );
-	};
-
-	onAlreadyDonatedMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater( 'banner-closed-already-donated-maybelater' );
-	};
-
-	onAlreadyDonatedGoAway = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onCloseBecauseDonated( 'banner-closed-already-donated' );
+	onPage3 = () => {
+		this.trackBannerEvent( 'third-form-page-shown' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -248,13 +231,6 @@ export class Banner extends Component {
 					/>
 					<div className="wmde-banner-wrapper">
 						<ButtonClose onClick={ this.onSoftCloseBanner }/>
-						<AlreadyDonatedModal
-							content={ props.alreadyDonatedContent }
-							isVisible={ state.isAlreadyDonatedModalVisible }
-							onHide={ this.hideAlreadyDonated }
-							onMaybeLater={ this.onAlreadyDonatedMaybeLater }
-							onGoAway={ this.onAlreadyDonatedGoAway }
-						/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								{ state.bannerWidth < SHOW_SLIDE_BREAKPOINT && (
@@ -287,27 +263,32 @@ export class Banner extends Component {
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
+									onPage2={ this.onPage2 }
+									onPage3={ this.onPage3 }
 									onSubmit={ props.onSubmit }
+									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
+									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
+									onSubmitStep3={ () => props.onSubmit( 'submit-different-amount' ) }
+									onStep3Increased={ () => this.trackBannerEvent( 'increased-amount' ) }
+									onStep3Decreased={ () => this.trackBannerEvent( 'decreased-amount' ) }
 									formItems={props.formItems}
+									formStep2={ props.donationFormStep2 }
+									formStep3={ props.donationFormStep3 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
+									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
 									buttonText={ props.buttonText }
 									errorPosition={ props.errorPosition }
 									bannerType={ props.bannerType }
+									showCookieBanner={ props.showCookieBanner }
 									formActionProps={ props.formActionProps }
-									donationForms={ props.donationForms }
-									createFormController={ props.createFormController }
-									trackBannerEvent={ ( eventName ) => this.trackBannerEvent( eventName ) }
 								/>
 							</div>
 						</div>
-						<Footer
-							showFundsModal={ this.toggleFundsModal }
-							showAlreadyDonated={ this.showAlreadyDonated }
-						/>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
 
 				</TranslationContext.Provider>
