@@ -7,6 +7,7 @@ import IconRefresh from './IconRefresh';
 import IconCog from './IconCog';
 import IconCommand from './IconCommand';
 import { parseCompileInfo } from '../util';
+import classNames from 'classnames';
 
 export default function Dashboard( props ) {
 
@@ -31,9 +32,9 @@ export default function Dashboard( props ) {
 			} );
 	};
 
-	let branchInfo = props.gitBranch;
+	let branchName = props.gitBranch;
 	if ( props.gitBranch.match( gitFailurePrefix ) ) {
-		branchInfo = props.gitBranch.replace( gitFailurePrefix, '' );
+		branchName = props.gitBranch.replace( gitFailurePrefix, '' );
 	}
 
 	const refresh = e => {
@@ -47,8 +48,8 @@ export default function Dashboard( props ) {
 				<h1>FUN Forge</h1>
 				<a className="header-link header-git"
 					target="_blank"
-					href={`https://github.com/wmde/fundraising-banners/tree/${branchInfo}`}>
-					<IconGit/> { branchInfo }
+					href={`https://github.com/wmde/fundraising-banners/tree/${branchName}`}>
+					<IconGit/> { branchName }
 				</a>
 			</div>
 			<div className="header-right">
@@ -60,19 +61,24 @@ export default function Dashboard( props ) {
 
 		<section className="content">
 			<div className="campaigns">
-				{ Object.entries( props.campaigns ).map( ( [ campaignName, campaign ], index ) => {
+				{ Object.entries( props.campaigns ).map( ( [ channelName, campaign ], index ) => {
 					const isWPDE = campaign.banners.ctrl.pagename.includes( 'WPDE' );
-					return <div key={ campaignName } className="campaign" style={ '--index: ' + index }>
+					return <div
+						key={ channelName }
+						className={classNames( 'campaign', { 'current-branch': campaign.name === branchName } ) }
+						style={ '--index: ' + index }>
 						<div className="campaign-title">
-							<span>{ campaignName }</span>
+							<span title={ campaign.name} >{ channelName }</span>
 							{ !isWPDE && (
-								<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
+								<a href={ `https://meta.wikimedia.org/w/index.php?title=Special:CentralNotice&subaction=noticeDetail&notice=${ campaign.name }` }
+									target="_blank"
 									className="link-icon link-icon-large"
 									data-tooltip="View Central Notice Settings">
 									<IconCog/>
 								</a>
 							) }
 							<a href={ `https://shutterbug.wikimedia.de/#/slides/${ campaign.campaign_tracking }` }
+								target="_blank"
 								className="link-icon link-icon-large"
 								data-tooltip="View in Shutterbug">
 								<IconShutterbug/>
@@ -80,7 +86,7 @@ export default function Dashboard( props ) {
 							<a href="#"
 								className="link-icon link-icon-large"
 								data-tooltip="Copy Shutterbug Command"
-								onClick={ ( e ) => onDoScreenshots( campaignName, e ) }>
+								onClick={ ( e ) => onDoScreenshots( campaign.name, e ) }>
 								<IconCommand/>
 							</a>
 						</div>
