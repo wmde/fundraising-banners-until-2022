@@ -77,9 +77,22 @@ const Translations = {
 	'submit-label-sofort': 'Proceed with Sofort-Überweisung',
 	'submit-label-bank-transfer': 'Proceed with bank transfer',
 	'submit-label-default': 'Proceed with the donation',
-	'address-type-notice-disabled': 'A postal address is necessary for donating by direct-debit.'
+	'address-type-notice-disabled': 'A postal address is necessary for donating by direct-debit.',
 	// End of forms with address type
 
+	// Month names
+	'month-name-1': 'January',
+	'month-name-2': 'February',
+	'month-name-3': 'March',
+	'month-name-4': 'April',
+	'month-name-5': 'May',
+	'month-name-6': 'June',
+	'month-name-7': 'July',
+	'month-name-8': 'August',
+	'month-name-9': 'September',
+	'month-name-10': 'October',
+	'month-name-11': 'November',
+	'month-name-12': 'December'
 };
 
 export default Translations;

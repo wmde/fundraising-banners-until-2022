@@ -1,5 +1,6 @@
 import formatter from 'format-number';
 import amountForServerFormatter from './server';
+import getEnglishOrdinalSuffixOf from '../english_ordinal';
 
 export const integerFormatter = formatter( { round: 0 } );
 /** @deprecated */
@@ -9,5 +10,6 @@ export const millionFormatter = formatter( { round: 1, prefix: '€ ', suffix: '
 export const millionFormatterNumeric = function ( numberToFormat ) {
 	return formatter( { round: 1, padRight: 1 } )( numberToFormat / 1000000 );
 };
+export const dayOfMonthFormatter = day => getEnglishOrdinalSuffixOf( day );
 
 export { amountForServerFormatter };
