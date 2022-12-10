@@ -4,6 +4,7 @@ import IconEdit from './IconEdit';
 import IconCopy from './IconCopy';
 import IconBuild from './IconBuild';
 import classNames from 'classnames';
+import relativeDate from 'tiny-relative-date';
 
 const CENTRAL_NOTICE_EDIT_URL = 'https://meta.wikimedia.org/wiki/Special:CentralNoticeBanners/edit/{{banner}}';
 const WPDE_GITHUB_REPO = 'https://github.com/wmde/wikipedia.de-banners/blob/master/campaigns.yml';
@@ -67,7 +68,7 @@ export default function BannerActions( props ) {
 		if ( props.compileInfo ) {
 			const compiledSizeInKb = Math.round( props.compileInfo.size / 1024 );
 			onCopyBannerToClipBoard = bannerCopyHandler;
-			bannerCopyTooltip = `Copy ${compiledSizeInKb} KB Banner Code, last compiled on ${props.compileInfo.date}`;
+			bannerCopyTooltip = `Copy ${compiledSizeInKb} KB Banner Code, compiled ${ relativeDate( props.compileInfo.date ) }`;
 		}
 		bannerCopyLink = (
 			<a className={ classNames( {

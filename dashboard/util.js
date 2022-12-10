@@ -10,7 +10,7 @@ export function parseCompileInfo( webpackIndexText ) {
 			return;
 		}
 		const size = node.querySelector( '.size' )?.textContent;
-		const date = node.querySelector( '.date' )?.textContent;
+		const date = new Date( node.querySelector( '.date' )?.textContent );
 		compileInfo[ bannerName ] = { fileName, size, date };
 	} );
 	return compileInfo;
