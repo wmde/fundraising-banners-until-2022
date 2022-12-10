@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */ }
+{ /* eslint-disable max-len */ }
 
 export default function IconShutterbug() {
 	return <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ export default function IconShutterbug() {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g id="Shutterbug1" transform="matrix(0.411932,0,0,0.408835,603.068,-1047.1)">
 							<path
 								d="M118.8,2796.22L120.457,2792.07C120.867,2791.05 122.097,2790.22 123.206,2790.22L128.794,2790.22C129.902,2790.22 131.134,2791.05 131.543,2792.07L133.2,2796.22L135.798,2796.22C138.008,2796.22 139.8,2798.01 139.8,2800.22L139.8,2819.78C139.8,2821.99 138.007,2823.78 135.798,2823.78L104.202,2823.78C101.992,2823.78 100.2,2821.99 100.2,2819.78L100.2,2800.22C100.2,2798.01 101.993,2796.22 104.202,2796.22L118.8,2796.22Z"

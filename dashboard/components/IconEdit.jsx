@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */ }
+{ /* eslint-disable max-len */ }
 
 export default function IconEdit() {
 	return <svg viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ export default function IconEdit() {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g transform="matrix(0.732361,-0.732361,0.732361,0.732361,56.0551,576.911)">
 							<rect x="732" y="81" width="8" height="3" style="fill:rgb(0,157,255);"/>
 						</g>

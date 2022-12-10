@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */
+{ /* eslint-disable max-len */
 }
 
 export default function IconCommand() {
@@ -13,7 +13,7 @@ export default function IconCommand() {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g transform="matrix(0.90625,0,0,0.90625,-132.992,28.6195)">
 							<g transform="matrix(18,0,0,18,877.406,83.5014)">
 							</g>

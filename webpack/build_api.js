@@ -1,11 +1,6 @@
 const webpack = require( 'webpack' );
 const newProductionConfiguration = require( '../webpack.production' );
 
-/**
- *
- * @param request
- * @param response
- */
 function webpackBuildApiRoute( request, response ) {
 	const bannerName = request.params.bannerName;
 	if ( !bannerName ) {

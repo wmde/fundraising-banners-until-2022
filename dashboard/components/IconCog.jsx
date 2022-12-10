@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */ }
+{ /* eslint-disable max-len */ }
 
 export default function IconCog() {
 	return <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ export default function IconCog() {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g transform="matrix(0.90625,0,0,0.90625,-86.0937,24.375)">
 							<path
 								d="M815,74L818.653,77.673L823.66,79L822.306,84L823.66,89L818.653,90.327L815,94L811.347,90.327L806.34,89L807.694,84L806.34,79L811.347,77.673L815,74ZM815,82.5C814.172,82.5 813.5,83.172 813.5,84C813.5,84.828 814.172,85.5 815,85.5C815.828,85.5 816.5,84.828 816.5,84C816.5,83.172 815.828,82.5 815,82.5Z"

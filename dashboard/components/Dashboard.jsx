@@ -107,7 +107,7 @@ export default function Dashboard( props ) {
 									isWPDE={ isWPDE }/>
 							</div>
 						</div>
-					</div>
+					</div>;
 				} ) }
 			</div>
 		</section>

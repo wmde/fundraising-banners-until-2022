@@ -1,8 +1,8 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */ }
+{ /* eslint-disable max-len */ }
 
-export default function IconPreview( { fill } ) {
+export default function IconPreview() {
 	return <svg viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg"
 		style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
 		<g transform="matrix(1,0,0,1,-605,-72)">
@@ -12,7 +12,7 @@ export default function IconPreview( { fill } ) {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g transform="matrix(1.03571,0,0,1.03571,11.2543,11.901)">
 							<ellipse cx="619" cy="85.5" rx="9" ry="6.5" style="fill:white;"/>
 						</g>

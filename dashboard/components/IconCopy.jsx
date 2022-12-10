@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-{/* eslint-disable max-len */ }
+{ /* eslint-disable max-len */ }
 
 export default function IconCopy() {
 	return <svg width="100%" height="100%" viewBox="0 0 28 28" version="1.1"
@@ -12,7 +12,7 @@ export default function IconCopy() {
 					<clipPath id="_clip1">
 						<circle cx="652.5" cy="100.5" r="14.5"/>
 					</clipPath>
-					<g clip-path="url(#_clip1)">
+					<g clipPath="url(#_clip1)">
 						<g transform="matrix(1.03571,0,0,1.03571,-67.3214,11.4286)">
 							<rect x="690" y="81" width="9" height="13" style="fill:white;"/>
 						</g>
