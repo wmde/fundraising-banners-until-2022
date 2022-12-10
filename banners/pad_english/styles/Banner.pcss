@@ -35,13 +35,21 @@
 	}
 
 	&-column-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding-bottom: 10px;
 		border: 5px solid $color-primary;
 		border-radius: 9px;
 		background-color: $color-white-off;
-		padding: 0 0 80px;
 		position: relative;
 		margin-right: $banner-padding;
 		overflow-y: hidden;
+
+		min-height: 345px;
+		@media ( min-width: 1114px ) {
+			min-height: 320px;
+		}
 
 		.wmde-banner-progress-bar {
 			margin-left: 32px;
