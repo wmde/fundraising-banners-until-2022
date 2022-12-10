@@ -291,7 +291,7 @@ export default class Banner extends Component {
 				</FollowupTransition>
 				<div
 					ref={ this.softCloseTransitionRef }
-					className="soft-close-container banner-position--state-finished banner-position banner-position--fixed"
+					className="soft-close-container"
 					style="top: 0px"
 				>
 					<SoftClose
