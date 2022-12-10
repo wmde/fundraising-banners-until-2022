@@ -1,0 +1,167 @@
+@import './reset.pcss';
+@import './tooltip.pcss';
+
+$color-dark: #141414;
+$color-light: #ffffff;
+$color-grey: #f8f8f8;
+$color-grey-darker: #d0d0d0;
+$color-current-branch: #dbe6f5;
+
+@keyframes show-campaigns {
+	0% {
+		transform: translateX( 60px );
+		opacity: 0;
+	}
+	100% {
+		transform: translateX( 0 );
+		opacity: 1;
+	}
+}
+
+h1 {
+	display: inline-block;
+}
+
+body {
+	font-family: monospace;
+}
+
+a {
+	text-decoration: none;
+}
+
+.header,
+.footer {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background: $color-dark;
+	color: $color-light;
+	padding: 0 24px;
+
+	display: flex;
+	justify-content: space-between;
+
+	&-link {
+		height: 50px;
+		display: inline-block;
+		padding: 0 10px;
+		color: $color-light;
+	}
+
+	&-git {
+		display: flex;
+
+		svg {
+			margin: 12px 8px 12px 30px;
+		}
+	}
+
+	&-link-refresh {
+		float: right;
+		line-height: 58px;
+	}
+}
+
+.header {
+	top: 0;
+
+	&-left {
+		display: flex;
+	}
+}
+
+.footer {
+	bottom: 0;
+}
+
+.content {
+	padding: 50px 0;
+}
+
+.campaign {
+	display: flex;
+	flex-direction: column;
+	min-height: 40px;
+	line-height: 40px;
+	padding: 24px;
+	border-bottom: 1px dotted $color-dark;
+
+	transform: translateX( 60px );
+	opacity: 0;
+	animation: show-campaigns 1s ease-in-out;
+	animation-fill-mode: forwards;
+	animation-delay: calc( 0.1s * var( --index ) );
+
+	&.current-branch {
+		background: $color-current-branch;
+	}
+
+	&-title {
+		display: flex;
+		font-size: 20px;
+		font-weight: bold;
+		text-transform: capitalize;
+		margin-bottom: 10px;
+	}
+
+	&-banners {
+		display: flex;
+		flex-grow: 1;
+		flex-wrap: wrap;
+	}
+
+	&-banner {
+		flex: 0 0 100%;
+		font-size: 16px;
+
+		@media screen and ( min-width: 1100px ) {
+			flex: 0 0 50%;
+		}
+	}
+}
+
+.link-icon-large {
+	height: 32px;
+	width: 32px;
+	margin: 4px 0 4px 8px;
+}
+
+.banner-actions {
+	display: flex;
+	flex-wrap: nowrap;
+
+	&-title {
+		color: $color-dark;
+	}
+
+	&-links {
+		display: flex;
+		flex-wrap: nowrap;
+		height: 40px;
+		padding: 6px 0;
+	}
+
+	&-icon {
+		display: inline-block;
+		margin: 0 8px;
+		height: 28px;
+		width: 28px;
+		&.uncompiled {
+			opacity: 0.5;
+			cursor: default;
+		}
+	}
+}
+
+.shutterbug-preview {
+	text-decoration: none;
+	padding-right: 10px;
+}
+
+.campaign-column {
+	vertical-align: top;
+	font-weight: bold;
+	padding: 10px 10px 0 0;
+}

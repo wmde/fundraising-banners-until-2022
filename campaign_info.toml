@@ -4,6 +4,7 @@
 
 # A Campaign with global settings
 [desktop]
+name = "C22_WMDE_Test_19"
 campaign_tracking = "19-ba-221207"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
@@ -24,20 +25,10 @@ tracking = "org-19-221207-var"
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
-[desktop_vector_2022]
-campaign_tracking = "06-ba-220916"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=vector-2022&banner=B17WMDE_webpack_prototype&devMode"
-preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
-wrapper_template = "wikipedia_org"
-
-# Banners of the campaign, key after "banners" can be anything
-[desktop_vector_2022.banners.ctrl]
-filename = "./banners/desktop/banner_ctrl.js"
-pagename = "B22_WMDE_Test_06_ctrl_desktop_vector_2022"
-tracking = "org-06-220916-ctrl"
 
 # Mobile Campaign
 [mobile]
+name = "C22_WMDE_Mobile_Test_12"
 campaign_tracking = "mob12-ba-221205"
 preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
@@ -60,6 +51,7 @@ orientation = [ "portrait", "landscape"]
 
 # Mobile English Campaign
 [mobile_english]
+name = "C22_WMDE_Mobile_EN_Test_01"
 campaign_tracking = "mob_en01-ba-221103"
 preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://en.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
@@ -82,6 +74,7 @@ orientation = [ "portrait", "landscape" ]
 
 # iPad campaign
 [pad]
+name = "C22_WMDE_ipad_Test_01"
 campaign_tracking = "pad01-ba-221103"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
@@ -92,7 +85,7 @@ filename = "./banners/pad/banner_ctrl.js"
 pagename = "B22_WMDE_ipad_Test_01_ctrl"
 tracking = "org-pad01-221103-ctrl"
 
-[pad.banners.pad]
+[pad.banners.var]
 filename = "./banners/pad/banner_var.js"
 pagename = "B22_WMDE_ipad_Test_01_var"
 tracking = "org-pad01-221103-var"
@@ -104,6 +97,7 @@ orientation = [ "portrait", "landscape"]
 
 # iPad English campaign
 [pad_en]
+name = "C22_WMDE_ipad_en_Test_01"
 campaign_tracking = "en-ipad01-221103"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
@@ -127,10 +121,12 @@ orientation = [ "portrait", "landscape"]
 
 # Wikipedia.de Campaign
 [wikipediade]
+name = "C22_WPDE_02"
 campaign_tracking = "wpde-02-221124"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 
 [wikipediade.banners.ctrl]
 filename = "./banners/wpde_desktop/banner_ctrl.js"
@@ -144,10 +140,12 @@ tracking = "wpde-02-221124-var"
 
 # Wikipedia.de Mobile Campaign
 [wikipediade_mobile]
+name = "C22_WPDE_mob01"
 campaign_tracking = "wpde-mob01-221103"
 preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
 wrapper_template = "wikipedia_de"
 wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
 
 [wikipediade_mobile.banners.ctrl]
 filename = "./banners/wpde_mobile/banner_ctrl.js"
@@ -162,6 +160,7 @@ tracking = "wpde-mob01-221103-var"
 
 # English Campaign
 [english]
+name = "C22_WMDE_Test_EN_06"
 campaign_tracking = "en06-ba-221201"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://en.wikipedia.org/wiki/Wikipedia:Main_Page?banner={{PLACEHOLDER}}'

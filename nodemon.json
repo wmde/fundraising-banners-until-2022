@@ -1,0 +1,8 @@
+{
+   "watch": [
+	   "webpack.config.js",
+	   "webpack.production.js",
+	   "campaign_info.toml"
+   ],
+   "exec": "webpack serve --host 0.0.0.0"
+}
