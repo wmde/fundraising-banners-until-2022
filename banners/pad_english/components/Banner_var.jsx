@@ -239,7 +239,9 @@ export default class Banner extends Component {
 									goalDonationSum={campaignProjection.goalDonationSum}
 									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
 									setStartAnimation={this.registerStartProgressbar}
-									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
+									isLateProgress={ props.campaignParameters.isLateProgress }
+									amountToShowOnRight={ AmountToShowOnRight.TOTAL }
+								/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm

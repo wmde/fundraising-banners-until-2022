@@ -98,7 +98,7 @@ orientation = [ "portrait", "landscape"]
 # iPad English campaign
 [pad_en]
 name = "C22_WMDE_ipad_en_Test_02"
-campaign_tracking = "en-ipad02-221210"
+campaign_tracking = "en-ipad02-221212"
 preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
@@ -106,12 +106,12 @@ wrapper_template = "wikipedia_org"
 [pad_en.banners.ctrl]
 filename = "./banners/pad_english/banner_ctrl.js"
 pagename = "B22_WMDE_ipad_en_02_ctrl"
-tracking = "org-en-ipad02-221210-ctrl"
+tracking = "org-en-ipad02-221212-ctrl"
 
 [pad_en.banners.var]
 filename = "./banners/pad_english/banner_var.js"
 pagename = "B22_WMDE_ipad_en_02_var"
-tracking = "org-en-ipad02-221210-var"
+tracking = "org-en-ipad02-221212-var"
 
 [pad_en.test_matrix]
 device = [ 'ipad_mini', 'ipad', 'ipad_pro_9_7_inch', 'ipad_pro_12_inch']
