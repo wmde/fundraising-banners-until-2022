@@ -1,0 +1,52 @@
+.wmde-banner {
+
+	&-form {
+		padding: 16px;
+		position: relative;
+
+		&-field-group-legend {
+			display: block;
+			width: 100%;
+			text-align: center;
+			height: 18px;
+			line-height: 18px;
+			margin-bottom: 8px;
+		}
+
+		&-button {
+			height: 60px;
+			line-height: 60px;
+			border-radius: 30px;
+			font-weight: bold;
+			color: $color-white;
+			background: $color-secondary;
+
+			&:hover,
+			&:focus {
+				background: $color-secondary-hover;
+			}
+		}
+
+		&-button-error {
+			display: block;
+			padding: 5px 0;
+			width: 100%;
+			color: $color-error;
+			text-align: center;
+			font-size: 14px;
+			font-weight: bold;
+		}
+	}
+
+	&-form-slider {
+		height: 100%;
+		width: 100%;
+	}
+
+	&-sub-form {
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: calc( 100% + 0 );
+		max-width: calc( 100% + 0 );
+	}
+}

@@ -36,20 +36,20 @@ export default function FullBanner( props ) {
 			Jetzt sind Sie <span className="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 		</div>
 		<DonationForm
-			onSubmit={props.onSubmit}
-			onPage2={ props.onPage2 }
-			onSubmitRecurring={ props.onSubmitRecurring }
-			onSubmitNonRecurring={ props.onSubmitNonRecurring }
-			onChangeToYearly={ props.onChangeToYearly }
+			onSubmit={ props.onSubmit }
 			formItems={props.formItems}
 			bannerName={props.bannerName}
 			campaignName={props.campaignName}
 			formatters={props.formatters}
 			impressionCounts={props.impressionCounts}
-			customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
-			toggleFundsModal={props.toggleFundsModal}
-			scrollToFirstError={ scrollToFirstError }
-			preselectedAmount={ props.preselectedAmount }
+			onFormInteraction={this.onFormInteraction}
+			buttonText={ props.buttonText }
+			errorPosition={ props.errorPosition }
+			bannerType={ props.bannerType }
+			formActionProps={ props.formActionProps }
+			donationForms={ props.donationForms }
+			createFormController={ props.createFormController }
+			trackBannerEvent={ ( eventName ) => props.trackBannerEvent( eventName ) }
 		/>
 		<div className="wmde-banner-full-small-print">
 			<span>

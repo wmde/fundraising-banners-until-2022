@@ -287,11 +287,12 @@ export default class Banner extends Component {
 						setStartAnimation={ this.registerStartProgressBarInFullPageBanner }
 						toggleFundsModal={ this.toggleFundsModal }
 						dynamicCampaignText={ this.dynamicCampaignText }
+						trackBannerEvent={ ( eventName ) => this.trackBannerEvent( eventName ) }
 					/>
 				</FollowupTransition>
 				<div
 					ref={ this.softCloseTransitionRef }
-					className="soft-close-container"
+					className="soft-close-container banner-position--state-finished banner-position banner-position--fixed"
 					style="top: 0px"
 				>
 					<SoftClose

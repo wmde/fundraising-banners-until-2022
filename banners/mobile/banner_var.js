@@ -10,18 +10,20 @@ import Translations from '../../shared/messages/de';
 import LocalTranslations from './translations';
 import TranslationsSoftClose from './translations_soft_close';
 import useOfFundsText from '../../node_modules/fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
-import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonationFormCompact';
-import FormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2MobileCompact';
+import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
+import Donation from '../../components/MultistepDonationForm/forms/Donation';
+import UpgradeToYearly from '../../components/MultistepDonationForm/forms/UpgradeToYearlyButtons';
 import BannerText from './content/BannerText';
 import Slides from './content/Slides';
 import SoftClose from '../../components/SoftClose/SoftClose';
 
-import Banner from './components/Banner_var';
+import Banner from './components/Banner';
 
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
+import createFormController from './FormController';
 import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -49,7 +51,8 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		donationForm: DonationForm,
-		donationFormStep2: FormStep2,
+		donationForms: [ Donation, UpgradeToYearly ],
+		createFormController: createFormController,
 		bannerText: BannerText,
 		slides: Slides,
 		softClose: SoftClose
