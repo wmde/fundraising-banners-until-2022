@@ -1,4 +1,5 @@
 const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
+const NAMESPACE_IDENTIFIER = 'namespace_tracking';
 const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
 
 // TODO: Remove this when the old banners are deleted
@@ -27,6 +28,16 @@ export default class LegacyEventLoggingTracker {
 	 */
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
 		this.trackViewportData( this.bannerName, dimensionData, trackingRatio );
+	}
+
+	/**
+	 * Track the event of a banner being too large for a user's viewport
+	 *
+	 * @param {Object} dimensionData
+	 * @param {number} trackingRatio The probability of the event being tracked (between 0 and 1)
+	 */
+	trackDisallowedNamespaceEvent( dimensionData, trackingRatio ) {
+		this.trackViewportData( this.bannerName + '-' + NAMESPACE_IDENTIFIER, dimensionData, trackingRatio );
 	}
 
 	/**
