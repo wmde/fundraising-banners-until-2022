@@ -9,13 +9,6 @@ export default function FullBanner( props ) {
 	const DonationForm = props.donationForm;
 	const BannerText = props.bannerText;
 
-	const scrollToFirstError = e => {
-		e.preventDefault();
-		document.getElementsByClassName( 'wmde-banner-select-group-container--with-error' )[ 0 ]?.scrollIntoView(
-			{ behavior: 'smooth', block: 'center', inline: 'nearest' }
-		);
-	};
-
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
 		<button className="wmde-banner-full-close" onClick={ props.onClose }><CloseIconMobile/></button>
 		<div className="wmde-banner-full-info">

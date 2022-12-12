@@ -16,7 +16,7 @@ export function createFormModel(
 	const paymentMethod = usePaymentMethod( initialPaymentMethod );
 	const amount = useAmountWithCustom( initialAmount, customAmountFormatter );
 	const addressType = useAddressType( initialAddressType );
-	const disabled = useDisabledFormValues( interval[0], paymentMethod[0] );
+	const disabled = useDisabledFormValues( interval[ 0 ], paymentMethod[ 0 ] );
 
 	const initialState = {
 		addressType: initialAddressType,

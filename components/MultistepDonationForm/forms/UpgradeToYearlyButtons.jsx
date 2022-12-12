@@ -29,6 +29,14 @@ export default function UpgradeToYearlyButtons( props ) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ props.active ] );
 
+	// check with side effects
+	const paymentDataIsValid = () => [
+		[ intervalValidity, setIntervalValidity ],
+		[ amountValidity, setAmountValidity ],
+		[ paymentMethodValidity, setPaymentMethodValidity ],
+		[ upgradeToYearlyValidity, setUpgradeToYearlyValidity ]
+	].map( validateRequired ).every( isValid );
+
 	// 1. The button clicks update the value of alternative.
 	// 2. We watch the value of alternative for changes
 	// 3. If the value is not null we know the user clicked a button so we submit the form
@@ -53,14 +61,6 @@ export default function UpgradeToYearlyButtons( props ) {
 
 		setUpgradeToYearly( e.target.value );
 	};
-
-	// check with side effects
-	const paymentDataIsValid = () => [
-		[ intervalValidity, setIntervalValidity ],
-		[ amountValidity, setAmountValidity ],
-		[ paymentMethodValidity, setPaymentMethodValidity ],
-		[ upgradeToYearlyValidity, setUpgradeToYearlyValidity ]
-	].map( validateRequired ).every( isValid );
 
 	const onBack = e => {
 		e.preventDefault();

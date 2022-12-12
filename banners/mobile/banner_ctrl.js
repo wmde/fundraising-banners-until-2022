@@ -55,7 +55,8 @@ bannerPresenter.present(
 		createFormController: createFormController,
 		bannerText: BannerText,
 		slides: Slides,
-		softClose: SoftClose
+		softClose: SoftClose,
+		formActionProps: { ast: 0 }
 	},
 	0
 );
