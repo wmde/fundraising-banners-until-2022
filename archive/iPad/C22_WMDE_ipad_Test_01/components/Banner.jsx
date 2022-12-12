@@ -9,23 +9,20 @@ import { BannerType } from '../../../shared/BannerType';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import debounce from '../../../shared/debounce';
 import SlideState from '../../../shared/slide_state';
+import Slides from '../content/Slides';
 
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import Slider from '../../../components/Slider/Slider';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
+import Footer from '../../../components/Footer/Footer';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
-import CssTransition from '../../../shared/css_transition';
-import AlreadyDonatedModal from '../../../components/AlreadyDonatedModal/AlreadyDonatedModal';
 
-const BannerVisibilityState = Object.freeze( {
-	PENDING: Symbol( 'pending' ),
-	FULL_VISIBLE: Symbol( 'full-visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
-	CLOSED: Symbol( 'closed' )
-} );
+const PENDING = 0;
+const VISIBLE = 1;
+const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
@@ -58,18 +55,15 @@ export default class Banner extends Component {
 	};
 
 	ref = createRef();
-	softCloseTransitionRef = createRef();
-	softCloseRef = createRef();
 
 	constructor( props ) {
 		super( props );
 		this.state = {
-			bannerVisibilityState: BannerVisibilityState.PENDING,
+			displayState: PENDING,
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
-			formInteractionSwitcher: false,
-			isAlreadyDonatedModalVisible: false
+			formInteractionSwitcher: false
 		};
 		this.slideInBanner = () => {};
 		this.startSliderAutoplay = () => {};
@@ -87,7 +81,7 @@ export default class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.FULL_VISIBLE } );
+				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
 			}
 		);
@@ -101,18 +95,6 @@ export default class Banner extends Component {
 			this.slideState.currentSlide + 1,
 			trackRatio ?? this.props.trackingData.bannerClickTrackRatio
 		);
-	}
-
-	setContentSize() {
-		switch ( this.state.bannerVisibilityState ) {
-			case BannerVisibilityState.FULL_VISIBLE:
-				this.props.skinAdjuster.addSpaceInstantly( this.getFullBannerHeight() );
-				this.fullPageBannerReRender();
-				break;
-			case BannerVisibilityState.SOFT_CLOSING:
-				this.props.skinAdjuster.addSpaceInstantly( this.getSoftCloseBannerHeight() );
-				break;
-		}
 	}
 
 	onPageResize() {
@@ -132,6 +114,12 @@ export default class Banner extends Component {
 		this.props.onFinishedTransitioning();
 		setTimeout( this.startSliderAutoplay, SLIDESHOW_START_DELAY );
 		this.onPageResize();
+	};
+
+	closeBanner = e => {
+		e.preventDefault();
+		this.setState( { displayState: CLOSED } );
+		this.props.onClose();
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -164,84 +152,20 @@ export default class Banner extends Component {
 		this.stopSliderAutoplay();
 	};
 
-	getSoftCloseBannerHeight() {
-		return this.softCloseTransitionRef.current ? this.softCloseTransitionRef.current.offsetHeight : 0;
-	}
-
-	onSoftCloseBanner = e => {
-		e.preventDefault();
-		this.softCloseRef.current?.startProgress();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.setContentSize()
-		);
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater();
-	};
-
-	onCloseBanner = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose();
-	};
-
-	onTimeOutClose = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'micro-banner-ignored', new CssTransition( 1000 ) );
-	};
-
 	onSlideChange = ( index ) => {
 		this.slideState.onSlideChange( index );
 	};
 
-	onPage2 = () => {
-		this.trackBannerEvent( 'second-form-page-shown' );
-	};
-
-	onChangeToYearly = () => {
-		this.trackBannerEvent( 'changed-to-yearly' );
-	};
-
-	showAlreadyDonated = ( e ) => {
-		e.preventDefault();
-		this.trackBannerEvent( 'clicked-already-donated' );
-		this.setState( { isAlreadyDonatedModalVisible: true } );
-	};
-
-	hideAlreadyDonated = ( e ) => {
-		e.preventDefault();
-		this.setState( { isAlreadyDonatedModalVisible: false } );
-	};
-
-	onAlreadyDonatedMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater( 'banner-closed-already-donated-maybelater' );
-	};
-
-	onAlreadyDonatedGoAway = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onCloseBecauseDonated( 'banner-closed-already-donated' );
-	};
-
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
-		const SoftClose = props.softClose;
-		const Footer = props.footer;
 		const campaignProjection = props.campaignProjection;
 		const DonationForm = props.donationForm;
 		return <div
 			className={ classNames(
 				'wmde-banner',
 				{
-					'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
-					'wmde-banner--visible': state.bannerVisibilityState !== BannerVisibilityState.CLOSED && state.bannerVisibilityState !== BannerVisibilityState.PENDING,
-					'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
+					'wmde-banner--hidden': state.displayState === CLOSED,
+					'wmde-banner--visible': state.displayState === VISIBLE,
 					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 					'wmde-banner--var': props.bannerType === BannerType.VAR
 				}
@@ -256,18 +180,11 @@ export default class Banner extends Component {
 			>
 				<TranslationContext.Provider value={props.translations}>
 					<div className="wmde-banner-wrapper">
-						<ButtonClose onClick={ this.onSoftCloseBanner }/>
-						<AlreadyDonatedModal
-							content={ props.alreadyDonatedContent }
-							isVisible={ state.isAlreadyDonatedModalVisible }
-							onHide={ this.hideAlreadyDonated }
-							onMaybeLater={ this.onAlreadyDonatedMaybeLater }
-							onGoAway={ this.onAlreadyDonatedGoAway }
-						/>
+						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								<Slider
-									slides={ props.slides( this.dynamicCampaignText ) }
+									slides={ Slides( this.dynamicCampaignText ) }
 									onSlideChange={ this.onSlideChange }
 									registerAutoplay={ this.registerAutoplayCallbacks }
 									interval={ SLIDESHOW_SLIDE_INTERVAL }
@@ -287,38 +204,18 @@ export default class Banner extends Component {
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
-									onPage2={ this.onPage2 }
-									onSubmit={ props.onSubmit }
-									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
-									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-									onChangeToYearly={ this.onChangeToYearly }
-									onFormInteraction={ this.onFormInteraction }
 									formItems={props.formItems}
-									formStep2={ props.donationFormStep2 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
+									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
+									onSubmit={ props.onSubmit }
 								/>
 							</div>
 						</div>
-						<Footer
-							showFundsModal={ this.toggleFundsModal }
-							showAlreadyDonated={ this.showAlreadyDonated }
-						/>
-					</div>
-					<div
-						ref={ this.softCloseTransitionRef }
-						className="soft-close-container banner-position--state-finished banner-position banner-position--fixed"
-						style="top: 0px"
-					>
-						<SoftClose
-							onMaybeLater={ this.onMaybeLater }
-							onCloseBanner={ this.onCloseBanner }
-							onTimeOutClose={ this.onTimeOutClose }
-							ref={ this.softCloseRef }
-						/>
+						<Footer showFundsModal={ this.toggleFundsModal }/>
 					</div>
 				</TranslationContext.Provider>
 			</BannerTransition>
