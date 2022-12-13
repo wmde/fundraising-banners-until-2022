@@ -7,8 +7,6 @@ let nextCallback = () => {};
 let backCallback = () => {};
 let goToStepCallback = () => {};
 
-let thirdPageAmount = '';
-
 const submitStep = ( step, extraData ) => {
 	const [ paymentInterval, setPaymentInterval, , ] = formModel.interval;
 	const [ paymentMethod, , , ] = formModel.paymentMethod;
@@ -30,7 +28,6 @@ const submitStep = ( step, extraData ) => {
 			}
 			break;
 		case 3:
-			thirdPageAmount = extraData.numericThirdPageAmount;
 			setPaymentInterval( Intervals.YEARLY.value );
 			submitCallback( 'submit-different-amount' );
 			break;
@@ -53,20 +50,6 @@ const goBack = ( step ) => {
 
 const goToStep = ( step ) => {
 	goToStepCallback( step );
-};
-
-const getSubmitValues = () => {
-	const [ addressType, , , ] = formModel.addressType;
-	const [ { numericAmount } ] = formModel.amount;
-	const [ paymentInterval, , , ] = formModel.interval;
-	const [ paymentMethod, , , ] = formModel.paymentMethod;
-
-	return {
-		addressType: addressType,
-		amount: thirdPageAmount === '' ? numericAmount : thirdPageAmount,
-		interval: paymentInterval,
-		paymentMethod: paymentMethod
-	};
 };
 
 const onNext = callback => {
@@ -96,7 +79,6 @@ export default function createFormController( withFormModel ) {
 		submitStep,
 		goNext,
 		goBack,
-		goToStep,
-		getSubmitValues
+		goToStep
 	};
 }

@@ -6,22 +6,21 @@ import classNames from 'classnames';
 import { propTypes } from './propTypes';
 import { validateRequired } from '../../DonationForm/utils';
 import { isValid, isValidOrUnset, UNSET } from '../../DonationForm/hooks/validation_states';
-import useCustomAmount from '../../DonationForm/hooks/use_custom_amount';
 
 export default function CustomAmount( props ) {
 	const Translations = useContext( TranslationContext );
 	const [ , , intervalValidity, setIntervalValidity ] = props.formModel.interval;
 	const [ , , paymentMethodValidity, setPaymentMethodValidity ] = props.formModel.paymentMethod;
 	const [ { numericAmount, amountValidity }, { setAmountValidity } ] = props.formModel.amount;
-	const [ thirdPageAmount, numericThirdPageAmount, setThirdPageAmount, thirdPageAmountValidity, setThirdPageAmountValidity ] = useCustomAmount( '' );
+	const [ customAmount, numericCustomAmount, setCustomAmount, customAmountValidity, setCustomAmountValidity ] = props.formModel.customAmount;
 
 	const onEntered = () => {
 		props.trackBannerEvent( 'custom-amount-form-page-shown' );
 	};
 
 	const onExited = () => {
-		setThirdPageAmount( '' );
-		setThirdPageAmountValidity( UNSET );
+		setCustomAmount( '' );
+		setCustomAmountValidity( UNSET );
 	};
 
 	useEffect( () => {
@@ -37,30 +36,30 @@ export default function CustomAmount( props ) {
 		[ intervalValidity, setIntervalValidity ],
 		[ amountValidity, setAmountValidity ],
 		[ paymentMethodValidity, setPaymentMethodValidity ],
-		[ thirdPageAmountValidity, setThirdPageAmountValidity ]
+		[ customAmountValidity, setCustomAmountValidity ]
 	].map( validateRequired ).every( isValid );
 
 	const onSubmit = e => {
 		e.preventDefault();
 		if ( paymentDataIsValid() ) {
 			const amountFloat = parseFloat( numericAmount );
-			const thirdPageAmountFloat = parseFloat( numericThirdPageAmount );
-			if ( amountFloat > thirdPageAmountFloat ) {
+			const customAmountFloat = parseFloat( numericCustomAmount );
+			if ( amountFloat > customAmountFloat ) {
 				props.trackBannerEvent( 'decreased-amount' );
-			} else if ( amountFloat < thirdPageAmountFloat ) {
+			} else if ( amountFloat < customAmountFloat ) {
 				props.trackBannerEvent( 'increased-amount' );
 			}
 
-			props.onSubmit( props.step, { thirdPageAmount, numericThirdPageAmount } );
+			props.onSubmit( props.step );
 		}
 	};
 
 	const onInput = ( e ) => {
-		setThirdPageAmount( e.target.value );
+		setCustomAmount( e.target.value );
 	};
 
 	const onBlur = () => {
-		setThirdPageAmount( props.formatters.customAmountInputFormatter( numericThirdPageAmount ) );
+		setCustomAmount( props.formatters.customAmountInputFormatter( numericCustomAmount ) );
 	};
 
 	const onBack = ( e ) => {
@@ -78,7 +77,7 @@ export default function CustomAmount( props ) {
 
 		<div className={ classNames(
 			'wmde-banner-form-custom-content',
-			{ 'wmde-banner-select-group-container--with-error': !isValidOrUnset( thirdPageAmountValidity ) }
+			{ 'wmde-banner-select-group-container--with-error': !isValidOrUnset( customAmountValidity ) }
 		) }>
 			<p className="wmde-banner-form-custom-header">
 				{ Translations[ 'form-step-3-header' ] }
@@ -90,7 +89,7 @@ export default function CustomAmount( props ) {
 				<span className="wmde-banner-select-custom-amount-euro-symbol">&euro;</span>
 				<input type="text"
 					tabIndex="-1"
-					value={ thirdPageAmount || '' }
+					value={ customAmount || '' }
 					onInput={ onInput }
 					onBlur={ onBlur }
 					size="3"
@@ -107,8 +106,8 @@ export default function CustomAmount( props ) {
 
 		<div className="wmde-banner-form-button-container wmde-banner-form-custom-button">
 			<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
-				{ numericThirdPageAmount > 0 ?
-					Translations[ 'form-step-3-button' ].replace( '{{amount}}', thirdPageAmount ) :
+				{ numericCustomAmount > 0 ?
+					Translations[ 'form-step-3-button' ].replace( '{{amount}}', customAmount ) :
 					Translations[ 'form-step-3-button-blank' ] }
 			</button>
 		</div>
