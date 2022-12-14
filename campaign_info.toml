@@ -160,21 +160,21 @@ tracking = "wpde-mob01-221103-var"
 
 # English Campaign
 [english]
-name = "C22_WMDE_Test_EN_06"
-campaign_tracking = "en06-ba-221201"
+name = "C22_WMDE_Test_EN_07"
+campaign_tracking = "en07-ba-221216"
 preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
 [english.banners.ctrl]
 filename = "./banners/english/banner_ctrl.js"
-pagename = "B22_WMDE_Test_EN_06_ctrl"
-tracking = "org-en06-221201-ctrl"
+pagename = "B22_WMDE_Test_EN_07_ctrl"
+tracking = "org-en07-221216-ctrl"
 
 [english.banners.var]
 filename = "./banners/english/banner_var.js"
-pagename = "B22_WMDE_Test_EN_06_var"
-tracking = "org-en06-221201-var"
+pagename = "B22_WMDE_Test_EN_07_var"
+tracking = "org-en07-221216-var"
 
 [english.test_matrix]
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
