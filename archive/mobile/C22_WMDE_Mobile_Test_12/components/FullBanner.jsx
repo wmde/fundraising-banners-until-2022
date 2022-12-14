@@ -9,6 +9,13 @@ export default function FullBanner( props ) {
 	const DonationForm = props.donationForm;
 	const BannerText = props.bannerText;
 
+	const scrollToFirstError = e => {
+		e.preventDefault();
+		document.getElementsByClassName( 'wmde-banner-select-group-container--with-error' )[ 0 ]?.scrollIntoView(
+			{ behavior: 'smooth', block: 'center', inline: 'nearest' }
+		);
+	};
+
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
 		<button className="wmde-banner-full-close" onClick={ props.onClose }><CloseIconMobile/></button>
 		<div className="wmde-banner-full-info">
@@ -29,20 +36,20 @@ export default function FullBanner( props ) {
 			Jetzt sind Sie <span className="wmde-banner-full-call-to-action-optional-text">in Deutschland</span> gefragt.
 		</div>
 		<DonationForm
-			onSubmit={ props.onSubmit }
+			onSubmit={props.onSubmit}
+			onPage2={ props.onPage2 }
+			onSubmitRecurring={ props.onSubmitRecurring }
+			onSubmitNonRecurring={ props.onSubmitNonRecurring }
+			onChangeToYearly={ props.onChangeToYearly }
 			formItems={props.formItems}
 			bannerName={props.bannerName}
 			campaignName={props.campaignName}
 			formatters={props.formatters}
 			impressionCounts={props.impressionCounts}
-			onFormInteraction={this.onFormInteraction}
-			buttonText={ props.buttonText }
-			errorPosition={ props.errorPosition }
-			bannerType={ props.bannerType }
-			formActionProps={ props.formActionProps }
-			donationForms={ props.donationForms }
-			createFormController={ props.createFormController }
-			trackBannerEvent={ ( eventName ) => props.trackBannerEvent( eventName ) }
+			customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder-short' ] }
+			toggleFundsModal={props.toggleFundsModal}
+			scrollToFirstError={ scrollToFirstError }
+			preselectedAmount={ props.preselectedAmount }
 		/>
 		<div className="wmde-banner-full-small-print">
 			<span>
