@@ -29,7 +29,8 @@ module.exports = () => Promise.all( [
 	{
 		mode: 'development',
 		entry: {
-			main: './dashboard/main.js'
+			main: './dashboard/main.js',
+			inject_tracking: './webpack/inject_tracking.js'
 		},
 		plugins: [
 			new webpack.HotModuleReplacementPlugin(),
