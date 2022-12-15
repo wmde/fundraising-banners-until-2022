@@ -19,14 +19,10 @@ import Footer from '../../../components/Footer/Footer';
 import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
-import SoftClose from '../../../components/SoftClose/SoftClose';
 
-const BannerVisibilityState = Object.freeze( {
-	PENDING: Symbol( 'pending' ),
-	VISIBLE: Symbol( 'visible' ),
-	SOFT_CLOSING: Symbol( 'soft-closing' ),
-	CLOSED: Symbol( 'closed' )
-} );
+const PENDING = 0;
+const VISIBLE = 1;
+const CLOSED = 2;
 
 const SLIDESHOW_START_DELAY = 2000;
 const SLIDESHOW_SLIDE_INTERVAL = 10000;
@@ -59,12 +55,11 @@ export default class Banner extends Component {
 	};
 
 	ref = createRef();
-	softCloseRef = createRef();
 
 	constructor( props ) {
 		super( props );
 		this.state = {
-			bannerVisibilityState: BannerVisibilityState.PENDING,
+			displayState: PENDING,
 			isFundsModalVisible: false,
 
 			// trigger for banner resize events
@@ -86,7 +81,7 @@ export default class Banner extends Component {
 	componentDidMount() {
 		this.props.registerDisplayBanner(
 			() => {
-				this.setState( { bannerVisibilityState: BannerVisibilityState.VISIBLE } );
+				this.setState( { displayState: VISIBLE } );
 				this.slideInBanner();
 			}
 		);
@@ -121,30 +116,10 @@ export default class Banner extends Component {
 		this.onPageResize();
 	};
 
-	onSoftCloseBanner = e => {
+	closeBanner = e => {
 		e.preventDefault();
-		this.softCloseRef.current?.startProgress();
-		this.setState(
-			{ bannerVisibilityState: BannerVisibilityState.SOFT_CLOSING },
-			() => this.onPageResize()
-		);
-	};
-
-	onMaybeLater = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onMaybeLater();
-	};
-
-	onCloseBanner = e => {
-		e.preventDefault();
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		this.setState( { displayState: CLOSED } );
 		this.props.onClose();
-	};
-
-	onTimeOutClose = () => {
-		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
-		this.props.onClose( 'micro-banner-ignored' );
 	};
 
 	registerBannerTransition = ( cb ) => {
@@ -181,14 +156,6 @@ export default class Banner extends Component {
 		this.slideState.onSlideChange( index );
 	};
 
-	onPage2 = () => {
-		this.trackBannerEvent( 'second-form-page-shown' );
-	};
-
-	onPage3 = () => {
-		this.trackBannerEvent( 'third-form-page-shown' );
-	};
-
 	// eslint-disable-next-line no-unused-vars
 	render( props, state, context ) {
 		const campaignProjection = props.campaignProjection;
@@ -197,9 +164,8 @@ export default class Banner extends Component {
 			className={ classNames(
 				'wmde-banner',
 				{
-					'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
-					'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
-					'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
+					'wmde-banner--hidden': state.displayState === CLOSED,
+					'wmde-banner--visible': state.displayState === VISIBLE,
 					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 					'wmde-banner--var': props.bannerType === BannerType.VAR
 				}
@@ -213,14 +179,8 @@ export default class Banner extends Component {
 				transitionSpeed={ 1000 }
 			>
 				<TranslationContext.Provider value={props.translations}>
-					<SoftClose
-						onMaybeLater={ this.onMaybeLater }
-						onCloseBanner={ this.onCloseBanner }
-						onTimeOutClose={ this.onTimeOutClose }
-						ref={this.softCloseRef}
-					/>
 					<div className="wmde-banner-wrapper">
-						<ButtonClose onClick={ this.onSoftCloseBanner }/>
+						<ButtonClose onClick={ this.closeBanner }/>
 						<div className="wmde-banner-content">
 							<div className="wmde-banner-column-left">
 								<Slider
@@ -233,39 +193,25 @@ export default class Banner extends Component {
 									sliderOptions={ { loop: false } }
 								/>
 								<ProgressBar
-									formatters={props.formatters}
-									daysLeft={campaignProjection.getRemainingDays()}
-									donationAmount={campaignProjection.getProjectedDonationSum()}
-									goalDonationSum={campaignProjection.goalDonationSum}
-									missingAmount={campaignProjection.getProjectedRemainingDonationSum()}
-									setStartAnimation={this.registerStartProgressbar}
+									formatters={ props.formatters }
+									daysLeft={ campaignProjection.getRemainingDays() }
+									donationAmount={ campaignProjection.getProjectedDonationSum() }
+									goalDonationSum={ campaignProjection.goalDonationSum }
+									missingAmount={ campaignProjection.getProjectedRemainingDonationSum() }
+									setStartAnimation={ this.registerStartProgressbar }
 									isLateProgress={ props.campaignParameters.isLateProgress }
-									amountToShowOnRight={ AmountToShowOnRight.TOTAL }
-								/>
+									amountToShowOnRight={ AmountToShowOnRight.TOTAL }/>
 							</div>
 							<div className="wmde-banner-column-right">
 								<DonationForm
-									onPage2={ this.onPage2 }
-									onPage3={ this.onPage3 }
-									onSubmit={ props.onSubmit }
-									onSubmitRecurring={ () => props.onSubmit( 'submit-recurring' ) }
-									onSubmitNonRecurring={ () => props.onSubmit( 'submit-non-recurring' ) }
-									onSubmitStep3={ () => props.onSubmit( 'submit-different-amount' ) }
-									onStep3Increased={ () => this.trackBannerEvent( 'increased-amount' ) }
-									onStep3Decreased={ () => this.trackBannerEvent( 'decreased-amount' ) }
 									formItems={props.formItems}
-									formStep2={ props.donationFormStep2 }
-									formStep3={ props.donationFormStep3 }
 									bannerName={props.bannerName}
 									campaignName={props.campaignName}
 									formatters={props.formatters}
 									impressionCounts={props.impressionCounts}
 									onFormInteraction={this.onFormInteraction}
 									customAmountPlaceholder={ props.translations[ 'custom-amount-placeholder' ] }
-									buttonText={ props.buttonText }
-									errorPosition={ props.errorPosition }
-									bannerType={ props.bannerType }
-									showCookieBanner={ props.showCookieBanner }
+									onSubmit={ props.onSubmit }
 									formActionProps={ props.formActionProps }
 								/>
 							</div>

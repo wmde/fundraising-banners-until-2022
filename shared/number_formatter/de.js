@@ -9,5 +9,6 @@ export const millionFormatter = formatter( { round: 1, decimal: ',', suffix: ' M
 export const millionFormatterNumeric = function ( numberToFormat ) {
 	return formatter( { round: 1, decimal: ',', padRight: 1 } )( numberToFormat / 1000000 );
 };
+export const dayOfMonthFormatter = day => day;
 
 export { amountForServerFormatter };

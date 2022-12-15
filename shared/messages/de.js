@@ -79,8 +79,22 @@ const Translations = {
 	'submit-label-default': 'Weiter zur Adresseingabe',
 	'address-type-notice-negative': 'Ihre Kontaktdaten benötigen wir für die Bestätigungsemail und Ihre Spendenquittung. ' +
 		'Zudem können wir Sie auf Wunsch informieren, wenn Wikipedia in Zukunft Ihre Hilfe benötigt.',
-	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.'
+	'address-type-notice-disabled': 'Für Lastschriften ist die Angabe einer Adresse erforderlich.',
 	// End of 2 forms with address type
+
+	// Month names
+	'month-name-1': 'Januar',
+	'month-name-2': 'Februar',
+	'month-name-3': 'März',
+	'month-name-4': 'April',
+	'month-name-5': 'Mai',
+	'month-name-6': 'Juni',
+	'month-name-7': 'Juli',
+	'month-name-8': 'August',
+	'month-name-9': 'September',
+	'month-name-10': 'Oktober',
+	'month-name-11': 'November',
+	'month-name-12': 'Dezember'
 };
 
 export default Translations;

@@ -5,8 +5,10 @@ import VisitorsVsDonorsSentence from './visitors_vs_donors_sentence';
 import DonorsNeededSentence from './DonorsNeededSentence';
 
 export default function createDynamicCampaignText( campaignParameters, campaignProjection, impressionCounts, formatters, translations ) {
-	const dayName = new DayName( new Date() );
+	const date = new Date();
+	const dayName = new DayName( date );
 	const currentDayName = translations[ dayName.getDayNameMessageKey() ];
+	const currentDate = translations[ 'month-name-' + ( date.getMonth() + 1 ) ] + ' ' + formatters.dayOfMonthFormatter( date.getDate() );
 	const campaignDays = new CampaignDays(
 		startOfDay( campaignParameters.startDate ),
 		endOfDay( campaignParameters.endDate )
@@ -28,6 +30,7 @@ export default function createDynamicCampaignText( campaignParameters, campaignP
 
 	return {
 		currentDayName,
+		currentDate,
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		visitorsVsDonorsSentence: visitorsVsDonorsSentence.getSentence(),
 		donorsNeededSentence: donorsNeededSentence.getSentence(),

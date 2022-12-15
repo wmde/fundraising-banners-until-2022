@@ -10,11 +10,14 @@ import Banner from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/en';
+import LocalTranslations from './translations';
 import useOfFundsText from 'fundraising-frontend-content/i18n/en_GB/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import DonationForm from '../../components/DonationForm/DonationForm';
+import DonationForm from '../../components/DonationForm/BegYearlyRecurringDonation3StepForm';
+import DonationFormStep2 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep2';
+import DonationFormStep3 from '../../components/DonationForm/BegYearlyRecurringDonationFormStep3CustomAmount';
 import Slides from './content/Slides';
 import getBannerDelay from '../../shared/banner_delay';
 
@@ -39,7 +42,9 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
-		translations: Translations,
+		donationFormStep2: DonationFormStep2,
+		donationFormStep3: DonationFormStep3,
+		translations: Object.assign( Translations, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		slides: Slides,
 		bannerType: BannerType.CTRL,
