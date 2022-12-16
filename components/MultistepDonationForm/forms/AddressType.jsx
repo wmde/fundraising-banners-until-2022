@@ -18,6 +18,9 @@ export default function AddressType( props ) {
 		props.trackBannerEvent( 'address-type-form-page-shown' );
 		if ( paymentMethod === PaymentMethods.DIRECT_DEBIT.value ) {
 			setDisabledAddressTypes( [ AddressTypes.NO.value ] );
+			if ( addressType === AddressTypes.NO.value ) {
+				setAddressType( null );
+			}
 		} else {
 			setDisabledAddressTypes( [] );
 		}
