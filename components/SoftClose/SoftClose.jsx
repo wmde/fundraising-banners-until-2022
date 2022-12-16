@@ -29,7 +29,12 @@ export default class SoftClose extends Component {
 		/**
 		 * Callback when the timer runs out without user choice
 		 */
-		onTimeOutClose: PropTypes.func
+		onTimeOutClose: PropTypes.func,
+
+		/**
+		 * Optional element that replaces the standard text
+		 */
+		content: PropTypes.element
 	};
 
 	constructor( props ) {
@@ -58,6 +63,7 @@ export default class SoftClose extends Component {
 
 	render( props, state, context ) {
 		const Translations = context;
+
 		return ( <div className="wmde-banner-soft-close">
 			<div className="wmde-banner-soft-close-countdown-bar">
 				<div className="wmde-banner-soft-close-countdown-bar-fill"></div>
@@ -65,7 +71,9 @@ export default class SoftClose extends Component {
 			<div className="wmde-banner-soft-close-columns">
 
 				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-actions">
-					<span className="wmde-banner-soft-close-prompt">{ Translations[ 'soft-close-prompt' ] }</span>
+					{ props.children || (
+						<span className="wmde-banner-soft-close-prompt">{ Translations[ 'soft-close-prompt' ] }</span>
+					) }
 					<div className="wmde-banner-soft-close-buttons">
 						<button
 							className="wmde-banner-soft-close-button"
@@ -80,10 +88,12 @@ export default class SoftClose extends Component {
 					</div>
 				</div>
 
-				{/* eslint-disable-next-line react/no-danger */}
-				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text" dangerouslySetInnerHTML={ {
-					__html: Translations[ 'soft-close-countdown-text' ].replace( '{{seconds}}', state.secondsRemaining )
-				} }></div>
+				<div className="wmde-banner-soft-close-column wmde-banner-soft-close-countdown-text">
+					{/* eslint-disable-next-line react/no-danger */}
+					<div className="wmde-banner-soft-close-countdown-text-wrapper" dangerouslySetInnerHTML={ {
+						__html: Translations[ 'soft-close-countdown-text' ].replace( '{{seconds}}', state.secondsRemaining )
+					} }></div>
+				</div>
 
 			</div>
 		</div> );
