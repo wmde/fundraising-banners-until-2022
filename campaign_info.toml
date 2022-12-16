@@ -25,6 +25,25 @@ tracking = "org-20-221211-var"
 platform = ["edge", "ie11", "firefox_win10", "chrome_win10", "safari", "firefox_macos", "chrome_macos", "firefox_linux", "chrome_linux"]
 resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560x1440"]
 
+# A Campaign with global settings
+[desktop_double_progress]
+name = "C22_WMDE_Test_20"
+campaign_tracking = "20-ba-221211"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
+preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
+wrapper_template = "wikipedia_org"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_double_progress.banners.ctrl]
+filename = "./banners/desktop_double_progress/banner_ctrl.js"
+pagename = "B22_WMDE_progress_ctrl"
+tracking = "org-20-221211-ctrl"
+
+# Banners of the campaign, key after "banners" can be anything
+[desktop_double_progress.banners.var]
+filename = "./banners/desktop_double_progress/banner_var.js"
+pagename = "B22_WMDE_progress_var"
+tracking = "org-20-221211-var"
 
 # Mobile Campaign
 [mobile]

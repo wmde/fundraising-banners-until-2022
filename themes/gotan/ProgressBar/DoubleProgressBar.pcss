@@ -1,0 +1,73 @@
+$color-nubbin: #fb4848;
+$background-amount: #ffe8e8;
+$color-time-left: #2b6da0;
+$background-time-left: #dff1ff;
+
+.wmde-banner {
+	&-double-progress {
+		height: 52px;
+		margin: 4px 0 15px;
+		font-weight: bold;
+		font-size: 12px;
+		color: transparent;
+		transition: color 1000ms ease-in-out;
+
+		&-amount,
+		&-time {
+			height: 24px;
+			line-height: 24px;
+			padding-right: 10px;
+			border-radius: 12px;
+
+			&-fill,
+			&-difference {
+				min-width: 80px;
+				height: 100%;
+				padding: 0 10px;
+			}
+
+			&-fill {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+
+		&-amount {
+			margin-bottom: 3px;
+			background: $background-amount;
+
+			&-fill,
+			&-difference {
+				border-radius: 12px;
+			}
+
+			&-fill {
+				background: $color-primary;
+				transition: width 3500ms $banner-easing;
+				z-index: 2;
+			}
+
+			&-difference {
+				color: $color-white;
+				background: $color-nubbin;
+				transition: width 3000ms $banner-easing;
+				z-index: 1;
+				text-align: right;
+			}
+		}
+
+		&-time {
+			background: $background-time-left;
+
+			&-fill {
+				border-radius: 12px;
+				transition: width 3000ms $banner-easing;
+				background: $color-time-left;
+			}
+		}
+
+		&--finished {
+			color: $color-white;
+		}
+	}
+}
