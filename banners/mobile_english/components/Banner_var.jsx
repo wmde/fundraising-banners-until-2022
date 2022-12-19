@@ -4,7 +4,7 @@ import debounce from '../../../shared/debounce';
 
 import BannerTransition from '../../../components/BannerTransition/BannerTransition';
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
-import MiniBanner from './MiniBanner';
+import MiniBanner from './MiniBanner_var';
 import FullBanner from './FullBanner';
 import TranslationContext from '../../../shared/components/TranslationContext';
 import PropTypes from 'prop-types';
@@ -231,7 +231,7 @@ export default class Banner extends Component {
 			'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
 			'wmde-banner--visible': state.bannerVisibilityState !== BannerVisibilityState.CLOSED && state.bannerVisibilityState !== BannerVisibilityState.PENDING,
 			'wmde-banner--soft-closing': state.bannerVisibilityState === BannerVisibilityState.SOFT_CLOSING,
-			'wmde-banner--mini-banner': state.bannerVisibilityState !== BannerVisibilityState.FULL_VISIBLE,
+			'wmde-banner--mini-banner': state.bannerVisibilityState === BannerVisibilityState.MINI_VISIBLE,
 			'wmde-banner--full-page': state.bannerVisibilityState === BannerVisibilityState.FULL_VISIBLE,
 			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,

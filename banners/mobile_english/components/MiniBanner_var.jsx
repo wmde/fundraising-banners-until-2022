@@ -33,7 +33,7 @@ export default function MiniBanner( props ) {
 		</div>
 
 		<button className="wmde-banner-mini-button" onClick={ props.onExpandFullpage }>
-			Donate now
+				Donate now
 		</button>
 
 	</div>;

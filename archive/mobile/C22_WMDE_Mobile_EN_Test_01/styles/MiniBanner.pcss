@@ -1,0 +1,42 @@
+.wmde-banner {
+	&-mini {
+		position: relative;
+		cursor: pointer;
+		text-align: center;
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		margin: 5px auto 0;
+		background: $color-primary-lighter;
+		border: 8px solid $color-primary;
+		box-shadow: 0 7px 22px 0 rgba( 0, 0, 0, 0.35 );
+		border-radius: 15px;
+		padding: 5px;
+		width: 98%;
+
+		&-slideshow {
+			width: 100%;
+		}
+	}
+
+	&-mini-button {
+		display: block;
+		position: absolute;
+		z-index: 1000;
+		left: 50%;
+		bottom: -40px;
+		width: 170px;
+		height: 40px;
+		margin-left: -85px;
+		padding: 5px 15px 4px;
+		cursor: pointer;
+		background: $color-primary-lighter;
+		border: 8px solid $color-primary;
+		border-radius: 8px;
+		border-top: 2px solid $color-primary-lighter;
+		text-transform: uppercase;
+		color: $color-primary-darker;
+		font-size: 0.9em;
+		font-weight: bold;
+	}
+}
