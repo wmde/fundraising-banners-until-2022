@@ -13,7 +13,7 @@ export default function Slides( dynamicCampaignText ) {
 			<p>
 				Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte
 				nicht weg! Am heutigen { currentDayName } bitten
-				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu sichern.</p>
+				wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu unterstützen.</p>
 		</div> },
 		{ content: <div>
 			<p>{ campaignDaySentence } Insgesamt spenden 99% nichts – sie übergehen
