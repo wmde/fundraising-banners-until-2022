@@ -14,7 +14,7 @@ import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
-import SoftClose from '../../../components/SoftClose/SoftClose';
+import SoftClose from '../../../components/SoftClose/SoftCloseWithSurveyButton';
 import AlreadyDonatedModal from '../../../components/AlreadyDonatedModal/AlreadyDonatedModal';
 
 const BannerVisibilityState = Object.freeze( {
@@ -131,6 +131,12 @@ export class Banner extends Component {
 		this.props.onClose();
 	};
 
+	onGiveFeedback = e => {
+		this.onCloseBanner( e );
+		this.props.trackingData.tracker.trackBannerEvent( 'feedback-button-clicked', 0, 0, this.props.trackingData.bannerClickTrackRatio );
+		window.open( 'https://lime.wikimedia.de/index.php/727537', '_blank' );
+	};
+
 	onTimeOutClose = () => {
 		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		this.props.onClose( 'micro-banner-ignored' );
@@ -243,6 +249,7 @@ export class Banner extends Component {
 					<SoftClose
 						onMaybeLater={ this.onMaybeLater }
 						onCloseBanner={ this.onCloseBanner }
+						onGiveFeedback={ this.onGiveFeedback }
 						onTimeOutClose={ this.onTimeOutClose }
 						ref={this.softCloseRef}
 					/>
