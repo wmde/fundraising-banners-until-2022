@@ -1,3 +1,6 @@
+$breakpoint-soft-close-2-col: 950px;
+$breakpoint-soft-close-3-col: 1500px;
+
 .wmde-banner {
 	&-soft-close {
 		background: $color-white;
@@ -5,33 +8,46 @@
 
 		&-columns {
 			padding: 8px;
-			flex-wrap: nowrap;
 			justify-content: center;
 
-			@media ( min-width: $breakpoint-l ) {
-				padding: 8px 27px;
+			@media ( min-width: $breakpoint-soft-close-3-col ) {
 				justify-content: space-between;
+				padding: 8px 16px;
 			}
 		}
 
 		&-actions {
 			justify-content: center;
+			flex-direction: column;
+
+			@media ( min-width: $breakpoint-soft-close-2-col ) {
+				flex-direction: row;
+				flex-wrap: nowrap;
+			}
+
+			@media ( min-width: $breakpoint-soft-close-3-col ) {
+				justify-content: space-between;
+			}
 		}
 
 		&-prompt {
 			text-align: center;
 			line-height: 32px;
-			height: 32px;
+			min-height: 32px;
 			margin-right: 20px;
 			font-size: 18px;
 			font-family: $banner-text-font-family;
 			white-space: nowrap;
+			@media ( min-width: $breakpoint-soft-close-2-col ) {
+				text-align: left;
+			}
 		}
 
 		&-buttons {
 			display: flex;
 			align-items: center;
 			text-align: center;
+			justify-content: center;
 		}
 
 		&-button {
@@ -49,13 +65,29 @@
 		}
 
 		&-countdown-text {
-			line-height: 32px;
-			font-size: 14px;
-			text-align: right;
+			display: none;
 
+			&-wrapper {
+				line-height: 32px;
+				min-height: 32px;
+				font-size: 18px;
+				font-family: $banner-text-font-family;
+				text-align: right;
+				white-space: nowrap;
+				flex: 1 1 auto;
+				width: 100%;
+			}
+
+			/* Override for default SoftClose.pcss */
 			@media ( min-width: $breakpoint-l ) {
+				display: none;
+			}
+
+			@media ( min-width: $breakpoint-soft-close-3-col ) {
 				display: flex;
 				align-items: center;
+				flex: 1 1 auto;
+				width: 100%;
 			}
 		}
 
