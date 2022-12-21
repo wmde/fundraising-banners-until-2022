@@ -6,7 +6,7 @@
 [desktop]
 name = "C22_WMDE_Test_22"
 campaign_tracking = "22-ba-221217"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -30,7 +30,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 [mobile]
 name = "C22_WMDE_Mobile_Test_13"
 campaign_tracking = "mob13-ba-221213"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -53,7 +53,7 @@ orientation = [ "portrait", "landscape"]
 [mobile_english]
 name = "C22_WMDE_Mobile_EN_Test_02"
 campaign_tracking = "mob_en02-ba-221206"
-preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/en-mobile/wiki/Main_Page?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://en.m.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -76,7 +76,7 @@ orientation = [ "portrait", "landscape" ]
 [pad]
 name = "C22_WMDE_ipad_Test_02"
 campaign_tracking = "pad02-ba-221207"
-preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://de.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -99,7 +99,7 @@ orientation = [ "portrait", "landscape"]
 [pad_en]
 name = "C22_WMDE_ipad_en_Test_02"
 campaign_tracking = "en-ipad02-221212"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
@@ -162,7 +162,7 @@ tracking = "wpde-mob01-221103-var"
 [english]
 name = "C22_WMDE_Test_EN_06"
 campaign_tracking = "en06-ba-221201"
-preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/wiki/Main_Page?devbanner={{banner}}&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://en.wikipedia.org/wiki/Main_Page?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 
