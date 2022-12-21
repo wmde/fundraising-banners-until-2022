@@ -21,7 +21,6 @@ export function createFormItems( translations, amountFormatter ) {
 	);
 	builder.setAddressType(
 		AddressTypes.FULL,
-		AddressTypes.EMAIL,
 		AddressTypes.NO,
 	);
 	return builder.getItems();
