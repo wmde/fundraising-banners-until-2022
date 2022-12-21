@@ -1,0 +1,50 @@
+/**
+The order in which imports happen is important because component ones
+can be overridden by the theme and the individual banners. The variable
+weight should be component < theme < banner.
+ */
+
+/* COMPONENT VARIABLES */
+@import '../../../components/ButtonClose/ButtonCloseVariables.pcss';
+@import '../../../components/Footer/FooterVariables.pcss';
+@import '../../../components/UseOfFunds/UseOfFundsVariables.pcss';
+
+@import '../../../themes/gohan/theme-variables-form-compact.pcss';
+@import './variables.pcss';
+
+@import './Banner.pcss';
+@import './MiniBanner.pcss';
+@import './FullBanner.pcss';
+
+/* COMPONENTS */
+@import '../../../components/BannerTransition/BannerTransition.pcss';
+@import '../../../components/BannerTransition/FollowupTransition.pcss';
+@import '../../../components/Footer/Footer.pcss';
+@import '../../../components/Footer/SelectionInput.pcss';
+@import '../../../components/ButtonClose/ButtonClose.pcss';
+@import '../../../components/MultistepDonationForm/MultistepDonationForm.pcss';
+@import '../../../components/MultistepDonationForm/forms/UpgradeToYearly.pcss';
+@import '../../../components/DonationForm/subcomponents/SelectGroup.pcss';
+@import '../../../components/DonationForm/subcomponents/SelectCustomAmount.pcss';
+@import '../../../components/DonationForm/subcomponents/SmsBox.pcss';
+@import '../../../components/Slider/Slider.pcss';
+@import '../../../components/SubscriptionForm/SubscriptionForm.pcss';
+@import '../../../components/ProgressBar/ProgressBar.pcss';
+@import '../../../components/SoftClose/SoftClose.pcss';
+@import '../../../components/UseOfFunds/UseOfFunds.pcss';
+@import '../../../components/UseOfFunds/FundsDistributionAccordion.pcss';
+
+/* THEME */
+@import '../../../themes/gohan/animated-text-highlight.pcss';
+@import '../../../themes/gohan/Footer/Footer.pcss';
+@import '../../../themes/gohan/Footer/SelectionInput.pcss';
+@import '../../../themes/gohan/MultistepDonationForm/MultistepDonationForm.pcss';
+@import '../../../themes/gohan/MultistepDonationForm/UpgradeToYearly.pcss';
+@import '../../../themes/gohan/DonationFormCompact/SelectGroup.pcss';
+@import '../../../themes/gohan/DonationFormCompact/SelectCustomAmount.pcss';
+@import '../../../themes/gohan/DonationFormCompact/SmsBox.pcss';
+@import '../../../themes/gohan/DonationFormCompact/2-step-form-slide.pcss';
+@import '../../../themes/gohan/Slider/Slider.pcss';
+@import '../../../themes/gohan/SubscriptionForm/SubscriptionForm.pcss';
+@import '../../../themes/gohan/ProgressBar/ProgressBar.pcss';
+@import '../../../themes/gohan/SoftClose/SoftCloseWithSubscriptionsButton.pcss';
