@@ -94,4 +94,5 @@ export default class MatomoTracker {
 	}
 
 	trackSizeIssueEvent() {}
+	trackDisallowedNamespaceEvent() {}
 }

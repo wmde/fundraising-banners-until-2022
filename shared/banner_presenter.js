@@ -30,6 +30,22 @@ export default class BannerPresenter {
 		return mw.centralNotice.hideBanner;
 	}
 
+	isInArticleNamespace() {
+		const namespaceNumber = mw.config.values.wgNamespaceNumber;
+		const pageName = mw.config.values.wgRelevantPageName;
+
+		if ( namespaceNumber === 0 ) {
+			return true;
+		}
+
+		// dewiki main page is in nameSpace 4, and we show banners there
+		if ( namespaceNumber === 4 && pageName === 'Wikipedia:Hauptseite' ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	createResizeHandler( bannerContainer, skinAdjuster ) {
 		return function () {
 			if ( this.resizeHandlerOfBanner ) {
@@ -135,6 +151,16 @@ export default class BannerPresenter {
 			sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
 			this.trackingData.viewportDimensionsTrackRatio
 		);
+
+		if ( onMediaWiki() && !this.isInArticleNamespace() ) {
+			mw.centralNotice.setBannerLoadedButHidden();
+
+			this.trackingData.tracker.trackDisallowedNamespaceEvent(
+				sizeIssueIndicator.getDimensions( bannerElement.offsetHeight ),
+				this.trackingData.sizeIssueTrackRatio
+			);
+			return;
+		}
 
 		if ( sizeIssueIndicator.hasSizeIssues( bannerElement ) ) {
 			if ( onMediaWiki() ) {

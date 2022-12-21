@@ -1,4 +1,5 @@
 export const VIEWPORT_TRACKING_IDENTIFIER = 'viewport_tracking';
+export const NAMESPACE_TRACKING_IDENTIFIER = 'namespace_tracking';
 export const VIEWPORT_TRACKING_CLOSED_EVENT_IDENTIFIER = 'vtc';
 export const VIEWPORT_TRACKING_SUBMITTED_EVENT_IDENTIFIER = 'submit';
 
@@ -44,6 +45,10 @@ export class EventLoggingTracker {
 
 	trackSizeIssueEvent( dimensionData, trackingRatio ) {
 		this.trackViewportData( this.bannerName, dimensionData, trackingRatio );
+	}
+
+	trackDisallowedNamespaceEvent( dimensionData, trackingRatio = 1 ) {
+		this.trackViewportData( NAMESPACE_TRACKING_IDENTIFIER + '-' + this.bannerName, dimensionData, trackingRatio );
 	}
 
 	trackViewportData( bannerName, dimensionData, trackingRatio = 0.01 ) {
