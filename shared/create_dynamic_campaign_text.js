@@ -27,10 +27,16 @@ export default function createDynamicCampaignText( campaignParameters, campaignP
 		formatters.integerFormatter( donorsNeededRoundedUp ),
 		translations[ 'remaining-donors-needed-sentence' ] ?? ''
 	);
+	const daysLeft = campaignDays.getNumberOfDaysUntilCampaignEnd();
+	const differenceToDonationTarget = campaignProjection.getProjectedRemainingDonationSum();
+	const numberOfDonors = campaignProjection.getProjectedNumberOfDonors();
 
 	return {
 		currentDayName,
 		currentDate,
+		daysLeft,
+		differenceToDonationTarget,
+		numberOfDonors,
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		visitorsVsDonorsSentence: visitorsVsDonorsSentence.getSentence(),
 		donorsNeededSentence: donorsNeededSentence.getSentence(),
