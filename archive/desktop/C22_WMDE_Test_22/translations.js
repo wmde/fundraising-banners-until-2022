@@ -18,10 +18,7 @@ const Translations = {
 	'form-step-3-error': 'Bitte wählen Sie einen Betrag aus.',
 	'address-type-notice-full': 'Sie erhalten eine Spendenquittung per Post und eine Bestätigung per E-Mail.',
 	'address-type-notice-email': 'Sie verzichten auf eine Spendenquittung, erhalten aber eine Bestätigung per E-Mail.',
-	'address-type-notice-none': 'Sie erhalten weder eine Spendenquittung noch eine Bestätigung per E-Mail.',
-
-	'soft-close-button-conjunction': 'oder',
-	'soft-close-button-3': 'Feedback geben'
+	'address-type-notice-none': 'Sie erhalten weder eine Spendenquittung noch eine Bestätigung per E-Mail.'
 };
 
 export default Translations;
