@@ -11,7 +11,7 @@ const currentBanner = currentUrl.searchParams.get( 'devbanner' );
 const container = document.getElementById( 'WMDE-Banner-Container' );
 if ( pages[ currentBanner ] ) {
 	container.dataset.tracking = pages[ currentBanner ].tracking;
-	container.dataset[ 'campaign-tracking' ] = pages[ currentBanner ].campaign_tracking;
+	container.dataset.campaignTracking = pages[ currentBanner ].campaign_tracking;
 } else {
 	console.log( `Banner "${currentBanner}" not found in campaign configuration, can't inject tracking` );
 }
