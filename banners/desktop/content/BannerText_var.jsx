@@ -2,21 +2,21 @@ import { h } from 'preact';
 import InfoIcon from '../../../components/Icons/InfoIcon';
 
 export default function BannerText( props ) {
-	const { currentDayName, campaignDaySentence, visitorsVsDonorsSentence } = props.dynamicCampaignText;
-	const animatedVisitorsVsDonorsSentence = visitorsVsDonorsSentence ? <span className="wmde-banner-text-animated-highlight">{ visitorsVsDonorsSentence }</span> : '';
+	const { currentDayName, daysLeft, differenceToDonationTarget, numberOfDonors } = props.dynamicCampaignText;
 
 	return <div>
 		<p>
-			<strong><InfoIcon fill={ '#990a00' }/> An alle, die Wikipedia in Deutschland nutzen </strong>
+			<strong><InfoIcon fill={ '#990a00' }/> An alle in Deutschland, denen die Unabhängigkeit von Wikipedia wichtig ist </strong>
 		</p>
 		<p>
-			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
-			heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
-			unterstützen. { campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€
-			finanziert. Doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. { animatedVisitorsVsDonorsSentence } Die
-			meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr
-			Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der seltenen Ausnahmen
-			zu sein, und geben Sie etwas zurück. Vielen Dank!
+			Es wird knapp: { daysLeft } bleiben uns, und noch fehlen rund { differenceToDonationTarget } Millionen
+			Euro bis zum Erreichen unseres Spendenziels. Bisher haben { numberOfDonors } großartige
+			Menschen gespendet, aber das reicht leider noch nicht. <span className="wmde-banner-text-animated-highlight">Vielleicht
+			fällt es Ihnen in diesen schwierigen Zeiten schwerer als sonst, etwas zu spenden. Wikipedia schenkt uns aber gerade jetzt
+			Orientierung durch neutrales und unabhängiges Wissen.</span> Warum ist es so
+			wichtig, dass Wikipedia von Menschen wie Ihnen finanziell getragen wird? Weil es sonst niemand macht. Und
+			weil es genau so gut und richtig ist! Deshalb zählen wir an diesem { currentDayName } auf Ihre Spende – und
+			wenn es nur der Preis einer Tasse Kaffee ist. Vielen Dank!
 		</p>
 	</div>;
 }

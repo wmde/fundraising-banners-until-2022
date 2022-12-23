@@ -3,6 +3,7 @@ import CampaignDays, { endOfDay, startOfDay } from './campaign_days';
 import CampaignDaySentence from './campaign_day_sentence';
 import VisitorsVsDonorsSentence from './visitors_vs_donors_sentence';
 import DonorsNeededSentence from './DonorsNeededSentence';
+import { getDaysLeft } from './days_left';
 
 export default function createDynamicCampaignText( campaignParameters, campaignProjection, impressionCounts, formatters, translations ) {
 	const date = new Date();
@@ -28,9 +29,16 @@ export default function createDynamicCampaignText( campaignParameters, campaignP
 		translations[ 'remaining-donors-needed-sentence' ] ?? ''
 	);
 
+	const daysLeft = getDaysLeft( campaignDays.getNumberOfDaysUntilCampaignEnd(), translations );
+	const differenceToDonationTarget = formatters.millionFormatterNumeric( campaignProjection.getProjectedRemainingDonationSum() );
+	const numberOfDonors = formatters.integerFormatter( campaignProjection.getProjectedNumberOfDonors() );
+
 	return {
 		currentDayName,
 		currentDate,
+		daysLeft,
+		differenceToDonationTarget,
+		numberOfDonors,
 		campaignDaySentence: campaignDaySentence.getSentence(),
 		visitorsVsDonorsSentence: visitorsVsDonorsSentence.getSentence(),
 		donorsNeededSentence: donorsNeededSentence.getSentence(),

@@ -14,7 +14,7 @@ import ChevronLeftIcon from '../../../components/Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../../components/Icons/ChevronRightIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import ProgressBar, { AmountToShowOnRight } from '../../../components/ProgressBar/ProgressBar';
-import SoftClose from '../../../components/SoftClose/SoftClose';
+import SoftClose from '../../../components/SoftClose/SoftCloseWithSurveyButton';
 import AlreadyDonatedModal from '../../../components/AlreadyDonatedModal/AlreadyDonatedModal';
 
 const BannerVisibilityState = Object.freeze( {
