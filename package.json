@@ -10,7 +10,8 @@
     "start": "nodemon",
     "clean": "rimraf dist/*.js dist/*.wikitext dist/*.map",
     "lint:js": "eslint --ext .jsx --ext .js --cache --cache-location .eslintcache --ignore-path .gitignore .",
-    "lint:css": "stylelint '**/*.pcss'"
+    "lint:css": "stylelint '**/*.pcss'",
+    "update-content": "npm update fundraising-frontend-content"
   },
   "keywords": [],
   "author": "gabriel.birke@wikimedia.de",
