@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import style from './styles/styles_var.pcss';
+import style from './styles/styles.pcss';
 
 import * as formatters from '../../shared/number_formatter/de';
 import { createCampaignParameters } from '../../shared/campaign_parameters';
@@ -16,7 +16,6 @@ import TranslationsAlreadyDonated from '../../components/AlreadyDonatedModal/tra
 import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
 import Donation from '../../components/MultistepDonationForm/forms/Donation';
 import UpgradeToYearly from '../../components/MultistepDonationForm/forms/UpgradeToYearly';
-import AddressType from '../../components/MultistepDonationForm/forms/AddressType';
 import CustomAmount from '../../components/MultistepDonationForm/forms/CustomAmount';
 import Footer from '../../components/Footer/FooterAlreadyDonated';
 import BannerText from './content/BannerText';
@@ -24,9 +23,9 @@ import Slides from './content/Slides';
 import AlreadyDonated from './content/AlreadyDonated';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
-import { createFormItems } from './form_items_var';
+import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
-import createFormController from './FormController_var';
+import createFormController from './FormController';
 import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -51,7 +50,7 @@ bannerPresenter.present(
 		formatters,
 		useOfFundsText,
 		donationForm: DonationForm,
-		donationForms: [ Donation, UpgradeToYearly, CustomAmount, AddressType ],
+		donationForms: [ Donation, UpgradeToYearly, CustomAmount ],
 		createFormController: createFormController,
 		footer: Footer,
 		bannerText: BannerText,
@@ -61,7 +60,6 @@ bannerPresenter.present(
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
 		bannerType: BannerType.VAR,
 		showCookieBanner: '0',
-		initialBannerWidth: window.innerWidth,
-		formActionProps: { ast: 2 }
+		initialBannerWidth: window.innerWidth
 	}
 );
