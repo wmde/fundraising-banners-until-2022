@@ -12,11 +12,11 @@ export default function BannerText( props ) {
 		<p>
 			Vielleicht kommen wir gerade ungelegen, aber dennoch: Klicken Sie jetzt bitte nicht weg! Am
 			heutigen { currentDayName } bitten wir Sie bescheiden, die Unabhängigkeit von Wikipedia zu
-			unterstützen. { campaignDaySentence } Wikipedia wird durch Spenden von durchschnittlich 22,66&nbsp;€
-			finanziert. Doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. { animatedVisitorsVsDonorsSentence } Die
-			meisten Menschen spenden, weil sie Wikipedia nützlich finden. Hat Wikipedia Ihnen in diesem Jahr
-			Wissen im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der seltenen Ausnahmen
-			zu sein, und geben Sie etwas zurück. Vielen Dank!
+			unterstützen. { campaignDaySentence } { animatedVisitorsVsDonorsSentence } Die meisten Menschen
+			spenden, weil sie Wikipedia nützlich finden. Die durchschnittliche Spende beträgt 22,66&nbsp;€,
+			doch bereits eine Spende von 5&nbsp;€ hilft uns weiter. Hat Wikipedia Ihnen in diesem Jahr Wissen
+			im Wert einer Tasse Kaffee geschenkt? Dann entscheiden Sie sich, eine der seltenen Ausnahmen zu
+			sein, und geben Sie etwas zurück. Vielen Dank!
 		</p>
 	</div>;
 }
