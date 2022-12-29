@@ -10,7 +10,7 @@ import { Banner } from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
-import LocalTranslations from './translations';
+import LocalTranslations from './translations_var';
 import TranslationsSoftClose from '../../components/SoftClose/translations/de';
 import TranslationsAlreadyDonated from '../../components/AlreadyDonatedModal/translations/de';
 import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
