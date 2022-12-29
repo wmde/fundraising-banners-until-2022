@@ -18,8 +18,8 @@ import Donation from '../../components/MultistepDonationForm/forms/Donation';
 import UpgradeToYearly from '../../components/MultistepDonationForm/forms/UpgradeToYearly';
 import CustomAmount from '../../components/MultistepDonationForm/forms/CustomAmount';
 import Footer from '../../components/Footer/FooterAlreadyDonated';
-import BannerText from './content/BannerText_var';
-import Slides from './content/Slides_var';
+import BannerText from './content/BannerText';
+import Slides from './content/Slides';
 import AlreadyDonated from './content/AlreadyDonated';
 import useOfFundsText from 'fundraising-frontend-content/i18n/de_DE/data/use_of_funds_content.json';
 import { createCampaignProjection } from '../../shared/campaign_projection';
@@ -58,7 +58,7 @@ bannerPresenter.present(
 		alreadyDonatedContent: AlreadyDonated,
 		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsAlreadyDonated, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
+		bannerType: BannerType.CTRL,
 		showCookieBanner: '0',
 		initialBannerWidth: window.innerWidth
 	}
