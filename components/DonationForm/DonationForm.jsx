@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import { SelectGroup } from './subcomponents/SelectGroup';
 import SelectCustomAmount from './subcomponents/SelectCustomAmount';
 import SmsBox from './subcomponents/SmsBox';

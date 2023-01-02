@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

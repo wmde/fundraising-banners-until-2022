@@ -5,7 +5,7 @@ import BannerTransition from '../../../components/BannerTransition/BannerTransit
 import Message from '../../../components/Message/Message';
 import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { BannerType } from '../BannerType';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import Slider from '../../../components/Slider/Slider';

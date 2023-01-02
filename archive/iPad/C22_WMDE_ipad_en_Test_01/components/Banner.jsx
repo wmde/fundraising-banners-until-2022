@@ -1,7 +1,7 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { LocalImpressionCount } from '../../../shared/local_impression_count';
 import { CampaignProjection } from '../../../shared/campaign_projection';
 import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';

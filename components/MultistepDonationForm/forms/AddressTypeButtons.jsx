@@ -4,7 +4,7 @@ import { propTypes } from './propTypes';
 import { isValid } from '../../DonationForm/hooks/validation_states';
 import { validateRequired } from '../../DonationForm/utils';
 import { PaymentMethods, AddressTypes } from '../../DonationForm/FormItemsBuilder';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
 import classNames from 'classnames';
 

@@ -6,7 +6,7 @@ import BannerTransition from '../../../components/BannerTransition/BannerTransit
 import FollowupTransition from '../../../components/BannerTransition/FollowupTransition';
 import MiniBanner from './MiniBanner';
 import FullBanner from './FullBanner_var';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import PropTypes from 'prop-types';
 import FundsModal from '../../../components/UseOfFunds/FundsModal';
 import FundsDistributionAccordion from '../../../components/UseOfFunds/FundsDistributionAccordion';

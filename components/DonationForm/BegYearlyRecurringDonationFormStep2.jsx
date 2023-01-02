@@ -3,7 +3,7 @@ import { useContext } from 'preact/hooks';
 import ChevronLeftIcon from '../Icons/ChevronLeftIcon';
 import classNames from 'classnames';
 import { Alternatives } from './hooks/use_alternative';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 
 export default function BegYearlyRecurringDonationFormStep2( props ) {
 	const Translations = useContext( TranslationContext );

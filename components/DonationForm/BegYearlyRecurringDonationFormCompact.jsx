@@ -1,7 +1,7 @@
 import { createRef, h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import { SelectGroup } from './subcomponents/SelectGroup';
 import SelectCustomAmount from './subcomponents/SelectCustomAmount';
 import SubmitValues from './subcomponents/SubmitValues';
@@ -14,7 +14,7 @@ import usePaymentMethod from './hooks/use_payment_method';
 import useAlternative, { Alternatives } from './hooks/use_alternative';
 import useFormAction from './hooks/use_form_action';
 import { amountMessage, validateRequired } from './utils';
-import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
+import { Intervals, PaymentMethods } from '../../components/DonationForm/FormItemsBuilder';
 import classNames from 'classnames';
 
 const formSteps = Object.freeze( {

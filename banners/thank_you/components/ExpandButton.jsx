@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 import { useContext } from 'preact/hooks';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 
 export default function ExpandButton( props ) {
 	const Translations = useContext( TranslationContext );
