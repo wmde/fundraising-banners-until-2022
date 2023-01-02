@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 
 export default function SmsBox() {
 	const Translations = useContext( TranslationContext );

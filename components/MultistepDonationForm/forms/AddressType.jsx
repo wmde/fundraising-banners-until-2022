@@ -5,7 +5,7 @@ import { SelectGroup } from '../../DonationForm/subcomponents/SelectGroup';
 import { isValid, isValidOrUnset } from '../../DonationForm/hooks/validation_states';
 import { validateRequired } from '../../DonationForm/utils';
 import { PaymentMethods, AddressTypes } from '../../DonationForm/FormItemsBuilder';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
 
 export default function AddressType( props ) {

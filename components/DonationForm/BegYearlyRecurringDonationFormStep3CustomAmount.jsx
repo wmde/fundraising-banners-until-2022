@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
 import ChevronLeftIcon from '../Icons/ChevronLeftIcon';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import classNames from 'classnames';
 
 export default function BegYearlyRecurringDonationFormStep3CustomAmount( props ) {

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import ExpandButton from './ExpandButton';
 import ProgressBar from './ProgressBar';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import InfoIcon from '../../../components/Icons/InfoIcon';
 import ButtonClose from '../../../components/ButtonClose/ButtonClose';
 import CloseIconThankYou from './CloseIconThankYou';

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useContext, useEffect } from 'preact/hooks';
 import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import classNames from 'classnames';
 import { propTypes } from './propTypes';
 import { validateRequired } from '../../DonationForm/utils';

@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import useAlternative, { Alternatives } from '../../DonationForm/hooks/use_alternative';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
 import classNames from 'classnames';
 import { propTypes } from './propTypes';
-import { Intervals } from '../../../shared/components/ui/form/FormItemsBuilder';
+import { Intervals } from '../../../components/DonationForm/FormItemsBuilder';
 import { validateRequired } from '../../DonationForm/utils';
 import { isValid, isValidOrUnset } from '../../DonationForm/hooks/validation_states';
 

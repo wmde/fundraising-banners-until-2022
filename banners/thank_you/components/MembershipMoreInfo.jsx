@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import Subscribe from './Subscribe';
 import { BannerType } from '../../../shared/BannerType';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { useContext } from 'preact/hooks';
 
 export default function MembershipMoreInfo( props ) {

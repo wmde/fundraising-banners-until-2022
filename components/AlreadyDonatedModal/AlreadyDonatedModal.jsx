@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import PropTypes from 'prop-types';
 import { useContext } from 'preact/hooks';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import classNames from 'classnames';
 import ButtonClose from '../ButtonClose/ButtonClose';
 

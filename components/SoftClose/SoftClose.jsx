@@ -1,6 +1,6 @@
 import { Component, h } from 'preact';
 import PropTypes from 'prop-types';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 
 /**
  * A "mini banner" that displays when the user clicks on the regular "close" button.

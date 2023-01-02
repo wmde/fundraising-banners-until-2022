@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import { useContext } from 'preact/hooks';
 import SelectionInput from './SelectionInput';
 import Tick from '../Icons/Tick';

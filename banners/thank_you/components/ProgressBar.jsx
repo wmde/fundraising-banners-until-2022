@@ -3,7 +3,7 @@ import { h } from 'preact';
 // animation events yet, see bug https://github.com/preactjs/preact/issues/1589
 import { Component } from 'preact/compat';
 import classNames from 'classnames';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 
 const PENDING = 0;
 const ENDED = 2;
