@@ -1,0 +1,51 @@
+.wmde-banner {
+	visibility: hidden;
+	width: 100%;
+	font-size: 16px;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.text-highlight {
+		font-weight: bold;
+	}
+
+	.soft-close-container {
+		position: fixed;
+		left: 0;
+		width: 100%;
+		z-index: 10000;
+	}
+
+	&--visible,
+	&--soft-closing {
+		visibility: visible;
+	}
+
+	&--hidden {
+		display: none;
+	}
+
+	&--mini-banner {
+		.wmde-banner-full {
+			visibility: hidden;
+		}
+	}
+
+	&--full-page {
+		.wmde-banner-mini {
+			visibility: hidden;
+		}
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	&-slide-content .wmde-banner-slide-content-first p {
+		margin: 13px 0 16px;
+	}
+}

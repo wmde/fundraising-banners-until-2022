@@ -57,7 +57,7 @@ bannerPresenter.present(
 		bannerText: BannerText,
 		slides: Slides,
 		softClose: SoftClose,
-		formActionProps: { ast: 0 }
+		formActionProps: { ast: 1 }
 	},
 	0
 );

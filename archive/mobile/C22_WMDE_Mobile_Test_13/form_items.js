@@ -1,8 +1,4 @@
-import FormItemsBuilder, {
-	AddressTypes,
-	Intervals,
-	PaymentMethods
-} from '../../components/DonationForm/FormItemsBuilder';
+import FormItemsBuilder, { Intervals, PaymentMethods } from '../../components/DonationForm/FormItemsBuilder';
 
 export function createFormItems( translations, amountFormatter ) {
 	const builder = new FormItemsBuilder( translations, amountFormatter );
@@ -18,10 +14,6 @@ export function createFormItems( translations, amountFormatter ) {
 		PaymentMethods.DIRECT_DEBIT,
 		PaymentMethods.BANK_TRANSFER,
 		PaymentMethods.SOFORT
-	);
-	builder.setAddressType(
-		AddressTypes.FULL,
-		AddressTypes.NO,
 	);
 	return builder.getItems();
 }
