@@ -10,7 +10,7 @@ import { Banner } from './components/Banner';
 import { BannerType } from '../../shared/BannerType';
 import BannerPresenter from '../../shared/banner_presenter';
 import Translations from '../../shared/messages/de';
-import LocalTranslations from './translations_var';
+import LocalTranslations from './translations';
 import TranslationsSoftClose from '../../components/SoftClose/translations/de';
 import TranslationsAlreadyDonated from '../../components/AlreadyDonatedModal/translations/de';
 import DonationForm from '../../components/MultistepDonationForm/MultistepDonationForm';
@@ -58,7 +58,7 @@ bannerPresenter.present(
 		alreadyDonatedContent: AlreadyDonated,
 		translations: Object.assign( Translations, TranslationsSoftClose, TranslationsAlreadyDonated, LocalTranslations ),
 		formItems: createFormItems( Translations, formatters.amountInputFormatter ),
-		bannerType: BannerType.VAR,
+		bannerType: BannerType.CTRL,
 		showCookieBanner: '0',
 		initialBannerWidth: window.innerWidth
 	}

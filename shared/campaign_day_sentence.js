@@ -26,6 +26,8 @@ export default class CampaignDaySentence {
 
 		if ( daysUntilCampaignEnds === 1 ) {
 			return this.translations[ 'campaign-day-last-day' ];
+		} else if ( daysUntilCampaignEnds === 2 ) {
+			return this.translations[ 'campaign-day-second-last-day' ];
 		} else if ( daysUntilCampaignEnds <= this.urgencyThreshold ) {
 			return this.translations[ 'campaign-day-only-n-days' ].replace( '{{days}}', daysUntilCampaignEnds );
 		}

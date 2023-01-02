@@ -38,7 +38,8 @@ const Translations = {
 	'campaign-day-first-day': 'Heute beginnt unsere Spendenkampagne.',
 	'campaign-day-nth-day': 'Heute ist der {{days}}. Tag unserer Spendenkampagne.',
 	'campaign-day-only-n-days': 'In {{days}} Tagen endet unsere Spendenkampagne.',
-	'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um Wikipedia in diesem Jahr zu unterstützen.',
+	'campaign-day-second-last-day': 'Es bleiben nur noch zwei Tage, um für Wikipedia in diesem Jahr zu spenden.',
+	'campaign-day-last-day': 'Es bleibt nur noch ein Tag, um für Wikipedia in diesem Jahr zu spenden.',
 	'visitors-vs-donors-sentence-no-impressions': 'Millionenfach wird unser Spendenaufruf täglich angezeigt,' +
 		' aber nur {{totalNumberOfDonors}} Menschen haben bisher gespendet.',
 	'visitors-vs-donors-sentence': 'Über {{millionImpressionsPerDay}} Millionen Mal wird unser Spendenaufruf täglich angezeigt,' +
