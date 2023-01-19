@@ -307,6 +307,7 @@ export class Banner extends Component {
 									formActionProps={ props.formActionProps }
 									donationForms={ props.donationForms }
 									createFormController={ props.createFormController }
+									useFormModel={ props.useFormModel }
 									trackBannerEvent={ ( eventName ) => this.trackBannerEvent( eventName ) }
 								/>
 							</div>

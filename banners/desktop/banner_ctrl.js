@@ -26,6 +26,7 @@ import { createCampaignProjection } from '../../shared/campaign_projection';
 import { createFormItems } from './form_items';
 import { LocalImpressionCount } from '../../shared/local_impression_count';
 import createFormController from './FormController';
+import useFormModel from '../../components/MultistepDonationForm/hooks/use_form_model_with_custom';
 import getBannerDelay from '../../shared/banner_delay';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
@@ -52,6 +53,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		donationForms: [ Donation, UpgradeToYearly, CustomAmount ],
 		createFormController: createFormController,
+		useFormModel: useFormModel,
 		footer: Footer,
 		bannerText: BannerText,
 		slides: Slides,

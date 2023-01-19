@@ -1,22 +1,25 @@
 import { h } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { useKeenSlider } from 'keen-slider/react';
-import useFormAction, { ADD_DONATION_URL, NEW_DONATION_URL } from './hooks/use_form_action';
-import { createFormModel } from './formModel';
-import SubmitValues from './SubmitValues';
-import { AddressTypes } from '../DonationForm/FormItemsBuilder';
+import SubmitForm from './SubmitForm';
+import PropTypes from 'prop-types';
 
 export default function MultistepDonationForm( props ) {
 	const onFormInteraction = this.props.onFormInteraction ? e => props.onFormInteraction( e ) : () => {};
-	const formModel = createFormModel( props.formatters.customAmountInputFormatter );
+	const formModel = props.useFormModel(
+		props.formatters.customAmountInputFormatter,
+		{
+			bannerName: props.bannerName,
+			campaignName: props.campaignName,
+			impressionCounts: props.impressionCounts
+		}
+	);
+	formModel.useSubmitValuesWatcher();
 	const formController = props.createFormController( formModel );
-	const submitFormRef = useRef();
 
-	const [ formAction, setUrl ] = useFormAction( props, props.formActionProps ?? {} );
 	const [ currentSlide, setCurrentSlide ] = useState( 0 );
 	// Trigger value for submitting the form
 	const [ submitForm, setSubmitForm ] = useState( 0 );
-	const [ submitValues, setSubmitValues ] = useState( formModel.initialState );
 	const [ sliderRef, slider ] = useKeenSlider( {
 		initial: 0,
 		loop: false,
@@ -24,47 +27,24 @@ export default function MultistepDonationForm( props ) {
 		spacing: 15
 	} );
 
-	useEffect( () => {
-		if ( submitForm ) {
-			submitFormRef.current.submit();
-		}
-	}, [ submitForm ] );
-
 	formController.onNext( () =>{
 		setCurrentSlide( currentSlide + 1 );
 		slider.next();
 	} );
+
 	formController.onBack( () => {
 		setCurrentSlide( currentSlide - 1 );
 		slider.prev();
 	} );
+
 	formController.onGoToStep( ( step ) => {
 		setCurrentSlide( step - 1 );
 		slider.moveToSlide( step - 1 );
 	} );
+
 	formController.onSubmit( ( eventName ) => {
-		// The following timeouts are ugly hack to get around the asynchronous state change of the store
-		// and the asynchronous rendering of SubmitValues before the form is submitted
-		// See https://blog.logrocket.com/why-react-doesnt-update-state-immediately/
-
-		// Wait for a few ms until P(React) has updated the store
-		setTimeout( () => {
-			const finalSubmitValues = formController.getSubmitValues();
-
-			// TODO Move form address generation to FormController
-			if ( finalSubmitValues.addressType === AddressTypes.NO.value ) {
-				setUrl( ADD_DONATION_URL );
-			} else {
-				setUrl( NEW_DONATION_URL );
-			}
-			setSubmitValues( finalSubmitValues );
-			// wait for the submit values to be rendered,
-			// then trigger the effect (which submits the form) by changing submitForm to true
-			setTimeout( () => {
-				props.onSubmit( eventName );
-				setSubmitForm( submitForm + 1 );
-			}, 100 );
-		}, 50 );
+		props.onSubmit( eventName );
+		setSubmitForm( submitForm + 1 );
 	} );
 
 	const onSubmitStep = ( step, extraData = {} ) => formController.submitStep( step, extraData );
@@ -90,16 +70,29 @@ export default function MultistepDonationForm( props ) {
 				</div>
 			) ) }
 		</div>
-		<form
-			method="post"
-			name="donationForm"
-			action={ formAction }
-			ref={ submitFormRef }
-		>
-			<SubmitValues
-				submitValues={ submitValues }
-				formatter={ props.formatters.amountForServerFormatter }
-			/>
-		</form>
+		<SubmitForm
+			formAction={ formModel.formAction[ 0 ] }
+			submitValues={ formModel.submit[ 0 ] }
+			submit={ submitForm }
+			amountFormatter={ props.formatters.amountForServerFormatter }
+		/>
 	</div>;
 }
+
+MultistepDonationForm.propTypes = {
+	onSubmit: PropTypes.func,
+	formItems: PropTypes.array,
+	bannerName: PropTypes.string,
+	campaignName: PropTypes.string,
+	impressionCounts: PropTypes.string,
+	formatters: PropTypes.object,
+	onFormInteraction: PropTypes.func,
+	buttonText: PropTypes.string,
+	errorPosition: PropTypes.symbol,
+	bannerType: PropTypes.symbol,
+	formActionProps: PropTypes.object,
+	donationForms: PropTypes.array,
+	createFormController: PropTypes.func,
+	useFormModel: PropTypes.func,
+	trackBannerEvent: PropTypes.func
+};
