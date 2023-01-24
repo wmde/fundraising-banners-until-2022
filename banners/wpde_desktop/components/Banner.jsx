@@ -188,7 +188,8 @@ export class Banner extends Component {
 				'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 				'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 				'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
-				'wmde-banner--var': props.bannerType === BannerType.VAR
+				'wmde-banner--var': props.bannerType === BannerType.VAR,
+				't-banner-visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 			} ) }
 			ref={this.ref}
 		>

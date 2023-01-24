@@ -80,7 +80,7 @@ export default function AddressTypeButtons( props ) {
 				} ) }>
 					<button
 						tabIndex="-1"
-						className="wmde-banner-form-button"
+						className={ `wmde-banner-form-button t-submit-address-type-${value}` }
 						onClick={ onSelectAddressType }
 						value={ value }
 						disabled={ disabledAddressTypes.indexOf( value ) > -1 }

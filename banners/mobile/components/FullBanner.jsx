@@ -10,7 +10,7 @@ export default function FullBanner( props ) {
 	const BannerText = props.bannerText;
 
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
-		<button className="wmde-banner-full-close t-full-banner-close" onClick={ props.onClose }><CloseIconMobile/></button>
+		<button className="wmde-banner-full-close t-close-full-banner" onClick={ props.onClose }><CloseIconMobile/></button>
 		<div className="wmde-banner-full-info">
 			<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 			<ProgressBar

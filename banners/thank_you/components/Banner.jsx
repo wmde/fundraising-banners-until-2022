@@ -155,7 +155,7 @@ export class Banner extends Component {
 										goalDonationSum={ props.formatters.millionFormatter( campaignProjection.goalDonationSum / 1000000 ) }/>
 								</div>
 							</div>
-							<div className="close t-main-banner-close" onClick={this.closeBanner}>
+							<div className="close t-close-main-banner" onClick={this.closeBanner}>
 								<span className="close__icon">✕</span>
 							</div>
 						</div>

@@ -88,15 +88,15 @@ export default function UpgradeToYearlyButtons( props ) {
 		</div>
 
 		<div className="wmde-banner-form-upgrade-buttons">
-			<button tabIndex="-1" className="wmde-banner-form-button" onClick={ onChooseUpgradeToYearly } value={ Alternatives.NO }>
+			<button tabIndex="-1" className="wmde-banner-form-button t-annual-upgrade-no" onClick={ onChooseUpgradeToYearly } value={ Alternatives.NO }>
 				{ Translations[ 'form-step-2-no' ].replace( '{{amount}}', secondPageAmount ) }
 			</button>
 
-			<button tabIndex="-1" className="wmde-banner-form-button" onClick={ onChooseUpgradeToYearly } value={ Alternatives.YES }>
+			<button tabIndex="-1" className="wmde-banner-form-button t-annual-upgrade-yes" onClick={ onChooseUpgradeToYearly } value={ Alternatives.YES }>
 				{ Translations[ 'form-step-2-yes' ].replace( '{{amount}}', secondPageAmount ) }
 			</button>
 
-			<a tabIndex="-1" href="#" className="wmde-banner-form-upgrade-custom" onClick={ onNext }>
+			<a tabIndex="-1" href="#" className="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom" onClick={ onNext }>
 				{ Translations[ 'form-step-2-link' ] }
 			</a>
 		</div>

@@ -85,7 +85,7 @@ export default function UpgradeToYearly( props ) {
 			) }>
 				<div className="wmde-banner-select-group">
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-no">
-						<label>
+						<label className="t-annual-upgrade-no">
 							<input
 								tabIndex="-1"
 								type="radio"
@@ -98,7 +98,7 @@ export default function UpgradeToYearly( props ) {
 						</label>
 					</div>
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
-						<label>
+						<label className="t-annual-upgrade-yes">
 							<input
 								tabIndex="-1"
 								type="radio"
@@ -119,7 +119,7 @@ export default function UpgradeToYearly( props ) {
 			</div>
 		</div>
 
-		<a tabIndex="-1" href="#" className="wmde-banner-form-upgrade-custom" onClick={ onNext }>
+		<a tabIndex="-1" href="#" className="wmde-banner-form-upgrade-custom t-annual-upgrade-yes-custom" onClick={ onNext }>
 			{ Translations[ 'form-step-2-link' ] }
 		</a>
 

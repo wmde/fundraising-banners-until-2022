@@ -25,7 +25,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 			) }>
 				<div className="wmde-banner-select-group">
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-no">
-						<label>
+						<label className="t-annual-upgrade-no">
 							<input
 								tabIndex="-1"
 								type="radio"
@@ -38,7 +38,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 						</label>
 					</div>
 					<div className="wmde-banner-select-group-option wmde-banner-select-group-option-yes">
-						<label>
+						<label className="t-annual-upgrade-yes">
 							<input
 								tabIndex="-1"
 								type="radio"
@@ -62,7 +62,7 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 		<a
 			tabIndex="-1"
 			href="#"
-			className="wmde-banner-form-step-2-custom"
+			className="wmde-banner-form-step-2-custom t-annual-upgrade-yes-custom"
 			onClick={ props.onFormBackToYearly }>
 			{ Translations[ 'form-step-2-link' ] }
 		</a>
