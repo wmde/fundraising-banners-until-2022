@@ -1,6 +1,6 @@
 {
 	"extends": "wikimedia",
-	"parser": "babel-eslint",
+	"parser": "@babel/eslint-parser",
 	"parserOptions": {
 		"ecmaVersion": 6,
 		"sourceType": "module",
@@ -20,7 +20,6 @@
 		"mw": false
 	},
 	"plugins": [
-		"react"
 	],
 	"rules": {
 		"dot-notation": [ "error", { "allowKeywords": true } ],
@@ -33,12 +32,6 @@
 			"code": 180
 		}],
 		"max-statements-per-line": [ "error", { "max": 2 } ],
-		"prefer-regex-literals": [ "off" ],
-		"react/jsx-uses-react": "error",
-		"react/jsx-uses-vars": "error",
-		"react/jsx-pascal-case": "error",
-		"react/jsx-no-undef": "error",
-		"react/jsx-key": "error",
-		"react/no-unknown-property": "error"
+		"prefer-regex-literals": [ "off" ]
 	}
 }

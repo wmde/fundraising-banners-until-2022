@@ -1,9 +1,6 @@
 <template>
 	<div>
 		<Slide>
-			<div class="sad-puppy" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/17/Crying-cat.jpg')"></div>
-		</Slide>
-		<Slide>
 			<div class="sad-puppy" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mr_Newman_-_the_world%27s_saddest_dog_%28cropped%29.jpg/1024px-Mr_Newman_-_the_world%27s_saddest_dog_%28cropped%29.jpg')"></div>
 		</Slide>
 		<Slide>
