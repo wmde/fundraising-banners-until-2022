@@ -51,7 +51,7 @@ export default function BegYearlyRecurringDonationFormStep3CustomAmount( props )
 		</div>
 
 		<div className="wmde-banner-form-button-container form-step-3-button">
-			<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
+			<button tabIndex="-1" className="wmde-banner-form-button t-submit-custom-amount" type="submit">
 				{ props.numericAmount > 0 ?
 					Translations[ 'form-step-3-button' ].replace( '{{amount}}', props.amount ) :
 					Translations[ 'form-step-3-button-blank' ] }
