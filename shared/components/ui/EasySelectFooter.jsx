@@ -22,7 +22,7 @@ export default function EasySelectFooter( { showFundsModal } ) {
 
 			<div className="footer__usage">
 				<div className="footer__item">
-					<a id="application-of-funds-link" className="application-of-funds-link" onClick={ showFundsModal }>
+					<a id="application-of-funds-link" className="application-of-funds-link t-use-of-funds-link" onClick={ showFundsModal }>
 						{ Translations[ 'use-of-funds-link' ] }
 					</a>
 				</div>

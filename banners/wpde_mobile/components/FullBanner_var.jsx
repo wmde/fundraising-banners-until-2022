@@ -54,7 +54,7 @@ export default function FullBanner( props ) {
 		/>
 		<div className="wmde-banner-full-small-print">
 			<span>
-				<a className="application-of-funds-link"
+				<a className="application-of-funds-link t-use-of-funds-link"
 					href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
 					onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
 			</span>

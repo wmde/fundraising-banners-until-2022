@@ -22,7 +22,7 @@ export default function Footer( { showFundsModal } ) {
 			</div>
 
 			<div className="footer__item footer__item--rightflex footer__usage">
-				<a id="application-of-funds-link" className="application-of-funds-link"
+				<a id="application-of-funds-link" className="application-of-funds-link t-use-of-funds-link"
 					onClick={ showFundsModal }>{ Translations[ 'use-of-funds-link' ] }
 				</a>
 			</div>
