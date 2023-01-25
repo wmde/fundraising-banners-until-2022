@@ -14,3 +14,8 @@ filename = "./desktop/banner_ctrl.js"
 pagename = "B21WMDE_04_210831_ctrl"
 tracking = "org-04-210831-ctrl"
 
+[desktop.banners.var]
+filename = "./desktop/banner_var.js"
+pagename = "B21WMDE_04_210831_var"
+tracking = "org-04-210831-var"
+

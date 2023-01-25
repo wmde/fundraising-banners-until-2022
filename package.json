@@ -23,7 +23,7 @@
     "fundraising-frontend-content": "github:wmde/fundraising-frontend-content#production",
     "keen-slider": "^5.5.1",
     "npm-check-updates": "^11.8.5",
-    "vue": "^2.7.10"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -64,8 +64,7 @@
     "stylelint-config-wikimedia": "^0.13.1",
     "toml": "^3.0.0",
     "url": "^0.11.0",
-    "vue-loader": "^15.10.0",
-    "vue-template-compiler": "^2.7.14",
+    "vue-loader": "^17.0.1",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.0",

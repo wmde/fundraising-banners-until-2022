@@ -1,5 +1,21 @@
 import { getSkinAdjuster } from './skin';
 import { getBannerLoaderPlatform } from './platform';
+import { createVueApp } from './create_vue_app';
+
+const deprecatedEventBus = {
+	deprecationWarning( methodName ) {
+		console.warn(`Event bus is deprecated, called with ${methodName}. Banner won't work`)
+	},
+	$emit() {
+		this.deprecationWarning('$emit');
+	},
+	$on() {
+		this.deprecationWarning('$on');
+	},
+	$once() {
+		this.deprecationWarning('$once');
+	}
+}
 
 export class BannerLoader {
 	constructor( trackingData, appearanceDelay ) {
@@ -8,23 +24,12 @@ export class BannerLoader {
 	}
 
 	load( Banner, bannerContainer, translations, props ) {
-		mw.loader.using( [ 'vue' ] ).then(
-			async ( require ) => {
-				const Vue = require( 'vue' );
-				Vue.prototype.$translations = translations;
-				// eslint-disable-next-line no-new
-				new Vue( {
-					el: bannerContainer,
-					render: h => h( Banner ),
-					components: { Banner },
-					props,
-					provide: {
-						skinAdjuster: getSkinAdjuster(),
-						bannerLoaderPlatform: getBannerLoaderPlatform(),
-						trackingService: this.trackingData,
-						eventBus: new Vue()
-					}
-				} );
-			} );
-	}
+		const app = createVueApp( Banner, props);
+		app.config.globalProperties.$translations = translations;
+		app.provide('skinAdjuster', getSkinAdjuster())
+			.provide('bannerLoaderPlatform', getBannerLoaderPlatform())
+			.provide('trackingService', this.trackingData)
+			.provide('eventBus', deprecatedEventBus)
+			.mount(bannerContainer);
+	} ;
 }

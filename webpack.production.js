@@ -52,6 +52,25 @@ module.exports = ( env ) => {
 						} );
 					}
 				} )()
+			],
+			externals: [
+				/**
+				* In production builds we'll use the Vue class provided by MediaWiki and declare everything imported from
+				* 'vue' and '@vue/something' an external dependency
+				*
+				* To make the Vue class available to the bundled code, you need to wrap it like this:
+				*
+				*    mw.loader.using( [ 'vue' ], function() { bundled code goes here } );
+				*
+				* The MediaWikiTextWrapper webpack plugin (and the template it uses) must take care of the wrapping
+				*/
+				function ( { request }, callback ) {
+					if ( /(^@vue\/|^vue$)/.test( request ) ) {
+						callback( null, 'Vue' );
+						return;
+					}
+					callback()
+				}
 			]
 		},
 		entrypointRules
