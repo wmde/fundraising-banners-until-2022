@@ -41,7 +41,7 @@ export default function BegYearlyRecurringDonationFormStep3CustomAmount( props )
 					size="3"
 					maxLength="8"
 					autoComplete="off"
-					className="wmde-banner-select-custom-amount-input"/>
+					className="wmde-banner-select-custom-amount-input t-custom-amount-annual-upgrade"/>
 			</div>
 			<span className="wmde-banner-select-group-error-message">
 				<span className="wmde-banner-error-icon">
