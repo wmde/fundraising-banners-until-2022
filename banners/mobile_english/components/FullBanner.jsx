@@ -18,7 +18,7 @@ export default function FullBanner( props ) {
 	};
 
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
-		<ButtonClose testLabel={'t-full-banner-close'} onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
+		<ButtonClose testLabel={'t-close-full-banner'} onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
 
 		<header className="wmde-banner-headline">
 			<span className="wmde-banner-headline-content">the wikimedia fundraising campaign</span>
