@@ -210,7 +210,7 @@ export default class Banner extends Component {
 			'wmde-banner--animate-highlight': state.textHighlight === HighlightState.ANIMATE,
 			'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 			'wmde-banner--var': props.bannerType === BannerType.VAR,
-			't-banner-visible': state.displayState === VISIBLE,
+			't-banner-visible': state.displayState === VISIBLE
 		} )}>
 			{ state.setCookie && (
 				<img src="https://bruce.wikipedia.de/close-banner?c=fundraising" alt="" height="0" width="0"/>

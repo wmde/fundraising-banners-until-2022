@@ -37,15 +37,15 @@ export default function BegYearlyRecurringDonationFormStep2( props ) {
 			<div className="wmde-banner-form-step-2-notice">{ Translations[ 'form-step-2-copy' ] }</div>
 
 			<div className="wmde-banner-form-step-2-buttons">
-				<button className="wmde-banner-form-button" onClick={ onClickAlternativeButton } value={ Alternatives.NO }>
+				<button className="wmde-banner-form-button t-annual-upgrade-no" onClick={ onClickAlternativeButton } value={ Alternatives.NO }>
 					{ Translations[ 'form-step-2-no' ].replace( '{{amount}}', props.secondPageAmount ) }
 				</button>
 
-				<button className="wmde-banner-form-button" onClick={ onClickAlternativeButton } value={ Alternatives.YES }>
+				<button className="wmde-banner-form-button t-annual-upgrade-yes" onClick={ onClickAlternativeButton } value={ Alternatives.YES }>
 					{ Translations[ 'form-step-2-yes' ].replace( '{{amount}}', props.secondPageAmount ) }
 				</button>
 
-				<a href="#" className="wmde-banner-form-step-2-custom" onClick={ props.onFormBackToYearly }>
+				<a href="#" className="wmde-banner-form-step-2-custom t-annual-upgrade-yes-custom" onClick={ props.onFormBackToYearly }>
 					{ Translations[ 'form-step-2-link' ] }
 				</a>
 			</div>

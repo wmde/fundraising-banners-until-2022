@@ -106,8 +106,8 @@ export default function CustomAmount( props ) {
 
 		<div className="wmde-banner-form-button-container wmde-banner-form-custom-button">
 			<button tabIndex="-1" className="wmde-banner-form-button t-submit-custom-amount" type="submit">
-				{ numericThirdPageAmount > 0 ?
-					Translations[ 'form-step-3-button' ].replace( '{{amount}}', thirdPageAmount ) :
+				{ numericCustomAmount > 0 ?
+					Translations[ 'form-step-3-button' ].replace( '{{amount}}', customAmount ) :
 					Translations[ 'form-step-3-button-blank' ] }
 			</button>
 		</div>
