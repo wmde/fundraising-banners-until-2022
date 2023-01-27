@@ -4,6 +4,7 @@ const toml = require( 'toml' );
 const { mergeWithCustomize, customizeObject } = require( 'webpack-merge' );
 const CommonConfig = require( './webpack.common.js' );
 const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
+const LoadVueOnWpde = require( './webpack/load_vue_on_wpde' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
 const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
@@ -43,6 +44,8 @@ module.exports = ( env ) => {
 					filePattern: '{B,WMDE}*.js',
 					campaignConfig: campaigns.getConfigForPages()
 				} ),
+				// TODO use wpde url instead
+				new LoadVueOnWpde( { vueURL: 'https://unpkg.com/vue@3/dist/vue.runtime.global.prod.js' } ),
 				// Remove generated license files
 				// See https://stackoverflow.com/a/72237744/130121
 				new ( class {

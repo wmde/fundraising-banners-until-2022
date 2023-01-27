@@ -19,3 +19,16 @@ filename = "./desktop/banner_var.js"
 pagename = "B21WMDE_04_210831_var"
 tracking = "org-04-210831-var"
 
+[wikipediade]
+name = "C22_WPDE_02"
+campaign_tracking = "wpde-02-221124"
+preview_link = "/wikipedia.de?devbanner={{banner}}&banner=dev-mode-wpde"
+wrapper_template = "wikipedia_de"
+wrap_in_wikitext = false
+preview_url = 'https://www.wikipedia.de/?banner={{PLACEHOLDER}}'
+
+[wikipediade.banners.ctrl]
+filename = "./wpde_desktop/banner_ctrl.js"
+pagename = "B22WPDE_02_ctrl"
+tracking = "wpde-02-221124-ctrl"
+

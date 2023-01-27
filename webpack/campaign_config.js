@@ -1,3 +1,5 @@
+const path = require( 'path' );
+
 function CampaignConfig( config ) {
 	this.config = config;
 }
@@ -80,7 +82,31 @@ CampaignConfig.prototype.getCampaignTracking = function ( pageName ) {
 	}.bind( this ) );
 
 	if ( trackingData === undefined ) {
-		throw Error( 'No tracking data found for page name ' + pageName );
+		throw new Error( 'No tracking data found for page name ' + pageName );
+	}
+	return trackingData;
+};
+
+CampaignConfig.prototype.getCampaignTrackingForEntryPoint = function ( entryPointPath ) {
+	let trackingData;
+
+	const resolvedPath = path.resolve( entryPointPath );
+
+	Object.keys( this.config ).forEach( function ( campaign ) {
+		Object.keys( this.config[ campaign ].banners ).forEach( function ( banner ) {
+			const configFileName = this.config[ campaign ].banners[ banner ].filename;
+			const resolvedConfigFileName = path.resolve( configFileName );
+			if ( configFileName === entryPointPath || resolvedConfigFileName === resolvedPath ) {
+				trackingData = {
+					bannerTracking: this.config[ campaign ].banners[ banner ].tracking,
+					campaignTracking: this.config[ campaign ].campaign_tracking
+				};
+			}
+		}.bind( this ) );
+	}.bind( this ) );
+
+	if ( trackingData === undefined ) {
+		throw new Error( 'No tracking data found for entry point ' + entryPointPath );
 	}
 	return trackingData;
 };
