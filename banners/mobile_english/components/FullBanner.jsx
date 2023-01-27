@@ -53,12 +53,6 @@ export default function FullBanner( props ) {
 			preselectedAmount={ props.preselectedAmount }
 			formActionProps={ props.formActionProps }
 		/>
-		<Footer/>
-
-		<div className="wmde-banner-footer-small-print">
-			<a className="application-of-funds-link t-use-of-funds-link" href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`} onClick={ props.toggleFundsModal } >
-				Where does my donation go?
-			</a>
-		</div>
+		<Footer showFundsModal={ props.toggleFundsModal }/>
 	</div>;
 }
