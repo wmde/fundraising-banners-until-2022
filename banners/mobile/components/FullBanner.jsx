@@ -42,6 +42,7 @@ export default function FullBanner( props ) {
 			formActionProps={ props.formActionProps }
 			donationForms={ props.donationForms }
 			createFormController={ props.createFormController }
+			useFormModel={ props.useFormModel }
 			trackBannerEvent={ ( eventName ) => props.trackBannerEvent( eventName ) }
 		/>
 		<div className="wmde-banner-full-small-print">
