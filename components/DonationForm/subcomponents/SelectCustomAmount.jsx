@@ -64,7 +64,7 @@ export default class SelectCustomAmount extends Component {
 					autoComplete="off"
 					placeholder={ state.focused ? '' : props.placeholder }
 					ref={ this.ref }
-					className="wmde-banner-select-custom-amount-input"
+					className="wmde-banner-select-custom-amount-input t-custom-amount"
 				/>
 			</div>
 		</label>;

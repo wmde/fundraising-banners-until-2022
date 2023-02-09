@@ -21,7 +21,7 @@ export default function Footer( { showFundsModal } ) {
 
 		<div className="wmde-banner-footer-usage">
 			<div className="wmde-banner-footer-item">
-				<a id="application-of-funds-link" className="wmde-banner-footer-usage-link" onClick={ showFundsModal }>
+				<a id="application-of-funds-link" className="wmde-banner-footer-usage-link t-use-of-funds-link" onClick={ showFundsModal }>
 					{ Translations[ 'use-of-funds-link' ] }
 				</a>
 			</div>

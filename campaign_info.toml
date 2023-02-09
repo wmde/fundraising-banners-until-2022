@@ -30,7 +30,7 @@ resolution = ["800x600", "1024x768", "1280x960", "1600x1200", "1920x1200", "2560
 [mobile]
 name = "C22_WMDE_Mobile_Test_14"
 campaign_tracking = "mob14-ba-221222"
-preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B17WMDE_webpack_prototype&devMode"
+preview_link = "/mobile/wiki/Wikipedia:Hauptseite?devbanner={{banner}}&useskin=minerva&banner=B22_WMDE_local_prototype&devMode"
 preview_url = 'https://de.m.wikipedia.org/wiki/Wikipedia:Hauptseite?banner={{PLACEHOLDER}}'
 wrapper_template = "wikipedia_org"
 

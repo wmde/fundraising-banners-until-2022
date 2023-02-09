@@ -26,6 +26,7 @@ import { LocalImpressionCount } from '../../shared/local_impression_count';
 import { BannerType } from '../../shared/BannerType';
 import createFormController from './FormController_var';
 import getBannerDelay from '../../shared/banner_delay';
+import useFormModel from '../../components/MultistepDonationForm/hooks/use_form_model_with_custom';
 
 const bannerContainer = document.getElementById( 'WMDE-Banner-Container' );
 const campaignParameters = createCampaignParameters();
@@ -54,6 +55,7 @@ bannerPresenter.present(
 		donationForm: DonationForm,
 		donationForms: [ Donation, UpgradeToYearly, AddressType ],
 		createFormController: createFormController,
+		useFormModel: useFormModel,
 		bannerText: BannerText,
 		slides: Slides,
 		softClose: SoftClose,

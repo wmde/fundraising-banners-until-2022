@@ -21,7 +21,7 @@ export default function MiniBanner( props ) {
 
 	return <div className="wmde-banner-mini">
 		<div className="wmde-banner-mini-close">
-			<button className="wmde-banner-mini-close-button" onClick={ props.onClose }><CloseIconMobile/></button>
+			<button className="wmde-banner-mini-close-button t-close-main-banner" onClick={ props.onClose }><CloseIconMobile/></button>
 		</div>
 
 		<header className="wmde-banner-mini-headline">

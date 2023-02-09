@@ -18,7 +18,7 @@ export default function FullBanner( props ) {
 	};
 
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
-		<ButtonClose onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
+		<ButtonClose testLabel={'t-close-full-banner'} onClick={ props.onClose } icon={ <CloseIconChunky/> }/>
 
 		<header className="wmde-banner-headline">
 			<span className="wmde-banner-headline-content">the wikimedia fundraising campaign</span>
@@ -53,12 +53,6 @@ export default function FullBanner( props ) {
 			preselectedAmount={ props.preselectedAmount }
 			formActionProps={ props.formActionProps }
 		/>
-		<Footer/>
-
-		<div className="wmde-banner-footer-small-print">
-			<a className="application-of-funds-link" href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`} onClick={ props.toggleFundsModal } >
-				Where does my donation go?
-			</a>
-		</div>
+		<Footer showFundsModal={ props.toggleFundsModal }/>
 	</div>;
 }

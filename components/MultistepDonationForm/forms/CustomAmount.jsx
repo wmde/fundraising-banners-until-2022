@@ -95,7 +95,7 @@ export default function CustomAmount( props ) {
 					size="3"
 					maxLength="8"
 					autoComplete="off"
-					className="wmde-banner-select-custom-amount-input"/>
+					className="wmde-banner-select-custom-amount-input t-custom-amount-annual-upgrade"/>
 			</div>
 			<span className="wmde-banner-select-group-error-message">
 				<span className="wmde-banner-error-icon">
@@ -105,7 +105,7 @@ export default function CustomAmount( props ) {
 		</div>
 
 		<div className="wmde-banner-form-button-container wmde-banner-form-custom-button">
-			<button tabIndex="-1" className="wmde-banner-form-button" type="submit">
+			<button tabIndex="-1" className="wmde-banner-form-button t-submit-custom-amount" type="submit">
 				{ numericCustomAmount > 0 ?
 					Translations[ 'form-step-3-button' ].replace( '{{amount}}', customAmount ) :
 					Translations[ 'form-step-3-button-blank' ] }

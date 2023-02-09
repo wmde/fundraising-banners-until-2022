@@ -91,7 +91,8 @@ export default class BannerTransition extends Component {
 				`banner-position--state-${STATE_NAMES.get( state.transitionPhase ) }`,
 				{
 					'banner-position': true,
-					'banner-position--fixed': props.fixed
+					'banner-position--fixed': props.fixed,
+					't-banner-visible': state.transitionPhase === FINISHED
 				}
 			)}
 			onTransitionEnd={ this.onTransitionEnd }>

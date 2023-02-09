@@ -17,7 +17,7 @@ export default function FullBanner( props ) {
 	};
 
 	return <div className={ classNames( 'wmde-banner-full', { visible: props.isFullPageVisible } ) }>
-		<button className="wmde-banner-full-close" onClick={ props.onClose }><CloseIconMobile/></button>
+		<button className="wmde-banner-full-close t-close-full-banner" onClick={ props.onClose }><CloseIconMobile/></button>
 		<div className="wmde-banner-full-info">
 			<BannerText dynamicCampaignText={ props.dynamicCampaignText }/>
 			<ProgressBar
@@ -49,7 +49,7 @@ export default function FullBanner( props ) {
 		/>
 		<div className="wmde-banner-full-small-print">
 			<span>
-				<a className="application-of-funds-link"
+				<a className="application-of-funds-link t-use-of-funds-link"
 					href={`https://spenden.wikimedia.de/use-of-funds?${ props.trackingParams }`}
 					onClick={ props.toggleFundsModal } >Wohin geht meine Spende?</a>
 			</span>
