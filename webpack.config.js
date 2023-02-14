@@ -40,7 +40,7 @@ module.exports = () => Promise.all( [
 			} )
 		],
 		devServer: {
-			'port': 8084,
+			'port': 9084,
 			'allowedHosts': 'all',
 			'static': [
 				{

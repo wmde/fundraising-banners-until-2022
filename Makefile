@@ -6,7 +6,7 @@ build: clean setup ## Build all banners into dist directory
 setup: ## Install all npm dependencies
 	docker-compose run js-build npm install
 
-server: ## Start development server on http://localhost:8084/
+server: ## Start development server on http://localhost:9084/
 	docker-compose up js-serve
 
 lint-js:
