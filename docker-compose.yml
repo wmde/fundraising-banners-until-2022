@@ -9,5 +9,5 @@ services:
   js-serve:
     extends: js-build
     ports:
-      - "8084:8084"
+      - "9084:9084"
     command: "npm run start"

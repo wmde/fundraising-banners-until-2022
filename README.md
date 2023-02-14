@@ -18,7 +18,7 @@ You can preview the banners by running the built-in server.
 
     make server
 
-The preview server is at [http://localhost:8084/](http://localhost:8084/)
+The preview server is at [http://localhost:9084/](http://localhost:9084/)
 
 It will display a selection of banners to preview in their respective channel (German Wikimedia / mobile German Wikipedia / wikipedia.de).
 
