@@ -1,7 +1,7 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { BannerType } from '../../../shared/BannerType';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 

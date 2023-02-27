@@ -1,4 +1,4 @@
-import { Intervals, PaymentMethods } from '../../shared/components/ui/form/FormItemsBuilder';
+import { Intervals, PaymentMethods } from '../../components/DonationForm/FormItemsBuilder';
 import { Alternatives } from '../../components/DonationForm/hooks/use_alternative';
 
 let formModel = {};

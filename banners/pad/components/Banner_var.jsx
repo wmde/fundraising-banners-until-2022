@@ -1,10 +1,10 @@
 import { Component, h, createRef } from 'preact';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { LocalImpressionCount } from '../../../shared/local_impression_count';
 import { CampaignProjection } from '../../../shared/campaign_projection';
-import FundsDistributionInfo from '../../../shared/components/ui/use_of_funds/FundsDistributionInfo';
+import FundsDistributionInfo from '../../../components/UseOfFunds/FundsDistributionInfo';
 import { BannerType } from '../../../shared/BannerType';
 import createDynamicCampaignText from '../../../shared/create_dynamic_campaign_text';
 import debounce from '../../../shared/debounce';

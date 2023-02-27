@@ -1,0 +1,27 @@
+.wmde-banner {
+	&-membership-form {
+		display: block;
+		text-align: center;
+
+		&-button {
+			border: 0;
+			display: inline-block;
+			padding: 14px;
+			font-size: 18px;
+			font-weight: bold;
+			background-color: $color-accent;
+			color: $color-accent-contrast;
+			border-radius: 6px;
+			text-decoration: none;
+			margin: 0 0.5em 0.5em 0;
+			min-width: 280px;
+			white-space: nowrap;
+			cursor: pointer;
+			@media ( min-width: $breakpoint-m ) {
+				padding: 14px 32px;
+				font-size: 24px;
+				min-width: 400px;
+			}
+		}
+	}
+}

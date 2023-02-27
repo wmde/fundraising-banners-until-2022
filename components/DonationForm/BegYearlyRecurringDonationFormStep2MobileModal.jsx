@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useContext, useEffect } from 'preact/hooks';
 import CloseIcon from '../Icons/CloseIconMobile';
 import { Alternatives } from './hooks/use_alternative';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 
 export default function BegYearlyRecurringDonationFormStep2( props ) {
 	const Translations = useContext( TranslationContext );

@@ -4,16 +4,16 @@ import classNames from 'classnames';
 
 import ExpandButton from './ExpandButton';
 import ProgressBar from './ProgressBar';
-import TranslationContext from '../../../shared/components/TranslationContext';
-import InfoIcon from './InfoIcon';
+import TranslationContext from '../../../shared/TranslationContext';
+import InfoIcon from '../../../components/Icons/InfoIcon';
+import ButtonClose from '../../../components/ButtonClose/ButtonClose';
+import CloseIconThankYou from './CloseIconThankYou';
+import { BannerType } from '../../../shared/BannerType';
 
-const PENDING = 0;
-const VISIBLE = 1;
-const CLOSED = 2;
-
-export const BannerType = Object.freeze( {
-	CTRL: Symbol( 'ctrl ' ),
-	VAR: Symbol( 'var' )
+export const BannerVisibilityState = Object.freeze( {
+	PENDING: Symbol( 'pending' ),
+	VISIBLE: Symbol( 'visible' ),
+	CLOSED: Symbol( 'closed' )
 } );
 
 export class Banner extends Component {
@@ -22,7 +22,7 @@ export class Banner extends Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			displayState: PENDING,
+			bannerVisibilityState: BannerVisibilityState.PENDING,
 			infoVisible: false,
 			topPosition: 0
 		};
@@ -34,7 +34,7 @@ export class Banner extends Component {
 		this.props.registerDisplayBanner(
 			() => {
 				this.setState(
-					{ displayState: VISIBLE, topPosition: 0 },
+					{ bannerVisibilityState: BannerVisibilityState.VISIBLE, topPosition: 0 },
 					() => this.adjustSurroundingSpace()
 				);
 			}
@@ -55,7 +55,7 @@ export class Banner extends Component {
 
 		if (
 			// Banner is not visible - pull outside viewport
-			( this.state.displayState !== VISIBLE && this.ref.current ) ||
+			( this.state.bannerVisibilityState !== BannerVisibilityState.VISIBLE && this.ref.current ) ||
 			// Expanded mobile banner positioned absolute (instead of fixed), inside pushed-down content and needs to be pulled up
 			( isMobile && this.state.infoVisible && this.ref.current )
 		) {
@@ -67,12 +67,12 @@ export class Banner extends Component {
 
 	adjustSurroundingSpace() {
 		const isMobile = this.props.skinAdjuster.getName() === 'minerva';
-		if ( this.state.displayState !== VISIBLE || !this.ref.current ) {
+		if ( this.state.bannerVisibilityState !== BannerVisibilityState.VISIBLE || !this.ref.current ) {
 			return;
 		}
 		// Expanded mobile banner is no longer fixed and should push content down
 		if ( isMobile && this.state.infoVisible ) {
-			this.props.skinAdjuster.removeSpace();
+			this.props.skinAdjuster.removeSpaceInstantly();
 		}
 		this.props.skinAdjuster.addSpaceInstantly( this.ref.current.offsetHeight );
 	}
@@ -84,7 +84,7 @@ export class Banner extends Component {
 
 	closeBanner = e => {
 		e.preventDefault();
-		this.setState( { displayState: CLOSED } );
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
 		if ( onMediaWiki() ) {
 			mw.centralNotice.customHideBanner( 'close', 1814400 );
 		}
@@ -121,10 +121,17 @@ export class Banner extends Component {
 		} );
 	};
 
-	onSubmit = ( formId, e ) => {
+	onSubmit = ( formId ) => {
 		const eventName = formId === 'banner-membership-form-with-amount' ? 'submit-amount' : 'submit';
-		this.props.trackingData.tracker.trackBannerEvent( eventName, this.props.impressionCounts.bannerCount, 0, 1 );
-		this.props.onSubmit( e );
+		this.props.onSubmit( eventName );
+	};
+
+	onSubmitSubscriptionForm = () => {
+		this.setState( { bannerVisibilityState: BannerVisibilityState.CLOSED } );
+		if ( onMediaWiki() ) {
+			mw.centralNotice.customHideBanner( 'close', 1814400 );
+		}
+		this.props.onClose( 'subscription-form-submitted' );
 	};
 
 	// eslint-disable-next-line no-unused-vars
@@ -134,43 +141,48 @@ export class Banner extends Component {
 		const MembershipMoreInfo = props.moreInfo;
 
 		return <div
-			className={classNames(
-				state.infoVisible ? 'wmde-banner--expanded' : 'wmde-banner--collapsed',
-				{ 'wmde-banner': true,
-					'wmde-banner--hidden': state.displayState === CLOSED,
-					'wmde-banner--visible': state.displayState === VISIBLE,
+			className={ classNames( 'wmde-banner',
+				{
+					'wmde-banner--expanded': state.infoVisible,
+					'wmde-banner--collapsed': !state.infoVisible,
+					'wmde-banner--hidden': state.bannerVisibilityState === BannerVisibilityState.CLOSED,
+					'wmde-banner--visible': state.bannerVisibilityState === BannerVisibilityState.VISIBLE,
 					'wmde-banner--ctrl': props.bannerType === BannerType.CTRL,
 					'wmde-banner--var': props.bannerType === BannerType.VAR
 				},
 			)}>
-			<div className="banner-position" style={ { top: state.topPosition + 'px' } } ref={this.ref}>
-				<TranslationContext.Provider value={props.translations}>
-					<div className="banner-wrapper">
-						<div className={'small-banner'}>
-							<div className="small-banner__inner" onClick={ this.expandBanner }>
-								<InfoIcon/>
-								<div className="thankyou-message">{Translations[ 'thank-you-main-message' ]}</div>
-								<div className="small-banner__content">
-									<ProgressBar
-										goalDonationSum={ props.formatters.millionFormatter( campaignProjection.goalDonationSum / 1000000 ) }/>
-								</div>
-							</div>
-							<div className="close t-close-main-banner" onClick={this.closeBanner}>
-								<span className="close__icon">✕</span>
+			<div className="banner-position" style={ { top: state.topPosition + 'px' } } ref={ this.ref }>
+				<TranslationContext.Provider value={ props.translations }>
+					<div className="wmde-banner-wrapper">
+						<div className="wmde-banner-small">
+							<ButtonClose className="t-close-main-banner" onClick={ this.closeBanner } icon={ <CloseIconThankYou/> }/>
+							<div className="wmde-banner-small-inner" onClick={ this.expandBanner }>
+								<button className="wmde-banner-info-button"><InfoIcon/></button>
+								<div className="wmde-banner-headline">{Translations[ 'thank-you-main-message' ]}</div>
+								<ProgressBar goalDonationSum={ props.formatters.millionFormatter( campaignProjection.goalDonationSum / 1000000 ) }/>
+								<div className="wmde-banner-firework wmde-banner-firework-lefter"></div>
+								<div className="wmde-banner-firework wmde-banner-firework-left"></div>
+								<div className="wmde-banner-firework wmde-banner-firework-center"></div>
+								<div className="wmde-banner-firework wmde-banner-firework-right"></div>
+								<div className="wmde-banner-firework wmde-banner-firework-righter"></div>
 							</div>
 						</div>
 
-						<div className={classNames( 'expand-wrapper', state.infoVisible ? 'expand-wrapper--expanded' : 'expand-wrapper--collapsed' )}>
+						<div className="wmde-banner-expand-button">
 							<ExpandButton
 								expanded={state.infoVisible}
 								expandText={props.expandText}
 								toggleExpansion={ e => this.expandBanner( e ) }
 							/>
 						</div>
-						<div className={classNames( 'more-info', state.infoVisible ? 'more-info--expanded' : 'more-info--collapsed', 'more-info--' + props.bannerVariant )}>
-							<MembershipMoreInfo {...props} onSubmit={this.onSubmit} />
+						<div className="wmde-banner-more-info">
+							<MembershipMoreInfo
+								{ ...props }
+								onSubmit={ this.onSubmit }
+								onSubmitSubscriptionForm={ this.onSubmitSubscriptionForm }
+							/>
 						</div>
-						<div className={classNames( 'secondary-expand-wrapper', state.infoVisible ? 'secondary-expand-wrapper--expanded' : 'secondary-expand-wrapper--collapsed' )}>
+						<div className="wmde-banner-secondary-expand-button">
 							<ExpandButton
 								expanded={state.infoVisible}
 								toggleExpansion={ e => this.expandBanner( e ) }

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Component } from 'preact/compat';
 import classNames from 'classnames';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import PropTypes from 'prop-types';
 
 const PENDING = 0;

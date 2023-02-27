@@ -1,6 +1,6 @@
 import { Component, h } from 'preact';
 import PropTypes from 'prop-types';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import SubscriptionForm from '../../components/SubscriptionForm/SubscriptionForm';
 import classNames from 'classnames';
 

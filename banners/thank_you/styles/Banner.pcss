@@ -1,0 +1,140 @@
+.wmde-banner {
+	font-family: $banner-font-family-sans-serif;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	visibility: hidden;
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	img {
+		border: 0 none;
+	}
+
+	p {
+		margin: 0 0 24px;
+	}
+
+	&--visible {
+		visibility: visible;
+	}
+
+	&--hidden {
+		display: none;
+	}
+
+	&-small {
+		background: $color-secondary;
+		position: relative;
+		padding: 10px;
+		overflow: hidden;
+		&-inner {
+			padding: 48px;
+			background: $color-white;
+			border-radius: 6px;
+		}
+	}
+
+	&-info-button {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		height: 34px;
+		width: 34px;
+		padding: 8px;
+		background: none;
+		border: 0;
+	}
+
+	&-close {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		height: 34px;
+		width: 34px;
+		padding: 8px;
+	}
+
+	&-more-info {
+		display: none;
+		box-shadow: 0 3px 3px rgba( 0, 0, 0, 0.3 );
+		border-bottom: 10px solid $color-secondary;
+
+		&-content {
+			margin: 0 auto;
+			max-width: 960px;
+			padding: 0 24px;
+			font-size: 18px;
+			line-height: 1.5;
+		}
+	}
+
+	&-headline {
+		font-family: $banner-font-family-serif;
+		font-size: 24px;
+		text-align: center;
+		margin-bottom: 30px;
+
+		@media ( min-width: $breakpoint-m ) {
+			font-size: 26px;
+		}
+		@media ( min-width: $breakpoint-l ) {
+			font-size: 38px;
+		}
+	}
+
+	&-expand-button,
+	&-secondary-expand-button {
+		height: 40px;
+		text-align: center;
+	}
+
+	&-secondary-expand-button {
+		display: none;
+	}
+
+	&--expanded {
+		position: relative;
+
+		.banner-position {
+			position: absolute;
+			left: 0;
+			width: 100%;
+		}
+
+		.wmde-banner-more-info,
+		.wmde-banner-secondary-expand-button {
+			display: block;
+		}
+	}
+}
+
+/* special adjustments for the mobile skin minerva */
+.skin-minerva {
+
+	.wmde-banner {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+
+	.banner-position {
+		position: fixed;
+		width: 100%;
+	}
+
+	.wmde-banner--expanded {
+		position: absolute;
+	}
+
+	.wmde-banner--expanded .banner-position {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 0;
+	}
+}

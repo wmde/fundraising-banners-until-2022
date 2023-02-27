@@ -3,7 +3,7 @@ import { h } from 'preact';
 // animation events yet, see bug https://github.com/preactjs/preact/issues/1589
 import { Component } from 'preact/compat';
 import classNames from 'classnames';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 
 const PENDING = 0;
 const ENDED = 2;
@@ -25,12 +25,10 @@ export default class ProgressBar extends Component {
 
 	render( props, state, context ) {
 		const Translations = context;
-		return <div className="progress_bar__wrapper">
-			<div className={classNames( 'progress_bar', state.animation === ENDED ? 'progress_bar--finished' : '' ) }>
-				<div className="progress_bar__fill" onAnimationEnd={ this.animationFinished }>
-					<div className="progress_bar__days_left">{Translations[ 'progress-bar-inner-text' ]}</div>
-					<div className="progress_bar__donation_remaining">{ props.goalDonationSum }</div>
-				</div>
+		return <div className={ classNames( 'wmde-banner-progress-bar', { 'wmde-banner-progress-bar--finished': state.animation === ENDED } ) }>
+			<div className="wmde-banner-progress-bar-fill" onAnimationEnd={ this.animationFinished }>
+				<div className="wmde-banner-progress-bar-days-left">{Translations[ 'progress-bar-inner-text' ]}</div>
+				<div className="wmde-banner-progress-bar-donation-remaining">{ props.goalDonationSum }</div>
 			</div>
 		</div>;
 	}

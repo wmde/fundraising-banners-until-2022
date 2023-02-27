@@ -1,6 +1,6 @@
 import { Component, h } from 'preact';
 import classNames from 'classnames';
-import TranslationContext from '../../shared/components/TranslationContext';
+import TranslationContext from '../../shared/TranslationContext';
 import CloseIcon from './CloseIcon';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

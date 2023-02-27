@@ -6,7 +6,9 @@ const CommonConfig = require( './webpack.common.js' );
 const MediaWikiTextWrapper = require( './webpack/mediawiki_text_wrapper' );
 
 const CampaignConfig = require( './webpack/campaign_config' );
-const campaigns = new CampaignConfig( toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) ) );
+const campaignData = toml.parse( fs.readFileSync( 'campaign_info.toml', 'utf8' ) );
+const thankYouData = toml.parse( fs.readFileSync( 'campaign_info_thank_you.toml', 'utf8' ) );
+const campaigns = new CampaignConfig( Object.assign( campaignData, thankYouData ) );
 
 function readWrapperTemplate( name ) {
 	return fs.readFileSync( './webpack/wikitext_templates/' + name + '.hbs', 'utf8' );

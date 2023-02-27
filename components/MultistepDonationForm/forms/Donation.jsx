@@ -5,9 +5,9 @@ import { isValid, isValidOrUnset } from '../../DonationForm/hooks/validation_sta
 import { amountMessage, validateRequired } from '../../DonationForm/utils';
 import SelectCustomAmount from '../../DonationForm/subcomponents/SelectCustomAmount';
 import SmsBox from '../../DonationForm/subcomponents/SmsBox';
-import TranslationContext from '../../../shared/components/TranslationContext';
+import TranslationContext from '../../../shared/TranslationContext';
 import { propTypes } from './propTypes';
-import { Intervals, PaymentMethods } from '../../../shared/components/ui/form/FormItemsBuilder';
+import { Intervals, PaymentMethods } from '../../../components/DonationForm/FormItemsBuilder';
 
 export default function Donation( props ) {
 	const Translations = useContext( TranslationContext );

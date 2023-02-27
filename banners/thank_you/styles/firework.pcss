@@ -1,0 +1,168 @@
+/* stylelint-disable */
+
+@keyframes firework {
+	0% {
+		transform: translate( var( --x ), var( --initialY ) );
+		width: var( --initialSize );
+		opacity: 1;
+	}
+	50% {
+		width: 0.5vmin;
+		opacity: 1;
+	}
+	100% {
+		width: var( --finalSize );
+		opacity: 0;
+	}
+}
+
+.wmde-banner {
+	&-firework,
+	&-firework::before,
+	&-firework::after {
+		--initialSize: 0.5vmin;
+		--finalSize: 45vmin;
+		--particleSize: 0.2vmin;
+		--color1: yellow;
+		--color2: khaki;
+		--color3: white;
+		--color4: lime;
+		--color5: gold;
+		--color6: mediumseagreen;
+		--y: -20vmin;
+		--x: -50%;
+		--initialY: 60vmin;
+		content: "";
+		animation: firework 4s infinite;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate( -50%, var( --y ) );
+		width: var(--initialSize);
+		aspect-ratio: 1;
+		pointer-events: none;
+		background: radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
+		radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
+		radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
+		radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
+			/* bottom right */ radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
+		radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 90% 70%,
+		radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
+		radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
+		radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%,
+			/* bottom left */ radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 22% 90%,
+		radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 45% 90%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 33% 70%,
+		radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 10% 60%,
+		radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 31% 80%,
+		radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 28% 77%,
+		radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 13% 72%,
+			/* top left */ radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 80% 10%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 95% 14%,
+		radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 90% 23%,
+		radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 100% 43%,
+		radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 85% 27%,
+		radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 77% 37%,
+		radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 60% 7%,
+			/* top right */ radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 22% 14%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 45% 20%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 33% 34%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 10% 29%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 31% 37%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 28% 7%,
+		radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 13% 42%;
+		background-size: var(--initialSize) var(--initialSize);
+		background-repeat: no-repeat;
+	}
+
+	&-firework::before {
+		--x: -50%;
+		--y: -50%;
+		--initialY: -50%;
+		transform: translate( -50%, -50% ) rotate( 40deg ) scale( 1.3 ) rotateY( 40deg );
+	}
+
+	&-firework::after {
+		--x: -50%;
+		--y: -50%;
+		--initialY: -50%;
+		transform: translate( -50%, -50% ) rotate( 170deg ) scale( 1.15 ) rotateY( -30deg );
+	}
+
+	&-firework-left {
+		--x: 30vmin;
+	}
+
+	&-firework-lefter {
+		--x: 60vmin;
+	}
+
+	&-firework-left,
+	&-firework-left::before,
+	&-firework-left::after {
+		--color1: pink;
+		--color2: violet;
+		--color3: fuchsia;
+		--color4: orchid;
+		--color5: plum;
+		--color6: lavender;
+		--finalSize: 40vmin;
+		left: 30%;
+		top: 60%;
+		animation-delay: -0.25s;
+	}
+
+	&-firework-lefter,
+	&-firework-lefter::before,
+	&-firework-lefter::after {
+		--color1: #ffc0c0;
+		--color2: #ee8282;
+		--color3: #ff0000;
+		--color4: #da7070;
+		--color5: #dda0a0;
+		--color6: #fae6e6;
+		--finalSize: 40vmin;
+		left: 30%;
+		top: 60%;
+		animation-delay: -0.15s;
+	}
+
+	&-firework-right {
+		--x: -30vmin;
+	}
+
+	&-firework-righter {
+		--x: -60vmin;
+	}
+
+	&-firework-right,
+	&-firework-right::before,
+	&-firework-right::after {
+		--color1: cyan;
+		--color2: lightcyan;
+		--color3: lightblue;
+		--color4: PaleTurquoise;
+		--color5: SkyBlue;
+		--color6: lavender;
+		--finalSize: 35vmin;
+		left: 70%;
+		top: 60%;
+		animation-delay: -0.4s;
+	}
+
+	&-firework-righter,
+	&-firework-righter::before,
+	&-firework-righter::after {
+		--color1: #5eff00;
+		--color2: #eaffe0;
+		--color3: #c2e6ad;
+		--color4: #c8eeaf;
+		--color5: #afeb87;
+		--color6: #edfae6;
+		--finalSize: 35vmin;
+		left: 70%;
+		top: 60%;
+		animation-delay: -0.8s;
+	}
+}
